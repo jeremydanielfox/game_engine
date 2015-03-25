@@ -2,8 +2,8 @@
     <modelVersion>4.0.0</modelVersion>
     <!-- ORGANIZATION is replaced with the organization name (duke-compsci308-fall2014) -->
     <!-- REPO is replaced with the repo name (slogo_team01) -->
-    <groupId>duke-compsci308-spring2015.voogasalad</groupId>
-    <artifactId>voogasalad</artifactId>
+    <groupId>duke-compsci308-spring2015.voogasalad_RDatGV</groupId>
+    <artifactId>voogasalad_RDatGV</artifactId>
     <version>master-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>

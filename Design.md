@@ -1,17 +1,17 @@
 CS 308: VOOGASalad Plan Document
 ===================
 ####Robert Duvall and the Global Variables
-Brandon Choi
-Jeremy Fox
-John Gilhuly
-Cosette Goldstein
-Kaighn Kevlin
-Danny Oh
-Nathan Prabhu
-Tom Puglisi
-Eric Saba
-Sierra Smith
-Nina Sun
+Brandon Choi <br>
+Jeremy Fox <br>
+John Gilhuly <br>
+Cosette Goldstein <br>
+Kaighn Kevlin <br>
+Danny Oh <br>
+Nathan Prabhu <br>
+Tom Puglisi <br>
+Eric Saba <br>
+Sierra Smith <br>
+Nina Sun <br>
 Kei Yoshikoshi
 
 #Introduction
@@ -80,15 +80,15 @@ Another design discussion we had was how to handle user input and whether to use
 We talked at length about how to implement upgrades that users can buy in the game. Our two main ideas were to implement a Decorator Pattern or to simply have components that were switched out. We thought the layering of the Decorator Pattern could be problematic with implementing upgrades that are completely different from the current behavior, and attempting to remove a layer from the middle. Switching out individual components could avoid this, however this would lead to a lot of setter methods and it would be hard to build upon pre-existing methods. Also keeping track of upgrades already applied would have to be tracked externally with swapping components out.
 
 #Team Responsibilities
-Kaighn: Back end engine, pathfinding
-Jeremy: Engine, game object states
-Sierra:  Engine team, collision engine 
-Tom: Game Object General Structure, Bounding Boxes
-Cosette: front end Game Engine, Game Player.
-Nathan: Engine team, Shop (instantiating towers, back-end/front-end communication)
-Danny: Engine team, Waves and Events
-Brandon: Authoring team, front end features, general UI for authoring environment
-Eric: Authoring team, back end features, working with connecting the front end and the back end
-John: Authoring team, front end features, working with UI and the editor class that allows user to edit different properties of said game object
-Kei:
-Nina:
+Kaighn: Back end engine, pathfinding <br>
+Jeremy: Engine, game object states <br>
+Sierra:  Engine team, collision engine <br>
+Tom: Game Object General Structure, Bounding Boxes <br>
+Cosette: front end Game Engine, Game Player. <br>
+Nathan: Engine team, Shop (instantiating towers, back-end/front-end communication) <br>
+Danny: Engine team, Waves and Events <br>
+Brandon: Authoring team, front end features, general UI for authoring environment <br>
+Eric: Authoring team, back end features, working with connecting the front end and the back end <br>
+John: Authoring team, front end features, working with UI and the editor class that allows user to edit different properties of said game object <br>
+Kei: Authoring team, back end features, XML Parsing, GameManager <br>
+Nina: Authoring team, back end features, working with library and game data

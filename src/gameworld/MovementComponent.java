@@ -2,6 +2,6 @@ package gameworld;
 
 import gameobject.GameObject;
 
-public interface PhysicsComponent {
+public interface MovementComponent {
 	public void update(GameObject object);
 }

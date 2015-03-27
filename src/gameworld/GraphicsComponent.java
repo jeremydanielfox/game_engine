@@ -1,6 +1,6 @@
 package gameworld;
 
-import GameObject.GameObject;
+import gameobject.GameObject;
 
 public interface GraphicsComponent {
 public void update(GameObject object);

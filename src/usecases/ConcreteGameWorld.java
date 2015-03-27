@@ -1,5 +1,6 @@
 package usecases;
 
+import gameobject.GameObject;
 import gameobject.Tower;
 import gameworld.GameWorld;
 import gameworld.Grid;
@@ -20,5 +21,11 @@ public class ConcreteGameWorld implements GameWorld{
         // now updating its physics
         concreteTower.updatePhysics(); 
     }
+
+	@Override
+	public void addObject(GameObject object) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

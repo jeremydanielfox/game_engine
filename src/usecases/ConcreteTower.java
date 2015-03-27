@@ -69,4 +69,10 @@ public class ConcreteTower implements Tower {
         return Collections.unmodifiableCollection(weapons);
     }
 
+	@Override
+	public void onBorn() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

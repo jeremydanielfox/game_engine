@@ -3,9 +3,11 @@ package gameobject;
 import gameworld.WorldInhabitant;
 
 public interface GameObject extends WorldInhabitant {
-	abstract void updatePosition();
+	public void updatePosition();
 
-	abstract void updatePhysics();
+	public void updatePhysics();
 
-	abstract void updateGraphics();
+	public void updateGraphics();
+	
+	
 }

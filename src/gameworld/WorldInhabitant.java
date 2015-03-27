@@ -1,5 +1,11 @@
 package gameworld;
 
+import javafx.geometry.Point2D;
+
 public interface WorldInhabitant {
-	abstract void getImage();
+    
+	public String getImage();
+	
+	public Point2D getLocation();
+	
 }

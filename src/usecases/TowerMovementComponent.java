@@ -3,7 +3,7 @@ package usecases;
 import gameobject.GameObject;
 import gameworld.MovementComponent;
 
-public class ConcreteMovementComponent implements MovementComponent  {
+public class TowerMovementComponent implements MovementComponent  {
 
     @Override
     public void update (GameObject object) {

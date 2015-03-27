@@ -1,0 +1,12 @@
+ConcreteTower: Size, Health, Weapon
+ConcreteWeapon: Range, Health, Projectile
+ConecreteProjectile: Health, Speed
+ConcreteEnemy: Speed, Health, Size
+ConcreteLevel: GameWorld, Goals
+ConcreteTerrain: Walkable, Placable, 
+ConcreteWave: Timer, Enemies
+ConcreteGameWorld: Grid
+ConcreteGrid: TowerLocations
+ConcretePlayer: Health, Money, Score
+ConcreteWinCondition: Health, Money, Score, Time, StoryBoard
+ConcreteLoseCondition: Health, Money, Score, Time, StoryBoard

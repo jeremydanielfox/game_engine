@@ -1,16 +1,19 @@
 package usecases;
 
+import gameobject.Editable;
 import gameobject.Tower;
 import gameobject.Weapon;
 import gameworld.GraphicsComponent;
 import gameworld.MovementComponent;
 import gameworld.PhysicsComponent;
+
 import java.util.Collection;
 import java.util.Collections;
+
 import javafx.geometry.Point2D;
 
 
-public class ConcreteTower implements Tower {
+public class ConcreteTower implements Tower, Editable{
 
     private Collection<Weapon> weapons;
 
@@ -84,5 +87,11 @@ public class ConcreteTower implements Tower {
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public void edit() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

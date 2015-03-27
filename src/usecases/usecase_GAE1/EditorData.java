@@ -12,11 +12,11 @@ import java.util.ResourceBundle;
  * file to see which fields can be change by the author.
  * 
  */
-public class Editor {
+public class EditorData {
 	private HashMap<String, String[]> fieldMap;
 	private Editable editable;
 
-	public Editor(Editable editable) {
+	public EditorData(Editable editable) {
 		this.editable = editable;
 		fieldMap = useResourceBundle();
 	}

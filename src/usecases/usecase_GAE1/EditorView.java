@@ -12,7 +12,7 @@ public class EditorView {
 	// started. The setEditor() class will be called every time the property
 	// above is changed, which means some other object was selected.
 	public void setEditor() {
-		Editor editor = new Editor(property.get());
+		EditorData editor = new EditorData(property.get());
 		editor.showFields();
 	}
 

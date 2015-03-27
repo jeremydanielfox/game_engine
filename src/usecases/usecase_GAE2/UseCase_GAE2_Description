@@ -1,0 +1,7 @@
+Use Case for Graphical Authoring Environment 2:
+- User creates a new level
+
+1. User clicks "Create new level"
+2. GameManager calls its method "addNewLevel()" and creates a new LevelManager class, and adds itself to the list of LevelManagers.
+3. When the LevelManager class is instantiated, a Level class is also created.
+4. Because this is an Editable, the EditorView should recognize this and display its editable attributes

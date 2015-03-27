@@ -11,7 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
-public class Library extends Observable {
+public class LibraryData extends Observable {
 
 	// We would need this Editable ObservableList to be held by the Library
 	// class and LibraryView class
@@ -31,7 +31,7 @@ public class Library extends Observable {
 	 * another class
 	 */
 
-	public Library() {
+	public LibraryData() {
 		tower.addListener((ListChangeListener.Change<? extends Editable> e) -> onChanged(e));
 	}
 

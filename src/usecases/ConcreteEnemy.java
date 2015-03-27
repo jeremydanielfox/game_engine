@@ -61,4 +61,10 @@ public class ConcreteEnemy implements Enemy {
         return null;
     }
 
+    @Override
+    public void onBorn () {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

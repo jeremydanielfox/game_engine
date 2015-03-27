@@ -9,15 +9,18 @@ import java.util.Collection;
 import java.util.Collections;
 import javafx.geometry.Point2D;
 
+
 public class ConcreteTower implements Tower {
-    
+
     private Collection<Weapon> weapons;
-    
+
     private MovementComponent mover;
     private PhysicsComponent physics;
-    private GraphicsComponent graphics;    
+    private GraphicsComponent graphics;
 
-    public ConcreteTower(MovementComponent mover, PhysicsComponent physics, GraphicsComponent graphics){
+    public ConcreteTower (MovementComponent mover,
+                          PhysicsComponent physics,
+                          GraphicsComponent graphics) {
         this.mover = mover;
         this.physics = physics;
         this.graphics = graphics;
@@ -53,13 +56,12 @@ public class ConcreteTower implements Tower {
 
     }
 
- 
     @Override
     public void addWeapon (Weapon weapon) {
         // TODO Auto-generated method stub
 
     }
-    
+
     @Override
     public Collection<Weapon> getWeapons () {
         return Collections.unmodifiableCollection(weapons);
@@ -75,6 +77,12 @@ public class ConcreteTower implements Tower {
     public Point2D getLocation () {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void onBorn () {
+        // TODO Auto-generated method stub
+
     }
 
 }

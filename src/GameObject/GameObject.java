@@ -1,9 +1,9 @@
-package GameObject;
+package gameobject;
 
 import gameworld.WorldInhabitant;
 
 public interface GameObject extends WorldInhabitant {
-	abstract void updateInput();
+	abstract void updatePosition();
 
 	abstract void updatePhysics();
 

@@ -1,9 +1,9 @@
 package game;
 
-import GameObject.GameObject;
+import gameobject.GameObject;
 
 public interface Drawer {
 
-	public void draw(GameObject go);
+	public void draw(GameObject gameObject);
 }
 

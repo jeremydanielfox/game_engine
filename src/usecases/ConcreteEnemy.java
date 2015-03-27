@@ -1,26 +1,19 @@
 package usecases;
 
-import gameobject.Tower;
-import gameobject.Weapon;
+import javafx.geometry.Point2D;
+import gameobject.Enemy;
 import gameworld.GraphicsComponent;
 import gameworld.MovementComponent;
 import gameworld.PhysicsComponent;
-import java.util.Collection;
-import java.util.Collections;
-import javafx.geometry.Point2D;
 
 
-public class ConcreteTower implements Tower {
-
-    private Collection<Weapon> weapons;
-
+public class ConcreteEnemy implements Enemy {
+    
     private MovementComponent mover;
     private PhysicsComponent physics;
-    private GraphicsComponent graphics;
+    private GraphicsComponent graphics;    
 
-    public ConcreteTower (MovementComponent mover,
-                          PhysicsComponent physics,
-                          GraphicsComponent graphics) {
+    public ConcreteEnemy(MovementComponent mover, PhysicsComponent physics, GraphicsComponent graphics){
         this.mover = mover;
         this.physics = physics;
         this.graphics = graphics;
@@ -40,13 +33,12 @@ public class ConcreteTower implements Tower {
 
     @Override
     public void updatePosition () {
-        // TODO Auto-generated method stub
-
+        mover.update(this);
     }
 
     @Override
     public void updatePhysics () {
-        physics.update(this);
+        // TODO Auto-generated method stub
 
     }
 
@@ -56,16 +48,6 @@ public class ConcreteTower implements Tower {
 
     }
 
-    @Override
-    public void addWeapon (Weapon weapon) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Collection<Weapon> getWeapons () {
-        return Collections.unmodifiableCollection(weapons);
-    }
 
     @Override
     public String getImage () {
@@ -82,7 +64,7 @@ public class ConcreteTower implements Tower {
     @Override
     public void onBorn () {
         // TODO Auto-generated method stub
-
+        
     }
 
 }

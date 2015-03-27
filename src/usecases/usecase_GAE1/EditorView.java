@@ -1,6 +1,6 @@
 package usecases.usecase_GAE1;
 
-import GameObject.Editable;
+import gameobject.Editable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 

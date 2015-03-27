@@ -1,4 +1,4 @@
-package usecases.usecase_GAE2;
+package AuthoringEnvironment;
 
 import game.Level;
 

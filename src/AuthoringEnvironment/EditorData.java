@@ -1,4 +1,4 @@
-package usecases.usecase_GAE1;
+package AuthoringEnvironment;
 
 import gameobject.Editable;
 
@@ -6,6 +6,8 @@ import java.lang.reflect.Field;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+
+import usecases.ConcreteTower;
 
 /**
  * This class is for taking in an Editable object and referencing the property
@@ -32,13 +34,13 @@ public class EditorData {
 				Field field = editableClass.getDeclaredField(fieldName);
 				field.setAccessible(true);
 				Object value = field.get(editable);
-				// System.out.println("Field is: " + field);
-				// System.out.println("Value is: " + value);
-				// if (!fieldName.equals("Weapon")){
-				// field.set(editable, 10);
-				// Object newValue = field.get(editable);
-				// System.out.println("New Value is: " + newValue);
-				// }
+				System.out.println("Field is: " + field);
+				System.out.println("Value is: " + value);
+				if (!fieldName.equals("Weapon")) {
+					field.set(editable, 10);
+					Object newValue = field.get(editable);
+					System.out.println("New Value is: " + newValue);
+				}
 			} catch (NoSuchFieldException | SecurityException
 					| IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
@@ -61,10 +63,4 @@ public class EditorData {
 		}
 		return newMap;
 	}
-
-	// public static void main(String[] args) {
-	// ConcreteTower ct = new ConcreteTower();
-	// Editor ee = new Editor(ct);
-	// ee.showFields();
-	// }
 }

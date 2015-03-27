@@ -1,4 +1,4 @@
-package usecases.usecase_GAE2;
+package AuthoringEnvironment;
 
 import game.Game;
 import game.Level;
@@ -10,8 +10,6 @@ import java.util.List;
 import javafx.collections.ObservableList;
 
 import com.thoughtworks.xstream.XStream;
-
-import usecases.usecase_GAE1.LibraryData;
 
 // In this use case, we are creating a level. Obviously, the first thing that has to happen is to create the level.
 

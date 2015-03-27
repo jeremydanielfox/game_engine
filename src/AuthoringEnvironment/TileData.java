@@ -1,4 +1,4 @@
-package usecases.usecase_GAE2;
+package AuthoringEnvironment;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

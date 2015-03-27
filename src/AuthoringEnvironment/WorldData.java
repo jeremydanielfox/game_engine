@@ -1,4 +1,4 @@
-package usecases.usecase_GAE2;
+package AuthoringEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;

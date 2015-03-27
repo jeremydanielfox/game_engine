@@ -1,5 +1,6 @@
-package usecases.usecase_GAE1;
+package AuthoringEnvironment;
 
+import usecases.ConcreteTower;
 import gameobject.Editable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -19,5 +20,12 @@ public class EditorView {
 	public void setGUI() {
 		// this method will create in the GUI the textboxes and corresponding
 		// fields, taken from the editor class
+	}
+
+	public static void main(String[] args) {
+		ConcreteTower ct = new ConcreteTower(null, null, null);
+		EditorView ev = new EditorView();
+		ev.property.set(ct);
+		ev.setEditor();
 	}
 }

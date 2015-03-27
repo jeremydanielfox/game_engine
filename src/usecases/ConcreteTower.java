@@ -14,9 +14,11 @@ import javafx.geometry.Point2D;
 
 
 public class ConcreteTower implements Tower, Editable{
-
+	private int Size = 0;
+	private int Health = 100;
+	private Weapon weapon;
     private Collection<Weapon> weapons;
-
+    
     private MovementComponent mover;
     private PhysicsComponent physics;
     private GraphicsComponent graphics;

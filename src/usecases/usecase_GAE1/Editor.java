@@ -1,11 +1,11 @@
 package usecases.usecase_GAE1;
 
+import gameobject.Editable;
+
 import java.lang.reflect.Field;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-
-import GameObject.Editable;
 
 /**
  * This class is for taking in an Editable object and referencing the property

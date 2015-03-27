@@ -1,5 +1,7 @@
 package gameworld;
 
+import GameObject.GameObject;
+
 public interface Grid {
 	public void addObject(double row, double col, GameObject o);
 

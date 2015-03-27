@@ -1,9 +1,12 @@
 package gameworld;
 
+import gameobject.GameObject;
 import java.util.Collection;
 
-import GameObject.GameObject;
 
 public interface CollisionEngine {
-public void detectCollision(GameObject object, Collection<GameObject> objects);
+    
+    public void updateCollisions (GameObject object);
+    
+    public void updateInRange (GameObject object, double range);
 }

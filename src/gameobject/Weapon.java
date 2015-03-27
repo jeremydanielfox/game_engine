@@ -1,4 +1,4 @@
-package GameObject;
+package gameobject;
 
 
 public interface Weapon {

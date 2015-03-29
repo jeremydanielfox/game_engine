@@ -13,7 +13,6 @@ public class BasicWorld implements GameWorld {
 
     @Override
     public void addObject (GameObject toSpawn) {
-        toSpawn.onBorn();
         myObjects.add(toSpawn);
     }
 

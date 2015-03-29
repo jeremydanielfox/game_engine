@@ -1,7 +1,6 @@
 package gameworld;
 
-import gameobject.Enemy;
-import gameobject.Projectile;
+import gameobject.GameObject;
 import javafx.geometry.Point2D;
 
 /**
@@ -9,12 +8,7 @@ import javafx.geometry.Point2D;
  * By giving having separate methods for each type of GameObject, the path can be catered to each. 
  * All enemies will follow the same fixed path and/or the same path-algorithm, and all projectiles
  * will follow their own algorithm to their target. 
- * @author Nathan Prabhu
- *
  */
 public interface PathFinder {
-
-    public Point2D getNextLocation(Enemy enemy, Point2D current);
-    
-    public Point2D getNextLocation(Projectile projectile, Point2D current);
+    public Point2D getNextLocation(GameObject o, Point2D current);
 }

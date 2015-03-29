@@ -1,15 +1,6 @@
 package gameobject;
 
-import gameworld.WorldInhabitant;
-
-
-public interface GameObject extends WorldInhabitant {
-
-    public void updatePosition ();
-
-    public void updatePhysics ();
-
-    public void updateGraphics ();
-
-    public void onBorn ();
+public interface GameObject extends Actor, Mover, Health{
+    //public void updateGraphics ();//cannot implement yet
+    public void addWeapon(Weapon weapon);
 }

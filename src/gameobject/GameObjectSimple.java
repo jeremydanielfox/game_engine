@@ -2,7 +2,10 @@ package gameobject;
 
 import java.util.List;
 
+import javafx.geometry.Point2D;
+
 public class GameObjectSimple implements GameObject {
+	private Point2D myPoint;
 	private Health myHealth;
 	private Mover myMover;
 	private Actor myActor;
@@ -15,8 +18,9 @@ public class GameObjectSimple implements GameObject {
 	}
 
 	@Override
-	public void move() {
-		myMover.move();
+	public void move(double x, double y) {
+		Pointlike point = myMover.move(x,y);
+		myPoint = new Point2D(point.getX(), point.getY());
 	}
 
 	@Override

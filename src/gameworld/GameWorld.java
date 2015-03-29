@@ -1,5 +1,6 @@
 package gameworld;
 
+import engine.pathfinding.PathFinder;
 import gameobject.GameObject;
 
 

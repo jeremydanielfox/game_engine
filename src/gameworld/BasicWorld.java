@@ -1,6 +1,8 @@
 package gameworld;
 
+import engine.pathfinding.PathFinder;
 import gameobject.GameObject;
+
 import java.util.ArrayList;
 
 

@@ -1,14 +1,16 @@
-package gameworld;
+package engine.pathfinding;
 
+import engine.grid.Gridlike;
 import gameobject.GameObject;
 import javafx.geometry.Point2D;
 
 /**
- * Pathfinder will know where each GameObject can go, since it has access to the current gameWorld. 
- * By giving having separate methods for each type of GameObject, the path can be catered to each. 
- * All enemies will follow the same fixed path and/or the same path-algorithm, and all projectiles
- * will follow their own algorithm to their target. 
+ * Responsible for telling GameObjects their next position on a grid.
+ * @author Kaighn  
  */
 public interface PathFinder {
-    public Point2D getNextLocation(GameObject o, Point2D current);
+	/**
+	 * Based on a gameobject's current row and column, return its next grid location.
+	 */
+    public Gridlike getNextLocation(Gridlike cell);
 }

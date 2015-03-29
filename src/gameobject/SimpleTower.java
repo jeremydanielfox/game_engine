@@ -72,4 +72,8 @@ public class SimpleTower implements Tower {
 		return myWeapons;
 	}
 
+	public GameObject clone(){
+	    return null;
+	}
+	
 }

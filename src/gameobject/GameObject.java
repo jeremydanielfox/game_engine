@@ -12,4 +12,6 @@ public interface GameObject extends WorldInhabitant {
     public void updateGraphics ();
 
     public void onBorn ();
+    
+    public GameObject clone();
 }

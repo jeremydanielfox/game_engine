@@ -1,34 +1,35 @@
 package events;
 
-import java.util.HashMap;
-import java.util.Map;
+import gameworld.GameWorld;
 
-/**
- * A wave encapsulates a sequence of events. Uses composite pattern.
- * @author myungoh
- *
- */
-public class Wave implements Event{
-	private HashMap<Event, Integer> eventMap;
-	private int timePassed;
-	public Wave(Map<Event, Integer> eventMap){
-		this.eventMap = new HashMap<>(eventMap);
-	}
 
-/**
- * This is one iteration of the loop. Every unit of time, this method would run
- * and the "timePassed" would be updated. Using this "timePassed", the correct Event
- * would be executed.
- */
-	public void execute(){
-		for (Event e : eventMap.keySet()){
-			if (eventMap.get(e) == timePassed)
-				e.execute();
-		}
-		keepTime();
-	}
-	
-	private void keepTime(){
-		timePassed++;
-	}
+public abstract class Wave {
+
+    private GameWorld myWorld;
+    private GameObjectQueue myQueue;
+
+    public Wave (GameObjectQueue objects, GameWorld world) {
+        myQueue = objects;
+        myWorld = world;
+    }
+
+    /**
+     * This method is to be called during each iteration of the game loop. In concrete wave
+     * classes it is responsible for releasing enemies.
+     */
+    public abstract void update ();
+
+    /**
+     * Returns a boolean representing whether or not this wave is complete
+     * 
+     * @return
+     */
+    public boolean isComplete () {
+        return myQueue.getObjectCount() <= 0;
+    }
+
+    public void releaseObject () {
+        if (myQueue.getObjectCount() > 0)
+            myWorld.addObject(myQueue.releaseGameObject());
+    }
 }

@@ -1,12 +1,11 @@
 package gameobject;
 
-public class SimpleHealthComponent implements HealthComponent {
+public class HealthSimple implements Health {
 	private double myHealth;
-	private double lowerHealthLimit;
 
 	@Override
 	public boolean isDead() {
-		return myHealth <= lowerHealthLimit;
+		return myHealth <= 0;
 	}
 
 	@Override

@@ -1,11 +1,11 @@
 package usecases;
 
+import engine.grid.Grid;
 import engine.pathfinding.PathFinder;
 import gameobject.Enemy;
 import gameobject.GameObject;
 import gameobject.Tower;
 import gameworld.GameWorld;
-import gameworld.Grid;
 
 
 public class ConcreteGameWorld implements GameWorld {

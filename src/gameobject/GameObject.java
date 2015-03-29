@@ -5,4 +5,7 @@ public interface GameObject extends Actor, Movable, Health{
     public void addWeapon(Weapon weapon);
     
     public String getLabel();
+
+    public GameObject clone();
+
 }

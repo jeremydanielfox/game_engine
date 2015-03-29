@@ -38,4 +38,10 @@ public class GameObjectSimple implements GameObject {
 		myHealth.changeHealth(amount);
 	}
 
+	@Override
+	public String getLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

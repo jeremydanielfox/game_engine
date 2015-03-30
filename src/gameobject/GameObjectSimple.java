@@ -47,4 +47,14 @@ public class GameObjectSimple implements GameObject {
 		return null;
 	}
 
+	@Override
+	public Pointlike getPoint() {
+		return new PointSimple(myPoint);
+	}
+
+	@Override
+	public List<Weapon> getWeapons() {
+		return myWeapons;
+	}
+
 }

@@ -8,4 +8,5 @@ package gameobject;
 public interface Pointlike {
 	public double getX();
 	public double getY();
+	public boolean withinRange(Pointlike point, double range);
 }

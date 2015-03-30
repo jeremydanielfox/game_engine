@@ -3,7 +3,6 @@ package gameobject;
 import java.util.List;
 import javafx.geometry.Point2D;
 
-
 public class GameObjectSimple implements GameObject {
     private Point2D myPoint;
     private Health myHealth;

@@ -36,16 +36,21 @@ public class EditorData {
 				Object value = field.get(editable);
 				System.out.println("Field is: " + field);
 				System.out.println("Value is: " + value);
-				if (!fieldName.equals("Weapon")) {
-					field.set(editable, 10);
-					Object newValue = field.get(editable);
-					System.out.println("New Value is: " + newValue);
-				}
+				// if (!fieldName.equals("Weapon")) {
+				// field.set(editable, 10);
+				// Object newValue = field.get(editable);
+				// System.out.println("New Value is: " + newValue);
+				// }
 			} catch (NoSuchFieldException | SecurityException
 					| IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		}
+		/*
+		 * I think for this part, the front-end should have the Editable object.
+		 * Using the method showFields, the front-end can tell which fields to
+		 * show the GUI, and then they can also bind each field to the textfield
+		 */
 	}
 
 	/**
@@ -63,4 +68,10 @@ public class EditorData {
 		}
 		return newMap;
 	}
+
+//	public static void main(String[] args) {
+//		ConcreteTower tower = new ConcreteTower(null, null, null);
+//		EditorData data = new EditorData(tower);
+//
+//	}
 }

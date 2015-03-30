@@ -9,7 +9,10 @@ import gameworld.PhysicsComponent;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Observable;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Point2D;
 
 
@@ -95,5 +98,4 @@ public class ConcreteTower implements Tower, Editable{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

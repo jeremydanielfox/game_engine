@@ -39,6 +39,7 @@
                         <exclude>src/**/*Test.java</exclude>
                         <exclude>src/**/Test*.java</exclude>
                         <exclude>src/**/*Test*.java</exclude>
+                        <exclude>src/usecases/*</exclude>
                     </excludes>
                     <includes>
                         <include>src/**/*.java</include>

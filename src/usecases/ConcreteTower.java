@@ -11,91 +11,97 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Observable;
 
+import javafx.geometry.Point2D;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Point2D;
 
-
-public class ConcreteTower implements Tower, Editable{
+public class ConcreteTower implements Tower, Editable {
 	private int Size = 0;
 	private int Health = 100;
 	private Weapon weapon;
-    private Collection<Weapon> weapons;
-    
-    private MovementComponent mover;
-    private PhysicsComponent physics;
-    private GraphicsComponent graphics;
+	private Collection<Weapon> weapons;
 
-    public ConcreteTower (MovementComponent mover,
-                          PhysicsComponent physics,
-                          GraphicsComponent graphics) {
-        this.mover = mover;
-        this.physics = physics;
-        this.graphics = graphics;
-    }
+	private MovementComponent mover;
+	private PhysicsComponent physics;
+	private GraphicsComponent graphics;
 
-    @Override
-    public void changeHealth (double amount) {
-        // TODO Auto-generated method stub
+	public ConcreteTower(MovementComponent mover, PhysicsComponent physics,
+			GraphicsComponent graphics) {
+		this.mover = mover;
+		this.physics = physics;
+		this.graphics = graphics;
+	}
 
-    }
+	@Override
+	public void changeHealth(double amount) {
+		// TODO Auto-generated method stub
 
-    @Override
-    public boolean isDead () {
-        // TODO Auto-generated method stub
-        return false;
-    }
+	}
 
-    @Override
-    public void updatePosition () {
-        // TODO Auto-generated method stub
+	@Override
+	public boolean isDead() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-    }
+	@Override
+	public void updatePosition() {
+		// TODO Auto-generated method stub
 
-    @Override
-    public void updatePhysics () {
-        physics.update(this);
+	}
 
-    }
+	@Override
+	public void updatePhysics() {
+		physics.update(this);
 
-    @Override
-    public void updateGraphics () {
-        // TODO Auto-generated method stub
+	}
 
-    }
+	@Override
+	public void updateGraphics() {
+		// TODO Auto-generated method stub
 
-    @Override
-    public void addWeapon (Weapon weapon) {
-        // TODO Auto-generated method stub
+	}
 
-    }
+	@Override
+	public void addWeapon(Weapon weapon) {
+		// TODO Auto-generated method stub
 
-    @Override
-    public Collection<Weapon> getWeapons () {
-        return Collections.unmodifiableCollection(weapons);
-    }
+	}
 
-    @Override
-    public String getImage () {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	public Collection<Weapon> getWeapons() {
+		return Collections.unmodifiableCollection(weapons);
+	}
 
-    @Override
-    public Point2D getLocation () {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	public String getImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public void onBorn () {
-        // TODO Auto-generated method stub
+	@Override
+	public Point2D getLocation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    }
+	@Override
+	public void onBorn() {
+		// TODO Auto-generated method stub
+
+	}
 
 	@Override
 	public void edit() {
 		// TODO Auto-generated method stub
-		
+
 	}
+
+	public String getIdentifier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

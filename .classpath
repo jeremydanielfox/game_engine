@@ -12,6 +12,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="lib/groovy-doc.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-src.jar"/>
 	<classpathentry kind="lib" path="lib/xstream-doc.jar"/>
@@ -30,5 +31,8 @@
 	<classpathentry kind="lib" path="lib/xmlpull-1.1.3.1.jar"/>
 	<classpathentry kind="lib" path="lib/xom-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/xpp3_min-1.1.4c.jar"/>
+=======
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+>>>>>>> 3fbe059f9614ea9f6198c8895b95c944342f363e
 	<classpathentry kind="output" path="bin"/>
 </classpath>

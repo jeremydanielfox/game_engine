@@ -1,4 +1,4 @@
-package AuthoringEnvironment;
+package usecases.usecase_GAE1;
 
 import gameobject.Editable;
 
@@ -7,18 +7,16 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import usecases.ConcreteTower;
-
 /**
  * This class is for taking in an Editable object and referencing the property
  * file to see which fields can be change by the author.
  * 
  */
-public class EditorData {
+public class Editor {
 	private HashMap<String, String[]> fieldMap;
 	private Editable editable;
 
-	public EditorData(Editable editable) {
+	public Editor(Editable editable) {
 		this.editable = editable;
 		fieldMap = useResourceBundle();
 	}
@@ -34,9 +32,9 @@ public class EditorData {
 				Field field = editableClass.getDeclaredField(fieldName);
 				field.setAccessible(true);
 				Object value = field.get(editable);
-				System.out.println("Field is: " + field);
-				System.out.println("Value is: " + value);
-				// if (!fieldName.equals("Weapon")) {
+				// System.out.println("Field is: " + field);
+				// System.out.println("Value is: " + value);
+				// if (!fieldName.equals("Weapon")){
 				// field.set(editable, 10);
 				// Object newValue = field.get(editable);
 				// System.out.println("New Value is: " + newValue);
@@ -46,11 +44,6 @@ public class EditorData {
 				e.printStackTrace();
 			}
 		}
-		/*
-		 * I think for this part, the front-end should have the Editable object.
-		 * Using the method showFields, the front-end can tell which fields to
-		 * show the GUI, and then they can also bind each field to the textfield
-		 */
 	}
 
 	/**
@@ -69,9 +62,9 @@ public class EditorData {
 		return newMap;
 	}
 
-//	public static void main(String[] args) {
-//		ConcreteTower tower = new ConcreteTower(null, null, null);
-//		EditorData data = new EditorData(tower);
-//
-//	}
+	// public static void main(String[] args) {
+	// ConcreteTower ct = new ConcreteTower();
+	// Editor ee = new Editor(ct);
+	// ee.showFields();
+	// }
 }

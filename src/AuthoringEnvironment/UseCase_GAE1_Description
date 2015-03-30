@@ -1,9 +1,0 @@
-Use Case for Graphical Authoring Environment 1:
-- User selects already-created object from LibraryView and the EditorView shows the parameters that the author can edit.
-
-1. The LibrayView detects a user-click and refers to the ObservableList in the LibraryData class. 
-2. The property object in the LibraryData class is bound to the property object in the EditorView.
-3. When a change is detected, the EditorView class creates a EditorData class, which takes in the Editable object (from the property object)
-4. Using reflection, the EditorData class spits out the parameters/fields that the author can dynamically edit on the GUI back to the EditorView
-5. The EditorView uses this information to construct its GUI.
-6. Each change in the GUI should be bound to the actual value/property in the object.

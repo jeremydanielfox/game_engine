@@ -4,6 +4,7 @@ import java.util.List;
 import javafx.geometry.Point2D;
 
 public class GameObjectSimple implements GameObject {
+	private String myLabel;
     private Point2D myPoint;
     private Health myHealth;
     private Mover myMover;
@@ -38,13 +39,16 @@ public class GameObjectSimple implements GameObject {
 
     // temporary
     public GameObject clone () {
-        return null;
+      try {  return (GameObject) super.clone();
+      } catch(CloneNotSupportedException e) {
+    	  System.out.println(this.getLabel() + " can't be cloned");
+    	  return null;
+      }
     }
 
 	@Override
 	public String getLabel() {
-		// TODO Auto-generated method stub
-		return null;
+		return myLabel;
 	}
 
 	@Override

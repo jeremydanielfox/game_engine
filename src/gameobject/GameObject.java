@@ -1,15 +1,17 @@
 package gameobject;
 
-import gameworld.WorldInhabitant;
+import java.util.List;
 
+public interface GameObject extends Actor, Movable, Health {
+	// public void updateGraphics ();//cannot implement yet
+	public void addWeapon(Weapon weapon);
+	
+	public List<Weapon> getWeapons();
+	
+	public String getLabel();
 
-public interface GameObject extends WorldInhabitant {
+	public GameObject clone();
+	
+	public Pointlike getPoint();
 
-    public void updatePosition ();
-
-    public void updatePhysics ();
-
-    public void updateGraphics ();
-
-    public void onBorn ();
 }

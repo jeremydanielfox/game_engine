@@ -1,0 +1,29 @@
+.root {
+	-fx-font-family: "Courier Sans Serif";
+	-fx-background-color: white;
+}
+
+#rightPanel {
+   -fx-padding: 50 175 0 0 ;
+}
+
+#selectGameText {
+   -fx-font-size: 25;
+}
+
+.hoverPicture {
+	-fx-opacity: 0.5;
+	
+}
+
+#dataForm {
+  -fx-padding: 100 0 0 175;
+}
+
+#authorButton {
+	
+}
+
+#welcomeBanner {
+	-fx-font-size: 40;
+}

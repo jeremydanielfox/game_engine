@@ -5,8 +5,10 @@ import gameobject.Weapon;
 import gameworld.GraphicsComponent;
 import gameworld.MovementComponent;
 import gameworld.PhysicsComponent;
+
 import java.util.Collection;
 import java.util.Collections;
+
 import javafx.geometry.Point2D;
 
 
@@ -84,5 +86,11 @@ public class ConcreteTower implements Tower {
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public String getIdentifier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

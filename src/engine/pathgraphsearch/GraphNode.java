@@ -2,6 +2,7 @@ package engine.pathgraphsearch;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GraphNode {
 	private List<Edge> myEdges;
@@ -33,5 +34,9 @@ public class GraphNode {
 	
 	public List<Edge> getEdges(){
 		return Collections.unmodifiableList(myEdges);
+	}
+	
+	public List<GraphNode> getNeighbors(){
+		return Collections.unmodifiableList(myEdges.stream().map(e -> e.getNeighbor()).collect(Collectors.toList()));
 	}
 }

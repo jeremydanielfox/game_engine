@@ -33,4 +33,8 @@ public class Graph {
 	private List<GraphNode> toNodes(List<GraphNodeID> ids){
 		return Collections.unmodifiableList(ids.stream().map(id -> myNodeMap.get(id)).collect(Collectors.toList()));
 	}
+	
+	public static void main(String[] args){
+		
+	}
 }

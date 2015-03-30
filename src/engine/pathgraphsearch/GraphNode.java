@@ -11,8 +11,8 @@ public class GraphNode {
 	private boolean visited;
 	
 	public GraphNode(){
-		ID = IDCounter.getClone();
 		IDCounter.increment();
+		IDCounter.getClone();
 		visited = false;
 	}
 	

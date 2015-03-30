@@ -26,7 +26,6 @@ public class GraphNodeIDRectangle implements GraphNodeID{
 
 	@Override
 	public GraphNodeID getClone() {
-		// TODO Auto-generated method stub
-		return null;
+		return new GraphNodeIDRectangle(myRow, myCol, myWidth);
 	}
 }

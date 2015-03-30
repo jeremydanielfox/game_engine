@@ -1,5 +1,9 @@
 package events;
 
 public interface Event {
-	public void execute();
+    /**
+     * 
+     * @return false if the event is complete
+     */
+    public boolean execute ();
 }

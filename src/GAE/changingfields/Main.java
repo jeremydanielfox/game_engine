@@ -1,4 +1,4 @@
-package AuthoringEnvironment;
+package GAE.changingfields;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

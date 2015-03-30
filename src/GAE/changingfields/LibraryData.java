@@ -1,4 +1,4 @@
-package AuthoringEnvironment;
+package GAE.changingfields;
 
 import gameobject.Editable;
 

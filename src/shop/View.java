@@ -36,7 +36,7 @@ public class View extends Application {
             ItemGraphic item = new ItemGraphic();
             item.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 TransitionTower transitionTower = new TransitionTower();
-                pane.getChildren().add(DraggableTransform.attachToCursor(transitionTower.getView()));
+                pane.getChildren().add(DraggableTransform.makeDraggable(transitionTower.getView()));
             });
             items.add(item);
             

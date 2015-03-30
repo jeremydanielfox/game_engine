@@ -1,0 +1,85 @@
+<Game>
+	<Win> Beat levels </Win>
+	<Lose> 5 enemies pass </Lose>
+	<View> Top </View>
+	<Type> Place before Level </Type>
+	<Hero> False </Hero>
+	<Level>
+		<level> 1 </level>
+		<World>
+			<Tower>
+				<Price> 1000 </Price>
+				<Level> 1 </Level>
+				<x_coor> 10 </x_coor>
+				<y_coor> 10 </y_coor>
+				<Health> 100 </Health>
+				<BoundaryBox>
+					<Corner>
+						<x_coor> 11 </x_coor>
+						<y_coor> 11 </y_coor>
+					</Corner>
+					<Corner>
+						<x_coor> 9 </x_coor>
+						<y_coor> 9 </y_coor>
+					</Corner>
+					<Corner>
+						<x_coor> 9 </x_coor>
+						<y_coor> 11 </y_coor>
+					</Corner>
+					<Corner>
+						<x_coor> 11 </x_coor>
+						<y_coor> 9 </y_coor>
+					</Corner>
+				</BoundaryBox>
+				<Weapon>
+					<Type> Fire </Type>
+					<Rate> 3 </Rate>
+					<Projectile>
+						<Type> AoE </Type>
+						<Damage> 10 </Damage>
+						<Range> 5 </Range>
+						<Speed> 15 </Speed>
+					</Projectile>
+				</Weapon>
+			</Tower>
+			<Tile>
+				<x> 0 </x>
+				<y> 1 </y>
+				<Buildable> True </Buildable>
+			</Tile>
+			<Enemy>
+				<Type> Easy </Type>
+				<Spawn_X> 0 </Spawn_X>
+				<Spawn_Y> 0 </Spawn_Y>
+				<Speed> 5 < /Speed>
+				<Rate> 1 </Rate>
+		</World>
+	</Level>
+	
+	<Level>
+	</Level>
+	<Store>
+		<
+	</Store>
+	<Purchaseable>
+		<Tower>
+			<Price> 2000 </Price>
+			<Level> 3 </Level>
+			<x_coor> null </x_coor>
+			<y_coor> null </y_coor>
+			<Health> 100 </Health>
+			<BoundaryBox> null </BoundaryBox>
+			<Weapon>
+				<Type> Ice </Type>
+				<Rate> 5 </Rate>
+				<Projectile>
+					<Type> Splash </Type>
+					<Damage> 12 </Damage>
+					<Range> 8 </Range>
+					<Speed> 10 </Speed>
+				</Projectile>
+			</Weapon>
+		</Tower>
+		
+	</Purchaseable>
+</Game>

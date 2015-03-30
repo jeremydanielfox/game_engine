@@ -6,6 +6,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * Represents an item's icon in the shop.
+ * @author Nathan Prabhu
+ *
+ */
 public class ItemGraphic extends Parent {
     
     private static Random ourGenerator = new Random();

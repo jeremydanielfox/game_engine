@@ -13,7 +13,11 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-
+/**
+ * View of the shop. Right now it is being tested using its own stage/launch(). 
+ * @author Nathan Prabhu
+ *
+ */
 public class View extends Application {
 
 

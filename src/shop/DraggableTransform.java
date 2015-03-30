@@ -4,7 +4,11 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
-
+/**
+ * Allows Nodes to be draggable
+ * @author Nathan Prabhu
+ *
+ */
 public class DraggableTransform {
 
     private static final boolean dragModeActiveProperty = true;

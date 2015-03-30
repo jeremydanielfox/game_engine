@@ -6,6 +6,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+/**
+ * Experimental object used to model a transition tower.
+ * @author Nathan Prabhu
+ *
+ */
 
 public class TransitionTower {
 

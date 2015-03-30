@@ -7,6 +7,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Decorator intended to allow a node to be attached to the cursor (and thus move with it).
+ * @author Nathan Prabhu
+ *
+ */
 
 public class CursorBinder extends Parent {
     
@@ -57,7 +62,6 @@ public class CursorBinder extends Parent {
     }
     
     public void doOnMousePressed(MouseEvent mouseEvent){
-        System.out.println("triggered");
         dragModeActiveProperty.set(!dragModeActiveProperty.get());
         node.relocate(mouseEvent.getX(), mouseEvent.getY());
         System.out.println(String.format("Mouse Coords: (%f, %f)", mouseEvent.getX(), mouseEvent.getY()));

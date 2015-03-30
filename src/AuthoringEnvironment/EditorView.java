@@ -1,5 +1,6 @@
-package usecases.usecase_GAE1;
+package AuthoringEnvironment;
 
+import usecases.ConcreteTower;
 import gameobject.Editable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -12,12 +13,19 @@ public class EditorView {
 	// started. The setEditor() class will be called every time the property
 	// above is changed, which means some other object was selected.
 	public void setEditor() {
-		Editor editor = new Editor(property.get());
+		EditorData editor = new EditorData(property.get());
 		editor.showFields();
 	}
 
 	public void setGUI() {
 		// this method will create in the GUI the textboxes and corresponding
 		// fields, taken from the editor class
+	}
+
+	public static void main(String[] args) {
+		ConcreteTower ct = new ConcreteTower(null, null, null);
+		EditorView ev = new EditorView();
+		ev.property.set(ct);
+		ev.setEditor();
 	}
 }

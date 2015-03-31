@@ -5,6 +5,8 @@ import java.util.Observer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.Group;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import game.Drawer;
 import game.Game;
@@ -19,20 +21,28 @@ import game.LevelBoard;
 public class ConcreteView implements View, Observer {
 
     private Game myGame;
-    private Integer myRate;
+    private Integer myRate=200;
     private Timeline myAnimation;
     private LevelBoard myLevelBoard;
+    private Group myGroup;
     
-    public ConcreteView(Game game) {
+    public ConcreteView(Game game,Group group) {
         myGame=game;
         myLevelBoard=myGame.getLevelBoard();
+        myGroup=group;
     }
     
     //look into removing Drawer
     @Override
     public void initializeGameWorld (Drawer drawer) {
-        // TODO Auto-generated method stub
+        ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
+        image.setPreserveRatio(true);
+        image.setFitWidth(500);
+        myGroup.getChildren().add(image);
+        PopUpScreen popup=new PopUpScreen();
+        popup.makeScreen("Begin Level 1", "Start"); // these should be from resource files
         buildTimeline();
+        play();
     }
 
     @Override

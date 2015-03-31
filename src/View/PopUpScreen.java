@@ -17,8 +17,7 @@ import javafx.stage.Stage;
 
 public class PopUpScreen {
 
-    
-    
+
     protected void makeScreen(String caption, String buttonCaption) {
         Stage newStage = new Stage();
         GridPane grid = new GridPane();

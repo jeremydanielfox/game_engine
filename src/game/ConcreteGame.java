@@ -19,6 +19,8 @@ public class ConcreteGame implements Game {
 
     }
     
-    
+    public LevelBoard getLevelBoard() {
+        return myLevelBoard;
+    }
 
 }

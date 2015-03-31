@@ -13,7 +13,7 @@ public class ConcreteGame implements Game {
     @Override
     public void update () {
         // TODO Auto-generated method stub
-
+        myLevelBoard.update();
     }
 
     public void init () {
@@ -22,6 +22,12 @@ public class ConcreteGame implements Game {
     
     public LevelBoard getLevelBoard() {
         return myLevelBoard;
+    }
+
+    @Override
+    public Player getPlayer () {
+        // TODO Auto-generated method stub
+        return myPlayer;
     }
 
 }

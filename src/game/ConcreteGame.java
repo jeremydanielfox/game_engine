@@ -5,8 +5,9 @@ public class ConcreteGame implements Game {
     private Player myPlayer;
     private LevelBoard myLevelBoard;
 
-    public ConcreteGame (Player player) {
+    public ConcreteGame (Player player,LevelBoard level) {
         myPlayer = player;
+        myLevelBoard=level;
     }
 
     @Override
@@ -19,6 +20,8 @@ public class ConcreteGame implements Game {
 
     }
     
-    
+    public LevelBoard getLevelBoard() {
+        return myLevelBoard;
+    }
 
 }

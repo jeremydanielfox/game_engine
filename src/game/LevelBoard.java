@@ -1,6 +1,10 @@
 package game;
 
 public interface LevelBoard {
-abstract void getNextLevel();
+    
+    abstract void startNextLevel ();
 
+    public boolean gameOver();
+    
+    public String getCurrentLevelMap ();
 }

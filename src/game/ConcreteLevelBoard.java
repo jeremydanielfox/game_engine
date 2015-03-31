@@ -8,7 +8,7 @@ import java.util.Observable;
 /**
  * This class contains all levels that exist in a game.
  * 
- * @author Sierra Smith
+ * @authors Sierra Smith, Cosette Goldstein
  *
  */
 public class ConcreteLevelBoard extends Observable implements LevelBoard {
@@ -31,7 +31,11 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
      * If it has ended, notify the View.
      */
     public void update () {
-
+        myLevels.get(curLevelIndex).update();
+        if (myLevels.get(curLevelIndex).isWon()||myLevels.get(curLevelIndex).isLost()) {
+            setChanged();
+            notifyObservers();
+        }
     }
 
     /**
@@ -51,9 +55,9 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
     // note: do we really need this method? no other object knows how to deal with a "level"
     // rather, should the method just be called update current level? which can change the level
     @Override
-    public void getNextLevel () {
+    public void startNextLevel () {
         // TODO Auto-generated method stub
-
+        curLevelIndex++;
     }
 
 }

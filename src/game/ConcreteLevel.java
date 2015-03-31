@@ -37,4 +37,10 @@ public class ConcreteLevel implements Level {
         return false;
     }
 
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

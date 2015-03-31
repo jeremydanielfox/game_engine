@@ -1,8 +1,8 @@
 package engine.interactions;
 
 import gameobject.GameObject;
-
 import java.util.function.BiConsumer;
+
 
 /**
  * This preset interaction can be used in the InteractionEngine to define an
@@ -12,13 +12,13 @@ import java.util.function.BiConsumer;
  *
  */
 public class HealthChanger implements BiConsumer<GameObject, GameObject> {
-	private double first = 0;
-	private double second = 0;
+    private double first = 0;
+    private double second = 0;
 
-	@Override
-	public void accept(GameObject t, GameObject u) {
-		t.changeHealth(first);
-		u.changeHealth(second);
-	}
+    @Override
+    public void accept (GameObject t, GameObject u) {
+        t.changeHealth(first);
+        u.changeHealth(second);
+    }
 
 }

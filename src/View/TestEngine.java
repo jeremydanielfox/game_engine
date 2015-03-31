@@ -1,5 +1,9 @@
 package View;
 
+import java.util.ArrayList;
+import java.util.List;
+import engine.goals.Goal;
+import engine.goals.HealthDepletionGoal;
 import game.ConcreteGame;
 import game.ConcreteLevel;
 import game.ConcreteLevelBoard;
@@ -18,8 +22,13 @@ public class TestEngine extends Application {
         primaryStage.setHeight(600); // needs to account for scaling; add constants
         primaryStage.setWidth(600);// needs to account for scaling; add constants
         Scene scene=new Scene(root);
-        View view = new ConcreteView(new ConcreteGame(new Player("Boi",0,0,0),board),root);
-        board.addLevel(new ConcreteLevel("images/Park_Path.png"));
+        Player myPlayer=new Player("Boi",100,100,100);
+        View view = new ConcreteView(new ConcreteGame(myPlayer,board),root);
+        HealthDepletionGoal healthy=new HealthDepletionGoal(myPlayer);
+        List<Goal> list=new ArrayList<Goal>();
+        list.add(healthy);
+        board.addLevel(new ConcreteLevel("images/Park_Path.png",list,list));
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg",list,list));
         view.initializeGameWorld(null);
         primaryStage.setScene(scene);
         primaryStage.show();

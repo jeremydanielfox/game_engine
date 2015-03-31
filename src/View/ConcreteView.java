@@ -6,7 +6,9 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import game.Drawer;
 import game.Game;
@@ -24,12 +26,16 @@ public class ConcreteView implements View, Observer {
     private Integer myRate=200;
     private Timeline myAnimation;
     private LevelBoard myLevelBoard;
-    private Group myGroup;
+    private Group myGameWorldGroup;
+    private Group myTotalGroup;
     
     public ConcreteView(Game game,Group group) {
         myGame=game;
         myLevelBoard=myGame.getLevelBoard();
-        myGroup=group;
+        myLevelBoard.addObserver(this);
+        myTotalGroup=group;
+        myGameWorldGroup=new Group();
+        myTotalGroup.getChildren().add(myGameWorldGroup);
     }
     
     //look into removing Drawer
@@ -38,9 +44,14 @@ public class ConcreteView implements View, Observer {
         ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
         image.setPreserveRatio(true);
         image.setFitWidth(500);
-        myGroup.getChildren().add(image);
+        myGameWorldGroup.getChildren().add(image);
+        HeadsUpDisplay headsUp=new HeadsUpDisplay(myGame.getPlayer());
+        HBox hbox=headsUp.makeDisplay();
         PopUpScreen popup=new PopUpScreen();
         popup.makeScreen("Begin Level 1", "Start"); // these should be from resource files
+        Button btn=new Button("SWITCH");
+        btn.setOnAction(e->myGame.getPlayer().changeHealth(-100));
+        myTotalGroup.getChildren().addAll(btn,hbox);
         buildTimeline();
         play();
     }
@@ -77,7 +88,10 @@ public class ConcreteView implements View, Observer {
             pause();
             if (myLevelBoard.gameOver()) {
                 //note: display game over screen
+                PopUpScreen gameOver=new PopUpScreen();
+                gameOver.makeScreen("GAME OVER", "Play Again");
                 //ideally gamePlayer/observers should be notified here
+                
             }
             else {
                 myLevelBoard.startNextLevel();
@@ -85,10 +99,34 @@ public class ConcreteView implements View, Observer {
                 //display new sprites
                 //popup window
                 //then after closing popup window, play();
+                ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
+                image.setPreserveRatio(true);
+                image.setFitWidth(500);
+                myGameWorldGroup.getChildren().clear();
+                myGameWorldGroup.getChildren().add(image);
+                //display new sprites
+                play();
             }
         }
     }
 
+    
+    public void test() {
+        pause();
+        myLevelBoard.startNextLevel();
+        //display new background
+        //display new sprites
+        //popup window
+        //then after closing popup window, play();
+        ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
+        image.setPreserveRatio(true);
+        image.setFitWidth(500);
+        myGameWorldGroup.getChildren().clear();
+        myGameWorldGroup.getChildren().add(image);
+        //display new sprites
+        play();
+    }
+    
     @Override
     public void pause () {
         myAnimation.pause();

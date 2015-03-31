@@ -31,10 +31,12 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
      * If it has ended, notify the View.
      */
     public void update () {
-        myLevels.get(curLevelIndex).update();
         if (myLevels.get(curLevelIndex).isWon()||myLevels.get(curLevelIndex).isLost()) {
             setChanged();
             notifyObservers();
+        }
+        else {
+            myLevels.get(curLevelIndex).update();
         }
     }
 

@@ -3,16 +3,22 @@ package engine.grid;
 import java.util.LinkedList;
 import java.util.List;
 
+import engine.interactions.ConcreteInteractionEngine;
+import engine.interactions.InteractionEngine;
 import gameobject.GameObject;
+import gameobject.Weapon;
 
 public class Grid {
 	private List<GameObject>[][] myGrid;
 	private List<GameObject> myGameObjects;
+	private InteractionEngine myInteractionEngine;
+	
 	
 	@SuppressWarnings("unchecked")
 	public Grid(int numRows, int numCols){
 		myGrid = (List<GameObject>[][]) new LinkedList<?>[numRows][numCols];
 		myGameObjects = new LinkedList<>();
+		myInteractionEngine = new ConcreteInteractionEngine();
 	}
 	
 	public void addStructure(int row, int col, GameObject o){
@@ -28,7 +34,12 @@ public class Grid {
 	}
 	public void detectRange(){
 		for(GameObject o : myGameObjects){
-			myGameObjects.stream(); //TODO finish
+			for(Weapon w : o.getWeapons()){
+				myGameObjects.stream()
+					.filter(go -> go.getPoint().withinRange(o.getPoint(), w.getRange()))
+					.forEach(go -> { myInteractionEngine.interact(w.getProjectile(), o);});
+					//TODO make a weapon not fire upon everything in range. Also, rework weapon/projectile.
+			}
 		}
 	}
 }

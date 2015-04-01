@@ -39,8 +39,7 @@ public class ItemGraphic extends Parent {
 
     private void initialize () {
         circle = new Circle(ITEM_RADIUS);
-        Image dartTower = new Image(image);
-        circle.setFill(new ImagePattern(dartTower, 0, 0, 1, 1, true));
+        circle.setFill(new ImagePattern(new Image(image), 0, 0, 1, 1, true));
         circle.setOnMouseEntered(mouseEvent -> hoverAction());
         circle.setOnMouseExited(mouseEvent -> circle.setEffect(null));
         getChildren().add(circle);

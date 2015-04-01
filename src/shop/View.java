@@ -57,8 +57,8 @@ public class View extends Application {
                 item.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                     TransitionTower transitionTower = new TransitionTower();
                     transitionTower.getView()
-                            .relocate(mouseEvent.getSceneX() - item.getRadius(),
-                                      mouseEvent.getSceneY() - item.getRadius());
+                            .relocate(mouseEvent.getSceneX() + CenterOffset.getX(item),
+                                      mouseEvent.getSceneY() + CenterOffset.getY(item));
                     pane.getChildren()
                             .add(CursorBinder.bindCursor(transitionTower.getView(),
                                                          shopDisplay.getScene(), KeyCode.ESCAPE));

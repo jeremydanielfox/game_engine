@@ -33,11 +33,8 @@ public class CursorBinder {
         final Group wrapGroup = new Group(node);
 
         scene.setOnMouseMoved(mouseEvent -> {
-            Point2D nodeOffset = new Point2D(-node.getBoundsInLocal().getWidth() / 2,
-                                             -node.getBoundsInLocal().getHeight() / 2);
-
-            double currentX = mouseEvent.getSceneX() + nodeOffset.getX();
-            double currentY = mouseEvent.getSceneY() + nodeOffset.getY();
+            double currentX = mouseEvent.getSceneX() + CenterOffset.getX(node);
+            double currentY = mouseEvent.getSceneY() + CenterOffset.getY(node);
 
             wrapGroup.relocate(currentX, currentY);
 
@@ -46,6 +43,7 @@ public class CursorBinder {
         });
 
         // TODO: figure out why keyPressed caller must be scene, and not pane or node
+        // AND why node not deleted if deleted while on flowpane
         scene.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
                 System.out.println("triggered");

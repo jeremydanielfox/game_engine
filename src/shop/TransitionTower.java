@@ -1,13 +1,18 @@
 package shop;
 
 import java.util.Random;
-import javafx.geometry.Point2D;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+
 /**
  * Experimental object used to model a transition tower.
+ * 
  * @author Nathan Prabhu
  *
  */
@@ -15,39 +20,34 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 public class TransitionTower {
 
     private static Random ourGenerator = new Random();
-    private Point2D myCenter;
-    private int mySize;
-    private Point2D myVelocity;
-    private Color myColor;
+
+    private static final double TOWER_RADIUS = 25;
+    private static final double RANGE = 30 + TOWER_RADIUS;
+    private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
+
     @XStreamOmitField
-    private transient Circle myShape;
+    private transient StackPane pane;
 
     public TransitionTower () {
-        init(new Point2D(ourGenerator.nextInt(400), ourGenerator.nextInt(4)),
-             ourGenerator.nextInt(16) + 15,
-             new Point2D(ourGenerator.nextInt(5) - 3, ourGenerator.nextInt(5) - 3),
-             new Color(ourGenerator.nextDouble(), ourGenerator.nextDouble(), ourGenerator.nextDouble(), 1));
-    }
-    
-    public void update(){
-        myCenter = myCenter.add(myVelocity);
-        myShape.setCenterX(myCenter.getX());
-        myShape.setCenterY(myCenter.getY());
+        initialize(new Color(ourGenerator.nextDouble(), ourGenerator.nextDouble(), ourGenerator
+                .nextDouble(), 1));
     }
 
     // This method now only needs to be called once
-    public Circle getView () {
-        return myShape;
+    public Node getView () {
+        return pane;
     }
 
     // Shared initialization method
-    private void init (Point2D center, int size, Point2D velocity, Color color) {
-        myCenter = new Point2D(center.getX(), center.getY());
-        mySize = size;
-        myVelocity = new Point2D(velocity.getX(), velocity.getY());
-        myColor = color;
-        myShape = new Circle(center.getX(), center.getY(), size);
-        myShape.setFill(color);
+    private void initialize (Color color) {
+        pane = new StackPane();
+
+        Circle rangeDetection = new Circle(RANGE, ERROR_COLOR);
+        rangeDetection.setStroke(Color.BLACK);
+
+        Circle tower = new Circle(TOWER_RADIUS, color);
+        //tower.setFill(new ImagePattern(new Image("/images/Bloons_DartMonkeyIcon.jpg"), 0, 0, 1, 1, true));
+        pane.getChildren().addAll(rangeDetection, tower);
     }
 
 }

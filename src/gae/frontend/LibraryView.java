@@ -1,4 +1,4 @@
-package GAE.frontend;
+package gae.frontend;
 
 import java.util.ArrayList;
 import java.util.List;

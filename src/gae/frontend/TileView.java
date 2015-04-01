@@ -1,4 +1,4 @@
-package GAE.frontend;
+package gae.frontend;
 
 public class TileView {
 

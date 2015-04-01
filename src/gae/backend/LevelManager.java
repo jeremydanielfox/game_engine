@@ -1,4 +1,4 @@
-package GAE.backend;
+package gae.backend;
 
 import game.Level;
 

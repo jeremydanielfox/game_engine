@@ -1,11 +1,11 @@
-package GAE.frontend;
+package gae.frontend;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import GAE.backend.ResourceBundleUtil;
 import exception.NonNumberException;
+import gae.backend.ResourceBundleUtil;
 import gameobject.Editable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

@@ -1,6 +1,6 @@
-package GAE.backend;
+package gae.backend;
 
-import GAE.frontend.EditorView;
+import gae.frontend.EditorView;
 import javafx.stage.Stage;
 
 

@@ -1,4 +1,4 @@
-package GAE.backend;
+package gae.backend;
 
 import java.util.Enumeration;
 import java.util.HashMap;

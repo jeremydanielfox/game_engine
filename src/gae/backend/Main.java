@@ -1,4 +1,4 @@
-package GAE.backend;
+package gae.backend;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

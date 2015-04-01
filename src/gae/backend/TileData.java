@@ -1,4 +1,4 @@
-package GAE.backend;
+package gae.backend;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

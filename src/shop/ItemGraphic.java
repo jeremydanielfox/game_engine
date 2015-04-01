@@ -27,10 +27,12 @@ public class ItemGraphic extends Parent {
     private int cost;
     private String description;
     private Circle circle;
-    private String image;
+    private String icon;
+    private String tower;
 
-    public ItemGraphic (String image) {
-        this.image = image;
+    public ItemGraphic (String icon, String tower) {
+        this.icon = icon;
+        this.tower = tower;
         name = "name";
         cost = ourGenerator.nextInt(100);
         description = "this is my description";
@@ -39,7 +41,7 @@ public class ItemGraphic extends Parent {
 
     private void initialize () {
         circle = new Circle(ITEM_RADIUS);
-        circle.setFill(new ImagePattern(new Image(image), 0, 0, 1, 1, true));
+        circle.setFill(new ImagePattern(new Image(icon)));
         circle.setOnMouseEntered(mouseEvent -> hoverAction());
         circle.setOnMouseExited(mouseEvent -> circle.setEffect(null));
         getChildren().add(circle);
@@ -54,10 +56,14 @@ public class ItemGraphic extends Parent {
     }
 
     public double getRadius () {
-        return circle.getRadius();
+        return ITEM_RADIUS;
     }
 
     public Point2D getCenter () {
         return new Point2D(circle.getCenterX(), circle.getCenterY());
+    }
+
+    public String getTower () {
+        return tower;
     }
 }

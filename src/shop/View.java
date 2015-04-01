@@ -2,7 +2,9 @@ package shop;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -47,15 +49,21 @@ public class View extends Application {
                 .set(new Background(new BackgroundFill(Color.GRAY, null, null)));
 
         // add Icons
+        Map<String, String> shopImages = new HashMap<String, String>();
         String[] iconImages= new String[] {"/images/Bloons_DartMonkeyIcon.jpg",
                                             "/images/Bloons_TackShooterIcon.jpg"};
+        String[] towerImages = new String[] {"/images/Bloons_DartMonkey.png",
+                                             "/images/Bloons_TackShooter.png"};
+        for (int i=0; i<iconImages.length; i++){
+            shopImages.put(iconImages[i], towerImages[i]);
+        }
         
         List<Node> items = new ArrayList<Node>();
         for (int i = 0; i < ITEM_COUNT/iconImages.length; i++) {
-            Arrays.asList(iconImages).forEach(image->{
-                ItemGraphic item = new ItemGraphic(image);
+            shopImages.forEach((icon, tower)->{
+                ItemGraphic item = new ItemGraphic(icon, tower);
                 item.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-                    TransitionTower transitionTower = new TransitionTower();
+                    TransitionTower transitionTower = new TransitionTower(item.getTower());
                     transitionTower.getView()
                             .relocate(mouseEvent.getSceneX() + CenterOffset.getX(item),
                                       mouseEvent.getSceneY() + CenterOffset.getY(item));

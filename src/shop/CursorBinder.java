@@ -46,7 +46,6 @@ public class CursorBinder {
         // AND why node not deleted if deleted while on flowpane
         scene.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
-                System.out.println("triggered");
                 scene.setOnMouseMoved(mouseEvent -> {
                 });
                 ((Group) node.getParent()).getChildren().remove(node);

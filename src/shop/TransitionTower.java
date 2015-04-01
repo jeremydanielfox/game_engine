@@ -7,6 +7,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 
@@ -21,16 +22,19 @@ public class TransitionTower {
 
     private static Random ourGenerator = new Random();
 
-    private static final double TOWER_RADIUS = 25;
-    private static final double RANGE = 30 + TOWER_RADIUS;
+    private static final double TOWER_WIDTH = 50;
+    private static final double RANGE = 30 + widthToRadius(TOWER_WIDTH);
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
+
+    private static double widthToRadius (double width) {
+        return width * Math.sqrt(2) / 2;
+    }
 
     @XStreamOmitField
     private transient StackPane pane;
 
-    public TransitionTower () {
-        initialize(new Color(ourGenerator.nextDouble(), ourGenerator.nextDouble(), ourGenerator
-                .nextDouble(), 1));
+    public TransitionTower (String image) {
+        initialize(image);
     }
 
     // This method now only needs to be called once
@@ -39,14 +43,14 @@ public class TransitionTower {
     }
 
     // Shared initialization method
-    private void initialize (Color color) {
+    private void initialize (String image) {
         pane = new StackPane();
 
         Circle rangeDetection = new Circle(RANGE, ERROR_COLOR);
         rangeDetection.setStroke(Color.BLACK);
 
-        Circle tower = new Circle(TOWER_RADIUS, color);
-        //tower.setFill(new ImagePattern(new Image("/images/Bloons_DartMonkeyIcon.jpg"), 0, 0, 1, 1, true));
+        Rectangle tower = new Rectangle(TOWER_WIDTH, TOWER_WIDTH);
+        tower.setFill(new ImagePattern(new Image(image)));
         pane.getChildren().addAll(rangeDetection, tower);
     }
 

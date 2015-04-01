@@ -1,4 +1,4 @@
-package gameobject;
+package engine.gameobject;
 
 import engine.grid.Gridlike;
 

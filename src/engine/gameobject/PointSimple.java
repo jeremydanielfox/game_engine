@@ -1,4 +1,4 @@
-package gameobject;
+package engine.gameobject;
 import javafx.geometry.Point2D;
 
 public class PointSimple implements Pointlike {

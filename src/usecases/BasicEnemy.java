@@ -1,7 +1,7 @@
 package usecases;
 
+import engine.gameobject.Enemy;
 import javafx.geometry.Point2D;
-import gameobject.Enemy;
 
 
 public class BasicEnemy implements Enemy {

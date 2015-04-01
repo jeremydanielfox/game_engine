@@ -1,7 +1,7 @@
 package usecases;
 
-import gameobject.GameObject;
-import gameobject.Tower;
+import engine.gameobject.GameObject;
+import engine.gameobject.Tower;
 import gameworld.CollisionEngine;
 import gameworld.PhysicsComponent;
 

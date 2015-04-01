@@ -1,8 +1,8 @@
 package usecases;
 
+import engine.gameobject.Enemy;
+import engine.gameobject.GameObject;
 import engine.pathfinding.PathFinder;
-import gameobject.Enemy;
-import gameobject.GameObject;
 import gameworld.MovementComponent;
 
 public class EnemyMovementComponent implements MovementComponent {

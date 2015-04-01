@@ -1,10 +1,10 @@
 package usecases;
 
+import engine.gameobject.Enemy;
+import engine.gameobject.GameObject;
+import engine.gameobject.Tower;
 import engine.grid.Grid;
 import engine.pathfinding.PathFinder;
-import gameobject.Enemy;
-import gameobject.GameObject;
-import gameobject.Tower;
 import gameworld.GameWorld;
 
 

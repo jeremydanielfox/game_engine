@@ -1,4 +1,4 @@
-package gameobject;
+package engine.gameobject;
 
 public class HealthSimple implements Health {
 	private double myHealth;

@@ -1,7 +1,7 @@
 package usecases;
 
+import engine.gameobject.Enemy;
 import javafx.geometry.Point2D;
-import gameobject.Enemy;
 import gameworld.GraphicsComponent;
 import gameworld.MovementComponent;
 import gameworld.PhysicsComponent;

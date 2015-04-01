@@ -1,7 +1,7 @@
 package gameManager;
 
+import engine.gameobject.Editable;
 import javafx.collections.ObservableList;
-import gameobject.Editable;
 
 public interface LibraryData {
 

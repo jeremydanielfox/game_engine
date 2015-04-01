@@ -1,4 +1,4 @@
-package gameobject;
+package engine.gameobject;
 
 /**
  * Implemented by a class if it can update its own position.

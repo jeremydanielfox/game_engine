@@ -1,6 +1,6 @@
 package usecases;
 
-import gameobject.GameObject;
+import engine.gameobject.GameObject;
 import gameworld.MovementComponent;
 
 public class TowerMovementComponent implements MovementComponent  {

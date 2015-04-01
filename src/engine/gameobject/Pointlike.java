@@ -1,4 +1,4 @@
-package gameobject;
+package engine.gameobject;
 
 /**
  * Implemented if the class has a cartesian representation of its position.

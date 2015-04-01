@@ -1,5 +1,8 @@
 package game;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * This class is in charge of maintaining everything that occurs within one level, such as
  * the list of events/waves to occur (Storyboard object), as well as the background image
@@ -8,7 +11,7 @@ package game;
  * @author Sierra Smith
  *
  */
-public class ConcreteLevel implements Level {
+public class ConcreteLevel implements Level, Observer {
 
     // note to self: we need to save all of the images out to one directory
     // we should identify images by name and have a constant image path that we pin on before
@@ -35,6 +38,12 @@ public class ConcreteLevel implements Level {
     public boolean isLost () {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public void update (Observable o, Object arg) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

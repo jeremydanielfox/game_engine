@@ -2,9 +2,8 @@ package AuthoringEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import engine.gameobject.Editable;
 import javafx.scene.control.Button;
-import gameobject.Editable;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;

@@ -1,9 +1,9 @@
 package gameManager;
 
+import engine.gameobject.Editable;
 import javafx.collections.ObservableList;
 import game.Game;
 import game.Level;
-import gameobject.Editable;
 
 public interface GameManager {
     public void export();

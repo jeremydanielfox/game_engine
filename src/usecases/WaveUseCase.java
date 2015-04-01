@@ -1,9 +1,8 @@
 package usecases;
 
-import gameobject.Enemy;
+import engine.gameobject.Enemy;
 import gameworld.BasicWorld;
 import gameworld.GameWorld;
-
 import java.util.HashMap;
 
 public class WaveUseCase {

@@ -1,14 +1,12 @@
 package usecases;
 
-import gameobject.Tower;
-import gameobject.Weapon;
+import engine.gameobject.Tower;
+import engine.gameobject.Weapon;
 import gameworld.GraphicsComponent;
 import gameworld.MovementComponent;
 import gameworld.PhysicsComponent;
-
 import java.util.Collection;
 import java.util.Collections;
-
 import javafx.geometry.Point2D;
 
 

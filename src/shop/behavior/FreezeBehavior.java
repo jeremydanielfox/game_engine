@@ -1,4 +1,4 @@
-package shop;
+package shop.behavior;
 
 import gameobject.GameObject;
 

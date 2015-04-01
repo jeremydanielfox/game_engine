@@ -6,4 +6,6 @@ public interface Level {
 	public boolean isLost();
 	
 	public String getLevelBackground();
+	
+	public void update();
 }

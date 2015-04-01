@@ -3,8 +3,9 @@ package gameobject;
 import java.util.List;
 import javafx.geometry.Point2D;
 
+
 public class GameObjectSimple implements GameObject {
-	private String myLabel;
+    private String myLabel;
     private Point2D myPoint;
     private Health myHealth;
     private Mover myMover;
@@ -39,26 +40,28 @@ public class GameObjectSimple implements GameObject {
 
     // temporary
     public GameObject clone () {
-      try {  return (GameObject) super.clone();
-      } catch(CloneNotSupportedException e) {
-    	  System.out.println(this.getLabel() + " can't be cloned");
-    	  return null;
-      }
+        try {
+            return (GameObject) super.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            System.out.println(this.getLabel() + " can't be cloned");
+            return null;
+        }
     }
 
-	@Override
-	public String getLabel() {
-		return myLabel;
-	}
+    @Override
+    public String getLabel () {
+        return myLabel;
+    }
 
-	@Override
-	public Pointlike getPoint() {
-		return new PointSimple(myPoint);
-	}
+    @Override
+    public Pointlike getPoint () {
+        return new PointSimple(myPoint);
+    }
 
-	@Override
-	public List<Weapon> getWeapons() {
-		return myWeapons;
-	}
+    @Override
+    public List<Weapon> getWeapons () {
+        return myWeapons;
+    }
 
 }

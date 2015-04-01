@@ -11,4 +11,8 @@ public interface View {
     abstract void executeFrameActions ();
 
     abstract void displayShop ();
+    
+    abstract void pause ();
+    
+    abstract void play ();
 }

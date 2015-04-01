@@ -1,4 +1,4 @@
-package AuthoringEnvironment;
+package GAE.backend;
 
 import game.Level;
 

@@ -12,16 +12,29 @@
 }
 
 .hoverPicture {
-	-fx-opacity: 0.5;
-	
+   -fx-opacity: 0.3;
+}
+
+  .hoverPicture:hover {
+    -fx-opacity: 1;
+  }
+
+    .hoverPicture:pressed {
+      -fx-opacity: 1;
+      -fx-border-color: red;
+      -fx-border-width: 5px;
+    }
+
+.gameLabel {
+  -fx-font-size: 30;
 }
 
 #dataForm {
   -fx-padding: 100 0 0 175;
 }
 
-#authorButton {
-	
+#authorButton:hover {
+ -fx-border-color: blue;
 }
 
 #welcomeBanner {

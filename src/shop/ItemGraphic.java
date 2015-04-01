@@ -4,8 +4,9 @@ import java.util.Random;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
+import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 
@@ -17,7 +18,8 @@ import javafx.scene.shape.Circle;
  */
 public class ItemGraphic extends Parent {
 
-    private static final int ITEM_RADIUS = 25;
+    private static final double ITEM_RADIUS = 25;
+    private static final double GLOW_VALUE = 0.5;
 
     private static Random ourGenerator = new Random();
 
@@ -25,8 +27,10 @@ public class ItemGraphic extends Parent {
     private int cost;
     private String description;
     private Circle circle;
+    private String image;
 
-    public ItemGraphic () {
+    public ItemGraphic (String image) {
+        this.image = image;
         name = "name";
         cost = ourGenerator.nextInt(100);
         description = "this is my description";
@@ -34,13 +38,17 @@ public class ItemGraphic extends Parent {
     }
 
     private void initialize () {
-        circle = new Circle(ITEM_RADIUS, Color.AQUA);
-        circle.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> hoverAction());
+        circle = new Circle(ITEM_RADIUS);
+        Image dartTower = new Image(image);
+        circle.setFill(new ImagePattern(dartTower, 0, 0, 1, 1, true));
+        circle.setOnMouseEntered(mouseEvent -> hoverAction());
+        circle.setOnMouseExited(mouseEvent -> circle.setEffect(null));
         getChildren().add(circle);
     }
 
     private void hoverAction () {
         circle.setCursor(Cursor.HAND);
+        circle.setEffect(new Glow(GLOW_VALUE));
         System.out.println(String.format("Name: %s", name));
         System.out.println(String.format("Cost: %d", cost));
         System.out.println(String.format("Description: %s", description));

@@ -1,6 +1,7 @@
 package shop;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Node;
@@ -26,7 +27,7 @@ public class View extends Application {
     private final static int SCENE_WIDTH = 400;
     private final static int SCENE_HEIGHT = 400;
     private final static int SHOP_WIDTH = 160;
-    private final static int ITEM_COUNT = 15;
+    private final static int ITEM_COUNT = 12;
 
     private BorderPane pane;
 
@@ -35,6 +36,8 @@ public class View extends Application {
         pane = new BorderPane();
         Scene scene = new Scene(pane, SCENE_WIDTH, SCENE_HEIGHT);
         stage.setScene(scene);
+        
+        // FlowPane contains the entire store. This is what should be moved around. 
         FlowPane shopDisplay = new FlowPane();
         shopDisplay.setHgap(5);
         shopDisplay.setVgap(5);
@@ -43,21 +46,26 @@ public class View extends Application {
         shopDisplay.backgroundProperty()
                 .set(new Background(new BackgroundFill(Color.GRAY, null, null)));
 
-        // add Items
+        // add Icons
+        String[] iconImages= new String[] {"/images/Bloons_DartMonkeyIcon.jpg",
+                                            "/images/Bloons_TackShooterIcon.jpg"};
+        
         List<Node> items = new ArrayList<Node>();
-        for (int i = 0; i < ITEM_COUNT; i++) {
-            ItemGraphic item = new ItemGraphic();
-            item.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-                TransitionTower transitionTower = new TransitionTower();
-                transitionTower.getView()
-                        .relocate(mouseEvent.getSceneX() - item.getRadius(),
-                                  mouseEvent.getSceneY() - item.getRadius());
-                pane.getChildren()
-                        .add(CursorBinder.bindCursor(transitionTower.getView(),
-                                                     pane.getScene(), KeyCode.ESCAPE));
+        for (int i = 0; i < ITEM_COUNT/iconImages.length; i++) {
+            Arrays.asList(iconImages).forEach(image->{
+                ItemGraphic item = new ItemGraphic(image);
+                item.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+                    TransitionTower transitionTower = new TransitionTower();
+                    transitionTower.getView()
+                            .relocate(mouseEvent.getSceneX() - item.getRadius(),
+                                      mouseEvent.getSceneY() - item.getRadius());
+                    pane.getChildren()
+                            .add(CursorBinder.bindCursor(transitionTower.getView(),
+                                                         shopDisplay.getScene(), KeyCode.ESCAPE));
 
+                });
+                items.add(item);
             });
-            items.add(item);
         }
         shopDisplay.getChildren().addAll(items);
         stage.show();

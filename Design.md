@@ -106,8 +106,5 @@ Brandon: Authoring team, front end features, general UI for authoring environmen
 Eric: Authoring team, back end features, working with connecting the front end and the back end <br>
 John: Authoring team, front end features, working with UI and the editor class that allows user to edit different properties of said game object <br>
 Kei: Authoring team, back end features, XML Parsing, GameManager <br>
-<<<<<<< HEAD
 Nina: Authoring team, back end features, working with library and game data
-=======
-Nina: Authoring team, back end features, working with library and game data
->>>>>>> 3fbe059f9614ea9f6198c8895b95c944342f363e
+

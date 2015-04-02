@@ -1,10 +1,15 @@
-package game;
+package engine.game;
 
 import java.util.ArrayList;
 import java.util.List;
 import events.Event;
 
-
+/**
+ * Manages the event progression for a level
+ * 
+ * @author Tom Puglisi
+ *
+ */
 public class StoryBoard {
     private List<Event> eventList;
     private int frameCount;
@@ -40,7 +45,7 @@ public class StoryBoard {
      * @param event
      */
     public void updateEvent(Event event) {
-        if (!event.update()) {
+        if (!event.update(frameCount)) {
             eventList.remove(event);
         }
     }

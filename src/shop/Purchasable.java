@@ -1,8 +1,5 @@
 package shop;
 
-import gameobject.GameObject;
-
-
 public interface Purchasable {
     public Object clone ();
 

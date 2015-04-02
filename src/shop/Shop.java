@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import shop.upgrade.Upgrade;
 
 
+/**
+ * Manages the maps containing the purchasable prototypes
+ * 
+ * @author Tom Puglisi
+ *
+ */
 public class Shop {
     private Map<ItemGraphic, Purchasable> purchasableMap;
     private Map<Purchasable, ItemGraphic> itemGraphicMap;
@@ -33,21 +38,26 @@ public class Shop {
 
     public List<ItemGraphic> getItemGraphics (GameObject gameObject) {
         List<ItemGraphic> items = new ArrayList<>();
-        itemGraphicMap.keySet().stream().forEach(purchasable -> addPurchasable(gameObject, items, purchasable));
+        itemGraphicMap.keySet().stream()
+                .forEach(purchasable -> addPurchasable(gameObject, items, purchasable));
         return items;
     }
-    
-    private void addPurchasable (GameObject gameObject, List<ItemGraphic> items, Purchasable purchasable) {
-        if (gameObject.canPurchase(purchasable)) {
-            items.add(itemGraphicMap.get(purchasable));
-        }
+
+    private void addPurchasable (GameObject gameObject,
+                                 List<ItemGraphic> items,
+                                 Purchasable purchasable) {
+        /*
+         * if (gameObject.canPurchase(purchasable)) {
+         * items.add(itemGraphicMap.get(purchasable));
+         * }
+         */
     }
 
-    public Object getPrototypeClone(ItemGraphic itemGraphic) {
+    public Object getPrototypeClone (ItemGraphic itemGraphic) {
         return purchasableMap.get(itemGraphic).clone();
     }
-    
-    public ItemGraphic getItemGraphic(Purchasable purchasable) {
+
+    public ItemGraphic getItemGraphic (Purchasable purchasable) {
         return itemGraphicMap.get(purchasable);
     }
 }

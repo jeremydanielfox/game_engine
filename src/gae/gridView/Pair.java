@@ -1,4 +1,4 @@
-package gae.pathView;
+package gae.gridView;
 
 public class Pair {
     double x, y;

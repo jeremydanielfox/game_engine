@@ -5,9 +5,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 
-public class Tile extends Group {
-    public Tile (double size) {
+public class TileView extends Group {
+    private TileData data;
 
+    public TileView (double size, TileData data) {
+        this.data = data;
         Rectangle rect = new Rectangle(size, size, Color.TRANSPARENT);
         rect.setStroke(Color.BLACK);
         rect.setStrokeWidth(1);
@@ -18,14 +20,13 @@ public class Tile extends Group {
     private void setUp (Rectangle rect) {
         this.setOnMouseEntered(e -> {
             rect.setFill(Color.LIGHTGREEN);
-            // rect.setStyle("-fx-background-color: blue;");
         });
         this.setOnMouseExited(e -> {
             rect.setFill(Color.TRANSPARENT);
-            // rect.setStyle("-fx-background-color: transparent;");
         });
         this.setOnMouseClicked(e -> {
             System.out.println("clicked");
+            data.changeState();
         });
     }
 }

@@ -1,4 +1,4 @@
-package gae.pathView;
+package gae.gridView;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.paint.Color;

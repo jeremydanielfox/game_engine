@@ -1,6 +1,6 @@
 package View;
 
-import game.Player;
+import engine.game.Player;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;

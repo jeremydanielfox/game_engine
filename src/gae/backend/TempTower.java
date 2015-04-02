@@ -1,6 +1,6 @@
 package gae.backend;
 
-import gameobject.Editable;
+import engine.gameobject.Editable;
 import gameobject.Weapon;
 
 

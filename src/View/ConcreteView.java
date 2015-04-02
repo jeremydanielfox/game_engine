@@ -2,6 +2,9 @@ package View;
 
 import java.util.Observable;
 import java.util.Observer;
+import engine.game.Drawer;
+import engine.game.Game;
+import engine.game.LevelBoard;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -10,9 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
-import game.Drawer;
-import game.Game;
-import game.LevelBoard;
 
 /**
  * 
@@ -41,24 +41,29 @@ public class ConcreteView implements View, Observer {
     //look into removing Drawer
     @Override
     public void initializeGameWorld (Drawer drawer) {
+        //System.out.println("initializing world");
         ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
         image.setPreserveRatio(true);
         image.setFitWidth(500);
         myGameWorldGroup.getChildren().add(image);
         HeadsUpDisplay headsUp=new HeadsUpDisplay(myGame.getPlayer());
         HBox hbox=headsUp.makeDisplay();
+        hbox.setLayoutY(hbox.getLayoutX()+500);
+        buildTimeline();
+        //for testing purposes:
         PopUpScreen popup=new PopUpScreen();
         popup.makeScreen("Begin Level 1", "Start"); // these should be from resource files
-        Button btn=new Button("SWITCH");
+        Button btn=new Button("Dec");
         btn.setOnAction(e->myGame.getPlayer().changeHealth(-100));
-        myTotalGroup.getChildren().addAll(btn,hbox);
-        buildTimeline();
+        Button btn2=new Button("Inc");
+        btn2.setTranslateX(btn2.getLayoutX()+200);
+        btn2.setOnAction(e->myGame.getPlayer().increaseScore(100));//.changeScore(100));
+        myTotalGroup.getChildren().addAll(btn,hbox,btn2);
         play();
     }
 
     @Override
     public void buildTimeline () {
-        
         KeyFrame frame = makeKeyFrame(60);
         myAnimation = new Timeline();
         myAnimation.setCycleCount(Animation.INDEFINITE);
@@ -74,6 +79,7 @@ public class ConcreteView implements View, Observer {
     public void executeFrameActions () {
         //after updating game, how to update after level ends? need to look into checking something like gameEnded()
         myGame.update();
+        //System.out.println("Game loop running");
     }
 
     @Override
@@ -84,8 +90,10 @@ public class ConcreteView implements View, Observer {
 
     @Override
     public void update (Observable o, Object arg) {
+        System.out.println("in update method");
         if (myLevelBoard.equals(o)) {
             pause();
+            System.out.println("calling game over check");
             if (myLevelBoard.gameOver()) {
                 //note: display game over screen
                 PopUpScreen gameOver=new PopUpScreen();

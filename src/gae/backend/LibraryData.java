@@ -1,10 +1,8 @@
 package gae.backend;
 
-import gameobject.Editable;
 import java.util.ArrayList;
 import java.util.Observable;
-import usecases.ConcreteEnemy;
-import usecases.ConcreteTower;
+import engine.gameobject.Editable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -47,7 +45,7 @@ public class LibraryData extends Observable {
     }
 
     public ObservableList<Editable> getObservableList () {
-        tower.add(new TempTower());
+//        tower.add(new TempTower());
         return tower;
     }
 

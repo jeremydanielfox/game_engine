@@ -1,6 +1,6 @@
 package engine.interactions;
 
-import gameobject.GameObject;
+import engine.gameobject.GameObject;
 import java.util.function.BiConsumer;
 
 

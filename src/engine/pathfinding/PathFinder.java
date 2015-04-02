@@ -1,7 +1,7 @@
 package engine.pathfinding;
 
+import engine.gameobject.GameObject;
 import engine.grid.Gridlike;
-import gameobject.GameObject;
 import javafx.geometry.Point2D;
 
 /**

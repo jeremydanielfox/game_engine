@@ -54,6 +54,10 @@ public class View extends Application {
         BorderPane gameView = new BorderPane();
         pane.setCenter(gameView);
         gameView.setBackground(new Background(new BackgroundFill(Color.BEIGE, null, null)));
+        gameView.setOnMousePressed(mouseEvent -> {
+            System.out.println("Relative coordinates: " +
+                               PixelNormalizer.normalize(mouseEvent, gameView));
+        });
         stage.show();
     }
 

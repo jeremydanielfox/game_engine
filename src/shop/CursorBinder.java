@@ -1,14 +1,9 @@
 package shop;
 
-import java.util.List;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 
 
 /**
@@ -34,7 +29,7 @@ public class CursorBinder {
      */
     public static Node bindCursor (Node node, Scene scene, KeyCode key) {
         final Group wrapGroup = new Group(node);
-
+        
         scene.setOnMouseMoved(mouseEvent -> {
             double currentX = mouseEvent.getSceneX() + CenterOffset.getX(node);
             double currentY = mouseEvent.getSceneY() + CenterOffset.getY(node);
@@ -56,12 +51,5 @@ public class CursorBinder {
         });
 
         return wrapGroup;
-    }
-    
-    private static void redrawScene(Node node){
-        List<Node> children = node.getScene().getRoot().getChildrenUnmodifiable();
-        Pane pane = (Pane) node.getScene().getRoot();
-        pane.getChildren().removeAll(children);
-        pane.getChildren().addAll(children);
     }
 }

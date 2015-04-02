@@ -17,14 +17,16 @@ public class TileContainer extends Region {
     private void addTiles (int size) {
         for (double i = 0; i < SCREEN_HEIGHT; i += SCREEN_HEIGHT / size) {
             for (double j = 0; j < SCREEN_HEIGHT; j += SCREEN_HEIGHT / size) {
-                Tile tile = new Tile(SCREEN_HEIGHT / size);
-                tile.setLayoutX(i);
-                tile.setLayoutY(j);
-                this.getChildren().add(tile);
+                TileView tileView =
+                        new TileView(SCREEN_HEIGHT / size,
+                                     new TileData((int) (i / (SCREEN_HEIGHT / size)), (int) (j /
+                                                  (SCREEN_HEIGHT / size))));
+                tileView.setLayoutX(i);
+                tileView.setLayoutY(j);
+                this.getChildren().add(tileView);
             }
         }
         this.setMaxWidth(SCREEN_HEIGHT);
         this.setMaxHeight(SCREEN_HEIGHT);
     }
-    
 }

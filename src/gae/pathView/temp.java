@@ -11,7 +11,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 
 
-public class PathView {
+public class temp {
     private Group root;
     private Scene myScene;
     private int increment;
@@ -22,7 +22,7 @@ public class PathView {
     private ArrayList<CubicCurve> curveList;
     private ArrayList<Anchor> anchorList;
 
-    public PathView () {
+    public temp () {
         curveList = new ArrayList<>();
         anchorList = new ArrayList<>();
     }
@@ -39,9 +39,7 @@ public class PathView {
         makeCurve.setTranslateX(500);
         makeCurve.setTranslateY(0);
         makeCurve.setOnMouseClicked(e -> {
-//            PathSet path = new PathSet();
             CubicCurve curve = new CubicCurve();
-//            path.setCurve(curve);
             curve.setFill(Color.TRANSPARENT);
             curveList.add(curve);
             makePath = true;

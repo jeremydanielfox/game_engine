@@ -4,7 +4,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 
@@ -21,15 +20,12 @@ public class TempScene {
         ImageView background = new ImageView(new Image("/images/Park_Path.png"));
 
         TileContainer container = new TileContainer(10);
-        // container.setLayoutX(SCREEN_WIDTH/2);
         background.fitWidthProperty().bind(container.widthProperty());
         background.fitHeightProperty().bind(container.heightProperty());
         stack.getChildren().addAll(background, container);
 
         StackPane.setAlignment(background, Pos.CENTER);
         StackPane.setAlignment(container, Pos.CENTER);
-        // BorderPane pane = new BorderPane();
-        // pane.setCenter(new TileContainer(10));
         myScene = new Scene(stack);
         return myScene;
     }

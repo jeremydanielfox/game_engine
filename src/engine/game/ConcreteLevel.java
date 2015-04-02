@@ -1,4 +1,4 @@
-package game;
+package engine.game;
 
 import java.util.List;
 import engine.goals.Goal;

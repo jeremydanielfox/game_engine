@@ -1,4 +1,4 @@
-package game;
+package engine.game;
 
 public interface Level {
 	public boolean isWon();

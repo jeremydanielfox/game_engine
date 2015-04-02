@@ -1,7 +1,7 @@
 package AuthoringEnvironment;
 
+import engine.gameobject.Editable;
 import usecases.ConcreteTower;
-import gameobject.Editable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 

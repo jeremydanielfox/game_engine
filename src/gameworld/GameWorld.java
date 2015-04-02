@@ -1,7 +1,7 @@
 package gameworld;
 
+import engine.gameobject.GameObject;
 import engine.pathfinding.PathFinder;
-import gameobject.GameObject;
 
 
 public interface GameWorld {

@@ -1,6 +1,6 @@
 package View;
 
-import game.Drawer;
+import engine.game.Drawer;
 
 
 public interface View {

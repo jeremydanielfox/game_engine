@@ -1,6 +1,6 @@
 package gameView;
 
-import gameobject.Editable;
+import engine.gameobject.Editable;
 
 public interface LibraryView {
     public void editEditableObject(Editable e);

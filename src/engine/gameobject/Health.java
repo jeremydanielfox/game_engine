@@ -1,4 +1,4 @@
-package gameobject;
+package engine.gameobject;
 
 public interface Health {
 	public boolean isDead();

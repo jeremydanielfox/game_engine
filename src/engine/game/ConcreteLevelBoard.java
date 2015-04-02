@@ -1,4 +1,4 @@
-package game;
+package engine.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,7 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
      */
     public void update () {
         if (myLevels.get(curLevelIndex).isWon()||myLevels.get(curLevelIndex).isLost()) {
+            System.out.println("level over");
             setChanged();
             notifyObservers();
         }
@@ -46,8 +47,10 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
      * @return
      */
     public boolean gameOver () {
-        return ((curLevelIndex == myLevels.size() - 1) && (myLevels.get(curLevelIndex).isWon())) ||
+        boolean answer = ((curLevelIndex == myLevels.size() - 1) && (myLevels.get(curLevelIndex).isWon())) ||
                myLevels.get(curLevelIndex).isLost();
+        System.out.println(answer);
+        return answer;
     }
 
     public String getCurrentLevelMap () {

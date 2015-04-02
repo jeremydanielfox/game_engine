@@ -1,4 +1,4 @@
-package game;
+package engine.game;
 
 public interface Level {
 	public boolean isWon();
@@ -6,4 +6,6 @@ public interface Level {
 	public boolean isLost();
 	
 	public String getLevelBackground();
+	
+	public void update();
 }

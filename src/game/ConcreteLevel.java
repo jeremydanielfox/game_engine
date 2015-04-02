@@ -2,6 +2,7 @@ package game;
 
 import java.util.Observable;
 import java.util.Observer;
+import engine.game.Level;
 
 /**
  * This class is in charge of maintaining everything that occurs within one level, such as
@@ -42,6 +43,12 @@ public class ConcreteLevel implements Level, Observer {
 
     @Override
     public void update (Observable o, Object arg) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void update () {
         // TODO Auto-generated method stub
         
     }

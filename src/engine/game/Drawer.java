@@ -1,4 +1,4 @@
-package game;
+package engine.game;
 
 import engine.gameobject.GameObject;
 

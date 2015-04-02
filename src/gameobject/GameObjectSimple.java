@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import engine.gameobject.Health;
 import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
-import engine.gameobject.Pointlike;
+import engine.gameobject.PointSimple;
 
 /**
  * 
@@ -26,7 +26,7 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public void move (double x, double y) {
-        Pointlike point = myMover.move(x, y);
+        PointSimple point = myMover.move(x, y);
         myPoint = new Point2D(point.getX(), point.getY());
     }
 
@@ -62,7 +62,7 @@ public class GameObjectSimple implements GameObject {
     }
 
     @Override
-    public Pointlike getPoint () {
+    public PointSimple getPoint () {
         return new PointSimple(myPoint);
     }
 

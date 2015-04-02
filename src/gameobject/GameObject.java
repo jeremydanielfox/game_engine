@@ -3,7 +3,7 @@ package gameobject;
 import java.util.List;
 import engine.gameobject.Health;
 import engine.gameobject.Movable;
-import engine.gameobject.Pointlike;
+import engine.gameobject.PointSimple;
 
 /**
  * 
@@ -28,6 +28,6 @@ public interface GameObject extends Movable, Health {
 
     public GameObject clone ();
 
-    public Pointlike getPoint ();
+    public PointSimple getPoint ();
 
 }

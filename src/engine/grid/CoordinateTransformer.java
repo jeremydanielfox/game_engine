@@ -1,6 +1,6 @@
-package engine.gameobject;
+package engine.grid;
 
-import engine.grid.Gridlike;
+import engine.gameobject.PointSimple;
 
 /**
  * Provides a function to convert from game world coordinates to a (row,col) entry
@@ -10,6 +10,6 @@ import engine.grid.Gridlike;
  *
  */
 public interface CoordinateTransformer {
-	public Gridlike transformWorldToGrid(double x, double y);
-	public Pointlike tranformGridToWorld(int row, int col);
+	public GridCell transformWorldToGrid(PointSimple point);
+	public PointSimple tranformGridToWorld(GridCell cell);
 }

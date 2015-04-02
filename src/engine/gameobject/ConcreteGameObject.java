@@ -1,5 +1,7 @@
 package engine.gameobject;
 
+import engine.grid.GridCell;
+import engine.pathfinding.EndOfPathException;
 import javafx.geometry.Point2D;
 
 /**
@@ -9,15 +11,16 @@ import javafx.geometry.Point2D;
  */
 public class ConcreteGameObject implements GameObject, Cloneable {
     private String myLabel;
-    private Point2D myPoint;
+    private PointSimple myPoint;
     private Health myHealth;
     private Mover myMover;
     private Weapon myWeapon;
+    private GridCell myDimensions;
 
     @Override
-    public void move (double x, double y) {
-        Pointlike point = myMover.move(x, y);
-        myPoint = new Point2D(point.getX(), point.getY());
+    public void move() throws EndOfPathException {
+        PointSimple point = myMover.move(myPoint);
+        myPoint = new PointSimple(point.getX(), point.getY());
     }
 
     @Override
@@ -52,13 +55,23 @@ public class ConcreteGameObject implements GameObject, Cloneable {
     }
 
     @Override
-    public Pointlike getPoint () {
+    public PointSimple getPoint () {
         return new PointSimple(myPoint);
     }
 
     @Override
-    public Weapon getWeapons () {
+    public Weapon getWeapon() {
         return myWeapon;
     }
+
+	@Override
+	public void setSpeed(double speed) {
+		myMover.setSpeed(speed);
+	}
+
+	@Override
+	public GridCell getGridDimensions() {
+		return myDimensions;
+	}
 
 }

@@ -11,6 +11,7 @@ public class Grid {
 	private List<GameObject>[][] myGrid;
 	private List<GameObject> myGameObjects;
 	private InteractionEngine myInteractionEngine;
+	private CoordinateTransformer myCoordTrans;
 	
 	
 	@SuppressWarnings("unchecked")
@@ -20,25 +21,38 @@ public class Grid {
 		myInteractionEngine = new ConcreteInteractionEngine();
 	}
 	
-	public void addStructure(int row, int col, GameObject o){
-		myGrid[row][col].add(o);
+	public void addStructure(GameObject o){
+		GridCell cell = myCoordTrans.transformWorldToGrid(o.getPoint());
+		myGrid[cell.getRow()][cell.getCol()].add(o);
+		myGameObjects.add(o);
+	}
+	public void removeObject(GameObject o){
 		myGameObjects.remove(o);
+		for(List<GameObject>[] row : myGrid){
+			for(List<GameObject> tileList : row){
+				if(tileList.contains(o)){
+					tileList.remove(o);
+				}
+			}
+		}
 	}
-	public void removeObject(int row, int col, GameObject o){
-		myGrid[row][col].remove(o);
+	public void addObject(GameObject o){
+		myGameObjects.remove(o);
+		for(List<GameObject>[] row : myGrid){
+			for(List<GameObject> tileList : row){
+				tileList.add(o);//TODO duplicated with "removeObject"
+			}
+		}
 	}
-	boolean canPlace(int row, int col, GameObject o){
-		//TODO implement. GameObject needs a definition of how many cells it takes up.
-		return true;
-	}
+
 	public void detectRange(){
 		for(GameObject o : myGameObjects){
-			for(Weapon w : o.getWeapons()){
+			Weapon w = o.getWeapon();
 				myGameObjects.stream()
-					.filter(go -> go.getPoint().withinRange(o.getPoint(), w.getRange()))
-					.forEach(go -> { myInteractionEngine.interact(w.getProjectile(), o);});
+					.filter(go -> go.getPoint().withinRange(o.getPoint(), w.getRange()));
+//					.forEach(go -> { myInteractionEngine.interact(w.getProjectiles(), o);}); //need to rework weapons first TODO
 					//TODO make a weapon not fire upon everything in range. Also, rework weapon/projectile.
-			}
+			
 		}
 	}
 }

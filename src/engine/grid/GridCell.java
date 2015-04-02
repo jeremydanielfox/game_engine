@@ -1,6 +1,6 @@
 package engine.grid;
 
-public class GridCell implements Gridlike {
+public class GridCell {
 	int myRow, myCol;
 	
 	public GridCell(int r, int c){
@@ -8,12 +8,10 @@ public class GridCell implements Gridlike {
 		myCol = c;
 	}
 	
-	@Override
 	public int getRow() {
 		return myRow;
 	}
 
-	@Override
 	public int getCol() {
 		return myCol;
 	}

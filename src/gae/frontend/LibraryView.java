@@ -3,7 +3,7 @@ package gae.frontend;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Button;
-import gameobject.Editable;
+import engine.gameobject.Editable;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;

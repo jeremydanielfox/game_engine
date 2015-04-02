@@ -1,11 +1,18 @@
 package engine.interactions;
 
-import gameobject.GameObject;
-
+import engine.gameobject.GameObject;
 import java.util.function.BiConsumer;
 
-public interface InteractionEngine {
-	public void interact(GameObject first, GameObject second);
 
-	public void put(GameObject first, GameObject second, BiConsumer<GameObject,GameObject> consumer);
+/**
+ * 
+ * @author Jeremy
+ *
+ */
+public interface InteractionEngine {
+    public void interact (GameObject first, GameObject second);
+
+    public void put (GameObject first,
+                     GameObject second,
+                     BiConsumer<GameObject, GameObject> consumer);
 }

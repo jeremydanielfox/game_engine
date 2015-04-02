@@ -1,6 +1,6 @@
 package gae.gameView;
 
-import gameobject.Editable;
+import engine.gameobject.Editable;
 
 public interface TileView {
     public void clear();

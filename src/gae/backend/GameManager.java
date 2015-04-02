@@ -1,12 +1,13 @@
 package gae.backend;
 
-import game.Game;
-import game.Level;
-import gameobject.Editable;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.ObservableList;
 import com.thoughtworks.xstream.XStream;
+import engine.game.Game;
+import engine.gameobject.Editable;
+
+
 
 // In this use case, we are creating a level. Obviously, the first thing that has to happen is to create the level.
 

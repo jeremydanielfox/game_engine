@@ -41,6 +41,7 @@ public class ConcreteView implements View, Observer {
     //look into removing Drawer
     @Override
     public void initializeGameWorld (Drawer drawer) {
+        //System.out.println("initializing world");
         ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
         image.setPreserveRatio(true);
         image.setFitWidth(500);
@@ -58,7 +59,6 @@ public class ConcreteView implements View, Observer {
 
     @Override
     public void buildTimeline () {
-        
         KeyFrame frame = makeKeyFrame(60);
         myAnimation = new Timeline();
         myAnimation.setCycleCount(Animation.INDEFINITE);
@@ -74,6 +74,7 @@ public class ConcreteView implements View, Observer {
     public void executeFrameActions () {
         //after updating game, how to update after level ends? need to look into checking something like gameEnded()
         myGame.update();
+        //System.out.println("Game loop running");
     }
 
     @Override
@@ -84,8 +85,10 @@ public class ConcreteView implements View, Observer {
 
     @Override
     public void update (Observable o, Object arg) {
+        System.out.println("in update method");
         if (myLevelBoard.equals(o)) {
             pause();
+            System.out.println("calling game over check");
             if (myLevelBoard.gameOver()) {
                 //note: display game over screen
                 PopUpScreen gameOver=new PopUpScreen();

@@ -1,25 +1,24 @@
 package engine.goals;
 
 import game.Player;
-import java.util.Observable;
 
-public class HealthDepletionGoal extends Goal {
 
-    private Player myPlayer;
-    
+/**
+ * This class listens to the player and marks a boolean true if the players health
+ * has depleted to less than or equal to zero.
+ * 
+ * @author Sierra Smith, Cosette Goldstein
+ *
+ */
+public class HealthDepletionGoal extends PlayerGoal {
+
     public HealthDepletionGoal (Player player) {
-        myPlayer=player;
-        myPlayer.addObserver(this);
-    } 
-    
-    @Override
-    public void update (Observable o, Object arg) {
-        // TODO Auto-generated method stub
-        if (myPlayer.equals(o)&&myPlayer.getHealth()<=0) {
-            System.out.println("here");
-            setIsSatisfied(true);
-        }
+        super(player);
     }
 
+    @Override
+    protected void checkCondition (Player p) {
+        setIsSatisfied(p.getHealth() == 0);
+    }
 
 }

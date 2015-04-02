@@ -43,8 +43,8 @@ public class Shop {
         }
     }
 
-    public Purchasable getPurchasable(ItemGraphic itemGraphic) {
-        return purchasableMap.get(itemGraphic);
+    public Object getPrototypeClone(ItemGraphic itemGraphic) {
+        return purchasableMap.get(itemGraphic).clone();
     }
     
     public ItemGraphic getItemGraphic(Purchasable purchasable) {

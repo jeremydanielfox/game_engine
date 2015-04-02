@@ -4,7 +4,7 @@ import gameobject.GameObject;
 
 
 public interface Purchasable {
-    public GameObject clone ();
+    public Object clone ();
 
     public String getName ();
 

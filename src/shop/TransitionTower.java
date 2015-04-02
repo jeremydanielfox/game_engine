@@ -23,7 +23,8 @@ public class TransitionTower {
     private static Random ourGenerator = new Random();
 
     private static final double TOWER_WIDTH = 50;
-    private static final double RANGE = 30 + widthToRadius(TOWER_WIDTH);
+    private static final double TOWER_RADIUS = widthToRadius(TOWER_WIDTH);
+    private static final double RANGE = 30 + TOWER_RADIUS; // TODO: make as a field
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
 
     private static double widthToRadius (double width) {

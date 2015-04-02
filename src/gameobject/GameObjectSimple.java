@@ -2,20 +2,23 @@ package gameobject;
 
 import java.util.List;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-
+/**
+ * 
+ * @author Jeremy
+ *
+ */
 public class GameObjectSimple implements GameObject {
+    private Node myNode;
+    private String myImagePath;
     private String myLabel;
     private Point2D myPoint;
     private Health myHealth;
     private Mover myMover;
-    private Actor myActor;
     private List<Weapon> myWeapons;
-
-    @Override
-    public void act (GameObject a, GameObject b) {
-        myActor.act(a, b);
-    }
 
     @Override
     public void move (double x, double y) {
@@ -62,6 +65,13 @@ public class GameObjectSimple implements GameObject {
     @Override
     public List<Weapon> getWeapons () {
         return myWeapons;
+    }
+
+    public void initializeNode () {
+        Image image = new Image(myImagePath);
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        myNode = imageView;
     }
 
 }

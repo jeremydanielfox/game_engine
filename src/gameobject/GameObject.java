@@ -2,13 +2,25 @@ package gameobject;
 
 import java.util.List;
 
-
-public interface GameObject extends Actor, Movable, Health {
+/**
+ * 
+ * @author Jeremy
+ *
+ */
+public interface GameObject extends Movable, Health {
     // public void updateGraphics ();//cannot implement yet
+    /**
+     * Adds a weapon to the GameObject's Collection of Weapons
+     */
     public void addWeapon (Weapon weapon);
-
+/**
+ * Returns the GameObject's Collection of Weapons
+ */
     public List<Weapon> getWeapons ();
-
+/**
+ * Labels allow the GameEngine to differentiate
+ * @return: A string
+ */
     public String getLabel ();
 
     public GameObject clone ();

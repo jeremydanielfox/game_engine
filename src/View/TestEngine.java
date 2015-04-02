@@ -2,12 +2,12 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+import engine.game.ConcreteGame;
+import engine.game.ConcreteLevel;
+import engine.game.ConcreteLevelBoard;
+import engine.game.Player;
 import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
-import game.ConcreteGame;
-import game.ConcreteLevel;
-import game.ConcreteLevelBoard;
-import game.Player;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;

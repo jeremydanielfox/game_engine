@@ -1,4 +1,4 @@
-package game;
+package engine.game;
 
 public class ConcreteGame implements Game {
 

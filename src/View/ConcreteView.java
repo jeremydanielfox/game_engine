@@ -2,6 +2,9 @@ package View;
 
 import java.util.Observable;
 import java.util.Observer;
+import engine.game.Drawer;
+import engine.game.Game;
+import engine.game.LevelBoard;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -10,9 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
-import game.Drawer;
-import game.Game;
-import game.LevelBoard;
 
 /**
  * 

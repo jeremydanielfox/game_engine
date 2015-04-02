@@ -1,6 +1,6 @@
 package View;
 
-import game.Player;
+import engine.game.Player;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.scene.layout.HBox;

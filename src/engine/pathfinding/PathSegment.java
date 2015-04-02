@@ -1,6 +1,8 @@
 package engine.pathfinding;
 
-import gameobject.Pointlike;
+import engine.gameobject.Pointlike;
+
+
 
 
 public interface PathSegment {

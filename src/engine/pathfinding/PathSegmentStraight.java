@@ -1,6 +1,6 @@
 package engine.pathfinding;
 
-import gameobject.Pointlike;
+import engine.gameobject.Pointlike;
 /**
  * 
  * @author Jeremy

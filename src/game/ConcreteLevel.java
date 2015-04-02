@@ -34,13 +34,11 @@ public class ConcreteLevel implements Level {
 
     @Override
     public boolean isWon () {
-        //System.out.println("result of iswon: "+ checkGoals(myWinningGoals));
         return checkGoals(myWinningGoals);
     }
 
     @Override
     public boolean isLost () {
-       // System.out.println("result of islist: "+ checkGoals(myLosingGoals));
         return checkGoals(myLosingGoals);
     }
 

@@ -48,12 +48,13 @@ public class ConcreteView implements View, Observer {
         myGameWorldGroup.getChildren().add(image);
         HeadsUpDisplay headsUp=new HeadsUpDisplay(myGame.getPlayer());
         HBox hbox=headsUp.makeDisplay();
+        buildTimeline();
+        //for testing purposes:
         PopUpScreen popup=new PopUpScreen();
         popup.makeScreen("Begin Level 1", "Start"); // these should be from resource files
         Button btn=new Button("SWITCH");
         btn.setOnAction(e->myGame.getPlayer().changeHealth(-100));
         myTotalGroup.getChildren().addAll(btn,hbox);
-        buildTimeline();
         play();
     }
 

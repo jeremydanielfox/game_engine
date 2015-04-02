@@ -23,6 +23,7 @@ public class ScoreGoal extends PlayerGoal {
     @Override
     protected void checkCondition (Player p) {
        setIsSatisfied(p.getScore() >= myScoreGoal);
+       System.out.println(p.getScore());
     }
 
 }

@@ -1,11 +1,9 @@
 package shop;
 
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 
 
 /**
@@ -31,7 +29,7 @@ public class CursorBinder {
      */
     public static Node bindCursor (Node node, Scene scene, KeyCode key) {
         final Group wrapGroup = new Group(node);
-
+        
         scene.setOnMouseMoved(mouseEvent -> {
             double currentX = mouseEvent.getSceneX() + CenterOffset.getX(node);
             double currentY = mouseEvent.getSceneY() + CenterOffset.getY(node);
@@ -43,12 +41,12 @@ public class CursorBinder {
         });
 
         // TODO: figure out why keyPressed caller must be scene, and not pane or node
-        // AND why node not deleted if deleted while on flowpane
         scene.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
                 scene.setOnMouseMoved(mouseEvent -> {
                 });
-                ((Group) node.getParent()).getChildren().remove(node);
+                wrapGroup.setVisible(false);
+                //((Group) node.getParent()).getChildren().remove(node);
             }
         });
 

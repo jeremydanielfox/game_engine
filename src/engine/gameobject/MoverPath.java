@@ -1,7 +1,6 @@
 package engine.gameobject;
 
-import engine.grid.GridCell;
-import engine.grid.Gridlike;
+import engine.pathfinding.EndOfPathException;
 import engine.pathfinding.PathFinder;
 
 /**
@@ -11,14 +10,22 @@ import engine.pathfinding.PathFinder;
  */
 public class MoverPath implements Mover {
 	PathFinder myPathFinder;
-	CoordinateTransformer myCoordinateTransformer;
+	private double myDistance, mySpeed;
+	
+	public MoverPath(PathFinder pf, double speed){
+		myDistance = 0;
+		myPathFinder = pf;
+		mySpeed = speed;
+	}
 	
 	@Override
-	public Pointlike move(double x, double y) {
-		Gridlike cell = myCoordinateTransformer.transformWorldToGrid(x, y);
-		int row = cell.getRow();
-		int col = cell.getCol();
-		Gridlike nextCell = myPathFinder.getNextLocation(new GridCell(row,col));
-		return myCoordinateTransformer.tranformGridToWorld(nextCell.getRow(), nextCell.getCol());
+	public PointSimple move(PointSimple current) throws EndOfPathException {
+		myDistance += mySpeed;
+		return myPathFinder.getNextLocation(current, myDistance);
+	}
+
+	@Override
+	public void setSpeed(double speed) {
+		mySpeed = speed;
 	}
 }

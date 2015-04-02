@@ -1,6 +1,6 @@
 package engine.pathfinding;
 
-import engine.gameobject.Pointlike;
+import engine.gameobject.PointSimple;
 
 /**
  * A PathFinder that contains 
@@ -10,10 +10,16 @@ import engine.gameobject.Pointlike;
 public class PathSegmentBezier implements PathSegment{
 
     @Override
-    public Pointlike getNextPoint (Pointlike current) {
+    public PointSimple getPoint (double distance) {
         // TODO Auto-generated method stub
         return null;
     }
+
+	@Override
+	public double getLength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
     
 

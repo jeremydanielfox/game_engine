@@ -15,12 +15,16 @@ public class RandomSpanWave extends Wave {
     }
 
     @Override
-    public void update () {
+    public boolean update (int frameCount) {
+        if(!canStart(frameCount)) {
+            return true;
+        }
         // decide if it's time to release an enemy
         // need to know the number of enemies total...?
         // preset the enemy release over the period in the constructor?
 
         myFramesSinceStart++;
+        return true;
     }
 
 }

@@ -1,7 +1,8 @@
 package engine.pathfinding;
 
 import engine.gameobject.GameObject;
-import engine.grid.Gridlike;
+import engine.gameobject.PointSimple;
+import engine.grid.GridCell;
 import javafx.geometry.Point2D;
 
 /**
@@ -11,6 +12,10 @@ import javafx.geometry.Point2D;
 public interface PathFinder {
 	/**
 	 * Based on a gameobject's current row and column, return its next grid location.
+	 * @throws EndOfPathException 
 	 */
-    public Gridlike getNextLocation(Gridlike cell);
+	public PointSimple getNextLocation(PointSimple current, double distance) throws EndOfPathException;
+
+    public void addPathSegment(PathSegment ps);
+
 }

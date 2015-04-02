@@ -5,9 +5,9 @@ public class TileData {
     private int col;
     private boolean walkable = true;
 
-    public TileData (int row, int col) {
-        this.row = row;
-        this.col = col;
+    public TileData (double row, double col) {
+        this.row = (int) Math.round(row);
+        this.col = (int) Math.round(col);
     }
 
     public void changeState () {

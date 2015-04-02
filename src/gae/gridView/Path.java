@@ -12,4 +12,11 @@ public class Path {
         this.control1 = control1;
         this.control2 = control2;
     }
+
+    public void printInfo () {
+        System.out.println("Start coordinates: (" + start.x + " , " + start.y + ")");
+        System.out.println("End coordinates: (" + end.x + " , " + end.y + ")");
+        System.out.println("Control 1 coordinates: (" + control1.x + " , " + control1.y + ")");
+        System.out.println("Control 2 coordinates: (" + control2.x + " , " + control2.y + ")");
+    }
 }

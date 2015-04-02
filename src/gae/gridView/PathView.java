@@ -34,8 +34,8 @@ public class PathView {
         stack.getChildren().add(root);
     }
 
-    public void makeBezierCurve (CubicCurve curve) {
-
+    public void makeBezierCurve () {
+        CubicCurve curve = new CubicCurve();
         curve.setFill(Color.TRANSPARENT);
         curveList.add(curve);
         makePath = true;

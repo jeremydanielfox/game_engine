@@ -3,6 +3,7 @@ package gae.gridView;
 import javafx.scene.layout.Region;
 import javafx.stage.Screen;
 
+
 /*
  * https://www.youtube.com/watch?v=ag8U6sUptsY
  * Want to base it on this ^^^^^
@@ -18,12 +19,11 @@ public class TileContainer extends Region {
     }
 
     private void addTiles (int size) {
-        for (double i = 0; i < SCREEN_HEIGHT; i += SCREEN_HEIGHT / size) {
-            for (double j = 0; j < SCREEN_HEIGHT; j += SCREEN_HEIGHT / size) {
+        double length = SCREEN_HEIGHT / size;
+        for (double i = 0; Math.round(i) < SCREEN_HEIGHT; i += SCREEN_HEIGHT / size) {
+            for (double j = 0; Math.round(j) < SCREEN_HEIGHT; j += SCREEN_HEIGHT / size) {
                 TileView tileView =
-                        new TileView(SCREEN_HEIGHT / size,
-                                     new TileData((int) (i / (SCREEN_HEIGHT / size)), (int) (j /
-                                                  (SCREEN_HEIGHT / size))));
+                        new TileView(length, new TileData(i / length, j / length));
                 tileView.setLayoutX(i);
                 tileView.setLayoutY(j);
                 this.getChildren().add(tileView);

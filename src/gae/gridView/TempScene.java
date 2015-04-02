@@ -1,12 +1,12 @@
 package gae.gridView;
 
+import java.util.List;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.CubicCurve;
 import javafx.stage.Screen;
 
 
@@ -23,7 +23,7 @@ public class TempScene {
         stack = new StackPane();
         ImageView background = new ImageView(new Image("/images/Park_Path.png"));
 
-        TileContainer container = new TileContainer(10);
+        TileContainer container = new TileContainer(20);
         background.fitWidthProperty().bind(container.widthProperty());
         background.fitHeightProperty().bind(container.heightProperty());
 
@@ -31,6 +31,7 @@ public class TempScene {
 
         StackPane.setAlignment(background, Pos.CENTER);
         StackPane.setAlignment(container, Pos.CENTER);
+
         myScene = new Scene(stack);
         pathView = new PathView(stack, myScene);
         return myScene;
@@ -40,10 +41,7 @@ public class TempScene {
         Button makeCurve = new Button("Make Path");
         makeCurve.setTranslateX(500);
         makeCurve.setTranslateY(0);
-        makeCurve.setOnMouseClicked(e -> {
-            CubicCurve curve = new CubicCurve();
-            pathView.makeBezierCurve(curve);
-        });
+        makeCurve.setOnMouseClicked(e -> pathView.makeBezierCurve());
         return makeCurve;
     }
 
@@ -51,7 +49,14 @@ public class TempScene {
         Button complete = new Button("Path Complete");
         complete.setTranslateX(500);
         complete.setTranslateY(50);
-        complete.setOnMouseClicked(e -> pathView.createPathObjects());
+        complete.setOnMouseClicked(e -> {
+            List<Path> path = pathView.createPathObjects();
+            for (int i = 0; i<path.size(); i++) {
+                System.out.println("Path " + i + "'s coordinates");
+                path.get(i).printInfo();
+                System.out.println();
+            }
+        });
         return complete;
     }
 }

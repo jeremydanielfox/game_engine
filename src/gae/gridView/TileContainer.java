@@ -3,7 +3,10 @@ package gae.gridView;
 import javafx.scene.layout.Region;
 import javafx.stage.Screen;
 
-
+/*
+ * https://www.youtube.com/watch?v=ag8U6sUptsY
+ * Want to base it on this ^^^^^
+ */
 public class TileContainer extends Region {
     public static final double SCREEN_HEIGHT =
             Screen.getPrimary().getVisualBounds().getHeight() - 100;

@@ -1,4 +1,4 @@
-package gae.pathView;
+package gae.gridView;
 
 public class Path {
     private Pair start;

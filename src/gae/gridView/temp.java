@@ -1,7 +1,5 @@
-package gae.pathView;
-/**
- * In the process of trying to put the Anchors and the curve into one object
- */
+package gae.gridView;
+
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Group;
@@ -13,7 +11,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 
 
-public class PathSet {
+public class temp {
     private Group root;
     private Scene myScene;
     private int increment;
@@ -21,21 +19,61 @@ public class PathSet {
     private double startX;
     private double startY;
     private Anchor start;
-    private CubicCurve curve;
+    private ArrayList<CubicCurve> curveList;
     private ArrayList<Anchor> anchorList;
 
-    public PathSet () {
+    public temp () {
+        curveList = new ArrayList<>();
         anchorList = new ArrayList<>();
     }
 
-    public void setCurve(CubicCurve curve) {
-        this.curve = curve;
+    public Scene getScene () {
+        root = new Group();
+        root.getChildren().addAll(makeBezierCurve(), completePath());
+        myScene = new Scene(root);
+        return myScene;
     }
-    public void setStart(double x, double y) {
-        start = new Anchor(Color.PALEGREEN, startX, startY);
-        addAnchor(start);
-        increment++;
+
+    private Button makeBezierCurve () {
+        Button makeCurve = new Button("Make Path");
+        makeCurve.setTranslateX(500);
+        makeCurve.setTranslateY(0);
+        makeCurve.setOnMouseClicked(e -> {
+//            PathSet path = new PathSet();
+            CubicCurve curve = new CubicCurve();
+//            path.setCurve(curve);
+            curve.setFill(Color.TRANSPARENT);
+            curveList.add(curve);
+            makePath = true;
+            choosePoint(curve);
+        });
+        return makeCurve;
     }
+
+    private Button completePath () {
+        Button complete = new Button("Path Complete");
+        complete.setTranslateX(600);
+        complete.setTranslateY(0);
+        complete.setOnMouseClicked(e -> createPathObjects());
+        return complete;
+    }
+
+    private List<Path> createPathObjects () {
+        /*
+         * TODO: Make sure the use is able to delete specific ones and send the paths in order
+         */
+        List<Path> pathList = new ArrayList<>();
+        for (CubicCurve curve : curveList) {
+            Pair start = new Pair(curve.getStartX(), curve.getStartY());
+            Pair end = new Pair(curve.getEndX(), curve.getEndY());
+            Pair control1 = new Pair(curve.getControlX1(), curve.getControlY1());
+            Pair control2 = new Pair(curve.getControlX2(), curve.getControlY2());
+            Path path = new Path(start, end, control1, control2);
+            pathList.add(path);
+        }
+        return pathList;
+    }
+
     private void choosePoint (CubicCurve curve) {
         myScene.setOnMouseClicked(e -> {
             if (increment == 0 && makePath) {

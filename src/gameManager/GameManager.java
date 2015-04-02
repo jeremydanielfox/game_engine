@@ -1,9 +1,10 @@
 package gameManager;
 
 import javafx.collections.ObservableList;
-import game.Game;
-import game.Level;
-import gameobject.Editable;
+import com.sun.glass.ui.Window.Level;
+import engine.game.Game;
+import engine.gameobject.Editable;
+
 
 public interface GameManager {
     public void export();

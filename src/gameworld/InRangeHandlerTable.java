@@ -1,6 +1,6 @@
 package gameworld;
 
-import gameobject.GameObject;
+import engine.gameobject.GameObject;
 
 public interface InRangeHandlerTable {
     

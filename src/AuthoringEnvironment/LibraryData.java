@@ -1,10 +1,8 @@
 package AuthoringEnvironment;
 
-import gameobject.Editable;
-
+import engine.gameobject.Editable;
 import java.util.ArrayList;
 import java.util.Observable;
-
 import usecases.ConcreteEnemy;
 import usecases.ConcreteTower;
 import javafx.beans.property.ObjectProperty;

@@ -1,6 +1,6 @@
 package gameManager;
 
-import gameobject.Editable;
+import engine.gameobject.Editable;
 
 public interface TileData {
 

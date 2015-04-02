@@ -1,6 +1,6 @@
 package AuthoringEnvironment;
 
-import game.Level;
+import engine.game.Level;
 
 public class LevelManager {
 

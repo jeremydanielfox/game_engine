@@ -1,28 +1,18 @@
-package gameobject;
+package engine.gameobject;
 
-import java.util.List;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import engine.gameobject.Health;
-import engine.gameobject.Mover;
-import engine.gameobject.PointSimple;
-import engine.gameobject.Pointlike;
 
 /**
  * 
  * @author Jeremy
  *
  */
-public class GameObjectSimple implements GameObject {
-    private Node myNode;
-    private String myImagePath;
+public class ConcreteGameObject implements GameObject, Cloneable {
     private String myLabel;
     private Point2D myPoint;
     private Health myHealth;
     private Mover myMover;
-    private List<Weapon> myWeapons;
+    private Weapon myWeapon;
 
     @Override
     public void move (double x, double y) {
@@ -31,8 +21,8 @@ public class GameObjectSimple implements GameObject {
     }
 
     @Override
-    public void addWeapon (Weapon weapon) {
-        myWeapons.add(weapon);
+    public void setWeapon (Weapon weapon) {
+        myWeapon = weapon;
     }
 
     @Override
@@ -67,15 +57,8 @@ public class GameObjectSimple implements GameObject {
     }
 
     @Override
-    public List<Weapon> getWeapons () {
-        return myWeapons;
-    }
-
-    public void initializeNode () {
-        Image image = new Image(myImagePath);
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
-        myNode = imageView;
+    public Weapon getWeapons () {
+        return myWeapon;
     }
 
 }

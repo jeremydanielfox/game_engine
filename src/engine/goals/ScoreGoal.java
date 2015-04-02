@@ -1,6 +1,6 @@
 package engine.goals;
 
-import game.Player;
+import engine.game.Player;
 import java.util.Observable;
 
 

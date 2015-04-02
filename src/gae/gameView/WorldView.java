@@ -1,4 +1,4 @@
-package gameView;
+package gae.gameView;
 
 import gameManager.TileData;
 

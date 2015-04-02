@@ -1,4 +1,4 @@
-package AuthoringEnvironment;
+package gae.backend;
 
 import java.util.ArrayList;
 import java.util.List;

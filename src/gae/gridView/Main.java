@@ -19,8 +19,8 @@ public class Main extends Application{
         Stage myStage = new Stage();
         myStage.setWidth(SCREEN_WIDTH);
         myStage.setHeight(SCREEN_HEIGHT);
-        GridView view = new GridView();
-        myStage.setScene(view.getScene());
+        TempScene scene = new TempScene();
+        myStage.setScene(scene.getScene());
         myStage.show();
     }
 }

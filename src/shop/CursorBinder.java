@@ -1,11 +1,14 @@
 package shop;
 
+import java.util.List;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
 
 /**
@@ -43,15 +46,22 @@ public class CursorBinder {
         });
 
         // TODO: figure out why keyPressed caller must be scene, and not pane or node
-        // AND why node not deleted if deleted while on flowpane
         scene.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
                 scene.setOnMouseMoved(mouseEvent -> {
                 });
-                ((Group) node.getParent()).getChildren().remove(node);
+                wrapGroup.setVisible(false);
+                //((Group) node.getParent()).getChildren().remove(node);
             }
         });
 
         return wrapGroup;
+    }
+    
+    private static void redrawScene(Node node){
+        List<Node> children = node.getScene().getRoot().getChildrenUnmodifiable();
+        Pane pane = (Pane) node.getScene().getRoot();
+        pane.getChildren().removeAll(children);
+        pane.getChildren().addAll(children);
     }
 }

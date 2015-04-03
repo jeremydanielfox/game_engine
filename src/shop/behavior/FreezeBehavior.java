@@ -1,6 +1,6 @@
 package shop.behavior;
 
-import gameobject.GameObject;
+import engine.gameobject.GameObject;
 
 public class FreezeBehavior implements Behavior {
     

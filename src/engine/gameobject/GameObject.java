@@ -1,5 +1,10 @@
 package engine.gameobject;
 
+import gameobject.Weapon;
+import java.util.List;
+import javafx.scene.Node;
+
+
 /**
  * 
  * @author Jeremy
@@ -7,14 +12,27 @@ package engine.gameobject;
  */
 public interface GameObject extends Movable, Health {
     // public void updateGraphics ();//cannot implement yet
-    public void setWeapon (Weapon weapon);
+    /**
+     * Adds a weapon to the GameObject's Collection of Weapons
+     */
+    public void addWeapon (Weapon weapon);
 
-    public Weapon getWeapons ();
+    /**
+     * Returns the GameObject's Collection of Weapons
+     */
+    public List<Weapon> getWeapons ();
 
+    /**
+     * Labels allow the GameEngine to differentiate
+     * 
+     * @return: A string
+     */
     public String getLabel ();
 
     public GameObject clone ();
 
     public Pointlike getPoint ();
+    
+    public Node getGraphic();
 
 }

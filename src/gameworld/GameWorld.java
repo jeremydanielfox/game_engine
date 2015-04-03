@@ -7,5 +7,5 @@ import engine.pathfinding.PathFinder;
 public interface GameWorld {
     public void updateGameObjects ();
     public PathFinder getPathFinder ();
-    public void addObject (GameObject object);
+    public void addStructure (int row, int col, GameObject object);
 }

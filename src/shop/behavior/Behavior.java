@@ -1,6 +1,6 @@
 package shop.behavior;
 
-import gameobject.GameObject;
+import engine.gameobject.GameObject;
 
 /**
  * Actions associated with a weapon. They will be applied every time a weapon is used on the 

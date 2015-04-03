@@ -1,14 +1,13 @@
-package gameobject;
+package engine.gameobject;
 
 import java.util.List;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import engine.gameobject.Health;
-import engine.gameobject.Mover;
-import engine.gameobject.PointSimple;
-import engine.gameobject.Pointlike;
+import gameobject.Weapon;
+
 
 /**
  * 
@@ -16,7 +15,9 @@ import engine.gameobject.Pointlike;
  *
  */
 public class GameObjectSimple implements GameObject {
-    private Node myNode;
+
+    @XStreamOmitField
+    private transient Node myNode;
     private String myImagePath;
     private String myLabel;
     private Point2D myPoint;
@@ -25,9 +26,11 @@ public class GameObjectSimple implements GameObject {
     private List<Weapon> myWeapons;
 
     @Override
-    public void move (double x, double y) {
-        Pointlike point = myMover.move(x, y);
+    public void move () {
+        Pointlike point = myMover.move(myPoint.getX(), myPoint.getY());
         myPoint = new Point2D(point.getX(), point.getY());
+        myNode.setTranslateX(transformToScreenX(myPoint.getX()));
+        myNode.setTranslateY(transformToScreenY(myPoint.getY()));
     }
 
     @Override
@@ -76,6 +79,22 @@ public class GameObjectSimple implements GameObject {
         ImageView imageView = new ImageView();
         imageView.setImage(image);
         myNode = imageView;
+
+    }
+    
+    private double transformToScreenX(double X){
+        //TODO: Implement this method
+        return X;
+    }
+    
+    private double transformToScreenY(double Y) {
+        //TODO: Implement this method
+        return Y;
+    }
+
+    @Override
+    public Node getGraphic () {
+        return myNode;
     }
 
 }

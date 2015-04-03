@@ -1,5 +1,7 @@
 package gameobject;
 
+import engine.gameobject.GameObject;
+
 public interface Weapon {
 
     public double getRange ();

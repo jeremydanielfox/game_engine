@@ -1,5 +1,6 @@
 package engine.gameobject;
 
+import engine.gameobject.weapon.Weapon;
 import engine.grid.GridCell;
 
 /**

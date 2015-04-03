@@ -1,9 +1,8 @@
 package engine.grid;
 
 import java.util.List;
-
 import engine.gameobject.GameObject;
-import engine.gameobject.Weapon;
+import engine.gameobject.weapon.Weapon;
 import engine.interactions.InteractionEngine;
 
 public class GridAbstract implements Grid {

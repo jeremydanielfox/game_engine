@@ -1,6 +1,7 @@
 package gae.gameView;
 
 import gae.openingView.OpeningView;
+import gae.tabView.CentralTabView;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TabPane;
@@ -16,9 +17,10 @@ public class GameView {
     private static final String GAMEVIEW_CSS = "css/GameViewCSS.css";
     
     private BorderPane myUI;
-    private TabPane myTabs; //replace with main editor
+    private CentralTabView myTabs; //replace with main editor
     private Scene myScene;
     private LibraryView myLibrary;
+    private GenericObjectsPane myGenericObjects;
     
     public GameView () {
         initialize();
@@ -32,10 +34,15 @@ public class GameView {
         myUI = new BorderPane();
         myUI.setPrefWidth(Main.SCREEN_WIDTH);
         myUI.setPrefHeight(Main.SCREEN_HEIGHT);
-        myTabs = new TabPane();
-        myUI.setCenter(myTabs);
+        myTabs = new CentralTabView(myScene);
+        myUI.setCenter(myTabs.getBaseNode());
+        
+        myGenericObjects = new GenericObjectsPane();
+        myUI.setRight(myGenericObjects.getBaseNode());
+        
         myScene = new Scene(myUI);
         myScene.getStylesheets().add(GAMEVIEW_CSS);
         myLibrary = new LibraryView();
+        
     }
 }

@@ -23,6 +23,7 @@ public class PathView {
         root = new Group();
         root.setManaged(false);
         stack.getChildren().add(root);
+        System.out.println("hello");
     }
 
     public void makeBezierCurve () {

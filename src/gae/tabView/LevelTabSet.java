@@ -4,29 +4,29 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
 
+
 public class LevelTabSet {
     private TabPane baseNode;
-    
+
     public LevelTabSet (StackPane world, StackPane prefs) {
         initialize(world, prefs);
     }
 
-    private void initialize (StackPane world, StackPane prefs) {   
+    private void initialize (StackPane world, StackPane prefs) {
         baseNode = new TabPane();
-        Tab worldTab = new Tab("World");
-        worldTab.setContent(world);
-        worldTab.setClosable(false);
-        
-        Tab prefsTab = new Tab("Preferences");
-        prefsTab.setContent(prefs);
-        worldTab.setClosable(false);
-
-        baseNode.getTabs().addAll(worldTab, prefsTab);
+        baseNode.getTabs().addAll(createInteriorTab("World", world),
+                                  createInteriorTab("Preferences", prefs));
     }
-    
-    public TabPane getBaseNode() {
+
+    private Tab createInteriorTab (String name, StackPane contents) {
+        Tab tab = new Tab(name);
+        tab.setContent(contents);
+        tab.setClosable(false);
+        return tab;
+    }
+
+    public TabPane getBaseNode () {
         return baseNode;
     }
-    
 
 }

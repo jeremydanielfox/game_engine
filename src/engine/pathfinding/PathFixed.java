@@ -10,10 +10,10 @@ import engine.gameobject.PointSimple;
  * @author Kaighn
  *
  */
-public class PathFinderFixed implements PathFinder {
+public class PathFixed implements Path {
 	private List<PathSegment> myPathSegments;
 	
-	public PathFinderFixed(){
+	public PathFixed(){
 		myPathSegments = new LinkedList<>();
 	}
 	

@@ -1,7 +1,7 @@
 package engine.grid;
 
 public class GridCell {
-	int myRow, myCol;
+	private int myRow, myCol;
 	
 	public GridCell(int r, int c){
 		myRow = r;

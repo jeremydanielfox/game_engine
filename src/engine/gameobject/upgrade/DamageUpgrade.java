@@ -1,4 +1,4 @@
-package shop.upgrade;
+package engine.gameobject.upgrade;
 
 import gameobject.Weapon;
 

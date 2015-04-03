@@ -1,7 +1,7 @@
 package engine.gameobject;
 
 import engine.pathfinding.EndOfPathException;
-import engine.pathfinding.PathFinder;
+import engine.pathfinding.Path;
 
 /**
  * A mover that moves according to a pathfinder.
@@ -9,10 +9,10 @@ import engine.pathfinding.PathFinder;
  *
  */
 public class MoverPath implements Mover {
-	PathFinder myPathFinder;
+	Path myPathFinder;
 	private double myDistance, mySpeed;
 	
-	public MoverPath(PathFinder pf, double speed){
+	public MoverPath(Path pf, double speed){
 		myDistance = 0;
 		myPathFinder = pf;
 		mySpeed = speed;

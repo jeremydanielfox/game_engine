@@ -9,7 +9,7 @@ import javafx.geometry.Point2D;
  * Responsible for telling GameObjects their next position on a grid.
  * @author Kaighn  
  */
-public interface PathFinder {
+public interface Path {
 	/**
 	 * Based on a gameobject's current row and column, return its next grid location.
 	 * @throws EndOfPathException 

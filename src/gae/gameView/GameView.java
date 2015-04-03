@@ -34,7 +34,7 @@ public class GameView {
         myUI = new BorderPane();
         myUI.setPrefWidth(Main.SCREEN_WIDTH);
         myUI.setPrefHeight(Main.SCREEN_HEIGHT);
-        myTabs = new CentralTabView();
+        myTabs = new CentralTabView(myScene);
         myUI.setCenter(myTabs.getBaseNode());
         
         myGenericObjects = new GenericObjectsPane();

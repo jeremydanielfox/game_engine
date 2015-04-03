@@ -36,11 +36,11 @@ public class TempScene {
         pathView = new PathView(stack, myScene);
         return myScene;
     }
-    
+
     /*
      * Used by CentralTabView to create a new Level. Could be changed
      */
-    public StackPane getStack() {
+    public StackPane getStack (Scene scene) {
         stack = new StackPane();
         ImageView background = new ImageView(new Image("/images/Park_Path.png"));
 
@@ -52,7 +52,7 @@ public class TempScene {
 
         StackPane.setAlignment(background, Pos.CENTER);
         StackPane.setAlignment(container, Pos.CENTER);
-        
+        pathView = new PathView(stack, scene);
         return stack;
     }
 
@@ -70,7 +70,7 @@ public class TempScene {
         complete.setTranslateY(50);
         complete.setOnMouseClicked(e -> {
             List<Path> path = pathView.createPathObjects();
-            for (int i = 0; i<path.size(); i++) {
+            for (int i = 0; i < path.size(); i++) {
                 System.out.println("Path " + i + "'s coordinates");
                 path.get(i).printInfo();
                 System.out.println();

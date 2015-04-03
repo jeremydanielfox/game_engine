@@ -2,6 +2,7 @@ package gae.tabView;
 
 import gae.gridView.TempScene;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -11,8 +12,10 @@ public class CentralTabView {
     private VBox baseNode;
     private TabPane tabView;
     private int levelCount;
+    private Scene scene;
     
-    public CentralTabView() {
+    public CentralTabView(Scene sceneIn) {
+        scene = sceneIn;
         initialize();
     }
 
@@ -34,7 +37,7 @@ public class CentralTabView {
     private void createNewLevel () {
         TempScene tempScene = new TempScene();
         LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
-        LevelTabSet newLevel = new LevelTabSet(tempScene.getStack(), levelPrefs.getStack());
+        LevelTabSet newLevel = new LevelTabSet(tempScene.getStack(scene), levelPrefs.getStack());
         
         Tab newTab = new Tab("Level:" + levelCount++);
         newTab.setContent(newLevel.getBaseNode());

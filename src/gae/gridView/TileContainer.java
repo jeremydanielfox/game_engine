@@ -4,6 +4,10 @@ import javafx.scene.layout.Region;
 import javafx.stage.Screen;
 
 
+/*
+ * https://www.youtube.com/watch?v=ag8U6sUptsY
+ * Want to base it on this ^^^^^
+ */
 public class TileContainer extends Region {
     public static final double SCREEN_HEIGHT =
             Screen.getPrimary().getVisualBounds().getHeight() - 100;
@@ -15,16 +19,17 @@ public class TileContainer extends Region {
     }
 
     private void addTiles (int size) {
-        for (double i = 0; i < SCREEN_HEIGHT; i += SCREEN_HEIGHT / size) {
-            for (double j = 0; j < SCREEN_HEIGHT; j += SCREEN_HEIGHT / size) {
-                Tile tile = new Tile(SCREEN_HEIGHT / size);
-                tile.setLayoutX(i);
-                tile.setLayoutY(j);
-                this.getChildren().add(tile);
+        double length = SCREEN_HEIGHT / size;
+        for (double i = 0; Math.round(i) < SCREEN_HEIGHT; i += SCREEN_HEIGHT / size) {
+            for (double j = 0; Math.round(j) < SCREEN_HEIGHT; j += SCREEN_HEIGHT / size) {
+                TileView tileView =
+                        new TileView(length, new TileData(i / length, j / length));
+                tileView.setLayoutX(i);
+                tileView.setLayoutY(j);
+                this.getChildren().add(tileView);
             }
         }
         this.setMaxWidth(SCREEN_HEIGHT);
         this.setMaxHeight(SCREEN_HEIGHT);
     }
-    
 }

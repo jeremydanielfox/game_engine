@@ -1,10 +1,11 @@
-package gae.pathView;
+package gae.gridView;
 
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
@@ -21,42 +22,28 @@ public class PathView {
     private Anchor start;
     private ArrayList<CubicCurve> curveList;
     private ArrayList<Anchor> anchorList;
+    private StackPane stack;
 
-    public PathView () {
+    public PathView (StackPane stack, Scene scene) {
+        this.myScene = scene;
+        this.stack = stack;
         curveList = new ArrayList<>();
         anchorList = new ArrayList<>();
-    }
-
-    public Scene getScene () {
         root = new Group();
-        root.getChildren().addAll(makeBezierCurve(), completePath());
-        myScene = new Scene(root);
-        return myScene;
+        root.setManaged(false);
+        stack.getChildren().add(root);
     }
 
-    private Button makeBezierCurve () {
-        Button makeCurve = new Button("Make Path");
-        makeCurve.setTranslateX(500);
-        makeCurve.setTranslateY(0);
-        makeCurve.setOnMouseClicked(e -> {
-            CubicCurve curve = new CubicCurve();
-            curve.setFill(Color.WHITE);
-            curveList.add(curve);
-            makePath = true;
-            choosePoint(curve);
-        });
-        return makeCurve;
+    public void makeBezierCurve () {
+        CubicCurve curve = new CubicCurve();
+        curve.setFill(Color.TRANSPARENT);
+        curveList.add(curve);
+        makePath = true;
+        choosePoint(curve);
+
     }
 
-    private Button completePath () {
-        Button complete = new Button("Path Complete");
-        complete.setTranslateX(600);
-        complete.setTranslateY(0);
-        complete.setOnMouseClicked(e -> createPathObjects());
-        return complete;
-    }
-
-    private List<Path> createPathObjects () {
+    public List<Path> createPathObjects () {
         /*
          * TODO: Make sure the use is able to delete specific ones and send the paths in order
          */

@@ -5,7 +5,6 @@ import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
@@ -15,7 +14,7 @@ public class PathView {
     private Scene myScene;
     private ArrayList<Anchor> anchorList;
     private ArrayList<PathSet> pathSetList;
-    private boolean selected;
+    private int index;
 
     public PathView (StackPane stack, Scene scene) {
         this.myScene = scene;
@@ -27,25 +26,33 @@ public class PathView {
     }
 
     public void makeBezierCurve () {
-        PathSet set = new PathSet(root, anchorList, myScene);
+        PathSet set = new PathSet(anchorList, myScene, index);
+        index++;
         root.getChildren().add(set);
 
         set.setOnMouseEntered(e -> {
             set.changeColor(Color.YELLOW);
-            selected = true;
             myScene.setOnKeyPressed(f -> {
                 if (f.getCode().equals(KeyCode.BACK_SPACE)) {
                     root.getChildren().remove(set);
                     pathSetList.remove(set);
+                    setIndices();
                 }
             });
         });
 
-        set.setOnMouseReleased(e -> {
+        set.setOnMouseExited(e -> {
             set.changeColor(Color.FORESTGREEN);
         });
 
         pathSetList.add(set);
+    }
+
+    private void setIndices () {
+        for (int i = 0; i < pathSetList.size(); i++) {
+            pathSetList.get(i).changeIndex(i);
+        }
+        index = pathSetList.size();
     }
 
     public List<Path> createPathObjects () {

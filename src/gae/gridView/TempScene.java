@@ -23,7 +23,7 @@ public class TempScene {
         stack = new StackPane();
         ImageView background = new ImageView(new Image("/images/Park_Path.png"));
 
-        TileContainer container = new TileContainer(20);
+        TileContainer container = new TileContainer(10);
         background.fitWidthProperty().bind(container.widthProperty());
         background.fitHeightProperty().bind(container.heightProperty());
 

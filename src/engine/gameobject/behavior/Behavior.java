@@ -1,4 +1,4 @@
-package shop.behavior;
+package engine.gameobject.behavior;
 
 import gameobject.GameObject;
 

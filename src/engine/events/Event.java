@@ -34,14 +34,23 @@ public abstract class Event {
      */
     public abstract boolean update (int frameCount);
 
+    /**
+     * Fix conditions! Does not work correctly atm
+     * 
+     * @param frameCount
+     * @return
+     */
     protected boolean canStart (int frameCount) {
         if (frameTrigger >= 0 && frameCount >= frameTrigger) {
             return true;
         }
-        for (Goal goal : eventTriggers) {
-            if (goal.isSatisfied()) {
-                return true;
+        else if (eventTriggers.size() > 0) {
+            for (Goal goal : eventTriggers) {
+                if (!goal.isSatisfied()) {
+                    return false;
+                }
             }
+            return true;
         }
         return false;
     }

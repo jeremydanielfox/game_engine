@@ -1,7 +1,7 @@
 package gae.backend;
 
 import engine.gameobject.Editable;
-import gameobject.Weapon;
+import engine.gameobject.weapon.Weapon;
 
 
 public class TempTower implements Editable {

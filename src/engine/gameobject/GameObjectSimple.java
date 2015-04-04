@@ -1,9 +1,15 @@
 package engine.gameobject;
 
-import engine.gameobject.weapon.Weapon;
-import engine.grid.GridCell;
-import engine.pathfinding.EndOfPathException;
+import java.util.List;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import engine.gameobject.Health;
+import engine.gameobject.Mover;
+import engine.gameobject.PointSimple;
+import engine.gameobject.weapon.Weapon;
+import engine.pathfinding.EndOfPathException;
 
 
 /**
@@ -11,25 +17,15 @@ import javafx.geometry.Point2D;
  * @author Jeremy
  *
  */
-public class ConcreteGameObject implements GameObject, Cloneable {
+public class GameObjectSimple implements GameObject {
+    private Node myNode;
+    private String myImagePath;
     private String myLabel;
     private PointSimple myPoint;
     private Health myHealth;
     private Mover myMover;
-    private Weapon myWeapon;
-    private GridCell myDimensions;
+    private List<Weapon> myWeapons;
     private Graphic myGraphic;
-
-    @Override
-    public void move () throws EndOfPathException {
-        PointSimple point = myMover.move(myPoint);
-        myPoint = new PointSimple(point.getX(), point.getY());
-    }
-
-    @Override
-    public void setWeapon (Weapon weapon) {
-        myWeapon = weapon;
-    }
 
     @Override
     public boolean isDead () {
@@ -63,23 +59,39 @@ public class ConcreteGameObject implements GameObject, Cloneable {
     }
 
     @Override
-    public Weapon getWeapon () {
-        return myWeapon;
+    public List<Weapon> getWeapons () {
+        return myWeapons;
+    }
+
+    public void initializeNode () {
+        Image image = new Image(myImagePath);
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        myNode = imageView;
+    }
+
+    @Override
+    public void move () throws EndOfPathException {
+        // TODO Auto-generated method stub
+        PointSimple point = myMover.move(myPoint);
+        myPoint = new PointSimple(new Point2D(point.getX(), point.getY()));
     }
 
     @Override
     public void setSpeed (double speed) {
-        myMover.setSpeed(speed);
+        // TODO Auto-generated method stub
+
     }
 
     @Override
-    public GridCell getGridDimensions () {
-        return myDimensions;
+    public void addWeapon (Weapon weapon) {
+        // TODO Auto-generated method stub
+        myWeapons.add(weapon);
     }
 
-    // note: initialize graphic somewhere, constructor or setter method
     @Override
     public Graphic getGraphic () {
+        // TODO Auto-generated method stub
         return myGraphic;
     }
 

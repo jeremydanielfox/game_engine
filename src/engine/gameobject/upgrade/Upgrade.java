@@ -1,6 +1,6 @@
 package engine.gameobject.upgrade;
 
-import gameobject.Weapon;
+import engine.gameobject.weapon.Weapon;
 
 /**
  * One-time upgrades used to enhance a weapon's properties. Examples are range and firing rate.

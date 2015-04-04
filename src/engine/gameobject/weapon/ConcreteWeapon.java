@@ -48,4 +48,10 @@ public class ConcreteWeapon implements Weapon {
         myBehaviors.forEach(action);
     }
 
+    @Override
+    public void addRange (double value) {
+        myRange+=value;
+        
+    }
+
 }

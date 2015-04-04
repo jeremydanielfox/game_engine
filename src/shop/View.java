@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import View.ViewUtilities;
 import javafx.application.Application;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -56,7 +58,7 @@ public class View extends Application {
         gameView.setBackground(new Background(new BackgroundFill(Color.BEIGE, null, null)));
         gameView.setOnMousePressed(mouseEvent -> {
             System.out.println("Relative coordinates: " +
-                               PixelNormalizer.normalize(mouseEvent, gameView));
+                               ViewUtilities.normalizePixels(mouseEvent, gameView));
         });
         stage.show();
     }
@@ -75,21 +77,22 @@ public class View extends Application {
         for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
             shopImages.forEach( (icon, tower) -> {
                 ItemGraphic item = new ItemGraphic(icon, tower);
-                item.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-                    TransitionTower transitionTower = new TransitionTower(item.getTower());
-                    pane.getChildren()
-                            .add(CursorBinder.bindCursor(transitionTower.getView(),
-                                                         shopDisplay.getScene(),
-                                                         KeyCode.ESCAPE));
-                    transitionTower.getView()
-                            .relocate(mouseEvent.getSceneX() + CenterOffset.getX(item),
-                                      mouseEvent.getSceneY() + CenterOffset.getY(item));
-
+                TransitionTower transitionTower = new TransitionTower(item.getTower());
+                Node towerNode = transitionTower.getView();
+                item.setOnMouseClicked(mouseEvent -> {
+                    addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
+                                       towerNode);
                 });
                 items.add(item);
             });
         }
         shopDisplay.getChildren().addAll(items);
+    }
+
+    private void addTransitionTower (Point2D initial, Node node) {
+        Node bindedTower =
+                ViewUtilities.bindCursor(node, pane.getScene(), initial, KeyCode.ESCAPE);
+        pane.getChildren().add(bindedTower);
     }
 
     public static void main (String[] args) {

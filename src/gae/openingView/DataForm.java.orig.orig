@@ -62,9 +62,17 @@ public class DataForm {
         Button b = new Button(BUTTON_TEXT);
         b.setId("authorButton");
         b.setOnMouseClicked(e -> {
+<<<<<<< HEAD
             GameManager gameManager = new GameManager();
             GameView author = new GameView(gameManager);
             //best way to pass around stage?
+=======
+            GameView author = new GameView();
+<<<<<<< Updated upstream
+>>>>>>> a541471676c0817a14528ba13cd735866a3f87c3
+=======
+>>>>>>> 094df8811c85780dd9c8ca0018085d20153517aa
+>>>>>>> Stashed changes
             myStage.setScene(author.getScene());
             myStage.show();
         });

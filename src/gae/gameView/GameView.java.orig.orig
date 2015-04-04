@@ -38,7 +38,11 @@ public class GameView {
 
     public GameView () {
         initialize();
+<<<<<<< Updated upstream
+>>>>>>> a541471676c0817a14528ba13cd735866a3f87c3
+=======
 >>>>>>> 094df8811c85780dd9c8ca0018085d20153517aa
+>>>>>>> Stashed changes
     }
 
     public Scene getScene () {

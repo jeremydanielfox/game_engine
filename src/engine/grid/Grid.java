@@ -1,5 +1,6 @@
 package engine.grid;
 
+import java.util.List;
 import engine.gameobject.GameObject;
 
 public interface Grid {
@@ -10,5 +11,7 @@ public interface Grid {
 	public abstract void detectRange();
 	
 	public void detectCollisions();
+	
+	public List<GameObject> getGameObjects();
 
 }

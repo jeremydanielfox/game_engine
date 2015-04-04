@@ -4,7 +4,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class ObjectEditor {
+public class ObjectEditor extends Editor{
     
     private BorderPane objectEditor;
     private VBox rightContainer;
@@ -23,5 +23,11 @@ public class ObjectEditor {
     
     public Pane getEditor () {
         return objectEditor;
+    }
+
+    @Override
+    void setDefaults () {
+        // TODO Auto-generated method stub
+        
     }
 }

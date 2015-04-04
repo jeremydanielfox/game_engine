@@ -5,13 +5,16 @@ import java.util.Observer;
 import engine.game.Drawer;
 import engine.game.Game;
 import engine.game.LevelBoard;
+import gae.gameView.Main;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
@@ -29,26 +32,31 @@ public class ConcreteView implements View, Observer {
     private Group myGameWorldGroup;
     private Group myTotalGroup;
     
-    public ConcreteView(Game game,Group group) {
+    private double myDisplayWidth;
+    private double myDisplayHeight;
+    
+    public ConcreteView(Game game,Group group,double width,double height) {
         myGame=game;
         myLevelBoard=myGame.getLevelBoard();
         myLevelBoard.addObserver(this);
         myTotalGroup=group;
         myGameWorldGroup=new Group();
         myTotalGroup.getChildren().add(myGameWorldGroup);
+        myDisplayWidth=width;
+        myDisplayHeight=height;
     }
     
     //look into removing Drawer
     @Override
-    public void initializeGameWorld (Drawer drawer) {
+    public void initializeGameWorld () {
         //System.out.println("initializing world");
         ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
         image.setPreserveRatio(true);
-        image.setFitWidth(500);
+        image.setFitHeight(myDisplayHeight);
         myGameWorldGroup.getChildren().add(image);
         HeadsUpDisplay headsUp=new HeadsUpDisplay(myGame.getPlayer());
-        HBox hbox=headsUp.makeDisplay();
-        hbox.setLayoutY(hbox.getLayoutX()+500);
+        VBox vbox=headsUp.makeDisplay();
+        vbox.setLayoutY(vbox.getLayoutX()+500);
         buildTimeline();
         //for testing purposes:
         PopUpScreen popup=new PopUpScreen();
@@ -58,7 +66,7 @@ public class ConcreteView implements View, Observer {
         Button btn2=new Button("Inc");
         btn2.setTranslateX(btn2.getLayoutX()+200);
         btn2.setOnAction(e->myGame.getPlayer().increaseScore(100));//.changeScore(100));
-        myTotalGroup.getChildren().addAll(btn,hbox,btn2);
+        myTotalGroup.getChildren().addAll(btn,vbox,btn2);
         play();
     }
 
@@ -109,7 +117,7 @@ public class ConcreteView implements View, Observer {
                 //then after closing popup window, play();
                 ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
                 image.setPreserveRatio(true);
-                image.setFitWidth(500);
+                image.setFitHeight(myDisplayHeight);
                 myGameWorldGroup.getChildren().clear();
                 myGameWorldGroup.getChildren().add(image);
                 //display new sprites
@@ -128,7 +136,7 @@ public class ConcreteView implements View, Observer {
         //then after closing popup window, play();
         ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
         image.setPreserveRatio(true);
-        image.setFitWidth(500);
+        image.setFitHeight(myDisplayHeight);
         myGameWorldGroup.getChildren().clear();
         myGameWorldGroup.getChildren().add(image);
         //display new sprites
@@ -143,6 +151,12 @@ public class ConcreteView implements View, Observer {
     @Override
     public void play () {
         myAnimation.play();
+    }
+
+    @Override
+    public Node initializeView () {
+        // TODO Auto-generated method stub
+        return null;
     }
     
 }

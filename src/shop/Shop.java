@@ -1,6 +1,6 @@
 package shop;
 
-import gameobject.GameObject;
+import engine.gameobject.GameObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

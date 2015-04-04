@@ -4,132 +4,74 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.CubicCurve;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.StrokeLineCap;
 
 
 public class PathView {
     private Group root;
     private Scene myScene;
-    private int increment;
-    private boolean makePath;
-    private double startX;
-    private double startY;
-    private Anchor start;
-    private ArrayList<CubicCurve> curveList;
     private ArrayList<Anchor> anchorList;
-    private StackPane stack;
+    private ArrayList<PathSet> pathSetList;
+    private int index;
+    private StackPane myStack;
 
     public PathView (StackPane stack, Scene scene) {
         this.myScene = scene;
-        this.stack = stack;
-        curveList = new ArrayList<>();
+        myStack = stack;
         anchorList = new ArrayList<>();
+        pathSetList = new ArrayList<>();
         root = new Group();
         root.setManaged(false);
         stack.getChildren().add(root);
     }
 
     public void makeBezierCurve () {
-        CubicCurve curve = new CubicCurve();
-        curve.setFill(Color.TRANSPARENT);
-        curveList.add(curve);
-        makePath = true;
-        choosePoint(curve);
+        PathSet set = new PathSet(anchorList, myStack, index);
+        index++;
+        root.getChildren().add(set);
+        set.setOnMouseEntered(e -> {
+            set.changeColor(Color.YELLOW);
+            myScene.setOnKeyPressed(f -> {
+                if (f.getCode().equals(KeyCode.BACK_SPACE)) {
+                    root.getChildren().remove(set);
+                    pathSetList.remove(set);
+                    setIndices();
+                }
+            });
+        });
 
+        set.setOnMouseExited(e -> {
+            set.changeColor(Color.FORESTGREEN);
+        });
+
+        pathSetList.add(set);
+    }
+
+    private void setIndices () {
+        for (int i = 0; i < pathSetList.size(); i++) {
+            pathSetList.get(i).changeIndex(i);
+        }
+        index = pathSetList.size();
+    }
+
+    public void remakePath () {
+        myStack.getChildren().add(root);
     }
 
     public List<Path> createPathObjects () {
         /*
-         * TODO: Make sure the use is able to delete specific ones and send the paths in order
+         * TODO: I want to be able to keep the group with the paths so I'll probably delet ethe root
+         * from the stack and store the root somewhere
+         * 
+         * OR, We can store the PathView somewhere and re-visualize that
          */
         List<Path> pathList = new ArrayList<>();
-        for (CubicCurve curve : curveList) {
-            Pair start = new Pair(curve.getStartX(), curve.getStartY());
-            Pair end = new Pair(curve.getEndX(), curve.getEndY());
-            Pair control1 = new Pair(curve.getControlX1(), curve.getControlY1());
-            Pair control2 = new Pair(curve.getControlX2(), curve.getControlY2());
-            Path path = new Path(start, end, control1, control2);
-            pathList.add(path);
+        for (PathSet set : pathSetList) {
+            pathList.add(set.getPathObject());
         }
+        myStack.getChildren().remove(root);
         return pathList;
-    }
-
-    private void choosePoint (CubicCurve curve) {
-        myScene.setOnMouseClicked(e -> {
-            if (increment == 0 && makePath) {
-                startX = e.getX();
-                startY = e.getY();
-                start = new Anchor(Color.PALEGREEN, startX, startY);
-                addAnchor(start);
-                increment++;
-            }
-                else if (increment == 1 && makePath) {
-                    Anchor end = new Anchor(Color.TOMATO, e.getX(), e.getY());
-
-                    curve.setStartX(startX);
-                    curve.setStartY(startY);
-                    curve.setEndX(e.getX());
-                    curve.setEndY(e.getY());
-
-                    addAnchor(end);
-                    Anchor control1 =
-                            new Anchor(Color.GOLD, (startX + e.getX()) / 2, (startY + e.getY()) / 2);
-                    Anchor control2 =
-                            new Anchor(Color.GOLDENROD, (startX + e.getX()) / 2,
-                                       (startY + e.getY()) / 2);
-
-                    bindProperties(curve, start, end, control1, control2);
-
-                    curve.setStroke(Color.FORESTGREEN);
-                    curve.setStrokeWidth(4);
-                    curve.setStrokeLineCap(StrokeLineCap.ROUND);
-
-                    increment = 0;
-                    makePath = false;
-
-                    Line controlLine1 =
-                            new BoundLine(curve.controlX1Property(), curve.controlY1Property(),
-                                          curve.startXProperty(), curve.startYProperty());
-                    Line controlLine2 =
-                            new BoundLine(curve.controlX2Property(), curve.controlY2Property(),
-                                          curve.endXProperty(), curve.endYProperty());
-                    root.getChildren()
-                            .addAll(curve, control1, control2, controlLine1, controlLine2);
-                }
-            });
-    }
-
-    private void addAnchor (Anchor anchor) {
-        checkForIntersect(anchor);
-        anchor.setOnMouseReleased(f -> {
-            checkForIntersect(anchor);
-        });
-        anchorList.add(anchor);
-        root.getChildren().add(anchor);
-    }
-
-    private void bindProperties (CubicCurve curve,
-                                 Anchor start,
-                                 Anchor end,
-                                 Anchor control1,
-                                 Anchor control2) {
-        start.bind(curve.startXProperty(), curve.startYProperty());
-        end.bind(curve.endXProperty(), curve.endYProperty());
-        control1.bind(curve.controlX1Property(), curve.controlY1Property());
-        control2.bind(curve.controlX2Property(), curve.controlY2Property());
-    }
-
-    private void checkForIntersect (Anchor point) {
-        for (Anchor anchor : anchorList) {
-            if (anchor.checkIntersect(point)) {
-                point.setCenterX(anchor.getCenterX());
-                point.setCenterY(anchor.getCenterY());
-            }
-        }
     }
 }

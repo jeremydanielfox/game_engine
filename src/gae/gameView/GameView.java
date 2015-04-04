@@ -1,8 +1,14 @@
 package gae.gameView;
 
+import gae.frontend.UtilitiesBar;
+
 import gae.openingView.OpeningView;
+
+import javafx.scene.ImageCursor;
+
 import gae.tabView.CentralTabView;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TabPane;
 
@@ -21,8 +27,9 @@ public class GameView {
     private CentralTabView myTabs; // replace with main editor
     private Scene myScene;
     private LibraryView myLibrary;
+    private UtilitiesBar utilities;
     private GenericObjectsPane myGenericObjects;
-
+    
     public GameView () {
         initialize();
     }
@@ -35,8 +42,17 @@ public class GameView {
         myUI = new BorderPane();
         myScene = new Scene(myUI);
         myTabs = new CentralTabView(myScene);
-        myUI.setPrefWidth(Main.SCREEN_WIDTH);
-        myUI.setPrefHeight(Main.SCREEN_HEIGHT);
+//        myUI.setPrefWidth(Main.SCREEN_WIDTH);
+//        myUI.setPrefHeight(Main.SCREEN_HEIGHT);
+
+       // myTabs = new TabPane();
+        //myUI.setCenter(myTabs);
+        myScene = new Scene(myUI);
+        myScene.setCursor(new ImageCursor(new Image("/images/swordCursor.jpg")));
+        myScene.getStylesheets().add(GAMEVIEW_CSS);
+        myLibrary = new LibraryView();
+        utilities = new UtilitiesBar();
+        myUI.setTop(utilities.getUtilitiesBar());
 
         myUI.setCenter(myTabs.getBaseNode());
 
@@ -45,6 +61,5 @@ public class GameView {
 
         myScene.getStylesheets().add(GAMEVIEW_CSS);
         myLibrary = new LibraryView();
-
     }
 }

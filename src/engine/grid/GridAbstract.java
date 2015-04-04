@@ -1,5 +1,6 @@
 package engine.grid;
 
+import java.util.Collections;
 import java.util.List;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.Weapon;
@@ -42,5 +43,11 @@ public class GridAbstract implements Grid {
 	public void detectCollisions(){
 		
 	}
+
+    @Override
+    public List<GameObject> getGameObjects () {
+        return Collections.unmodifiableList(myObjects);
+        
+    }
 
 }

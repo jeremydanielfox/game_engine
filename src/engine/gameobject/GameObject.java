@@ -21,5 +21,7 @@ public interface GameObject extends Movable, Health {
     public PointSimple getPoint ();
     
     public GridCell getGridDimensions();
+    
+    public Graphic getGraphic();
 
 }

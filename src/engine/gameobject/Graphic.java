@@ -36,7 +36,7 @@ public class Graphic {
     }
 
     // note: may not need get method if resizeGraphic returns node
-    public Node getGraphic () {
+    public Node getNode () {
         return myImageView;
     }
 

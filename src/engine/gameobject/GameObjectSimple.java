@@ -24,7 +24,7 @@ public class GameObjectSimple implements GameObject {
     private PointSimple myPoint;
     private Health myHealth;
     private Mover myMover;
-    private List<Weapon> myWeapons;
+    private Weapon myWeapon;
     private Graphic myGraphic;
 
     @Override
@@ -58,11 +58,7 @@ public class GameObjectSimple implements GameObject {
         return new PointSimple(myPoint);
     }
 
-    @Override
-    public List<Weapon> getWeapons () {
-        return myWeapons;
-    }
-
+   
     public void initializeNode () {
         Image image = new Image(myImagePath);
         ImageView imageView = new ImageView();
@@ -83,16 +79,55 @@ public class GameObjectSimple implements GameObject {
 
     }
 
-    @Override
-    public void addWeapon (Weapon weapon) {
-        // TODO Auto-generated method stub
-        myWeapons.add(weapon);
-    }
-
+  
     @Override
     public Graphic getGraphic () {
         // TODO Auto-generated method stub
         return myGraphic;
     }
+    
+    String getImagePath() {
+        return myImagePath;
+    }
+    
+    void setImagePath(String imgpath) {
+        myImagePath = imgpath;
+    }
+    
+    void setLabel(String label) {
+        myLabel = label;
+    }
+    
+    void setPoint(PointSimple point) {
+        myPoint = point;
+    }
 
+    Health getHealth() {
+        return myHealth;
+    }
+    
+    void setHealth(Health health) {
+        myHealth = health;
+    }
+    
+    Mover getMover() {
+        return myMover;
+    }
+    
+    void setMover(Mover mover) {
+        myMover = mover;
+    }
+    
+    void setGraphic(Graphic graphic) {
+        myGraphic = graphic;
+    }
+
+    @Override
+    public Weapon getWeapon () {
+        return myWeapon;
+    }
+    @Override
+    public void setWeapon(Weapon weapon)  {
+        myWeapon = weapon;
+    }
 }

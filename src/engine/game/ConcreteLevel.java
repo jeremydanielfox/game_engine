@@ -2,6 +2,7 @@ package engine.game;
 
 import java.util.List;
 import engine.goals.Goal;
+import gameworld.GameWorld;
 
 /**
  * This class is in charge of maintaining everything that occurs within one level, such as
@@ -19,6 +20,7 @@ public class ConcreteLevel implements Level {
     private String myImagePath;
     private List<Goal> myWinningGoals;
     private List<Goal> myLosingGoals;
+    private GameWorld myGameWorld;
 
     // level also needs a story board and game world
 
@@ -54,7 +56,16 @@ public class ConcreteLevel implements Level {
     @Override
     public void update () {
         // TODO Auto-generated method stub
+        myGameWorld.moveObjects();
+        myGameWorld.checkCollisions();
+        myGameWorld.removeDeadObjects();
         //move GameObjects, needs to communicate with StoryBoard
+    }
+
+    @Override
+    public GameWorld getGameWorld () {
+        // TODO Auto-generated method stub
+        return myGameWorld;
     }
 
 }

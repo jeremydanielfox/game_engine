@@ -44,10 +44,4 @@ public class GridAbstract implements Grid {
 		
 	}
 
-    @Override
-    public List<GameObject> getGameObjects () {
-        return Collections.unmodifiableList(myObjects);
-        
-    }
-
 }

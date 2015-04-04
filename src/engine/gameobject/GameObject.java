@@ -12,14 +12,14 @@ import engine.gameobject.weapon.Weapon;
 public interface GameObject extends Movable, Health {
     // public void updateGraphics ();//cannot implement yet
     /**
-     * Adds a weapon to the GameObject's Collection of Weapons
+     * Sets the GameObject's Weapon
      */
-    public void addWeapon (Weapon weapon);
+    public void setWeapon (Weapon weapon);
 
     /**
-     * Returns the GameObject's Collection of Weapons
+     * Returns the GameObject's Weapon
      */
-    public List<Weapon> getWeapons ();
+    public Weapon getWeapon();
 
     /**
      * Labels allow the GameEngine to differentiate

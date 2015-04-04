@@ -9,6 +9,7 @@ import engine.game.Player;
 import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.ScoreGoal;
+import gae.gameView.Main;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -20,11 +21,11 @@ public class TestEngine extends Application {
     public void start (Stage primaryStage) throws Exception {
         ConcreteLevelBoard board=new ConcreteLevelBoard();
         Group root=new Group();
-        primaryStage.setHeight(600); // needs to account for scaling; add constants
-        primaryStage.setWidth(600);// needs to account for scaling; add constants
+        primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add constants
+        primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
         Scene scene=new Scene(root);
         Player myPlayer=new Player("Boi",100,100,100);
-        View view = new ConcreteView(new ConcreteGame(myPlayer,board),root);
+        View view = new ConcreteView(new ConcreteGame(myPlayer,board),root,Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         HealthDepletionGoal healthy=new HealthDepletionGoal(myPlayer);
         ScoreGoal score=new ScoreGoal(myPlayer,200);
         List<Goal> list=new ArrayList<Goal>();
@@ -36,7 +37,7 @@ public class TestEngine extends Application {
         list3.add(score2);
         board.addLevel(new ConcreteLevel("images/Park_Path.png",list2,list));
         board.addLevel(new ConcreteLevel("images/example_path.jpeg",list3,list));
-        view.initializeGameWorld(null);
+        view.initializeGameWorld();
         primaryStage.setScene(scene);
         primaryStage.show();
     }

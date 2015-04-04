@@ -1,46 +1,30 @@
 package engine.gameobject;
 
-import engine.grid.GridCell;
-import engine.pathfinding.EndOfPathException;
-import gameobject.Weapon;
 import java.util.List;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import engine.gameobject.Health;
+import engine.gameobject.Mover;
+import engine.gameobject.PointSimple;
+import engine.gameobject.weapon.Weapon;
+import engine.pathfinding.EndOfPathException;
+
 
 /**
  * 
- * @author Jeremy 
+ * @author Jeremy
  *
  */
 public class GameObjectSimple implements GameObject {
-
-    @XStreamOmitField
-    private transient Node myNode;
+    private Node myNode;
     private String myImagePath;
     private String myLabel;
-    private Point2D myPoint;
+    private PointSimple myPoint;
     private Health myHealth;
     private Mover myMover;
     private List<Weapon> myWeapons;
-
-//    @Override
-//    public void move () {
-//        Pointlike point = myMover.move(myPoint.getX(), myPoint.getY());
-//    }
-//    public void move (double x, double y) {
-//        PointSimple point = myMover.move(x, y);
-//        myPoint = new Point2D(point.getX(), point.getY());
-//        myNode.setTranslateX(transformToScreenX(myPoint.getX()));
-//        myNode.setTranslateY(transformToScreenY(myPoint.getY()));
-//    }
-
-    @Override
-    public void addWeapon (Weapon weapon) {
-        myWeapons.add(weapon);
-    }
 
     @Override
     public boolean isDead () {
@@ -73,49 +57,35 @@ public class GameObjectSimple implements GameObject {
         return new PointSimple(myPoint);
     }
 
+    @Override
+    public List<Weapon> getWeapons () {
+        return myWeapons;
+    }
 
     public void initializeNode () {
         Image image = new Image(myImagePath);
         ImageView imageView = new ImageView();
         imageView.setImage(image);
         myNode = imageView;
-
-    }
-    
-    private double transformToScreenX(double X){
-        //TODO: Implement this method
-        return X;
-    }
-    
-    private double transformToScreenY(double Y) {
-        //TODO: Implement this method
-        return Y;
-    }
-
-    @Override
-    public Node getGraphic () {
-        return myNode;
-    }
-    @Override
-    public void setSpeed (double speed) {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
-    public Weapon getWeapon () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    @Override
-    public GridCell getGridDimensions () {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override
     public void move () throws EndOfPathException {
         // TODO Auto-generated method stub
-        
+        PointSimple point = myMover.move(myPoint);
+        myPoint = new PointSimple(new Point2D(point.getX(), point.getY()));
+    }
+
+    @Override
+    public void setSpeed (double speed) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addWeapon (Weapon weapon) {
+        // TODO Auto-generated method stub
+        myWeapons.add(weapon);
     }
 
 }

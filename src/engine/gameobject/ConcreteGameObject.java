@@ -1,9 +1,9 @@
 package engine.gameobject;
 
-import javafx.scene.Node;
 import engine.gameobject.weapon.Weapon;
 import engine.grid.GridCell;
 import engine.pathfinding.EndOfPathException;
+import javafx.geometry.Point2D;
 
 
 /**
@@ -18,6 +18,7 @@ public class ConcreteGameObject implements GameObject, Cloneable {
     private Mover myMover;
     private Weapon myWeapon;
     private GridCell myDimensions;
+    private Graphic myGraphic;
 
     @Override
     public void move () throws EndOfPathException {
@@ -25,6 +26,10 @@ public class ConcreteGameObject implements GameObject, Cloneable {
         myPoint = new PointSimple(point.getX(), point.getY());
     }
 
+    @Override
+    public void setWeapon (Weapon weapon) {
+        myWeapon = weapon;
+    }
 
     @Override
     public boolean isDead () {
@@ -57,6 +62,10 @@ public class ConcreteGameObject implements GameObject, Cloneable {
         return new PointSimple(myPoint);
     }
 
+    @Override
+    public Weapon getWeapon () {
+        return myWeapon;
+    }
 
     @Override
     public void setSpeed (double speed) {
@@ -68,22 +77,10 @@ public class ConcreteGameObject implements GameObject, Cloneable {
         return myDimensions;
     }
 
+    // note: initialize graphic somewhere, constructor or setter method
     @Override
-    public void addWeapon (gameobject.Weapon weapon) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public gameobject.Weapon getWeapon () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Node getGraphic () {
-        // TODO Auto-generated method stub
-        return null;
+    public Graphic getGraphic () {
+        return myGraphic;
     }
 
 }

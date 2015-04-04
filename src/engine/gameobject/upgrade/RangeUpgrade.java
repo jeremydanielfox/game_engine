@@ -1,6 +1,6 @@
 package engine.gameobject.upgrade;
 
-import gameobject.Weapon;
+import engine.gameobject.weapon.Weapon;
 
 public class RangeUpgrade implements Upgrade {
     

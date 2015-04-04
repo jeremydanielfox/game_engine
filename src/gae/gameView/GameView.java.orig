@@ -1,8 +1,11 @@
 package gae.gameView;
 
+<<<<<<< HEAD
 import gae.backend.GameManager;
+=======
 import gae.frontend.UtilitiesBar;
 
+>>>>>>> 5d899900a3b6c420453582ae83ef39a2c1e87143
 import gae.openingView.OpeningView;
 
 import javafx.scene.ImageCursor;
@@ -30,10 +33,16 @@ public class GameView {
     private LibraryView myLibrary;
     private UtilitiesBar utilities;
     private GenericObjectsPane myGenericObjects;
+<<<<<<< HEAD
     private GameManager myGameManager;
 
     public GameView (GameManager gameManager) {
         initialize(gameManager);
+=======
+    
+    public GameView () {
+        initialize();
+>>>>>>> 5d899900a3b6c420453582ae83ef39a2c1e87143
     }
 
     public Scene getScene () {

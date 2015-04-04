@@ -1,7 +1,7 @@
 package engine.gameobject;
 
+import java.util.List;
 import engine.gameobject.weapon.Weapon;
-import engine.grid.GridCell;
 
 /**
  * 
@@ -10,16 +10,24 @@ import engine.grid.GridCell;
  */
 public interface GameObject extends Movable, Health {
     // public void updateGraphics ();//cannot implement yet
-    public void setWeapon (Weapon weapon);
-
-    public Weapon getWeapon ();
-
+    /**
+     * Adds a weapon to the GameObject's Collection of Weapons
+     */
+    public void addWeapon (Weapon weapon);
+/**
+ * Returns the GameObject's Collection of Weapons
+ */
+    public List<Weapon> getWeapons ();
+/**
+ * Labels allow the GameEngine to differentiate
+ * @return: A string
+ */
     public String getLabel ();
 
     public GameObject clone ();
 
     public PointSimple getPoint ();
     
-    public GridCell getGridDimensions();
+    public Graphic getGraphic();
 
 }

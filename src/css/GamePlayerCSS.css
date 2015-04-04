@@ -1,0 +1,32 @@
+.root {
+	-fx-background-color: white;
+	-fx-font-family: "Courier Sans Serif";
+}
+
+#playerHeader {
+	-fx-font-size: 90;
+}
+
+#optionBox {
+	-fx-padding: 50 100 75 100;
+}
+
+#selectOption {
+	
+}
+
+	#gameIcon {
+
+	}
+
+		#gameName {
+			-fx-font-size: 30;
+			-fx-text-alignment: center;
+		}
+
+#playerButton {
+	-fx-padding: 25 100 25 100;
+}
+
+#gameChooser {
+}

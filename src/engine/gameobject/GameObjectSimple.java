@@ -25,6 +25,7 @@ public class GameObjectSimple implements GameObject {
     private Health myHealth;
     private Mover myMover;
     private List<Weapon> myWeapons;
+    private Graphic myGraphic;
 
     @Override
     public boolean isDead () {
@@ -86,6 +87,12 @@ public class GameObjectSimple implements GameObject {
     public void addWeapon (Weapon weapon) {
         // TODO Auto-generated method stub
         myWeapons.add(weapon);
+    }
+
+    @Override
+    public Graphic getGraphic () {
+        // TODO Auto-generated method stub
+        return myGraphic;
     }
 
 }

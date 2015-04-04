@@ -27,5 +27,7 @@ public interface GameObject extends Movable, Health {
     public GameObject clone ();
 
     public PointSimple getPoint ();
+    
+    public Graphic getGraphic();
 
 }

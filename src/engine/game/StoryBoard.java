@@ -2,7 +2,7 @@ package engine.game;
 
 import java.util.ArrayList;
 import java.util.List;
-import events.Event;
+import engine.events.Event;
 
 /**
  * Manages the event progression for a level

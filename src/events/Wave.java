@@ -1,9 +1,10 @@
+
 package events;
 
 import gameworld.GameWorld;
 
 
-public abstract class Wave extends Event {
+public abstract class Wave extends TimedEvent {
 
     private GameWorld myWorld;
     private GameObjectQueue myQueue;

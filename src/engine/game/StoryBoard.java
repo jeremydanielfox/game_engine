@@ -2,7 +2,7 @@ package engine.game;
 
 import java.util.ArrayList;
 import java.util.List;
-import events.Event;
+import events.TimedEvent;
 
 /**
  * Manages the event progression for a level
@@ -11,17 +11,17 @@ import events.Event;
  *
  */
 public class StoryBoard {
-    private List<Event> eventList;
+    private List<TimedEvent> eventList;
     private int frameCount;
 
-    public StoryBoard (Event ... events) {
+    public StoryBoard (TimedEvent ... events) {
         frameCount = 0;
-        eventList = new ArrayList<Event>();
+        eventList = new ArrayList<TimedEvent>();
         addEvent(events);
     }
 
-    public boolean addEvent (Event ... events) {
-        for (Event event : events) {
+    public boolean addEvent (TimedEvent ... events) {
+        for (TimedEvent event : events) {
             eventList.add(event);
         }
         return true;
@@ -44,7 +44,7 @@ public class StoryBoard {
      * If an event is complete, remove it from the list
      * @param event
      */
-    public void updateEvent(Event event) {
+    public void updateEvent(TimedEvent event) {
         if (!event.update(frameCount)) {
             eventList.remove(event);
         }

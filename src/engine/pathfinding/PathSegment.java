@@ -1,10 +1,11 @@
 package engine.pathfinding;
 
-import engine.gameobject.Pointlike;
+import engine.gameobject.PointSimple;
 
 
 
 
 public interface PathSegment {
-    public Pointlike getNextPoint (Pointlike current);
+    public PointSimple getPoint (double distance);
+    public double getLength();
 }

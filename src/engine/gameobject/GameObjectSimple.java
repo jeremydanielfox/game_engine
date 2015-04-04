@@ -1,17 +1,18 @@
 package engine.gameobject;
 
+import engine.grid.GridCell;
+import engine.pathfinding.EndOfPathException;
+import gameobject.Weapon;
 import java.util.List;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import gameobject.Weapon;
-
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 /**
  * 
- * @author Jeremy
+ * @author Jeremy 
  *
  */
 public class GameObjectSimple implements GameObject {
@@ -25,13 +26,16 @@ public class GameObjectSimple implements GameObject {
     private Mover myMover;
     private List<Weapon> myWeapons;
 
-    @Override
-    public void move () {
-        Pointlike point = myMover.move(myPoint.getX(), myPoint.getY());
-        myPoint = new Point2D(point.getX(), point.getY());
-        myNode.setTranslateX(transformToScreenX(myPoint.getX()));
-        myNode.setTranslateY(transformToScreenY(myPoint.getY()));
-    }
+//    @Override
+//    public void move () {
+//        Pointlike point = myMover.move(myPoint.getX(), myPoint.getY());
+//    }
+//    public void move (double x, double y) {
+//        PointSimple point = myMover.move(x, y);
+//        myPoint = new Point2D(point.getX(), point.getY());
+//        myNode.setTranslateX(transformToScreenX(myPoint.getX()));
+//        myNode.setTranslateY(transformToScreenY(myPoint.getY()));
+//    }
 
     @Override
     public void addWeapon (Weapon weapon) {
@@ -65,14 +69,10 @@ public class GameObjectSimple implements GameObject {
     }
 
     @Override
-    public Pointlike getPoint () {
+    public PointSimple getPoint () {
         return new PointSimple(myPoint);
     }
 
-    @Override
-    public List<Weapon> getWeapons () {
-        return myWeapons;
-    }
 
     public void initializeNode () {
         Image image = new Image(myImagePath);
@@ -95,6 +95,27 @@ public class GameObjectSimple implements GameObject {
     @Override
     public Node getGraphic () {
         return myNode;
+    }
+    @Override
+    public void setSpeed (double speed) {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public Weapon getWeapon () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public GridCell getGridDimensions () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void move () throws EndOfPathException {
+        // TODO Auto-generated method stub
+        
     }
 
 }

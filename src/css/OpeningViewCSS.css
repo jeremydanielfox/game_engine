@@ -1,0 +1,42 @@
+.root {
+	-fx-font-family: "Courier Sans Serif";
+	-fx-background-color: white;
+}
+
+#rightPanel {
+   -fx-padding: 50 175 0 0 ;
+}
+
+#selectGameText {
+   -fx-font-size: 25;
+}
+
+.hoverPicture {
+   -fx-opacity: 0.3;
+}
+
+  .hoverPicture:hover {
+    -fx-opacity: 1;
+  }
+
+    .hoverPicture:pressed {
+      -fx-opacity: 1;
+      -fx-border-color: red;
+      -fx-border-width: 5px;
+    }
+
+.gameLabel {
+  -fx-font-size: 30;
+}
+
+#dataForm {
+  -fx-padding: 100 0 0 175;
+}
+
+#authorButton:hover {
+ -fx-border-color: blue;
+}
+
+#welcomeBanner {
+	-fx-font-size: 40;
+}

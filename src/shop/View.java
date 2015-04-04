@@ -25,9 +25,9 @@ import javafx.stage.Stage;
  *
  */
 public class View extends Application {
-    
-    private final static int SCENE_WIDTH = 400;
-    private final static int SCENE_HEIGHT = 400;
+
+    private final static int SCENE_WIDTH = 600;
+    private final static int SCENE_HEIGHT = 600;
     private final static int SHOP_WIDTH = 160;
     private final static int ITEM_COUNT = 12;
 
@@ -38,45 +38,58 @@ public class View extends Application {
         pane = new BorderPane();
         Scene scene = new Scene(pane, SCENE_WIDTH, SCENE_HEIGHT);
         stage.setScene(scene);
-        
-        // FlowPane contains the entire store. This is what should be moved around. 
+
+        // FlowPane contains the entire store. This is what should be moved around.
         FlowPane shopDisplay = new FlowPane();
         shopDisplay.setHgap(5);
         shopDisplay.setVgap(5);
         pane.setRight(shopDisplay);
         shopDisplay.setMaxWidth(SHOP_WIDTH);
-        shopDisplay.backgroundProperty()
-                .set(new Background(new BackgroundFill(Color.GRAY, null, null)));
+        shopDisplay.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
 
         // add Icons
+        addIcons(shopDisplay);
+
+        // add general gameWorld view
+        BorderPane gameView = new BorderPane();
+        pane.setCenter(gameView);
+        gameView.setBackground(new Background(new BackgroundFill(Color.BEIGE, null, null)));
+        gameView.setOnMousePressed(mouseEvent -> {
+            System.out.println("Relative coordinates: " +
+                               PixelNormalizer.normalize(mouseEvent, gameView));
+        });
+        stage.show();
+    }
+
+    private void addIcons (FlowPane shopDisplay) {
         Map<String, String> shopImages = new HashMap<String, String>();
-        String[] iconImages= new String[] {"/images/Bloons_DartMonkeyIcon.jpg",
-                                            "/images/Bloons_TackShooterIcon.jpg"};
-        String[] towerImages = new String[] {"/images/Bloons_DartMonkey.png",
-                                             "/images/Bloons_TackShooter.png"};
-        for (int i=0; i<iconImages.length; i++){
+        String[] iconImages = new String[] { "/images/Bloons_DartMonkeyIcon.jpg",
+                                            "/images/Bloons_TackShooterIcon.jpg" };
+        String[] towerImages = new String[] { "/images/Bloons_DartMonkey.png",
+                                             "/images/Bloons_TackShooter.png" };
+        for (int i = 0; i < iconImages.length; i++) {
             shopImages.put(iconImages[i], towerImages[i]);
         }
-        
+
         List<Node> items = new ArrayList<Node>();
-        for (int i = 0; i < ITEM_COUNT/iconImages.length; i++) {
-            shopImages.forEach((icon, tower)->{
+        for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
+            shopImages.forEach( (icon, tower) -> {
                 ItemGraphic item = new ItemGraphic(icon, tower);
                 item.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                     TransitionTower transitionTower = new TransitionTower(item.getTower());
+                    pane.getChildren()
+                            .add(CursorBinder.bindCursor(transitionTower.getView(),
+                                                         shopDisplay.getScene(),
+                                                         KeyCode.ESCAPE));
                     transitionTower.getView()
                             .relocate(mouseEvent.getSceneX() + CenterOffset.getX(item),
                                       mouseEvent.getSceneY() + CenterOffset.getY(item));
-                    pane.getChildren()
-                            .add(CursorBinder.bindCursor(transitionTower.getView(),
-                                                         shopDisplay.getScene(), KeyCode.ESCAPE));
 
                 });
                 items.add(item);
             });
         }
         shopDisplay.getChildren().addAll(items);
-        stage.show();
     }
 
     public static void main (String[] args) {

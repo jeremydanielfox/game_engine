@@ -1,6 +1,5 @@
 package player.gamePlayer;
 
-
 import java.util.Arrays;
 import gae.gameView.Main;
 import javafx.application.Application;

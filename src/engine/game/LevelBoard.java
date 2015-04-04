@@ -1,5 +1,6 @@
 package engine.game;
 
+import gameworld.GameWorld;
 import java.util.Observer;
 
 public interface LevelBoard {
@@ -13,4 +14,6 @@ public interface LevelBoard {
     public void update ();
     
     public void addObserver(Observer o);
+    
+    public GameWorld getGameWorld();
 }

@@ -17,6 +17,8 @@ public interface Weapon {
     
     public GameObject getProjectile ();
 
-    public void applyBehaviors (Consumer<Behavior> action); 
+    public void applyBehaviors (Consumer<Behavior> action);
+
+    public void addRange (double value); 
     
 }

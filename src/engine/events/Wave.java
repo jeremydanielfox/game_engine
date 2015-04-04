@@ -1,9 +1,14 @@
+<<<<<<< HEAD:src/engine/events/Wave.java
 package engine.events;
+=======
+
+package events;
+>>>>>>> 4ef3523c8a38eb88ab9b13cadf3d88adf0c1dea0:src/events/Wave.java
 
 import gameworld.GameWorld;
 
 
-public abstract class Wave extends Event {
+public abstract class Wave extends TimedEvent {
 
     private GameWorld myWorld;
     private GameObjectQueue myQueue;

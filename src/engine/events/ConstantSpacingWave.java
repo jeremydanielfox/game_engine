@@ -16,7 +16,7 @@ public class ConstantSpacingWave extends Wave {
 
     @Override
     public boolean update (int frameCount) {
-        if (!canStart(frameCount)) {
+        if (!canStart()) {
             return true;
         }
         if (myFramesSinceLastRelease == myFramesBetweenEnemies) {

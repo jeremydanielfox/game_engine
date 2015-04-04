@@ -62,8 +62,8 @@ public class DataForm {
         b.setId("authorButton");
         b.setOnMouseClicked(e -> {
             GameView author = new GameView();
-            //best way to pass around stage?
             myStage.setScene(author.getScene());
+            myStage.show();
         });
         box.setAlignment(Pos.BASELINE_RIGHT);
         box.getChildren().add(b);

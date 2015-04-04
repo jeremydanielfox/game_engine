@@ -5,6 +5,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import engine.fieldsetting.Settable;
 import engine.gameobject.Health;
 import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
@@ -24,7 +25,7 @@ public class GameObjectSimple implements GameObject {
     private PointSimple myPoint;
     private Health myHealth;
     private Mover myMover;
-    private List<Weapon> myWeapons;
+    private Weapon myWeapon;
     private Graphic myGraphic;
 
     @Override
@@ -58,11 +59,6 @@ public class GameObjectSimple implements GameObject {
         return new PointSimple(myPoint);
     }
 
-    @Override
-    public List<Weapon> getWeapons () {
-        return myWeapons;
-    }
-
     public void initializeNode () {
         Image image = new Image(myImagePath);
         ImageView imageView = new ImageView();
@@ -77,16 +73,11 @@ public class GameObjectSimple implements GameObject {
         myPoint = new PointSimple(new Point2D(point.getX(), point.getY()));
     }
 
+    @Settable
     @Override
     public void setSpeed (double speed) {
         // TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public void addWeapon (Weapon weapon) {
-        // TODO Auto-generated method stub
-        myWeapons.add(weapon);
     }
 
     @Override
@@ -95,4 +86,44 @@ public class GameObjectSimple implements GameObject {
         return myGraphic;
     }
 
+    @Settable
+    void setImagePath (String imgpath) {
+        myImagePath = imgpath;
+    }
+
+    @Settable
+    void setLabel (String label) {
+        myLabel = label;
+    }
+
+    @Settable
+    void setPoint (PointSimple point) {
+        myPoint = point;
+    }
+
+    @Settable
+    void setHealth (Health health) {
+        myHealth = health;
+    }
+
+    @Settable
+    void setMover (Mover mover) {
+        myMover = mover;
+    }
+
+    @Settable
+    void setGraphic (Graphic graphic) {
+        myGraphic = graphic;
+    }
+
+    @Override
+    public Weapon getWeapon () {
+        return myWeapon;
+    }
+
+    @Settable
+    @Override
+    public void setWeapon (Weapon weapon) {
+        myWeapon = weapon;
+    }
 }

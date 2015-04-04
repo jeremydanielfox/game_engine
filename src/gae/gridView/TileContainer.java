@@ -1,6 +1,7 @@
 package gae.gridView;
 
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 
 
@@ -10,11 +11,13 @@ import javafx.stage.Screen;
  */
 public class TileContainer extends Region {
     public static final double SCREEN_HEIGHT =
-            Screen.getPrimary().getVisualBounds().getHeight() - 100;
+            Screen.getPrimary().getVisualBounds().getHeight() - 120;
     public static final double SCREEN_WIDTH =
-            Screen.getPrimary().getVisualBounds().getWidth() - 100;
+            Screen.getPrimary().getVisualBounds().getWidth() - 120;
 
     public TileContainer (int size) {
+//        System.out.println(stack.getWidth());
+//        stack.getHeight();
         addTiles(size);
     }
 

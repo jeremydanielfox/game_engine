@@ -3,9 +3,6 @@ package engine.grid;
 import java.util.LinkedList;
 import java.util.List;
 import engine.gameobject.GameObject;
-import engine.gameobject.weapon.Weapon;
-import engine.interactions.ConcreteInteractionEngine;
-import engine.interactions.InteractionEngine;
 
 public class GridFree extends GridAbstract {
 	private List<GameObject>[][] myGrid;

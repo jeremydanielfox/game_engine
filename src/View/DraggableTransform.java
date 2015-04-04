@@ -1,4 +1,4 @@
-package shop;
+package View;
 
 import javafx.scene.Group;
 import javafx.scene.Node;

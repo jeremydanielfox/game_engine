@@ -12,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TabPane;
 
-
 // import gameobject.Editable;
 
 public class GameView {
@@ -29,7 +28,7 @@ public class GameView {
     private LibraryView myLibrary;
     private UtilitiesBar utilities;
     private GenericObjectsPane myGenericObjects;
-    
+
     public GameView () {
         initialize();
     }
@@ -42,12 +41,9 @@ public class GameView {
         myUI = new BorderPane();
         myScene = new Scene(myUI);
         myTabs = new CentralTabView(myScene);
-//        myUI.setPrefWidth(Main.SCREEN_WIDTH);
-//        myUI.setPrefHeight(Main.SCREEN_HEIGHT);
+        myUI.setPrefWidth(Main.SCREEN_WIDTH);
+        myUI.setPrefHeight(Main.SCREEN_HEIGHT);
 
-       // myTabs = new TabPane();
-        //myUI.setCenter(myTabs);
-        myScene = new Scene(myUI);
         myScene.setCursor(new ImageCursor(new Image("/images/swordCursor.jpg")));
         myScene.getStylesheets().add(GAMEVIEW_CSS);
         myLibrary = new LibraryView();

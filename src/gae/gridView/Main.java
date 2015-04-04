@@ -19,7 +19,7 @@ public class Main extends Application{
         Stage myStage = new Stage();
         myStage.setWidth(SCREEN_WIDTH);
         myStage.setHeight(SCREEN_HEIGHT);
-        TempScene scene = new TempScene();
+        WorldView scene = new WorldView();
         myStage.setScene(scene.getScene());
         myStage.show();
     }

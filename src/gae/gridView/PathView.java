@@ -15,22 +15,22 @@ public class PathView {
     private ArrayList<Anchor> anchorList;
     private ArrayList<PathSet> pathSetList;
     private int index;
+    private StackPane myStack;
 
     public PathView (StackPane stack, Scene scene) {
         this.myScene = scene;
+        myStack = stack;
         anchorList = new ArrayList<>();
         pathSetList = new ArrayList<>();
         root = new Group();
         root.setManaged(false);
         stack.getChildren().add(root);
-        System.out.println("hello");
     }
 
     public void makeBezierCurve () {
-        PathSet set = new PathSet(anchorList, myScene, index);
+        PathSet set = new PathSet(anchorList, myStack, index);
         index++;
         root.getChildren().add(set);
-
         set.setOnMouseEntered(e -> {
             set.changeColor(Color.YELLOW);
             myScene.setOnKeyPressed(f -> {
@@ -56,14 +56,22 @@ public class PathView {
         index = pathSetList.size();
     }
 
+    public void remakePath () {
+        myStack.getChildren().add(root);
+    }
+
     public List<Path> createPathObjects () {
         /*
-         * TODO: Make sure the use is able to delete specific ones and send the paths in order
+         * TODO: I want to be able to keep the group with the paths so I'll probably delet ethe root
+         * from the stack and store the root somewhere
+         * 
+         * OR, We can store the PathView somewhere and re-visualize that
          */
         List<Path> pathList = new ArrayList<>();
         for (PathSet set : pathSetList) {
             pathList.add(set.getPathObject());
         }
+        myStack.getChildren().remove(root);
         return pathList;
     }
 }

@@ -1,23 +1,23 @@
 package gae.gridView;
 
+import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Screen;
 
 
-public class TempScene {
-    public static final double SCREEN_HEIGHT =
-            Screen.getPrimary().getVisualBounds().getHeight() - 100;
-    public static final double SCREEN_WIDTH =
-            Screen.getPrimary().getVisualBounds().getWidth() - 100;
+public class WorldView {
     private Scene myScene;
     private StackPane stack;
     private PathView pathView;
+    private List<List<Path>> allPaths;
+    private List<PathView> previousPaths;
+    private Scene scene;
 
     public Scene getScene () {
         stack = new StackPane();
@@ -42,17 +42,21 @@ public class TempScene {
      */
     public StackPane getStack (Scene scene) {
         stack = new StackPane();
+        this.scene = scene;
         ImageView background = new ImageView(new Image("/images/Park_Path.png"));
-
+        Group root = new Group();
         TileContainer container = new TileContainer(20);
+        root.getChildren().addAll(background, container);
+
+        Button bezier = makeBezierCurve();
+        Button path = completePath();
+        Button previous = previousPath();
+        stack.getChildren().addAll(root, bezier, path, previous);
+
         background.fitWidthProperty().bind(container.widthProperty());
         background.fitHeightProperty().bind(container.heightProperty());
 
-        stack.getChildren().addAll(background, container, makeBezierCurve(), completePath());
-
-        StackPane.setAlignment(background, Pos.CENTER);
-        StackPane.setAlignment(container, Pos.CENTER);
-        pathView = new PathView(stack, scene);
+        pathView = new PathView(stack, this.scene);
         return stack;
     }
 
@@ -68,14 +72,34 @@ public class TempScene {
         Button complete = new Button("Path Complete");
         complete.setTranslateX(500);
         complete.setTranslateY(50);
+        allPaths = new ArrayList<>();
+        previousPaths = new ArrayList<>();
         complete.setOnMouseClicked(e -> {
             List<Path> path = pathView.createPathObjects();
+            previousPaths.add(pathView);
+            allPaths.add(path);
             for (int i = 0; i < path.size(); i++) {
                 System.out.println("Path " + i + "'s coordinates");
                 path.get(i).printInfo();
                 System.out.println();
             }
+            pathView = new PathView(stack, this.scene);
         });
         return complete;
+    }
+    private Button previousPath () {
+        Button previous = new Button("Previous Path");
+        previous.setTranslateX(500);
+        previous.setTranslateY(100);
+        previous.setOnMouseClicked(e -> setOldPath(previousPaths.get(0)));
+        return previous;
+    }
+    /*
+     * This method is able to bring back PathView's that had already been made and replace it with
+     * the current screen
+     */
+    public void setOldPath(PathView view) {
+        pathView = view;
+        pathView.remakePath();
     }
 }

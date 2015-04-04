@@ -1,8 +1,8 @@
 package gae.backend;
 
+import engine.gameobject.Editable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import gameobject.Editable;
 
 
 public class TileData implements Editable {

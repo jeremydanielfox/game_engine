@@ -1,8 +1,7 @@
 package gameworld;
 
-import engine.pathfinding.PathFinder;
-import gameobject.GameObject;
-
+import engine.gameobject.GameObject;
+import engine.pathfinding.Path;
 import java.util.ArrayList;
 
 
@@ -25,7 +24,7 @@ public class BasicWorld implements GameWorld {
     }
 
     @Override
-    public PathFinder getPathFinder () {
+    public Path getPathFinder () {
         // TODO Auto-generated method stub
         return null;
     }

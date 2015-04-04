@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import gameobject.GameObject;
+import engine.gameobject.GameObject;
 
 
 public class ConcreteQueue implements GameObjectQueue {

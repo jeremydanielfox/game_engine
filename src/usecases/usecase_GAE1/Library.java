@@ -1,10 +1,8 @@
 package usecases.usecase_GAE1;
 
-import gameobject.Editable;
-
+import engine.gameobject.Editable;
 import java.util.ArrayList;
 import java.util.Observable;
-
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;

@@ -1,11 +1,11 @@
 package gameworld;
 
-import engine.pathfinding.PathFinder;
-import gameobject.GameObject;
+import engine.gameobject.GameObject;
+import engine.pathfinding.Path;
 
 
 public interface GameWorld {
     public void updateGameObjects ();
-    public PathFinder getPathFinder ();
+    public Path getPathFinder ();
     public void addObject (GameObject object);
 }

@@ -2,22 +2,31 @@ package gameobject;
 
 import java.util.List;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import engine.gameobject.Health;
+import engine.gameobject.Mover;
+import engine.gameobject.PointSimple;
+import engine.gameobject.PointSimple;
 
+/**
+ * 
+ * @author Jeremy
+ *
+ */
 public class GameObjectSimple implements GameObject {
+    private Node myNode;
+    private String myImagePath;
+    private String myLabel;
     private Point2D myPoint;
     private Health myHealth;
     private Mover myMover;
-    private Actor myActor;
     private List<Weapon> myWeapons;
 
     @Override
-    public void act (GameObject a, GameObject b) {
-        myActor.act(a, b);
-    }
-
-    @Override
     public void move (double x, double y) {
-        Pointlike point = myMover.move(x, y);
+        PointSimple point = myMover.move(x, y);
         myPoint = new Point2D(point.getX(), point.getY());
     }
 
@@ -38,23 +47,35 @@ public class GameObjectSimple implements GameObject {
 
     // temporary
     public GameObject clone () {
-        return null;
+        try {
+            return (GameObject) super.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            System.out.println(this.getLabel() + " can't be cloned");
+            return null;
+        }
     }
 
-	@Override
-	public String getLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public String getLabel () {
+        return myLabel;
+    }
 
-	@Override
-	public Pointlike getPoint() {
-		return new PointSimple(myPoint);
-	}
+    @Override
+    public PointSimple getPoint () {
+        return new PointSimple(myPoint);
+    }
 
-	@Override
-	public List<Weapon> getWeapons() {
-		return myWeapons;
-	}
+    @Override
+    public List<Weapon> getWeapons () {
+        return myWeapons;
+    }
+
+    public void initializeNode () {
+        Image image = new Image(myImagePath);
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        myNode = imageView;
+    }
 
 }

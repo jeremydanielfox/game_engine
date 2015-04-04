@@ -1,47 +1,74 @@
 package gae.gridView;
+
 /**
  * In the process of trying to put the Anchors and the curve into one object
  */
 import java.util.ArrayList;
-import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 
 
-public class PathSet {
-    private Group root;
-    private Scene myScene;
+public class PathSet extends Region {
     private int increment;
     private boolean makePath;
     private double startX;
     private double startY;
     private Anchor start;
-    private CubicCurve curve;
     private ArrayList<Anchor> anchorList;
+    private Group root;
+    private CubicCurve curve;
+    private int index;
+    private PathLabel pathLabel;
+    private StackPane stack;
 
-    public PathSet () {
-        anchorList = new ArrayList<>();
+    public PathSet (ArrayList<Anchor> anchorList, StackPane scene, int index) {
+        root = new Group();
+        root.setManaged(false);
+        this.getChildren().add(root);
+        this.anchorList = anchorList;
+        this.stack = scene;
+        this.index = index;
+        init();
     }
 
-    public void setCurve(CubicCurve curve) {
-        this.curve = curve;
+    public Path getPathObject () {
+        Pair start = new Pair(curve.getStartX(), curve.getStartY());
+        Pair end = new Pair(curve.getEndX(), curve.getEndY());
+        Pair control1 = new Pair(curve.getControlX1(), curve.getControlY1());
+        Pair control2 = new Pair(curve.getControlX2(), curve.getControlY2());
+        return new Path(start, end, control1, control2);
     }
-    public void setStart(double x, double y) {
-        start = new Anchor(Color.PALEGREEN, startX, startY);
-        addAnchor(start);
-        increment++;
+
+    public void changeColor (Color color) {
+        curve.setStroke(color);
     }
+
+    public void changeIndex (int value) {
+        pathLabel.changeValue(value);
+    }
+
+    private void init () {
+        curve = new CubicCurve();
+        curve.setFill(Color.TRANSPARENT);
+        makePath = true;
+        choosePoint(curve);
+    }
+
     private void choosePoint (CubicCurve curve) {
-        myScene.setOnMouseClicked(e -> {
+        stack.setOnMouseClicked(e -> {
+            System.out.println("scene was clicked");
             if (increment == 0 && makePath) {
                 startX = e.getX();
                 startY = e.getY();
-                start = new Anchor(Color.PALEGREEN, startX, startY);
+                pathLabel = new PathLabel(index);
+                start = new Anchor(Color.PALEGREEN, startX, startY, pathLabel);
+                root.getChildren().add(pathLabel);
                 addAnchor(start);
                 increment++;
             }
@@ -75,6 +102,7 @@ public class PathSet {
                     Line controlLine2 =
                             new BoundLine(curve.controlX2Property(), curve.controlY2Property(),
                                           curve.endXProperty(), curve.endYProperty());
+
                     root.getChildren()
                             .addAll(curve, control1, control2, controlLine1, controlLine2);
                 }
@@ -109,4 +137,5 @@ public class PathSet {
             }
         }
     }
+
 }

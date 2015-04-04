@@ -1,5 +1,6 @@
 package View;
 
+import javafx.scene.Node;
 import engine.game.Drawer;
 
 
@@ -15,4 +16,6 @@ public interface View {
     abstract void pause ();
     
     abstract void play ();
+
+    abstract Node initializeView ();
 }

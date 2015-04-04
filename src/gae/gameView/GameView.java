@@ -1,5 +1,6 @@
 package gae.gameView;
 
+import gae.backend.GameManager;
 import gae.openingView.OpeningView;
 import gae.tabView.CentralTabView;
 import javafx.scene.Scene;
@@ -22,16 +23,19 @@ public class GameView {
     private Scene myScene;
     private LibraryView myLibrary;
     private GenericObjectsPane myGenericObjects;
+    private GameManager myGameManager;
 
-    public GameView () {
-        initialize();
+    public GameView (GameManager gameManager) {
+        initialize(gameManager);
     }
 
     public Scene getScene () {
         return myScene;
     }
 
-    private void initialize () {
+    private void initialize (GameManager gameManager) {
+        myGameManager = gameManager;
+        
         myUI = new BorderPane();
         myScene = new Scene(myUI);
         myTabs = new CentralTabView(myScene);

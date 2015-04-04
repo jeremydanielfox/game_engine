@@ -1,5 +1,6 @@
 package gae.openingView;
 
+import gae.backend.GameManager;
 import gae.gameView.GameView;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -61,7 +62,8 @@ public class DataForm {
         Button b = new Button(BUTTON_TEXT);
         b.setId("authorButton");
         b.setOnMouseClicked(e -> {
-            GameView author = new GameView();
+            GameManager gameManager = new GameManager();
+            GameView author = new GameView(gameManager);
             //best way to pass around stage?
             myStage.setScene(author.getScene());
             myStage.show();;

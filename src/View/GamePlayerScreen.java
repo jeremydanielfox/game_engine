@@ -42,10 +42,10 @@ public class GamePlayerScreen extends Application {
         addDetails("Description","this is an example of a description");
         addDetails("Instructions","this is an example of instructions");
         
-        ConcreteView view=new ConcreteView(myGame,new Group());
+        ConcreteView view=new ConcreteView(myGame,new Group(),Main.SCREEN_WIDTH,Main.SCREEN_WIDTH);
         Button scoreBtn=new Button("View high scores");
         Button playBtn=new Button("play");
-        playBtn.setOnAction(e-> view.initializeGameWorld(null));
+        playBtn.setOnAction(e-> view.initializeGameWorld());
         myVbox.getChildren().addAll(scoreBtn,playBtn);
         //return myVbox;
     }

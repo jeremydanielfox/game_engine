@@ -1,5 +1,6 @@
 package engine.game;
 
+import gameworld.GameWorld;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -63,6 +64,12 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
     public void startNextLevel () {
         // TODO Auto-generated method stub
         curLevelIndex++;
+    }
+
+    @Override
+    public GameWorld getGameWorld () {
+        // TODO Auto-generated method stub
+        return myLevels.get(curLevelIndex).getGameWorld();
     }
 
 }

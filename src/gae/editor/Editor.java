@@ -2,10 +2,10 @@ package gae.editor;
 
 import javafx.scene.Node;
 
-public interface Editor {
+public abstract class Editor {
     
-    Node getEditor();
+    abstract Node getEditor();
     
-    void setDefaults();
+    abstract void setDefaults();
     
 }

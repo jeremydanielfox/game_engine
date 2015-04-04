@@ -18,6 +18,7 @@ public class ConcreteGameObject implements GameObject, Cloneable {
     private Mover myMover;
     private Weapon myWeapon;
     private GridCell myDimensions;
+    private Graphic myGraphic;
 
     @Override
     public void move () throws EndOfPathException {
@@ -74,6 +75,12 @@ public class ConcreteGameObject implements GameObject, Cloneable {
     @Override
     public GridCell getGridDimensions () {
         return myDimensions;
+    }
+
+    // note: initialize graphic somewhere, constructor or setter method
+    @Override
+    public Graphic getGraphic () {
+        return myGraphic;
     }
 
 }

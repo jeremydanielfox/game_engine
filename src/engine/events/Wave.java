@@ -1,6 +1,7 @@
 package engine.events;
 
 
+import engine.grid.StructurePlacementException;
 import gameworld.GameWorld;
 
 
@@ -43,7 +44,13 @@ public abstract class Wave extends TimedEvent {
      */
     public boolean releaseObject () {
         if (myQueue.getObjectCount() > 0) {
-            myWorld.addObject(myQueue.releaseGameObject());
+            try {
+                myWorld.addObject(myQueue.releaseGameObject());
+            }
+            catch (StructurePlacementException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             return true;
         }
         return false;

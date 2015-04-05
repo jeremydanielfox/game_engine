@@ -2,7 +2,7 @@ package engine.gameobject;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import engine.gameobject.weapon.ConcreteWeapon;
+import engine.gameobject.weapon.WeaponSimple;
 import engine.gameobject.weapon.Weapon;
 
 
@@ -33,7 +33,7 @@ public class GameObjectSimpleBean {
         myPoint = new PointSimple(0, 0);
         myHealth = new HealthSimple();
         myMover = new MoverPath(null, 0);
-        myWeapon = new ConcreteWeapon(0, 0, null, null);
+        myWeapon = new WeaponSimple(0, 0, null, null);
         myGraphic = new Graphic(0, 0, null);
     }
 

@@ -12,12 +12,6 @@ import javafx.scene.Node;
  */
 
 public interface UIObject {
-
-    /**
-     * initializes any objects, values, and can call helper methods to do so
-     */
-    abstract void initialize ();
-
     /**
      * returns the most general container to whatever class is calling it in order to display the
      * UIObject

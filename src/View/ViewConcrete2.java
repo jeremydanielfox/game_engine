@@ -63,8 +63,11 @@ public class ViewConcrete2 implements View, Observer {
     @Override
     public void initializeGameWorld () {
         setCurrentBackground();
-        HeadsUpDisplay headsUp=new HeadsUpDisplay(myGame.getPlayer());
-        VBox vbox=headsUp.makeDisplay();
+        HUD headsUp=new HUD();
+        for(Displayable d: myGame.getPlayer().getDisplayables()){
+            headsUp.addPairedDisplay(d);
+        }
+        VBox vbox=headsUp.getDisplay();
         //vbox.setMinWidth(myDisplayWidth-myDisplayHeight);
         //vbox.setLayoutY(vbox.getLayoutX()+500);
         myPane.setRight(vbox);

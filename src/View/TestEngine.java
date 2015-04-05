@@ -2,10 +2,13 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+import shop.wallet.ConcreteWallet;
+import shop.wallet.Wallet;
 import engine.game.ConcreteGame;
 import engine.game.ConcreteLevel;
 import engine.game.ConcreteLevelBoard;
 import engine.game.Player;
+import engine.game.PlayerUnit;
 import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.ScoreGoal;
@@ -51,7 +54,10 @@ public class TestEngine extends Application {
         primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
         //BorderPane pane = new BorderPane();
         Scene scene=new Scene(root);
-        Player myPlayer=new Player("Boi",100,100,100);
+        PlayerUnit health = new PlayerUnit(100, "Health");
+        PlayerUnit scoreUnit = new PlayerUnit(100, "Score");
+        Wallet wallet = new ConcreteWallet(scoreUnit);
+        Player myPlayer=new Player("Boi",health,scoreUnit,wallet);
         View view = new ViewConcrete2(new ConcreteGame(myPlayer,board),Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         HealthDepletionGoal healthy=new HealthDepletionGoal(myPlayer);
         ScoreGoal score=new ScoreGoal(myPlayer,200);

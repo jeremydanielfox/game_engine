@@ -2,7 +2,7 @@ package engine.game;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import engine.events.Event;
 import engine.events.TimedEvent;
 
 /**
@@ -12,15 +12,15 @@ import engine.events.TimedEvent;
  *
  */
 public class StoryBoard {
-    private List<TimedEvent> eventList;
+    private List<Event> eventList;
 
-    public StoryBoard (TimedEvent ... events) {
-        eventList = new ArrayList<TimedEvent>();
+    public StoryBoard (Event ... events) {
+        eventList = new ArrayList<Event>();
         addEvent(events);
     }
 
-    public boolean addEvent (TimedEvent ... events) {
-        for (TimedEvent event : events) {
+    public boolean addEvent (Event ... events) {
+        for (Event event : events) {
             eventList.add(event);
         }
         return true;
@@ -34,7 +34,7 @@ public class StoryBoard {
         if (eventList.size() == 0) {
             return false;
         }
-        eventList.stream().forEach(event -> updateEvent(event));
+        updateEvent(eventList.get(0));
         return true;
     }
     
@@ -42,7 +42,7 @@ public class StoryBoard {
      * If an event is complete, remove it from the list
      * @param event
      */
-    public void updateEvent(TimedEvent event) {
+    public void updateEvent(Event event) {
         if (!event.update()) {
             eventList.remove(event);
         }

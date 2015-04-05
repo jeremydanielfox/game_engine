@@ -51,7 +51,7 @@ public class HUD implements Observer {
         myDisplay.getChildren().add(newBox);
     }
 
-    public Node getDisplay () {
+    public VBox getDisplay () {
         return myDisplay;
     }
 

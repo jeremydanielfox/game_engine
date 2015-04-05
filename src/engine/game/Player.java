@@ -1,6 +1,9 @@
 package engine.game;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
+import View.Displayable;
 import shop.wallet.Wallet;
 
 
@@ -58,5 +61,12 @@ public class Player extends Observable {
     
     public String getName(){
         return myName;
+    }
+    
+    public List<Displayable> getDisplayables(){
+        List <Displayable> toReturn = new ArrayList<>();
+        toReturn.add(myHealth);
+        toReturn.add(myScore);
+        return toReturn;
     }
 }

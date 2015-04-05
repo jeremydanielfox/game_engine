@@ -6,11 +6,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
-public class HoverPicture {
+/**
+ * HoverPicture is a specific object used by ImagePanel. Each HoverPicture represents an image of
+ * the game type as well as an overlying text with the label. Text disappears when author hovers
+ * over the image.
+ * 
+ * @author Brandon Choi
+ *
+ */
+
+public class HoverPicture implements UIObject {
 
     private static final double IMAGE_WIDTH = Main.SCREEN_WIDTH / 4;
     private static final double IMAGE_HEIGHT = Main.SCREEN_HEIGHT / 4;
-    
     private StackPane view;
     private ImageView image;
     private Text label;
@@ -30,14 +38,18 @@ public class HoverPicture {
         setSelectEffect();
     }
 
-    public Node getView () {
+    @Override
+    public Node getObject () {
         return view;
     }
-    
+
     public boolean selectStatus () {
         return selected;
     }
 
+    /**
+     * sets up the hovering effect by altering the text's visibility
+     */
     private void setHoverEffect () {
         if (!selected) {
             image.setOnMouseEntered(e -> {
@@ -49,6 +61,9 @@ public class HoverPicture {
         }
     }
 
+    /**
+     * sets up what happens when it is clicked and selected
+     */
     private void setSelectEffect () {
         if (selected) {
             view.setOnMouseClicked(e -> {

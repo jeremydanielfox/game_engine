@@ -60,6 +60,10 @@ public class PathView {
         myStack.getChildren().add(root);
     }
 
+    public void resetScreen () {
+        myStack.getChildren().remove(root);
+    }
+
     public List<Path> createPathObjects () {
         /*
          * TODO: I want to be able to keep the group with the paths so I'll probably delet ethe root
@@ -71,7 +75,7 @@ public class PathView {
         for (PathSet set : pathSetList) {
             pathList.add(set.getPathObject());
         }
-        myStack.getChildren().remove(root);
+        resetScreen();
         return pathList;
     }
 }

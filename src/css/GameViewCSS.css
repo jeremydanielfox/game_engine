@@ -1,0 +1,9 @@
+.root {
+	-fx-background-color: white;
+	-fx-font-family: "Courier Sans Serif";
+}
+
+.buttons {
+	-fx-width: 25px;
+	-fx-height: 25px;
+}

@@ -1,6 +1,7 @@
 package gameView;
 
-import gameobject.Editable;
+import engine.gameobject.Editable;
+import gae.frontend.EditorView;
 
 public interface GameView {
     

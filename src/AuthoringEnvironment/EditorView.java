@@ -1,9 +1,8 @@
 package AuthoringEnvironment;
 
-import usecases.ConcreteTower;
-import gameobject.Editable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import engine.gameobject.Editable;
 
 public class EditorView {
 	// This property and the Library's property would be bound

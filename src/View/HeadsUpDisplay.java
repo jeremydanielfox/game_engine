@@ -1,9 +1,11 @@
 package View;
 
-import game.Player;
+import engine.game.Player;
 import java.util.Observable;
 import java.util.Observer;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 
@@ -28,17 +30,26 @@ public class HeadsUpDisplay implements Observer {
 
     // note: consider putting this in constructor and making a getDisplay method
     // note: add a resource file parameter to this method to set the text displays
-    public HBox makeDisplay () {
+    public VBox makeDisplay () {
         // this method will create the pane on the screen that displays time, score,and health for
         // the player.
-        HBox display = new HBox(TEXT_SPACING);
+        VBox display = new VBox(TEXT_SPACING);
         // make these set from resource file
-        Text score = new Text("Score: ");
-        Text currency = new Text("Currency: ");
-        Text health = new Text("Health: ");
-        display.getChildren().addAll(score, myScoreDisplay, currency, myCurrencyDisplay, health,
-                                     myHealthDisplay);
+//        Text score = new Text("Score: ");
+//        Text currency = new Text("Currency: ");
+//        Text health = new Text("Health: ");
+        // display.getChildren().addAll(score, myScoreDisplay, currency, myCurrencyDisplay, health,
+        // myHealthDisplay);
+        display.getChildren().addAll(generatePairedBox(new Text("Score: "), myScoreDisplay),
+                                     generatePairedBox(new Text("Currency: "), myCurrencyDisplay),
+                                     generatePairedBox(new Text("Health: "), myHealthDisplay));
         return display;
+    }
+
+    private HBox generatePairedBox (Node a, Node b) {
+        HBox toReturn = new HBox(TEXT_SPACING);
+        toReturn.getChildren().addAll(a, b);
+        return toReturn;
     }
 
     private void updateTime (int time) {

@@ -26,7 +26,7 @@ public abstract class TimedEvent implements Event {
      * 
      * @return true if the appropriate frame count is reached
      */
-    protected boolean canStart () {
+    public boolean canStart () {
         return (frameTrigger >= 0 && frameCount >= frameTrigger);
     }
     

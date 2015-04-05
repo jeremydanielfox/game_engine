@@ -34,7 +34,7 @@ public class StoryBoard {
         if (eventList.size() == 0) {
             return false;
         }
-        updateEvent(eventList.get(0));
+        updateEvent(getCurrentEvent());
         return true;
     }
     
@@ -42,9 +42,23 @@ public class StoryBoard {
      * If an event is complete, remove it from the list
      * @param event
      */
-    public void updateEvent(Event event) {
+    private void updateEvent(Event event) {
         if (!event.update()) {
             eventList.remove(event);
+        }
+    }
+    
+    private Event getCurrentEvent() {
+        if (eventList.size() > 0) {
+            return eventList.get(0);
+        }
+        return null;
+    }
+    
+    public void nextEvent() {
+        Event currentEvent = getCurrentEvent();
+        if (currentEvent != null && currentEvent.canStart()) {
+            currentEvent.setCanStart();
         }
     }
 

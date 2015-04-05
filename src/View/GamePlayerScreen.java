@@ -24,7 +24,7 @@ public class GamePlayerScreen extends Application {
     private Game myGame;
     
     public GamePlayerScreen() {
-        myGame=new ConcreteGame(new Player("Eric"),new ConcreteLevelBoard());
+        myGame=new ConcreteGame(new Player("Eric",null,null,null),new ConcreteLevelBoard());
         myVbox=new VBox();
         makeDis();
     }
@@ -47,7 +47,6 @@ public class GamePlayerScreen extends Application {
         Button playBtn=new Button("play");
         playBtn.setOnAction(e-> view.initializeGameWorld());
         myVbox.getChildren().addAll(scoreBtn,playBtn);
-        //return myVbox;
     }
     
     

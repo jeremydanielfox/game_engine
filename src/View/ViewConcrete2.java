@@ -63,7 +63,7 @@ public class ViewConcrete2 implements View, Observer {
     @Override
     public void initializeGameWorld () {
         setCurrentBackground();
-        HUD headsUp=new HUD();
+        HUD headsUp=new HUD(myPane);
         for(Displayable d: myGame.getPlayer().getDisplayables()){
             headsUp.addPairedDisplay(d);
         }
@@ -143,23 +143,6 @@ public class ViewConcrete2 implements View, Observer {
         image.setFitWidth(myDisplayHeight*GAME_WIDTH_TO_HEIGHT);
         myGameWorldPane.getChildren().clear();
         myGameWorldPane.getChildren().add(image);
-    }
-    
-    public void test() {
-        pause();
-        myLevelBoard.startNextLevel();
-        //display new background
-        //display new sprites
-        //popup window
-        //then after closing popup window, play();
-        ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
-        //image.setPreserveRatio(true);
-        image.setFitHeight(myDisplayHeight);
-        image.setFitWidth(myDisplayHeight);
-        myGameWorldPane.getChildren().clear();
-        myGameWorldPane.getChildren().add(image);
-        //display new sprites
-        play();
     }
     
     @Override

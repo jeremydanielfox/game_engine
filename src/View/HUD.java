@@ -1,12 +1,23 @@
 package View;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import shop.ItemGraphic;
+import shop.TransitionTower;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 
@@ -21,24 +32,32 @@ public class HUD implements Observer {
 
     // note: this should change with screen size, fix it later
     private static final double TEXT_SPACING = 10;
+    private final static int SHOP_WIDTH = 160;
+    private final static int ITEM_COUNT = 12;
 
     private Map<Displayable, Text> myDisplayFields;
-    private VBox myDisplay;
+    private VBox myStatsDisplay;
+    private VBox myWholeDisplay;
+    private BorderPane myPane;
 
-    public HUD(){
-        initialize();
+    public HUD(BorderPane pane){
+        initialize(pane);
     }
     
-    public HUD (Displayable ... displays) {
-        initialize();
+    public HUD (BorderPane pane,Displayable ... displays) {
+        initialize(pane);
         for (Displayable d : displays) {
             addPairedDisplay(d);
         }
     }
     
-    private void initialize(){
-        myDisplay = new VBox();
+    private void initialize(BorderPane pane){
+        myStatsDisplay = new VBox();
+        myWholeDisplay = new VBox();
+        myWholeDisplay.getChildren().add(myStatsDisplay);
         myDisplayFields = new HashMap<>();
+        myPane=pane;
+        makeShop();
     }
 
     public void addPairedDisplay (Displayable d) {
@@ -48,11 +67,11 @@ public class HUD implements Observer {
         Text value = new Text(d.getValue() + "");
         newBox.getChildren().addAll(label, value);
         myDisplayFields.put(d, value);
-        myDisplay.getChildren().add(newBox);
+        myStatsDisplay.getChildren().add(newBox);
     }
 
     public VBox getDisplay () {
-        return myDisplay;
+        return myWholeDisplay;
     }
 
     @Override
@@ -63,6 +82,49 @@ public class HUD implements Observer {
                 break;
             }
         }
+    }
+    
+    private void makeShop () {
+        FlowPane shopDisplay = new FlowPane();
+        shopDisplay.setHgap(5);
+        shopDisplay.setVgap(5);
+        //pane.setRight(shopDisplay);
+        //shopDisplay.setMaxWidth(SHOP_WIDTH);
+        shopDisplay.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
+        addIcons(shopDisplay);
+        myWholeDisplay.getChildren().add(shopDisplay);
+    }
+    
+    private void addIcons (FlowPane shopDisplay) {
+        Map<String, String> shopImages = new HashMap<String, String>();
+        String[] iconImages = new String[] { "/images/Bloons_DartMonkeyIcon.jpg",
+                                            "/images/Bloons_TackShooterIcon.jpg" };
+        String[] towerImages = new String[] { "/images/Bloons_DartMonkey.png",
+                                             "/images/Bloons_TackShooter.png" };
+        for (int i = 0; i < iconImages.length; i++) {
+            shopImages.put(iconImages[i], towerImages[i]);
+        }
+
+        List<Node> items = new ArrayList<Node>();
+        for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
+            shopImages.forEach( (icon, tower) -> {
+                ItemGraphic item = new ItemGraphic(icon, tower);
+                TransitionTower transitionTower = new TransitionTower(item.getTower());
+                Node towerNode = transitionTower.getView();
+                item.setOnMouseClicked(mouseEvent -> {
+                    addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
+                                       towerNode);
+                });
+                items.add(item);
+            });
+        }
+        shopDisplay.getChildren().addAll(items);
+    }
+    
+    private void addTransitionTower (Point2D initial, Node node) {
+        Node bindedTower =
+                ViewUtilities.bindCursor(node, myPane.getScene(), initial, KeyCode.ESCAPE);
+        myPane.getChildren().add(bindedTower);
     }
 
 }

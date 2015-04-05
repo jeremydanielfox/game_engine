@@ -78,7 +78,7 @@ public class ViewConcrete2 implements View, Observer {
         Button btn=new Button("Dec");
         btn.setOnAction(e->myGame.getPlayer().changeHealth(-100));
         Button btn2=new Button("Inc");
-        btn2.setTranslateX(btn2.getLayoutX()+200);
+        btn2.setTranslateX(btn2.getLayoutX());
         btn2.setOnAction(e->myGame.getPlayer().changeScore(100));//.changeScore(100));
         //myTotalGroup.getChildren().addAll(btn,vbox,btn2);
         vbox.getChildren().addAll(btn, btn2);

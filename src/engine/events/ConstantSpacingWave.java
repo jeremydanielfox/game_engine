@@ -21,16 +21,18 @@ public class ConstantSpacingWave extends Wave {
         }
         if (myFramesSinceLastRelease == myFramesBetweenEnemies) {
             // release enemy
-            if (!releaseObject()) {
-                return false;
-            }
+//            if (!releaseObject()) {
+//                return false;
+//            }
+            releaseObject();
+            
             // reset frame counter
             myFramesSinceLastRelease = 0;
         }
         else {
             myFramesSinceLastRelease++;
         }
-        return true;
-
+        return super.update();
+        
     }
 }

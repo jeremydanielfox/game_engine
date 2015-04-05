@@ -9,13 +9,13 @@ public class PointsWallet extends Wallet {
     }
 
     @Override
-    void deposit () {
+    void deposit (double amount) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    void withdraw () {
+    void withdraw (double amount) {
         // TODO Auto-generated method stub
 
     }

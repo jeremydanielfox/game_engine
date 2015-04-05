@@ -1,12 +1,8 @@
 package engine.events;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import engine.goals.Goal;
 
 
-public class TimedEvent implements Event {
+public abstract class TimedEvent implements Event {
     private int frameTrigger;
     private int frameCount;
 
@@ -24,15 +20,18 @@ public class TimedEvent implements Event {
      * 
      * @return false if the event is complete
      */
-    public boolean update () {
-        frameCount++;
-        if (canStart()) {
-            
-        }
-    }
+    public abstract boolean update ();
 
-    private boolean canStart (int frameCount) {
+    /**
+     * 
+     * @return true if the appropriate frame count is reached
+     */
+    protected boolean canStart () {
         return (frameTrigger >= 0 && frameCount >= frameTrigger);
+    }
+    
+    public void setCanStart() {
+        frameTrigger = 0;
     }
 
 }

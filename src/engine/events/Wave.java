@@ -1,9 +1,5 @@
-<<<<<<< HEAD:src/engine/events/Wave.java
 package engine.events;
-=======
 
-package events;
->>>>>>> 4ef3523c8a38eb88ab9b13cadf3d88adf0c1dea0:src/events/Wave.java
 
 import gameworld.GameWorld;
 
@@ -14,6 +10,11 @@ public abstract class Wave extends TimedEvent {
     private GameObjectQueue myQueue;
 
     public Wave (GameObjectQueue objects, GameWorld world) {
+        this(-1, objects, world);
+    }
+    
+    public Wave (double startTime, GameObjectQueue objects, GameWorld world) {
+        super(startTime);
         myQueue = objects;
         myWorld = world;
     }
@@ -25,7 +26,7 @@ public abstract class Wave extends TimedEvent {
      * @return false if the wave has finished
      */
     @Override
-    public abstract boolean update (int frameCount);
+    public abstract boolean update ();
 
     /**
      * Returns a boolean representing whether or not this wave is complete

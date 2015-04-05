@@ -13,10 +13,8 @@ import engine.events.TimedEvent;
  */
 public class StoryBoard {
     private List<TimedEvent> eventList;
-    private int frameCount;
 
     public StoryBoard (TimedEvent ... events) {
-        frameCount = 0;
         eventList = new ArrayList<TimedEvent>();
         addEvent(events);
     }
@@ -33,7 +31,6 @@ public class StoryBoard {
      * @return false if the StoryBoard has no more events to update
      */
     public boolean update () {
-        frameCount++;
         if (eventList.size() == 0) {
             return false;
         }

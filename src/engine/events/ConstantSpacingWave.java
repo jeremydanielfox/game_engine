@@ -15,7 +15,7 @@ public class ConstantSpacingWave extends Wave {
     }
 
     @Override
-    public boolean update (int frameCount) {
+    public boolean update () {
         if (!canStart()) {
             return true;
         }

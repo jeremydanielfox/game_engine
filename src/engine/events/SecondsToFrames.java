@@ -1,4 +1,4 @@
-package events;
+package engine.events;
 
 public class SecondsToFrames {
 

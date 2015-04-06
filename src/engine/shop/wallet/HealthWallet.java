@@ -1,6 +1,6 @@
-package shop.wallet;
+package engine.shop.wallet;
 
-public class PointsWallet extends Wallet {
+public class HealthWallet extends Wallet {
 
     @Override
     double getBalance () {

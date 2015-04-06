@@ -1,4 +1,4 @@
-package shop;
+package engine.shop;
 
 // TODO: might need to make a distinction between GameObject purchasables and UpgradeBundle
 // purchasables b/c of the getValue() method

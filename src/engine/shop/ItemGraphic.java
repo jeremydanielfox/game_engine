@@ -1,4 +1,4 @@
-package shop;
+package engine.shop;
 
 import java.util.Random;
 import javafx.geometry.Point2D;

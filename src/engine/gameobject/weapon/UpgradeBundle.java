@@ -1,8 +1,8 @@
 package engine.gameobject.weapon;
 
 import java.util.Map;
-import shop.Purchasable;
 import engine.gameobject.weapon.upgradable.Upgradable;
+import engine.shop.Purchasable;
 
 
 /**

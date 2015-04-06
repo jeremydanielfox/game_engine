@@ -5,8 +5,8 @@ package gae.gridView;
  */
 import java.util.ArrayList;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
@@ -21,15 +21,18 @@ public class PathSet extends Region {
     private Anchor start;
     private ArrayList<Anchor> anchorList;
     private Group root;
-    private Scene myScene;
     private CubicCurve curve;
+    private int index;
+    private PathLabel pathLabel;
+    private StackPane stack;
 
-    public PathSet (Group hello, ArrayList<Anchor> anchorList, Scene scene) {
+    public PathSet (ArrayList<Anchor> anchorList, StackPane scene, int index) {
         root = new Group();
         root.setManaged(false);
         this.getChildren().add(root);
         this.anchorList = anchorList;
-        this.myScene = scene;
+        this.stack = scene;
+        this.index = index;
         init();
     }
 
@@ -45,13 +48,11 @@ public class PathSet extends Region {
         curve.setStroke(color);
     }
 
+    public void changeIndex (int value) {
+        pathLabel.changeValue(value);
+    }
+
     private void init () {
-        this.setOnMouseEntered(e -> {
-            changeColor(Color.YELLOW);
-        });
-        this.setOnMouseExited( e -> {
-            changeColor(Color.FORESTGREEN);
-        });
         curve = new CubicCurve();
         curve.setFill(Color.TRANSPARENT);
         makePath = true;
@@ -59,11 +60,13 @@ public class PathSet extends Region {
     }
 
     private void choosePoint (CubicCurve curve) {
-        myScene.setOnMouseClicked(e -> {
+        stack.setOnMouseClicked(e -> {
             if (increment == 0 && makePath) {
                 startX = e.getX();
                 startY = e.getY();
-                start = new Anchor(Color.PALEGREEN, startX, startY);
+                pathLabel = new PathLabel(index);
+                start = new Anchor(Color.PALEGREEN, startX, startY, pathLabel);
+                root.getChildren().add(pathLabel);
                 addAnchor(start);
                 increment++;
             }
@@ -97,6 +100,7 @@ public class PathSet extends Region {
                     Line controlLine2 =
                             new BoundLine(curve.controlX2Property(), curve.controlY2Property(),
                                           curve.endXProperty(), curve.endYProperty());
+
                     root.getChildren()
                             .addAll(curve, control1, control2, controlLine1, controlLine2);
                 }
@@ -131,4 +135,5 @@ public class PathSet extends Region {
             }
         }
     }
+
 }

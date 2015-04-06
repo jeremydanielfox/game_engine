@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import shop.CursorBinder;
 import engine.gameobject.Editable;
 import gae.backend.TempTower;
 import javafx.collections.FXCollections;
@@ -24,7 +23,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
 
 // import gameobject.Editable;
 
@@ -83,6 +81,7 @@ public class LibraryView {
         });   
         setListClick(list);
         return list;
+
     }
 
 //    private ObservableList<LibraryContent> editableToLibraryContent(ObservableList<TempTower> editables){
@@ -113,6 +112,7 @@ public class LibraryView {
         });
         
     }
+
 
     private Node createCellContent(TempTower edit){
         HBox content=new HBox();
@@ -154,4 +154,4 @@ public class LibraryView {
 //        }
 //
 //    }
-}
+

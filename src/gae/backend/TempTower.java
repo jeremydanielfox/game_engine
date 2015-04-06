@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Pair;
 import engine.gameobject.Editable;
-import gameobject.Weapon;
+import engine.gameobject.weapon.Weapon;
 
 
 public class TempTower implements Editable {

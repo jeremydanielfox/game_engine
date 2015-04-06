@@ -9,9 +9,24 @@ import javafx.scene.shape.StrokeType;
 
 
 public class Anchor extends Circle {
+    private static final int PATH_OFFSET = 20;
+    private PathLabel label;
+
+    public Anchor (Color color, double x, double y, PathLabel label) {
+        super(x, y, 15);
+        init(color);
+        label.setLayoutX(x + PATH_OFFSET);
+        label.setLayoutY(y + PATH_OFFSET);
+        this.label = label;
+
+    }
 
     public Anchor (Color color, double x, double y) {
         super(x, y, 15);
+        init(color);
+    }
+
+    private void init (Color color) {
         setFill(color.deriveColor(1, 1, 1, 0.5));
         setStroke(color);
         setStrokeWidth(2);
@@ -38,12 +53,25 @@ public class Anchor extends Circle {
 
         setOnMouseDragged(e -> {
             double newX = e.getX() + dragDelta.x;
-            if (newX > 0 && newX < getScene().getWidth()) {
-                setCenterX(newX);
+            try {
+                if (newX > 0 && newX < getScene().getWidth()) {
+                    setCenterX(newX);
+                    label.setLayoutX(newX + PATH_OFFSET);
+                }
+                double newY = e.getY() + dragDelta.y;
+                if (newY > 0 && newY < getScene().getHeight()) {
+                    setCenterY(newY);
+                    label.setLayoutY(newY + PATH_OFFSET);
+                }
             }
-            double newY = e.getY() + dragDelta.y;
-            if (newY > 0 && newY < getScene().getHeight()) {
-                setCenterY(newY);
+            catch (NullPointerException nullPointer) {
+                if (newX > 0 && newX < getScene().getWidth()) {
+                    setCenterX(newX);
+                }
+                double newY = e.getY() + dragDelta.y;
+                if (newY > 0 && newY < getScene().getHeight()) {
+                    setCenterY(newY);
+                }
             }
         });
         setOnMouseEntered(e -> {

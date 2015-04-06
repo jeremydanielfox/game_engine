@@ -1,5 +1,7 @@
 package engine.game;
 
+import gameworld.GameWorld;
+
 public class ConcreteGame implements Game {
 
     private Player myPlayer;
@@ -29,5 +31,6 @@ public class ConcreteGame implements Game {
         // TODO Auto-generated method stub
         return myPlayer;
     }
+
 
 }

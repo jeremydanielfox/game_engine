@@ -32,7 +32,7 @@ public class GameObjectSimpleTest implements GameObject {
 
     public GameObjectSimpleTest () {
         createNode();
-        myImagePath = "image Path!";
+        myImagePath = "robertDuvall.jpg";
         myLabel = "test object";
         myPoint = new PointSimple(100,100);
         myHealth = new HealthSimple();

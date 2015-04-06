@@ -1,14 +1,20 @@
 package gae.openingView;
 
-import gae.gameView.Main;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class ImagePanel {
+/**
+ * ImagePanel holds visuals to represent the types of game available for the author to create.
+ * A mix of CSS and Java logic is used to set up effects such as hover, select, etc.
+ * 
+ * @author Brandon Choi
+ *
+ */
+
+public class ImagePanel implements UIObject {
 
     private static final ImageView SET_PATH_GAME = new ImageView("/images/bloonsdefense.jpg");
     private static final ImageView FREE_PATH_GAME = new ImageView("/images/desktopdefense.jpg");
@@ -18,34 +24,50 @@ public class ImagePanel {
     private static final Text SIDE_VIEW = new Text("Side View");
     private static final Text HEADER = new Text("Select Tower Defense Genre: ");
 
-    private VBox panel;
-    private VBox selections;
-    private HoverPicture setPath, freePath, sideView;
+    private UIMediator myMediator;
+    private VBox panel, selections;
+    private UIObject setPath, freePath, sideView;
 
-    public ImagePanel () {
-        initialize();
+    public ImagePanel (UIMediator mediator) {
+        myMediator = mediator;
+        panel = new VBox(15);
+        selections = new VBox(15);
+        setIDs();
+        createSelectOptions();
+        panel.getChildren().addAll(HEADER, selections);
     }
-
-    public Node getPanel () {
+    
+    @Override
+    public Node getObject () {
         return panel;
     }
 
-    private void initialize () {
-        panel = new VBox(15);
-        selections = new VBox(15);
+    /**
+     * set up IDs for nodes in order to enable editing through CSS files
+     */
+    private void setIDs () {
         HEADER.setId("selectGameText");
         panel.setId("rightPanel");
         selections.setId("imagePanel");
+    }
 
+    
+    /**
+     * creates all the select options by making new instances of HoverPicture
+     */
+    private void createSelectOptions () {
         setPath = new HoverPicture(SET_PATH_GAME, SET_PATH);
         freePath = new HoverPicture(FREE_PATH_GAME, FREE_PATH);
         sideView = new HoverPicture(SIDE_VIEW_GAME, SIDE_VIEW);
-
-        selections.getChildren().addAll(setPath.getView(), freePath.getView(), sideView.getView());
+        selections.getChildren().addAll(setPath.getObject(), freePath.getObject(), sideView.getObject());
         setUpClick(selections);
-        panel.getChildren().addAll(HEADER, selections);
     }
-
+    
+    
+    /**
+     * 
+     * @param choices
+     */
     private void setUpClick (Pane choices) {
         //if one is selected, disable the rest
         

@@ -2,7 +2,12 @@ package engine.gameobject;
 
 import javafx.geometry.Point2D;
 
-
+/**
+ * A simple class for representing a point in Cartesian point. Contains some fun utility
+ * methods too.
+ * @author Kaighn.
+ *
+ */
 public class PointSimple {
     private Point2D myPoint;
 

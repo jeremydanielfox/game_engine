@@ -2,6 +2,11 @@ package engine.gameobject;
 
 import engine.fieldsetting.Settable;
 
+/**
+ * Most traditional implementation of health. Can take damage and die appropriately.
+ * @author Kaighn
+ *
+ */
 public class HealthSimple implements Health {
 	private double myHealth;
 

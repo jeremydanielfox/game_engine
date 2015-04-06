@@ -1,4 +1,4 @@
-package shop;
+package engine.shop;
 
 import engine.gameobject.GameObject;
 import java.util.ArrayList;

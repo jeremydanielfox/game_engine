@@ -1,4 +1,4 @@
-package shop;
+package engine.shop;
 
 import java.util.ArrayList;
 import java.util.Arrays;

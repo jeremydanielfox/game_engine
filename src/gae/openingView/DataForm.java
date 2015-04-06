@@ -1,6 +1,5 @@
 package gae.openingView;
 
-import gae.gameView.GameView;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -10,43 +9,58 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-public class DataForm {
+/**
+ * DataForm is the left-hand side of the opening view. It holds all the forms the author must fill
+ * out as well as the title header and author button
+ * 
+ * @author Brandon Choi
+ *
+ */
+
+public class DataForm implements UIObject {
 
     private static final String BUTTON_TEXT = "LET'S GO!";
     private static final int LABEL_WIDTH = 80;
     private static final Text HEADER = new Text("Ready to create a game?");
 
-    private VBox form;
-    private VBox inputFields;
-    
-    private Stage myStage;
+    private UIMediator myMediator;
+    private VBox form, inputFields;
 
-    public DataForm (Stage stage) {
-        initialize();
-        
-        myStage = stage;
-    }
-
-    public Node getForm () {
-        return form;
-    }
-
-    private void initialize () {
+    public DataForm (UIMediator mediator) {
+        myMediator = mediator;
         form = new VBox(30);
         form.setId("dataForm");
         HEADER.setId("welcomeBanner");
-        inputFields = new VBox(10);
-        inputFields.getChildren().addAll(createInputField("Game Title", new TextField()),
-                                         createInputField("Author", new TextField()),
-                                         createInputField("Description", new TextArea()),
-                                         createInputField("Instructions", new TextArea()));
-        inputFields.setAlignment(Pos.BASELINE_LEFT);
+        createFields();
         form.getChildren().addAll(HEADER, inputFields, createButtonBox());
     }
 
-    private HBox createInputField (String input, Node fieldType) {
+    @Override
+    public Node getObject () {
+        return form;
+    }
+
+    /**
+     * creates all the desired fields and places them in a single VBox
+     */
+    private void createFields () {
+        inputFields = new VBox(10);
+        inputFields.getChildren().addAll(createSingleField("Game Title", new TextField()),
+                                         createSingleField("Author", new TextField()),
+                                         createSingleField("Description", new TextArea()),
+                                         createSingleField("Instructions", new TextArea()));
+        inputFields.setAlignment(Pos.BASELINE_LEFT);
+    }
+
+    /**
+     * creates one single input field
+     * 
+     * @param input
+     * @param fieldType
+     * @return
+     */
+    private HBox createSingleField (String input, Node fieldType) {
         HBox box = new HBox(10);
         box.setPrefWidth(600);
         Label label = new Label(input);
@@ -55,15 +69,19 @@ public class DataForm {
         return box;
     }
 
+    /**
+     * creates button that will take the user from the opening view to the actual authoring
+     * environment
+     * 
+     * @return
+     */
     private HBox createButtonBox () {
         HBox box = new HBox();
         box.setPrefWidth(600);
         Button b = new Button(BUTTON_TEXT);
         b.setId("authorButton");
         b.setOnMouseClicked(e -> {
-            GameView author = new GameView();
-            myStage.setScene(author.getScene());
-            myStage.show();
+            myMediator.handleEvent(this, e);
         });
         box.setAlignment(Pos.BASELINE_RIGHT);
         box.getChildren().add(b);

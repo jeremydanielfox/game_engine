@@ -2,8 +2,6 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
-import shop.wallet.ConcreteWallet;
-import shop.wallet.Wallet;
 import engine.game.ConcreteGame;
 import engine.game.ConcreteLevel;
 import engine.game.ConcreteLevelBoard;
@@ -12,6 +10,8 @@ import engine.game.PlayerUnit;
 import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.ScoreGoal;
+import engine.shop.wallet.ConcreteWallet;
+import engine.shop.wallet.Wallet;
 import gae.gameView.Main;
 import gameworld.BasicWorld;
 import gameworld.GameWorld;

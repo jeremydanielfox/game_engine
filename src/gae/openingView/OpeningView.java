@@ -1,38 +1,75 @@
 package gae.openingView;
 
+import gae.gameView.GameView;
+
+import java.util.ArrayList;
+import java.util.EventObject;
+import java.util.List;
+
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class OpeningView {
+/**
+ * OpeningView is the overarching class for the first scene the author sees. Allows the author to
+ * provide basic information about the game and select game type.
+ * 
+ * @author Brandon Choi
+ *
+ */
 
-    // first view to appear when you are running the authoring environment. will allow user to set
-    // basic info of the game such as the title or type
+public class OpeningView implements UIMediator {
 
     private static final String OPENINGVIEW_CSS = "css/OpeningViewCSS.css";
-    
+    private Stage myStage;
     private BorderPane myPane;
     private Scene myScene;
-    private ImagePanel imagePanel;
-    private DataForm dataForm;
+    private List<UIObject> myUIObjects;
+    private UIObject dataForm, imagePanel;
 
-    public OpeningView (Stage myStage) {
-        dataForm = new DataForm(myStage); //edit!
-        
-        initialize();
-    }
-    
-    public Scene getScene() {
-        return myScene;
-    }
-
-    private void initialize () {
+    public OpeningView (Stage stage) {
+        myStage = stage;
         myPane = new BorderPane();
         myScene = new Scene(myPane);
         myScene.getStylesheets().add(OPENINGVIEW_CSS);
-        imagePanel = new ImagePanel();
-        //dataForm = new DataForm();
-        myPane.setRight(imagePanel.getPanel());
-        myPane.setLeft(dataForm.getForm());
+        myUIObjects = new ArrayList<>();
+        imagePanel = new ImagePanel(this);
+        dataForm = new DataForm(this);
+        insertBorders();
+    }
+
+    /**
+     * sets up the different borders of the BorderPane
+     */
+    private void insertBorders () {
+        myPane.setRight(imagePanel.getObject());
+        myPane.setLeft(dataForm.getObject());
+    }
+
+    @Override
+    public Scene getScene () {
+        return myScene;
+    }
+
+    @Override
+    public void addUIObject (UIObject object) {
+        myUIObjects.add(object);
+    }
+
+    @Override
+    public void handleEvent (UIObject usedObject, EventObject action) {
+
+        // changes the scene to display the GameView if button in DataForm has been pressed
+        if (usedObject.equals(dataForm) && action instanceof MouseEvent) {
+            UIMediator author = new GameView();
+            myScene = author.getScene();
+            myStage.setScene(myScene);
+        }
+
+        // if game type is selected, gray out rest of the options
+
+        // enable author to proceed if all fields are filled out & game type is selected
+
     }
 }

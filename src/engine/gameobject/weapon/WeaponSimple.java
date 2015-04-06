@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.behavior.Behavior;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
+import engine.gameobject.weapon.upgradable.FiringRate;
+import engine.gameobject.weapon.upgradable.Upgradable;
+import engine.gameobject.weapon.upgradable.behavior.Behavior;
+import engine.gameobject.weapon.upgradable.range.Range;
 
 
 /**
@@ -17,14 +21,16 @@ import engine.gameobject.weapon.firingstrategy.FiringStrategy;
  *
  */
 public class WeaponSimple implements Weapon {
-    private double myRange;
-    private double myFiringRate;
+    private Range myRange;
+    private FiringRate myFiringRate;
     private List<Behavior> myBehaviors;
     private FiringStrategy myFiringStrategy;
+    Map<Class<? extends Upgradable>, Upgradable> upgradables;
+    private UpgradeTree tree;
     
 
-    public WeaponSimple (double range,
-                         double firingRate,
+    public WeaponSimple (Range range,
+                         FiringRate firingRate,
                          FiringStrategy firingStrategy,
                          Behavior ... behaviors) {
         myRange = range;
@@ -35,12 +41,12 @@ public class WeaponSimple implements Weapon {
 
     @Override
     public double getRange () {
-        return myRange;
+        return myRange.getRange();
     }
 
     @Override
     public double getFiringRate () {
-        return myFiringRate;
+        return myFiringRate.getRate();
     }
     
     public FiringStrategy getFiringStrategy () {
@@ -59,9 +65,8 @@ public class WeaponSimple implements Weapon {
         // add behavior if it doesn't exist, otherwise upgrade existing one 
     }
 
-    @Override
-    public void addRange (double value) {
-        myRange += value;
+    @Override 
+    public double getValue () {
+        return tree.getValue();
     }
-
 }

@@ -1,7 +1,7 @@
 package engine.gameobject.weapon;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.behavior.Behavior;
+import engine.gameobject.weapon.upgradable.behavior.Behavior;
 
 
 /**
@@ -25,9 +25,13 @@ public interface Weapon {
     public void addBehavior(Behavior behavior);
   
     public double getRange ();
-    
-    public void addRange (double value); 
 
     public double getFiringRate ();
+    
+    /**
+     * The value at which this weapon can be sold to the shop
+     * @return
+     */
+    public double getValue (); 
     
 }

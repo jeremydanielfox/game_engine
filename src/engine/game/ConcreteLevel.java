@@ -24,10 +24,11 @@ public class ConcreteLevel implements Level {
 
     // level also needs a story board and game world
 
-    public ConcreteLevel (String image, List<Goal> winningGoals,List<Goal> losingGoals) {
+    public ConcreteLevel (String image, List<Goal> winningGoals,List<Goal> losingGoals, GameWorld gameWorld) {
         myImagePath = image;
         myWinningGoals=winningGoals;
         myLosingGoals=losingGoals;
+        myGameWorld=gameWorld;
     }
     
     public String getLevelBackground(){

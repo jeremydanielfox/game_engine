@@ -25,8 +25,6 @@ public interface Weapon {
     public void addBehavior(Behavior behavior);
   
     public double getRange ();
-    
-    public void addRange (double value); 
 
     public double getFiringRate ();
     

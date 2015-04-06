@@ -1,5 +1,7 @@
 package gae.openingView;
 
+import gae.backend.GameManager;
+import gae.gameView.GameView;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -81,7 +83,8 @@ public class DataForm implements UIObject {
         Button b = new Button(BUTTON_TEXT);
         b.setId("authorButton");
         b.setOnMouseClicked(e -> {
-
+            GameManager gameManager = new GameManager();
+            GameView author = new GameView(gameManager);
         });
         box.setAlignment(Pos.BASELINE_RIGHT);
         box.getChildren().add(b);

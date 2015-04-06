@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import engine.game.Game;
@@ -20,6 +21,8 @@ import engine.game.LevelBoard;
 
 public class ViewConcrete2 implements View, Observer {
 
+    public static final double GAME_WIDTH_TO_HEIGHT = 1.25;
+    
     private Game myGame;
     private Integer myRate=200;
     private Timeline myAnimation;
@@ -27,7 +30,7 @@ public class ViewConcrete2 implements View, Observer {
     
     
     //old way
-    private Group myGameWorldGroup;
+    private Pane myGameWorldPane;
     //private Group myTotalGroup;
     
     //new way 
@@ -50,20 +53,22 @@ public class ViewConcrete2 implements View, Observer {
     @Override
     public Node initializeView(){
         myPane = new BorderPane();
-        myGameWorldGroup=new Group();
-        myPane.setCenter(myGameWorldGroup);
+        myGameWorldPane=new Pane();
+        myGameWorldPane.setMaxWidth(myDisplayHeight*GAME_WIDTH_TO_HEIGHT);
+        myPane.setCenter(myGameWorldPane);
         initializeGameWorld();
         return myPane;
     }
     
     @Override
     public void initializeGameWorld () {
-        ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
-        image.setPreserveRatio(true);
-        image.setFitHeight(myDisplayHeight);
-        myGameWorldGroup.getChildren().add(image);
-        HeadsUpDisplay headsUp=new HeadsUpDisplay(myGame.getPlayer());
-        VBox vbox=headsUp.makeDisplay();
+        setCurrentBackground();
+        HUD headsUp=new HUD(myPane);
+        for(Displayable d: myGame.getPlayer().getDisplayables()){
+            headsUp.addPairedDisplay(d);
+        }
+        VBox vbox=headsUp.getDisplay();
+        //vbox.setMinWidth(myDisplayWidth-myDisplayHeight);
         //vbox.setLayoutY(vbox.getLayoutX()+500);
         myPane.setRight(vbox);
         buildTimeline();
@@ -73,8 +78,8 @@ public class ViewConcrete2 implements View, Observer {
         Button btn=new Button("Dec");
         btn.setOnAction(e->myGame.getPlayer().changeHealth(-100));
         Button btn2=new Button("Inc");
-        btn2.setTranslateX(btn2.getLayoutX()+200);
-        btn2.setOnAction(e->myGame.getPlayer().increaseScore(100));//.changeScore(100));
+        btn2.setTranslateX(btn2.getLayoutX());
+        btn2.setOnAction(e->myGame.getPlayer().changeScore(100));//.changeScore(100));
         //myTotalGroup.getChildren().addAll(btn,vbox,btn2);
         vbox.getChildren().addAll(btn, btn2);
         play();
@@ -125,32 +130,19 @@ public class ViewConcrete2 implements View, Observer {
                 //display new sprites
                 //popup window
                 //then after closing popup window, play();
-                ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
-                image.setPreserveRatio(true);
-                image.setFitHeight(myDisplayHeight);
-                myGameWorldGroup.getChildren().clear();
-                myGameWorldGroup.getChildren().add(image);
+                setCurrentBackground();
                 //display new sprites
                 play();
             }
         }
     }
 
-    
-    public void test() {
-        pause();
-        myLevelBoard.startNextLevel();
-        //display new background
-        //display new sprites
-        //popup window
-        //then after closing popup window, play();
+    private void setCurrentBackground(){
         ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
-        image.setPreserveRatio(true);
         image.setFitHeight(myDisplayHeight);
-        myGameWorldGroup.getChildren().clear();
-        myGameWorldGroup.getChildren().add(image);
-        //display new sprites
-        play();
+        image.setFitWidth(myDisplayHeight*GAME_WIDTH_TO_HEIGHT);
+        myGameWorldPane.getChildren().clear();
+        myGameWorldPane.getChildren().add(image);
     }
     
     @Override

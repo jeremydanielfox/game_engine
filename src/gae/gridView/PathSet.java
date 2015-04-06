@@ -5,7 +5,6 @@ package gae.gridView;
  */
 import java.util.ArrayList;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -62,7 +61,6 @@ public class PathSet extends Region {
 
     private void choosePoint (CubicCurve curve) {
         stack.setOnMouseClicked(e -> {
-            System.out.println("scene was clicked");
             if (increment == 0 && makePath) {
                 startX = e.getX();
                 startY = e.getY();

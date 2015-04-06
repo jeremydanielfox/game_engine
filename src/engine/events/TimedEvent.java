@@ -1,7 +1,14 @@
 package engine.events;
 
-
-
+/**
+ * An Event that is triggered by a specified frame count.
+ * 
+ * TimedEvents can also be triggered externally through the setCanStart method (intended for use
+ * with a button to activate the event early)
+ * 
+ * @author Tom and Sierra
+ *
+ */
 public abstract class TimedEvent implements Event {
     private int frameTrigger;
     private int frameCount;
@@ -29,8 +36,8 @@ public abstract class TimedEvent implements Event {
     public boolean canStart () {
         return (frameTrigger >= 0 && frameCount >= frameTrigger);
     }
-    
-    public void setCanStart() {
+
+    public void setCanStart () {
         frameTrigger = 0;
     }
 

@@ -9,19 +9,19 @@ import engine.pathfinding.Path;
  *
  */
 public class MoverPath implements Mover {
-	Path myPathFinder;
+	Path myPath;
 	private double myDistance, mySpeed;
 	
 	public MoverPath(Path pf, double speed){
 		myDistance = 0;
-		myPathFinder = pf;
+		myPath = pf;
 		mySpeed = speed;
 	}
 	
 	@Override
 	public PointSimple move(PointSimple current) throws EndOfPathException {
 		myDistance += mySpeed;
-		return myPathFinder.getNextLocation(current, myDistance);
+		return myPath.getNextLocation(current, myDistance);
 	}
 
 	@Override

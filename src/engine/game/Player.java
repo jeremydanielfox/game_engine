@@ -1,66 +1,72 @@
 package engine.game;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
+import View.Displayable;
+import shop.wallet.Wallet;
 
 
 /**
  * This class represents a current player of the game, storing player specific information
  * such as lives left/health, score, and currency that can be used in the store.
  * 
- * @author Sierra Smith, Cosi Goldstein
+ * @author Sierra Smith, Cosette Goldstein
  *
  */
 public class Player extends Observable {
 
-    private int myScore;
-    private int myHealth;
-    private int myCurrency;
     private String myName;
+    private PlayerUnit myHealth;
+    private PlayerUnit myScore;
+    private Wallet myWallet;
 
-    // note: need to fix this because many things aren't initialized in this constructor
-    public Player (String name) {
-        myName = name;
-    }
-
-    public Player (String name, int startHealth, int startCurrency, int score) {
+    // note: wallet needs to be initialzed with the right player unit before passed in here?
+    // alternative: could pass in a string or something to indicate which player unit to assign the
+    // wallet
+    public Player (String name, PlayerUnit health, PlayerUnit score, Wallet wallet) {
+        myHealth = health;
         myScore = score;
-        myHealth = startHealth;
-        myCurrency = startCurrency;
         myName = name;
+        myWallet = wallet;
     }
 
     public void setName (String name) {
         myName = name;
     }
 
-    public void increaseScore (int toAdd) {
-        myScore += toAdd;
+    public void changeScore (int toAdd) {
+        myScore.changeValue(toAdd);
         setChanged();
-        notifyObservers();
+        notifyObservers(myScore);
     }
 
     public void changeHealth (int change) {
-        myHealth += change;
+        myHealth.changeValue(change);
         setChanged();
-        notifyObservers();
+        notifyObservers(myHealth);
     }
 
-    public void changeCurrency (int cash) {
-        myCurrency += cash;
-        setChanged();
-        notifyObservers();
+    public double getScore () {
+        return myScore.getValue();
     }
 
-    public int getScore () {
-        return myScore;
+    public double getHealth () {
+        return myHealth.getValue();
     }
-
-    public int getHealth () {
-        return myHealth;
+    
+    public Wallet getWallet(){
+        return myWallet;
     }
-
-    public int getCurrency () {
-        return myCurrency;
+    
+    public String getName(){
+        return myName;
     }
-
+    
+    public List<Displayable> getDisplayables(){
+        List <Displayable> toReturn = new ArrayList<>();
+        toReturn.add(myHealth);
+        toReturn.add(myScore);
+        return toReturn;
+    }
 }

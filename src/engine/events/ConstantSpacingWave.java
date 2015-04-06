@@ -1,4 +1,4 @@
-package events;
+package engine.events;
 
 import gameworld.GameWorld;
 
@@ -15,8 +15,8 @@ public class ConstantSpacingWave extends Wave {
     }
 
     @Override
-    public boolean update (int frameCount) {
-        if (!canStart(frameCount)) {
+    public boolean update () {
+        if (!canStart()) {
             return true;
         }
         if (myFramesSinceLastRelease == myFramesBetweenEnemies) {

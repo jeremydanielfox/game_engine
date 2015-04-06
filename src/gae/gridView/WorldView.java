@@ -2,10 +2,13 @@ package gae.gridView;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -18,6 +21,9 @@ public class WorldView {
     private List<List<Path>> allPaths;
     private List<PathView> previousPaths;
     private Scene scene;
+
+    private ObservableList paths =
+            FXCollections.observableArrayList();
 
     public Scene getScene () {
         stack = new StackPane();
@@ -50,8 +56,8 @@ public class WorldView {
 
         Button bezier = makeBezierCurve();
         Button path = completePath();
-        Button previous = previousPath();
-        stack.getChildren().addAll(root, bezier, path, previous);
+        Button newPath = newPath();
+        stack.getChildren().addAll(root, bezier, path, newPath);
 
         background.fitWidthProperty().bind(container.widthProperty());
         background.fitHeightProperty().bind(container.heightProperty());
@@ -62,7 +68,7 @@ public class WorldView {
 
     private Button makeBezierCurve () {
         Button makeCurve = new Button("Make Path");
-        makeCurve.setTranslateX(500);
+        makeCurve.setTranslateX(400);
         makeCurve.setTranslateY(0);
         makeCurve.setOnMouseClicked(e -> pathView.makeBezierCurve());
         return makeCurve;
@@ -70,7 +76,7 @@ public class WorldView {
 
     private Button completePath () {
         Button complete = new Button("Path Complete");
-        complete.setTranslateX(500);
+        complete.setTranslateX(400);
         complete.setTranslateY(50);
         allPaths = new ArrayList<>();
         previousPaths = new ArrayList<>();
@@ -78,6 +84,7 @@ public class WorldView {
             List<Path> path = pathView.createPathObjects();
             previousPaths.add(pathView);
             allPaths.add(path);
+            paths.add(pathView);
             for (int i = 0; i < path.size(); i++) {
                 System.out.println("Path " + i + "'s coordinates");
                 path.get(i).printInfo();
@@ -87,19 +94,42 @@ public class WorldView {
         });
         return complete;
     }
-    private Button previousPath () {
-        Button previous = new Button("Previous Path");
-        previous.setTranslateX(500);
-        previous.setTranslateY(100);
-        previous.setOnMouseClicked(e -> setOldPath(previousPaths.get(0)));
-        return previous;
+
+    private Button newPath() {
+        Button newPath = new Button("New Path");
+        newPath.setTranslateX(400);
+        newPath.setTranslateY(100);
+        newPath.setOnMouseClicked(e -> {
+            pathView.resetScreen();
+            pathView = new PathView(stack, this.scene);
+        });
+        return newPath;
     }
+
     /*
      * This method is able to bring back PathView's that had already been made and replace it with
      * the current screen
      */
-    public void setOldPath(PathView view) {
+    public void setOldPath (PathView view) {
+        pathView.resetScreen();
         pathView = view;
         pathView.remakePath();
+    }
+
+    public StackPane tempListView () {
+
+        final ListView listView = new ListView(paths);
+        listView.setPrefSize(200, 250);
+        listView.setEditable(true);
+
+        listView.setItems(paths);
+        listView.setOnMouseClicked(e -> {
+            setOldPath((PathView) listView.getSelectionModel().getSelectedItem());
+        });
+        StackPane root = new StackPane();
+        StackPane.setAlignment(listView, Pos.TOP_LEFT);
+        root.getChildren().add(listView);
+        listView.setMaxWidth(300);
+        return root;
     }
 }

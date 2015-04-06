@@ -1,4 +1,4 @@
-package events;
+package engine.events;
 
 import gameworld.GameWorld;
 
@@ -8,15 +8,15 @@ public class RandomSpanWave extends Wave {
     private int myFrameDuration;
     private int myFramesSinceStart;
 
-    public RandomSpanWave (double spanSeconds, GameObjectQueue objects, GameWorld world) {
-        super(objects, world);
+    public RandomSpanWave (double startTime, double spanSeconds, GameObjectQueue objects, GameWorld world) {
+        super(startTime, objects, world);
         myFrameDuration = SecondsToFrames.getFramesForSeconds(spanSeconds);
         myFramesSinceStart = 0;
     }
 
     @Override
-    public boolean update (int frameCount) {
-        if(!canStart(frameCount)) {
+    public boolean update () {
+        if(!canStart()) {
             return true;
         }
         // decide if it's time to release an enemy

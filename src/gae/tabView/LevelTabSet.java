@@ -2,19 +2,26 @@ package gae.tabView;
 
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 public class LevelTabSet {
     private TabPane baseNode;
     
-    public LevelTabSet (StackPane world, StackPane prefs) {
-        initialize(world, prefs);
+    public LevelTabSet (StackPane world, StackPane list, StackPane prefs) {
+        initialize(world, list, prefs);
+        
+        // actual code is only world and prefs
     }
 
-    private void initialize (StackPane world, StackPane prefs) {   
+    private void initialize (StackPane world, StackPane list, StackPane prefs) {   
         baseNode = new TabPane();
+        // actual code is worldTab.setContent(world)
         Tab worldTab = new Tab("World");
-        worldTab.setContent(world);
+        BorderPane bp = new BorderPane();
+        bp.setCenter(world);
+        bp.setLeft(list);
+        worldTab.setContent(bp);
         worldTab.setClosable(false);
         
         Tab prefsTab = new Tab("Preferences");

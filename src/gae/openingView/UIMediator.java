@@ -1,6 +1,8 @@
 package gae.openingView;
 
-import javafx.event.ActionEvent;
+import java.util.EventObject;
+
+import javafx.scene.Scene;
 
 /**
  * Represents the Mediator in the Mediator OO design pattern. A concrete object that implements this
@@ -11,6 +13,12 @@ import javafx.event.ActionEvent;
  */
 
 public interface UIMediator {
+    
+    /**
+     * returns the scene of the mediator
+     */
+    Scene getScene();
+    
     /**
      * called to add a UIObject whose interactions the mediator will control
      */
@@ -23,5 +31,5 @@ public interface UIMediator {
      * @param usedObject
      * @param action
      */
-    void handleEvent (UIObject usedObject, ActionEvent action);
+    void handleEvent (UIObject usedObject, EventObject action);
 }

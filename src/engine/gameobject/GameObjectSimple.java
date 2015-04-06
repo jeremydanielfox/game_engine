@@ -13,8 +13,8 @@ import engine.pathfinding.EndOfPathException;
 
 
 /**
- * 
- * @author Jeremy
+ * Simple (and possibly only) implementation of the gameobject. 
+ * @author Jeremy, Kaighn
  *
  */
 public class GameObjectSimple implements GameObject {

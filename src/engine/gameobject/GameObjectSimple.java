@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import engine.fieldsetting.Settable;
 import engine.gameobject.Health;
-import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
@@ -19,14 +18,14 @@ import engine.pathfinding.EndOfPathException;
  *
  */
 public class GameObjectSimple implements GameObject {
-    private Node myNode;
-    private String myImagePath;
-    private String myLabel;
-    private PointSimple myPoint;
-    private Health myHealth;
-    private Mover myMover;
-    private Weapon myWeapon;
-    private Graphic myGraphic;
+    protected Node myNode;
+    protected String myImagePath;
+    protected String myLabel;
+    protected PointSimple myPoint;
+    protected Health myHealth;
+    protected Mover myMover;
+    protected Weapon myWeapon;
+    protected Graphic myGraphic;
 
     @Override
     public boolean isDead () {

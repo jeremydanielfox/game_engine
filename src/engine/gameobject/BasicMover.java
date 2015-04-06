@@ -1,11 +1,21 @@
 package engine.gameobject;
 
 import engine.pathfinding.EndOfPathException;
+import engine.pathfinding.Path;
 
 public class BasicMover implements Mover {
+    Path myPath;
     double inherentSpeed;
-    double slowPercent;
+    double speedModifier;
+    double myDistance;
     boolean frozen;
+    
+
+    public BasicMover(Path pf, double speed){
+            myDistance = 0;
+            myPath = pf;
+            inherentSpeed = speed;
+    }
     
     /**
      * This switch statement is not worth having polymorphism/using a state pattern.
@@ -13,12 +23,9 @@ public class BasicMover implements Mover {
      */
     @Override
     public PointSimple move (PointSimple current) throws EndOfPathException {
-        if (frozen == true)
-            return current;
-        else
-            //TODO:
-            //return inherentSpeed*(1-slowPercent)+ current;
-        return null;
+        if (frozen != true)
+            myDistance += inherentSpeed * speedModifier;
+        return myPath.getNextLocation(current, myDistance);
     }
 
     @Override
@@ -32,14 +39,10 @@ public class BasicMover implements Mover {
     
     /**
      * 
-     * @param percentage i.e. .90 for 90%
+     * @param percentage i.e. .90 for 90% speedup
      */
-    public void slow (double percentage){
-        slowPercent = percentage;
-    }
-    
-    public void unSlow (){
-        slowPercent = 0;
+    public void speedBuff (double percentage){
+        speedModifier = speedModifier + percentage;
     }
     
 

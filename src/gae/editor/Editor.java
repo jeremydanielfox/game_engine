@@ -1,25 +1,41 @@
 package gae.editor;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.List;
-import engine.gameobject.GameObjectSimple;
 import javafx.scene.Node;
 
+/**
+ * 
+ * @author Eric
+ *
+ */
 public abstract class Editor {
-    
+
     abstract Node getEditor();
-    
+
     abstract void setDefaults();
-    
-    public void getGameObjectMethods() {
-        List<Method> methods = EditingParser.getMethodsWithSetterAnnotation(GameObjectSimple.class);
+
+    public TreeNode getMethodsTree(Class<?> klass, Method m) {
+        TreeNode root = new TreeNode(m, "null");
+        List<Method> methods = EditingParser.getMethodsWithSetterAnnotation(klass);
         for (Method method : methods) {
-            String propertyName = getPropertyNameFromMethodName(method.getName());
-            System.out.println(propertyName);
+            Type parameterClass = method.getGenericParameterTypes()[0];
+            if (parameterClass.equals(double.class)) {
+                System.out.println("double  " + getPropertyNameFromMethodName(method.getName()));
+                root.addToNodes(new TreeNode(method, "Slider"));
+            } else if (parameterClass.equals(String.class)) {
+                System.out.println("String  " + getPropertyNameFromMethodName(method.getName()));
+                root.addToNodes(new TreeNode(method, "Textbox"));
+            } else {
+                System.out.println(parameterClass.getTypeName() + ":");
+                root.addToNodes(getMethodsTree((Class<?>) parameterClass, method));
+            }
         }
+        return root;
     }
-    
-    private String getPropertyNameFromMethodName(String methodName) {
+
+    public static String getPropertyNameFromMethodName(String methodName) {
         String propertyName = methodName.substring(3, methodName.length());
         char[] chars = propertyName.toCharArray();
         int editCount = 0;
@@ -31,7 +47,7 @@ public abstract class Editor {
                 editCount++;
             }
         }
-        
+
         return propertyName;
     }
 }

@@ -43,6 +43,10 @@ public class HoverPicture implements UIObject {
         return view;
     }
 
+    /**
+     * returns whether or not the instance of HoverPicture has been selected
+     * @return
+     */
     public boolean selectStatus () {
         return selected;
     }

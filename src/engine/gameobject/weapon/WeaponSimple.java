@@ -26,6 +26,7 @@ public class WeaponSimple implements Weapon {
     private List<Behavior> myBehaviors;
     private FiringStrategy myFiringStrategy;
     Map<Class<? extends Upgradable>, Upgradable> upgradables;
+    private UpgradeTree tree;
     
 
     public WeaponSimple (Range range,
@@ -64,4 +65,8 @@ public class WeaponSimple implements Weapon {
         // add behavior if it doesn't exist, otherwise upgrade existing one 
     }
 
+    @Override 
+    public double getValue () {
+        return tree.getValue();
+    }
 }

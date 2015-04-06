@@ -28,4 +28,10 @@ public interface Weapon {
 
     public double getFiringRate ();
     
+    /**
+     * The value at which this weapon can be sold to the shop
+     * @return
+     */
+    public double getValue (); 
+    
 }

@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.function.Consumer;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.behavior.Behavior;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
+import engine.gameobject.weapon.upgradable.behavior.Behavior;
 
 
 /**

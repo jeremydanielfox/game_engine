@@ -1,7 +1,7 @@
 package engine.gameobject.weapon;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.behavior.Behavior;
+import engine.gameobject.weapon.upgradable.behavior.Behavior;
 
 
 /**

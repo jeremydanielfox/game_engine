@@ -37,6 +37,10 @@ public class GameObjectSimple implements GameObject {
         myHealth.changeHealth(amount);
     }
 
+    public void onDeath(){
+        
+    }
+    
     // temporary
     public GameObject clone () {
         try {

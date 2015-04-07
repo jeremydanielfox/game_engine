@@ -37,7 +37,7 @@ public class GameObjectSimpleTest implements GameObject {
         myPoint = new PointSimple(100,100);
         myHealth = new HealthSimple();
         myMover = new MoverPath(null, 0);
-        myWeapon = new WeaponSimple(0, 0, null, null);
+        //myWeapon = new WeaponSimple(0, 0, null, null);
         myGraphic = new Graphic(0, 0, myImagePath);
 
     }

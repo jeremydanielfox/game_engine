@@ -7,6 +7,7 @@ import engine.game.ConcreteLevel;
 import engine.game.ConcreteLevelBoard;
 import engine.game.Player;
 import engine.game.PlayerUnit;
+import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.ScoreGoal;
@@ -70,7 +71,9 @@ public class TestEngine extends Application {
         List<Goal> list3=new ArrayList<Goal>();
         ScoreGoal score2=new ScoreGoal(myPlayer,300);
         list3.add(score2);
-        board.addLevel(new ConcreteLevel("images/Park_Path.png",list2,list,new BasicWorld()));
+        GameWorld world = new BasicWorld();
+        //world.addObject(new GameObjectSimpleTest());
+        board.addLevel(new ConcreteLevel("images/Park_Path.png",list2,list,world));
         board.addLevel(new ConcreteLevel("images/example_path.jpeg",list3,list,new BasicWorld()));
         //pane.setCenter(view.initializeView());
         root.getChildren().add(view.initializeView());

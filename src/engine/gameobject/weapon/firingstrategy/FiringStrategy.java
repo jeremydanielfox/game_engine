@@ -1,5 +1,6 @@
 package engine.gameobject.weapon.firingstrategy;
 
+import engine.gameobject.GameObject;
 import engine.gameobject.weapon.Weapon;
 
 /**
@@ -10,6 +11,6 @@ import engine.gameobject.weapon.Weapon;
  */
 public interface FiringStrategy {
     
-    public void fire(Weapon weapon);
+    public void execute(GameObject o);
 
 }

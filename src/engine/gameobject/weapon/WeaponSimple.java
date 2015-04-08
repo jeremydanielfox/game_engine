@@ -20,7 +20,8 @@ import engine.gameobject.weapon.upgradable.range.Range;
  * @author Nathan Prabhu
  *
  */
-public class WeaponSimple implements Weapon {
+public class WeaponSimple extends Weapon {
+    private int timeSinceFire;
     private Range myRange;
     private FiringRate myFiringRate;
     private List<Behavior> myBehaviors;
@@ -33,24 +34,11 @@ public class WeaponSimple implements Weapon {
                          FiringRate firingRate,
                          FiringStrategy firingStrategy,
                          Behavior ... behaviors) {
+        timeSinceFire = 0;
         myRange = range;
         myFiringRate = firingRate;
         myFiringStrategy = firingStrategy;
         myBehaviors = new ArrayList<>(Arrays.asList(behaviors));
-    }
-
-    @Override
-    public double getRange () {
-        return myRange.getRange();
-    }
-
-    @Override
-    public double getFiringRate () {
-        return myFiringRate.getRate();
-    }
-    
-    public FiringStrategy getFiringStrategy () {
-        return myFiringStrategy;
     }
 
     @Override

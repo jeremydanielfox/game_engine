@@ -25,7 +25,7 @@ public class GoalEvent implements Event {
         return false;
     }
     
-    private boolean canStart() {
+    public boolean canStart() {
         for (Goal goal : eventTriggers) {
             if (!goal.isSatisfied()) {
                 return false;

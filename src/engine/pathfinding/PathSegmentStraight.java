@@ -3,9 +3,8 @@ package engine.pathfinding;
 import javafx.geometry.Point2D;
 import engine.gameobject.PointSimple;
 /**
- * 
- * @author Jeremy
- *
+ * A path segment for a simple line segment.
+ * @author Kaighn
  */
 public class PathSegmentStraight implements PathSegment {
 	private PointSimple start, end;

@@ -1,7 +1,7 @@
 package engine.gameobject.units;
 
 /**
- * Generally, how a buff should works is initialApply -> advanceTime (until the end of duration) -> unbuff. For example,
+ * Generally, how a buff should works is apply -> advanceTime (until the end of duration) -> unapply. For example,
  * a burning unbuff will (not do anything) -> (take away health every (advanceTime) time) -> (not do anything)
  * @author Danny
  *
@@ -21,10 +21,10 @@ public abstract class Buff {
 
     public void advanceTime (int timePassed, BuffableUnit myUnit) {
         timeSinceStart = timeSinceStart + timePassed;
-        changeOverTime();
+        changeOverTime(myUnit);
     }
 
-    protected void changeOverTime(){
+    protected void changeOverTime(BuffableUnit myUnit){
         
     }
     

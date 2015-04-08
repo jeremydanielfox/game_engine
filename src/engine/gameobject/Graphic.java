@@ -1,6 +1,7 @@
 package engine.gameobject;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import engine.fieldsetting.Settable;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
@@ -16,13 +17,18 @@ public class Graphic {
     // note to self: need to change this image path default when using data files
     private static final String DEFAULT_IMAGE_PATH_PREFIX = "images/";
 
-    private int myHeight;
-    private int myWidth;
+    private double myHeight;
+    private double myWidth;
     private String myImageName;
     @XStreamOmitField
     private transient ImageView myImageView;
 
-    public Graphic (int height, int width, String name) {
+    public Graphic () {
+        myImageName="";
+        myImageView=new ImageView();
+    }
+    
+    public Graphic (double height, double width, String name) {
         myHeight = height;
         myWidth = width;
         myImageName = name;
@@ -44,5 +50,25 @@ public class Graphic {
         myImageView.setPreserveRatio(true);
         myImageView.setFitHeight(myHeight * scaleFactor);
         return myImageView;
+    }
+
+    public void setPoint (PointSimple point) {
+        myImageView.setX(point.getX());
+        myImageView.setY(point.getY());
+    }
+    
+    @Settable
+    public void setWidth (double width) {
+        myWidth = width;
+    }
+    
+    @Settable
+    public void setHeight (double height) {
+        myHeight = height;
+    }
+
+    @Settable
+    public void setImageName (String imageName) {
+        myImageName = imageName;
     }
 }

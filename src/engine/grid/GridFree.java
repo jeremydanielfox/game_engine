@@ -11,6 +11,8 @@ public class GridFree extends GridAbstract {
 	@SuppressWarnings("unchecked")
 	public GridFree(int numRows, int numCols){
 		myGrid = (List<GameObject>[][]) new LinkedList<?>[numRows][numCols];
+		//THIS NEEDS TO BE INITIALIZED TO STOP GIVING NULL POINTER EXCEPTIONS 
+		//myCoordTrans=new CoordinateTransformer();
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import java.util.List;
 import engine.gameobject.PointSimple;
 
 /**
- * A path finder for following a 
+ * A path to represent a fixed path. 
  * @author Kaighn
  *
  */

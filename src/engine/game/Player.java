@@ -3,8 +3,8 @@ package engine.game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import engine.shop.wallet.Wallet;
 import View.Displayable;
-import shop.wallet.Wallet;
 
 
 /**

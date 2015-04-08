@@ -2,6 +2,11 @@ package engine.gameobject;
 
 import engine.pathfinding.EndOfPathException;
 
+/**
+ * Mover that moves to a point specified in the constructor.
+ * @author Kaighn
+ *
+ */
 public class MoverPoint implements Mover {
 	private double mySpeed;
 	private PointSimple myPoint;

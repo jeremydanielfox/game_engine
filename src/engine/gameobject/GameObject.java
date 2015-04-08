@@ -6,7 +6,7 @@ import engine.gameobject.weapon.Weapon;
 
 /**
  * 
- * @author Jeremy
+ * @author Jeremy, Kaighn
  *
  */
 public interface GameObject extends Movable, Health {
@@ -28,10 +28,19 @@ public interface GameObject extends Movable, Health {
      */
     public String getLabel ();
 
+    /**
+     * Creates an identical game object (with different reference).
+     */
     public GameObject clone ();
 
+    /**
+     * Returns the Cartesian coordinate of the game object.
+     */
     public PointSimple getPoint ();
 
+    /**
+     * Returns the graphical representation of the object in the view.
+     */
     public Graphic getGraphic ();
 
 }

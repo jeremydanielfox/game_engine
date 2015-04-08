@@ -1,4 +1,4 @@
-package shop.wallet;
+package engine.shop.wallet;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package shop;
+package engine.shop;
 
 import engine.gameobject.GameObject;
 import java.util.ArrayList;
@@ -53,8 +53,8 @@ public class Shop {
          */
     }
 
-    public Object getPrototypeClone (ItemGraphic itemGraphic) {
-        return purchasableMap.get(itemGraphic).clone();
+    public Purchasable getPurchasable (ItemGraphic itemGraphic) {
+        return purchasableMap.get(itemGraphic);
     }
 
     public ItemGraphic getItemGraphic (Purchasable purchasable) {

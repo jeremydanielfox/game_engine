@@ -3,6 +3,11 @@ package engine.grid;
 import java.util.List;
 import engine.gameobject.GameObject;
 
+/**
+ * 
+ * @author Kaighn
+ *
+ */
 public interface Grid {
         public abstract void removeObject(GameObject o);
 

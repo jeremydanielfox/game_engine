@@ -2,6 +2,13 @@ package engine.pathfinding;
 
 import engine.gameobject.PointSimple;
 
+/**
+ * A path to represent a free path. Game objects will receive
+ * their next destination not through some lookup of preset paths (ie fixed path)
+ * but will use pathfinding to navigate obstacles.
+ * @author Kaighn
+ *
+ */
 public class PathFree implements Path {
 
 	@Override

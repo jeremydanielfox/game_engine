@@ -1,6 +1,6 @@
 package engine.gameobject.weapon.firingstrategy;
 
-import engine.gameobject.weapon.Weapon;
+import engine.gameobject.weapon.upgradetree.Weapon;
 
 /**
  * Encapsulates how a weapon is fired. Examples would be a single projectile or an

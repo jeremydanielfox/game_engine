@@ -1,7 +1,7 @@
 package engine.gameobject;
 
 import java.util.List;
-import engine.gameobject.weapon.Weapon;
+import engine.gameobject.weapon.upgradetree.Weapon;
 
 
 /**

@@ -1,13 +1,10 @@
-package engine.gameobject.weapon;
+package engine.gameobject.weapon.upgradetree;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimple;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.upgradable.FiringRate;
 import engine.gameobject.weapon.upgradable.Upgradable;

@@ -1,6 +1,6 @@
 package engine.gameobject.weapon.firingstrategy;
 
-import engine.gameobject.weapon.Weapon;
+import engine.gameobject.weapon.upgradetree.Weapon;
 
 public class MultipleProjectile implements FiringStrategy {
 

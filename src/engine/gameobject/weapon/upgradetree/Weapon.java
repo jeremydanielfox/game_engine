@@ -1,9 +1,7 @@
-package engine.gameobject.weapon;
+package engine.gameobject.weapon.upgradetree;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.weapon.upgradable.FiringRate;
 import engine.gameobject.weapon.upgradable.behavior.Behavior;
-import engine.gameobject.weapon.upgradable.range.Range;
 
 
 /**

@@ -1,5 +1,6 @@
 package engine.game;
 
+import java.util.ArrayList;
 import java.util.List;
 import engine.fieldsetting.Settable;
 import engine.goals.Goal;
@@ -26,7 +27,13 @@ public class ConcreteLevel implements Level {
     private GameWorld myGameWorld;
     private StoryBoard myStoryBoard;
 
-    // level also needs a story board and game world
+    public ConcreteLevel() {
+        myImagePath = "";
+        myWinningGoals = new ArrayList<Goal>();
+        myLosingGoals = new ArrayList<Goal>();
+        //TODO:intialize GameWorld
+        myStoryBoard = new StoryBoard();
+    }
 
     public ConcreteLevel (String image,
                           List<Goal> winningGoals,

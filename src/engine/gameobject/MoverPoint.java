@@ -44,4 +44,8 @@ public class MoverPoint implements Mover {
     public void setPoint (PointSimple point) {
         myPoint = point;
     }
+
+    public Mover clone () {
+        return new MoverPoint(myPoint, mySpeed);
+    }
 }

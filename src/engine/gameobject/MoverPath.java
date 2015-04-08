@@ -48,4 +48,8 @@ public class MoverPath implements Mover {
 	    myDistance = distance;
 	}
 	
+	public Mover clone(){
+	    return new MoverPath(myPath, mySpeed);
+	}
+	
 }

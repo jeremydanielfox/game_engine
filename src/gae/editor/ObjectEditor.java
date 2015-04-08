@@ -1,34 +1,55 @@
 package gae.editor;
 
+import java.util.Arrays;
+
+import gae.openingView.UIObject;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class ObjectEditor extends Application {
+/**
+ * This represents the main editor that would open up in a new tab when creating a new game object.
+ * It will display the image, basic editable properties such as name, and more advanced features
+ * such as weapons (for towers), size, etc.
+ * 
+ * Implements UIObject to be a part of the Mediator pattern for the authoring environment.
+ * 
+ * @author Brandon Choi
+ *
+ */
+
+public class ObjectEditor extends Application implements UIObject{
     
     private BorderPane objectEditor;
-    private VBox rightContainer;
-    private VBox leftContainer;
+    private VBox rightContainer, leftContainer;
     private Pane imageBox;
-    
+    private SimpleEditor simpleEditor;
+
     public ObjectEditor () {
         objectEditor = new BorderPane();
         rightContainer = new VBox();
         leftContainer = new VBox();
-        imageBox = new Pane();     
-        objectEditor.setRight(rightContainer);
-        objectEditor.setLeft(leftContainer);
-        leftContainer.getChildren().add(imageBox);
+        imageBox = new Pane();
+        simpleEditor = new SimpleEditor();
+        setUpContainers();
     }
     
-    public Pane getEditor () {
+    @Override
+    public Node getObject () {
         return objectEditor;
     }
     
-    public static void main (String [] args) {
+    private void setUpContainers() {
+        objectEditor.setRight(rightContainer);
+        leftContainer.getChildren().addAll(imageBox, simpleEditor.getObject());
+        objectEditor.setLeft(leftContainer);
+    }
+
+    public static void main (String[] args) {
         launch(args);
     }
 

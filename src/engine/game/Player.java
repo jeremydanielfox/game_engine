@@ -3,8 +3,10 @@ package engine.game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-import engine.shop.wallet.Wallet;
 import View.Displayable;
+import engine.fieldsetting.Settable;
+import engine.shop.wallet.ConcreteWallet;
+import engine.shop.wallet.Wallet;
 
 
 /**
@@ -14,6 +16,7 @@ import View.Displayable;
  * @author Sierra Smith, Cosette Goldstein
  *
  */
+@Settable
 public class Player extends Observable {
 
     private String myName;
@@ -24,13 +27,20 @@ public class Player extends Observable {
     // note: wallet needs to be initialzed with the right player unit before passed in here?
     // alternative: could pass in a string or something to indicate which player unit to assign the
     // wallet
+    
+    public Player() {
+        myName = "";
+        myHealth = new PlayerUnit();
+        myScore = new PlayerUnit();
+        myWallet = new ConcreteWallet ();
+    }
     public Player (String name, PlayerUnit health, PlayerUnit score, Wallet wallet) {
         myHealth = health;
         myScore = score;
         myName = name;
         myWallet = wallet;
     }
-
+@Settable
     public void setName (String name) {
         myName = name;
     }
@@ -69,4 +79,20 @@ public class Player extends Observable {
         toReturn.add(myScore);
         return toReturn;
     }
+    
+    @Settable
+    public void setHealth(PlayerUnit health) {
+        myHealth = health;
+    }
+    
+    @Settable
+    public void setScore(PlayerUnit score) {
+        myScore = score;
+    }
+    
+    @Settable
+    public void setWallet(Wallet wallet) {
+        myWallet = wallet;
+    }
+    
 }

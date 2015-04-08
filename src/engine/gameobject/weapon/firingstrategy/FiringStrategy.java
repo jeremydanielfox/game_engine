@@ -3,7 +3,6 @@ package engine.gameobject.weapon.firingstrategy;
 import java.util.ArrayList;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import engine.gameobject.weapon.Weapon;
 import gameworld.GameWorld;
 
 /**

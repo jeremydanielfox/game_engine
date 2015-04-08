@@ -1,15 +1,23 @@
 package engine.gameobject;
 
 import javafx.geometry.Point2D;
+import engine.fieldsetting.Settable;
+
 
 /**
  * A simple class for representing a point in Cartesian point. Contains some fun utility
  * methods too.
+ * 
  * @author Kaighn.
  *
  */
+@Settable
 public class PointSimple {
     private Point2D myPoint;
+
+    public PointSimple () {
+        myPoint = new Point2D(0, 0);
+    }
 
     public PointSimple (double x, double y) {
         myPoint = new Point2D(x, y);
@@ -71,6 +79,11 @@ public class PointSimple {
     public static double distance (PointSimple first, PointSimple second) {
         return Math.sqrt(Math.pow(first.getX() - second.getX(), 2) +
                          Math.pow(first.getY() - second.getY(), 2));
+    }
+
+    @Settable
+    public void setPoint (Point2D point) {
+        myPoint = point;
     }
 
 }

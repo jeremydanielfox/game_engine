@@ -14,9 +14,11 @@ public class Path {
     }
 
     public void printInfo () {
-        System.out.println("Start coordinates: (" + start.x + " , " + start.y + ")");
-        System.out.println("End coordinates: (" + end.x + " , " + end.y + ")");
-        System.out.println("Control 1 coordinates: (" + control1.x + " , " + control1.y + ")");
-        System.out.println("Control 2 coordinates: (" + control2.x + " , " + control2.y + ")");
+        System.out.println("Start coordinates: (" + start.getX() + " , " + start.getY() + ")");
+        System.out.println("End coordinates: (" + end.getX() + " , " + end.getY() + ")");
+        System.out.println("Control 1 coordinates: (" + control1.getX() + " , " + control1.getY() +
+                           ")");
+        System.out.println("Control 2 coordinates: (" + control2.getX() + " , " + control2.getY() +
+                           ")");
     }
 }

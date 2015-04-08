@@ -1,25 +1,21 @@
 package engine.gameobject;
 
-import java.util.List;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import engine.fieldsetting.Settable;
-import engine.gameobject.Health;
-import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
+import engine.gameobject.weapon.WeaponSimple;
 import engine.pathfinding.EndOfPathException;
 import engine.shop.Purchasable;
 
 
 /**
- * Simple (and possibly only) implementation of the gameobject. 
+ * Simple (and possibly only) implementation of the gameobject.
+ * 
  * @author Jeremy, Kaighn
  *
  */
+@Settable
 public class GameObjectSimple implements GameObject, Purchasable {
-    protected Node myNode;
     protected String myImagePath;
     protected String myLabel;
     protected PointSimple myPoint;
@@ -27,6 +23,16 @@ public class GameObjectSimple implements GameObject, Purchasable {
     protected Mover myMover;
     protected Weapon myWeapon;
     protected Graphic myGraphic;
+
+    public GameObjectSimple () {
+        myImagePath = "";
+        myLabel = "";
+        myPoint = new PointSimple();
+        myHealth = new HealthSimple();
+        myMover = new MoverPath();
+        myWeapon = new WeaponSimple();
+        myGraphic = new Graphic();
+    }
 
     public void update(){
         if(isDead()){
@@ -39,7 +45,7 @@ public class GameObjectSimple implements GameObject, Purchasable {
         catch (EndOfPathException e){
             //TODO: Catch and perform end of path duties
         }
-        myWeapon.fire(world, myPoint);
+        //myWeapon.fire(world, myPoint);
     }
     
     @Override
@@ -52,10 +58,10 @@ public class GameObjectSimple implements GameObject, Purchasable {
         myHealth.changeHealth(amount);
     }
 
-    public void onDeath(){
-        
+    public void onDeath () {
+
     }
-    
+
     // temporary
     public GameObject clone () {
         try {
@@ -77,12 +83,12 @@ public class GameObjectSimple implements GameObject, Purchasable {
         return new PointSimple(myPoint);
     }
 
-    public void initializeNode () {
-        Image image = new Image(myImagePath);
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
-        myNode = imageView;
-    }
+//    public void initializeNode () {
+//        Image image = new Image(myImagePath);
+//        ImageView imageView = new ImageView();
+//        imageView.setImage(image);
+//        myNode = imageView;
+//    }
 
     @Override
     public void move () throws EndOfPathException {

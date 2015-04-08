@@ -6,6 +6,10 @@ public class ConcreteWallet extends Wallet {
 
     PlayerUnit myUnit;
     
+    public ConcreteWallet() {
+        myUnit = new PlayerUnit();
+    }
+    
     public ConcreteWallet(PlayerUnit unit){
         myUnit = unit;
     }

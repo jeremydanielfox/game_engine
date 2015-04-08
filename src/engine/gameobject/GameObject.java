@@ -9,6 +9,7 @@ import engine.gameobject.weapon.Weapon;
  * @author Jeremy, Kaighn
  *
  */
+
 public interface GameObject extends Movable, Health, Graphical {
     // public void updateGraphics ();//cannot implement yet
     /**

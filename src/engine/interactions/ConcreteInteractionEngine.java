@@ -1,9 +1,10 @@
 package engine.interactions;
 
-import engine.gameobject.GameObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import engine.fieldsetting.Settable;
+import engine.gameobject.GameObject;
 
 
 /**
@@ -15,6 +16,7 @@ import java.util.function.BiConsumer;
  * @author Jeremy
  *
  */
+@Settable
 public class ConcreteInteractionEngine implements InteractionEngine {
     private Map<String, Map<String, BiConsumer<GameObject, GameObject>>> myTable = new HashMap<>();
 
@@ -61,14 +63,24 @@ public class ConcreteInteractionEngine implements InteractionEngine {
     }
 
     /**
- * 
- */
+     * Checks to see if a given string in the outer HashMap. If it is not, puts the String in the
+     * HashMap,
+     * with another HashMap as its value
+     */
     private void checkNullMap (String str) {
         if (myTable.get(str) == null)
             myTable.put(str,
                         new HashMap<String, BiConsumer<GameObject, GameObject>>());
     }
 
+    /**
+     * Gets the HashMap associated with the String "first."
+     * Puts the given BiConsumer into that HashMap with the String "second" as the key.
+     * 
+     * @param first
+     * @param second
+     * @param consumer
+     */
     private void putInMap (String first, String second, BiConsumer consumer) {
         Map temp = myTable.get(first);
         temp.put(second, consumer);

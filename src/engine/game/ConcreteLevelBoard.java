@@ -1,5 +1,6 @@
 package engine.game;
 
+import engine.fieldsetting.Settable;
 import gameworld.GameWorld;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Observable;
  * @authors Sierra Smith, Cosette Goldstein
  *
  */
+@Settable
 public class ConcreteLevelBoard extends Observable implements LevelBoard {
 
     private List<Level> myLevels;
@@ -32,7 +34,7 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
      * If it has ended, notify the View.
      */
     public void update () {
-        if (myLevels.get(curLevelIndex).isWon()||myLevels.get(curLevelIndex).isLost()) {
+        if (myLevels.get(curLevelIndex).isWon() || myLevels.get(curLevelIndex).isLost()) {
             System.out.println("level over");
             setChanged();
             notifyObservers();
@@ -48,8 +50,9 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
      * @return
      */
     public boolean gameOver () {
-        boolean answer = ((curLevelIndex == myLevels.size() - 1) && (myLevels.get(curLevelIndex).isWon())) ||
-               myLevels.get(curLevelIndex).isLost();
+        boolean answer =
+                ((curLevelIndex == myLevels.size() - 1) && (myLevels.get(curLevelIndex).isWon())) ||
+                        myLevels.get(curLevelIndex).isLost();
         System.out.println(answer);
         return answer;
     }
@@ -70,6 +73,11 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
     public GameWorld getGameWorld () {
         // TODO Auto-generated method stub
         return myLevels.get(curLevelIndex).getGameWorld();
+    }
+
+    @Settable
+    public void setLevels (List<Level> levels) {
+        myLevels = levels;
     }
 
 }

@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
+
 public class ViewUtilities {
 
     private static Point2D previous;
@@ -27,7 +28,7 @@ public class ViewUtilities {
         wrapGroup.relocate(initial.getX(), initial.getY());
         scene.setOnMouseMoved(mouseEvent -> {
             Point2D current = getMouseLocation(mouseEvent, node);
-            
+
             wrapGroup.relocate(current.getX(), current.getY());
 
             previous = current;
@@ -39,53 +40,55 @@ public class ViewUtilities {
                 scene.setOnMouseMoved(mouseEvent -> {
                 });
                 wrapGroup.setVisible(false);
-                //((Group) node.getParent()).getChildren().remove(node);
+                // ((Group) node.getParent()).getChildren().remove(node);
             }
         });
 
         return wrapGroup;
     }
-    
 
     /**
      * Determines the normalized ratio (0 to 1) of width and height within a parent
      * container from local pixel coordinates
+     * 
      * @param mouseEvent Triggering MouseEvent
      * @param parent Container
      * @return
      */
-    public static Point2D normalizePixels(MouseEvent mouseEvent, Parent parent){
-       return normalizePixels(mouseEvent.getX(), mouseEvent.getY(), parent);
+    public static Point2D normalizePixels (MouseEvent mouseEvent, Parent parent) {
+        return normalizePixels(mouseEvent.getX(), mouseEvent.getY(), parent);
     }
-     
+
     /**
      * Determines the normalized ratio (0 to 1) of width and height within a parent
      * container from local pixel coordinates
+     * 
      * @param x X coordinate
      * @param y Y coordinate
      * @param parent Container
      * @return
      */
-    public static Point2D normalizePixels(double x, double y, Parent parent){
-        return new Point2D(x/parent.getBoundsInLocal().getWidth(),
-                          y/parent.getBoundsInLocal().getHeight());
+    public static Point2D normalizePixels (double x, double y, Parent parent) {
+        return new Point2D(x / parent.getBoundsInLocal().getWidth(),
+                           y / parent.getBoundsInLocal().getHeight());
     }
-    
+
     /**
      * Returns the global (scene-wide) mouseLocation triggered by a MouseEvent
      * on a node
+     * 
      * @param mouseEvent MouseEvent
      * @param node Node
      * @return
      */
     public static Point2D getMouseLocation (MouseEvent mouseEvent, Node node) {
-        return new Point2D(mouseEvent.getSceneX()+ getCenterOffSetX(node),
-                           mouseEvent.getSceneY()+ getCenterOffSetY(node));
+        return new Point2D(mouseEvent.getSceneX() + getCenterOffSetX(node),
+                           mouseEvent.getSceneY() + getCenterOffSetY(node));
     }
 
-    
     /**
      * Used to find the center of a node. Gets the X offset.
+     * 
      * @param node Node
      * @return
      */
@@ -95,6 +98,7 @@ public class ViewUtilities {
 
     /**
      * Used to find the center of a node. Gets the X offset.
+     * 
      * @param node Node
      * @return
      */

@@ -62,6 +62,11 @@ public class GameView implements UIMediator {
     public void handleEvent (UIObject usedObject, EventObject action) {
         // TODO Auto-generated method stub
 
+        myScene.setCursor(new ImageCursor(new Image("/images/swordCursor.jpg")));
+        myScene.getStylesheets().add(GAMEVIEW_CSS);
+     //   myLibrary = new LibraryView();
+        utilities = new UtilitiesBar();
+        myUI.setTop(utilities.getUtilitiesBar());
     }
 
     /**

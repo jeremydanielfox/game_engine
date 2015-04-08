@@ -31,23 +31,23 @@ public class GameObjectSimpleTest implements GameObject {
     private Graphic myGraphic;
 
     public GameObjectSimpleTest () {
-        createNode();
+        //createNode();
         myImagePath = "robertDuvall.jpg";
         myLabel = "test object";
-        myPoint = new PointSimple(100,100);
+        myPoint = new PointSimple(300,300);
         myHealth = new HealthSimple();
         myMover = new MoverPath(null, 0);
-        myWeapon = new WeaponSimple(0, 0, null, null);
-        myGraphic = new Graphic(0, 0, myImagePath);
-
+        //myWeapon = new WeaponSimple(0, 0, null, null);
+        myGraphic = new Graphic(100, 100, myImagePath);
+        myGraphic.setPoint(myPoint);
     }
 
-    private void createNode () {
-        Circle circle = new Circle();
-        circle.setFill(Color.ALICEBLUE);
-        myNode = circle;
-
-    }
+    //This method is outdated. Now encapsulated in graphics class.
+//    private void createNode () {
+//        Circle circle = new Circle();
+//        circle.setFill(Color.ALICEBLUE);
+//        myNode = circle;
+//    }
 
     @Override
     public boolean isDead () {
@@ -120,6 +120,7 @@ public class GameObjectSimpleTest implements GameObject {
     @Settable
     void setPoint (PointSimple point) {
         myPoint = point;
+        myGraphic.setPoint(point); 
     }
 
     @Settable

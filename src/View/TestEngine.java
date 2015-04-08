@@ -72,7 +72,7 @@ public class TestEngine extends Application {
         ScoreGoal score2=new ScoreGoal(myPlayer,300);
         list3.add(score2);
         GameWorld world = new BasicWorld();
-        //world.addObject(new GameObjectSimpleTest());
+        world.addObject(new GameObjectSimpleTest());
         board.addLevel(new ConcreteLevel("images/Park_Path.png",list2,list,world));
         board.addLevel(new ConcreteLevel("images/example_path.jpeg",list3,list,new BasicWorld()));
         //pane.setCenter(view.initializeView());

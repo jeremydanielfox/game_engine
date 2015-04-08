@@ -32,13 +32,26 @@ public class UpgradeBundleSimple implements UpgradeBundle {
             }
             // put new upgradable in the map
             upgradables.put(upgradeType, upgradeType.cast(upgrade));
+            // TODO: must add listener to Behavior list to update
         });
     }
 
     @Override
+    public boolean isFinalUpgrade () {
+        // TODO Auto-generated method stub
+        return false;
+    }
+    
+    @Override
     public String getName () {
         // TODO Auto-generated method stub
         return null;
+    }
+    
+    @Override
+    public double getPrice () {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
@@ -56,12 +69,6 @@ public class UpgradeBundleSimple implements UpgradeBundle {
     public String getDescription () {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    @Override
-    public double getPrice () {
-        // TODO Auto-generated method stub
-        return 0;
     }
 
 }

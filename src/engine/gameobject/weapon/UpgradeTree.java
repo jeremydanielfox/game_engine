@@ -2,6 +2,7 @@ package engine.gameobject.weapon;
 
 import java.util.List;
 
+
 /**
  * The path of available UpgradeBundles for a given weapon.
  * 
@@ -17,5 +18,10 @@ public interface UpgradeTree {
      */
     public double getValue ();
 
+    /**
+     * 
+     * @return list of upgradebundles, to be used in the shop to display what upgrades can currently
+     *         be bought
+     */
     public List<UpgradeBundle> getNextUpgrades ();
 }

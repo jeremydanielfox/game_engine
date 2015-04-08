@@ -1,6 +1,7 @@
 package gae.listView;
 
 import gae.backend.TempTower;
+import gae.gridView.PathView;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -21,10 +22,12 @@ import javafx.scene.paint.Color;
 
 public class LeftPaneView {
 
-    private String[] gameObjects = { "Tower", "Enemy" };
+    private String[] gameObjects = { "Tower", "Enemy", "Path" };
     private List<PaneList> listOfListObjects;
     private Group root;
     private Node nodeScene;
+    private ObservableList pathObservableList;
+    private PathView pathView;
 
     public Scene getScene () {
         root = new Group();
@@ -32,8 +35,11 @@ public class LeftPaneView {
         return new Scene(root);
     }
 
-    public Group getGroup (Node pane) {
+    public Group getGroup (Node pane, ObservableList pathList, PathView view) {
         this.nodeScene = pane;
+        this.pathObservableList = pathList;
+        this.pathView = view;
+
         root = new Group();
         root.getChildren().addAll(view(), tempButton());
         root.setManaged(false);
@@ -55,7 +61,9 @@ public class LeftPaneView {
             catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
                     | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException e) {
-                e.printStackTrace();
+                PathList pathList = new PathList(pathView);
+                accordion.getPanes()
+                        .add(pathList.getTitledPane(pathObservableList, gameObjects[i]));
             }
         }
         return accordion;

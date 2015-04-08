@@ -59,6 +59,10 @@ public class PathSet extends Region {
         choosePoint(curve);
     }
 
+    public CubicCurve getCurve () {
+        return curve;
+    }
+
     private void choosePoint (CubicCurve curve) {
         stack.setOnMouseClicked(e -> {
             if (increment == 0 && makePath) {

@@ -2,6 +2,7 @@ package gae.gridView;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -25,6 +26,7 @@ public class PathView {
         root = new Group();
         root.setManaged(false);
         stack.getChildren().add(root);
+        StackPane.setAlignment(root, Pos.CENTER);
     }
 
     public void makeBezierCurve () {

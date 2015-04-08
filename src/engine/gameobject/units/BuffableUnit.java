@@ -18,10 +18,6 @@ public class BuffableUnit extends GameObjectSimple {
             applyBuff(toAdd);
         }
     }
-
-    public BasicMover getMover () {
-        return (BasicMover) myMover;
-    }
     
     /********
      * advanceBuffs would need to be on the list of things updated every frame/unit of time.

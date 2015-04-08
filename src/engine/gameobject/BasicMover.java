@@ -10,11 +10,12 @@ public class BasicMover implements Mover {
     double myDistance;
     boolean frozen;
     
-
     public BasicMover(Path pf, double speed){
             myDistance = 0;
             myPath = pf;
             inherentSpeed = speed;
+            frozen = false;
+            speedModifier = 1;
     }
     
     /**
@@ -45,5 +46,7 @@ public class BasicMover implements Mover {
         speedModifier = speedModifier + percentage;
     }
     
-
+    public BasicMover clone(){
+        return new BasicMover(myPath, inherentSpeed);
+    }
 }

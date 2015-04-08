@@ -68,7 +68,7 @@ public abstract class Weapon {
         // TODO: In bloons, we choose from the candidates using first, last, strong, weak. We could
         // do something here as well using polymorphism. For now, we just choose a random one.
         if (!candidates.isEmpty()){
-            myFiringStrategy.execute(world, center, myProjectile);
+            myFiringStrategy.execute(world, candidates, center, myProjectile);
             timeSinceFire = 0;
         }
     }

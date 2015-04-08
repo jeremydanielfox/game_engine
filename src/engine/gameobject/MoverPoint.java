@@ -29,4 +29,7 @@ public class MoverPoint implements Mover {
 	public void setSpeed(double speed) {
 		mySpeed = speed;
 	}
+	public Mover clone(){
+	    return new MoverPoint(myPoint, mySpeed);
+	}
 }

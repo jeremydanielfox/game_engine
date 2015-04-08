@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
+import engine.gameobject.MoverDirection;
+import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffableUnit;
 
@@ -34,6 +36,11 @@ public class Projectile extends GameObjectSimple {
                 onCollision.remove(b);
             }
         }
+    }
+    
+    public Projectile clone(PointSimple location, double angle){
+        Projectile clone = (Projectile) super.clone();
+        return clone;
     }
     
     // Many conditions have to be met for an projectile to impart its effects.

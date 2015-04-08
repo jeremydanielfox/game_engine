@@ -89,7 +89,16 @@ public class GameObjectSimple implements GameObject, Purchasable {
         // TODO Auto-generated method stub
         return myGraphic;
     }
+    
+    public BasicMover getMover () {
+        return (BasicMover) myMover;
+    }
 
+    @Settable
+    public void setMover (Mover mover) {
+        myMover = mover;
+    }
+    
     @Settable
     void setImagePath (String imgpath) {
         myImagePath = imgpath;
@@ -101,7 +110,7 @@ public class GameObjectSimple implements GameObject, Purchasable {
     }
 
     @Settable
-    void setPoint (PointSimple point) {
+    public void setPoint (PointSimple point) {
         myPoint = point;
     }
 
@@ -110,10 +119,6 @@ public class GameObjectSimple implements GameObject, Purchasable {
         myHealth = health;
     }
 
-    @Settable
-    void setMover (Mover mover) {
-        myMover = mover;
-    }
 
     @Settable
     void setGraphic (Graphic graphic) {
@@ -154,4 +159,5 @@ public class GameObjectSimple implements GameObject, Purchasable {
         // TODO Auto-generated method stub
         return 0;
     }
+
 }

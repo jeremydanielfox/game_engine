@@ -45,4 +45,9 @@ public class Graphic {
         myImageView.setFitHeight(myHeight * scaleFactor);
         return myImageView;
     }
+    
+    public void setPoint(PointSimple point) {
+        myImageView.setX(point.getX());
+        myImageView.setY(point.getY());
+    }
 }

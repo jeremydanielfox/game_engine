@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import engine.gameobject.GameObject;
 import engine.grid.Grid;
+import engine.grid.GridFree;
 import engine.grid.StructurePlacementException;
 import engine.interactions.InteractionEngine;
 import engine.pathfinding.EndOfPathException;
@@ -18,12 +19,13 @@ public class BasicWorld implements GameWorld {
 
     public BasicWorld () {
         myObjects = new ArrayList<GameObject>();
+        myGrid=new GridFree(5,5);
     }
 
     @Override
     public void addObject (GameObject toSpawn) throws StructurePlacementException {
         myObjects.add(toSpawn);
-        myGrid.addObject(toSpawn);
+        //myGrid.addObject(toSpawn);
     }
 
     @Override

@@ -28,6 +28,15 @@ public class GameObjectSimple implements GameObject, Purchasable {
     protected Weapon myWeapon;
     protected Graphic myGraphic;
 
+    public void update(){
+        try {
+            move();
+        }
+        catch (EndOfPathException e){
+            //TODO: Catch and perform end of path duties
+        }
+        myWeapon.fire(world, myPoint);
+    }
     @Override
     public boolean isDead () {
         return myHealth.isDead();

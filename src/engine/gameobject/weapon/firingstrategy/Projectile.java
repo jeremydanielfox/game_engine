@@ -38,6 +38,7 @@ public class Projectile extends GameObjectSimple {
         }
     }
     
+    //TODO: We really want to impart a new mover to this projectile
     public Projectile clone(PointSimple location, double angle){
         Projectile clone = (Projectile) super.clone();
         return clone;

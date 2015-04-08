@@ -11,6 +11,9 @@ import engine.gameobject.weapon.Weapon;
  */
 public interface GameObject extends Movable, Health, Graphical {
     // public void updateGraphics ();//cannot implement yet
+   
+    public void update();
+    
     /**
      * Sets the GameObject's Weapon
      */

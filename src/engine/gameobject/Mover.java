@@ -27,5 +27,6 @@ public interface Mover {
     public void setSpeed (double speed);
     
     public Mover clone();
+    
 }
 

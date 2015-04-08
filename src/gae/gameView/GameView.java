@@ -46,7 +46,7 @@ public class GameView {
 
         myScene.setCursor(new ImageCursor(new Image("/images/swordCursor.jpg")));
         myScene.getStylesheets().add(GAMEVIEW_CSS);
-        myLibrary = new LibraryView();
+     //   myLibrary = new LibraryView();
         utilities = new UtilitiesBar();
         myUI.setTop(utilities.getUtilitiesBar());
 
@@ -56,6 +56,6 @@ public class GameView {
         myUI.setRight(myGenericObjects.getBaseNode());
 
         myScene.getStylesheets().add(GAMEVIEW_CSS);
-        myLibrary = new LibraryView();
+     //   myLibrary = new LibraryView();
     }
 }

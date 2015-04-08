@@ -28,9 +28,9 @@ public class DummyMain extends Application{
         BorderPane border=new BorderPane();
         LibraryData data=new LibraryData();
         data.addToList(new TempTower());
-        LibraryView view=new LibraryView(myStage, data.getMap());
-        border.setLeft(view.initialize());
         Scene scene=new Scene(border);
+        LibraryView view=new LibraryView(scene, data.getMap());
+        border.setLeft(view.initialize());
         myStage.setScene(scene);
         myStage.show();
     }

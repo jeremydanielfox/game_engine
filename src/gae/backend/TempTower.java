@@ -13,7 +13,7 @@ public class TempTower implements Editable {
     private Weapon weapon;
     private Pair location;
     private String image="/images/Bloons_DartMonkeyIcon.jpg";
-    private String myName;
+    private String myName="no name yet";
 
     @Override
     public void edit () {

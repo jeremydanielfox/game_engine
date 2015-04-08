@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import View.ViewUtilities;
 import engine.gameobject.Editable;
 import gae.backend.TempTower;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -24,23 +28,24 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+
 // import gameobject.Editable;
 
 public class LibraryView {
     // public void editEditableObject(Editable e);
 
-    public static final int THUMBNAIL_SIZE=20;
-    private Pane libraryView=new Pane();
+    public static final int THUMBNAIL_SIZE = 20;
+    private Pane libraryView = new Pane();
     private Map<String, ObservableList<Editable>> map;
-    private Stage stage;
+    private Scene scene;
 
-    public LibraryView (Stage st, Map<String, ObservableList<Editable>> librarymap) {
-        stage = st;
+    public LibraryView (Scene sc, Map<String, ObservableList<Editable>> librarymap) {
+        scene = sc;
         map = librarymap;
         libraryView.getChildren().add(makeAccordion());
     }
-    
-    public Pane initialize(){
+
+    public Pane initialize () {
         return libraryView;
     }
 
@@ -48,110 +53,104 @@ public class LibraryView {
         Accordion accordion = new Accordion();
         for (String key : map.keySet()) {
             TitledPane title = new TitledPane(key, createList(map.get(key)));
+            setTitledPaneClick(title);
             accordion.getPanes().add(title);
         }
         return accordion;
     }
 
     private Node createList (ObservableList<Editable> editables) {
-        ListView<TempTower> list = new ListView<>();
-        
-        //to be changed to editable in real implementation
-        List<TempTower> towerlist=new ArrayList<>();
-        towerlist.add(new TempTower("yo"));
-        towerlist.add(new TempTower("mama"));
-        
-        
-      //  list.setItems(editableToLibraryContent(FXCollections.observableList(towerlist)));
-        list.setItems(FXCollections.observableList(towerlist));
-        list.setCellFactory(new Callback<ListView<TempTower>, ListCell<TempTower>>(){           
+        ListView<Editable> list = new ListView<>();
+
+        // to be changed to editable in real implementation
+        List<Editable> towerlist = new ArrayList<>();
+        // towerlist.add(new TempTower("yo"));
+        // towerlist.add(new TempTower("mama"));
+
+        // list.setItems(FXCollections.observableList(towerlist));
+        list.setItems(editables);
+        list.setCellFactory(new Callback<ListView<Editable>, ListCell<Editable>>() {
             @Override
-            public ListCell<TempTower> call(ListView<TempTower> p) {                 
-                ListCell<TempTower> cell = new ListCell<TempTower>(){ 
+            public ListCell<Editable> call (ListView<Editable> p) {
+                ListCell<Editable> cell = new ListCell<Editable>() {
                     @Override
-                    protected void updateItem(TempTower edit, boolean bln) {
+                    protected void updateItem (Editable edit, boolean bln) {
                         super.updateItem(edit, bln);
                         if (edit != null) {
                             setGraphic(createCellContent(edit));
                         }
                     }
-                };               
+                };
                 return cell;
             }
-        });   
-        setListClick(list);
+        });
+        // setListClick(list);
         return list;
 
     }
 
-//    private ObservableList<LibraryContent> editableToLibraryContent(ObservableList<TempTower> editables){
-//        ObservableList<LibraryContent> list=FXCollections.observableList(new ArrayList<>());
-//        for(TempTower edit: editables){
-//            LibraryContent content=new LibraryContent(edit.getImage(), edit.getName());
-//            content.setEditable(edit);
-//            list.add(content);
-//        }
-//        return list;
-//    }
-    
-    private void setListClick (ListView<TempTower> list) {
-        list.setOnMouseClicked(e->{
-            TempTower currentItem=list.getSelectionModel().getSelectedItem();
-            ImageView image=new ImageView(new Image(getClass().getResourceAsStream(currentItem.getImage())));
-            Node binder=CursorBinder.bindCursor(image,
-                                   stage.getScene(),
-                                   KeyCode.ESCAPE);
-            binder.setOnMouseClicked(ev -> {
-                Circle xx=new Circle();
-                xx.setRadius(50.0f);
-              xx.setCenterX(ev.getSceneX());
-              xx.setCenterY(ev.getSceneY());
-              libraryView.getChildren().add(xx);
-              });
-        libraryView.getChildren().add(binder);
+    private void setTitledPaneClick (TitledPane pane) {
+        pane.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 2) {
+                TempTower tower = new TempTower();
+                ImageView transitionImage =
+                        new ImageView(
+                                      new Image(getClass().getResourceAsStream(tower
+                                              .getImage())));
+                Node binder =
+                        ViewUtilities.bindCursor(transitionImage,
+                                                 scene,
+                                                 ViewUtilities.getMouseLocation(e, transitionImage),
+                                                 KeyCode.ESCAPE);
+
+                binder.setOnMouseReleased(ev -> {
+                    ImageView placedTower =
+                            new ImageView(
+                                          new Image(getClass().getResourceAsStream(tower
+                                                  .getImage())));
+                    Group wrapGroup = new Group(placedTower);
+                    wrapGroup.relocate(ev.getSceneX(), ev.getSceneY());
+
+                    Point2D current = ViewUtilities.getMouseLocation(ev, placedTower);
+
+                    wrapGroup.relocate(current.getX(), current.getY());
+
+                    libraryView.getChildren().add(wrapGroup);
+                    map.get(pane.getText()).add(tower);
+                });
+                libraryView.getChildren().add(binder);
+            }
         });
-        
     }
 
+    // private void setListClick (ListView<Editable> list) {
+    // list.setOnMouseClicked(e -> {
+    // Editable currentItem = list.getSelectionModel().getSelectedItem();
+    // ImageView image =
+    // new ImageView(new Image(getClass().getResourceAsStream(currentItem.getImage())));
+    // Node binder = ViewUtilities.bindCursor(image,
+    // scene,
+    // ViewUtilities.getMouseLocation(e, image),
+    // KeyCode.Q);
+    //
+    // binder.setOnMouseClicked(ev -> {
+    // Circle xx = new Circle();
+    // xx.setRadius(50.0f);
+    // xx.setCenterX(ev.getSceneX());
+    // xx.setCenterY(ev.getSceneY());
+    // libraryView.getChildren().add(xx);
+    // });
+    // libraryView.getChildren().add(binder);
+    // });
+    //
+    // }
 
-    private Node createCellContent(TempTower edit){
-        HBox content=new HBox();
-        ImageView image=new ImageView(new Image(getClass().getResourceAsStream(edit.getImage())));
+    private Node createCellContent (Editable edit) {
+        HBox content = new HBox();
+        ImageView image = new ImageView(new Image(getClass().getResourceAsStream(edit.getImage())));
         image.setFitHeight(THUMBNAIL_SIZE);
         image.setPreserveRatio(true);
         content.getChildren().addAll(image, new Label(edit.getName()));
         return content;
     }
-
-//    private class LibraryContent {
-//
-//        private HBox content;
-//        private ImageView graphicIcon;
-//        private String label;
-//        private Editable editable;
-//
-//        // this means that all editables must have image and name
-//        public LibraryContent (ImageView image, String objectName) {
-//            content = new HBox(15);
-//            graphicIcon=image;
-//            label = objectName;
-//            content.getChildren().add(graphicIcon);
-//            content.getChildren().add(new Label(label));
-//            setUpClick();
-//        }
-//        
-//        private void setEditable(Editable edit){
-//            editable=edit;
-//        }
-//        
-//        private Node getContent(){
-//            return content;
-//        }
-//
-//        private void setUpClick () {
-//            // TODO Auto-generated method stub
-//
-//        }
-//
-//    }
-
+}

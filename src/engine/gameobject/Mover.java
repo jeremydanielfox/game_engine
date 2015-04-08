@@ -11,6 +11,8 @@ import engine.pathfinding.EndOfPathException;
  *
  */
 public interface Mover {
+    
+    @Settable
 
     /**
      * Based on mover's state, returns next destination for moving.
@@ -21,11 +23,7 @@ public interface Mover {
      */
     public PointSimple move (PointSimple current) throws EndOfPathException;
 
-    /**
-     * See Movable's speed method.
-     * 
-     * @param speed
-     */
     @Settable
     public void setSpeed (double speed);
 }
+

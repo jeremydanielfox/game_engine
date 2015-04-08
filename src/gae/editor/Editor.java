@@ -3,7 +3,6 @@ package gae.editor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.List;
-import javafx.scene.Node;
 
 /**
  * 
@@ -12,20 +11,19 @@ import javafx.scene.Node;
  */
 public abstract class Editor {
 
-    abstract Node getEditor();
-
     abstract void setDefaults();
 
     public TreeNode getMethodsTree(Class<?> klass, Method m) {
         TreeNode root = new TreeNode(m, "null");
         List<Method> methods = EditingParser.getMethodsWithSetterAnnotation(klass);
         for (Method method : methods) {
+            //System.out.println(method.toString());
             Type parameterClass = method.getGenericParameterTypes()[0];
             if (parameterClass.equals(double.class)) {
-                System.out.println("double  " + getPropertyNameFromMethodName(method.getName()));
+                System.out.println("double  " + getPropertyName(method.getName()));
                 root.addToNodes(new TreeNode(method, "Slider"));
             } else if (parameterClass.equals(String.class)) {
-                System.out.println("String  " + getPropertyNameFromMethodName(method.getName()));
+                System.out.println("String  " + getPropertyName(method.getName()));
                 root.addToNodes(new TreeNode(method, "Textbox"));
             } else {
                 System.out.println(parameterClass.getTypeName() + ":");
@@ -35,7 +33,7 @@ public abstract class Editor {
         return root;
     }
 
-    public static String getPropertyNameFromMethodName(String methodName) {
+    public static String getPropertyName(String methodName) {
         String propertyName = methodName.substring(3, methodName.length());
         char[] chars = propertyName.toCharArray();
         int editCount = 0;

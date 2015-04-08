@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import engine.shop.ItemGraphic;
-import engine.shop.TransitionTower;
+import engine.shop.TransitionGameObject;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -139,7 +139,7 @@ public class HUD implements Observer {
         for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
             shopImages.forEach( (icon, tower) -> {
                 ItemGraphic item = new ItemGraphic(icon, tower);
-                TransitionTower transitionTower = new TransitionTower(item.getTower());
+                TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
                 Node towerNode = transitionTower.getView();
                 item.setOnMouseClicked(mouseEvent -> {
                     addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),

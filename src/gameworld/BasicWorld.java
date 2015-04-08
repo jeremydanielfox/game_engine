@@ -21,6 +21,8 @@ public class BasicWorld implements GameWorld {
         myObjects = new ArrayList<GameObject>();
         myGrid=new GridFree(5,5);
     }
+    
+    
 
     @Override
     public void addObject (GameObject toSpawn) throws StructurePlacementException {

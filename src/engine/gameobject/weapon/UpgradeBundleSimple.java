@@ -41,18 +41,12 @@ public class UpgradeBundleSimple implements UpgradeBundle {
     }
 
     @Override
-    public double getPrice () {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
     public double getValue () {
         return 0;
     }
 
     @Override
-    public String getImage () {
+    public String getGraphic () {
         // TODO Auto-generated method stub
         return null;
     }

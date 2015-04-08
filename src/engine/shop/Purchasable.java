@@ -10,16 +10,10 @@ public interface Purchasable {
 
     /**
      * 
-     * @return Price at which the Shop sells this Purchasable
-     */
-    public double getPrice ();
-
-    /**
-     * 
      * @return Price at which the Shop values this Purchasable. This value is incrementally added to
      *         the receiving weapon's total value.
      */
     public double getValue ();
 
-    public String getImage ();
+    public String getGraphic ();
 }

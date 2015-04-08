@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import gae.openingView.UIObject;
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -55,8 +56,13 @@ public class ObjectEditor extends Application implements UIObject{
 
     @Override
     public void start (Stage arg0) throws Exception {
+        SimpleEditor se = new SimpleEditor();
+        
+        Group root = new Group();
+        root.getChildren().add(se.getObject());
+        
         Stage s = new Stage();
-        Scene scene = new Scene(objectEditor);
+        Scene scene = new Scene(root, 500, 500);
         s.setScene(scene);
         s.show();
     }

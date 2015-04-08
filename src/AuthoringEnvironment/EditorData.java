@@ -1,6 +1,7 @@
 package AuthoringEnvironment;
 
 import engine.gameobject.Editable;
+import engine.gameobject.GameObject;
 
 import java.lang.reflect.Field;
 import java.util.Enumeration;
@@ -16,9 +17,9 @@ import java.util.ResourceBundle;
  */
 public class EditorData {
 	private HashMap<String, String[]> fieldMap;
-	private Editable editable;
+	private GameObject editable;
 
-	public EditorData(Editable editable) {
+	public EditorData(GameObject editable) {
 		this.editable = editable;
 		fieldMap = useResourceBundle();
 	}

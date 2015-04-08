@@ -2,9 +2,10 @@ package engine.gameobject.weapon;
 
 import engine.gameobject.weapon.upgradable.Upgradable;
 
-
+//TODO: experiment with generics here
 /**
- * An Upgrade applies some change to an Upgradable.
+ * An Upgrade applies some change to an Upgradable. It will act as the decorator in the decorator
+ * pattern.
  * 
  * @author Nathan Prabhu
  *

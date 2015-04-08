@@ -1,7 +1,7 @@
 package engine.gameobject.weapon.firingstrategy;
 
+
 import engine.gameobject.PointSimple;
-import engine.gameobject.weapon.Weapon;
 import gameworld.GameWorld;
 
 

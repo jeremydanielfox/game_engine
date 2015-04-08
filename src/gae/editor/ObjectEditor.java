@@ -1,7 +1,5 @@
 package gae.editor;
 
-import java.util.Arrays;
-
 import gae.openingView.UIObject;
 import javafx.application.Application;
 import javafx.scene.Group;

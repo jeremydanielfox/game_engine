@@ -1,11 +1,19 @@
 package engine.game;
 
 import View.Displayable;
+import engine.fieldsetting.Settable;
 
+
+@Settable
 public class PlayerUnit extends Displayable {
 
     private double myValue;
     private String myLabel;
+    
+    public PlayerUnit() {
+        myValue = 0;
+        myLabel = "";
+    }
 
     public PlayerUnit (double startValue, String label) {
         myLabel = label;
@@ -16,6 +24,7 @@ public class PlayerUnit extends Displayable {
         myValue = value;
     }
 
+    @Settable
     public void setLabel (String label) {
         myLabel = label;
     }
@@ -35,8 +44,13 @@ public class PlayerUnit extends Displayable {
         return myLabel;
     }
 
-    public void updateObservers(){
+    public void updateObservers () {
         setChanged();
         notifyObservers();
+    }
+    
+    @Settable
+    public void setStartingValue(double value) {
+        myValue = value;
     }
 }

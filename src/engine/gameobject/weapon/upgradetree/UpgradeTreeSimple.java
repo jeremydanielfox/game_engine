@@ -18,6 +18,10 @@ public class UpgradeTreeSimple implements UpgradeTree {
 
     private BuildableBundle first;
     private BuildableBundle current;
+    
+    public UpgradeTreeSimple() {
+        //TODO: Initialize first and current
+    }
 
     public UpgradeTreeSimple (List<BuildableBundle> nodes) {
         first = current = nodes.get(0);

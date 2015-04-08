@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import engine.gameobject.GameObject;
+import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.upgradable.FiringRate;
 import engine.gameobject.weapon.upgradable.Upgradable;
@@ -18,6 +18,7 @@ import engine.gameobject.weapon.upgradetree.UpgradeTree;
  * @author Nathan Prabhu
  *
  */
+@Settable
 public class WeaponSimple extends Weapon {
     private Range myRange;
     private FiringRate myFiringRate;
@@ -66,5 +67,25 @@ public class WeaponSimple extends Weapon {
     @Override 
     public double getValue () {
         return tree.getValue();
+    }
+    
+    @Settable
+    public void setRange(Range range) {
+        myRange = range;
+    }
+    
+    @Settable
+    public void setFiringRate(FiringRate firingRate) {
+        myFiringRate = firingRate;
+    }
+    
+    @Settable
+    public void setFiringStrategy(FiringStrategy firingStrategy) {
+        myFiringStrategy = firingStrategy;
+    }
+    
+    @Settable
+    public void setBehaviors(List<Behavior> behaviors) {
+        myBehaviors = behaviors;
     }
 }

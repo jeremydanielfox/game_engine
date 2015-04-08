@@ -18,6 +18,7 @@ import engine.shop.Purchasable;
  * @author Jeremy, Kaighn
  *
  */
+@Settable
 public class GameObjectSimple implements GameObject, Purchasable {
     protected Node myNode;
     protected String myImagePath;

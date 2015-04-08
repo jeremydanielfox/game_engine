@@ -1,6 +1,7 @@
 package engine.pathfinding;
 
 import java.util.List;
+import engine.fieldsetting.Settable;
 import engine.gameobject.PointSimple;
 
 
@@ -12,6 +13,7 @@ import engine.gameobject.PointSimple;
  * @author Jeremy
  *
  */
+@Settable
 public class PathSegmentBezier implements PathSegment {
     private List<PointSimple> myPoints;
     private double myLength;
@@ -41,6 +43,8 @@ public class PathSegmentBezier implements PathSegment {
 
     @Override
     public double getLength () {
+        if (myLength == 0)
+            myLength = approximateLength(myPoints);
         return myLength;
     }
 
@@ -72,6 +76,10 @@ public class PathSegmentBezier implements PathSegment {
             currentPoint = nextPoint;
         }
         return currentLength;
+    }
+    @Settable
+    public void setPoints(List<PointSimple> points) {
+        myPoints = points;
     }
 
 }

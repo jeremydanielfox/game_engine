@@ -1,15 +1,17 @@
 package engine.game;
 
-import gameworld.GameWorld;
+import engine.fieldsetting.Settable;
 
+
+@Settable
 public class ConcreteGame implements Game {
 
     private Player myPlayer;
     private LevelBoard myLevelBoard;
 
-    public ConcreteGame (Player player,LevelBoard level) {
+    public ConcreteGame (Player player, LevelBoard level) {
         myPlayer = player;
-        myLevelBoard=level;
+        myLevelBoard = level;
     }
 
     @Override
@@ -21,8 +23,8 @@ public class ConcreteGame implements Game {
     public void init () {
 
     }
-    
-    public LevelBoard getLevelBoard() {
+
+    public LevelBoard getLevelBoard () {
         return myLevelBoard;
     }
 
@@ -32,5 +34,14 @@ public class ConcreteGame implements Game {
         return myPlayer;
     }
 
+    @Settable
+    public void setPlayer (Player player) {
+        myPlayer = player;
+    }
+
+    @Settable
+    public void setLevelBoard (LevelBoard levelBoard) {
+        myLevelBoard = levelBoard;
+    }
 
 }

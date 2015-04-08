@@ -13,22 +13,24 @@ public class EnemyPaneList extends PaneList {
     private ObservableList<TitledPane> enemyPaneList;
     private List<EditableNode> enemyEditablesList;
     private Group root;
-    private Node scene;
+    private Node workspace;
+    private Scene scene;
 
     public EnemyPaneList () {
         enemyEditablesList = new ArrayList<>();
     }
 
     @Override
-    public void addToGenericList (EditableNode node) {
-        enemyEditablesList.add(node);
-        TitledPane newPane = setTitledPaneClick(node, root, scene);
+    public void addToGenericList (EditableNode editableNode) {
+        enemyEditablesList.add(editableNode);
+        TitledPane newPane = setTitledPaneClick(editableNode, root, workspace, scene);
         enemyPaneList.add(newPane);
     }
 
     @Override
-    public TitledPane initialize (Group root, Node scene) {
+    public TitledPane initialize (Group root, Node node, Scene scene) {
         this.root = root;
+        this.workspace = node;
         this.scene = scene;
         TitledPane pane = getTitledPane("Enemy");
         enemyPaneList = setAccordion(pane);

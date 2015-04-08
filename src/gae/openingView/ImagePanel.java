@@ -1,10 +1,8 @@
 package gae.openingView;
 
-import gae.gameView.Main;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -30,19 +28,32 @@ public class ImagePanel implements UIObject {
     private VBox panel, selections;
     private UIObject setPath, freePath, sideView;
 
-    public ImagePanel () {
+    public ImagePanel (UIMediator mediator) {
+        myMediator = mediator;
         panel = new VBox(15);
         selections = new VBox(15);
+        setIDs();
+        createSelectOptions();
+        panel.getChildren().addAll(HEADER, selections);
+    }
+    
+    @Override
+    public Node getObject () {
+        return panel;
+    }
+
+    /**
+     * set up IDs for nodes in order to enable editing through CSS files
+     */
+    private void setIDs () {
         HEADER.setId("selectGameText");
         panel.setId("rightPanel");
         selections.setId("imagePanel");
-        createSelectOptions();
-        panel.getChildren().addAll(HEADER, selections);
     }
 
     
     /**
-     * 
+     * creates all the select options by making new instances of HoverPicture
      */
     private void createSelectOptions () {
         setPath = new HoverPicture(SET_PATH_GAME, SET_PATH);
@@ -52,10 +63,6 @@ public class ImagePanel implements UIObject {
         setUpClick(selections);
     }
     
-    @Override
-    public Node getObject () {
-        return panel;
-    }
     
     /**
      * 

@@ -1,5 +1,6 @@
 package engine.gameobject;
 
+import engine.fieldsetting.Settable;
 import engine.pathfinding.EndOfPathException;
 
 /**
@@ -9,5 +10,7 @@ import engine.pathfinding.EndOfPathException;
  */
 public interface Mover {
     public PointSimple move(PointSimple current) throws EndOfPathException;
+    
+    @Settable
     public void setSpeed(double speed);
 }

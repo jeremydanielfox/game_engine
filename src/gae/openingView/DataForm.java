@@ -1,5 +1,7 @@
 package gae.openingView;
 
+import gae.backend.GameManager;
+import gae.gameView.GameView;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -25,14 +27,14 @@ public class DataForm implements UIObject {
     private static final Text HEADER = new Text("Ready to create a game?");
 
     private UIMediator myMediator;
-    private VBox form;
-    private VBox inputFields;
+    private VBox form, inputFields;
 
-    public DataForm () {
+    public DataForm (UIMediator mediator) {
+        myMediator = mediator;
         form = new VBox(30);
         form.setId("dataForm");
         HEADER.setId("welcomeBanner");
-        createForm();
+        createFields();
         form.getChildren().addAll(HEADER, inputFields, createButtonBox());
     }
 
@@ -44,12 +46,12 @@ public class DataForm implements UIObject {
     /**
      * creates all the desired fields and places them in a single VBox
      */
-    private void createForm () {
+    private void createFields () {
         inputFields = new VBox(10);
-        inputFields.getChildren().addAll(createInputField("Game Title", new TextField()),
-                                         createInputField("Author", new TextField()),
-                                         createInputField("Description", new TextArea()),
-                                         createInputField("Instructions", new TextArea()));
+        inputFields.getChildren().addAll(createSingleField("Game Title", new TextField()),
+                                         createSingleField("Author", new TextField()),
+                                         createSingleField("Description", new TextArea()),
+                                         createSingleField("Instructions", new TextArea()));
         inputFields.setAlignment(Pos.BASELINE_LEFT);
     }
 
@@ -60,7 +62,7 @@ public class DataForm implements UIObject {
      * @param fieldType
      * @return
      */
-    private HBox createInputField (String input, Node fieldType) {
+    private HBox createSingleField (String input, Node fieldType) {
         HBox box = new HBox(10);
         box.setPrefWidth(600);
         Label label = new Label(input);
@@ -81,7 +83,7 @@ public class DataForm implements UIObject {
         Button b = new Button(BUTTON_TEXT);
         b.setId("authorButton");
         b.setOnMouseClicked(e -> {
-
+            myMediator.handleEvent(this, e);
         });
         box.setAlignment(Pos.BASELINE_RIGHT);
         box.getChildren().add(b);

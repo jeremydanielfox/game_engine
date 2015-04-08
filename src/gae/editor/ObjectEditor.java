@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class ObjectEditor extends Application{
+public class ObjectEditor extends Application {
     
     private BorderPane objectEditor;
     private VBox rightContainer;

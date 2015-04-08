@@ -13,12 +13,19 @@ import java.util.Map;
  * @author Tom Puglisi
  *
  */
-public class Shop {
+public class ShopModel {
     private Map<ItemGraphic, Purchasable> purchasableMap;
     private Map<Purchasable, ItemGraphic> itemGraphicMap;
+    private Map<ItemGraphic, TransitionTower> transitionTowerMap;
 
-    public Shop (List<Purchasable> purchasables) {
+    public ShopModel (List<Purchasable> purchasables) {
         populateMaps(purchasables);
+        transitionTowerMap = new HashMap<ItemGraphic, TransitionTower>();
+        purchasables.forEach(purchasable -> {
+            if (purchasable.getClass().isAssignableFrom(GameObject.class)) {
+                transitionTowerMap.put(new ItemGraphic(null, null), new TransitionTower(null));
+            }
+        });
     }
 
     /**
@@ -36,25 +43,19 @@ public class Shop {
                         .put(purchasable, itemGraphic)));
     }
 
-    public List<ItemGraphic> getItemGraphics (GameObject gameObject) {
+    public List<ItemGraphic> getUpgrades (GameObject gameObject) {
         List<ItemGraphic> items = new ArrayList<>();
         itemGraphicMap.keySet().stream()
-                .forEach(purchasable -> addPurchasable(gameObject, items, purchasable));
+                .forEach(purchasable -> {
+                    /*if (gameObject.canPurchase(purchasable)) {
+                        items.add(itemGraphicMap.get(purchasable));
+                    }*/
+                });
         return items;
     }
 
-    private void addPurchasable (GameObject gameObject,
-                                 List<ItemGraphic> items,
-                                 Purchasable purchasable) {
-        /*
-         * if (gameObject.canPurchase(purchasable)) {
-         * items.add(itemGraphicMap.get(purchasable));
-         * }
-         */
-    }
-
-    public Object getPrototypeClone (ItemGraphic itemGraphic) {
-        return purchasableMap.get(itemGraphic).clone();
+    public Purchasable getPurchasable (ItemGraphic itemGraphic) {
+        return purchasableMap.get(itemGraphic);
     }
 
     public ItemGraphic getItemGraphic (Purchasable purchasable) {

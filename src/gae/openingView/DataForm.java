@@ -1,5 +1,7 @@
 package gae.openingView;
 
+import gae.backend.GameManager;
+import gae.gameView.GameView;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

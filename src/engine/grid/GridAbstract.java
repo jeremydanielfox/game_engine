@@ -1,9 +1,11 @@
 package engine.grid;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.Weapon;
+import engine.interactions.ConcreteInteractionEngine;
 import engine.interactions.InteractionEngine;
 
 public class GridAbstract implements Grid {
@@ -12,7 +14,9 @@ public class GridAbstract implements Grid {
 	protected InteractionEngine myInteractionEngine;
 
 	public GridAbstract() {
-		super();
+		//super();
+	    myObjects=new ArrayList<GameObject>();
+	    myInteractionEngine=new ConcreteInteractionEngine();
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public abstract class Weapon {
      */
     public void fire(GameWorld world, PointSimple location){
         if(canFire()){  
-            myFiringStrategy.execute(world, location);
+            fireAtEnemyInRange(world, location);
         }
         else {
             //TODO: Check that this is syncing with time correctly
@@ -42,14 +42,13 @@ public abstract class Weapon {
     }
     
     /**
-     * Adds a behavior to the given weapon. Will automatically upgrade existing one
-     * TODO: May be duplicated from buff.
+     * Adds a behavior to the given weapon. Will automatically upgrade existing one.
      * @param newBuff the Buff you want add to the projectile
      */
     public void addBuff(Buff newBuff){
         myProjectile.addCollsionBehavior(newBuff);
     }
-  
+     
     /**
      * The value at which this weapon can be sold to the shop
      * 

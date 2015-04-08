@@ -60,16 +60,24 @@ public class OpeningView implements UIMediator {
     @Override
     public void handleEvent (UIObject usedObject, EventObject action) {
 
-        // changes the scene to display the GameView if button in DataForm has been pressed
+        /*
+         *  changes the scene to display the GameView if button in DataForm has been pressed
+         */
         if (usedObject.equals(dataForm) && action instanceof MouseEvent) {
             UIMediator author = new GameView();
             myScene = author.getScene();
             myStage.setScene(myScene);
         }
 
-        // if game type is selected, gray out rest of the options
+        /*
+         *  if game type is selected, gray out rest of the options
+         */
 
-        // enable author to proceed if all fields are filled out & game type is selected
+        
+        
+        /*
+         *  enable author to proceed if all fields are filled out & game type is selected
+         */
 
     }
 }

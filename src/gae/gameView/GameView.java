@@ -40,12 +40,12 @@ public class GameView implements UIMediator {
         myScene = new Scene(myUI);
         myTabs = new CentralTabView(myScene);
         myScene.getStylesheets().add(GAMEVIEW_CSS);
-        myLibrary = new LibraryView();
+//        myLibrary = new LibraryView();
         utilities = new UtilitiesBar();
         myGenericObjects = new GenericObjectsPane();
-        myLibrary = new LibraryView();
+//        myLibrary = new LibraryView();
         insertBorders();
-        changeCursor(CURSOR_GRAPHIC);
+//        changeCursor(CURSOR_GRAPHIC);
     }
 
     @Override

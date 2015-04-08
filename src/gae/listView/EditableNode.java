@@ -3,7 +3,12 @@ package gae.listView;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import View.ImageUtilities;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import engine.gameobject.Editable;
 
@@ -14,17 +19,17 @@ import engine.gameobject.Editable;
  * @author Kei Yoshikoshi
  *
  */
-public class EditableNode extends Region {
+public class EditableNode {
     private String myName;
     private String myType;
     private Editable editable;
-    private List<Editable> myChildren;
+    private ObservableList<Editable> myChildren;
     private ListView listView;
 
     public EditableNode (Editable editable) {
         myName = editable.getName();
         myType = editable.getType();
-        myChildren = new ArrayList<>();
+        myChildren = FXCollections.observableArrayList();
         this.editable = editable;
         /*
          * Get ListView from Nina's class --> each EditableNode will have an editable object + it's
@@ -38,7 +43,7 @@ public class EditableNode extends Region {
     }
 
     public void clearChildren () {
-        myChildren = new ArrayList<>();
+        myChildren = FXCollections.observableArrayList();
     }
 
     public Editable makeNewInstance () {
@@ -56,6 +61,11 @@ public class EditableNode extends Region {
         }
     }
 
+    public ImageView getImageView () {
+        return ImageUtilities.changeImageSize(new ImageView(new Image(getClass()
+                .getResourceAsStream(editable.getImage()))), 75, 75);
+    }
+
     public String getName () {
         return myName;
     }
@@ -64,7 +74,7 @@ public class EditableNode extends Region {
         return myType;
     }
 
-    public List<Editable> getChildrenList () {
+    public ObservableList<Editable> getChildrenList () {
         return myChildren;
     }
 

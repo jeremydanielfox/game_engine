@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
 import engine.grid.Grid;
 import engine.grid.StructurePlacementException;
 import engine.interactions.InteractionEngine;
@@ -83,10 +84,10 @@ public class BasicWorld implements GameWorld {
     }
 
     @Override
-    public List<GameObject> objectsInRange (double range, GameObject center) {
+    public Collection<GameObject> objectsInRange (double range, PointSimple center) {
         ArrayList<GameObject> inRange = new ArrayList<>();
         for (GameObject o : myObjects){
-            if (center.getPoint().withinRange(o.getPoint(), range)){
+            if (center.withinRange(o.getPoint(), range)){
                 inRange.add(o);
             }
         }

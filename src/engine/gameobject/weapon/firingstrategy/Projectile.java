@@ -1,4 +1,4 @@
-package engine.gameobject.projectile;
+package engine.gameobject.weapon.firingstrategy;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,15 +11,21 @@ import engine.gameobject.units.BuffableUnit;
 public class Projectile extends GameObjectSimple {
     protected Set<String> collidedID;
     protected Set<Buff> onCollision;
+    protected Set<Explosion> onDeath;
     
     public Projectile () {
         collidedID = new HashSet<String>();
         onCollision = new HashSet<Buff>();
+        onDeath = new HashSet<Explosion>();
     }
 
     public void addCollsionBehavior(Buff newBuff){
         removeDuplicateBuff(newBuff);
         onCollision.add(newBuff);
+    }
+    
+    public void addOnDeath(Explosion newExplosion){
+        onDeath.add(newExplosion);
     }
     
     private void removeDuplicateBuff(Buff newBuff){
@@ -29,6 +35,7 @@ public class Projectile extends GameObjectSimple {
             }
         }
     }
+    
     // Many conditions have to be met for an projectile to impart its effects.
     // For example, it must be on the "other side", it must not be another projectile, etc.
     private boolean effectiveCollision (GameObject obstacle) {

@@ -21,4 +21,28 @@ public class TileData implements Editable {
     public Editable getEditable () {
         return null;
     }
+
+    @Override
+    public String getName () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getType () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getImagePath () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setLocation (double x, double y) {
+        // TODO Auto-generated method stub
+        
+    }
 }

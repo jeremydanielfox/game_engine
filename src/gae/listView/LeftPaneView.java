@@ -26,8 +26,9 @@ public class LeftPaneView {
     private List<PaneList> listOfListObjects;
     private Group root;
     private Node nodeScene;
-    private ObservableList pathObservableList;
+    private ObservableList<PathView> pathObservableList;
     private PathView pathView;
+    private Scene myScene;
 
     public Scene getScene () {
         root = new Group();
@@ -35,11 +36,11 @@ public class LeftPaneView {
         return new Scene(root);
     }
 
-    public Group getGroup (Node pane, ObservableList pathList, PathView view) {
+    public Group getGroup (Node pane, Scene scene, ObservableList<PathView> pathList, PathView view) {
         this.nodeScene = pane;
         this.pathObservableList = pathList;
         this.pathView = view;
-
+        this.myScene = scene;
         root = new Group();
         root.getChildren().addAll(view(), tempButton());
         root.setManaged(false);
@@ -54,14 +55,15 @@ public class LeftPaneView {
                 Class<?> className = Class.forName("gae.listView." + gameObjects[i] + "PaneList");
                 Object instance = className.getConstructor().newInstance();
                 listOfListObjects.add((PaneList) instance);
-                Method setUpList = className.getMethod("initialize", Group.class, Node.class);
+                Method setUpList =
+                        className.getMethod("initialize", Group.class, Node.class, Scene.class);
                 accordion.getPanes().add((TitledPane) setUpList
-                        .invoke(instance, root, nodeScene));
+                        .invoke(instance, root, nodeScene, myScene));
             }
             catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
                     | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException e) {
-                PathList pathList = new PathList(pathView);
+                PathList pathList = new PathList(pathView, (StackPane) nodeScene, myScene);
                 accordion.getPanes()
                         .add(pathList.getTitledPane(pathObservableList, gameObjects[i]));
             }

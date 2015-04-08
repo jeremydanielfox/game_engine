@@ -48,6 +48,7 @@ public class PathView {
             set.changeColor(Color.FORESTGREEN);
         });
 
+        System.out.println("I'm adding onto : " + this);
         pathSetList.add(set);
     }
 
@@ -68,9 +69,6 @@ public class PathView {
 
     public List<Path> createPathObjects () {
         /*
-         * TODO: I want to be able to keep the group with the paths so I'll probably delet ethe root
-         * from the stack and store the root somewhere
-         * 
          * OR, We can store the PathView somewhere and re-visualize that
          */
         List<Path> pathList = new ArrayList<>();

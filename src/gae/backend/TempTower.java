@@ -2,9 +2,10 @@ package gae.backend;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Pair;
 import engine.gameobject.Editable;
 import engine.gameobject.weapon.Weapon;
+import gae.gridView.Pair;
+import gae.listView.EditableImage;
 
 
 public class TempTower implements Editable {
@@ -14,6 +15,7 @@ public class TempTower implements Editable {
     private Pair location;
     private String image = "/images/ArcaneTower.png";
     private String myName = "TempTower";
+    private EditableImage editableImage;
 
     @Override
     public void edit () {
@@ -30,7 +32,7 @@ public class TempTower implements Editable {
     }
 
     @Override
-    public String getImage () {
+    public String getImagePath () {
         return image;
     }
 
@@ -46,4 +48,22 @@ public class TempTower implements Editable {
         return "Tower";
     }
 
+    public Pair getLocation () {
+        return location;
+    }
+
+    public void setLocation (double x, double y) {
+        location = new Pair(x, y);
+    }
+
+    @Override
+    public void setEditableImage (EditableImage image) {
+        // TODO Auto-generated method stub
+        editableImage = image;
+    }
+
+    @Override
+    public EditableImage getEditableImage () {
+        return editableImage;
+    }
 }

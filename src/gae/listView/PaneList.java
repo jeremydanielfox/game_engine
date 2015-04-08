@@ -91,8 +91,8 @@ public abstract class PaneList {
                     Group wrapGroup = new Group(placedTower);
 
                     wrapGroup.relocate(ev.getSceneX(), ev.getSceneY());
-
-                    Point2D current = ViewUtilities.getMouseLocation(e, placedTower, pane);
+                    
+                    Point2D current = binder.localToParent(new Point2D(binder.getTranslateX(), binder.getTranslateY()));
                     wrapGroup.relocate(current.getX(), current.getY());
                     root.getChildren().add(wrapGroup);
 

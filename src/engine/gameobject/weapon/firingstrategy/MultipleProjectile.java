@@ -1,13 +1,14 @@
 package engine.gameobject.weapon.firingstrategy;
 
-import engine.gameobject.weapon.upgradetree.Weapon;
+import engine.gameobject.PointSimple;
+import gameworld.GameWorld;
 
 public class MultipleProjectile implements FiringStrategy {
 
     @Override
-    public void fire (Weapon weapon) {
-        // generates multiple projectiles and sends them to their targets
-
+    public void execute (GameWorld world, PointSimple location, Projectile prototype) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

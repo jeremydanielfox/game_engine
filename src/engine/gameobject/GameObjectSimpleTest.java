@@ -7,8 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import engine.fieldsetting.Settable;
-import engine.gameobject.weapon.upgradetree.Weapon;
-import engine.gameobject.weapon.upgradetree.WeaponSimple;
+import engine.gameobject.weapon.Weapon;
+import engine.gameobject.weapon.WeaponSimple;
 import engine.pathfinding.EndOfPathException;
 
 

@@ -1,6 +1,7 @@
 package gae.gameView;
 
 import java.util.EventObject;
+import gae.backend.GameManager;
 import gae.frontend.UtilitiesBar;
 import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
@@ -32,35 +33,40 @@ public class GameView implements UIMediator {
     private LibraryView myLibrary;
     private UtilitiesBar utilities;
     private GenericObjectsPane myGenericObjects;
+    private GameManager myGameManager;
 
     public GameView () {
         myUI = new BorderPane();
         myScene = new Scene(myUI);
         myTabs = new CentralTabView(myScene);
         myScene.getStylesheets().add(GAMEVIEW_CSS);
-        myLibrary = new LibraryView();
+//        myLibrary = new LibraryView();
         utilities = new UtilitiesBar();
         myGenericObjects = new GenericObjectsPane();
-        myLibrary = new LibraryView();
+//        myLibrary = new LibraryView();
         insertBorders();
-        changeCursor(CURSOR_GRAPHIC);
+//        changeCursor(CURSOR_GRAPHIC);
     }
 
     @Override
     public Scene getScene () {
         return myScene;
     }
-
+    
     @Override
     public void addUIObject (UIObject object) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void handleEvent (UIObject usedObject, EventObject action) {
         // TODO Auto-generated method stub
 
+        myScene.setCursor(new ImageCursor(new Image("/images/swordCursor.jpg")));
+        myScene.getStylesheets().add(GAMEVIEW_CSS);
+     //   myLibrary = new LibraryView();
+        utilities = new UtilitiesBar();
+        myUI.setTop(utilities.getUtilitiesBar());
     }
 
     /**

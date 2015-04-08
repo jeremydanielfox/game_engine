@@ -1,6 +1,7 @@
 package engine.gameobject.weapon.firingstrategy;
 
-import engine.gameobject.weapon.upgradetree.Weapon;
+import engine.gameobject.PointSimple;
+import gameworld.GameWorld;
 
 /**
  * Encapsulates how a weapon is fired. Examples would be a single projectile or an
@@ -10,6 +11,6 @@ import engine.gameobject.weapon.upgradetree.Weapon;
  */
 public interface FiringStrategy {
     
-    public void fire(Weapon weapon);
+    public void execute(GameWorld world, PointSimple location, Projectile prototype);
 
 }

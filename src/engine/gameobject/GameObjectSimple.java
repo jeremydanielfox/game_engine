@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import engine.fieldsetting.Settable;
 import engine.gameobject.Health;
 import engine.gameobject.PointSimple;
-import engine.gameobject.weapon.upgradetree.Weapon;
+import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import engine.shop.Purchasable;
 
@@ -38,6 +38,10 @@ public class GameObjectSimple implements GameObject, Purchasable {
         myHealth.changeHealth(amount);
     }
 
+    public void onDeath(){
+        
+    }
+    
     // temporary
     public GameObject clone () {
         try {

@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Keeps a list of all prototypes and has the ability to return clones
+ * 
+ * @author Tom Puglisi
+ *
+ */
 public class PrototypeService {
     private Map<String, Prototype> prototypeMap;
     

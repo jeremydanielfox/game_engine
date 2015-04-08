@@ -22,5 +22,11 @@ public interface UpgradeBundle extends Purchasable {
      * @param upgradables
      */
     public void applyUpgrades (Map<Class<? extends Upgradable>, Upgradable> upgradables);
+    
+    /**
+     * Flags whether or not this upgrade has a child in the UpgradeTree.
+     * @return
+     */
+    public boolean isFinalUpgrade();
 
 }

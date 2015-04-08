@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
  * @author Sierra Smith and Cosette Goldstein
  *
  */
+@Settable
 public class Graphic {
 
     // note to self: need to change this image path default when using data files

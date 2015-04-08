@@ -77,7 +77,7 @@ public class View extends Application {
         for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
             shopImages.forEach( (icon, tower) -> {
                 ItemGraphic item = new ItemGraphic(icon, tower);
-                TransitionTower transitionTower = new TransitionTower(item.getTower());
+                TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
                 Node towerNode = transitionTower.getView();
                 item.setOnMouseClicked(mouseEvent -> {
                     addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),

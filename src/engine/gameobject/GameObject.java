@@ -9,7 +9,7 @@ import engine.gameobject.weapon.Weapon;
  * @author Jeremy, Kaighn
  *
  */
-public interface GameObject extends Movable, Health {
+public interface GameObject extends Movable, Health, Graphical {
     // public void updateGraphics ();//cannot implement yet
     /**
      * Sets the GameObject's Weapon
@@ -38,9 +38,5 @@ public interface GameObject extends Movable, Health {
      */
     public PointSimple getPoint ();
 
-    /**
-     * Returns the graphical representation of the object in the view.
-     */
-    public Graphic getGraphic ();
 
 }

@@ -29,6 +29,10 @@ public class GameObjectSimple implements GameObject, Purchasable {
     protected Graphic myGraphic;
 
     public void update(){
+        if(isDead()){
+            onDeath();
+            return;
+        }
         try {
             move();
         }
@@ -37,6 +41,7 @@ public class GameObjectSimple implements GameObject, Purchasable {
         }
         myWeapon.fire(world, myPoint);
     }
+    
     @Override
     public boolean isDead () {
         return myHealth.isDead();

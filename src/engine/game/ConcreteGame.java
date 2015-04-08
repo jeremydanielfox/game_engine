@@ -3,11 +3,21 @@ package engine.game;
 import engine.fieldsetting.Settable;
 
 
+/**
+ * 
+ * @author Jeremy
+ *
+ */
 @Settable
 public class ConcreteGame implements Game {
 
     private Player myPlayer;
     private LevelBoard myLevelBoard;
+    
+    public ConcreteGame() {
+        myPlayer = new Player();
+        myLevelBoard = new ConcreteLevelBoard();
+    }
 
     public ConcreteGame (Player player, LevelBoard level) {
         myPlayer = player;

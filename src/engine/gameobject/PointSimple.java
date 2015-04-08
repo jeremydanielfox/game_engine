@@ -10,6 +10,10 @@ import javafx.geometry.Point2D;
  */
 public class PointSimple {
     private Point2D myPoint;
+    
+    public PointSimple() {
+        myPoint = new Point2D(0,0);
+    }
 
     public PointSimple (double x, double y) {
         myPoint = new Point2D(x, y);

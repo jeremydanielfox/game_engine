@@ -1,6 +1,11 @@
 package engine.prototype;
 
-public interface Prototype {
-    public Object clone();
+/**
+ * 
+ * @author Tom Puglisi
+ *
+ */
+public interface Prototype<E> {
+    public E clone();
     public String getName();
 }

@@ -60,12 +60,12 @@ public class TestEngine extends Application {
         PlayerUnit health = new PlayerUnit(100, "Health");
         PlayerUnit scoreUnit = new PlayerUnit(100, "Score");
         Wallet wallet = new ConcreteWallet(scoreUnit);
-        Player myPlayer=new Player("Boi",health,scoreUnit,wallet);
+        Player myPlayer=new Player("PlayerName",health,scoreUnit,wallet);
         View view = new ViewConcrete2(new ConcreteGame(myPlayer,board),Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         HealthDepletionGoal healthy=new HealthDepletionGoal(myPlayer);
-        ScoreGoal score=new ScoreGoal(myPlayer,200);
         List<Goal> list=new ArrayList<Goal>();
         list.add(healthy);
+        ScoreGoal score=new ScoreGoal(myPlayer,200);
         List<Goal> list2=new ArrayList<Goal>();
         list2.add(score);
         List<Goal> list3=new ArrayList<Goal>();

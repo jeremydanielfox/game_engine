@@ -24,6 +24,7 @@ public class ScoreGoal extends PlayerGoal {
     protected void checkCondition (Player p) {
        setIsSatisfied(p.getScore() >= myScoreGoal);
        System.out.println(p.getScore());
+       System.out.println("Score:"+super.getIsSatisfied());
     }
 
 }

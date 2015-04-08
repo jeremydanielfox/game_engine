@@ -117,7 +117,6 @@ public class WorldView {
     }
 
     public StackPane tempListView () {
-
         final ListView listView = new ListView(paths);
         listView.setPrefSize(200, 250);
         listView.setEditable(true);

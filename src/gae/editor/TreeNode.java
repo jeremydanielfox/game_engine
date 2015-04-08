@@ -1,0 +1,33 @@
+package gae.editor;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+
+/**
+ * 
+ * @author Eric
+ *
+ */
+public class TreeNode {
+    private ArrayList<TreeNode> myTreeNodes;
+    private Method myMethod;
+    private String myInputType;
+    
+    public TreeNode(Method method, String inputType) {
+        myMethod = method;
+        myInputType = inputType;
+        myTreeNodes = new ArrayList<TreeNode>();
+    }
+    
+    public Method getMethod() {
+        return myMethod;
+    }
+    
+    public String getInputType() {
+        return myInputType;
+    }
+    
+    public void addToNodes(TreeNode treeNode) {
+        myTreeNodes.add(treeNode);
+    }
+}

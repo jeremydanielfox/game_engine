@@ -91,7 +91,7 @@ public class View extends Application {
 
     private void addTransitionTower (Point2D initial, Node node) {
         Node bindedTower =
-                ViewUtilities.bindCursor(node, pane.getScene(), initial, KeyCode.ESCAPE);
+                ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE);
         pane.getChildren().add(bindedTower);
     }
 

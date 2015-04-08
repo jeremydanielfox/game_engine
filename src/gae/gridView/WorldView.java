@@ -1,5 +1,6 @@
 package gae.gridView;
 
+import gae.listView.LeftPaneView;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -62,7 +63,12 @@ public class WorldView {
         background.fitWidthProperty().bind(container.widthProperty());
         background.fitHeightProperty().bind(container.heightProperty());
 
+        LeftPaneView lpview = new LeftPaneView();
+        Group leftview = lpview.getGroup(stack);
+        stack.getChildren().add(leftview);
         pathView = new PathView(stack, this.scene);
+
+        StackPane.setAlignment(leftview, Pos.CENTER_LEFT);
         return stack;
     }
 
@@ -95,7 +101,7 @@ public class WorldView {
         return complete;
     }
 
-    private Button newPath() {
+    private Button newPath () {
         Button newPath = new Button("New Path");
         newPath.setTranslateX(400);
         newPath.setTranslateY(100);

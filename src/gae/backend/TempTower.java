@@ -8,6 +8,8 @@ import engine.gameobject.weapon.Weapon;
 
 
 public class TempTower implements Editable {
+    private static int ourID;
+    private int myID;
     private int Size = 10;
     private int Health = 100;
     private Weapon weapon;
@@ -22,7 +24,7 @@ public class TempTower implements Editable {
     }
 
     public TempTower () {
-
+        myID=ourID ++;
     }
 
     public TempTower (String name) {
@@ -37,7 +39,7 @@ public class TempTower implements Editable {
     @Override
     public String getName () {
         // TODO Auto-generated method stub
-        return "TempTower";
+        return "TempTower "+myID;
     }
 
     @Override

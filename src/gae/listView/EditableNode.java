@@ -6,10 +6,12 @@ import java.util.List;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
+import javafx.util.Pair;
 import engine.gameobject.Editable;
 
 
@@ -23,7 +25,7 @@ public class EditableNode {
     private String myName;
     private String myType;
     private Editable editable;
-    private ObservableList<Editable> myChildren;
+    private ObservableList<Pair<Editable, Node>> myChildren;
     private ListView listView;
 
     public EditableNode (Editable editable) {
@@ -48,14 +50,15 @@ public class EditableNode {
 
     public Editable makeNewInstance () {
         Editable copy = (Editable) DeepCopy.copy(editable);
-        myChildren.add(copy);
+        Pair<Editable, Node> newPair= new Pair<>(copy, null);
+        myChildren.add(newPair);
         return copy;
     }
 
     public void remove (Editable editable) {
-        Iterator<Editable> iter = myChildren.iterator();
+        Iterator<Pair<Editable, Node>> iter = myChildren.iterator();
         while (iter.hasNext()) {
-            if (iter.next().equals(editable)) {
+            if (iter.next().getKey().equals(editable)) {
                 iter.remove();
             }
         }
@@ -74,7 +77,7 @@ public class EditableNode {
         return myType;
     }
 
-    public ObservableList<Editable> getChildrenList () {
+    public ObservableList<Pair<Editable, Node>> getChildrenList () {
         return myChildren;
     }
 

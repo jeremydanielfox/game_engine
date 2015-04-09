@@ -1,6 +1,8 @@
 package engine.gameobject.units;
 
-public interface Buffable {
+import engine.gameobject.GameObject;
+
+public interface Buffable extends GameObject{
     /**
      * Buff this unit with buff
      * @param buff

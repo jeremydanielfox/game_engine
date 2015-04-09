@@ -1,11 +1,14 @@
 package engine.gameobject.weapon;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.upgradable.behavior.Behavior;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
+import engine.gameobject.units.Buffable;
+import engine.gameobject.weapon.firingstrategy.Buffer;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.Projectile;
 import engine.gameobject.weapon.upgradable.FiringRate;
@@ -25,7 +28,7 @@ public class BasicWeapon implements Weapon{
     protected int timeSinceFire;
     protected double myRange;
     protected FiringRate myFiringRate;
-    protected Projectile myProjectile;
+    protected Buffer myProjectile;
     protected FiringStrategy myFiringStrategy;
     Map<Class<? extends Upgradable>, Upgradable> upgradables;
     protected UpgradeTree tree;
@@ -34,14 +37,12 @@ public class BasicWeapon implements Weapon{
      * @see engine.gameobject.weapon.Weaopn#fire(gameworld.GameWorld, engine.gameobject.PointSimple)
      */
     @Override
-    public void fire (GameWorld world, PointSimple location) {
+    public List<Buffer> fire (List<Buffable> targets, PointSimple location) {
+        List<Buffer> myProjectiles = new ArrayList<>();
         if (canFire()) {
-            fireAtEnemyInRange(world, location);
+            myProjectiles.addAll(myFiringStrategy.execute(targets, location, myProjectile));
         }
-        else {
-            // TODO: Check that this is syncing with time correctly
-            timeSinceFire++;
-        }
+        return myProjectiles;
     }
 
     /* (non-Javadoc)
@@ -68,28 +69,6 @@ public class BasicWeapon implements Weapon{
         myProjectile = projectile;
     }
 
-    private void fireAtEnemyInRange (GameWorld world, PointSimple center) {
-        ArrayList<GameObject> candidates =
-                (ArrayList<GameObject>) world.objectsInRange(myRange, center);
-        // TODO: In bloons, we choose from the candidates using first, last, strong, weak. We could
-        // do something here as well using polymorphism. For now, we just choose a random one.
-        if (!candidates.isEmpty()){
-            myFiringStrategy.execute(world, candidates, center, myProjectile);
-            timeSinceFire = 0;
-        }
-    }
-
-    // TODO: Get the math correct here
-    private double firingRateToSeconds () {
-        return 60.0 / myFiringRate.getRate();
-    }
-
-    private boolean canFire () {
-        if (timeSinceFire > firingRateToSeconds())
-            return true;
-        return false;
-    }
-
     /* (non-Javadoc)
      * @see engine.gameobject.weapon.Weaopn#getRange()
      */
@@ -104,6 +83,27 @@ public class BasicWeapon implements Weapon{
     @Override
     public double getFiringRate(){
         return myFiringRate.getRate();
+    }
+    
+    /*Utility that we may need in the future
+    private void fireAtEnemyInRange (GameWorld world, PointSimple center) {
+        ArrayList<GameObject> candidates =
+                (ArrayList<GameObject>) world.objectsInRange(myRange, center);
+        // TODO: In bloons, we choose from the candidates using first, last, strong, weak. We could
+        // do something here as well using polymorphism. For now, we just choose a random one.
+        if (!candidates.isEmpty()){
+            myFiringStrategy.execute(world, candidates, center, myProjectile);
+            timeSinceFire = 0;
+        }
+    }*/
+
+    // TODO: Get the math correct here
+    private double firingRateToSeconds () {
+        return 60.0 / myFiringRate.getRate();
+    }
+
+    private boolean canFire () {
+        return timeSinceFire > firingRateToSeconds();
     }
 
 }

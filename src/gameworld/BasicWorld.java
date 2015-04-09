@@ -28,7 +28,7 @@ public class BasicWorld implements GameWorld {
     }
 
     @Override
-    public void addObject (GameObject toSpawn) throws StructurePlacementException {
+    public void addObject (GameObject toSpawn){
         myObjects.add(toSpawn);
         //myGrid.addObject(toSpawn);
     }
@@ -40,11 +40,13 @@ public class BasicWorld implements GameWorld {
             ArrayList<GameObject> objects =
                     (ArrayList<GameObject>) objectsInRange(o.getWeapon().getRange(), o.getPoint());
             List<Buffable> buffables =
-                    objects.stream().filter(p -> p.getClass().equals(Buffable))
+                    objects.stream().filter(p -> p.getClass().isAssignableFrom(Buffable.class))
+                            .map(p -> (Buffable) p)
                             .collect(Collectors.toList());
-            List<Buffer> projectiles = o.fire(buffables);
-
+            List<Buffer> projectiles = o.getWeapon().fire(buffables, o.getPoint());
+            projectiles.forEach(p -> addObject(p));
         }
+        //TODO: Still must decide whether to do like below, or to have fire just return a list of projectiles. I don't really like the above method.
         /*
          * for (GameObject o: myObjects){
          * o.update();

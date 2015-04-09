@@ -36,8 +36,7 @@ public class Projectile extends GameObjectSimple implements Buffer {
     
     @Override
     public void impartBuffs (Buffable target) {
-        // TODO Auto-generated method stub
-        
+        onCollision.forEach(b -> target.addBuff(b));
     }
     
     private void removeDuplicateBuff(Buff newBuff){

@@ -3,6 +3,7 @@ package engine.gameobject.weapon.upgradetree;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.upgradetree.upgradebundle.BuildableBundle;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 
@@ -14,6 +15,7 @@ import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
  *
  */
 
+@Settable
 public class UpgradeTreeSimple implements UpgradeTree {
 
     private BuildableBundle first;
@@ -22,8 +24,13 @@ public class UpgradeTreeSimple implements UpgradeTree {
     public UpgradeTreeSimple() {
         //TODO: Initialize first and current
     }
-
-    public UpgradeTreeSimple (List<BuildableBundle> nodes) {
+    
+    @Settable
+    void setUpgradeBundles(List<BuildableBundle> nodes){
+        buildTree(nodes);
+    }
+    
+    private void buildTree(List<BuildableBundle> nodes) {
         first = current = nodes.get(0);
         BuildableBundle last = first;
         // take care of first node's parent

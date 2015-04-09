@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import engine.game.Game;
+import engine.goals.*;
 import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
 
@@ -24,7 +25,9 @@ import engine.gameobject.GameObject;
 public class ViewConcrete2 implements View, Observer {
 
     public static final double GAME_WIDTH_TO_HEIGHT = 1.25;
-
+    public static final int SPEED_CHANGE_INTERVAL = 10;
+    
+    
     private Game myGame;
     private Integer myRate = 200;
     private Timeline myAnimation;
@@ -43,6 +46,8 @@ public class ViewConcrete2 implements View, Observer {
 
     private double myDisplayWidth;
     private double myDisplayHeight;
+    
+    private HUD myHeadsUp;
 
     public ViewConcrete2 (Game game, double width, double height) {
         myGame = game;
@@ -68,11 +73,12 @@ public class ViewConcrete2 implements View, Observer {
     @Override
     public void initializeGameWorld () {
         setCurrentBackground();
-        HUD headsUp = new HUD(myPane);
+        myHeadsUp = new HUD(myPane);
+        addControlButtons();
         for (Displayable d : myGame.getPlayer().getDisplayables()) {
-            headsUp.addPairedDisplay(d);
+            myHeadsUp.addPairedDisplay(d);
         }
-        vbox.getChildren().add(headsUp.getDisplay());
+        vbox.getChildren().add(myHeadsUp.getDisplay());
 
         addInitialObjects();
 
@@ -106,11 +112,15 @@ public class ViewConcrete2 implements View, Observer {
                             e -> executeFrameActions());
     }
 
+    private void changeRate(int speedChangeMultiplier) {
+        //TODO
+    }
+    
     @Override
     public void executeFrameActions () {
         // after updating game, how to update after level ends? need to look into checking something
         // like gameEnded()
-        // myGame.update();
+         myGame.update();
 
         myButtonList.forEach(e -> {
             if (e.isEnabled()) {
@@ -182,6 +192,15 @@ public class ViewConcrete2 implements View, Observer {
         myGameWorldPane.getChildren().add(image);
     }
 
+    private void addControlButtons() {
+        myHeadsUp.addButton(new ButtonWrapper("Play",e->play(),new NullGoal()));
+        myHeadsUp.addButton(new ButtonWrapper("Pause",e->pause(),new NullGoal()));
+        myHeadsUp.addButton(new ButtonWrapper("Slow",e->play(),new NullGoal()));
+        myHeadsUp.addButton(new ButtonWrapper("Fast",e->play(),new NullGoal()));
+    }
+    
+    
+    
     @Override
     public void pause () {
         myAnimation.pause();

@@ -18,7 +18,7 @@ import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.NullGoal;
-import engine.goals.NoCurrentEventGoal;
+//import engine.goals.NoCurrentEventGoal;
 import engine.goals.ScoreGoal;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
@@ -74,7 +74,7 @@ public class TestEngine extends Application {
         board.addLevel(new ConcreteLevel("images/example_path.jpeg",list3,list,new BasicWorld(),story));
         //pane.setCenter(view.initializeView());
         
-        //view.addButton(addWavesButtonTest(event,myPlayer), 0, 0);
+//        view.addButton(addWavesButtonTest(event,myPlayer), 0, 0);
         
         root.getChildren().add(view.initializeView());
         primaryStage.setScene(scene);

@@ -7,18 +7,18 @@ import engine.gameobject.GameObjectSimple;
 import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
+import engine.gameobject.units.Buffable;
 import engine.gameobject.units.BuffableUnit;
 
 
-public class Projectile extends GameObjectSimple {
+public class Projectile extends GameObjectSimple implements Buffer {
     protected Set<String> collidedID;
     protected Set<Buff> onCollision;
-    protected Set<Explosion> onDeath;
+    protected Explosion onDeath;
     
     public Projectile () {
         collidedID = new HashSet<String>();
         onCollision = new HashSet<Buff>();
-        onDeath = new HashSet<Explosion>();
     }
 
     public void addCollsionBehavior(Buff newBuff){
@@ -26,8 +26,18 @@ public class Projectile extends GameObjectSimple {
         onCollision.add(newBuff);
     }
     
-    public void addOnDeath(Explosion newExplosion){
-        onDeath.add(newExplosion);
+    public void collide(){
+        
+    }
+    
+    public void addOnDeath(Buff newBuff){
+        onDeath.addBuff(newBuff);;
+    }
+    
+    @Override
+    public void impartBuffs (Buffable target) {
+        // TODO Auto-generated method stub
+        
     }
     
     private void removeDuplicateBuff(Buff newBuff){
@@ -63,4 +73,5 @@ public class Projectile extends GameObjectSimple {
             changeHealth(-1);
         }
     }
+
 }

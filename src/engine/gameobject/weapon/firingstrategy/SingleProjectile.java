@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import engine.gameobject.GameObject;
 import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
-import engine.gameobject.weapon.Weapon;
+import engine.gameobject.weapon.BasicWeapon;
 import engine.grid.StructurePlacementException;
 import gameworld.GameWorld;
 

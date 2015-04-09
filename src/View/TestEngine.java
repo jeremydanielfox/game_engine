@@ -18,7 +18,7 @@ import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.NullGoal;
-import engine.goals.NoCurrentEventGoal;
+//import engine.goals.NoCurrentEventGoal;
 import engine.goals.ScoreGoal;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;

@@ -20,25 +20,24 @@ public class TowerPaneList extends PaneList {
     private ObservableList<TitledPane> towerPaneList;
     private List<EditableNode> towerEditablesList;
     private Group root;
-    private Node scene;
+    private Node workspace;
+    private Scene scene;
 
     public TowerPaneList () {
         towerEditablesList = new ArrayList<>();
     }
 
     @Override
-    public void addToGenericList (EditableNode node) {
-        towerEditablesList.add(node);
-        // this is the TitledPane that Nina created
-        // if we can make this a Node with all the information and attach it to this
-        TitledPane newPane = setTitledPaneClick(node, root, scene);
-        
+    public void addToGenericList (EditableNode editableNode) {
+        towerEditablesList.add(editableNode);
+        TitledPane newPane = setTitledPaneClick(editableNode, root, workspace, scene);
         towerPaneList.add(newPane);
     }
 
     @Override
-    public TitledPane initialize (Group root, Node scene) {
+    public TitledPane initialize (Group root, Node node, Scene scene) {
         this.root = root;
+        this.workspace = node;
         this.scene = scene;
         TitledPane pane = getTitledPane("Tower");
         towerPaneList = setAccordion(pane);

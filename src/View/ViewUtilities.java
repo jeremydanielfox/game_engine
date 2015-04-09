@@ -87,11 +87,6 @@ public class ViewUtilities {
                            mouseEvent.getY() + getCenterOffSetY(node));
     }
     
-    public static Point2D getMouseLocation (MouseEvent mouseEvent, Node node, Node pane) {
-        return new Point2D(mouseEvent.getSceneX() + getCenterOffSetX(node),
-                           mouseEvent.getSceneY() + getCenterOffSetY(node));
-    }
-    
     /**
      * Used to find the center of a node. Gets the X offset.
      * 

@@ -50,15 +50,16 @@ public class Anchor extends Circle {
         // setOnMouseReleased(e -> {
         // getScene().setCursor(Cursor.HAND);
         // });
-
+        
+        // FIX: dragDelta doesn't really matter anymore
         setOnMouseDragged(e -> {
-            double newX = e.getX() + dragDelta.x;
+            double newX = e.getX() + dragDelta.getX();
             try {
                 if (newX > 0 && newX < getScene().getWidth()) {
                     setCenterX(newX);
                     label.setLayoutX(newX + PATH_OFFSET);
                 }
-                double newY = e.getY() + dragDelta.y;
+                double newY = e.getY() + dragDelta.getY();
                 if (newY > 0 && newY < getScene().getHeight()) {
                     setCenterY(newY);
                     label.setLayoutY(newY + PATH_OFFSET);
@@ -68,7 +69,7 @@ public class Anchor extends Circle {
                 if (newX > 0 && newX < getScene().getWidth()) {
                     setCenterX(newX);
                 }
-                double newY = e.getY() + dragDelta.y;
+                double newY = e.getY() + dragDelta.getY();
                 if (newY > 0 && newY < getScene().getHeight()) {
                     setCenterY(newY);
                 }

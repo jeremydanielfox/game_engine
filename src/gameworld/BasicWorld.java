@@ -3,7 +3,9 @@ package gameworld;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
 import engine.grid.Grid;
 import engine.grid.GridFree;
 import engine.grid.StructurePlacementException;
@@ -84,5 +86,17 @@ public class BasicWorld implements GameWorld {
     public Collection<GameObject> getGameObjects () {
         return Collections.unmodifiableList(myObjects);
     }
+
+    @Override
+    public Collection<GameObject> objectsInRange (double range, PointSimple center) {
+        ArrayList<GameObject> inRange = new ArrayList<>();
+        for (GameObject o : myObjects){
+            if (center.withinRange(o.getPoint(), range)){
+                inRange.add(o);
+            }
+        }
+        return Collections.unmodifiableList(inRange);
+    }
+    
 
 }

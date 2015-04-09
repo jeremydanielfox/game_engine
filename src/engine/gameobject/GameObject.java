@@ -9,8 +9,12 @@ import engine.gameobject.weapon.Weapon;
  * @author Jeremy, Kaighn
  *
  */
+
 public interface GameObject extends Movable, Health, Graphical {
     // public void updateGraphics ();//cannot implement yet
+   
+    public void update();
+    
     /**
      * Sets the GameObject's Weapon
      */
@@ -37,6 +41,16 @@ public interface GameObject extends Movable, Health, Graphical {
      * Returns the Cartesian coordinate of the game object.
      */
     public PointSimple getPoint ();
+    
+    public void setPoint (PointSimple point);
+    
+    /**
+     * Sets the GameObject's Weapon
+     */
+    public void setMover (Mover mover);
 
-
+    /**
+     * Returns object's mover
+     */
+    public BasicMover getMover ();
 }

@@ -3,7 +3,7 @@ package engine.game;
 import java.util.ArrayList;
 import java.util.List;
 import engine.events.Event;
-import engine.events.TimedEvent;
+import engine.fieldsetting.Settable;
 
 
 /**
@@ -12,6 +12,7 @@ import engine.events.TimedEvent;
  * @author Tom Puglisi
  *
  */
+@Settable
 public class StoryBoard {
     private List<Event> eventList;
 
@@ -70,6 +71,11 @@ public class StoryBoard {
         if (currentEvent != null && !currentEvent.canStart()) {
             currentEvent.setCanStart();
         }
+    }
+    
+    @Settable
+    public void setEvents(List<Event> events) {
+        eventList = events;
     }
 
 }

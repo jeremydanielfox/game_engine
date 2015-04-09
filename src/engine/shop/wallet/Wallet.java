@@ -12,19 +12,19 @@ public abstract class Wallet {
      * 
      * @return
      */
-    abstract double getBalance ();
+    public abstract double getBalance ();
 
     /**
      * Takes in a value to add to the player unit value.
      * 
      * @param amount
      */
-    abstract void deposit (double amount);
+    public abstract void deposit (double amount);
 
     /**
      * Takes in an amount which it then subtracts from the player unit value.
      * 
      * @param amount
      */
-    abstract void withdraw (double amount);
+    public abstract void withdraw (double amount);
 }

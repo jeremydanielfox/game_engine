@@ -3,6 +3,7 @@ package engine.prototype;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import engine.gameobject.GameObject;
 
 /**
  * Keeps a list of all prototypes and has the ability to return clones
@@ -11,18 +12,18 @@ import java.util.Map;
  *
  */
 public class PrototypeService {
-    private Map<String, Prototype> prototypeMap;
+    private Map<String, Prototype<GameObject>> prototypeMap;
     
-    public PrototypeService(List<Prototype> prototypes) {
-        prototypeMap = new HashMap<String, Prototype>();
+    public PrototypeService(List<Prototype<GameObject>> prototypes) {
+        prototypeMap = new HashMap<String, Prototype<GameObject>>();
         prototypes.stream().forEach(prototype -> prototypeMap.put(prototype.getName(), prototype));
     }
     
-    public Object getInstance(String name) {
+    public GameObject getInstance(String name) {
         return prototypeMap.get(name).clone();
     }
     
-    public void addPrototype(Prototype prototype) {
+    public void addPrototype(Prototype<GameObject> prototype) {
         prototypeMap.put(prototype.getName(), prototype);
     }
 }

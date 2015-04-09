@@ -19,6 +19,10 @@ public class RangeUpgrade implements Range, Upgrade {
 
     private double increment;
     private Optional<Range> decorated;
+    
+    public RangeUpgrade() {
+        increment = 0;
+    }
 
     public RangeUpgrade (double increment) {
         this.increment = increment;

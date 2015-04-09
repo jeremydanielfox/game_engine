@@ -53,14 +53,13 @@ public class TowerPaneList extends PaneList {
     @Override
     public void removeRoot () {
         stack.getChildren().remove(root);
-        added = false;
     }
 
     @Override
     public void addRoot () {
-        if (!added) {
+        if (added) {
             stack.getChildren().add(root);
-            added = true;
+            added = false;
         }
     }
 

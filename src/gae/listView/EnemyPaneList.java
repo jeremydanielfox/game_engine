@@ -35,7 +35,7 @@ public class EnemyPaneList extends PaneList {
         this.root = root;
         this.workspace = node;
         this.scene = scene;
-        this.stack = (StackPane) node;
+        this.stack = (StackPane) workspace;
         TitledPane pane = getTitledPane("Enemy");
         enemyPaneList = setAccordion(pane);
         return pane;
@@ -49,7 +49,6 @@ public class EnemyPaneList extends PaneList {
     @Override
     public void removeRoot () {
         stack.getChildren().remove(root);
-        added = false;
     }
 
     @Override

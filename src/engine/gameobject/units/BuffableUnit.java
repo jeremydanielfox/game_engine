@@ -5,7 +5,7 @@ import engine.gameobject.BasicMover;
 import engine.gameobject.GameObjectSimple;
 
 
-public class BuffableUnit extends GameObjectSimple {
+public class BuffableUnit extends GameObjectSimple implements Buffable{
     private List<Buff> buffList;
 
     public void addBuff (Buff toAdd) {

@@ -20,6 +20,11 @@ public class Explosion {
         this.radius = radius;
     }
 
+    /**
+     * Creates explosion in world at the specified location
+     * @param world
+     * @param location
+     */
     public void explode (GameWorld world, PointSimple location) {
         HashSet<GameObject> objectsInRange = (HashSet) world.objectsInRange(radius, location);
         for (GameObject target : objectsInRange) {
@@ -28,7 +33,23 @@ public class Explosion {
             }
         }
     }
+    
+    /**
+     * Adds newBuff as an explosion behavior
+     * @param newBuff
+     */
+    public void addBuff(Buff newBuff){
+        effects.add(newBuff);
+    }
 
+    /**
+     * Sets the explosion radius
+     * @param radius
+     */
+    public void setRadius(int radius){
+        this.radius = radius;
+    }
+    
     private void applyBuffs (BuffableUnit target) {
         for (Buff b : effects) {
             target.addBuff(b);

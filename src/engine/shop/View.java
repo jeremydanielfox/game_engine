@@ -75,7 +75,7 @@ public class View extends Application {
         for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
             shopImages.forEach( (icon, tower) -> {
                 ItemGraphic item = new ItemGraphic(icon, tower);
-                TransitionTower transitionTower = new TransitionTower(item.getTower());
+                TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
                 Node towerNode = transitionTower.getView();
                 item.setOnMouseClicked(mouseEvent -> {
                     addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
@@ -89,7 +89,7 @@ public class View extends Application {
 
     private void addTransitionTower (Point2D initial, Node node) {
         Node bindedTower =
-                ViewUtilities.bindCursor(node, pane.getScene(), initial, KeyCode.ESCAPE);
+                ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE);
         pane.getChildren().add(bindedTower);
     }
 

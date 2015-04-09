@@ -38,8 +38,7 @@ public class CentralTabView {
         WorldView worldView = new WorldView();
         LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
         LevelTabSet newLevel =
-                new LevelTabSet(worldView.getStack(scene),
-                                worldView.tempListView(), levelPrefs.getStack());
+                new LevelTabSet(worldView.getBorder(scene), levelPrefs.getStack());
         // temporarily --> real code is :
         // LevelTabSet newLevel = new LevelTabSet(worldView.getStack(scene),levelPrefs.getStack());
         Tab newTab = new Tab("Level:" + levelCount++);

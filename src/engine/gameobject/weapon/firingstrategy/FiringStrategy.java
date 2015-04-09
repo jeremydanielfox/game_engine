@@ -1,6 +1,9 @@
 package engine.gameobject.weapon.firingstrategy;
 
-import engine.gameobject.weapon.Weapon;
+import java.util.ArrayList;
+import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
+import gameworld.GameWorld;
 
 /**
  * Encapsulates how a weapon is fired. Examples would be a single projectile or an
@@ -10,6 +13,6 @@ import engine.gameobject.weapon.Weapon;
  */
 public interface FiringStrategy {
     
-    public void fire(Weapon weapon);
-
+    public void execute(GameWorld world, ArrayList<GameObject> candidate, PointSimple location, Projectile prototype);
+        
 }

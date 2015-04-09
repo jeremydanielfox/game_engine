@@ -1,13 +1,27 @@
 package engine.gameobject.weapon.firingstrategy;
 
-import engine.gameobject.weapon.Weapon;
+import java.util.ArrayList;
+import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
+import gameworld.GameWorld;
+
 
 public class MultipleProjectile implements FiringStrategy {
+    
+    private int projectilesCreated;
+    
+    public MultipleProjectile(int numProjectiles){
+        projectilesCreated = numProjectiles;
+    }
+    
 
     @Override
-    public void fire (Weapon weapon) {
-        // generates multiple projectiles and sends them to their targets
-
+    public void execute (GameWorld world,
+                         ArrayList<GameObject> candidate,
+                         PointSimple location,
+                         Projectile prototype) {
+        
+        
     }
 
 }

@@ -37,6 +37,7 @@ public class PathSet extends Region {
     }
 
     public Path getPathObject () {
+        // EDIT: We could just use Point2D --> this is JavaFX so not recommended
         Pair start = new Pair(curve.getStartX(), curve.getStartY());
         Pair end = new Pair(curve.getEndX(), curve.getEndY());
         Pair control1 = new Pair(curve.getControlX1(), curve.getControlY1());
@@ -57,6 +58,10 @@ public class PathSet extends Region {
         curve.setFill(Color.TRANSPARENT);
         makePath = true;
         choosePoint(curve);
+    }
+
+    public CubicCurve getCurve () {
+        return curve;
     }
 
     private void choosePoint (CubicCurve curve) {

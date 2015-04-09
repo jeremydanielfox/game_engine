@@ -1,7 +1,8 @@
-package engine.gameobject.weapon;
+package engine.gameobject.weapon.upgradetree.upgradebundle;
 
 import java.util.Map;
 import engine.gameobject.weapon.upgradable.Upgradable;
+import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.shop.Purchasable;
 
 
@@ -22,5 +23,18 @@ public interface UpgradeBundle extends Purchasable {
      * @param upgradables
      */
     public void applyUpgrades (Map<Class<? extends Upgradable>, Upgradable> upgradables);
+    
+    /**
+     * 
+     * @return whether or not this upgrade is the last child in an UpgradeTree.
+     */
+    public boolean isFinalUpgrade ();
+    
+    /**
+     * 
+     * @return parent UpgradeTree
+     */
+    public UpgradeTree getParent ();
+    
 
 }

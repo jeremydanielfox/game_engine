@@ -1,4 +1,4 @@
-package AuthoringEnvironment;
+package gae.editor;
 
 import engine.gameobject.Editable;
 import engine.gameobject.GameObject;

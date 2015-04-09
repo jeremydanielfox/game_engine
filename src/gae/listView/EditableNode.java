@@ -4,8 +4,12 @@ import java.util.Iterator;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
+import javafx.util.Pair;
 import engine.gameobject.Editable;
 
 
@@ -19,6 +23,7 @@ public class EditableNode {
     private String myName;
     private String myType;
     private Editable editable;
+    private int myID=0;
     private ObservableList<Editable> myChildren;
 
     public EditableNode (Editable editable) {
@@ -28,13 +33,14 @@ public class EditableNode {
         this.editable = editable;
     }
 
-
     public void clearChildren () {
         myChildren = FXCollections.observableArrayList();
     }
 
     public Editable makeNewInstance () {
         Editable copy = (Editable) DeepCopy.copy(editable);
+        myID++;
+        copy.setID(myID);
         myChildren.add(copy);
         return copy;
     }

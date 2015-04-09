@@ -30,7 +30,7 @@ public class GameView implements UIMediator {
     private BorderPane myUI;
     private CentralTabView myTabs; // replace with main editor
     private Scene myScene;
-    private LibraryView myLibrary;
+    //private LibraryView myLibrary;
     private UtilitiesBar utilities;
     private GenericObjectsPane myGenericObjects;
     private GameManager myGameManager;

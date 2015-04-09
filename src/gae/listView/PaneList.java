@@ -31,6 +31,10 @@ public abstract class PaneList {
 
     public abstract String getType ();
 
+    public abstract void removeRoot ();
+
+    public abstract void addRoot ();
+
     protected TitledPane getTitledPane (String text) {
         TitledPane pane = new TitledPane();
         pane.setText(text);

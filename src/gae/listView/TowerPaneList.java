@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.StackPane;
 
 
 public class TowerPaneList extends PaneList {
@@ -15,6 +16,8 @@ public class TowerPaneList extends PaneList {
     private Group root;
     private Node workspace;
     private Scene scene;
+    private StackPane stack;
+    private boolean added;
 
     public TowerPaneList () {
         towerEditablesList = new ArrayList<>();
@@ -35,6 +38,7 @@ public class TowerPaneList extends PaneList {
     public TitledPane initialize (Group root, Node node, Scene scene) {
         this.root = root;
         this.workspace = node;
+        this.stack = (StackPane) workspace;
         this.scene = scene;
         TitledPane pane = getTitledPane("Tower");
         towerPaneList = setAccordion(pane);
@@ -44,6 +48,20 @@ public class TowerPaneList extends PaneList {
     @Override
     public String getType () {
         return "Tower";
+    }
+
+    @Override
+    public void removeRoot () {
+        stack.getChildren().remove(root);
+        added = false;
+    }
+
+    @Override
+    public void addRoot () {
+        if (!added) {
+            stack.getChildren().add(root);
+            added = true;
+        }
     }
 
 }

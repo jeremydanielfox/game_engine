@@ -42,6 +42,9 @@ public class ObjectEditor extends Application implements UIObject{
         return objectEditor;
     }
     
+    /**
+     * sets up the different borders of the border pane
+     */
     private void setUpContainers() {
         objectEditor.setRight(rightContainer);
         leftContainer.getChildren().addAll(imageBox, simpleEditor.getObject());

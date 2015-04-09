@@ -28,16 +28,18 @@ public class SliderEditor implements ComponentEditor {
     public SliderEditor (String name, double bottom, double high) {
         editBox = new HBox();
         slider = new Slider(bottom, high, DEFAULT);
-        label = new Label(name);
-        
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        label = new Label(name);    
         editBox.getChildren().addAll(label, slider);
     }
 
     public SliderEditor (String name, double high) {
         editBox = new HBox();
         slider = new Slider(DEFAULT, high, DEFAULT);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
         label = new Label(name);
-        
         editBox.getChildren().addAll(label, slider);
     }
 

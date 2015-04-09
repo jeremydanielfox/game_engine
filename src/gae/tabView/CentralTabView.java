@@ -1,7 +1,11 @@
 package gae.tabView;
 
-import gae.gridView.WorldView;
+import gae.gridView.WorldView
+;
+
 import gae.openingView.UIMediator;
+
+import gae.openingView.UIObject;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +17,9 @@ import javafx.scene.layout.VBox;
 public class CentralTabView {
     
     private UIMediator myMediator;
+    
+public class CentralTabView implements UIObject{
+    
     private VBox baseNode;
     private TabPane tabView;
     private int levelCount;
@@ -55,7 +62,9 @@ public class CentralTabView {
         tabView.getTabs().add(newTab);
     }
 
-    public Node getBaseNode () {
+    @Override
+    public Node getObject () {
         return baseNode;
     }
+}
 }

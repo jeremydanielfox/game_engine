@@ -109,7 +109,7 @@ public class PathList {
     }
 
     public void setScreen () {
-        pathView.resetScreen();
+//        pathView.resetScreen();
         for (Button button : buttonList) {
             button.setDisable(false);
         }

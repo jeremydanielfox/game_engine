@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
+import engine.gameobject.units.Buffable;
+import engine.gameobject.weapon.firingstrategy.Buffer;
 import engine.grid.Grid;
 import engine.grid.GridFree;
 import engine.grid.StructurePlacementException;
@@ -15,7 +18,7 @@ import engine.pathfinding.Path;
 
 
 public class BasicWorld implements GameWorld {
-    private ArrayList<GameObject> myObjects;
+    private List<GameObject> myObjects;
     private Grid myGrid;
     private InteractionEngine myCollisionEngine;
 
@@ -25,16 +28,30 @@ public class BasicWorld implements GameWorld {
     }
 
     @Override
-    public void addObject (GameObject toSpawn) throws StructurePlacementException {
+    public void addObject (GameObject toSpawn){
         myObjects.add(toSpawn);
         //myGrid.addObject(toSpawn);
     }
 
     @Override
     public void updateGameObjects () {
-        for (GameObject o: myObjects){
-            o.update();
+        for (GameObject o : myObjects) {
+            o.move();
+            ArrayList<GameObject> objects =
+                    (ArrayList<GameObject>) objectsInRange(o.getWeapon().getRange(), o.getPoint());
+            List<Buffable> buffables =
+                    objects.stream().filter(p -> p.getClass().isAssignableFrom(Buffable.class))
+                            .map(p -> (Buffable) p)
+                            .collect(Collectors.toList());
+            List<Buffer> projectiles = o.getWeapon().fire(buffables, o.getPoint());
+            projectiles.forEach(p -> addObject(p));
         }
+        //TODO: Still must decide whether to do like below, or to have fire just return a list of projectiles. I don't really like the above method.
+        /*
+         * for (GameObject o: myObjects){
+         * o.update();
+         * }
+         */
     }
 
     @Override

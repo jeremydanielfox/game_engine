@@ -18,7 +18,7 @@ import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.NullGoal;
-import engine.goals.PlayerGoal;
+import engine.goals.NoCurrentEventGoal;
 import engine.goals.ScoreGoal;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
@@ -28,7 +28,6 @@ import gameworld.GameWorld;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class TestEngine extends Application {
@@ -44,8 +43,8 @@ public class TestEngine extends Application {
         GameWorld world = new BasicWorld();
         world.addObject(new GameObjectSimpleTest());
         GameObjectQueue q = new ConcreteQueue(new ArrayList<GameObject>());
-        TimedEvent event = new ConstantSpacingWave(2.0, q, world);
-        StoryBoard story = new StoryBoard(event);
+        TimedEvent wave = new ConstantSpacingWave(2.0, q, world);
+        StoryBoard story = new StoryBoard(wave);
         
         
         Scene scene=new Scene(root);
@@ -54,7 +53,8 @@ public class TestEngine extends Application {
         Wallet wallet = new ConcreteWallet(scoreUnit);
         Player myPlayer=new Player("PlayerName",health,scoreUnit,wallet);
         Game game=new ConcreteGame(myPlayer,board,new ArrayList<ButtonWrapper>());
-        ButtonWrapper wrap=new ButtonWrapper("wave",e->event.canStart(),new NullGoal());
+        ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
+        //ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NoCurrentEventGoal());
         game.addButton(wrap);
         View view = new ViewConcrete2(game,Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         
@@ -79,11 +79,6 @@ public class TestEngine extends Application {
         root.getChildren().add(view.initializeView());
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    public Button addWavesButtonTest(TimedEvent event,Player player) {
-        ButtonWrapper wrap=new ButtonWrapper("wave",e->event.canStart(),new NullGoal());
-        return wrap.getButton();
     }
     
     public static void main(String[] args) {

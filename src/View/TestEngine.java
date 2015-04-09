@@ -74,7 +74,7 @@ public class TestEngine extends Application {
         board.addLevel(new ConcreteLevel("images/example_path.jpeg",list3,list,new BasicWorld(),story));
         //pane.setCenter(view.initializeView());
         
-        //view.addButton(addWavesButtonTest(event,myPlayer), 0, 0);
+//        view.addButton(addWavesButtonTest(event,myPlayer), 0, 0);
         
         root.getChildren().add(view.initializeView());
         primaryStage.setScene(scene);

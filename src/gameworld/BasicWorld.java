@@ -67,8 +67,7 @@ public class BasicWorld implements GameWorld {
                 go.move();
             }
             catch (EndOfPathException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+//            	go.changeHealth();
             }
         });
     }

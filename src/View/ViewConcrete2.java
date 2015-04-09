@@ -110,7 +110,7 @@ public class ViewConcrete2 implements View, Observer {
     public void executeFrameActions () {
         // after updating game, how to update after level ends? need to look into checking something
         // like gameEnded()
-        // myGame.update();
+         myGame.update();
 
         myButtonList.forEach(e -> {
             if (e.isEnabled()) {

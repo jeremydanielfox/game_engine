@@ -1,6 +1,6 @@
 package gae.listView;
 
-import engine.gameobject.Editable;
+import gae.backend.Editable;
 import View.ViewUtilities;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;

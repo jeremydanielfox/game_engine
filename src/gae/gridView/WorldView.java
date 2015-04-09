@@ -16,6 +16,9 @@ public class WorldView {
     private PathView pathView;
     private Scene scene;
     private BorderPane border;
+    
+    //ERASE AFTER
+    public LeftPaneView lpview;
 
     private ObservableList<PathView> paths =
             FXCollections.observableArrayList();
@@ -50,7 +53,8 @@ public class WorldView {
 
     private Group getLeftView () {
         StackPane stackPane = new StackPane();
-        LeftPaneView lpview = new LeftPaneView();
+        lpview = new LeftPaneView();
+        //LeftPaneView lpview = new LeftPaneView();
         Group leftview = lpview.getGroup(stack, scene, paths, pathView);
         stackPane.getChildren().add(leftview);
         return leftview;

@@ -1,6 +1,7 @@
 package gae.tabView;
 
 import gae.gridView.WorldView;
+import gae.openingView.UIMediator;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,12 +11,18 @@ import javafx.scene.layout.VBox;
 
 
 public class CentralTabView {
+    
+    private UIMediator myMediator;
     private VBox baseNode;
     private TabPane tabView;
     private int levelCount;
     private Scene scene;
+    
+    // ERASE AFTER
+    public WorldView worldView;
 
-    public CentralTabView (Scene sceneIn) {
+    public CentralTabView (Scene sceneIn, UIMediator mediator) {
+        myMediator = mediator;
         scene = sceneIn;
         initialize();
     }
@@ -35,7 +42,8 @@ public class CentralTabView {
     }
 
     private void createNewLevel () {
-        WorldView worldView = new WorldView();
+        worldView = new WorldView();
+        //WorldView worldView = new WorldView();
         LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
         LevelTabSet newLevel =
                 new LevelTabSet(worldView.getBorder(scene), levelPrefs.getStack());

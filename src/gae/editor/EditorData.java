@@ -1,7 +1,7 @@
 package gae.editor;
 
-import engine.gameobject.Editable;
 import engine.gameobject.GameObject;
+import gae.backend.Editable;
 
 import java.lang.reflect.Field;
 import java.util.Enumeration;

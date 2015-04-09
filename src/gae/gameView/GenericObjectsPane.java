@@ -3,14 +3,16 @@ package gae.gameView;
 import gae.editor.SimpleEditor;
 import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
-import javafx.event.EventHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GenericObjectsPane implements UIObject{
@@ -25,24 +27,28 @@ public class GenericObjectsPane implements UIObject{
     
     private void initialize () {
         baseNode = new VBox();
-        baseNode.setStyle("-fx-background-color: #FFFFFF;");
-        baseNode.setStyle("-fx-border-color: red;");
-        baseNode.setSpacing(10);
-        baseNode.setPadding(new Insets(15, 12, 15, 12));
+        ObservableList<String> data = FXCollections.observableArrayList();
 
-        // Make these classes?
-        Label towerLabel = makeNewClickableText("Tower", e -> newCustomObject("Tower"));
-        Label enemyLabel = makeNewClickableText("Enemy", e -> newCustomObject("Enemy"));
-        Label obstacleLabel = makeNewClickableText("Obstacle", e -> newCustomObject("Obstacle"));
-        baseNode.getChildren().addAll(new Label("Custom Object Types"), towerLabel, enemyLabel, obstacleLabel);
+        ListView<String> listView = new ListView<String>(data);
+        listView.setPrefSize(200, 250);
+        listView.setEditable(true);
+
+        data.addAll("Tower", "Enemy", "Obstacle");
+
+        listView.setItems(data);
+        listView.setOnMouseClicked(e -> cellClicked(e, listView.getSelectionModel().getSelectedItem()));
+        
+        baseNode.getChildren().addAll(new Text("Generic Objects"), listView);
+        baseNode.setPadding(new Insets(5));
+        baseNode.setSpacing(5);
     }  
-
-    private Label makeNewClickableText(String title, EventHandler<MouseEvent> action) {
-        Label ret = new Label(title);
-        ret.setOnMouseClicked(action);
-        return ret;
-    }
     
+    private void cellClicked (MouseEvent e, String selected) {
+        if (e.getClickCount() == 2) {
+            newCustomObject(selected);
+        }
+    }
+
     private void newCustomObject (String type) {
         SimpleEditor editor = new SimpleEditor(myMediator);
         Scene editorScene = new Scene(new Pane(editor.getObject()));

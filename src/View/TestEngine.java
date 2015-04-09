@@ -2,6 +2,10 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
@@ -18,17 +22,12 @@ import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.NullGoal;
-import engine.goals.NoCurrentEventGoal;
 import engine.goals.ScoreGoal;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
 import gae.gameView.Main;
 import gameworld.BasicWorld;
 import gameworld.GameWorld;
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 public class TestEngine extends Application {
     

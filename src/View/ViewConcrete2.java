@@ -1,6 +1,7 @@
 package View;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.animation.Animation;
@@ -35,8 +36,10 @@ public class ViewConcrete2 implements View, Observer {
 
     // new way
     private BorderPane myPane;
-    
-    private VBox vbox=new VBox();
+
+    private VBox vbox = new VBox();
+
+    private List<ButtonWrapper> myButtonList;
 
     private double myDisplayWidth;
     private double myDisplayHeight;
@@ -45,7 +48,7 @@ public class ViewConcrete2 implements View, Observer {
         myGame = game;
         myLevelBoard = myGame.getLevelBoard();
         myLevelBoard.addObserver(this);
-        //vbox=new VBox();
+        // vbox=new VBox();
         // myTotalGroup=group;
 
         myDisplayWidth = width;
@@ -85,7 +88,8 @@ public class ViewConcrete2 implements View, Observer {
         btn2.setOnAction(e -> myGame.getPlayer().changeScore(100));// .changeScore(100));
         // myTotalGroup.getChildren().addAll(btn,vbox,btn2);
         vbox.getChildren().addAll(btn, btn2);
-        myGame.getButtons().forEach(e->vbox.getChildren().add(e.getButton()));
+        myButtonList = myGame.getButtons();
+        myButtonList.forEach(e -> vbox.getChildren().add(e.getButton()));
         play();
     }
 
@@ -107,6 +111,16 @@ public class ViewConcrete2 implements View, Observer {
         // after updating game, how to update after level ends? need to look into checking something
         // like gameEnded()
         // myGame.update();
+
+        myButtonList.forEach(e -> {
+            if (e.isEnabled()) {
+                e.getButton().setDisable(false);
+            }
+            else {
+                e.getButton().setDisable(true);
+            }
+        });
+
     }
 
     @Override
@@ -144,12 +158,12 @@ public class ViewConcrete2 implements View, Observer {
                 play();
             }
         }
-        
-        //Look back at this to think about if statements.
-        //Also, alternatively, check if it already exists in gameWorld opposed to just in View.
+
+        // Look back at this to think about if statements.
+        // Also, alternatively, check if it already exists in gameWorld opposed to just in View.
         if (myLevelBoard.getGameWorld().equals(o)) {
             if (!(arg.equals(null)) && arg instanceof GameObject) {
-                Node node=((GameObject) arg).getGraphic().getNode();
+                Node node = ((GameObject) arg).getGraphic().getNode();
                 if (myGameWorldPane.getChildren().contains(node)) {
                     myGameWorldPane.getChildren().remove(node);
                 }
@@ -167,7 +181,6 @@ public class ViewConcrete2 implements View, Observer {
         myGameWorldPane.getChildren().clear();
         myGameWorldPane.getChildren().add(image);
     }
-    
 
     @Override
     public void pause () {
@@ -179,8 +192,8 @@ public class ViewConcrete2 implements View, Observer {
         myAnimation.play();
     }
 
-    public void addButton(Button b, int x,int y) {
+    public void addButton (Button b, int x, int y) {
         vbox.getChildren().add(b);
     }
-    
+
 }

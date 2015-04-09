@@ -38,6 +38,10 @@ public class GameObjectSimple implements GameObject, Purchasable {
         myHealth.changeHealth(amount);
     }
 
+    public void onDeath(){
+        
+    }
+    
     // temporary
     public GameObject clone () {
         try {

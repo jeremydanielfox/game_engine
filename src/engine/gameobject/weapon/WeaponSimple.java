@@ -2,17 +2,15 @@ package engine.gameobject.weapon;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimple;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.upgradable.FiringRate;
 import engine.gameobject.weapon.upgradable.Upgradable;
 import engine.gameobject.weapon.upgradable.behavior.Behavior;
 import engine.gameobject.weapon.upgradable.range.Range;
+import engine.gameobject.weapon.upgradetree.UpgradeTree;
 
 
 /**
@@ -20,7 +18,7 @@ import engine.gameobject.weapon.upgradable.range.Range;
  * @author Nathan Prabhu
  *
  */
-public class WeaponSimple implements Weapon {
+public class WeaponSimple extends Weapon {
     private Range myRange;
     private FiringRate myFiringRate;
     private List<Behavior> myBehaviors;
@@ -53,17 +51,17 @@ public class WeaponSimple implements Weapon {
         return myFiringStrategy;
     }
 
-    @Override
-    public void attack (GameObject... targets) {
-        Arrays.asList(targets).forEach(target -> {
-            myBehaviors.forEach(behavior -> behavior.apply(target));
-        });
-    }
-    
-    @Override
-    public void addBehavior (Behavior behavior) {
-        // add behavior if it doesn't exist, otherwise upgrade existing one 
-    }
+//    @Override
+//    public void attack (GameObject... targets) {
+//        Arrays.asList(targets).forEach(target -> {
+//            myBehaviors.forEach(behavior -> behavior.apply(target));
+//        });
+//    }
+//    
+//    @Override
+//    public void addBehavior (Behavior behavior) {
+//        // add behavior if it doesn't exist, otherwise upgrade existing one 
+//    }
 
     @Override 
     public double getValue () {

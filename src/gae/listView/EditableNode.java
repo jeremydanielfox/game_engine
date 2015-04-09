@@ -1,8 +1,6 @@
 package gae.listView;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,23 +23,14 @@ public class EditableNode {
     private String myName;
     private String myType;
     private Editable editable;
-    private ObservableList<Pair<Editable, Node>> myChildren;
-    private ListView listView;
+    private int myID=0;
+    private ObservableList<Editable> myChildren;
 
     public EditableNode (Editable editable) {
         myName = editable.getName();
         myType = editable.getType();
         myChildren = FXCollections.observableArrayList();
         this.editable = editable;
-        /*
-         * Get ListView from Nina's class --> each EditableNode will have an editable object + it's
-         * listView
-         */
-        listView = null;
-    }
-
-    public ListView getListView () {
-        return listView;
     }
 
     public void clearChildren () {
@@ -50,15 +39,16 @@ public class EditableNode {
 
     public Editable makeNewInstance () {
         Editable copy = (Editable) DeepCopy.copy(editable);
-        Pair<Editable, Node> newPair= new Pair<>(copy, null);
-        myChildren.add(newPair);
+        myID++;
+        copy.setID(myID);
+        myChildren.add(copy);
         return copy;
     }
 
     public void remove (Editable editable) {
-        Iterator<Pair<Editable, Node>> iter = myChildren.iterator();
+        Iterator<Editable> iter = myChildren.iterator();
         while (iter.hasNext()) {
-            if (iter.next().getKey().equals(editable)) {
+            if (iter.next().equals(editable)) {
                 iter.remove();
             }
         }
@@ -66,7 +56,7 @@ public class EditableNode {
 
     public ImageView getImageView () {
         return ImageUtilities.changeImageSize(new ImageView(new Image(getClass()
-                .getResourceAsStream(editable.getImage()))), 75, 75);
+                .getResourceAsStream(editable.getImagePath()))), 75, 75);
     }
 
     public String getName () {
@@ -77,7 +67,7 @@ public class EditableNode {
         return myType;
     }
 
-    public ObservableList<Pair<Editable, Node>> getChildrenList () {
+    public ObservableList<Editable> getChildrenList () {
         return myChildren;
     }
 

@@ -1,11 +1,15 @@
 package engine.gameobject.weapon.firingstrategy;
 
-import engine.gameobject.weapon.Weapon;
+
+import engine.gameobject.PointSimple;
+import gameworld.GameWorld;
+
 
 public class SingleProjectile implements FiringStrategy {
 
     @Override
-    public void fire (Weapon weapon) {
-        // creates a new projectile and sends it to the target 
+    public void execute (GameWorld world, PointSimple location, Projectile prototype) {
+        // TODO Auto-generated method stub
+
     }
 }

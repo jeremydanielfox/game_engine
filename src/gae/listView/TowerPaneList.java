@@ -1,18 +1,12 @@
 package gae.listView;
 
-import gae.backend.TempTower;
 import java.util.ArrayList;
 import java.util.List;
-import View.ViewUtilities;
 import javafx.collections.ObservableList;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TitledPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 
 
@@ -22,11 +16,17 @@ public class TowerPaneList extends PaneList {
     private Group root;
     private Node workspace;
     private Scene scene;
+    private StackPane stack;
+    private boolean added;
 
     public TowerPaneList () {
         towerEditablesList = new ArrayList<>();
     }
 
+    /*
+     * TODO: Make it so that when Tower is clicked, all the tower objects on the grid will show up,
+     * and when Path is clicked, these will all disappear because we don't want conflicts
+     */
     @Override
     public void addToGenericList (EditableNode editableNode) {
         towerEditablesList.add(editableNode);
@@ -38,6 +38,7 @@ public class TowerPaneList extends PaneList {
     public TitledPane initialize (Group root, Node node, Scene scene) {
         this.root = root;
         this.workspace = node;
+        this.stack = (StackPane) workspace;
         this.scene = scene;
         TitledPane pane = getTitledPane("Tower");
         towerPaneList = setAccordion(pane);
@@ -47,6 +48,20 @@ public class TowerPaneList extends PaneList {
     @Override
     public String getType () {
         return "Tower";
+    }
+
+    @Override
+    public void removeRoot () {
+        stack.getChildren().remove(root);
+        added = false;
+    }
+
+    @Override
+    public void addRoot () {
+        if (!added) {
+            stack.getChildren().add(root);
+            added = true;
+        }
     }
 
 }

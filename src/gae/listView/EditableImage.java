@@ -5,7 +5,6 @@ import View.ViewUtilities;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.effect.Bloom;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
@@ -37,6 +36,7 @@ public class EditableImage extends Region {
             }
             editable.setLocation(abs.getX(), abs.getY());
         });
+        
     }
 
     public boolean checkIntersect (Node object) {

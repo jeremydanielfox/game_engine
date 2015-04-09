@@ -36,7 +36,7 @@ public class GameObjectSimpleTest implements GameObject {
         myLabel = "test object";
         myPoint = new PointSimple(300,300);
         myHealth = new HealthSimple();
-        myMover = new MoverPath(null, 0);
+        myMover = new MoverPoint(new PointSimple(600,600), .2);
         //myWeapon = new WeaponSimple(0, 0, null, null);
         myGraphic = new Graphic(100, 100, myImagePath);
         myGraphic.setPoint(myPoint);
@@ -92,6 +92,7 @@ public class GameObjectSimpleTest implements GameObject {
         // TODO Auto-generated method stub
         PointSimple point = myMover.move(myPoint);
         myPoint = new PointSimple(new Point2D(point.getX(), point.getY()));
+        myGraphic.setPoint(myPoint);
     }
 
     @Settable
@@ -118,6 +119,7 @@ public class GameObjectSimpleTest implements GameObject {
     }
 
     @Settable
+	public
     void setPoint (PointSimple point) {
         myPoint = point;
         myGraphic.setPoint(point); 
@@ -129,6 +131,7 @@ public class GameObjectSimpleTest implements GameObject {
     }
 
     @Settable
+	public
     void setMover (Mover mover) {
         myMover = mover;
     }
@@ -148,4 +151,16 @@ public class GameObjectSimpleTest implements GameObject {
     public void setWeapon (Weapon weapon) {
         myWeapon = weapon;
     }
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BasicMover getMover() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

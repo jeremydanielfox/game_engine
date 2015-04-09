@@ -1,5 +1,7 @@
 package gae.openingView;
 
+import java.util.Arrays;
+
 import gae.backend.GameManager;
 import gae.gameView.GameView;
 import javafx.geometry.Pos;

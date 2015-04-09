@@ -16,7 +16,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 
-
+/**
+ * Abstract class to be extended to all Editable object's lists
+ * 
+ * @author Kei & Nina
+ *
+ */
 public abstract class PaneList {
     public static final int THUMBNAIL_SIZE = 20;
 
@@ -25,6 +30,10 @@ public abstract class PaneList {
     public abstract void addToGenericList (EditableNode node);
 
     public abstract String getType ();
+
+    public abstract void removeRoot ();
+
+    public abstract void addRoot ();
 
     protected TitledPane getTitledPane (String text) {
         TitledPane pane = new TitledPane();

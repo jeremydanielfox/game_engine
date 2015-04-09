@@ -28,7 +28,7 @@ public class MoverPoint implements Mover {
     @Override
     public PointSimple move (PointSimple current) throws EndOfPathException {
         PointSimple p = PointSimple.pointOnLine(current, myPoint, mySpeed);
-        if (PointSimple.pointInBetween(current, myPoint, p)) {
+        if (PointSimple.pointInBetween(current, p, myPoint)) {
             throw new EndOfPathException();
         }
         return p;

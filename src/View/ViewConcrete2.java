@@ -86,8 +86,6 @@ public class ViewConcrete2 implements View, Observer {
         // myTotalGroup.getChildren().addAll(btn,vbox,btn2);
         vbox.getChildren().addAll(btn, btn2);
         myGame.getButtons().forEach(e->vbox.getChildren().add(e.getButton()));
-        
-        //addButton(new Button("wavessss"),0,0);
         play();
     }
 

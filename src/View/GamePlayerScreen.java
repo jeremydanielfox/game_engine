@@ -86,6 +86,14 @@ public class GamePlayerScreen extends Application {
     private void startGame () {
         //myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_WIDTH);
         
+        Group root = new Group();
+        root.getChildren().add(makeDemoGame());
+        Scene scene = new Scene(root);
+        myStage.setScene(scene);
+        
+    }
+
+    public Node makeDemoGame() {
         ConcreteLevelBoard board=new ConcreteLevelBoard();
         
         GameWorld world = new BasicWorld();
@@ -105,8 +113,8 @@ public class GamePlayerScreen extends Application {
         Wallet wallet = new ConcreteWallet(scoreUnit);
         Player myPlayer=new Player("PlayerName",health,scoreUnit,wallet);
         myGame=new ConcreteGame(myPlayer,board,new ArrayList<ButtonWrapper>());
+        //ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
         ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
-        //ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NoCurrentEventGoal());
         myGame.addButton(wrap);
         
         
@@ -126,13 +134,9 @@ public class GamePlayerScreen extends Application {
         
         myGameView = new ViewConcrete2(myGame,Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();
-        Group root = new Group();
-        root.getChildren().add(node);
-        Scene scene = new Scene(root);
-        myStage.setScene(scene);
-        
+        return node;
     }
-
+    
     public static void main (String[] args) {
         launch(args);
     }

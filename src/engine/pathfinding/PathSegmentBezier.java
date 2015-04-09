@@ -37,7 +37,6 @@ public class PathSegmentBezier implements PathSegment {
      */
     @Override
     public PointSimple getPoint (double distance) {
-        // TODO Auto-generated method stub
         return BezierRecurse(myPoints, distance / myLength);
     }
 

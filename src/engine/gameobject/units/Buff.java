@@ -14,11 +14,24 @@ public abstract class Buff {
         this.duration=duration;
         timeSinceStart = 0;
     }
-
+    
+    /**
+     * Applies initial effect to myUnit
+     * @param myUnit
+     */
     public abstract void apply (BuffableUnit myUnit);
 
+    /**
+     * Unapplies the initial effect
+     * @param myUnit
+     */
     public abstract void unapply (BuffableUnit myUnit);
 
+    /**
+     * What the buff does each timeunit
+     * @param timePassed
+     * @param myUnit
+     */
     public void advanceTime (int timePassed, BuffableUnit myUnit) {
         timeSinceStart = timeSinceStart + timePassed;
         changeOverTime(myUnit);
@@ -28,9 +41,18 @@ public abstract class Buff {
         
     }
     
+    /**
+     * Returns time left before buff expires
+     * @return
+     */
     public int timeLeft () {
         return duration - timeSinceStart;
     }
 
+    /**
+     * Comparator of buffs
+     * @param otherBuff
+     * @return whether it is stronger than otherBuff
+     */
     public abstract boolean isStrongerBuff(Buff otherBuff);
 }

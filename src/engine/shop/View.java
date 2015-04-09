@@ -1,23 +1,21 @@
 package engine.shop;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import View.ViewUtilities;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import View.ViewUtilities;
 
 
 /**
@@ -77,7 +75,7 @@ public class View extends Application {
         for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
             shopImages.forEach( (icon, tower) -> {
                 ItemGraphic item = new ItemGraphic(icon, tower);
-                TransitionTower transitionTower = new TransitionTower(item.getTower());
+                TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
                 Node towerNode = transitionTower.getView();
                 item.setOnMouseClicked(mouseEvent -> {
                     addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
@@ -91,7 +89,7 @@ public class View extends Application {
 
     private void addTransitionTower (Point2D initial, Node node) {
         Node bindedTower =
-                ViewUtilities.bindCursor(node, pane.getScene(), initial, KeyCode.ESCAPE);
+                ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE);
         pane.getChildren().add(bindedTower);
     }
 

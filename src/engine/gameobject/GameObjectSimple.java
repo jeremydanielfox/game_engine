@@ -10,6 +10,7 @@ import engine.gameobject.Health;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
+import engine.shop.Purchasable;
 
 
 /**
@@ -17,7 +18,7 @@ import engine.pathfinding.EndOfPathException;
  * @author Jeremy, Kaighn
  *
  */
-public class GameObjectSimple implements GameObject {
+public class GameObjectSimple implements GameObject, Purchasable {
     protected Node myNode;
     protected String myImagePath;
     protected String myLabel;
@@ -37,6 +38,10 @@ public class GameObjectSimple implements GameObject {
         myHealth.changeHealth(amount);
     }
 
+    public void onDeath(){
+        
+    }
+    
     // temporary
     public GameObject clone () {
         try {
@@ -124,5 +129,29 @@ public class GameObjectSimple implements GameObject {
     @Override
     public void setWeapon (Weapon weapon) {
         myWeapon = weapon;
+    }
+
+    @Override
+    public String getName () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public double getValue () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public String getDescription () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public double getPrice () {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

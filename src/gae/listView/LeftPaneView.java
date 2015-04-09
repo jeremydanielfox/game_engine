@@ -1,6 +1,7 @@
 package gae.listView;
 
 import gae.backend.TempTower;
+import gae.gridView.PathView;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -15,18 +16,35 @@ import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 
 public class LeftPaneView {
 
-    private String[] gameObjects = { "Tower", "Enemy" };
+    private String[] gameObjects = { "Tower", "Enemy", "Path" };
     private List<PaneList> listOfListObjects;
+    private Group root;
+    private Node nodeScene;
+    private ObservableList<PathView> pathObservableList;
+    private PathView pathView;
+    private Scene myScene;
 
     public Scene getScene () {
-        Group root = new Group();
+        root = new Group();
         root.getChildren().addAll(view(), tempButton());
         return new Scene(root);
+    }
+
+    public Group getGroup (Node pane, Scene scene, ObservableList<PathView> pathList, PathView view) {
+        this.nodeScene = pane;
+        this.pathObservableList = pathList;
+        this.pathView = view;
+        this.myScene = scene;
+        root = new Group();
+        root.getChildren().addAll(view(), tempButton());
+        root.setManaged(false);
+        return root;
     }
 
     private Node view () {
@@ -37,14 +55,17 @@ public class LeftPaneView {
                 Class<?> className = Class.forName("gae.listView." + gameObjects[i] + "PaneList");
                 Object instance = className.getConstructor().newInstance();
                 listOfListObjects.add((PaneList) instance);
-                Method setUpList = className.getMethod("setUpList");
+                Method setUpList =
+                        className.getMethod("initialize", Group.class, Node.class, Scene.class);
                 accordion.getPanes().add((TitledPane) setUpList
-                        .invoke(instance));
+                        .invoke(instance, root, nodeScene, myScene));
             }
             catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
                     | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException e) {
-                e.printStackTrace();
+                PathList pathList = new PathList(pathView, (StackPane) nodeScene, myScene);
+                accordion.getPanes()
+                        .add(pathList.getTitledPane(pathObservableList, gameObjects[i]));
             }
         }
         return accordion;
@@ -60,28 +81,11 @@ public class LeftPaneView {
 
     private Button tempButton () {
         Button temp = new Button("add to List");
-        temp.setTranslateX(200);
+        temp.setTranslateX(0);
+        temp.setTranslateY(500);
         EditableNode node = new EditableNode(new TempTower());
         temp.setOnAction(e -> addToList(node));
         return temp;
     }
 
-    private void addTitledPanesWithList (Accordion accordion) {
-        // TODO: must be able to dynamically add to Main TitledPane list (Tower/Enemy/Weapon)
-        // TODO: want to connect it to the list but could also just add a TitledPane using the
-        // addEditableTolist method
-        GameObjectList golist = new GameObjectList();
-        for (EditableNode node : golist.getListTemp()) {
-            TitledPane tp = new TitledPane();
-            /*
-             * how is Nina getting the object when the TitledPane is clicked? Is it just getting an
-             * image
-             * NEED: EditableNode to be the content of this TitledPane so that Nina can click on it
-             * and obtain the Editable object
-             */
-            tp.setText(node.getName());
-            tp.setContent(new ListView());
-            accordion.getPanes().add(tp);
-        }
-    }
 }

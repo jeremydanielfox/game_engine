@@ -23,7 +23,7 @@ public class ViewUtilities {
      * @param key Disabling key
      * @return
      */
-    public static Node bindCursor (Node node, Scene scene, Point2D initial, KeyCode key) {
+    public static Node bindCursor (Node node, Node scene, Point2D initial, KeyCode key) {
         final Group wrapGroup = new Group(node);
         wrapGroup.relocate(initial.getX(), initial.getY());
         scene.setOnMouseMoved(mouseEvent -> {
@@ -35,7 +35,8 @@ public class ViewUtilities {
         });
 
         // TODO: figure out why keyPressed caller must be scene, and not pane or node
-        scene.setOnKeyPressed(keyEvent -> {
+        // EDIT: I changed this to node and it worked perfectly for me! 
+        scene.getScene().setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
                 scene.setOnMouseMoved(mouseEvent -> {
                 });
@@ -82,10 +83,10 @@ public class ViewUtilities {
      * @return
      */
     public static Point2D getMouseLocation (MouseEvent mouseEvent, Node node) {
-        return new Point2D(mouseEvent.getSceneX() + getCenterOffSetX(node),
-                           mouseEvent.getSceneY() + getCenterOffSetY(node));
+        return new Point2D(mouseEvent.getX() + getCenterOffSetX(node),
+                           mouseEvent.getY() + getCenterOffSetY(node));
     }
-
+    
     /**
      * Used to find the center of a node. Gets the X offset.
      * 

@@ -1,5 +1,6 @@
 package gae.gridView;
 
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
@@ -11,13 +12,13 @@ import javafx.stage.Screen;
  */
 public class TileContainer extends Region {
     public static final double SCREEN_HEIGHT =
-            Screen.getPrimary().getVisualBounds().getHeight() - 120;
+            Screen.getPrimary().getVisualBounds().getHeight() - 150;
     public static final double SCREEN_WIDTH =
             Screen.getPrimary().getVisualBounds().getWidth() - 120;
+    private BorderPane border;
 
-    public TileContainer (int size) {
-//        System.out.println(stack.getWidth());
-//        stack.getHeight();
+    public TileContainer (int size, BorderPane border) {
+        this.border = border;
         addTiles(size);
     }
 
@@ -32,7 +33,10 @@ public class TileContainer extends Region {
                 this.getChildren().add(tileView);
             }
         }
-        this.setMaxWidth(SCREEN_HEIGHT);
-        this.setMaxHeight(SCREEN_HEIGHT);
+        border.prefHeightProperty().bind(this.heightProperty());
+//         this.setMaxWidth(SCREEN_HEIGHT);
+//         this.setMaxHeight(SCREEN_HEIGHT);
+         
     }
+
 }

@@ -1,5 +1,7 @@
 package engine.gameobject.weapon.firingstrategy;
 
+import java.util.ArrayList;
+import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import gameworld.GameWorld;
 
@@ -11,6 +13,6 @@ import gameworld.GameWorld;
  */
 public interface FiringStrategy {
     
-    public void execute(GameWorld world, PointSimple location, Projectile prototype);
-
+    public void execute(GameWorld world, ArrayList<GameObject> candidate, PointSimple location, Projectile prototype);
+        
 }

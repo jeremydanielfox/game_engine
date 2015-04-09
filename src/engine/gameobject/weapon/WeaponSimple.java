@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import engine.fieldsetting.Settable;
-import engine.gameobject.weapon.firingstrategy.DirectAttack;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
+import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.upgradable.FiringRate;
 import engine.gameobject.weapon.upgradable.Upgradable;
 import engine.gameobject.weapon.upgradable.behavior.Behavior;
@@ -35,7 +35,7 @@ public class WeaponSimple extends Weapon {
         myRange = new RangeUpgrade();
         myFiringRate = new FiringRate();
         myBehaviors = new ArrayList<Behavior>();
-        myFiringStrategy = new DirectAttack();
+        myFiringStrategy = new SingleProjectile();
         upgradables = new HashMap<>();
         tree = new UpgradeTreeSimple();
     }
@@ -63,18 +63,6 @@ public class WeaponSimple extends Weapon {
     public FiringStrategy getFiringStrategy () {
         return myFiringStrategy;
     }
-
-//    @Override
-//    public void attack (GameObject... targets) {
-//        Arrays.asList(targets).forEach(target -> {
-//            myBehaviors.forEach(behavior -> behavior.apply(target));
-//        });
-//    }
-//    
-//    @Override
-//    public void addBehavior (Behavior behavior) {
-//        // add behavior if it doesn't exist, otherwise upgrade existing one 
-//    }
 
     @Override 
     public double getValue () {

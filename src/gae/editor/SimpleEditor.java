@@ -1,5 +1,8 @@
 package gae.editor;
 
+import java.util.Arrays;
+import java.util.List;
+
 import engine.gameobject.GameObjectSimpleTest;
 import gae.openingView.UIObject;
 import javafx.scene.Node;
@@ -20,6 +23,7 @@ import javafx.scene.layout.VBox;
 public class SimpleEditor extends Editor implements UIObject {
 
     private VBox simpleEditor;
+    private List<ComponentEditor> editFields;
 
     public SimpleEditor () {
         simpleEditor = new VBox(30);
@@ -37,36 +41,21 @@ public class SimpleEditor extends Editor implements UIObject {
      */
     private void createEditor () {
         TreeNode root = getMethodsTree(GameObjectSimpleTest.class, null);
-        for (TreeNode n : root.getChildren()) {
-            simpleEditor.getChildren()
-                    .add(createEditField(getPropertyName(n.getMethod().getName())));
-        }
-    }
 
-    /**
-     * returns some field that allows user to edit value of object's property
-     * 
-     * @param name
-     * @return
-     */
-    private HBox createEditField (String name) {
-        HBox field = new HBox();
-        Label label = new Label(name);
-        label.setPrefWidth(100);
-        TextField input = new TextField();
-        input.setPrefWidth(100);
-        field.setPrefWidth(200);
-        field.getChildren().addAll(label, input);
-        return field;
-    }
+        SliderEditor se = new SliderEditor("Hello", 0, 10);
+        TextEditor te = new TextEditor("Hi");
+        FileChooserEditor fe = new FileChooserEditor("File");
+        simpleEditor.getChildren().addAll(Arrays.asList(se.getObject(), te.getObject(), fe.getObject()));
 
-    /* TO DO:
-     * move createEditField to abstract class. add different methods for creating different types of
-     * editors such as sliders, file choosers, text fields, etc.
-     */
+    }
 
     @Override
     void setDefaults () {
+        editFields.forEach(e -> e.defaultField());
+    }
 
+    @Override
+    void clearValues () {
+        editFields.forEach(e -> e.clear());
     }
 }

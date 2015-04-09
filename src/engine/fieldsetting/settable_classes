@@ -8,7 +8,11 @@ StoryBoard
 // GameObject
 BasicMover
 GameObjectSimple
-Health
+Graphic
+HealthSimple
+MoverPath
+MoverPoint
+PointSimple
 	// Weapon
 	WeaponSimple
 

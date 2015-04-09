@@ -1,5 +1,6 @@
 package engine.gameobject;
 
+import engine.fieldsetting.Settable;
 import engine.pathfinding.EndOfPathException;
 import engine.pathfinding.Path;
 import engine.pathfinding.PathFixed;
@@ -9,6 +10,7 @@ import engine.pathfinding.PathFixed;
  * @author Kaighn
  *
  */
+@Settable
 public class MoverPath implements Mover {
 	Path myPath;
 	private double myDistance, mySpeed;
@@ -30,9 +32,24 @@ public class MoverPath implements Mover {
 		myDistance += mySpeed;
 		return myPath.getNextLocation(current, myDistance);
 	}
-
+	@Settable
 	@Override
 	public void setSpeed(double speed) {
 		mySpeed = speed;
 	}
+	
+	@Settable
+	public void setPath(Path path) {
+	    myPath = path;
+	}
+	
+	@Settable
+	public void setDistance(double distance) {
+	    myDistance = distance;
+	}
+	
+	public Mover clone(){
+	    return new MoverPath(myPath, mySpeed);
+	}
+	
 }

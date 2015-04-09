@@ -152,9 +152,9 @@ public class HUD implements Observer {
     }
     
     private void addTransitionTower (Point2D initial, Node node) {
-        Node bindedTower =
-                ViewUtilities.bindCursor(node, myPane.getScene(), initial, KeyCode.ESCAPE);
-        myPane.getChildren().add(bindedTower);
+        //Node bindedTower =
+          //      ViewUtilities.bindCursor(node, myPane.getScene(), initial, KeyCode.ESCAPE);
+        //myPane.getChildren().add(bindedTower);
     }
 
 }

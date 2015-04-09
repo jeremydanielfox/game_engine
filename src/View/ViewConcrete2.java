@@ -35,6 +35,8 @@ public class ViewConcrete2 implements View, Observer {
 
     // new way
     private BorderPane myPane;
+    
+    private VBox vbox=new VBox();
 
     private double myDisplayWidth;
     private double myDisplayHeight;
@@ -43,7 +45,7 @@ public class ViewConcrete2 implements View, Observer {
         myGame = game;
         myLevelBoard = myGame.getLevelBoard();
         myLevelBoard.addObserver(this);
-
+        //vbox=new VBox();
         // myTotalGroup=group;
 
         myDisplayWidth = width;
@@ -67,7 +69,7 @@ public class ViewConcrete2 implements View, Observer {
         for (Displayable d : myGame.getPlayer().getDisplayables()) {
             headsUp.addPairedDisplay(d);
         }
-        VBox vbox = headsUp.getDisplay();
+        vbox.getChildren().add(headsUp.getDisplay());
 
         addInitialObjects();
 
@@ -83,6 +85,9 @@ public class ViewConcrete2 implements View, Observer {
         btn2.setOnAction(e -> myGame.getPlayer().changeScore(100));// .changeScore(100));
         // myTotalGroup.getChildren().addAll(btn,vbox,btn2);
         vbox.getChildren().addAll(btn, btn2);
+        myGame.getButtons().forEach(e->vbox.getChildren().add(e.getButton()));
+        
+        //addButton(new Button("wavessss"),0,0);
         play();
     }
 
@@ -164,6 +169,7 @@ public class ViewConcrete2 implements View, Observer {
         myGameWorldPane.getChildren().clear();
         myGameWorldPane.getChildren().add(image);
     }
+    
 
     @Override
     public void pause () {
@@ -175,4 +181,8 @@ public class ViewConcrete2 implements View, Observer {
         myAnimation.play();
     }
 
+    public void addButton(Button b, int x,int y) {
+        vbox.getChildren().add(b);
+    }
+    
 }

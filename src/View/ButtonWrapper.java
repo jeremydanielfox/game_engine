@@ -10,8 +10,8 @@ import engine.goals.NullGoal;
 @Settable
 public class ButtonWrapper {
 
-    @XStreamOmitField
-    private transient Button myButton;
+    //@XStreamOmitField
+    private Button myButton;
     private Goal myEnableCondition;
     
     public ButtonWrapper(){

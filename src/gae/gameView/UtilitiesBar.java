@@ -1,4 +1,4 @@
-package gae.frontend;
+package gae.gameView;
 
 import java.io.File;
 import java.util.Arrays;

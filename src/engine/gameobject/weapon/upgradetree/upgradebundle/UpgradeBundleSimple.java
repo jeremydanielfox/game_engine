@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import engine.fieldsetting.Settable;
 import engine.gameobject.Graphic;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.upgradable.Upgradable;
@@ -16,6 +17,7 @@ import engine.gameobject.weapon.upgradetree.UpgradeTree;
  * @author Nathan Prabhu
  *
  */
+@Settable
 public class UpgradeBundleSimple implements BuildableBundle {
 
     private List<Upgrade> upgrades;
@@ -23,7 +25,12 @@ public class UpgradeBundleSimple implements BuildableBundle {
     private boolean isFinal;
     private UpgradeTree parent;
 
-    public UpgradeBundleSimple (Upgrade ... upgrades) {
+    public UpgradeBundleSimple () {
+        
+    }
+    
+    @Settable
+    void setUpgrades(Upgrade ... upgrades){
         this.upgrades = new ArrayList<>(Arrays.asList(upgrades));
         isFinal = false;
     }

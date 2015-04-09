@@ -1,15 +1,18 @@
 package gae.gameView;
 
+import gae.editor.SimpleEditor;
+import gae.openingView.UIObject;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class GenericObjectsPane {
+public class GenericObjectsPane implements UIObject{
 
     private VBox baseNode;
 
@@ -38,11 +41,15 @@ public class GenericObjectsPane {
     }
     
     private void newCustomObject (String type) {
-        // TODO This opens a new custom object window
-        System.out.println(type);
+        SimpleEditor editor = new SimpleEditor();
+        Scene editorScene = new Scene(new Pane(editor.getObject()));
+        Stage editorStage = new Stage();
+        editorStage.setScene(editorScene);
+        editorStage.show();
     }
 
-    public Node getBaseNode () {
+    @Override
+    public Node getObject () {
         return baseNode;
     }
 

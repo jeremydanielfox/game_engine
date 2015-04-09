@@ -25,6 +25,7 @@ public class PopUpScreen {
         newStage.setHeight(400); // needs to be proportionate to full game screen
         newStage.setWidth(400); // needs to be proportionate to full game screen
         Button button = new Button(buttonCaption);
+        button.setOnAction(e-> newStage.close());
         Text text = new Text(caption);
         grid.add(text, 3, 4);
         grid.add(button, 5, 5);

@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.StackPane;
 
 
 public class EnemyPaneList extends PaneList {
@@ -15,6 +16,8 @@ public class EnemyPaneList extends PaneList {
     private Group root;
     private Node workspace;
     private Scene scene;
+    private boolean added;
+    private StackPane stack;
 
     public EnemyPaneList () {
         enemyEditablesList = new ArrayList<>();
@@ -32,6 +35,7 @@ public class EnemyPaneList extends PaneList {
         this.root = root;
         this.workspace = node;
         this.scene = scene;
+        this.stack = (StackPane) node;
         TitledPane pane = getTitledPane("Enemy");
         enemyPaneList = setAccordion(pane);
         return pane;
@@ -40,6 +44,20 @@ public class EnemyPaneList extends PaneList {
     @Override
     public String getType () {
         return "Enemy";
+    }
+
+    @Override
+    public void removeRoot () {
+        stack.getChildren().remove(root);
+        added = false;
+    }
+
+    @Override
+    public void addRoot () {
+        if (!added) {
+            stack.getChildren().add(root);
+            added = true;
+        }
     }
 
 }

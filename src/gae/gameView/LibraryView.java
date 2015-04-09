@@ -14,13 +14,16 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -54,6 +57,7 @@ public class LibraryView {
         for (String key : map.keySet()) {
             TitledPane title = new TitledPane(key, createList(map.get(key)));
             setTitledPaneClick(title);
+        //    title.setContextMenu(createContextMenu());
             accordion.getPanes().add(title);
         }
         return accordion;
@@ -84,41 +88,15 @@ public class LibraryView {
                 return cell;
             }
         });
-        // setListClick(list);
+        //setListClick(list);
         return list;
 
     }
 
     private void setTitledPaneClick (TitledPane pane) {
-        pane.setOnMouseClicked(e -> {
-            if (e.getClickCount() == 2) {
-                TempTower tower = new TempTower();
-                ImageView transitionImage =
-                        new ImageView(
-                                      new Image(getClass().getResourceAsStream(tower
-                                              .getImage())));
-                Node binder =
-                        ViewUtilities.bindCursor(transitionImage,
-                                                 scene,
-                                                 ViewUtilities.getMouseLocation(e, transitionImage),
-                                                 KeyCode.ESCAPE);
-
-                binder.setOnMouseReleased(ev -> {
-                    ImageView placedTower =
-                            new ImageView(
-                                          new Image(getClass().getResourceAsStream(tower
-                                                  .getImage())));
-                    Group wrapGroup = new Group(placedTower);
-                    wrapGroup.relocate(ev.getSceneX(), ev.getSceneY());
-
-                    Point2D current = ViewUtilities.getMouseLocation(ev, placedTower);
-
-                    wrapGroup.relocate(current.getX(), current.getY());
-
-                    libraryView.getChildren().add(wrapGroup);
-                    map.get(pane.getText()).add(tower);
-                });
-                libraryView.getChildren().add(binder);
+        pane.setOnMousePressed(e -> {
+            if (e.isSecondaryButtonDown()) {
+                createContextMenu(e).show(pane, e.getX(), e.getY());
             }
         });
     }
@@ -144,6 +122,44 @@ public class LibraryView {
     // });
     //
     // }
+    
+  
+    
+    private ContextMenu createContextMenu(MouseEvent me){
+        ContextMenu contextmenu=new ContextMenu();
+        MenuItem item=new MenuItem("New");
+        item.setOnAction(e->{
+            TempTower tower = new TempTower();
+            ImageView transitionImage =
+                    new ImageView(
+                                  new Image(getClass().getResourceAsStream(tower
+                                          .getImage())));
+            Node binder =
+                    ViewUtilities.bindCursor(transitionImage,
+                                             scene,
+                                             ViewUtilities.getMouseLocation(me, transitionImage),
+                                             KeyCode.ESCAPE);
+
+            binder.setOnMouseReleased(ev -> {
+                ImageView placedTower =
+                        new ImageView(
+                                      new Image(getClass().getResourceAsStream(tower
+                                              .getImage())));
+                Group wrapGroup = new Group(placedTower);
+                wrapGroup.relocate(ev.getSceneX(), ev.getSceneY());
+
+                Point2D current = ViewUtilities.getMouseLocation(ev, placedTower);
+
+                wrapGroup.relocate(current.getX(), current.getY());
+
+                libraryView.getChildren().add(wrapGroup);
+            //    map.get(pane.getText()).add(tower);
+            });
+            libraryView.getChildren().add(binder);
+        });
+        contextmenu.getItems().add(item);
+        return contextmenu;
+    }
 
     private Node createCellContent (Editable edit) {
         HBox content = new HBox();

@@ -21,4 +21,6 @@ public interface Editable extends Serializable {
     public void setEditableImage (EditableImage image);
 
     public EditableImage getEditableImage ();
+
+    public void setID (int id);
 }

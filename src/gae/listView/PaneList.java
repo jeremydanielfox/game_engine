@@ -8,13 +8,17 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
+
 /**
  * Abstract class to be extended to all Editable object's lists
+ * 
  * @author Kei & Nina
  *
  */
@@ -46,42 +50,55 @@ public abstract class PaneList {
         root.setManaged(false);
         ObservableList<Editable> editableList = node.getChildrenList();
         newPane.setContent(ListViewUtilities.createList(editableList, scene));
-        newPane.setOnMouseClicked(e -> {
-            if (e.getClickCount() == 2) {
-                ImageView transitionImage = node.getImageView();
-                // TODO: fix issue of not being able to use bindcursor if cursor is above already
-                // placed tower (group is above stack)
-                Node binder =
-                        ViewUtilities.bindCursor(transitionImage,
-                                                 pane,
-                                                 ViewUtilities.getMouseLocation(e, transitionImage),
-                                                 KeyCode.ESCAPE);
-                binder.setOnMouseClicked(ev -> {
-                    Point2D current =
-                            binder.localToParent(new Point2D(binder.getTranslateX(), binder
-                                    .getTranslateY()));
-                    Double currentX = current.getX();
-                    Double currentY = current.getY();
-
-                    Editable newEditable = node.makeNewInstance();
-                    newEditable.setLocation(currentX, currentY);
-                    EditableImage edimage = new EditableImage(node.getImageView(), newEditable);
-                    newEditable.setEditableImage(edimage);
-
-                    edimage.relocate(currentX, currentY);
-                    root.getChildren().add(edimage);
-
-                    for (Editable editables : editableList) {
-                        System.out.println("X IS : " + editables.getLocation().getX());
-                        System.out.println("Y IS : " + editables.getLocation().getY());
-                        System.out.println();
-                    }
+        newPane.setOnMousePressed(me -> {
+            if (me.isSecondaryButtonDown()) {
+                ContextMenu contextmenu = new ContextMenu();
+                MenuItem item = new MenuItem("New");
+                item.setOnAction(ae -> {
+                    ImageView transitionImage = node.getImageView();
+                    // TODO: fix issue of not being able to use bindcursor if cursor is above
+                    // already
+                    // placed tower (group is above stack)
+                    Node binder =
+                            ViewUtilities.bindCursor(transitionImage,
+                                                     pane,
+                                                     ViewUtilities
+                                                             .getMouseLocation(me, transitionImage),
+                                                     KeyCode.ESCAPE);
+                    makeNodePlaceable(binder, node, root);
+                    root.getChildren().add(binder);
 
                 });
-                root.getChildren().add(binder);
+                contextmenu.getItems().add(item);
+                contextmenu.show(newPane, me.getSceneX(), me.getSceneY());
+
             }
         });
         return newPane;
+    }
+
+    private void makeNodePlaceable (Node binder, EditableNode node, Group root) {
+        binder.setOnMouseClicked(ev -> {
+            Point2D current =
+                    binder.localToParent(new Point2D(binder.getTranslateX(), binder
+                            .getTranslateY()));
+            Double currentX = current.getX();
+            Double currentY = current.getY();
+
+            Editable newEditable = node.makeNewInstance();
+            newEditable.setLocation(currentX, currentY);
+            EditableImage edimage = new EditableImage(node.getImageView(), newEditable);
+            newEditable.setEditableImage(edimage);
+            edimage.relocate(currentX, currentY);
+            root.getChildren().add(edimage);
+
+            // for (Editable editables : editableList) {
+            // System.out.println("X IS : " + editables.getLocation().getX());
+            // System.out.println("Y IS : " + editables.getLocation().getY());
+            // System.out.println();
+            // }
+
+        });
     }
 
 }

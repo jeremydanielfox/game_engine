@@ -1,19 +1,12 @@
 package gae.listView;
 
-import gae.backend.TempTower;
 import java.util.ArrayList;
 import java.util.List;
-import View.ViewUtilities;
 import javafx.collections.ObservableList;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TitledPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.StackPane;
 
 
 public class TowerPaneList extends PaneList {
@@ -27,6 +20,10 @@ public class TowerPaneList extends PaneList {
         towerEditablesList = new ArrayList<>();
     }
 
+    /*
+     * TODO: Make it so that when Tower is clicked, all the tower objects on the grid will show up,
+     * and when Path is clicked, these will all disappear because we don't want conflicts
+     */
     @Override
     public void addToGenericList (EditableNode editableNode) {
         towerEditablesList.add(editableNode);

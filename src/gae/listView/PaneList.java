@@ -13,7 +13,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
-
+/**
+ * Abstract class to be extended to all Editable object's lists
+ * @author Kei & Nina
+ *
+ */
 public abstract class PaneList {
     public static final int THUMBNAIL_SIZE = 20;
 

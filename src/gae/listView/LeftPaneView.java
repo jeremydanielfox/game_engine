@@ -2,22 +2,18 @@ package gae.listView;
 
 import gae.backend.TempTower;
 import gae.gridView.PathView;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 
 
 public class LeftPaneView {

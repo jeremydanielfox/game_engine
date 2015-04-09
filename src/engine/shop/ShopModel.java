@@ -1,10 +1,14 @@
 package engine.shop;
 
-import engine.gameobject.GameObject;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import engine.game.Player;
+import engine.gameobject.GameObject;
+import engine.gameobject.weapon.UpgradeBundle;
+import engine.grid.StructurePlacementException;
+import engine.prototype.PrototypeLocator;
+import gameworld.GameWorld;
 
 
 /**
@@ -14,51 +18,79 @@ import java.util.Map;
  *
  */
 public class ShopModel {
-    private Map<ItemGraphic, Purchasable> purchasableMap;
-    private Map<Purchasable, ItemGraphic> itemGraphicMap;
-    private Map<ItemGraphic, TransitionTower> transitionTowerMap;
+    private View myShopView;
+    private Player currentPlayer;
+    private GameWorld myGameWorld;
+    private Map<ItemGraphic, TransitionTower> itemTowerMap;
+    private Map<TransitionTower, Purchasable> towerPurchasableMap;
+    private Map<ItemGraphic, UpgradeBundle> itemUpgradeMap;
+    private Map<ItemGraphic, Purchasable> itemPurchasableMap;
 
-    public ShopModel (List<Purchasable> purchasables) {
-        populateMaps(purchasables);
-        transitionTowerMap = new HashMap<ItemGraphic, TransitionTower>();
-        purchasables.forEach(purchasable -> {
-            if (purchasable.getClass().isAssignableFrom(GameObject.class)) {
-                transitionTowerMap.put(new ItemGraphic(null, null), new TransitionTower(null));
-            }
-        });
+    public ShopModel (List<Purchasable> purchasables,
+                      GameWorld myGameWorld,
+                      View myShopView,
+                      Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+        this.myShopView = myShopView;
+        itemTowerMap = new HashMap<ItemGraphic, TransitionTower>();
+        itemUpgradeMap = new HashMap<ItemGraphic, UpgradeBundle>();
+        towerPurchasableMap = new HashMap<TransitionTower, Purchasable>();
+        purchasables.forEach(purchasable -> addPurchasable(purchasable));
+    }
+
+    public void addPurchasable (Purchasable purchasable) {
+        TransitionTower transitionTower = new TransitionTower(null);
+        ItemGraphic itemGraphic = new ItemGraphic(null, null);
+        itemTowerMap.put(itemGraphic, transitionTower);
+        towerPurchasableMap.put(transitionTower, purchasable);
+        itemPurchasableMap.put(itemGraphic, purchasable);
+    }
+
+    public TransitionTower getTransitionTower (ItemGraphic itemGraphic) {
+        return itemTowerMap.get(itemGraphic);
+    }
+
+    public void showUpgradeBundles (GameObject gameObject) {
+        /*List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
+        itemUpgradeMap.clear();
+        bundles.forEach(bundle -> itemUpgradeMap.put(new ItemGraphic(null, null), bundle));
+        myShopView.display(itemUpgradeMap.keySet());*/
     }
 
     /**
+     * Used to purchase items which are placed on the screen (e.g. towers)
      * 
-     * @param purchasables list of purchasable items to be added to the bidirectional map
+     * @param transitionTower
      */
-    private void populateMaps (List<Purchasable> purchasables) {
-        purchasableMap = new HashMap<ItemGraphic, Purchasable>();
-        itemGraphicMap = new HashMap<Purchasable, ItemGraphic>();
-        purchasables.stream().forEach(purchasable -> purchasableMap
-                .put(new ItemGraphic("tempIcon", "tempTower"),
-                     purchasable));
-        purchasableMap.keySet().stream()
-                .forEach(itemGraphic -> purchasables.stream().forEach(purchasable -> itemGraphicMap
-                        .put(purchasable, itemGraphic)));
+    public boolean purchase (TransitionTower transitionTower, double x, double y) {
+        try {
+            myGameWorld.addObject(PrototypeLocator.getService()
+                    .getInstance(towerPurchasableMap.get(transitionTower).getName()));
+        }
+        catch (StructurePlacementException e) {
+            return false;
+        }
+        currentPlayer.getWallet().withdraw(towerPurchasableMap.get(transitionTower).getPrice());
+        return true;
     }
 
-    public List<ItemGraphic> getUpgrades (GameObject gameObject) {
-        List<ItemGraphic> items = new ArrayList<>();
-        itemGraphicMap.keySet().stream()
-                .forEach(purchasable -> {
-                    /*if (gameObject.canPurchase(purchasable)) {
-                        items.add(itemGraphicMap.get(purchasable));
-                    }*/
-                });
-        return items;
+    /**
+     * Used to purchase items which are not placed on the screen (upgrades)
+     * 
+     * @param itemGraphic
+     */
+    public void purchase (ItemGraphic itemGraphic, GameObject gameObject) {
+        currentPlayer.getWallet().withdraw(itemUpgradeMap.get(itemGraphic).getPrice());
+        //gameObject.getWeapon().applyUpgrade()
     }
-
-    public Purchasable getPurchasable (ItemGraphic itemGraphic) {
-        return purchasableMap.get(itemGraphic);
-    }
-
-    public ItemGraphic getItemGraphic (Purchasable purchasable) {
-        return itemGraphicMap.get(purchasable);
+    
+    public boolean canPurchase(ItemGraphic itemGraphic) {
+        double price;
+        if(itemPurchasableMap.containsKey(itemGraphic)) {
+            price = itemPurchasableMap.get(itemGraphic).getPrice();
+        } else {
+            price = itemUpgradeMap.get(itemGraphic).getPrice();
+        }
+        return currentPlayer.getWallet().getBalance() > price;
     }
 }

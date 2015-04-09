@@ -12,6 +12,7 @@ import java.util.List;
 public abstract class Editor {
 
     abstract void setDefaults();
+    abstract void clearValues();
 
     public TreeNode getMethodsTree(Class<?> klass, Method m) {
         TreeNode root = new TreeNode(m, "null");

@@ -25,5 +25,8 @@ public interface Mover {
 
     @Settable
     public void setSpeed (double speed);
+    
+    public Mover clone();
+    
 }
 

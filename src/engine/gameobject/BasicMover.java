@@ -13,12 +13,13 @@ public class BasicMover implements Mover {
     double myDistance;
     boolean frozen;
 
-    public BasicMover (Path pf, double speed) {
-        myDistance = 0;
-        myPath = pf;
-        inherentSpeed = speed;
+    public BasicMover(Path pf, double speed){
+            myDistance = 0;
+            myPath = pf;
+            inherentSpeed = speed;
+            frozen = false;
+            speedModifier = 1;
     }
-
     /**
      * This switch statement is not worth having polymorphism/using a state pattern.
      * No incompatible extensions will be made.
@@ -47,6 +48,11 @@ public class BasicMover implements Mover {
      */
     public void speedBuff (double percentage) {
         speedModifier = speedModifier + percentage;
+    }
+
+    
+    public BasicMover clone(){
+        return new BasicMover(myPath, inherentSpeed);
     }
 
     @Settable

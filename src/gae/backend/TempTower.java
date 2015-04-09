@@ -9,6 +9,14 @@ import gae.listView.EditableImage;
 
 
 public class TempTower implements Editable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     * 
+     */
+    private int myID=0;
     private int Size = 10;
     private int Health = 100;
     private Weapon weapon;
@@ -24,7 +32,6 @@ public class TempTower implements Editable {
     }
 
     public TempTower () {
-
     }
 
     public TempTower (String name) {
@@ -39,13 +46,18 @@ public class TempTower implements Editable {
     @Override
     public String getName () {
         // TODO Auto-generated method stub
-        return "TempTower";
+        return "TempTower "+myID;
     }
 
     @Override
     public String getType () {
         // TODO Auto-generated method stub
         return "Tower";
+    }
+    
+    @Override
+    public void setID(int id){
+        myID=id;
     }
 
     public Pair getLocation () {

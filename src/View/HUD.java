@@ -43,6 +43,8 @@ public class HUD implements Observer {
     private VBox myWholeDisplay;
     private BorderPane myPane;
     private HBox myDefaultButtonDisplay;
+    
+    private List<ButtonWrapper> myButtonWrapperList;
 
     public HUD(BorderPane pane){
         initialize(pane);
@@ -68,18 +70,24 @@ public class HUD implements Observer {
         makeShop();
         makeDefaultButtonDisplay();
         myWholeDisplay.setAlignment(Pos.CENTER);
+        myButtonWrapperList = new ArrayList<>();
     }
 
     private void makeDefaultButtonDisplay () {
         myDefaultButtonDisplay = new HBox();
-        Button play=new Button("Play");
-        Button pause=new Button("Pause");
-        Button fastForward=new Button("Fast");
-        Button slowDown=new Button("Slow");
-        myDefaultButtonDisplay.getChildren().addAll(play,pause,fastForward,slowDown);
+//        Button play=new Button("Play");
+//        Button pause=new Button("Pause");
+//        Button fastForward=new Button("Fast");
+//        Button slowDown=new Button("Slow");
+//        myDefaultButtonDisplay.getChildren().addAll(play,pause,fastForward,slowDown);
         myDefaultButtonDisplay.setAlignment(Pos.CENTER);
         myWholeDisplay.getChildren().add(myDefaultButtonDisplay);
         System.out.println("pane:"+myPane.getWidth());
+    }
+    
+    public void addButton(ButtonWrapper button) {
+        myButtonWrapperList.add(button);
+        myDefaultButtonDisplay.getChildren().add(button.getButton());
     }
     
     public void addPairedDisplay (Displayable d) {
@@ -152,9 +160,9 @@ public class HUD implements Observer {
     }
     
     private void addTransitionTower (Point2D initial, Node node) {
-        //Node bindedTower =
-          //      ViewUtilities.bindCursor(node, myPane.getScene(), initial, KeyCode.ESCAPE);
-        //myPane.getChildren().add(bindedTower);
+        Node bindedTower =
+                ViewUtilities.bindCursor(node, myPane.getScene().getRoot(), initial, KeyCode.ESCAPE);
+        myPane.getChildren().add(bindedTower);
     }
 
 }

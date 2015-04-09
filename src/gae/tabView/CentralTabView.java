@@ -1,7 +1,6 @@
 package gae.tabView;
 
-import gae.gridView.WorldView
-;
+import gae.gridView.WorldView;
 
 import gae.openingView.UIMediator;
 
@@ -13,58 +12,55 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 
+public class CentralTabView implements UIObject {
 
-public class CentralTabView {
-    
     private UIMediator myMediator;
-    
-public class CentralTabView implements UIObject{
-    
-    private VBox baseNode;
-    private TabPane tabView;
-    private int levelCount;
-    private Scene scene;
-    
-    // ERASE AFTER
-    public WorldView worldView;
 
-    public CentralTabView (Scene sceneIn, UIMediator mediator) {
-        myMediator = mediator;
-        scene = sceneIn;
-        initialize();
+        private VBox baseNode;
+        private TabPane tabView;
+        private int levelCount;
+        private Scene scene;
+
+        // ERASE AFTER
+        public WorldView worldView;
+
+        public CentralTabView (Scene sceneIn, UIMediator mediator) {
+            myMediator = mediator;
+            scene = sceneIn;
+            initialize();
+        }
+
+        private void initialize () {
+            levelCount = 1;
+
+            baseNode = new VBox();
+            tabView = new TabPane();
+            ShopTab shopTab = new ShopTab();
+            tabView.getTabs().add(shopTab.getBaseTabNode());
+
+            Button newLevel = new Button("Add Level");
+            newLevel.setOnAction(e -> createNewLevel());
+
+            baseNode.getChildren().addAll(newLevel, tabView);
+        }
+
+        private void createNewLevel () {
+            worldView = new WorldView();
+            // WorldView worldView = new WorldView();
+            LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
+            LevelTabSet newLevel = new LevelTabSet(worldView.getBorder(scene),
+                                                   levelPrefs.getStack());
+            // temporarily --> real code is :
+            // LevelTabSet newLevel = new
+            // LevelTabSet(worldView.getStack(scene),levelPrefs.getStack());
+            Tab newTab = new Tab("Level:" + levelCount++);
+            newTab.setContent(newLevel.getBaseNode());
+            newTab.setClosable(false);
+            tabView.getTabs().add(newTab);
+        }
+
+        @Override
+        public Node getObject () {
+            return baseNode;
+        }
     }
-
-    private void initialize () {
-        levelCount = 1;
-
-        baseNode = new VBox();
-        tabView = new TabPane();
-        ShopTab shopTab = new ShopTab();
-        tabView.getTabs().add(shopTab.getBaseTabNode());
-
-        Button newLevel = new Button("Add Level");
-        newLevel.setOnAction(e -> createNewLevel());
-
-        baseNode.getChildren().addAll(newLevel, tabView);
-    }
-
-    private void createNewLevel () {
-        worldView = new WorldView();
-        //WorldView worldView = new WorldView();
-        LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
-        LevelTabSet newLevel =
-                new LevelTabSet(worldView.getBorder(scene), levelPrefs.getStack());
-        // temporarily --> real code is :
-        // LevelTabSet newLevel = new LevelTabSet(worldView.getStack(scene),levelPrefs.getStack());
-        Tab newTab = new Tab("Level:" + levelCount++);
-        newTab.setContent(newLevel.getBaseNode());
-        newTab.setClosable(false);
-        tabView.getTabs().add(newTab);
-    }
-
-    @Override
-    public Node getObject () {
-        return baseNode;
-    }
-}
-}

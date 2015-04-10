@@ -1,5 +1,8 @@
 package gae.listView;
 
+import gae.backend.Editable;
+
+import View.ViewUtilities;
 
 import exception.ObjectOutOfBoundsException;
 import gae.backend.Editable;

@@ -32,7 +32,6 @@ public class LeftPaneView {
     private Group objectGroup;
     private Node nodeScene;
     private ObservableList<PathView> pathObservableList;
-    private PathView pathView;
     private Scene myScene;
     private Accordion accordion;
     private TitledPane pathTitledPane;
@@ -48,11 +47,9 @@ public class LeftPaneView {
     public Group getGroup (Node pane,
                            Scene scene,
                            ObservableList<PathView> pathList,
-                           PathView view,
                            ObjectProperty<Image> backgroundProperty, ContainerWrapper wrapper) {
         this.nodeScene = pane;
         this.pathObservableList = pathList;
-        this.pathView = view;
         this.myScene = scene;
         this.wrapper = wrapper;
         root = new Group();

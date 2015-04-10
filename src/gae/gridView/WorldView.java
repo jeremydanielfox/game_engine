@@ -5,18 +5,21 @@ import gae.listView.LeftPaneView;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 
 public class WorldView {
     private StackPane stack;
-    private PathView pathView;
     private Scene scene;
     private BorderPane border;
     private ObjectProperty<Image> backgroundProperty;
@@ -58,11 +61,10 @@ public class WorldView {
     }
 
     private Group getLeftView () {
-        StackPane stackPane = new StackPane();
         lpview = new LeftPaneView();
         Group leftview =
-                lpview.getGroup(stack, scene, paths, pathView, backgroundProperty, wrapper);
-        stackPane.getChildren().add(leftview);
+                lpview.getGroup(stack, scene, paths, backgroundProperty, wrapper);
+        // TODO: can't do the above since it messes up the coordinates - got to fix
         return leftview;
     }
     

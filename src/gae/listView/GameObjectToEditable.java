@@ -15,8 +15,7 @@ public class GameObjectToEditable implements Editable {
     private int Health = 100;
     private Weapon weapon;
     private Pair location;
-    private String image = "/images/ArcaneTower.png";
-    private String myName = "TempTower";
+    private String imagePath = "/images/ArcaneTower.png";
     private EditableImage editableImage;
 
     public GameObjectToEditable (GameObjectSimple gameobject) {
@@ -34,7 +33,9 @@ public class GameObjectToEditable implements Editable {
 
     @Override
     public String getImagePath () {
-        return image;
+        System.out.println(gameObject.getImagePath());
+        return gameObject.getImagePath();
+//         return imagePath;
     }
 
     @Override

@@ -1,8 +1,6 @@
 package gae.listView;
 
-
 import gae.backend.Editable;
-
 import View.ViewUtilities;
 import exception.ObjectOutOfBoundsException;
 import gae.backend.Editable;
@@ -104,13 +102,13 @@ public abstract class PaneList {
                             .getTranslateY()));
             Double currentX = current.getX();
             Double currentY = current.getY();
-
+            if (wrapper.checkBounds(currentX, currentY))
+                throw new ObjectOutOfBoundsException();
+            
             Editable newEditable = node.makeNewInstance();
             newEditable.setLocation(currentX, currentY);
             EditableImage edimage = new EditableImage(node.getImageView(), newEditable, wrapper);
             newEditable.setEditableImage(edimage);
-            if (wrapper.checkBounds(currentX, currentY))
-                throw new ObjectOutOfBoundsException();
             edimage.relocate(currentX, currentY);
             // for (EditableImage image : imageList) {
             // if (edimage.checkIntersect(image)) {

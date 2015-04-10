@@ -1,6 +1,5 @@
 package gae.gridView;
 
-import gae.listView.ContainerWrapper;
 import gae.listView.LeftPaneView;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
@@ -49,6 +48,10 @@ public class WorldView {
         border.setCenter(getStack(scene));
         border.setLeft(getLeftView());
         return border;
+    }
+    
+    public Image getBackgroundImage() {
+        return backgroundProperty.get();
     }
 
     private Group getLeftView () {

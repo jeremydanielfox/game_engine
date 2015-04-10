@@ -1,0 +1,37 @@
+<engine.pathfinding.PathFixed>
+  <myPathSegments class="linked-list">
+    <engine.pathfinding.PathSegmentBezier>
+      <myPoints>
+        <engine.gameobject.PointSimple>
+          <myPoint>
+            <x>950.0</x>
+            <y>377.0</y>
+            <hash>0</hash>
+          </myPoint>
+        </engine.gameobject.PointSimple>
+        <engine.gameobject.PointSimple>
+          <myPoint>
+            <x>816.5</x>
+            <y>368.5</y>
+            <hash>0</hash>
+          </myPoint>
+        </engine.gameobject.PointSimple>
+        <engine.gameobject.PointSimple>
+          <myPoint>
+            <x>816.5</x>
+            <y>368.5</y>
+            <hash>0</hash>
+          </myPoint>
+        </engine.gameobject.PointSimple>
+        <engine.gameobject.PointSimple>
+          <myPoint>
+            <x>683.0</x>
+            <y>360.0</y>
+            <hash>0</hash>
+          </myPoint>
+        </engine.gameobject.PointSimple>
+      </myPoints>
+      <myLength>0.0</myLength>
+    </engine.pathfinding.PathSegmentBezier>
+  </myPathSegments>
+</engine.pathfinding.PathFixed>

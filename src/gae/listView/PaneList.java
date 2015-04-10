@@ -1,9 +1,12 @@
 package gae.listView;
 
-import java.util.ArrayList;
-import java.util.List;
-import engine.gameobject.Editable;
+
+import gae.backend.Editable;
+
 import View.ViewUtilities;
+import exception.ObjectOutOfBoundsException;
+import gae.backend.Editable;
+import gae.gridView.ContainerWrapper;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -16,6 +19,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import View.ViewUtilities;
 
 
 /**
@@ -103,9 +107,10 @@ public abstract class PaneList {
 
             Editable newEditable = node.makeNewInstance();
             newEditable.setLocation(currentX, currentY);
-            EditableImage edimage = new EditableImage(node.getImageView(), newEditable);
+            EditableImage edimage = new EditableImage(node.getImageView(), newEditable, wrapper);
             newEditable.setEditableImage(edimage);
-            wrapper.checkBounds(currentX, currentY);
+            if (wrapper.checkBounds(currentX, currentY))
+                throw new ObjectOutOfBoundsException();
             edimage.relocate(currentX, currentY);
             // for (EditableImage image : imageList) {
             // if (edimage.checkIntersect(image)) {

@@ -24,6 +24,7 @@ public class FileChooserEditor implements ComponentEditor{
     private FileChooser fileChooser;
     private Button chooserOpener;
     private Stage stage;
+    private File file;
 
     public FileChooserEditor (String name) {
         editBox = new HBox();
@@ -32,9 +33,13 @@ public class FileChooserEditor implements ComponentEditor{
         chooserOpener = new Button("LOAD FILE");
         stage = new Stage();
         chooserOpener.setOnMouseClicked(e -> {
-            File file = fileChooser.showOpenDialog(stage);
+           file = fileChooser.showOpenDialog(stage);
         }); 
         editBox.getChildren().addAll(label, chooserOpener);
+    }
+    
+    public File getFile() {
+        return file;
     }
 
     @Override

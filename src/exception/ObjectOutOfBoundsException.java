@@ -10,7 +10,6 @@ public class ObjectOutOfBoundsException extends VOOGAException {
 
     public ObjectOutOfBoundsException () {
         super(String.format("Object is out of bounds!"));
-
     }
 
 }

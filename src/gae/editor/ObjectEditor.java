@@ -33,7 +33,7 @@ public class ObjectEditor extends Application implements UIObject{
         rightContainer = new VBox();
         leftContainer = new VBox();
         imageBox = new Pane();
-        simpleEditor = new SimpleEditor();
+        //simpleEditor = new SimpleEditor();
         setUpContainers();
     }
     

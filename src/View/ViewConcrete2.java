@@ -7,6 +7,7 @@ import java.util.Observer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.Animation.Status;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -22,39 +23,28 @@ import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
 
 
-public class ViewConcrete2 implements View, Observer, ChangeableSpeed {
+public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable {
 
-    public static final double GAME_WIDTH_TO_HEIGHT = 1.25;
-    public static final int MAX_FRAME_RATE = 300;
-    public static final int MIN_FRAME_RATE = 200;    
+    public static final double GAME_WIDTH_TO_HEIGHT = 1;
+    public static final int MAX_FRAME_RATE = 200;
+    public static final int MIN_FRAME_RATE = 500;
 
     private Game myGame;
     private Integer myRate = MIN_FRAME_RATE;
     private Timeline myAnimation;
     private LevelBoard myLevelBoard;
-
-    // old way
     private Pane myGameWorldPane;
-    // private Group myTotalGroup;
-
-    // new way
     private BorderPane myPane;
-
     private VBox vbox = new VBox();
-
     private List<ButtonWrapper> myButtonList;
-
     private double myDisplayWidth;
     private double myDisplayHeight;
-
     private HUD myHeadsUp;
 
     public ViewConcrete2 (Game game, double width, double height) {
         myGame = game;
         myLevelBoard = myGame.getLevelBoard();
         myLevelBoard.addObserver(this);
-        // vbox=new VBox();
-        // myTotalGroup=group;
 
         myDisplayWidth = width;
         myDisplayHeight = height;
@@ -92,7 +82,6 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed {
         Button btn2 = new Button("Inc");
         btn2.setTranslateX(btn2.getLayoutX());
         btn2.setOnAction(e -> myGame.getPlayer().changeScore(100));// .changeScore(100));
-        // myTotalGroup.getChildren().addAll(btn,vbox,btn2);
         vbox.getChildren().addAll(btn, btn2);
         myButtonList = myGame.getButtons();
         myButtonList.forEach(e -> vbox.getChildren().add(e.getButton()));
@@ -116,8 +105,8 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed {
         // TODO
         Animation.Status previousStatus = myAnimation.getStatus();
         myAnimation.stop();
-        //changeFramesPerSecondValue(speedChangeMultiplier);
-        if(myRate >= MAX_FRAME_RATE){
+        // changeFramesPerSecondValue(speedChangeMultiplier);
+        if (myRate <= MAX_FRAME_RATE) {
             myRate = MIN_FRAME_RATE;
         }
         else
@@ -127,14 +116,15 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed {
     }
 
     public boolean canIncSpeed () {
-        return myRate <= MIN_FRAME_RATE;
+        return myRate >= MIN_FRAME_RATE;
     }
 
     public boolean canDecSpeed () {
-        return myRate >= MAX_FRAME_RATE;
+        return myRate <= MAX_FRAME_RATE;
     }
 
     private void restoreLastAnimationStatus (Animation.Status prevStatus) {
+        myHeadsUp.update();
         if (prevStatus.equals(Animation.Status.RUNNING))
             play();
     }
@@ -153,6 +143,7 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed {
                     e.getButton().setDisable(true);
                 }
             });
+        myHeadsUp.update();
 
     }
 
@@ -216,24 +207,33 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed {
     }
 
     private void addControlButtons () {
-        myHeadsUp.addButton(new ButtonWrapper("Play", e -> play(), new NullGoal()));
-        myHeadsUp.addButton(new ButtonWrapper("Pause", e -> pause(), new NullGoal()));
-        myHeadsUp.addButton(new ButtonWrapper("Slow", e -> toggleRate(), new NullGoal()));
-        myHeadsUp.addButton(new ButtonWrapper("Fast", e -> toggleRate(), new NullGoal()));
+        myHeadsUp.addButton(new ButtonWrapper("Play", e -> play(), new NotPlayingGoal(this)));
+        myHeadsUp.addButton(new ButtonWrapper("Pause", e -> pause(), new IsPlayingGoal(this)));
+        myHeadsUp
+                .addButton(new ButtonWrapper("Slow", e -> toggleRate(), new CanDecSpeedGoal(this)));
+        myHeadsUp
+                .addButton(new ButtonWrapper("Fast", e -> toggleRate(), new CanIncSpeedGoal(this)));
     }
 
     @Override
     public void pause () {
         myAnimation.pause();
+        myHeadsUp.update();
     }
 
     @Override
     public void play () {
         myAnimation.play();
+        myHeadsUp.update();
     }
 
     public void addButton (Button b, int x, int y) {
         vbox.getChildren().add(b);
+    }
+
+    @Override
+    public boolean isPlaying () {
+        return myAnimation.getStatus().equals(Status.RUNNING);
     }
 
 }

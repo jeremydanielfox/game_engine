@@ -26,13 +26,14 @@ public class BasicWorld implements GameWorld {
 
     public BasicWorld () {
         myObjects = new ArrayList<GameObject>();
-        myGrid=new GridFree(5,5);
+        myGrid = new GridFree(5, 5);
     }
 
     @Override
-    public void addObject (GameObject toSpawn){
+    public void addObject (GameObject toSpawn, PointSimple pixelCoords) {
         myObjects.add(toSpawn);
-        //myGrid.addObject(toSpawn);
+        toSpawn.setPoint(pixelCoords);// TODO change from pixel coords
+        // myGrid.addObject(toSpawn);
     }
 
     @Override
@@ -100,13 +101,22 @@ public class BasicWorld implements GameWorld {
     @Override
     public Collection<GameObject> objectsInRange (double range, PointSimple center) {
         ArrayList<GameObject> inRange = new ArrayList<>();
-        for (GameObject o : myObjects){
-            if (center.withinRange(o.getPoint(), range)){
+        for (GameObject o : myObjects) {
+            if (center.withinRange(o.getPoint(), range)) {
                 inRange.add(o);
             }
         }
         return Collections.unmodifiableList(inRange);
     }
-    
+
+    @Override
+    public void addObject (GameObject toSpawn) {
+        myObjects.add(toSpawn);
+    }
+
+    @Override
+    public boolean isPlacable (GameObject toSpawn, PointSimple pixelCoords) {
+        return true; // TODO plz replace with logic. Ex: towers cannot be placed on towers
+    }
 
 }

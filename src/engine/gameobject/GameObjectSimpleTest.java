@@ -2,10 +2,12 @@ package engine.gameobject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import xml.DataManager;
 import engine.fieldsetting.Settable;
 import engine.gameobject.units.BuffableUnit;
 import engine.gameobject.weapon.BasicWeapon;
@@ -44,9 +46,13 @@ public class GameObjectSimpleTest extends BuffableUnit{
         points.add(new PointSimple(500,500));
         myBez.setPoints(points);
         myPath.addPathSegment(myBez);
+        myPath = DataManager.readFromXML(PathFixed.class, "src/gae/listView/Test.xml");
+//        XStream xstream = new XStream(new DomDriver());
+//        File file = new File("src/gae/listView/Test.xml");
+//        myPath = (PathFixed) xstream.fromXML(file);
         myMover = new MoverPath(myPath,1);
         setWeapon(new BasicWeapon());
-        myGraphic = new Graphic(100, 100, myImagePath);
+        myGraphic = new Graphic(40, 40, myImagePath);
         myGraphic.setPoint(myPoint);
     }
 
@@ -69,7 +75,6 @@ public class GameObjectSimpleTest extends BuffableUnit{
         myPoint = new PointSimple(new Point2D(point.getX(), point.getY()));
         myGraphic.setPoint(myPoint);
     }
-    
 	@Override
 	    public void update (ObjectCollection world) {
 	        if (isDead()){

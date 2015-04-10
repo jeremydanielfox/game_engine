@@ -4,10 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import engine.gameobject.GameObjectSimpleTest;
+import gae.backend.TempTower;
+import gae.listView.EditableImage;
+import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -22,6 +27,7 @@ import javafx.scene.layout.VBox;
 
 public class SimpleEditor extends Editor implements UIObject {
 
+    private UIMediator myMediator;
     private VBox simpleEditor;
     private List<ComponentEditor> editFields;
 
@@ -45,8 +51,15 @@ public class SimpleEditor extends Editor implements UIObject {
         SliderEditor se = new SliderEditor("Hello", 0, 10);
         TextEditor te = new TextEditor("Hi");
         FileChooserEditor fe = new FileChooserEditor("File");
-        simpleEditor.getChildren().addAll(Arrays.asList(se.getObject(), te.getObject(), fe.getObject()));
-
+        Button b = new Button("done");
+        simpleEditor.getChildren().addAll(Arrays.asList(se.getObject(), te.getObject(), fe.getObject(), b));
+               
+        TempTower tt = new TempTower("KEI'S TOWER");
+        b.setOnMouseClicked(e -> {  
+            tt.setImage("/images/" + fe.getFile().getName());
+            myMediator.handleEvent(tt, e);
+        });
+        System.out.println(tt.getImagePath()); 
     }
 
     @Override

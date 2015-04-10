@@ -1,7 +1,7 @@
 package gae.backend;
 
 import gae.editor.EditorView;
-import gae.frontend.DummyLibraryView;
+//import gae.frontend.DummyLibraryView;
 import javafx.stage.Stage;
 
 
@@ -16,11 +16,11 @@ public class Manager {
          LibraryData data = new LibraryData();
          data.addToList(new TempTower());
          data.addToList(new TempTower());
-         DummyLibraryView view = new DummyLibraryView(s, data.getMap());
+         //DummyLibraryView view = new DummyLibraryView(s, data.getMap());
         TempTower tower = new TempTower();
         data.addToList(tower);
       //  EditorView view = new EditorView(tower, s);
-        view.setGUI();
+       // view.setGUI();
 
     }
 }

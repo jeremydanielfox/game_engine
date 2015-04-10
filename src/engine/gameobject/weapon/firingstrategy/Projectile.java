@@ -82,5 +82,10 @@ public class Projectile extends GameObjectSimple implements Buffer {
         
     }
 
+    @Override
+    public double getHealth () {
+        return myHealth.getHealth();
+    }
+
 
 }

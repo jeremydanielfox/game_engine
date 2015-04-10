@@ -8,8 +8,9 @@ import java.util.Map;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
-import engine.gameobject.weapon.upgradable.FiringRate;
 import engine.gameobject.weapon.upgradable.behavior.Behavior;
+import engine.gameobject.weapon.upgradable.firingrate.FiringRate;
+import engine.gameobject.weapon.upgradable.firingrate.FiringRateUpgrade;
 import engine.gameobject.weapon.upgradable.range.Range;
 import engine.gameobject.weapon.upgradable.range.RangeUpgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
@@ -32,7 +33,7 @@ public class WeaponSimple extends BasicWeapon {
 
     public WeaponSimple () {
         myRange = new RangeUpgrade();
-        //myFiringRate = new FiringRate();
+        myFiringRate = new FiringRateUpgrade();
         myBehaviors = new ArrayList<Behavior>();
         myFiringStrategy = new SingleProjectile();
         upgradables = new HashMap<>();

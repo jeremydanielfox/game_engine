@@ -9,7 +9,6 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.upgradable.FiringRate;
-import engine.gameobject.weapon.upgradable.Upgradable;
 import engine.gameobject.weapon.upgradable.behavior.Behavior;
 import engine.gameobject.weapon.upgradable.range.Range;
 import engine.gameobject.weapon.upgradable.range.RangeUpgrade;
@@ -28,12 +27,12 @@ public class WeaponSimple extends Weapon {
     private FiringRate myFiringRate;
     private List<Behavior> myBehaviors;
     private FiringStrategy myFiringStrategy;
-    Map<Class<? extends Upgradable>, Upgradable> upgradables;
+    Map<Class<? extends Upgrade>, Upgrade> upgradables;
     private UpgradeTree tree;
-    
-    public WeaponSimple() {
+
+    public WeaponSimple () {
         myRange = new RangeUpgrade();
-        myFiringRate = new FiringRate();
+        //myFiringRate = new FiringRate();
         myBehaviors = new ArrayList<Behavior>();
         myFiringStrategy = new SingleProjectile();
         upgradables = new HashMap<>();
@@ -59,33 +58,33 @@ public class WeaponSimple extends Weapon {
     public double getFiringRate () {
         return myFiringRate.getRate();
     }
-    
+
     public FiringStrategy getFiringStrategy () {
         return myFiringStrategy;
     }
 
-    @Override 
+    @Override
     public double getValue () {
         return tree.getValue();
     }
-    
+
     @Settable
-    public void setRange(Range range) {
+    public void setRange (Range range) {
         myRange = range;
     }
-    
+
     @Settable
-    public void setFiringRate(FiringRate firingRate) {
+    public void setFiringRate (FiringRate firingRate) {
         myFiringRate = firingRate;
     }
-    
+
     @Settable
-    public void setFiringStrategy(FiringStrategy firingStrategy) {
+    public void setFiringStrategy (FiringStrategy firingStrategy) {
         myFiringStrategy = firingStrategy;
     }
-    
+
     @Settable
-    public void setBehaviors(List<Behavior> behaviors) {
+    public void setBehaviors (List<Behavior> behaviors) {
         myBehaviors = behaviors;
     }
 }

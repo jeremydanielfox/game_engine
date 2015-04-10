@@ -1,6 +1,5 @@
 package engine.gameobject.weapon.upgradable.behavior;
 
-import engine.gameobject.GameObject;
 
 /**
  * Determines how many targets a projectile can go through before dying
@@ -8,12 +7,12 @@ import engine.gameobject.GameObject;
  * @author Nathan Prabhu
  *
  */
-public class Piercing implements Behavior {
+public interface Piercing extends Behavior {
 
-    @Override
-    public void apply (GameObject target) {
-        // TODO Auto-generated method stub
-
-    }
+//    @Override
+//    public void apply (GameObject target) {
+//        // TODO Auto-generated method stub
+//
+//    }
 
 }

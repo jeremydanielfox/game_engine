@@ -23,6 +23,7 @@ public class UpgradeTreeSimple implements UpgradeTree {
     
     public UpgradeTreeSimple() {
         //TODO: Initialize first and current
+        // EDIT: ^No, GAE needs to pass a list of nodes
     }
     
     @Settable

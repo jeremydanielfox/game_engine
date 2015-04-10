@@ -3,13 +3,11 @@ package engine.gameobject.weapon;
 import java.util.ArrayList;
 import java.util.Map;
 import engine.gameobject.GameObject;
-import engine.gameobject.weapon.upgradable.behavior.Behavior;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.Projectile;
 import engine.gameobject.weapon.upgradable.FiringRate;
-import engine.gameobject.weapon.upgradable.Upgradable;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import gameworld.GameWorld;
 
@@ -27,7 +25,7 @@ public abstract class Weapon {
     protected FiringRate myFiringRate;
     protected Projectile myProjectile;
     protected FiringStrategy myFiringStrategy;
-    Map<Class<? extends Upgradable>, Upgradable> upgradables;
+    Map<Class<? extends Upgrade>, Upgrade> upgradables;
     protected UpgradeTree tree;
 
     /**

@@ -2,9 +2,6 @@ package engine.gameobject.weapon.upgradable.range;
 
 import java.util.Optional;
 import engine.gameobject.weapon.Upgrade;
-import engine.gameobject.weapon.upgradable.Upgradable;
-import engine.gameobject.weapon.upgradable.behavior.damage.Damage;
-import engine.gameobject.weapon.upgradable.behavior.damage.DamageUpgrade;
 
 
 /**
@@ -34,12 +31,12 @@ public class RangeUpgrade implements Range, Upgrade {
     }
 
     @Override
-    public Class<? extends Upgradable> getType () {
+    public Class<? extends Upgrade> getType () {
         return Range.class;
     }
 
     @Override
-    public void setDecorated (Upgradable decorated) {
+    public void setDecorated (Upgrade decorated) {
         this.decorated = Optional.of((Range) decorated);
     }
     

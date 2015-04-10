@@ -3,7 +3,6 @@ package engine.gameobject.weapon.upgradable.behavior.damage;
 import java.util.Optional;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.Upgrade;
-import engine.gameobject.weapon.upgradable.Upgradable;
 
 
 /**
@@ -44,12 +43,12 @@ public class DamageUpgrade implements Damage, Upgrade {
     }
 
     @Override
-    public Class<? extends Upgradable> getType () {
+    public Class<? extends Upgrade> getType () {
         return Damage.class;
     }
 
     @Override
-    public void setDecorated (Upgradable decorated) {
+    public void setDecorated (Upgrade decorated) {
         this.decorated = Optional.of((Damage) decorated);
     }
 

@@ -1,6 +1,5 @@
 package gae.gridView;
 
-import exception.ObjectOutOfBoundsException;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
@@ -42,8 +41,6 @@ public class TileContainer extends Region implements ContainerWrapper {
 
     public boolean checkBounds (double x, double y) {
         Point2D point = this.screenToLocal(x, y);
-        System.out.println("X IS: " + point.getX());
-        System.out.println("Y IS : " + y);
         if (point.getX() < 0 || point.getX() > this.getWidth() || y < 0 ||
             y > this.getHeight()) {
             return true;
@@ -53,7 +50,8 @@ public class TileContainer extends Region implements ContainerWrapper {
 
     @Override
     public Point2D convertCoordinates (double x, double y) {
-        return this.parentToLocal(x, y);
+        Point2D point = this.screenToLocal(x, y);
+        return new Point2D(point.getX(), y);
     }
 
 }

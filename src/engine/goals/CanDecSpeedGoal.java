@@ -11,13 +11,17 @@ import View.ChangeableSpeed;
  */
 public class CanDecSpeedGoal extends ChangeableSpeedGoal {
 
+    public CanDecSpeedGoal(){
+        super();
+    }
+    
     public CanDecSpeedGoal(ChangeableSpeed changer){
         super(changer);
     }
     
     @Override
-    public void updateSatisfied () {
-        setIsSatisfied(getChangeableSpeed().canDecSpeed());
+    public boolean isSatisfied () {
+        return getChangeableSpeed().canDecSpeed();
     }
     
 }

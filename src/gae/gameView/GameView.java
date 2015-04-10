@@ -82,8 +82,8 @@ public class GameView implements UIMediator {
      */
     private void insertBorders () {
         myUI.setTop(utilities.getUtilitiesBar());
-        myUI.setCenter(myTabs.getBaseNode());
-        myUI.setRight(myGenericObjects.getBaseNode());
-        myUI.setRight(myGenericObjects.getBaseNode());
+        myUI.setCenter(myTabs.getObject());
+        myUI.setRight(myGenericObjects.getObject());
+        myUI.setRight(myGenericObjects.getObject());
     }
 }

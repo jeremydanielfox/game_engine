@@ -20,6 +20,11 @@ public class Explosion {
         this.radius = radius;
     }
 
+    public Explosion () {
+        radius = 0;
+        effects = new HashSet<Buff>();
+    }
+
     /**
      * Creates explosion in world at the specified location
      * @param world

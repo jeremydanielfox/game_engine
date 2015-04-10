@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
+import engine.gameobject.test.TestTower;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.weapon.firingstrategy.Buffer;
 import engine.grid.Grid;
@@ -35,9 +37,12 @@ public class BasicWorld implements GameWorld {
 
     @Override
     public void updateGameObjects () {
-         for (GameObject o: myObjects){
+         ArrayList<GameObject> currentObjects = new ArrayList<GameObject>(myObjects);
+         for (GameObject o: currentObjects){
              o.update(this);
          }
+         checkCollisions();
+         removeDeadObjects();
     }
 
     @Override
@@ -49,19 +54,23 @@ public class BasicWorld implements GameWorld {
     @Override
     public void checkCollisions () {
         List<Buffable> buffables =
-                myObjects.stream().filter(p -> p.getClass().isAssignableFrom(Buffable.class))
+                myObjects.stream().filter(p -> p instanceof Buffable)
                 .map(p -> (Buffable) p)
                 .collect(Collectors.toList());
         List<Buffer> buffers =
-                myObjects.stream().filter(p -> p.getClass().isAssignableFrom(Buffer.class))
+                myObjects.stream().filter(p -> p instanceof Buffer)
                 .map(p -> (Buffer) p)
                 .collect(Collectors.toList());
-        buffers.forEach(go1 -> {
-            buffables.forEach(go2 -> {
-                if (go1.getGraphic().getNode().getBoundsInParent()
-                        .intersects(go2.getGraphic().getNode().getBoundsInParent())){
+        buffers.forEach(buffer -> {
+            buffables.forEach(buffable -> {
+                if (buffer.getGraphic().getNode().getBoundsInParent()
+                        .intersects(buffable.getGraphic().getNode().getBoundsInParent())){
                     //myCollisionEngine.interact(go1, go2);
-                    go1.collide(go2);
+                    //buffer.collide(buffable);
+                    //TODO: Actually make teams and collide correctly
+                    if((buffable instanceof GameObjectSimpleTest)){
+                        buffer.impartBuffs(buffable);
+                    }
                 }
             });
         });
@@ -71,13 +80,15 @@ public class BasicWorld implements GameWorld {
     @Override
     public void removeDeadObjects () {
         // TODO Auto-generated method stub
+        ArrayList<GameObject> buffer = new ArrayList<GameObject>();
         myObjects.forEach(go -> {
             if (go.isDead()) {
-                myObjects.remove(go);
-                myGrid.removeObject(go);
+                //System.out.println(go.getClass());
+                buffer.add(go);
             }
 
         });
+        buffer.forEach(go -> myObjects.remove(go));
 
     }
 

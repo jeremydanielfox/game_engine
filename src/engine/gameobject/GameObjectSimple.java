@@ -21,7 +21,6 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     protected PointSimple myPoint;
     protected Health myHealth;
     protected Mover myMover;
-    protected Weapon myWeapon;
     protected Graphic myGraphic;
 
     public GameObjectSimple () {
@@ -30,7 +29,6 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();
-        myWeapon = new WeaponSimple();
         myGraphic = new Graphic();
     }
     
@@ -129,17 +127,6 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     @Settable
     void setGraphic (Graphic graphic) {
         myGraphic = graphic;
-    }
-
-    @Override
-    public Weapon getWeapon () {
-        return myWeapon;
-    }
-
-    @Settable
-    @Override
-    public void setWeapon (Weapon weapon) {
-        myWeapon = weapon;
     }
 
     @Override

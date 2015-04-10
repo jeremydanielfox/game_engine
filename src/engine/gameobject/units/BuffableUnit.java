@@ -1,17 +1,31 @@
 package engine.gameobject.units;
 
+import java.util.ArrayList;
 import java.util.List;
 import engine.gameobject.BasicMover;
 import engine.gameobject.GameObjectSimple;
+import engine.gameobject.weapon.BasicWeapon;
+import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import gameworld.ObjectCollection;
 
 
 public class BuffableUnit extends GameObjectSimple implements Buffable{
     private List<Buff> buffList;
+    private Weapon myWeapon;
 
+    public BuffableUnit(){
+        super();
+        buffList = new ArrayList<>();
+        myWeapon = new BasicWeapon();
+    }
+    
+    public double getHealth(){
+        return myHealth.getHealth();
+    }
     @Override
     public void update (ObjectCollection world) {
+        advanceBuffs();
         if (isDead()){
             onDeath();
             return;
@@ -22,9 +36,7 @@ public class BuffableUnit extends GameObjectSimple implements Buffable{
         catch (EndOfPathException e){
             //TODO: ENCODE END OF PATH BEHAVIOR
         }
-        myWeapon.fire(world, myPoint);
-        
-        
+        myWeapon.fire(world, myPoint);        
     }
     
     public void addBuff (Buff toAdd) {
@@ -35,6 +47,8 @@ public class BuffableUnit extends GameObjectSimple implements Buffable{
         else if (toAdd.isStrongerBuff(equalBuff)) {
             removeBuff(equalBuff);
             applyBuff(toAdd);
+            System.out.println("Buff is applied" + "Health: " + getHealth());
+            System.out.println(isDead());
         }
     }
     
@@ -42,11 +56,15 @@ public class BuffableUnit extends GameObjectSimple implements Buffable{
      * advanceBuffs would need to be on the list of things updated every frame/unit of time.
      ********/
     private void advanceBuffs () {
+        ArrayList<Buff> buffer = new ArrayList<Buff>();
         for (Buff buff : buffList) {
             if (buff.timeLeft() <= 0) {
-                removeBuff(buff);
+                buffer.add(buff);
             }
             buff.advanceTime(1, this);
+        }
+        for(Buff toRemove : buffer){
+            buffList.remove(toRemove);
         }
     }
 
@@ -67,6 +85,17 @@ public class BuffableUnit extends GameObjectSimple implements Buffable{
             }
         }
         return null;
+    }
+
+    @Override
+    public void setWeapon (Weapon weapon) {
+        myWeapon = weapon;
+        
+    }
+
+    @Override
+    public Weapon getWeapon () {
+        return myWeapon;
     }
 
 }

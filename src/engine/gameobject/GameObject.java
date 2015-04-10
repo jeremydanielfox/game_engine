@@ -21,16 +21,6 @@ public interface GameObject extends Movable, Health, Graphical {
     public void update(ObjectCollection world);
     
     /**
-     * Sets the GameObject's Weapon
-     */
-    public void setWeapon (Weapon weapon);
-
-    /**
-     * Returns the GameObject's Weapon
-     */
-    public Weapon getWeapon();
-
-    /**
      * Labels allow the GameEngine to differentiate
      * 
      * @return: A string

@@ -1,17 +1,20 @@
 package engine.gameobject.weapon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.upgradable.behavior.Behavior;
 import engine.gameobject.PointSimple;
+import engine.gameobject.test.TestProjectile;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.weapon.firingstrategy.Buffer;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.Projectile;
+import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.upgradable.FiringRate;
 import engine.gameobject.weapon.upgradable.Upgradable;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
@@ -35,6 +38,13 @@ public class BasicWeapon implements Weapon{
     Map<Class<? extends Upgradable>, Upgradable> upgradables;
     protected UpgradeTree tree;
 
+    public BasicWeapon(){
+        timeSinceFire = 0;
+        myRange = 10000;
+        myFiringRate = new FiringRate(1);
+        myFiringStrategy = new SingleProjectile();
+    }
+    
     /* (non-Javadoc)
      * @see engine.gameobject.weapon.Weaopn#fire(gameworld.GameWorld, engine.gameobject.PointSimple)
      */
@@ -43,7 +53,7 @@ public class BasicWeapon implements Weapon{
         if (canFire()) {
             List<GameObject> targets = (List<GameObject>) world.objectsInRange(myRange, location);
             List<Buffable> buffables =
-                    targets.stream().filter(p -> p.getClass().isAssignableFrom(Buffable.class))
+                    targets.stream().filter(p -> p instanceof Buffable)
                             .map(p -> (Buffable) p)
                             .collect(Collectors.toList());
             if (!buffables.isEmpty()) {
@@ -61,7 +71,7 @@ public class BasicWeapon implements Weapon{
      */
     @Override
     public void addBuff (Buff newBuff) {
-        myProjectile.addCollsionBehavior(newBuff);
+        myProjectile.addCollisionBehavior(newBuff);
     }
 
     /* (non-Javadoc)

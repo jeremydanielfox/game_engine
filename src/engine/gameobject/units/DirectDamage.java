@@ -10,7 +10,6 @@ public class DirectDamage extends Buff{
     @Override
     public void apply (BuffableUnit myUnit) {
         myUnit.changeHealth(-1 * myDamage);
-        
     }
 
     @Override
@@ -19,11 +18,11 @@ public class DirectDamage extends Buff{
     }
 
     /*
-     * You always want the new damage to apply, so return false
+     * You always want the new damage to apply, so return true
      */
     @Override
     public boolean isStrongerBuff (Buff otherBuff) {
-        return false;
+        return true;
     }
 
 }

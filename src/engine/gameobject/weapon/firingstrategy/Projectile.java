@@ -8,6 +8,8 @@ import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.weapon.Weapon;
+import engine.pathfinding.EndOfPathException;
 import gameworld.ObjectCollection;
 
 
@@ -19,15 +21,12 @@ public class Projectile extends GameObjectSimple implements Buffer {
     public Projectile () {
         collidedID = new HashSet<String>();
         onCollision = new HashSet<Buff>();
+        onDeath = new Explosion();
     }
 
-    public void addCollsionBehavior(Buff newBuff){
+    public void addCollisionBehavior(Buff newBuff){
         removeDuplicateBuff(newBuff);
         onCollision.add(newBuff);
-    }
-    
-    public void collide(){
-        
     }
     
     public void addOnDeath(Buff newBuff){
@@ -35,8 +34,8 @@ public class Projectile extends GameObjectSimple implements Buffer {
     }
     
     @Override
-    public void impartBuffs (Buffable target) {
-        onCollision.forEach(b -> target.addBuff(b));
+    public void impartBuffs (Buffable obstacle) {
+        onCollision(obstacle);
     }
     
     private void removeDuplicateBuff(Buff newBuff){
@@ -47,8 +46,7 @@ public class Projectile extends GameObjectSimple implements Buffer {
         }
     }
     
-    //TODO: We really want to impart a new mover to this projectile
-    public Projectile clone(PointSimple location, double angle){
+    public Projectile clone(){
         Projectile clone = (Projectile) super.clone();
         return clone;
     }
@@ -61,10 +59,10 @@ public class Projectile extends GameObjectSimple implements Buffer {
             if(obstacle.getTeam()!= getTeam())
                 return true;
         }*/
-        return false;
+        return true;
     }
 
-    private void onCollision (BuffableUnit obstacle) {
+    private void onCollision (Buffable obstacle) {
         if (effectiveCollision(obstacle)) {
             for (Buff b: onCollision){
                 obstacle.addBuff(b);
@@ -75,8 +73,14 @@ public class Projectile extends GameObjectSimple implements Buffer {
 
     @Override
     public void update (ObjectCollection world) {
-        // TODO Auto-generated method stub
+        try {
+            move();
+        }
+        catch (EndOfPathException e) {
+            //TODO: Implement end of path behavior
+        }
         
     }
+
 
 }

@@ -2,6 +2,7 @@ package engine.gameobject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;

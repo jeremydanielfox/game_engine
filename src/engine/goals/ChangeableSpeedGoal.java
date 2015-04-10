@@ -34,9 +34,7 @@ public abstract class ChangeableSpeedGoal extends Goal {
     @Override
     public void update (Observable o, Object arg) {
         if(myChangeableSpeed.equals(o)){
-            updateSatisfied();
+            //updateSatisfied();
         }
     }
-    
-    public abstract void updateSatisfied();
 }

@@ -15,7 +15,7 @@ import engine.shop.Purchasable;
  *
  */
 @Settable
-public class GameObjectSimple implements GameObject, Purchasable {
+public abstract class GameObjectSimple implements GameObject, Purchasable {
     protected String myImagePath;
     protected String myLabel;
     protected PointSimple myPoint;
@@ -32,20 +32,6 @@ public class GameObjectSimple implements GameObject, Purchasable {
         myMover = new MoverPath();
         myWeapon = new WeaponSimple();
         myGraphic = new Graphic();
-    }
-
-    public void update(){
-        if(isDead()){
-            onDeath();
-            return;
-        }
-        try {
-            move();
-        }
-        catch (EndOfPathException e){
-            //TODO: Catch and perform end of path duties
-        }
-        //myWeapon.fire(world, myPoint);
     }
     
     @Override
@@ -101,13 +87,12 @@ public class GameObjectSimple implements GameObject, Purchasable {
     @Settable
     @Override
     public void setSpeed (double speed) {
-        // TODO Auto-generated method stub
+       myMover.setSpeed(speed);
 
     }
 
     @Override
     public Graphic getGraphic () {
-        // TODO Auto-generated method stub
         return myGraphic;
     }
     
@@ -121,12 +106,12 @@ public class GameObjectSimple implements GameObject, Purchasable {
     }
     
     @Settable
-    void setImagePath (String imgpath) {
+    public void setImagePath (String imgpath) {
         myImagePath = imgpath;
     }
 
     @Settable
-    void setLabel (String label) {
+    public void setLabel (String label) {
         myLabel = label;
     }
 
@@ -136,13 +121,13 @@ public class GameObjectSimple implements GameObject, Purchasable {
     }
 
     @Settable
-    void setHealth (Health health) {
+    public void setHealth (Health health) {
         myHealth = health;
     }
 
 
     @Settable
-    void setGraphic (Graphic graphic) {
+    public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }
 

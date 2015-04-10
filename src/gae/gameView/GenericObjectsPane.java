@@ -26,7 +26,7 @@ public class GenericObjectsPane implements UIObject{
     }
     
     private void initialize () {
-        baseNode = new VBox();
+        this.baseNode = new VBox();
         ObservableList<String> data = FXCollections.observableArrayList();
 
         ListView<String> listView = new ListView<String>(data);
@@ -38,9 +38,9 @@ public class GenericObjectsPane implements UIObject{
         listView.setItems(data);
         listView.setOnMouseClicked(e -> cellClicked(e, listView.getSelectionModel().getSelectedItem()));
         
-        baseNode.getChildren().addAll(new Text("Generic Objects"), listView);
-        baseNode.setPadding(new Insets(5));
-        baseNode.setSpacing(5);
+        this.baseNode.getChildren().addAll(new Text("Generic Objects"), listView);
+        this.baseNode.setPadding(new Insets(5));
+        this.baseNode.setSpacing(5);
     }  
     
     private void cellClicked (MouseEvent e, String selected) {
@@ -62,7 +62,7 @@ public class GenericObjectsPane implements UIObject{
 
     @Override
     public Node getObject () {
-        return baseNode;
+        return this.baseNode;
     }
 
 }

@@ -18,7 +18,7 @@ public class WorldView {
     private Scene scene;
     private BorderPane border;
     private ObjectProperty<Image> backgroundProperty;
-
+    private ContainerWrapper wrapper;
     private ObservableList<PathView> paths =
             FXCollections.observableArrayList();
 
@@ -39,8 +39,7 @@ public class WorldView {
         background.fitWidthProperty().bind(container.widthProperty());
         background.fitHeightProperty().bind(container.heightProperty());
 
-        pathView = new PathView(stack, this.scene);
-        pathView.setContainerArea(root);
+        wrapper = (ContainerWrapper) container;
         return stack;
     }
 
@@ -50,11 +49,16 @@ public class WorldView {
         border.setLeft(getLeftView());
         return border;
     }
+    
+    public Image getBackgroundImage() {
+        return backgroundProperty.get();
+    }
 
     private Group getLeftView () {
         StackPane stackPane = new StackPane();
         LeftPaneView lpview = new LeftPaneView();
-        Group leftview = lpview.getGroup(stack, scene, paths, pathView, backgroundProperty);
+        Group leftview =
+                lpview.getGroup(stack, scene, paths, pathView, backgroundProperty, wrapper);
         stackPane.getChildren().add(leftview);
         return leftview;
     }

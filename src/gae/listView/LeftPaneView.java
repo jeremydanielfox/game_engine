@@ -1,6 +1,7 @@
 package gae.listView;
 
 import gae.backend.TempTower;
+import gae.gridView.ContainerWrapper;
 import gae.gridView.PathView;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -35,6 +36,7 @@ public class LeftPaneView {
     private Accordion accordion;
     private TitledPane pathTitledPane;
     private PathList pathList;
+    private ContainerWrapper wrapper;
 
     public Scene getScene () {
         root = new Group();
@@ -46,11 +48,12 @@ public class LeftPaneView {
                            Scene scene,
                            ObservableList<PathView> pathList,
                            PathView view,
-                           ObjectProperty<Image> backgroundProperty) {
+                           ObjectProperty<Image> backgroundProperty, ContainerWrapper wrapper) {
         this.nodeScene = pane;
         this.pathObservableList = pathList;
         this.pathView = view;
         this.myScene = scene;
+        this.wrapper = wrapper;
         root = new Group();
         objectGroup = new Group();
         root.getChildren().addAll(view(), tempButton(), changeBackground(backgroundProperty),
@@ -68,14 +71,15 @@ public class LeftPaneView {
                 Object instance = className.getConstructor().newInstance();
                 listOfListObjects.add((PaneList) instance);
                 Method setUpList =
-                        className.getMethod("initialize", Group.class, Node.class, Scene.class);
+                        className.getMethod("initialize", Group.class, Node.class, Scene.class,
+                                            ContainerWrapper.class);
                 accordion.getPanes().add((TitledPane) setUpList
-                        .invoke(instance, objectGroup, nodeScene, myScene));
+                        .invoke(instance, objectGroup, nodeScene, myScene, wrapper));
             }
             catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
                     | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException e) {
-                pathList = new PathList(pathView, (StackPane) nodeScene, myScene);
+                pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
                 pathTitledPane =
                         pathList.getTitledPane(pathObservableList, gameObjects[i]);
                 accordion.getPanes().add(pathTitledPane);

@@ -6,6 +6,7 @@ import engine.gameobject.units.Buff;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.weapon.firingstrategy.Buffer;
 import engine.gameobject.weapon.firingstrategy.Projectile;
+import gameworld.ObjectCollection;
 
 
 public interface Weapon {
@@ -15,7 +16,7 @@ public interface Weapon {
      * 
      * @param location takes in the GameObject's location
      */
-    public List<Buffer> fire (List<Buffable> targets, PointSimple location);
+    public void fire (ObjectCollection world, PointSimple location);
 
     /**
      * Adds a behavior to the given weapon. Will automatically upgrade existing one.

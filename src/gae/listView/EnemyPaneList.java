@@ -1,5 +1,6 @@
 package gae.listView;
 
+import gae.gridView.ContainerWrapper;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ public class EnemyPaneList extends PaneList {
     private Scene scene;
     private boolean added;
     private StackPane stack;
+    private ContainerWrapper wrapper;
 
     public EnemyPaneList () {
         enemyEditablesList = new ArrayList<>();
@@ -26,17 +28,18 @@ public class EnemyPaneList extends PaneList {
     @Override
     public void addToGenericList (EditableNode editableNode) {
         enemyEditablesList.add(editableNode);
-        TitledPane newPane = setTitledPaneClick(editableNode, root, workspace, scene);
+        TitledPane newPane = setTitledPaneClick(editableNode, root, workspace, scene, wrapper);
         enemyPaneList.add(newPane);
     }
 
     @Override
-    public TitledPane initialize (Group root, Node node, Scene scene) {
+    public TitledPane initialize (Group root, Node node, Scene scene, ContainerWrapper wrapper) {
         this.root = root;
         root.setManaged(false);
         this.workspace = node;
         this.scene = scene;
         this.stack = (StackPane) workspace;
+        this.wrapper = wrapper;
         TitledPane pane = getTitledPane("Enemy");
         enemyPaneList = setAccordion(pane);
         return pane;

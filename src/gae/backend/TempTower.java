@@ -2,7 +2,6 @@ package gae.backend;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import engine.gameobject.Editable;
 import engine.gameobject.weapon.Weapon;
 import gae.gridView.Pair;
 import gae.listView.EditableImage;

@@ -2,15 +2,20 @@ package engine.gameobject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import xml.DataManager;
 import engine.fieldsetting.Settable;
+import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
+import gameworld.ObjectCollection;
 
 
 /**
@@ -21,7 +26,7 @@ import engine.pathfinding.PathSegmentBezier;
  * @author Jeremy
  *
  */
-public class GameObjectSimpleTest implements GameObject {
+public class GameObjectSimpleTest extends BuffableUnit{
     private Node myNode;
     private String myImagePath;
     private String myLabel;
@@ -36,7 +41,8 @@ public class GameObjectSimpleTest implements GameObject {
         myImagePath = "robertDuvall.jpg";
         myLabel = "test object";
         myPoint = new PointSimple(300,300);
-        myHealth = new HealthSimple();
+        myHealth = new HealthSimple(3);
+        
 //        myMover = new MoverPoint(new PointSimple(600,600), .2);
         
         PathFixed myPath = new PathFixed();
@@ -48,8 +54,12 @@ public class GameObjectSimpleTest implements GameObject {
         points.add(new PointSimple(500,500));
         myBez.setPoints(points);
         myPath.addPathSegment(myBez);
+        myPath = DataManager.readFromXML(PathFixed.class, "src/gae/listView/Test.xml");
+//        XStream xstream = new XStream(new DomDriver());
+//        File file = new File("src/gae/listView/Test.xml");
+//        myPath = (PathFixed) xstream.fromXML(file);
         myMover = new MoverPath(myPath,1);
-        //myWeapon = new WeaponSimple(0, 0, null, null);
+        myWeapon = new BasicWeapon();
         myGraphic = new Graphic(100, 100, myImagePath);
         myGraphic.setPoint(myPoint);
     }
@@ -73,13 +83,7 @@ public class GameObjectSimpleTest implements GameObject {
 
     // temporary
     public GameObject clone () {
-        try {
             return (GameObject) super.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.out.println(this.getLabel() + " can't be cloned");
-            return null;
-        }
     }
 
     @Override
@@ -165,14 +169,22 @@ public class GameObjectSimpleTest implements GameObject {
     }
 
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public BasicMover getMover() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	    public void update (ObjectCollection world) {
+	        if (isDead()){
+	            onDeath();
+	            return;
+	        }
+	        try{
+	            move();
+	        }
+	        catch (EndOfPathException e){
+	            
+	        }
+	        
+	    }
 }

@@ -17,7 +17,7 @@ public class PathView {
     private ArrayList<PathSet> pathSetList;
     private int index;
     private StackPane myStack;
-    private static Group container;
+    private static ContainerWrapper container;
     private int myID;
 
 
@@ -32,7 +32,7 @@ public class PathView {
         StackPane.setAlignment(root, Pos.CENTER);
     }
 
-    public void setContainerArea (Group container) {
+    public void setContainerArea (ContainerWrapper container) {
         PathView.container = container;
     }
 

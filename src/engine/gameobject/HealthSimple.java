@@ -12,7 +12,14 @@ import engine.fieldsetting.Settable;
 @Settable
 public class HealthSimple implements Health {
     private double myHealth;
-
+    
+    public HealthSimple(){
+        myHealth = 0;
+    }
+    public HealthSimple(double health){
+        myHealth = health;
+    }
+    
     @Override
     public boolean isDead () {
         return myHealth <= 0;

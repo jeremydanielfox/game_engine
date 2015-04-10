@@ -1,9 +1,8 @@
 package gae.listView;
 
-import java.util.ArrayList;
-import java.util.List;
-import engine.gameobject.Editable;
-import View.ViewUtilities;
+import exception.ObjectOutOfBoundsException;
+import gae.backend.Editable;
+import gae.gridView.ContainerWrapper;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -16,6 +15,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import View.ViewUtilities;
 
 
 /**
@@ -29,7 +29,10 @@ public abstract class PaneList {
 
     // private List<EditableImage> imageList;
 
-    public abstract TitledPane initialize (Group root, Node node, Scene scene);
+    public abstract TitledPane initialize (Group root,
+                                           Node node,
+                                           Scene scene,
+                                           ContainerWrapper wrapper);
 
     public abstract void addToGenericList (EditableNode node);
 
@@ -52,7 +55,11 @@ public abstract class PaneList {
         return accordion.getPanes();
     }
 
-    protected TitledPane setTitledPaneClick (EditableNode node, Group root, Node pane, Scene scene) {
+    protected TitledPane setTitledPaneClick (EditableNode node,
+                                             Group root,
+                                             Node pane,
+                                             Scene scene,
+                                             ContainerWrapper wrapper) {
         TitledPane newPane = new TitledPane();
         newPane.setText(node.getName());
         ObservableList<Editable> editableList = node.getChildrenList();
@@ -71,7 +78,7 @@ public abstract class PaneList {
                                                      ViewUtilities
                                                              .getMouseLocation(me, transitionImage),
                                                      KeyCode.ESCAPE);
-                    makeNodePlaceable(binder, node, root);
+                    makeNodePlaceable(binder, node, root, wrapper);
                     root.getChildren().add(binder);
 
                 });
@@ -83,7 +90,10 @@ public abstract class PaneList {
         return newPane;
     }
 
-    private void makeNodePlaceable (Node binder, EditableNode node, Group root) {
+    private void makeNodePlaceable (Node binder,
+                                    EditableNode node,
+                                    Group root,
+                                    ContainerWrapper wrapper) {
         binder.setOnMouseClicked(ev -> {
             Point2D current =
                     binder.localToParent(new Point2D(binder.getTranslateX(), binder
@@ -93,8 +103,10 @@ public abstract class PaneList {
 
             Editable newEditable = node.makeNewInstance();
             newEditable.setLocation(currentX, currentY);
-            EditableImage edimage = new EditableImage(node.getImageView(), newEditable);
+            EditableImage edimage = new EditableImage(node.getImageView(), newEditable, wrapper);
             newEditable.setEditableImage(edimage);
+            if (wrapper.checkBounds(currentX, currentY))
+                throw new ObjectOutOfBoundsException();
             edimage.relocate(currentX, currentY);
             // for (EditableImage image : imageList) {
             // if (edimage.checkIntersect(image)) {

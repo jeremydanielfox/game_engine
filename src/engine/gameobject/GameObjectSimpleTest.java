@@ -7,6 +7,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import xml.DataManager;
 import engine.fieldsetting.Settable;
 import engine.gameobject.units.BuffableUnit;
 import engine.gameobject.weapon.BasicWeapon;
@@ -53,6 +54,10 @@ public class GameObjectSimpleTest extends BuffableUnit{
         points.add(new PointSimple(500,500));
         myBez.setPoints(points);
         myPath.addPathSegment(myBez);
+        myPath = DataManager.readFromXML(PathFixed.class, "src/gae/listView/Test.xml");
+//        XStream xstream = new XStream(new DomDriver());
+//        File file = new File("src/gae/listView/Test.xml");
+//        myPath = (PathFixed) xstream.fromXML(file);
         myMover = new MoverPath(myPath,1);
         myWeapon = new BasicWeapon();
         myGraphic = new Graphic(100, 100, myImagePath);

@@ -1,11 +1,8 @@
 package gae.listView;
 
-import java.util.ArrayList;
-import java.util.List;
-import engine.gameobject.Editable;
 import exception.ObjectOutOfBoundsException;
+import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
-import View.ViewUtilities;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -18,6 +15,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import View.ViewUtilities;
 
 
 /**

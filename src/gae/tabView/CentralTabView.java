@@ -27,7 +27,8 @@ public class CentralTabView implements UIObject{
         baseNode = new VBox();
         tabView = new TabPane();
         ShopTab shopTab = new ShopTab();
-        tabView.getTabs().add(shopTab.getBaseTabNode());
+        HudEditorTab hudTab = new HudEditorTab(null);
+        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode());
 
         Button newLevel = new Button("Add Level");
         newLevel.setOnAction(e -> createNewLevel());

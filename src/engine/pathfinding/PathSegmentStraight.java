@@ -1,6 +1,5 @@
 package engine.pathfinding;
 
-import javafx.geometry.Point2D;
 import engine.fieldsetting.Settable;
 import engine.gameobject.PointSimple;
 
@@ -14,7 +13,7 @@ import engine.gameobject.PointSimple;
 public class PathSegmentStraight implements PathSegment {
     private PointSimple start, end;
 
-    public PathSegmentStraight (Point2D start, Point2D end) {
+    public PathSegmentStraight (PointSimple start, PointSimple end) {
         this.start = new PointSimple(start);
         this.end = new PointSimple(end);
     }
@@ -34,12 +33,12 @@ public class PathSegmentStraight implements PathSegment {
     }
 
     @Settable
-    public void setStart (Point2D start) {
+    public void setStart (PointSimple start) {
         this.start = new PointSimple(start);
     }
 
     @Settable
-    public void setEnd (Point2D end) {
+    public void setEnd (PointSimple end) {
         this.end = new PointSimple(end);
     }
 

@@ -1,7 +1,6 @@
 package engine.gameobject;
 
 import engine.fieldsetting.Settable;
-import engine.pathfinding.EndOfPathException;
 
 
 /**
@@ -11,41 +10,29 @@ import engine.pathfinding.EndOfPathException;
  *
  */
 @Settable
-public class MoverPoint implements Mover {
-    private double mySpeed;
+public abstract class MoverPoint extends BasicMover {
     private PointSimple myPoint;
 
     public MoverPoint () {
-        mySpeed = 0;
+        super(0);
         myPoint = new PointSimple();
     }
 
     public MoverPoint (PointSimple point, double speed) {
-        mySpeed = speed;
+        super(speed);
         myPoint = point;
     }
-
-    @Override
-    public PointSimple move (PointSimple current) throws EndOfPathException {
-        PointSimple p = PointSimple.pointOnLine(current, myPoint, mySpeed);
-        if (PointSimple.pointInBetween(current, myPoint, p)) {
-            throw new EndOfPathException();
-        }
-        return p;
-    }
-
-    @Settable
-    @Override
-    public void setSpeed (double speed) {
-        mySpeed = speed;
-    }
-
+    
+    /**
+     * Sets the mover's reference point to point
+     * @param point
+     */
     @Settable
     public void setPoint (PointSimple point) {
         myPoint = point;
     }
-
-    public Mover clone () {
-        return new MoverPoint(myPoint, mySpeed);
+    
+    protected PointSimple getPoint(){
+        return myPoint;
     }
 }

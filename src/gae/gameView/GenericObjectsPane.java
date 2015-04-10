@@ -1,44 +1,48 @@
 package gae.gameView;
 
 import gae.editor.SimpleEditor;
+import gae.openingView.UIObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+public class GenericObjectsPane implements UIObject{
 
-public class GenericObjectsPane {
+    private VBox baseNode;
 
-    private StackPane baseNode;
-
-    public GenericObjectsPane () {
+    public GenericObjectsPane() {
         initialize();
     }
-
+    
     private void initialize () {
+        this.baseNode = new VBox();
         ObservableList<String> data = FXCollections.observableArrayList();
 
         ListView<String> listView = new ListView<String>(data);
         listView.setPrefSize(200, 250);
         listView.setEditable(true);
 
-        data.addAll("Tower", "Enemy", "Obstacle"); // TODO: Don't hard code these values
+        data.addAll("Tower", "Enemy", "Obstacle");
 
         listView.setItems(data);
-        listView.setOnMouseClicked(e -> listClicked(e, listView));
-
-        baseNode = new StackPane();
-        baseNode.getChildren().add(listView);
-    }
-
-    private void listClicked (MouseEvent click, ListView<String> list) {
-        if (click.getClickCount() == 2) {
-            newCustomObject(list.getSelectionModel().getSelectedItem());
+        listView.setOnMouseClicked(e -> cellClicked(e, listView.getSelectionModel().getSelectedItem()));
+        
+        this.baseNode.getChildren().addAll(new Text("Generic Objects"), listView);
+        this.baseNode.setPadding(new Insets(5));
+        this.baseNode.setSpacing(5);
+    }  
+    
+    private void cellClicked (MouseEvent e, String selected) {
+        if (e.getClickCount() == 2) {
+            newCustomObject(selected);
         }
     }
 
@@ -50,7 +54,9 @@ public class GenericObjectsPane {
         editorStage.show();
     }
 
-    public Node getBaseNode () {
-        return baseNode;
+    @Override
+    public Node getObject () {
+        return this.baseNode;
     }
+
 }

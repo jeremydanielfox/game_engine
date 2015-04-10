@@ -1,9 +1,14 @@
 package gae.listView;
 
-import java.util.ArrayList;
-import java.util.List;
+import engine.gameobject.PointSimple;
+import engine.pathfinding.PathFixed;
+import engine.pathfinding.PathSegmentBezier;
+import gae.gridView.ContainerWrapper;
 import gae.gridView.Path;
 import gae.gridView.PathView;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,6 +21,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
+import xml.DataManager;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 
 
 public class PathList {
@@ -27,13 +36,27 @@ public class PathList {
     private StackPane stack;
     private Scene scene;
     private int listIndex;
+    private Button bezier;
+    private Button completePath;
+    private Button newPath;
+    private Button displayPath;
+    private Button updatePath;
+    private List<Button> buttonList;
 
-    public PathList (PathView pathView, StackPane stack, Scene scene) {
-        this.pathView = pathView;
+    public PathList (StackPane stack, Scene scene, ContainerWrapper container) {
+        this.pathView = new PathView(stack, scene);
+        pathView.setContainerArea(container);
         this.stack = stack;
         this.scene = scene;
-        stack.getChildren().addAll(makeBezierCurve(), completePath(), newPath(), displayPaths(),
-                                   updatePath());
+        bezier = makeBezierCurve();
+        completePath = completePath();
+        newPath = newPath();
+        displayPath = displayPaths();
+        updatePath = updatePath();
+        buttonList = new ArrayList<>();
+        buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
+                                                      updatePath }));
+        stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
     }
 
     public TitledPane getTitledPane (ObservableList<PathView> paths, String text) {
@@ -73,8 +96,7 @@ public class PathList {
                         }
                         else if (pathView != null) {
                             HBox content = new HBox();
-                            // TODO : Nina - add a counter to the path
-                            content.getChildren().add(new Label("Path"));
+                            content.getChildren().add(new Label("Path " + pathView.getID()));
                             setGraphic(content);
                         }
                     }
@@ -85,6 +107,21 @@ public class PathList {
         listView.setMaxWidth(300);
         pane.setContent(listView);
         return pane;
+    }
+
+    public void disableScreen () {
+        pathView.resetScreen();
+        for (Button button : buttonList) {
+            button.setDisable(true);
+        }
+    }
+
+    public void setScreen () {
+        pathView.resetScreen();
+        for (Button button : buttonList) {
+            button.setDisable(false);
+        }
+        pathView = new PathView(stack, this.scene);
     }
 
     private void setOldPath (PathView view) {
@@ -115,6 +152,7 @@ public class PathList {
             allPaths.add(path);
             System.out.println("ADDING INDEX : " + paths.size());
             paths.add(pathView);
+            pathView.setID(counter);
             counter++;
             pathView = new PathView(stack, this.scene);
         });
@@ -136,19 +174,33 @@ public class PathList {
         Button display = new Button("Display Paths");
         display.setTranslateX(400);
         display.setTranslateY(150);
+        XStream xst = new XStream(new DomDriver());
         display.setOnMouseClicked(e -> {
             // this is the information that'll be passed into XML (allPaths)
             // *****************************************//
             System.out.println("PRINTING OUT ALLPATHS LIST!");
+            PathFixed myPath = new PathFixed();
             for (List<Path> lists : allPaths) {
+                
                 for (int i = 0; i < lists.size(); i++) {
-                    System.out.println("Path " + i + "'s coordinates");
-                    lists.get(i).printInfo();
-                    System.out.println();
+//                    System.out.println("Path " + i + "'s coordinates");
+                    Path temp = lists.get(i);
+                    temp.printInfo();
+//                    System.out.println();
+                    PathSegmentBezier tempBez = new PathSegmentBezier();
+                    List<PointSimple> points = new ArrayList<>();
+                    points.add(new PointSimple(temp.getStart()));
+                    points.add(new PointSimple(temp.getControlOne()));
+                    points.add(new PointSimple(temp.getControlTwo()));
+                    points.add(new PointSimple(temp.getEnd()));
+                    tempBez.setPoints(points);
+                    myPath.addPathSegment(tempBez);
                 }
             }
             // *****************************************//
+            DataManager.writeToXML(myPath, "src/gae/listView/Test.xml");
         });
+        
         return display;
     }
 

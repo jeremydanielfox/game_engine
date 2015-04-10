@@ -48,7 +48,7 @@ public class PointSimple {
         double run = end.getX() - start.getX();
         double norm = norm(rise, run);
         double mult = distance / norm;
-        return new PointSimple(run * mult, rise * mult);
+        return new PointSimple(start.getX() + run * mult, start.getY() + rise * mult);
     }
 
     public static boolean pointInBetween (PointSimple start, PointSimple end, PointSimple point) {
@@ -82,8 +82,13 @@ public class PointSimple {
     }
 
     @Settable
-    public void setPoint (Point2D point) {
-        myPoint = point;
+    public void setX (double x) {
+        myPoint = new Point2D(x, myPoint.getY());
+    }
+
+    @Settable
+    public void setY (double y) {
+        myPoint = new Point2D(myPoint.getX(), y);
     }
 
 }

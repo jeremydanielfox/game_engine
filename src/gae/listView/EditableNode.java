@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.util.Pair;
-import engine.gameobject.Editable;
+import gae.backend.Editable;
 
 
 /**
@@ -39,8 +39,8 @@ public class EditableNode {
 
     public Editable makeNewInstance () {
         Editable copy = (Editable) DeepCopy.copy(editable);
-        myID++;
         copy.setID(myID);
+        myID++;
         myChildren.add(copy);
         return copy;
     }

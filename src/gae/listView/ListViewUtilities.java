@@ -1,6 +1,5 @@
 package gae.listView;
 
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -11,9 +10,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
-import engine.gameobject.Editable;
+import gae.backend.Editable;
 
 
+/**
+ * ListView utility class made to create lists and cells with icons
+ * 
+ * @author Nina and Kei
+ *
+ */
 public class ListViewUtilities {
 
     public static final int THUMBNAIL_SIZE = 20;

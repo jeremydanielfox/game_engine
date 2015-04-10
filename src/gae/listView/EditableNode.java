@@ -39,8 +39,8 @@ public class EditableNode {
 
     public Editable makeNewInstance () {
         Editable copy = (Editable) DeepCopy.copy(editable);
-        myID++;
         copy.setID(myID);
+        myID++;
         myChildren.add(copy);
         return copy;
     }

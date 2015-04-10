@@ -1,6 +1,7 @@
 package gae.gridView;
 
 import gae.listView.LeftPaneView;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -16,6 +17,7 @@ public class WorldView {
     private PathView pathView;
     private Scene scene;
     private BorderPane border;
+    private ObjectProperty<Image> backgroundProperty;
 
     private ObservableList<PathView> paths =
             FXCollections.observableArrayList();
@@ -27,6 +29,7 @@ public class WorldView {
         stack = new StackPane();
         this.scene = scene;
         ImageView background = new ImageView(new Image("/images/Park_Path.png"));
+        backgroundProperty = background.imageProperty();
         Group root = new Group();
         TileContainer container = new TileContainer(20, border);
         root.getChildren().addAll(background, container);
@@ -37,7 +40,7 @@ public class WorldView {
         background.fitHeightProperty().bind(container.heightProperty());
 
         pathView = new PathView(stack, this.scene);
-
+        pathView.setContainerArea(root);
         return stack;
     }
 
@@ -51,7 +54,7 @@ public class WorldView {
     private Group getLeftView () {
         StackPane stackPane = new StackPane();
         LeftPaneView lpview = new LeftPaneView();
-        Group leftview = lpview.getGroup(stack, scene, paths, pathView);
+        Group leftview = lpview.getGroup(stack, scene, paths, pathView, backgroundProperty);
         stackPane.getChildren().add(leftview);
         return leftview;
     }

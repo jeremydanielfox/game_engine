@@ -4,6 +4,7 @@ package gae.gridView;
  * In the process of trying to put the Anchors and the curve into one object
  */
 import java.util.ArrayList;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -25,10 +26,12 @@ public class PathSet extends Region {
     private int index;
     private PathLabel pathLabel;
     private StackPane stack;
+    private Group container;
 
-    public PathSet (ArrayList<Anchor> anchorList, StackPane scene, int index) {
+    public PathSet (ArrayList<Anchor> anchorList, StackPane scene, int index, Group container) {
         root = new Group();
         root.setManaged(false);
+        this.container = container;
         this.getChildren().add(root);
         this.anchorList = anchorList;
         this.stack = scene;
@@ -38,10 +41,14 @@ public class PathSet extends Region {
 
     public Path getPathObject () {
         // EDIT: We could just use Point2D --> this is JavaFX so not recommended
-        Pair start = new Pair(curve.getStartX(), curve.getStartY());
-        Pair end = new Pair(curve.getEndX(), curve.getEndY());
-        Pair control1 = new Pair(curve.getControlX1(), curve.getControlY1());
-        Pair control2 = new Pair(curve.getControlX2(), curve.getControlY2());
+        Point2D start =
+                container.parentToLocal(new Point2D(curve.getStartX(), curve.getStartY()));
+        Point2D end = 
+                container.parentToLocal(new Point2D(curve.getEndX(), curve.getEndY()));
+        Point2D control1 =
+                container.parentToLocal(curve.getControlX1(), curve.getControlY1());
+        Point2D control2 = 
+                container.parentToLocal(curve.getControlX2(), curve.getControlY2());
         return new Path(start, end, control1, control2);
     }
 

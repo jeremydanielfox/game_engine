@@ -2,10 +2,12 @@ package gae.listView;
 
 import gae.backend.TempTower;
 import gae.gridView.PathView;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -13,7 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 public class LeftPaneView {
@@ -36,14 +42,19 @@ public class LeftPaneView {
         return new Scene(root);
     }
 
-    public Group getGroup (Node pane, Scene scene, ObservableList<PathView> pathList, PathView view) {
+    public Group getGroup (Node pane,
+                           Scene scene,
+                           ObservableList<PathView> pathList,
+                           PathView view,
+                           ObjectProperty<Image> backgroundProperty) {
         this.nodeScene = pane;
         this.pathObservableList = pathList;
         this.pathView = view;
         this.myScene = scene;
         root = new Group();
         objectGroup = new Group();
-        root.getChildren().addAll(view(), tempButton(), objectGroup);
+        root.getChildren().addAll(view(), tempButton(), changeBackground(backgroundProperty),
+                                  objectGroup);
         root.setManaged(false);
         return root;
     }
@@ -78,16 +89,17 @@ public class LeftPaneView {
         pathTitledPane.setOnMousePressed(event -> {
             for (PaneList lists : listOfListObjects) {
                 lists.removeRoot();
-                pathList.setScreen();
             }
+            pathList.setScreen();
         });
         for (TitledPane panes : accordion.getPanes()) {
             panes.setOnMouseClicked(event -> {
                 if (!panes.equals(pathTitledPane)) {
                     for (PaneList lists : listOfListObjects) {
                         lists.addRoot();
-                        pathList.disableScreen();
                     }
+                    pathList.disableScreen();
+                    System.out.println("removing path!");
                 }
             });
         }
@@ -110,4 +122,16 @@ public class LeftPaneView {
         return temp;
     }
 
+    private Button changeBackground (ObjectProperty<Image> backgroundProperty) {
+        Button background = new Button("Change Background");
+        background.setTranslateX(0);
+        background.setTranslateY(550);
+        background.setOnAction(e -> {
+            Stage stage = new Stage();
+            FileChooser fc = new FileChooser();
+            File picked = fc.showOpenDialog(stage);
+            backgroundProperty.setValue(new Image(picked.toURI().toString()));
+        });
+        return background;
+    }
 }

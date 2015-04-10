@@ -17,6 +17,7 @@ import engine.shop.Purchasable;
 @Settable
 public abstract class GameObjectSimple implements GameObject, Purchasable {
     protected String myImagePath;
+    protected String myName;
     protected String myLabel;
     protected PointSimple myPoint;
     protected Health myHealth;
@@ -27,13 +28,14 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     public GameObjectSimple () {
         myImagePath = "";
         myLabel = "";
+        myName = "";
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();
         myWeapon = new WeaponSimple();
         myGraphic = new Graphic();
     }
-    
+
     @Override
     public boolean isDead () {
         return myHealth.isDead();
@@ -69,12 +71,12 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         return new PointSimple(myPoint);
     }
 
-//    public void initializeNode () {
-//        Image image = new Image(myImagePath);
-//        ImageView imageView = new ImageView();
-//        imageView.setImage(image);
-//        myNode = imageView;
-//    }
+    // public void initializeNode () {
+    // Image image = new Image(myImagePath);
+    // ImageView imageView = new ImageView();
+    // imageView.setImage(image);
+    // myNode = imageView;
+    // }
 
     @Override
     public void move () throws EndOfPathException {
@@ -87,7 +89,7 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     @Settable
     @Override
     public void setSpeed (double speed) {
-       myMover.setSpeed(speed);
+        myMover.setSpeed(speed);
 
     }
 
@@ -95,16 +97,20 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     public Graphic getGraphic () {
         return myGraphic;
     }
-    
+
     public BasicMover getMover () {
         return (BasicMover) myMover;
+    }
+
+    public String getImagePath () {
+        return myImagePath;
     }
 
     @Settable
     public void setMover (Mover mover) {
         myMover = mover;
     }
-    
+
     @Settable
     public void setImagePath (String imgpath) {
         myImagePath = imgpath;
@@ -125,7 +131,6 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         myHealth = health;
     }
 
-
     @Settable
     public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
@@ -142,10 +147,15 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         myWeapon = weapon;
     }
 
+    @Settable
+    public void setName (String name) {
+        myName = name;
+    }
+
     @Override
     public String getName () {
         // TODO Auto-generated method stub
-        return null;
+        return myName;
     }
 
     @Override

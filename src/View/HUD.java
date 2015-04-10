@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
+import engine.gameobject.units.BuffableUnit;
 import engine.shop.ItemGraphic;
 import engine.shop.TransitionGameObject;
 import javafx.geometry.Point2D;
@@ -159,6 +162,12 @@ public class HUD implements Observer {
                 item.setOnMouseClicked(mouseEvent -> {
                     addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
                                        towerNode);
+                });
+                towerNode.setOnMouseClicked(mouseEvent -> {
+                    ViewUtilities.unbindCursor(myPane.getScene().getRoot());
+                    Point2D location = ViewUtilities.getMouseLocation(mouseEvent, towerNode);
+                    towerNode.relocate(location.getX(), location.getY());
+                    transitionTower.changeColor();
                 });
                 items.add(item);
             });

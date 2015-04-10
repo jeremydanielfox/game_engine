@@ -1,4 +1,4 @@
-package engine.gameobject;
+package gae.backend;
 
 import java.io.Serializable;
 import gae.gridView.Pair;

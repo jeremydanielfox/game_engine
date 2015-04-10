@@ -1,11 +1,14 @@
 package engine.gameobject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
@@ -48,6 +51,9 @@ public class GameObjectSimpleTest implements GameObject {
         points.add(new PointSimple(500,500));
         myBez.setPoints(points);
         myPath.addPathSegment(myBez);
+        XStream xstream = new XStream(new DomDriver());
+        File file = new File("src/gae/listView/Test.xml");
+        myPath = (PathFixed) xstream.fromXML(file);
         myMover = new MoverPath(myPath,1);
         //myWeapon = new WeaponSimple(0, 0, null, null);
         myGraphic = new Graphic(100, 100, myImagePath);

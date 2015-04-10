@@ -1,6 +1,6 @@
 package gae.listView;
 
-import engine.gameobject.Editable;
+import gae.backend.Editable;
 import View.ViewUtilities;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;

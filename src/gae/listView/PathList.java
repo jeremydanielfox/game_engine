@@ -1,10 +1,17 @@
 package gae.listView;
 
+import engine.gameobject.PointSimple;
+import engine.pathfinding.PathFixed;
+import engine.pathfinding.PathSegmentBezier;
+import gae.gridView.Path;
+import gae.gridView.PathView;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import gae.gridView.Path;
-import gae.gridView.PathView;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +24,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 
 
 public class PathList {
@@ -165,19 +175,62 @@ public class PathList {
         Button display = new Button("Display Paths");
         display.setTranslateX(400);
         display.setTranslateY(150);
+        XStream xst = new XStream(new DomDriver());
         display.setOnMouseClicked(e -> {
             // this is the information that'll be passed into XML (allPaths)
             // *****************************************//
             System.out.println("PRINTING OUT ALLPATHS LIST!");
+            PathFixed myPath = new PathFixed();
             for (List<Path> lists : allPaths) {
+                
                 for (int i = 0; i < lists.size(); i++) {
-                    System.out.println("Path " + i + "'s coordinates");
-                    lists.get(i).printInfo();
-                    System.out.println();
+//                    System.out.println("Path " + i + "'s coordinates");
+                    Path temp = lists.get(i);
+                    temp.printInfo();
+//                    System.out.println();
+                    PathSegmentBezier tempBez = new PathSegmentBezier();
+                    List<PointSimple> points = new ArrayList<>();
+                    points.add(new PointSimple(temp.getStart()));
+                    points.add(new PointSimple(temp.getControlOne()));
+                    points.add(new PointSimple(temp.getControlTwo()));
+                    points.add(new PointSimple(temp.getEnd()));
+                    tempBez.setPoints(points);
+                    myPath.addPathSegment(tempBez);
                 }
             }
             // *****************************************//
+            File myFile = new File("src/gae/listView/Test.xml");
+            Writer fWriter = null;
+            try {
+                fWriter = new FileWriter(myFile);
+            }
+            catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+                System.out.println("couldn't find file");
+            }
+//            FileOutputStream fos = null;
+//            try {
+//                fos = new FileOutputStream(myFile);
+//            }
+//            catch (Exception e1) {
+//                e1.printStackTrace();
+//                System.out.println("File not found");
+//                
+//            }
+//            String xml = xst.toXML(myPath);
+            xst.toXML(myPath, fWriter);
+            try {
+                fWriter.close();
+            }
+            catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+                System.out.println("couldn't close");
+            }
+//            System.out.println(xml);
         });
+        
         return display;
     }
 

@@ -10,7 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
-import engine.gameobject.Editable;
+import gae.backend.Editable;
 
 
 /**

@@ -25,8 +25,8 @@ import engine.gameobject.GameObject;
 
 public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable {
 
-    public static final double GAME_WIDTH_TO_HEIGHT = 1.25;
-    public static final int MAX_FRAME_RATE = 300;
+    public static final double GAME_WIDTH_TO_HEIGHT = 1;
+    public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
 
     private Game myGame;

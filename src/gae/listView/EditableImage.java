@@ -1,15 +1,16 @@
 package gae.listView;
 
-import engine.gameobject.Editable;
+
 import exception.ObjectOutOfBoundsException;
+import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
-import View.ViewUtilities;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
+import View.ViewUtilities;
 
 
 public class EditableImage extends Region {

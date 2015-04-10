@@ -5,7 +5,6 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import com.thoughtworks.xstream.XStream;
 import engine.game.Game;
-import engine.gameobject.Editable;
 
 
 
@@ -47,9 +46,9 @@ public class GameManager {
 		return null;
 	}
 
-	public ObservableList<Editable> getLibraryDataList() {
-		return library.getObservableList();
-	}
+//	public ObservableList<Editable> getLibraryDataList() {
+//		return library.getObservableList();
+//	}
 	
 	private void createEditorViewInTab() {
 	    

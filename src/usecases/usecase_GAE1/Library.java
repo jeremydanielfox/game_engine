@@ -1,6 +1,6 @@
 package usecases.usecase_GAE1;
 
-import engine.gameobject.Editable;
+import gae.backend.Editable;
 import java.util.ArrayList;
 import java.util.Observable;
 import javafx.beans.property.ObjectProperty;

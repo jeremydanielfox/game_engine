@@ -82,8 +82,13 @@ public class PointSimple {
     }
 
     @Settable
-    public void setPoint (Point2D point) {
-        myPoint = point;
+    public void setX (double x) {
+        myPoint = new Point2D(x, myPoint.getY());
+    }
+
+    @Settable
+    public void setY (double y) {
+        myPoint = new Point2D(myPoint.getX(), y);
     }
 
 }

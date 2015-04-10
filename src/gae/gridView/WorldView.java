@@ -40,7 +40,7 @@ public class WorldView {
         background.fitHeightProperty().bind(container.heightProperty());
 
         pathView = new PathView(stack, this.scene);
-
+        pathView.setContainerArea(root);
         return stack;
     }
 

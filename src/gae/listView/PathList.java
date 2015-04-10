@@ -1,8 +1,10 @@
 package gae.listView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import gae.gridView.Path;
 import gae.gridView.PathView;
 import javafx.collections.ObservableList;
@@ -16,6 +18,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 
@@ -33,6 +37,9 @@ public class PathList {
     private Button newPath;
     private Button displayPath;
     private Button updatePath;
+    
+    private Button changeImage;
+    
     private List<Button> buttonList;
 
     public PathList (PathView pathView, StackPane stack, Scene scene) {
@@ -45,9 +52,18 @@ public class PathList {
         displayPath = displayPaths();
         updatePath = updatePath();
         buttonList = new ArrayList<>();
+        
+        changeImage = new Button ("LOAD BACKDROP");
+        changeImage.setOnMousePressed(e -> {
+            Stage stage = new Stage();
+            FileChooser fc = new FileChooser();
+            File picked = fc.showOpenDialog(stage);
+            System.out.println(picked.getName());
+        });
+                
         buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
                                                       updatePath }));
-        stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
+        stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath, changeImage);
     }
 
     public TitledPane getTitledPane (ObservableList<PathView> paths, String text) {

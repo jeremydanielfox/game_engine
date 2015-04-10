@@ -1,14 +1,20 @@
 package gae.openingView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 /**
- * ImagePanel holds visuals to represent the types of game available for the author to create.
- * A mix of CSS and Java logic is used to set up effects such as hover, select, etc.
+ * ImagePanel holds visuals to represent the types of game available for the author to create. A mix
+ * of CSS and Java logic is used to set up effects such as hover, select, etc.
  * 
  * @author Brandon Choi
  *
@@ -26,17 +32,21 @@ public class ImagePanel implements UIObject {
 
     private UIMediator myMediator;
     private VBox panel, selections;
-    private UIObject setPath, freePath, sideView;
+    private HoverPicture setPath, freePath, sideView;
+    private SimpleStringProperty bindValue;
+    private List<HoverPicture> hoverPictures;
 
-    public ImagePanel (UIMediator mediator) {
+    public ImagePanel (UIMediator mediator, SimpleStringProperty binded) {
         myMediator = mediator;
         panel = new VBox(15);
         selections = new VBox(15);
+        bindValue = binded;
+        hoverPictures = new ArrayList<>();
         setIDs();
         createSelectOptions();
         panel.getChildren().addAll(HEADER, selections);
     }
-    
+
     @Override
     public Node getObject () {
         return panel;
@@ -51,7 +61,6 @@ public class ImagePanel implements UIObject {
         selections.setId("imagePanel");
     }
 
-    
     /**
      * creates all the select options by making new instances of HoverPicture
      */
@@ -59,17 +68,42 @@ public class ImagePanel implements UIObject {
         setPath = new HoverPicture(SET_PATH_GAME, SET_PATH);
         freePath = new HoverPicture(FREE_PATH_GAME, FREE_PATH);
         sideView = new HoverPicture(SIDE_VIEW_GAME, SIDE_VIEW);
-        selections.getChildren().addAll(setPath.getObject(), freePath.getObject(), sideView.getObject());
-        setUpClick(selections);
+        selections.getChildren().addAll(setPath.getObject(), freePath.getObject(),
+                                        sideView.getObject());
+        hoverPictures = Arrays.asList(setPath, freePath, sideView);
+        setUpClick(hoverPictures);
     }
-    
-    
+
     /**
+     * sets up the logic of clicking one game option
      * 
      * @param choices
      */
-    private void setUpClick (Pane choices) {
-        //if one is selected, disable the rest
-        
+    private void setUpClick (List<HoverPicture> list) {
+        list.forEach(e -> {
+            e.getObject().setOnMouseClicked(f -> {
+                if (!e.selected()) {
+                    e.changeSelectEffect();
+                    alterRest(e);
+                    bindValue.setValue(e.getName());
+                }
+                else if (e.selected()) {
+                    e.changeSelectEffect();
+                    alterRest(e);
+                }
+            });
+        });
+    }
+
+    /**
+     * alters the status of the rest of the hover pictures except the one selected
+     * 
+     * @param hp
+     */
+    private void alterRest (HoverPicture hp) {
+        hoverPictures.forEach(e -> {
+            if (!e.equals(hp))
+                e.alter();
+        });
     }
 }

@@ -1,4 +1,4 @@
-package engine.gameobject.weapon.upgradable;
+package engine.gameobject.weapon.upgradable.firingrate;
 
 import engine.gameobject.weapon.Upgrade;
 

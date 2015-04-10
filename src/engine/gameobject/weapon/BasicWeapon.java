@@ -14,7 +14,8 @@ import engine.gameobject.weapon.firingstrategy.Buffer;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.Projectile;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
-import engine.gameobject.weapon.upgradable.FiringRate;
+import engine.gameobject.weapon.upgradable.firingrate.FiringRate;
+import engine.gameobject.weapon.upgradable.firingrate.FiringRateUpgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import gameworld.ObjectCollection;
 
@@ -38,7 +39,7 @@ public class BasicWeapon implements Weapon{
     public BasicWeapon(){
         timeSinceFire = 0;
         myRange = 10000;
-        myFiringRate = new FiringRate(1);
+        myFiringRate = new FiringRateUpgrade(1);
         myFiringStrategy = new SingleProjectile();
     }
     

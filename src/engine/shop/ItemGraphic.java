@@ -2,11 +2,9 @@ package engine.shop;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.effect.Glow;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 
 
 /**
@@ -17,11 +15,10 @@ import javafx.scene.shape.Circle;
  */
 public class ItemGraphic extends Parent {
 
-    private static final double ITEM_RADIUS = 25;
     private static final double GLOW_VALUE = 0.5;
 
-    private Circle circle;
     private PriceTag myPriceTag;
+    private Node itemNode;
 
     public ItemGraphic (PriceTag priceTag) {
         myPriceTag = priceTag;
@@ -29,23 +26,23 @@ public class ItemGraphic extends Parent {
     }
 
     private void initialize () {
-        circle = new Circle(ITEM_RADIUS);
-        circle.setFill(new ImagePattern(((ImageView) myPriceTag.getShopGraphic().getNode()).getImage()));
-        circle.setOnMouseEntered(mouseEvent -> hoverAction());
-        circle.setOnMouseExited(mouseEvent -> circle.setEffect(null));
-        getChildren().add(circle);
+        itemNode = myPriceTag.getShopGraphic().getNode();
+        itemNode.setOnMouseEntered(mouseEvent -> hoverAction());
+        itemNode.setOnMouseExited(mouseEvent -> itemNode.setEffect(null));
+        getChildren().add(itemNode);
     }
 
     private void hoverAction () {
-        circle.setCursor(Cursor.HAND);
-        circle.setEffect(new Glow(GLOW_VALUE));
-        System.out.println(String.format("Name: %s", myPriceTag.getName()));
-        System.out.println(String.format("Cost: %d", myPriceTag.getPrice()));
-        System.out.println(String.format("Description: %s", myPriceTag.getDescription()));
+        itemNode.setCursor(Cursor.HAND);
+        itemNode.setEffect(new Glow(GLOW_VALUE));
+        //System.out.println(String.format("Name: %s", myPriceTag.getName()));
+        //System.out.println(String.format("Cost: %d", myPriceTag.getPrice()));
+        //System.out.println(String.format("Description: %s", myPriceTag.getDescription()));
     }
 
     public double getRadius () {
-        return ITEM_RADIUS;
+        //return ITEM_RADIUS;
+        return 0;
     }
     
     public String getName() {
@@ -53,7 +50,7 @@ public class ItemGraphic extends Parent {
     }
 
     public Point2D getCenter () {
-        return new Point2D(circle.getCenterX(), circle.getCenterY());
+        return new Point2D(myPriceTag.getShopGraphic().getCenterX(), myPriceTag.getShopGraphic().getCenterY());
     }
 
 }

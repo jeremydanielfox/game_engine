@@ -4,19 +4,17 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.Graphic;
 
 @Settable
-public class PriceTagConcrete implements PriceTag {
+public class PriceTagSimple implements PriceTag {
     private String name;
     private String description;
     private Graphic shopGraphic;
-    private Purchasable purchasable;
-    private static double markup;
+    private PurchasableGameObject purchasable;
 
-    public PriceTagConcrete () {
+    public PriceTagSimple () {
         name = "";
         description = "";
         shopGraphic = new Graphic();
         purchasable = null;
-        markup = 1;
     }
 
     @Override
@@ -43,11 +41,6 @@ public class PriceTagConcrete implements PriceTag {
     public double getValue () {
         return purchasable.getValue();
     }
-    
-    @Override
-    public double getPrice () {
-        return getValue()*markup;
-    }
 
     @Settable
     public void setName (String name) {
@@ -65,12 +58,8 @@ public class PriceTagConcrete implements PriceTag {
     }
 
     @Settable
-    public void setPurchasable (Purchasable purchasable) {
+    public void setPurchasable (PurchasableGameObject purchasable) {
         this.purchasable = purchasable;
     }
-    
-    @Settable
-    public void setMarkup (double markup) {
-        this.markup = markup;
-    }
+
 }

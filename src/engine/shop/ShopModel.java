@@ -7,7 +7,7 @@ import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import engine.grid.StructurePlacementException;
-import engine.prototype.PrototypeLocator;
+import engine.prototype.Prototype;
 import gameworld.GameWorld;
 
 
@@ -21,16 +21,20 @@ public class ShopModel {
     private View myShopView;
     private Player currentPlayer;
     private GameWorld myGameWorld;
-    private Map<String, PriceTag> stringPriceTagMap;
+    private Map<String, Prototype<GameObject>> prototypeMap;
+    private Map<String, UpgradeBundle> upgradeMap;
+    private final double markup;
 
-    public ShopModel (List<PriceTagConcrete> priceTags,
+    public ShopModel (List<Prototype<GameObject>> prototypes,
                       GameWorld myGameWorld,
                       View myShopView,
-                      Player currentPlayer) {
+                      Player currentPlayer, double markup) {
+        this.markup = markup;
         this.currentPlayer = currentPlayer;
         this.myShopView = myShopView;
-        stringPriceTagMap = new HashMap<String, PriceTag>();
-        priceTags.forEach(purchasable -> addPriceTag(purchasable));
+        prototypeMap = new HashMap<String, Prototype<GameObject>>();
+        upgradeMap = new HashMap<String, UpgradeBundle>();
+        prototypes.forEach(prototype -> addPrototype(prototype));
     }
 
     /**
@@ -38,12 +42,8 @@ public class ShopModel {
      * 
      * @param priceTag
      */
-    public void addPriceTag (PriceTag priceTag) {
-        stringPriceTagMap.put(priceTag.getName(), priceTag);
-    }
-
-    public TransitionGameObject getTransitionGameObject (ItemGraphic itemGraphic) {
-        return stringPriceTagMap.get(itemGraphic);
+    public void addPrototype (Prototype<GameObject> prototype) {
+        prototypeMap.put(prototype.getTag().getName(), prototype);
     }
 
     public void showUpgradeBundles (GameObject gameObject) {
@@ -60,37 +60,41 @@ public class ShopModel {
      * 
      * @param transitionGameObject
      */
-    public boolean purchase (TransitionGameObject transitionGameObject, double x, double y) {
+    public boolean purchaseGameObject (String name, double x, double y) {
         try {
-            myGameWorld.addObject(PrototypeLocator.getService()
-                    .getInstance(transitionPriceTagMap.get(transitionGameObject).getName()));
+            myGameWorld.addObject(prototypeMap.get(name).clone());
         }
         catch (StructurePlacementException e) {
             return false;
         }
-        currentPlayer.getWallet().withdraw(getPrice(transitionPriceTagMap.get(transitionGameObject)));
+        currentPlayer.getWallet().withdraw(getPrice(((PriceTag) prototypeMap.get(name).getTag()).getValue()));
         return true;
     }
 
     /**
-     * Used to purchase items which are not placed on the screen (upgrades)
+     * Applies an upgrade to the given GameObject and subtracts the appropriate amount from the
+     * player's wallet.
      * 
      * @param itemGraphic
      */
-    public void purchase (ItemGraphic itemGraphic, GameObject gameObject) {
-        currentPlayer.getWallet().withdraw(getPrice(itemUpgradeMap.get(itemGraphic)));
+    public void purchaseUpgrade (String name, GameObject gameObject) {
+        currentPlayer.getWallet().withdraw(getPrice(upgradeMap.get(name).getTag().getValue()));
         // gameObject.getWeapon().applyUpgrade()
     }
 
-    public boolean canPurchase (ItemGraphic itemGraphic) {
+    public boolean canPurchase (String name) {
         double price;
-        if (itemPurchasableMap.containsKey(itemGraphic)) {
-            price = getPrice(itemPurchasableMap.get(itemGraphic));
+        if (prototypeMap.containsKey(name)) {
+            price = getPrice(((PriceTag) prototypeMap.get(name).getTag()).getValue());
         }
         else {
-            price = getPrice(itemUpgradeMap.get(itemGraphic));
+            price = upgradeMap.get(name).getTag().getValue();
         }
-        return currentPlayer.getWallet().getBalance() > price;
+        return currentPlayer.getWallet().getBalance() >= price;
+    }
+    
+    public double getPrice (double value) {
+        return value*markup;
     }
 
 }

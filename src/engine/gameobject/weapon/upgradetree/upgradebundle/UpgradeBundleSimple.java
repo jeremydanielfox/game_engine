@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import engine.gameobject.Graphic;
+import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.upgradable.Upgradable;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
+import engine.shop.UpgradeTag;
 
 
 /**
@@ -16,12 +17,14 @@ import engine.gameobject.weapon.upgradetree.UpgradeTree;
  * @author Nathan Prabhu
  *
  */
+@Settable
 public class UpgradeBundleSimple implements BuildableBundle {
 
     private List<Upgrade> upgrades;
     private UpgradeBundleSimple next;
     private boolean isFinal;
     private UpgradeTree parent;
+    private UpgradeTag myUpgradeTag;
 
     public UpgradeBundleSimple (Upgrade ... upgrades) {
         this.upgrades = new ArrayList<>(Arrays.asList(upgrades));
@@ -78,34 +81,21 @@ public class UpgradeBundleSimple implements BuildableBundle {
     public void setParent (UpgradeTree tree) {
         parent = tree;
     }
-    
-    @Override
-    public String getName () {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
-    public double getPrice () {
-        // TODO Auto-generated method stub
-        return 0;
+    public UpgradeTag getTag () {
+        return myUpgradeTag;
     }
 
     @Override
     public double getValue () {
+        // TODO Auto-generated method stub
         return 0;
     }
-
-    @Override
-    public Graphic getGraphic () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getDescription () {
-        // TODO Auto-generated method stub
-        return null;
+    
+    @Settable
+    public void setUpgradeTag (UpgradeTag upgradeTag) {
+        myUpgradeTag = upgradeTag;
     }
 
 }

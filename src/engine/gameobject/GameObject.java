@@ -1,7 +1,7 @@
 package engine.gameobject;
 
 import engine.gameobject.weapon.Weapon;
-import engine.shop.Purchasable;
+import engine.shop.PurchasableGameObject;
 import engine.shop.Tag;
 
 
@@ -11,7 +11,7 @@ import engine.shop.Tag;
  *
  */
 
-public interface GameObject extends Movable, Health, Graphical, Purchasable {
+public interface GameObject extends Movable, Health, Graphical, PurchasableGameObject {
     // public void updateGraphics ();//cannot implement yet
 
     public void update ();

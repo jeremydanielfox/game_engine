@@ -72,4 +72,14 @@ public class Graphic {
     public void setImageName (String imageName) {
         myImageName = imageName;
     }
+    
+    public double getCenterX () {
+        // To do
+        return 0;
+    }
+    
+    public double getCenterY () {
+        // To do
+        return 0;
+    }
 }

@@ -2,9 +2,7 @@ package engine.shop;
 
 import engine.gameobject.Graphic;
 
-
-public interface PriceTag extends Tag {
-    public Graphic getGraphic ();
+public interface UpgradeTag extends Tag {
     
     public Graphic getShopGraphic ();
 

@@ -20,27 +20,18 @@ import engine.gameobject.Graphical;
 public class TransitionGameObject implements Graphical {
 
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
-
-    // TODO: these shouldn't be constants; should reflect corresponding Prototype GameObject
-    private static final double TOWER_WIDTH = 50;
-    private static final double TOWER_RADIUS = widthToRadius(TOWER_WIDTH);
-    private static final double RANGE = 30 + TOWER_RADIUS; 
   
     private Graphic myGraphic;
     private String name;
-
-    // TODO: initialize from corresponding prototype GameObject
-
-    private static double widthToRadius (double width) {
-        return width * Math.sqrt(2) / 2;
-    }
+    private double range;
 
     @XStreamOmitField
     private transient StackPane pane;
 
-    public TransitionGameObject (Graphic myGraphic, String name) {
+    public TransitionGameObject (Graphic myGraphic, String name, double range) {
         this.myGraphic = myGraphic;
         this.name = name;
+        this.range = range;
         initialize();
     }
 
@@ -53,7 +44,7 @@ public class TransitionGameObject implements Graphical {
     private void initialize () {
         pane = new StackPane();
 
-        Circle rangeDetection = new Circle(RANGE, ERROR_COLOR);
+        Circle rangeDetection = new Circle(range, ERROR_COLOR);
         rangeDetection.setStroke(Color.BLACK);
 
         pane.getChildren().addAll(rangeDetection, myGraphic.getNode());

@@ -37,6 +37,7 @@ public class EdittableHudLocation implements UIObject {
         r.setHeight(RECTANGLE_SIZE);
         r.setFill(color);
         r.setOnMousePressed(e -> showOptions(e));
+        r.setOpacity(0.5);
         
         textHolder.setOnMousePressed(e -> showOptions(e));
         

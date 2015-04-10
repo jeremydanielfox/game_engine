@@ -68,8 +68,8 @@ public class HudEditor implements UIObject {
         AnchorPane.setRightAnchor(locationNodes.get(3), ANCHOR_OFFSET);
         AnchorPane.setBottomAnchor(locationNodes.get(3), ANCHOR_OFFSET);
 
-        AnchorPane.setBottomAnchor(done, rootNode.getHeight() / 2);
-        AnchorPane.setLeftAnchor(done, rootNode.getWidth() / 2 - 50);
+        AnchorPane.setTopAnchor(done, 200.0 + ANCHOR_OFFSET);
+        AnchorPane.setLeftAnchor(done, ANCHOR_OFFSET);
     }
 
     private List<Node> extractNodesFromEHLList (List<EdittableHudLocation> ehlList) {

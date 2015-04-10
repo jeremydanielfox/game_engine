@@ -1,8 +1,7 @@
 package gae.listView;
 
+import java.io.File;
 import java.util.Iterator;
-
-
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,7 +25,7 @@ public class EditableNode implements UIObject {
     private String myName;
     private String myType;
     private Editable editable;
-    private int myID=0;
+    private int myID = 0;
     private ObservableList<Editable> myChildren;
 
     public EditableNode (Editable editable) {
@@ -58,8 +57,9 @@ public class EditableNode implements UIObject {
     }
 
     public ImageView getImageView () {
-        return ImageUtilities.changeImageSize(new ImageView(new Image(getClass()
-                .getResourceAsStream(editable.getImagePath()))), 75, 75);
+        return ImageUtilities.changeImageSize(new ImageView(new Image(editable.getImagePath())),
+                                              75, 75);
+
     }
 
     public String getName () {

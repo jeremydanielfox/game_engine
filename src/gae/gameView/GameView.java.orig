@@ -87,8 +87,12 @@ public class GameView implements UIMediator {
         myUI.setRight(myGenericObjects.getObject());
         myUI.setRight(myGenericObjects.getObject());
     }
+<<<<<<< HEAD
     
-    public void getAddFunction(EditableNode node) {
-        myTabs.getAddFunction(node);
+    public EventHandler<?> getAddFunction(EditableNode node) {
+        return myTabs.getAddFunction(node);
     }
 }
+=======
+}
+>>>>>>> 70abded86dad356ef059a20317fef514d20565d2

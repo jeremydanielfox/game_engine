@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -31,7 +32,6 @@ public class LeftPaneView {
     private Group objectGroup;
     private Node nodeScene;
     private ObservableList<PathView> pathObservableList;
-    private PathView pathView;
     private Scene myScene;
     private Accordion accordion;
     private TitledPane pathTitledPane;
@@ -47,11 +47,9 @@ public class LeftPaneView {
     public Group getGroup (Node pane,
                            Scene scene,
                            ObservableList<PathView> pathList,
-                           PathView view,
                            ObjectProperty<Image> backgroundProperty, ContainerWrapper wrapper) {
         this.nodeScene = pane;
         this.pathObservableList = pathList;
-        this.pathView = view;
         this.myScene = scene;
         this.wrapper = wrapper;
         root = new Group();

@@ -10,6 +10,13 @@ public abstract class BasicMover implements Mover {
     double speedModifier;
     double myDistance;
     boolean frozen;
+    
+    public BasicMover() {
+        inherentSpeed=0;
+        speedModifier=0;
+        myDistance=0;
+        frozen=false;
+    }
 
     public BasicMover(double speed){
             myDistance = 0;

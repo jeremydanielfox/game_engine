@@ -1,6 +1,5 @@
 package gae.backend;
 
-import engine.gameobject.Editable;
 import gae.gridView.Pair;
 import gae.listView.EditableImage;
 import javafx.beans.property.ObjectProperty;

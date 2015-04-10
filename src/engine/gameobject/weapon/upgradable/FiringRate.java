@@ -1,18 +1,8 @@
 package engine.gameobject.weapon.upgradable;
 
-public class FiringRate implements Upgradable {
-    private double rate;
-    
-    public FiringRate() {
-        rate = 0;
-    }
-    
-    public FiringRate(double rate){
-        this.rate = rate;
-    }
+import engine.gameobject.weapon.Upgrade;
 
-    public double getRate () {
-       return rate;
-    }
-
+public interface FiringRate extends Upgrade {
+   
+    public double getRate () ;
 }

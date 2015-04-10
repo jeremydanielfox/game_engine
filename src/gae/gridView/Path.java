@@ -3,6 +3,7 @@ package gae.gridView;
 import javafx.geometry.Point2D;
 
 
+
 public class Path {
     private Pair start;
     private Pair end;
@@ -24,4 +25,21 @@ public class Path {
         System.out.println("Control 2 coordinates: (" + control2.getX() + " , " + control2.getY() +
                            ")");
     }
+    
+    public Point2D getStart() {
+        return new Point2D(start.getX(),start.getY());
+    }
+    
+    public Point2D getEnd() {
+        return new Point2D(end.getX(),end.getY());
+    }
+    
+    public Point2D getControlOne() {
+        return new Point2D(control1.getX(),control1.getY());
+    }
+    
+    public Point2D getControlTwo() {
+        return new Point2D(control2.getX(),control2.getY());
+    }
+    
 }

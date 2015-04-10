@@ -1,7 +1,11 @@
 package gae.openingView;
 
-import gae.backend.GameManager;
-import gae.gameView.GameView;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableStringValue;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -28,12 +32,19 @@ public class DataForm implements UIObject {
 
     private UIMediator myMediator;
     private VBox form, inputFields;
+    private TextField title, author, gameType;
+    private TextArea description, instructions;
+    private SimpleStringProperty typeText;
+    private SimpleStringProperty bindValue;
 
-    public DataForm (UIMediator mediator) {
+    public DataForm (UIMediator mediator, SimpleStringProperty binded) {
         myMediator = mediator;
         form = new VBox(30);
         form.setId("dataForm");
         HEADER.setId("welcomeBanner");
+        typeText = new SimpleStringProperty();
+        bindValue = binded;
+        typeText.bind(bindValue);
         createFields();
         form.getChildren().addAll(HEADER, inputFields, createButtonBox());
     }
@@ -48,11 +59,69 @@ public class DataForm implements UIObject {
      */
     private void createFields () {
         inputFields = new VBox(10);
-        inputFields.getChildren().addAll(createSingleField("Game Title", new TextField()),
-                                         createSingleField("Author", new TextField()),
-                                         createSingleField("Description", new TextArea()),
-                                         createSingleField("Instructions", new TextArea()));
+
+        title = new TextField();
+        author = new TextField();
+
+        /*
+         * gameType is not editable so that when the user selects the game from the hover pictures,
+         * the string automatically binds
+         */
+        gameType = new TextField();
+        gameType.setEditable(false);
+        gameType.textProperty().bind(typeText);
+
+        description = new TextArea();
+        instructions = new TextArea();
+
+        inputFields.getChildren().addAll(createSingleField("Game Title", title),
+                                         createSingleField("Author", author),
+                                         createSingleField("Game Type", gameType),
+                                         createSingleField("Description", description),
+                                         createSingleField("Instructions", instructions));
+
         inputFields.setAlignment(Pos.BASELINE_LEFT);
+    }
+
+    /**
+     * the following get methods are all public methods for the OpeningView to receive and pull the
+     * user inputed text
+     * 
+     * @return
+     */
+    String getTitle () {
+        return title.getText();
+    }
+
+    String getAuthor () {
+        return author.getText();
+    }
+
+    String getGameType () {
+        return gameType.textProperty().get();
+    }
+
+    String getDescription () {
+        return description.getText();
+    }
+
+    String getInstructions () {
+        return instructions.getText();
+    }
+
+    /**
+     * checks whether all the forms are empty or not, is a package friendly method
+     * @return
+     */
+    boolean filledFields () {
+        if (getTitle().isEmpty() || getAuthor().isEmpty() || getGameType().equals(OpeningView.DEFAULT_TYPE_MSG) ||
+               getDescription().isEmpty() || getInstructions().isEmpty())
+            return false;
+        else if (!getTitle().isEmpty() || !getAuthor().isEmpty() || !getGameType().equals(OpeningView.DEFAULT_TYPE_MSG) ||
+                !getDescription().isEmpty() || !getInstructions().isEmpty())
+            return true;
+        
+        return false;
     }
 
     /**
@@ -62,12 +131,12 @@ public class DataForm implements UIObject {
      * @param fieldType
      * @return
      */
-    private HBox createSingleField (String input, Node fieldType) {
+    private HBox createSingleField (String input, Node field) {
         HBox box = new HBox(10);
         box.setPrefWidth(600);
         Label label = new Label(input);
         label.setMinWidth(LABEL_WIDTH);
-        box.getChildren().addAll(label, fieldType);
+        box.getChildren().addAll(label, field);
         return box;
     }
 

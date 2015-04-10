@@ -1,6 +1,5 @@
 package gae.gridView;
 
-import gae.listView.ContainerWrapper;
 import gae.listView.LeftPaneView;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
@@ -18,6 +17,10 @@ public class WorldView {
     private PathView pathView;
     private Scene scene;
     private BorderPane border;
+    
+    //ERASE AFTER
+    public LeftPaneView lpview;
+
     private ObjectProperty<Image> backgroundProperty;
     private ContainerWrapper wrapper;
     private ObservableList<PathView> paths =
@@ -50,9 +53,15 @@ public class WorldView {
         border.setLeft(getLeftView());
         return border;
     }
+    
+    public Image getBackgroundImage() {
+        return backgroundProperty.get();
+    }
 
     private Group getLeftView () {
         StackPane stackPane = new StackPane();
+        lpview = new LeftPaneView();
+        //LeftPaneView lpview = new LeftPaneView();
         LeftPaneView lpview = new LeftPaneView();
         Group leftview =
                 lpview.getGroup(stack, scene, paths, pathView, backgroundProperty, wrapper);

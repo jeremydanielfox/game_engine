@@ -1,11 +1,8 @@
 package gae.tabView;
 
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 public class LevelTabSet {
     private TabPane baseNode;
@@ -20,9 +17,6 @@ public class LevelTabSet {
         baseNode = new TabPane();
         // actual code is worldTab.setContent(world)
         Tab worldTab = new Tab("World");
-//        BorderPane bp = new BorderPane();
-//        bp.setCenter(world);
-//        bp.setLeft(list);
         worldTab.setContent(world);
         worldTab.setClosable(false);
         

@@ -1,6 +1,7 @@
 package gae.listView;
 
 import gae.backend.TempTower;
+import gae.gridView.ContainerWrapper;
 import gae.gridView.PathView;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -78,7 +79,7 @@ public class LeftPaneView {
             catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
                     | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException e) {
-                pathList = new PathList(pathView, (StackPane) nodeScene, myScene, wrapper);
+                pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
                 pathTitledPane =
                         pathList.getTitledPane(pathObservableList, gameObjects[i]);
                 accordion.getPanes().add(pathTitledPane);

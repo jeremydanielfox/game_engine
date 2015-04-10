@@ -1,10 +1,10 @@
 package gae.backend;
 
-import java.util.ArrayList;
+import java.util.ArrayList
+;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
-import engine.gameobject.Editable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;

@@ -7,10 +7,8 @@ import engine.gameobject.GameObject;
  * @author Nathan Prabhu
  *
  */
-public class Freeze implements Behavior {
+public interface Freeze extends Behavior {
     
-    public void apply(GameObject target){
-        target.setSpeed(0);
-        //target.setGraphics...
-    }
+    public void apply(GameObject target);
+       
 }

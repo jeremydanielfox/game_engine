@@ -2,6 +2,7 @@ package engine.gameobject;
 
 import engine.pathfinding.EndOfPathException;
 
+//WE MIGHT NOT NEED THIS CLASS
 public class MoverDirection implements Mover{
     private double speed;
     private double distance;

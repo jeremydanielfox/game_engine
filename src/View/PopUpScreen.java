@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class PopUpScreen {
 
     //consider adding lambda expression into constructor to pass to the button set on action
-    protected void makeScreen (String caption, String buttonCaption) {
+    public void makeScreen (String caption, String buttonCaption) {
         Stage newStage = new Stage();
         GridPane grid = new GridPane();
         Scene scene = new Scene(grid);

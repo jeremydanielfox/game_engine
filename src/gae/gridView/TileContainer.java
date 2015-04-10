@@ -3,7 +3,6 @@ package gae.gridView;
 import java.util.ArrayList;
 import java.util.List;
 import exception.ObjectOutOfBoundsException;
-import gae.listView.ContainerWrapper;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
@@ -27,8 +26,8 @@ public class TileContainer extends Region implements ContainerWrapper {
     public static final double SCREEN_WIDTH =
             Screen.getPrimary().getVisualBounds().getWidth() - 120;
     private BorderPane border;
-    private List<TileView> tileList=new ArrayList<>();
-    private Rectangle selectionRect=getNewRectangle();
+    private List<TileView> tileList = new ArrayList<>();
+    private Rectangle selectionRect = getNewRectangle();
     private ContextMenu contextmenu;
     private boolean showMenu;
 
@@ -57,70 +56,73 @@ public class TileContainer extends Region implements ContainerWrapper {
 
     }
 
-    public void checkBounds (double x, double y) {
+    public boolean checkBounds (double x, double y) {
         Point2D point = this.screenToLocal(x, y);
-
         if (point.getX() < 0 || point.getX() > this.getWidth() || y < 0 ||
             y > this.getHeight()) {
-            throw new ObjectOutOfBoundsException();
+            return true;
         }
+        return false;
     }
 
     @Override
     public Point2D convertCoordinates (double x, double y) {
-        return this.parentToLocal(x, y);
+        Point2D point = this.screenToLocal(x, y);
+        return new Point2D(point.getX(), y);
     }
-    
-    private void addSelectionBox(){
+
+    private void addSelectionBox () {
         DoubleProperty rectinitX = new SimpleDoubleProperty();
         DoubleProperty rectinitY = new SimpleDoubleProperty();
         DoubleProperty rectX = new SimpleDoubleProperty();
         DoubleProperty rectY = new SimpleDoubleProperty();
-        contextmenu=createContextMenu();
+        contextmenu = createContextMenu();
         selectionRect.widthProperty().bind(rectX.subtract(rectinitX));
         selectionRect.heightProperty().bind(rectY.subtract(rectinitY));
-        this.setOnMousePressed(e->{
+        this.setOnMousePressed(e -> {
             selectionRect.setX(e.getX());
             selectionRect.setY(e.getY());
             rectinitX.set(e.getX());
             rectinitY.set(e.getY());
-            contextmenu=createContextMenu();
+            contextmenu = createContextMenu();
         });
-        this.setOnMouseDragged(e->{
+        this.setOnMouseDragged(e -> {
             selectionRect.setVisible(true);
             rectX.set(e.getX());
             rectY.set(e.getY());
-            showMenu=true;
+            showMenu = true;
         });
-        this.setOnMouseReleased(e->{
-            if(showMenu){
+        this.setOnMouseReleased(e -> {
+            if (showMenu) {
                 contextmenu.show(this, e.getScreenX(), e.getScreenY());
-                showMenu=false;
+                showMenu = false;
             }
         });
     }
-    
-    private Rectangle getNewRectangle() {
+
+    private Rectangle getNewRectangle () {
         Rectangle rect = new Rectangle();
         rect.setFill(Color.web("blue", 0.1));
         rect.setStroke(Color.BLUE);
         return rect;
     }
-    
-    private ContextMenu createContextMenu() {
-        ContextMenu cmenu=new ContextMenu();
-        MenuItem walkable=new MenuItem("Make Walkable");
-        walkable.setOnAction(e->{
-            tileList.stream().forEach(tile->tile.handleSelected(selectionRect, true));
-            selectionRect.setVisible(false);;
+
+    private ContextMenu createContextMenu () {
+        ContextMenu cmenu = new ContextMenu();
+        MenuItem walkable = new MenuItem("Make Walkable");
+        walkable.setOnAction(e -> {
+            tileList.stream().forEach(tile -> tile.handleSelected(selectionRect, true));
+            selectionRect.setVisible(false);
+            ;
         });
-        MenuItem unwalkable=new MenuItem("Make Unwalkable");
-        unwalkable.setOnAction(e->{
-            tileList.stream().forEach(tile->tile.handleSelected(selectionRect, false));
+        MenuItem unwalkable = new MenuItem("Make Unwalkable");
+        unwalkable.setOnAction(e -> {
+            tileList.stream().forEach(tile -> tile.handleSelected(selectionRect, false));
             selectionRect.setVisible(false);
         });
-        cmenu.getItems().addAll(walkable,unwalkable);
+        cmenu.getItems().addAll(walkable, unwalkable);
         return cmenu;
-        
+
     }
+
 }

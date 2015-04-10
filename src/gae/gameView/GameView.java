@@ -1,8 +1,8 @@
 package gae.gameView;
 
 import java.util.EventObject;
+
 import gae.backend.GameManager;
-import gae.frontend.UtilitiesBar;
 import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
 import javafx.scene.ImageCursor;

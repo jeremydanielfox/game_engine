@@ -95,6 +95,7 @@ public class GameObjectSimple implements GameObject, Purchasable {
         // TODO Auto-generated method stub
         PointSimple point = myMover.move(myPoint);
         myPoint = new PointSimple(new Point2D(point.getX(), point.getY()));
+        myGraphic.setPoint(myPoint);
     }
 
     @Settable

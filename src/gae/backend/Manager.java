@@ -1,7 +1,7 @@
 package gae.backend;
 
+import gae.editor.EditorView;
 import gae.frontend.DummyLibraryView;
-import gae.frontend.EditorView;
 import javafx.stage.Stage;
 
 

@@ -2,18 +2,13 @@ package gae.gameView;
 
 import java.util.EventObject;
 
-import gae.backend.Editable;
 import gae.backend.GameManager;
-import gae.backend.TempTower;
-import gae.editor.SimpleEditor;
-import gae.listView.EditableNode;
 import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
 import javafx.scene.ImageCursor;
 import gae.tabView.CentralTabView;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -43,16 +38,14 @@ public class GameView implements UIMediator {
     public GameView () {
         myUI = new BorderPane();
         myScene = new Scene(myUI);
-        myTabs = new CentralTabView(myScene, this);
+        myTabs = new CentralTabView(myScene);
         myScene.getStylesheets().add(GAMEVIEW_CSS);
 //        myLibrary = new LibraryView();
         utilities = new UtilitiesBar();
-        myGenericObjects = new GenericObjectsPane(this);
+        myGenericObjects = new GenericObjectsPane();
 //        myLibrary = new LibraryView();
         insertBorders();
 //        changeCursor(CURSOR_GRAPHIC);
-        utilities = new UtilitiesBar();
-        myUI.setTop(utilities.getUtilitiesBar());
     }
 
     @Override
@@ -67,9 +60,13 @@ public class GameView implements UIMediator {
 
     @Override
     public void handleEvent (UIObject usedObject, EventObject action) {
-        if (usedObject instanceof TempTower && action instanceof MouseEvent) {
-            myTabs.worldView.lpview.addToList(new EditableNode((Editable)usedObject));
-        }
+        // TODO Auto-generated method stub
+
+        myScene.setCursor(new ImageCursor(new Image("/images/swordCursor.jpg")));
+        myScene.getStylesheets().add(GAMEVIEW_CSS);
+     //   myLibrary = new LibraryView();
+        utilities = new UtilitiesBar();
+        myUI.setTop(utilities.getUtilitiesBar());
     }
 
     /**

@@ -1,7 +1,6 @@
 package gae.gameView;
 
 import gae.editor.SimpleEditor;
-import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,11 +16,9 @@ import javafx.stage.Stage;
 
 public class GenericObjectsPane implements UIObject{
 
-    private UIMediator myMediator;
     private VBox baseNode;
 
-    public GenericObjectsPane(UIMediator mediator) {
-        myMediator = mediator;
+    public GenericObjectsPane() {
         initialize();
     }
     
@@ -50,7 +47,7 @@ public class GenericObjectsPane implements UIObject{
     }
 
     private void newCustomObject (String type) {
-        SimpleEditor editor = new SimpleEditor(myMediator);
+        SimpleEditor editor = new SimpleEditor();
         Scene editorScene = new Scene(new Pane(editor.getObject()));
         Stage editorStage = new Stage();
         editorStage.setScene(editorScene);

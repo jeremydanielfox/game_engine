@@ -74,7 +74,7 @@ public class OpeningView implements UIMediator {
         /*
          * changes the scene to display the GameView if button in DataForm has been pressed
          */
-        if (!emptyFields()) {
+        if (emptyFields()) {
             if (usedObject.equals(dataForm) && action instanceof MouseEvent) {
                 UIMediator author = new GameView();
                 myScene = author.getScene();

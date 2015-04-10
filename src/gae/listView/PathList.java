@@ -53,7 +53,6 @@ public class PathList {
     private Button displayPath;
     private Button updatePath;
     
-    private Button changeImage;
     
     private List<Button> buttonList;
 
@@ -68,18 +67,10 @@ public class PathList {
         displayPath = displayPaths();
         updatePath = updatePath();
         buttonList = new ArrayList<>();
-        
-        changeImage = new Button ("LOAD BACKDROP");
-        changeImage.setOnMousePressed(e -> {
-            Stage stage = new Stage();
-            FileChooser fc = new FileChooser();
-            File picked = fc.showOpenDialog(stage);
-            System.out.println(picked.getName());
-        });
                 
         buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
                                                       updatePath }));
-        stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath, changeImage);
+        stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
     }
 
     public TitledPane getTitledPane (ObservableList<PathView> paths, String text) {

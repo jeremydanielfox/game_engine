@@ -60,15 +60,11 @@ public class WorldView {
 
     private Group getLeftView () {
         StackPane stackPane = new StackPane();
-<<<<<<< HEAD
         lpview = new LeftPaneView();
         //LeftPaneView lpview = new LeftPaneView();
-        Group leftview = lpview.getGroup(stack, scene, paths, pathView);
-=======
         LeftPaneView lpview = new LeftPaneView();
         Group leftview =
                 lpview.getGroup(stack, scene, paths, pathView, backgroundProperty, wrapper);
->>>>>>> 136188cf20bd5219ebe7715a34d08eebea51b121
         stackPane.getChildren().add(leftview);
         return leftview;
     }

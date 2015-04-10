@@ -31,8 +31,7 @@ public class SimpleEditor extends Editor implements UIObject {
     private VBox simpleEditor;
     private List<ComponentEditor> editFields;
 
-    public SimpleEditor (UIMediator mediator) {
-        myMediator = mediator;
+    public SimpleEditor () {
         simpleEditor = new VBox(30);
         createEditor();
     }

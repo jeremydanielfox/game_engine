@@ -112,12 +112,10 @@ public class HUD implements Observer {
         myButtonWrapperList.forEach(e -> {
             if (e.isEnabled()) {
                 e.getButton().setDisable(false);
-                
-                System.out.println(e.getButton().getText()+" Button Enabled");
             }
                 else {
                     e.getButton().setDisable(true);
-                    System.out.println(e.getButton().getText()+" Button Disabled");
+                    
                 }
             });
     }

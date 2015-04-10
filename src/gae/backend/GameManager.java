@@ -45,9 +45,9 @@ public class GameManager {
 
 	}
 
-	public WorldData getWorldData() {
-		return null;
-	}
+//	public WorldData getWorldData() {
+//		return null;
+//	}
 
 //	public ObservableList<Editable> getLibraryDataList() {
 //		return library.getObservableList();

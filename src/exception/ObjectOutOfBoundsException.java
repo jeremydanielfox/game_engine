@@ -1,9 +1,7 @@
 package exception;
 
 /**
- * An exception for input is not a number is found
- * 
- *
+ * An exception for when the object placed is out of bounds
  */
 public class ObjectOutOfBoundsException extends VOOGAException {
     private static final long serialVersionUID = 1L;

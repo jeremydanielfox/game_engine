@@ -11,6 +11,12 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.StackPane;
 
 
+/**
+ * A subclass to keep track of Enemy GameObjects that are made through the Editor.
+ * 
+ * @author Kei
+ *
+ */
 public class EnemyPaneList extends PaneList {
     private ObservableList<TitledPane> enemyPaneList;
     private List<EditableNode> enemyEditablesList;
@@ -25,7 +31,7 @@ public class EnemyPaneList extends PaneList {
     public EnemyPaneList () {
         enemyEditablesList = new ArrayList<>();
     }
-
+    
     @Override
     public void addToGenericList (EditableNode editableNode) {
         enemyEditablesList.add(editableNode);

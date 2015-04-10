@@ -6,6 +6,14 @@ import gae.backend.Editable;
 import gae.gridView.Pair;
 
 
+/**
+ * A temporary adaptor class that converts the engine's GameObjectSimple object to an Editable
+ * object, as GAE has been working with Editables. Essentially takes in the engine's object and
+ * takes out necessary information from it for GAE use.
+ * 
+ * @author Kei
+ *
+ */
 public class GameObjectToEditable implements Editable {
     private GameObjectSimple gameObject;
     private static final long serialVersionUID = 1L;
@@ -21,6 +29,11 @@ public class GameObjectToEditable implements Editable {
 
     public GameObjectToEditable (GameObjectSimple gameobject) {
         gameObject = gameobject;
+        /*
+         * doing the following instantiation because it doesn't copy GameObjectSimple (not
+         * Serializable)
+         * TODO: find out how to copy the object
+         */
         name = gameObject.getName();
         imagePath = gameObject.getImagePath();
         type = gameObject.getLabel();

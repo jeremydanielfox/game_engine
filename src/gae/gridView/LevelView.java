@@ -1,24 +1,26 @@
 package gae.gridView;
 
 import gae.listView.EditableNode;
-import gae.listView.LeftPaneView;
+import gae.listView.LibraryView;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 
-public class WorldView {
+/**
+ * A class that instantiates the necessary components of the level. Contains the Library on the left
+ * and grid/background in the center.
+ * 
+ * @author Kei
+ *
+ */
+public class LevelView {
     private StackPane stack;
     private Scene scene;
     private BorderPane border;
@@ -26,12 +28,16 @@ public class WorldView {
     private ContainerWrapper wrapper;
     private ObservableList<PathView> paths =
             FXCollections.observableArrayList();
-    private LeftPaneView lpview;
+    private LibraryView libraryview;
 
-    /*
-     * Used by CentralTabView to create a new Level. Could be changed
+    /**
+     * Creates a StackPane that includes the background image and the TileContainer, put together in
+     * a Group. It's put in a Group so that it's easy to modify.
+     * 
+     * @param scene
+     * @return
      */
-    public StackPane getStack (Scene scene) {
+    private StackPane getStack (Scene scene) {
         stack = new StackPane();
         this.scene = scene;
         ImageView background = new ImageView(new Image("/images/Park_Path.png"));
@@ -49,26 +55,35 @@ public class WorldView {
         return stack;
     }
 
-    public BorderPane getBorder (Scene scene) {
-        border = new BorderPane();
-        border.setCenter(getStack(scene));
-        border.setLeft(getLeftView());
-        return border;
-    }
-    
-    public Image getBackgroundImage() {
-        return backgroundProperty.get();
-    }
-
-    private Group getLeftView () {
-        lpview = new LeftPaneView();
+    /**
+     * creates a Group from the LibraryView, which contains the different buttons, the Accordion
+     * view, as well as all the objects in one group so that it's easily hidden/unhidden.
+     * 
+     * @return
+     */
+    private Group getLibraryView () {
+        libraryview = new LibraryView();
         Group leftview =
-                lpview.getGroup(stack, scene, paths, backgroundProperty, wrapper);
+                libraryview.getGroup(stack, scene, paths, backgroundProperty, wrapper);
         // TODO: can't do the above since it messes up the coordinates - got to fix
         return leftview;
     }
-    
-    public void getAddFunction(EditableNode node) {
-        lpview.addToList(node);
+
+    public BorderPane getBorder (Scene scene) {
+        border = new BorderPane();
+        border.setCenter(getStack(scene));
+        border.setLeft(getLibraryView());
+        return border;
+    }
+
+    public Image getBackgroundImage () {
+        return backgroundProperty.get();
+    }
+    /**
+     * Temporary method to pass in the EditableNode all the way to the LibraryView
+     * @param node
+     */
+    public void getAddFunction (EditableNode node) {
+        libraryview.addToList(node);
     }
 }

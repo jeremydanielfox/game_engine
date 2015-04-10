@@ -22,14 +22,14 @@ import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
 
 
-public class ViewConcrete2 implements View, Observer {
+public class ViewConcrete2 implements View, Observer, ChangeableSpeed {
 
     public static final double GAME_WIDTH_TO_HEIGHT = 1.25;
-    public static final int SPEED_CHANGE_INTERVAL = 10;
-    
-    
+    public static final int MAX_FRAME_RATE = 300;
+    public static final int MIN_FRAME_RATE = 200;    
+
     private Game myGame;
-    private Integer myRate = 200;
+    private Integer myRate = MIN_FRAME_RATE;
     private Timeline myAnimation;
     private LevelBoard myLevelBoard;
 
@@ -46,7 +46,7 @@ public class ViewConcrete2 implements View, Observer {
 
     private double myDisplayWidth;
     private double myDisplayHeight;
-    
+
     private HUD myHeadsUp;
 
     public ViewConcrete2 (Game game, double width, double height) {
@@ -112,24 +112,47 @@ public class ViewConcrete2 implements View, Observer {
                             e -> executeFrameActions());
     }
 
-    private void changeRate(int speedChangeMultiplier) {
-        //TODO
+    public void toggleRate () {
+        // TODO
+        Animation.Status previousStatus = myAnimation.getStatus();
+        myAnimation.stop();
+        //changeFramesPerSecondValue(speedChangeMultiplier);
+        if(myRate >= MAX_FRAME_RATE){
+            myRate = MIN_FRAME_RATE;
+        }
+        else
+            myRate = MAX_FRAME_RATE;
+        buildTimeline();
+        restoreLastAnimationStatus(previousStatus);
     }
-    
+
+    public boolean canIncSpeed () {
+        return myRate <= MIN_FRAME_RATE;
+    }
+
+    public boolean canDecSpeed () {
+        return myRate >= MAX_FRAME_RATE;
+    }
+
+    private void restoreLastAnimationStatus (Animation.Status prevStatus) {
+        if (prevStatus.equals(Animation.Status.RUNNING))
+            play();
+    }
+
     @Override
     public void executeFrameActions () {
         // after updating game, how to update after level ends? need to look into checking something
         // like gameEnded()
-         myGame.update();
+        myGame.update();
 
         myButtonList.forEach(e -> {
             if (e.isEnabled()) {
                 e.getButton().setDisable(false);
             }
-            else {
-                e.getButton().setDisable(true);
-            }
-        });
+                else {
+                    e.getButton().setDisable(true);
+                }
+            });
 
     }
 
@@ -192,15 +215,13 @@ public class ViewConcrete2 implements View, Observer {
         myGameWorldPane.getChildren().add(image);
     }
 
-    private void addControlButtons() {
-        myHeadsUp.addButton(new ButtonWrapper("Play",e->play(),new NullGoal()));
-        myHeadsUp.addButton(new ButtonWrapper("Pause",e->pause(),new NullGoal()));
-        myHeadsUp.addButton(new ButtonWrapper("Slow",e->play(),new NullGoal()));
-        myHeadsUp.addButton(new ButtonWrapper("Fast",e->play(),new NullGoal()));
+    private void addControlButtons () {
+        myHeadsUp.addButton(new ButtonWrapper("Play", e -> play(), new NullGoal()));
+        myHeadsUp.addButton(new ButtonWrapper("Pause", e -> pause(), new NullGoal()));
+        myHeadsUp.addButton(new ButtonWrapper("Slow", e -> toggleRate(), new NullGoal()));
+        myHeadsUp.addButton(new ButtonWrapper("Fast", e -> toggleRate(), new NullGoal()));
     }
-    
-    
-    
+
     @Override
     public void pause () {
         myAnimation.pause();

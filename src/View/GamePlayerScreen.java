@@ -2,6 +2,20 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
@@ -25,21 +39,6 @@ import engine.shop.wallet.Wallet;
 import gae.gameView.Main;
 import gameworld.BasicWorld;
 import gameworld.GameWorld;
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 
 public class GamePlayerScreen extends Application {
@@ -86,6 +85,14 @@ public class GamePlayerScreen extends Application {
     private void startGame () {
         //myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_WIDTH);
         
+        Group root = new Group();
+        root.getChildren().add(makeDemoGame());
+        Scene scene = new Scene(root);
+        myStage.setScene(scene);
+        
+    }
+
+    public Node makeDemoGame() {
         ConcreteLevelBoard board=new ConcreteLevelBoard();
         
         GameWorld world = new BasicWorld();
@@ -105,8 +112,8 @@ public class GamePlayerScreen extends Application {
         Wallet wallet = new ConcreteWallet(scoreUnit);
         Player myPlayer=new Player("PlayerName",health,scoreUnit,wallet);
         myGame=new ConcreteGame(myPlayer,board,new ArrayList<ButtonWrapper>());
+        //ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
         ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
-        //ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NoCurrentEventGoal());
         myGame.addButton(wrap);
         
         
@@ -126,13 +133,9 @@ public class GamePlayerScreen extends Application {
         
         myGameView = new ViewConcrete2(myGame,Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();
-        Group root = new Group();
-        root.getChildren().add(node);
-        Scene scene = new Scene(root);
-        myStage.setScene(scene);
-        
+        return node;
     }
-
+    
     public static void main (String[] args) {
         launch(args);
     }

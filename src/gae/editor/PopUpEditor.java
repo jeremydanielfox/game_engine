@@ -3,6 +3,7 @@ package gae.editor;
 import engine.gameobject.GameObjectSimple;
 import gae.gameView.GameView;
 import gae.listView.EditableNode;
+import gae.listView.GameObjectToEditable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 

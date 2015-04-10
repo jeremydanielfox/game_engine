@@ -66,7 +66,7 @@ public class WorldView {
         return leftview;
     }
     
-    public EventHandler<?> getAddFunction(EditableNode node) {
-        return e -> lpview.addToList(node);
+    public void getAddFunction(EditableNode node) {
+        lpview.addToList(node);
     }
 }

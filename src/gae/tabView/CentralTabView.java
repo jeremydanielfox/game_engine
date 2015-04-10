@@ -60,7 +60,7 @@ public class CentralTabView implements UIObject{
         return baseNode;
     }
     
-    public EventHandler<?> getAddFunction(EditableNode node) {
-        return worldView.getAddFunction(node);
+    public void getAddFunction(EditableNode node) {
+        worldView.getAddFunction(node);
     }
 }

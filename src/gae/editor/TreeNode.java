@@ -33,11 +33,15 @@ public class TreeNode {
     }
 
     /**
-     * added to provide outside class to access chidlren nodes to iterate through
+     * added to provide outside class to access children nodes to iterate through
      * @ author Brandon
      * @return
      */
     public List<TreeNode> getChildren () {
         return myTreeNodes;
+    }
+    
+    public int getNumChildren() {
+        return myTreeNodes.size();
     }
 }

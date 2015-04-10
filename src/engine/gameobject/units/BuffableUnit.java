@@ -1,5 +1,6 @@
 package engine.gameobject.units;
 
+import java.io.Serializable;
 import java.util.List;
 import engine.gameobject.BasicMover;
 import engine.gameobject.GameObjectSimple;
@@ -7,7 +8,7 @@ import engine.pathfinding.EndOfPathException;
 import gameworld.ObjectCollection;
 
 
-public class BuffableUnit extends GameObjectSimple implements Buffable{
+public class BuffableUnit extends GameObjectSimple implements Buffable, Serializable{
     private List<Buff> buffList;
 
     @Override

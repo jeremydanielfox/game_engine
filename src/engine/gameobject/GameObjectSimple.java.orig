@@ -102,12 +102,16 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         return (BasicMover) myMover;
     }
 
+<<<<<<< HEAD
+    //@Settable
+    //TODO: Make settable
+=======
     public String getImagePath () {
         return myImagePath;
     }
 
-    //@Settable
-    //TODO: Make settable
+    @Settable
+>>>>>>> 70abded86dad356ef059a20317fef514d20565d2
     public void setMover (Mover mover) {
         myMover = mover;
     }

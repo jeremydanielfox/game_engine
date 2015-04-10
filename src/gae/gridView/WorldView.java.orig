@@ -19,6 +19,10 @@ public class WorldView {
     private PathView pathView;
     private Scene scene;
     private BorderPane border;
+    
+    //ERASE AFTER
+    public LeftPaneView lpview;
+
     private ObjectProperty<Image> backgroundProperty;
     private ContainerWrapper wrapper;
     private ObservableList<PathView> paths =
@@ -60,13 +64,18 @@ public class WorldView {
     private Group getLeftView () {
         StackPane stackPane = new StackPane();
         lpview = new LeftPaneView();
+<<<<<<< HEAD
+=======
+        //LeftPaneView lpview = new LeftPaneView();
+        LeftPaneView lpview = new LeftPaneView();
+>>>>>>> 70abded86dad356ef059a20317fef514d20565d2
         Group leftview =
                 lpview.getGroup(stack, scene, paths, pathView, backgroundProperty, wrapper);
         stackPane.getChildren().add(leftview);
         return leftview;
     }
     
-    public void getAddFunction(EditableNode node) {
-        lpview.addToList(node);
+    public EventHandler<?> getAddFunction(EditableNode node) {
+        return e -> lpview.addToList(node);
     }
 }

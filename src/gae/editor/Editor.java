@@ -11,7 +11,7 @@ import java.util.Map;
  * @author Eric Saba
  *
  */
-public abstract class Editor {
+public abstract class Editor implements Edits {
     private Map<String, ArrayList<String>> myPropertiesMap;
     
     public Editor() {

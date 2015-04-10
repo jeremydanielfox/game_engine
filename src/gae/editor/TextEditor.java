@@ -35,4 +35,9 @@ public class TextEditor extends ComponentEditor {
     public void defaultField () {
         field.setText("*DEFAULT*");
     }
+
+    @Override
+    public Object createObject (Class<?> c) {
+        return field.getText();
+    }
 }

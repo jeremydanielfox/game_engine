@@ -13,7 +13,7 @@ import gae.openingView.UIObject;
  *
  */
 
-public abstract class ComponentEditor implements UIObject {
+public abstract class ComponentEditor implements UIObject, Edits {
     private HBox editBox;
     private Label label;
     

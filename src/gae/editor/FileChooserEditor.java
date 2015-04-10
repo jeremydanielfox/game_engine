@@ -1,7 +1,6 @@
 package gae.editor;
 
 import java.io.File;
-
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,5 +45,11 @@ public class FileChooserEditor extends ComponentEditor {
     @Override
     public void defaultField () {
         
+    }
+
+    @Override
+    public Object createObject (Class<?> c) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

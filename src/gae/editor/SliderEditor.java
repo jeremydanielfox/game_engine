@@ -55,5 +55,9 @@ public class SliderEditor extends ComponentEditor {
     public void defaultField () {
         slider.setValue(DEFAULT);
     }
+    @Override
+    public Object createObject (Class<?> c) {
+        return slider.getValue();
+    }
 
 }

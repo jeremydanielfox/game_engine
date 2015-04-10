@@ -26,6 +26,7 @@ public class TransitionGameObject implements Graphical {
     private static Random ourGenerator = new Random();
 
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
+    private static final Color WHITE_COLOR = Color.rgb(255, 255, 255, 0.5); // half-transparent red
 
     // TODO: these shouldn't be constants; should reflect corresponding Prototype GameObject
     private static final double TOWER_WIDTH = 50;
@@ -33,7 +34,8 @@ public class TransitionGameObject implements Graphical {
     private static final double RANGE = 30 + TOWER_RADIUS; 
   
     private Graphic myGraphic;
-
+    private Circle rangeDetection;
+    
     // TODO: initialize from corresponding prototype GameObject
 
     private static double widthToRadius (double width) {
@@ -56,7 +58,7 @@ public class TransitionGameObject implements Graphical {
     private void initialize (String image) {
         pane = new StackPane();
 
-        Circle rangeDetection = new Circle(RANGE, ERROR_COLOR);
+        rangeDetection = new Circle(RANGE, ERROR_COLOR);
         rangeDetection.setStroke(Color.BLACK);
 
         Rectangle tower = new Rectangle(TOWER_WIDTH, TOWER_WIDTH);
@@ -67,6 +69,10 @@ public class TransitionGameObject implements Graphical {
     @Override
     public Graphic getGraphic () {
        return myGraphic;
+    }
+    
+    public void changeColor () {
+        rangeDetection.setFill(WHITE_COLOR);
     }
 
 }

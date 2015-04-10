@@ -1,11 +1,7 @@
 package engine.gameobject.weapon.firingstrategy;
 
-import java.util.ArrayList;
-import java.util.List;
-import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buffable;
-import gameworld.GameWorld;
 import gameworld.ObjectCollection;
 
 /**

@@ -17,6 +17,10 @@ public class WorldView {
     private PathView pathView;
     private Scene scene;
     private BorderPane border;
+    
+    //ERASE AFTER
+    public LeftPaneView lpview;
+
     private ObjectProperty<Image> backgroundProperty;
     private ContainerWrapper wrapper;
     private ObservableList<PathView> paths =
@@ -56,6 +60,8 @@ public class WorldView {
 
     private Group getLeftView () {
         StackPane stackPane = new StackPane();
+        lpview = new LeftPaneView();
+        //LeftPaneView lpview = new LeftPaneView();
         LeftPaneView lpview = new LeftPaneView();
         Group leftview =
                 lpview.getGroup(stack, scene, paths, pathView, backgroundProperty, wrapper);

@@ -2,8 +2,11 @@ package gae.backend;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.collections.ObservableList;
+
 import com.thoughtworks.xstream.XStream;
+
 import engine.game.Game;
 
 
@@ -46,9 +49,9 @@ public class GameManager {
 		return null;
 	}
 
-	public ObservableList<Editable> getLibraryDataList() {
-		return library.getObservableList();
-	}
+//	public ObservableList<Editable> getLibraryDataList() {
+//		return library.getObservableList();
+//	}
 	
 	private void createEditorViewInTab() {
 	    

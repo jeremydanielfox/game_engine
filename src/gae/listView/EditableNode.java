@@ -1,13 +1,16 @@
 package gae.listView;
 
 import java.util.Iterator;
+
+
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import gae.backend.Editable;
+import gae.openingView.UIObject;
 import javafx.scene.layout.Region;
 import javafx.util.Pair;
 import gae.backend.Editable;
@@ -19,7 +22,7 @@ import gae.backend.Editable;
  * @author Kei Yoshikoshi
  *
  */
-public class EditableNode {
+public class EditableNode implements UIObject {
     private String myName;
     private String myType;
     private Editable editable;
@@ -81,6 +84,12 @@ public class EditableNode {
         }
 
         return true;
+    }
+
+    @Override
+    public Node getObject () {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

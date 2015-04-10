@@ -61,7 +61,7 @@ public class GameObjectSimpleTest extends BuffableUnit{
 //        myPath = (PathFixed) xstream.fromXML(file);
         myMover = new MoverPath(myPath,1);
         myWeapon = new BasicWeapon();
-        myGraphic = new Graphic(100, 100, myImagePath);
+        myGraphic = new Graphic(40, 40, myImagePath);
         myGraphic.setPoint(myPoint);
     }
 
@@ -136,8 +136,7 @@ public class GameObjectSimpleTest extends BuffableUnit{
     }
 
     @Settable
-	public
-    void setPoint (PointSimple point) {
+    public void setPoint (PointSimple point) {
         myPoint = point;
         myGraphic.setPoint(point); 
     }
@@ -148,8 +147,7 @@ public class GameObjectSimpleTest extends BuffableUnit{
     }
 
     @Settable
-	public
-    void setMover (Mover mover) {
+    public void setMover (Mover mover) {
         myMover = mover;
     }
 

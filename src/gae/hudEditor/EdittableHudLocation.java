@@ -30,6 +30,7 @@ public class EdittableHudLocation implements UIObject {
         baseNode = new StackPane();
         textHolder = new VBox();
         
+//        ResizableRectangle r = new ResizableRectangle();
         Rectangle r = new Rectangle();
         
         r.setWidth(RECTANGLE_SIZE);

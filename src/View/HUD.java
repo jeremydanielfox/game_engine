@@ -43,30 +43,30 @@ public class HUD implements Observer {
     private VBox myWholeDisplay;
     private BorderPane myPane;
     private HBox myDefaultButtonDisplay;
-    
+
     private List<ButtonWrapper> myButtonWrapperList;
 
-    public HUD(BorderPane pane){
+    public HUD (BorderPane pane) {
         initialize(pane);
     }
-    
-    public HUD (BorderPane pane,Displayable ... displays) {
+
+    public HUD (BorderPane pane, Displayable ... displays) {
         initialize(pane);
         for (Displayable d : displays) {
             addPairedDisplay(d);
         }
     }
-    
-    private void initialize(BorderPane pane){
+
+    private void initialize (BorderPane pane) {
         myStatsDisplay = new VBox(10);
         myWholeDisplay = new VBox(10);
         myWholeDisplay.setAlignment(Pos.CENTER);
-        System.out.println("stats:"+myStatsDisplay.getWidth());
+        System.out.println("stats:" + myStatsDisplay.getWidth());
         myStatsDisplay.setAlignment(Pos.CENTER_RIGHT);
         myWholeDisplay.setAlignment(Pos.CENTER);
         myWholeDisplay.getChildren().add(myStatsDisplay);
         myDisplayFields = new HashMap<>();
-        myPane=pane;
+        myPane = pane;
         makeShop();
         makeDefaultButtonDisplay();
         myWholeDisplay.setAlignment(Pos.CENTER);
@@ -75,28 +75,23 @@ public class HUD implements Observer {
 
     private void makeDefaultButtonDisplay () {
         myDefaultButtonDisplay = new HBox();
-//        Button play=new Button("Play");
-//        Button pause=new Button("Pause");
-//        Button fastForward=new Button("Fast");
-//        Button slowDown=new Button("Slow");
-//        myDefaultButtonDisplay.getChildren().addAll(play,pause,fastForward,slowDown);
         myDefaultButtonDisplay.setAlignment(Pos.CENTER);
         myWholeDisplay.getChildren().add(myDefaultButtonDisplay);
-        System.out.println("pane:"+myPane.getWidth());
+        System.out.println("pane:" + myPane.getWidth());
     }
-    
-    public void addButton(ButtonWrapper button) {
+
+    public void addButton (ButtonWrapper button) {
         myButtonWrapperList.add(button);
         myDefaultButtonDisplay.getChildren().add(button.getButton());
     }
-    
+
     public void addPairedDisplay (Displayable d) {
         d.addObserver(this);
         HBox newBox = new HBox(TEXT_SPACING);
         Text label = new Text(d.getLabel());
-        formatText(label,30);
+        formatText(label, 30);
         Text value = new Text(d.getValue() + "");
-        formatText(value,30);
+        formatText(value, 30);
         newBox.getChildren().addAll(label, value);
         newBox.setAlignment(Pos.CENTER);
         myDisplayFields.put(d, value);
@@ -104,13 +99,25 @@ public class HUD implements Observer {
         myStatsDisplay.setAlignment(Pos.CENTER);
     }
 
-    private void formatText (Text t,int fontSize) {
+    private void formatText (Text t, int fontSize) {
         t.setFont(Font.font("Verdana", fontSize));
         t.setFill(Color.BLUEVIOLET);
     }
-    
+
     public VBox getDisplay () {
         return myWholeDisplay;
+    }
+
+    public void update () {
+        myButtonWrapperList.forEach(e -> {
+            if (e.isEnabled()) {
+                e.getButton().setDisable(false);
+            }
+                else {
+                    e.getButton().setDisable(true);
+                    
+                }
+            });
     }
 
     @Override
@@ -122,17 +129,17 @@ public class HUD implements Observer {
             }
         }
     }
-    
+
     private void makeShop () {
         FlowPane shopDisplay = new FlowPane();
         shopDisplay.setHgap(5);
         shopDisplay.setVgap(5);
         shopDisplay.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
-        //shopDisplay.setMaxWidth(SHOP_WIDTH+200);
+        // shopDisplay.setMaxWidth(SHOP_WIDTH+200);
         addIcons(shopDisplay);
         myWholeDisplay.getChildren().add(shopDisplay);
     }
-    
+
     private void addIcons (FlowPane shopDisplay) {
         Map<String, String> shopImages = new HashMap<String, String>();
         String[] iconImages = new String[] { "/images/Bloons_DartMonkeyIcon.jpg",
@@ -158,10 +165,11 @@ public class HUD implements Observer {
         }
         shopDisplay.getChildren().addAll(items);
     }
-    
+
     private void addTransitionTower (Point2D initial, Node node) {
         Node bindedTower =
-                ViewUtilities.bindCursor(node, myPane.getScene().getRoot(), initial, KeyCode.ESCAPE);
+                ViewUtilities
+                        .bindCursor(node, myPane.getScene().getRoot(), initial, KeyCode.ESCAPE);
         myPane.getChildren().add(bindedTower);
     }
 

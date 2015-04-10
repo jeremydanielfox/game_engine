@@ -107,7 +107,7 @@ public abstract class PaneList {
             
             Editable newEditable = node.makeNewInstance();
             newEditable.setLocation(currentX, currentY);
-            EditableImage edimage = new EditableImage(node.getImageView(), newEditable, wrapper);
+            MovableImage edimage = new MovableImage(node.getImageView(), newEditable, wrapper);
             newEditable.setEditableImage(edimage);
             edimage.relocate(currentX, currentY);
             // for (EditableImage image : imageList) {

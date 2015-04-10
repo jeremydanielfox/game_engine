@@ -1,6 +1,7 @@
 package gae.listView;
 
 import java.io.File;
+import java.io.NotSerializableException;
 import java.util.Iterator;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;

@@ -2,6 +2,7 @@ package engine.gameobject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -166,14 +167,14 @@ public class GameObjectSimpleTest implements GameObject {
     }
 
 	@Override
-	public void update(ObjectCollection world) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public BasicMover getMover() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void update(ObjectCollection world) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -25,8 +25,9 @@ public class BasicWorld implements GameWorld {
     }
 
     @Override
-    public void addObject (GameObject toSpawn){
+    public void addObject (GameObject toSpawn, PointSimple pixelCoords){
         myObjects.add(toSpawn);
+        toSpawn.setPoint(pixelCoords);//TODO change from pixel coords
         //myGrid.addObject(toSpawn);
     }
 
@@ -83,6 +84,18 @@ public class BasicWorld implements GameWorld {
         }
         return Collections.unmodifiableList(inRange);
     }
+
+	@Override
+	public void addObject(GameObject toSpawn) {
+		myObjects.add(toSpawn);
+	}
+
+	@Override
+	public boolean isPlacable(GameObject toSpawn, PointSimple pixelCoords) {
+		return true; //TODO plz replace with logic. Ex: towers cannot be placed on towers
+	}
+
+
     
 
 }

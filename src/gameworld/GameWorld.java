@@ -16,4 +16,7 @@ public interface GameWorld extends ObjectCollection {
     public void removeDeadObjects ();
 
     public Path getPathFinder ();
+
+	public void addObject(GameObject toSpawn, PointSimple pixelCoords);
+	public boolean isPlacable(GameObject toSpawn, PointSimple pixelCoords);
 }

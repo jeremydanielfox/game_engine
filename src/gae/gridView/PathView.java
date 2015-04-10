@@ -17,6 +17,8 @@ public class PathView {
     private ArrayList<PathSet> pathSetList;
     private int index;
     private StackPane myStack;
+    private static int ourID = 0;
+    private int myID;
 
     public PathView (StackPane stack, Scene scene) {
         this.myScene = scene;
@@ -64,6 +66,8 @@ public class PathView {
     }
 
     public void resetScreen () {
+        myID = ourID;
+        ourID++;
         myStack.getChildren().remove(root);
     }
 
@@ -77,5 +81,9 @@ public class PathView {
         }
         resetScreen();
         return pathList;
+    }
+
+    public int getID () {
+        return myID;
     }
 }

@@ -22,7 +22,7 @@ import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
 
 
-public class ViewConcrete2 implements View, Observer {
+public class ViewConcrete2 implements View, Observer, ChangeableSpeed {
 
     public static final double GAME_WIDTH_TO_HEIGHT = 1.25;
     public static final int MAX_FRAME_RATE = 300;
@@ -112,7 +112,7 @@ public class ViewConcrete2 implements View, Observer {
                             e -> executeFrameActions());
     }
 
-    private void toggleRate () {
+    public void toggleRate () {
         // TODO
         Animation.Status previousStatus = myAnimation.getStatus();
         myAnimation.stop();

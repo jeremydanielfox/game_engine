@@ -10,7 +10,7 @@ import engine.gameobject.units.Buffable;
 import engine.gameobject.weapon.firingstrategy.Buffer;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.Projectile;
-import engine.gameobject.weapon.upgradable.FiringRate;
+import engine.gameobject.weapon.upgradable.firingrate.FiringRate;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import gameworld.ObjectCollection;
 

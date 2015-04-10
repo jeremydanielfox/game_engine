@@ -95,9 +95,7 @@ public class GamePlayerScreen extends Application {
         ConcreteLevelBoard board = new ConcreteLevelBoard();
 
         GameWorld world = new BasicWorld();
-
         world.addObject(new GameObjectSimpleTest());
-
         GameObjectQueue q = new ConcreteQueue(new ArrayList<GameObject>());
         TimedEvent wave = new ConstantSpacingWave(2.0, q, world);
         StoryBoard story = new StoryBoard(wave);

@@ -70,13 +70,8 @@ public class ShopModel {
      * @param transitionGameObject
      */
     public boolean purchase (TransitionGameObject transitionGameObject, double x, double y) {
-        try {
             myGameWorld.addObject(PrototypeLocator.getService()
                     .getInstance(transitionPurchasableMap.get(transitionGameObject).getName()));
-        }
-        catch (StructurePlacementException e) {
-            return false;
-        }
         currentPlayer.getWallet().withdraw(transitionPurchasableMap.get(transitionGameObject)
                                                    .getPrice());
         return true;

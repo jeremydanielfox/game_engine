@@ -12,6 +12,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import xml.DataManager;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -201,36 +202,7 @@ public class PathList {
                 }
             }
             // *****************************************//
-            File myFile = new File("src/gae/listView/Test.xml");
-            Writer fWriter = null;
-            try {
-                fWriter = new FileWriter(myFile);
-            }
-            catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-                System.out.println("couldn't find file");
-            }
-//            FileOutputStream fos = null;
-//            try {
-//                fos = new FileOutputStream(myFile);
-//            }
-//            catch (Exception e1) {
-//                e1.printStackTrace();
-//                System.out.println("File not found");
-//                
-//            }
-//            String xml = xst.toXML(myPath);
-            xst.toXML(myPath, fWriter);
-            try {
-                fWriter.close();
-            }
-            catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-                System.out.println("couldn't close");
-            }
-//            System.out.println(xml);
+            DataManager.writeToXML(myPath, "src/gae/listView/Test.xml");
         });
         
         return display;

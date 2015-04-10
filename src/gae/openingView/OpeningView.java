@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
 
+import com.sun.glass.events.KeyEvent;
+
 import View.PopUpScreen;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -13,6 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableStringValue;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -48,6 +51,17 @@ public class OpeningView implements UIMediator {
         imagePanel = new ImagePanel(this, gameSelected);
         dataForm = new DataForm(this, gameSelected);
         insertBorders();
+        
+        /*
+         * to make it easier for us to test!
+         */
+        myScene.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ESCAPE)) {
+                UIMediator author = new GameView();
+                myScene = author.getScene();
+                myStage.setScene(myScene);
+            }
+        });
     }
 
     /**
@@ -70,11 +84,11 @@ public class OpeningView implements UIMediator {
 
     @Override
     public void handleEvent (UIObject usedObject, EventObject action) {
-
+        
         /*
          * changes the scene to display the GameView if button in DataForm has been pressed
          */
-        if (emptyFields()) {
+        if (fieldsCompleted()) {
             if (usedObject.equals(dataForm) && action instanceof MouseEvent) {
                 UIMediator author = new GameView();
                 myScene = author.getScene();
@@ -86,6 +100,8 @@ public class OpeningView implements UIMediator {
             popup.makeScreen("Fill out the forms, dummy!", "WILL DO!");
         }
 
+        
+        
         /*
          * if game type is selected, gray out rest of the options
          */
@@ -101,8 +117,8 @@ public class OpeningView implements UIMediator {
      * 
      * @return
      */
-    private boolean emptyFields () {
+    private boolean fieldsCompleted () {
         DataForm dt = (DataForm) dataForm;
-        return dt.isEmpty();
+        return dt.filledFields();
     }
 }

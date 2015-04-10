@@ -2,13 +2,13 @@ package engine.gameobject;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import xml.DataManager;
 import engine.fieldsetting.Settable;
+import engine.gameobject.test.TestWeapon;
 import engine.gameobject.units.BuffableUnit;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.Weapon;
@@ -33,10 +33,9 @@ public class GameObjectSimpleTest extends BuffableUnit{
         myImagePath = "robertDuvall.jpg";
         myLabel = "test object";
         myPoint = new PointSimple(300,300);
-        myHealth = new HealthSimple(10);
-        
+        myHealth = new HealthSimple(7);
+        super.setWeapon(new TestWeapon());
 //        myMover = new MoverPoint(new PointSimple(600,600), .2);
-        
         PathFixed myPath = new PathFixed();
         PathSegmentBezier myBez = new PathSegmentBezier();
         List<PointSimple> points = new ArrayList<PointSimple>();
@@ -51,7 +50,6 @@ public class GameObjectSimpleTest extends BuffableUnit{
 //        File file = new File("src/gae/listView/Test.xml");
 //        myPath = (PathFixed) xstream.fromXML(file);
         myMover = new MoverPath(myPath,1);
-        setWeapon(new BasicWeapon());
         myGraphic = new Graphic(40, 40, myImagePath);
         myGraphic.setPoint(myPoint);
     }
@@ -67,26 +65,4 @@ public class GameObjectSimpleTest extends BuffableUnit{
     public GameObject clone () {
             return (GameObject) super.clone();
     }
-
-    @Override
-    public void move () throws EndOfPathException {
-        // TODO Auto-generated method stub
-        PointSimple point = myMover.move(myPoint);
-        myPoint = new PointSimple(new Point2D(point.getX(), point.getY()));
-        myGraphic.setPoint(myPoint);
-    }
-	@Override
-	    public void update (ObjectCollection world) {
-	        if (isDead()){
-	            onDeath();
-	            return;
-	        }
-	        try{
-	            move();
-	        }
-	        catch (EndOfPathException e){
-	            
-	        }
-	        
-	    }
 }

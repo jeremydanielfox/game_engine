@@ -1,6 +1,7 @@
 package engine.gameobject.units;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import engine.gameobject.BasicMover;
 import engine.gameobject.GameObjectSimple;
@@ -10,7 +11,7 @@ import engine.pathfinding.EndOfPathException;
 import gameworld.ObjectCollection;
 
 
-public class BuffableUnit extends GameObjectSimple implements Buffable{
+public class BuffableUnit extends GameObjectSimple implements Buffable, Serializable{
     private List<Buff> buffList;
     private Weapon myWeapon;
 
@@ -45,6 +46,7 @@ public class BuffableUnit extends GameObjectSimple implements Buffable{
             applyBuff(toAdd);
         }
         else if (toAdd.isStrongerBuff(equalBuff)) {
+            System.out.println(equalBuff.timeLeft());
             removeBuff(equalBuff);
             applyBuff(toAdd);
             System.out.println("Buff is applied" + "Health: " + getHealth());
@@ -56,24 +58,26 @@ public class BuffableUnit extends GameObjectSimple implements Buffable{
      * advanceBuffs would need to be on the list of things updated every frame/unit of time.
      ********/
     private void advanceBuffs () {
-        ArrayList<Buff> buffer = new ArrayList<Buff>();
+        ArrayList<Buff> removeBuffer = new ArrayList<Buff>();
         for (Buff buff : buffList) {
             if (buff.timeLeft() <= 0) {
-                buffer.add(buff);
+                removeBuffer.add(buff);
             }
             buff.advanceTime(1, this);
         }
-        for(Buff toRemove : buffer){
-            buffList.remove(toRemove);
+        for(Buff toRemove : removeBuffer){
+            removeBuff(toRemove);
         }
     }
 
     private void applyBuff(Buff b){
         b.apply(this);
         buffList.add(b);
+        System.out.println("After adding: " + buffList.size());
     }
     
     private void removeBuff(Buff b){
+        System.out.println("Remove");
         buffList.remove(b);
         b.unapply(this);
     }

@@ -1,6 +1,6 @@
 package gae.tabView;
 
-import gae.gridView.LevelView;
+import gae.gridView.WorldView;
 import gae.listView.EditableNode;
 import gae.openingView.UIObject;
 import javafx.event.EventHandler;
@@ -19,7 +19,7 @@ public class CentralTabView implements UIObject{
     private int levelCount;
     private Scene scene;
     private HudEditorTab hudTab;
-    private LevelView worldView;
+    private WorldView worldView;
 
     public CentralTabView (Scene sceneIn) {
         scene = sceneIn;
@@ -42,7 +42,7 @@ public class CentralTabView implements UIObject{
     }
 
     private void createNewLevel () {
-        worldView = new LevelView();
+        worldView = new WorldView();
         LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
         LevelTabSet newLevel =
                 new LevelTabSet(worldView.getBorder(scene), levelPrefs.getStack());
@@ -59,8 +59,12 @@ public class CentralTabView implements UIObject{
     public Node getObject () {
         return baseNode;
     }
+<<<<<<< HEAD
     
-    public void getAddFunction(EditableNode node) {
-        worldView.getAddFunction(node);
+    public EventHandler<?> getAddFunction(EditableNode node) {
+        return worldView.getAddFunction(node);
     }
 }
+=======
+}
+>>>>>>> 70abded86dad356ef059a20317fef514d20565d2

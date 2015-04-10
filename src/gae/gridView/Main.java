@@ -5,6 +5,12 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 
+/**
+ * Written only for testing purposes - to start the GAE, use gae.gameView's Main class.
+ * 
+ * @author Kei
+ *
+ */
 public class Main extends Application {
 
     public static final Screen SCREEN = Screen.getPrimary();
@@ -20,7 +26,7 @@ public class Main extends Application {
         Stage myStage = new Stage();
         myStage.setWidth(SCREEN_WIDTH);
         myStage.setHeight(SCREEN_HEIGHT);
-        WorldView scene = new WorldView();
+        LevelView scene = new LevelView();
         // myStage.setScene(scene.getScene());
         myStage.show();
     }

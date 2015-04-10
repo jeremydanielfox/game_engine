@@ -6,6 +6,13 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 
 
+/**
+ * A class written to display the boundlines, coming out of the start/end points to the control
+ * points
+ * 
+ * @author Kei
+ *
+ */
 public class BoundLine extends Line {
     public BoundLine (DoubleProperty startX,
                       DoubleProperty startY,

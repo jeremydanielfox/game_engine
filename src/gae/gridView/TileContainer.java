@@ -2,11 +2,9 @@ package gae.gridView;
 
 import java.util.ArrayList;
 import java.util.List;
-import exception.ObjectOutOfBoundsException;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
@@ -19,6 +17,13 @@ import javafx.stage.Screen;
 /*
  * https://www.youtube.com/watch?v=ag8U6sUptsY
  * Want to base it on this ^^^^^
+ */
+/**
+ * Creates the tile objects and gives it the ability to see if other objects are on the grid. Also
+ * able to select multiple tiles at once.
+ * 
+ * @author Kei & Nina
+ *
  */
 public class TileContainer extends Region implements ContainerWrapper {
     public static final double SCREEN_HEIGHT =
@@ -38,6 +43,12 @@ public class TileContainer extends Region implements ContainerWrapper {
         this.getChildren().add(selectionRect);
     }
 
+    /**
+     * Adds the tiles and binds the height to the pane's height.
+     * Currently hard-coded to a square but should be able to change.
+     * 
+     * @param size
+     */
     private void addTiles (int size) {
         double length = SCREEN_HEIGHT / size;
         for (double i = 0; Math.round(i) < SCREEN_HEIGHT; i += SCREEN_HEIGHT / size) {
@@ -56,6 +67,9 @@ public class TileContainer extends Region implements ContainerWrapper {
 
     }
 
+    /**
+     * Important method that checks if the object's coordinate is on the grid
+     */
     public boolean checkBounds (double x, double y) {
         Point2D point = this.screenToLocal(x, y);
         if (point.getX() < 0 || point.getX() > this.getWidth() || y < 0 ||
@@ -65,7 +79,9 @@ public class TileContainer extends Region implements ContainerWrapper {
         return false;
     }
 
-    @Override
+    /**
+     * Important method that converts other coordinate systems to that relative to the grid
+     */
     public Point2D convertCoordinates (double x, double y) {
         Point2D point = this.screenToLocal(x, y);
         return new Point2D(point.getX(), y);

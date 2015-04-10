@@ -33,6 +33,7 @@ public abstract class Buff {
      * @param myUnit
      */
     public void advanceTime (int timePassed, BuffableUnit myUnit) {
+        System.out.println("Advancing time");
         timeSinceStart = timeSinceStart + timePassed;
         changeOverTime(myUnit);
     }

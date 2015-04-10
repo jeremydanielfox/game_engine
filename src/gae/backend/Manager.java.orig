@@ -1,0 +1,37 @@
+package gae.backend;
+
+import gae.editor.EditorView;
+<<<<<<< HEAD
+=======
+//import gae.frontend.DummyLibraryView;
+>>>>>>> 70abded86dad356ef059a20317fef514d20565d2
+import javafx.stage.Stage;
+
+
+public class Manager {
+    Stage s;
+
+    public Manager () {
+    }
+
+    public void init (Stage s) {
+        this.s = s;
+         LibraryData data = new LibraryData();
+         data.addToList(new TempTower());
+         data.addToList(new TempTower());
+<<<<<<< HEAD
+//         DummyLibraryView view = new DummyLibraryView(s, data.getMap());
+        TempTower tower = new TempTower();
+        data.addToList(tower);
+      //  EditorView view = new EditorView(tower, s);
+//        view.setGUI();
+=======
+         //DummyLibraryView view = new DummyLibraryView(s, data.getMap());
+        TempTower tower = new TempTower();
+        data.addToList(tower);
+      //  EditorView view = new EditorView(tower, s);
+       // view.setGUI();
+>>>>>>> 70abded86dad356ef059a20317fef514d20565d2
+
+    }
+}

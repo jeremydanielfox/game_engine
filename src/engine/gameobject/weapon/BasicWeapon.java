@@ -39,7 +39,7 @@ public class BasicWeapon implements Weapon{
     public BasicWeapon(){
         timeSinceFire = 0;
         myRange = 10000;
-        myFiringRate = new FiringRateUpgrade(1);
+        myFiringRate = new FiringRateUpgrade(2.5);
         myFiringStrategy = new SingleProjectile();
     }
     

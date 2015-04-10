@@ -6,6 +6,7 @@ import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.DirectDamage;
+import engine.gameobject.units.FreezeBuff;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.firingstrategy.Projectile;
 
@@ -13,7 +14,8 @@ public class TestProjectile extends Projectile{
 
     public TestProjectile(){
         super();
-        addCollisionBehavior(new DirectDamage(1));
+        //addCollisionBehavior(new DirectDamage(1));
+        addCollisionBehavior(new FreezeBuff(20));
         myImagePath = "robertDuvall.jpg";
         myLabel = "";
         myHealth = new HealthSimple(1);

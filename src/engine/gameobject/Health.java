@@ -1,8 +1,12 @@
 package engine.gameobject;
 
+import java.io.Serializable;
+
+
 /**
  * All gameobjects have a health. Every game object can affect other objects' health
  * through interaction.
+ * 
  * @author Kaighn
  */
 public interface Health {

@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 /**
  * Super class for all Exceptions thrown in this VOOGASalad program
- * 
+ * Not using the implemented ControlsFX Dialog class as the style differs too much from our program
  */
 public abstract class VOOGAException extends RuntimeException {
     private static final long serialVersionUID = 1L;

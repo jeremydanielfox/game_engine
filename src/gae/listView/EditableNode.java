@@ -1,8 +1,6 @@
 package gae.listView;
 
 import java.util.Iterator;
-
-
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,22 +9,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import gae.backend.Editable;
 import gae.openingView.UIObject;
-import javafx.scene.layout.Region;
-import javafx.util.Pair;
-import gae.backend.Editable;
 
 
 /**
- * A TreeNode class for handling the Editables
+ * A class that takes in an Editable and keeps a list of its copied instances
  * 
- * @author Kei Yoshikoshi
+ * @author Kei
  *
  */
 public class EditableNode implements UIObject {
     private String myName;
     private String myType;
     private Editable editable;
-    private int myID=0;
+    private int myID = 0;
     private ObservableList<Editable> myChildren;
 
     public EditableNode (Editable editable) {
@@ -58,8 +53,9 @@ public class EditableNode implements UIObject {
     }
 
     public ImageView getImageView () {
-        return ImageUtilities.changeImageSize(new ImageView(new Image(getClass()
-                .getResourceAsStream(editable.getImagePath()))), 75, 75);
+        return ImageUtilities.changeImageSize(new ImageView(new Image(editable.getImagePath())),
+                                              75, 75);
+
     }
 
     public String getName () {

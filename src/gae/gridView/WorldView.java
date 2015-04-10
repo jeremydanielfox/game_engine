@@ -1,9 +1,11 @@
 package gae.gridView;
 
+import gae.listView.EditableNode;
 import gae.listView.LeftPaneView;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -21,6 +23,7 @@ public class WorldView {
     private ContainerWrapper wrapper;
     private ObservableList<PathView> paths =
             FXCollections.observableArrayList();
+    private LeftPaneView lpview;
 
     /*
      * Used by CentralTabView to create a new Level. Could be changed
@@ -56,10 +59,14 @@ public class WorldView {
 
     private Group getLeftView () {
         StackPane stackPane = new StackPane();
-        LeftPaneView lpview = new LeftPaneView();
+        lpview = new LeftPaneView();
         Group leftview =
                 lpview.getGroup(stack, scene, paths, pathView, backgroundProperty, wrapper);
         stackPane.getChildren().add(leftview);
         return leftview;
+    }
+    
+    public EventHandler<?> getAddFunction(EditableNode node) {
+        return e -> lpview.addToList(node);
     }
 }

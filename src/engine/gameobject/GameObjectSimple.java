@@ -100,7 +100,8 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         return (BasicMover) myMover;
     }
 
-    @Settable
+    //@Settable
+    //TODO: Make settable
     public void setMover (Mover mover) {
         myMover = mover;
     }
@@ -136,7 +137,8 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         return myWeapon;
     }
 
-    @Settable
+    //@Settable
+    //TODO: Make settable
     @Override
     public void setWeapon (Weapon weapon) {
         myWeapon = weapon;

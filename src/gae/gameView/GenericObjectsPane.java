@@ -6,6 +6,7 @@ import gae.editor.SimpleEditor;
 import gae.openingView.UIObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,8 +21,10 @@ import javafx.stage.Stage;
 public class GenericObjectsPane implements UIObject{
 
     private VBox baseNode;
+    private GameView gameView;
 
-    public GenericObjectsPane() {
+    public GenericObjectsPane(GameView gv) {
+        gameView = gv;
         initialize();
     }
     
@@ -50,7 +53,7 @@ public class GenericObjectsPane implements UIObject{
     }
 
     private void newCustomObject (String type) {
-        PopUpEditor editor = new PopUpEditor(GameObjectSimple.class, type);
+        PopUpEditor editor = new PopUpEditor(GameObjectSimple.class, type, gameView);
         ScrollPane scroll = new ScrollPane();
         scroll.setPrefSize(300, 500);
         scroll.setContent(editor.getObject());

@@ -1,27 +1,27 @@
 package gae.editor;
 
-import java.lang.reflect.Method;
+import gae.gameView.GameView;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class PopUpEditor extends SimpleEditor{
 
-    public PopUpEditor (Class<?> c) {
+    public PopUpEditor (Class<?> c, GameView gameView) {
         super(c);
-        init(c);
+        init(c, gameView);
     }
     
-    public PopUpEditor (Class<?> c, String title) {
+    public PopUpEditor (Class<?> c, String title, GameView gameView) {
         super(c, title);
-        init(c);
+        init(c, gameView);
     }
     
-    private void init(Class<?> c) {
+    private void init(Class<?> c, GameView gameView) {
         VBox editor = (VBox)getObject();
         Button addButton = new Button("Add");
         addButton.setOnAction(e -> {
             Object obj = createObject(c);
-            //TODO: send to library/game object to add
+            gameView.getAddFunction(obj);
         });
         editor.getChildren().add(addButton);
     }

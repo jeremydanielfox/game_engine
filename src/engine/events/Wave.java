@@ -61,15 +61,9 @@ public abstract class Wave extends TimedEvent {
      */
     public boolean releaseObject () {
         if (myQueue.getObjectCount() > 0) {
-            try {
                 GameObject gameObject = myQueue.releaseGameObject();
                 myWaveSet.add(gameObject);
-                myWorld.addObject(gameObject);
-            }
-            catch (StructurePlacementException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+                myWorld.addObject(gameObject); 
             return true;
         }
         return false;

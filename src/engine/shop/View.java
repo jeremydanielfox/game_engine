@@ -99,6 +99,7 @@ public class View extends Application {
                     ViewUtilities.unbindCursor(pane);
                     Point2D location = ViewUtilities.getMouseLocation(mouseEvent, towerNode);
                     towerNode.relocate(location.getX(), location.getY());
+                    transitionTower.changeColor();
                 });
                 items.add(item);
             });

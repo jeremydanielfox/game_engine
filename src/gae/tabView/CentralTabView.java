@@ -1,19 +1,22 @@
 package gae.tabView;
 
 import gae.gridView.WorldView;
+import gae.openingView.UIObject;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 
-public class CentralTabView {
+public class CentralTabView implements UIObject{
     private VBox baseNode;
     private TabPane tabView;
     private int levelCount;
     private Scene scene;
+    private HudEditorTab hudTab;
 
     public CentralTabView (Scene sceneIn) {
         scene = sceneIn;
@@ -26,7 +29,8 @@ public class CentralTabView {
         baseNode = new VBox();
         tabView = new TabPane();
         ShopTab shopTab = new ShopTab();
-        tabView.getTabs().add(shopTab.getBaseTabNode());
+        hudTab = new HudEditorTab(null);
+        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode());
 
         Button newLevel = new Button("Add Level");
         newLevel.setOnAction(e -> createNewLevel());
@@ -45,9 +49,11 @@ public class CentralTabView {
         newTab.setContent(newLevel.getBaseNode());
         newTab.setClosable(false);
         tabView.getTabs().add(newTab);
+        hudTab.setBackgroundImage(worldView.getBackgroundImage());
     }
 
-    public Node getBaseNode () {
+    @Override
+    public Node getObject () {
         return baseNode;
     }
 }

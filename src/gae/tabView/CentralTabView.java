@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 
@@ -15,6 +16,7 @@ public class CentralTabView implements UIObject{
     private TabPane tabView;
     private int levelCount;
     private Scene scene;
+    private HudEditorTab hudTab;
 
     public CentralTabView (Scene sceneIn) {
         scene = sceneIn;
@@ -27,7 +29,7 @@ public class CentralTabView implements UIObject{
         baseNode = new VBox();
         tabView = new TabPane();
         ShopTab shopTab = new ShopTab();
-        HudEditorTab hudTab = new HudEditorTab(null);
+        hudTab = new HudEditorTab(null);
         tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode());
 
         Button newLevel = new Button("Add Level");
@@ -47,6 +49,7 @@ public class CentralTabView implements UIObject{
         newTab.setContent(newLevel.getBaseNode());
         newTab.setClosable(false);
         tabView.getTabs().add(newTab);
+        hudTab.setBackgroundImage(worldView.getBackgroundImage());
     }
 
     @Override

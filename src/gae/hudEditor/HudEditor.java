@@ -19,53 +19,51 @@ public class HudEditor implements UIObject {
     private List<EdittableHudLocation> locations;
     private List<Node> locationNodes;
     private AnchorPane rootNode;
-    
-    public HudEditor(Image backgroundImage) {
+
+    public HudEditor() {
         rootNode = new AnchorPane();
-        
+
         Button done = new Button ("Done");
         done.setOnAction(e -> export());
         rootNode.getChildren().add(done);
-        
+
         locations = new ArrayList<EdittableHudLocation>();
         locations.add(new EdittableHudLocation(Color.YELLOW));
         locations.add(new EdittableHudLocation(Color.GREEN));
         locations.add(new EdittableHudLocation(Color.RED));
         locations.add(new EdittableHudLocation(Color.BLUE));
 
-//        rootNode.setBackground(new Background(new BackgroundImage(backgroundImage, null, null, null, null)));
-        
         locationNodes = extractNodesFromEHLList(locations);
-        
+
         rootNode.getChildren().addAll(locationNodes);
-        
+
         setAnchorPoints(done);
     }
 
     private void setAnchorPoints (Button done) {
         AnchorPane.setBottomAnchor(locationNodes.get(0), ANCHOR_OFFSET);
         AnchorPane.setLeftAnchor(locationNodes.get(0), ANCHOR_OFFSET);
-        
+
         AnchorPane.setRightAnchor(locationNodes.get(1), ANCHOR_OFFSET);
         AnchorPane.setTopAnchor(locationNodes.get(1), ANCHOR_OFFSET);
-        
+
         AnchorPane.setTopAnchor(locationNodes.get(2), ANCHOR_OFFSET);
         AnchorPane.setLeftAnchor(locationNodes.get(2), ANCHOR_OFFSET);
-        
+
         AnchorPane.setRightAnchor(locationNodes.get(3), ANCHOR_OFFSET);
         AnchorPane.setBottomAnchor(locationNodes.get(3), ANCHOR_OFFSET);
-        
+
         AnchorPane.setBottomAnchor(done, SCREEN_HEIGHT/2);
         AnchorPane.setLeftAnchor(done, SCREEN_WIDTH/2 - 50);
     }
-    
+
     private List<Node> extractNodesFromEHLList (List<EdittableHudLocation> ehlList) {
         List<Node> ret = new ArrayList<Node>();
-        
+
         for (EdittableHudLocation ehl : ehlList) {
             ret.add(ehl.getObject());
         }
-        
+
         return ret;
     }
 
@@ -82,5 +80,9 @@ public class HudEditor implements UIObject {
     @Override
     public Node getObject () {
         return rootNode;
+    }
+    
+    public void setBackgroundImage(Image backgroundImage) {
+        rootNode.setBackground(new Background(new BackgroundImage(backgroundImage, null, null, null, null)));
     }
 }

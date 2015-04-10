@@ -16,6 +16,7 @@ public class WorldView {
     private PathView pathView;
     private Scene scene;
     private BorderPane border;
+    private ImageView background;
 
     private ObservableList<PathView> paths =
             FXCollections.observableArrayList();
@@ -26,7 +27,7 @@ public class WorldView {
     public StackPane getStack (Scene scene) {
         stack = new StackPane();
         this.scene = scene;
-        ImageView background = new ImageView(new Image("/images/Park_Path.png"));
+        background = new ImageView(new Image("/images/Park_Path.png"));
         Group root = new Group();
         TileContainer container = new TileContainer(20, border);
         root.getChildren().addAll(background, container);
@@ -46,6 +47,10 @@ public class WorldView {
         border.setCenter(getStack(scene));
         border.setLeft(getLeftView());
         return border;
+    }
+    
+    public Image getBackgroundImage() {
+        return background.getImage();
     }
 
     private Group getLeftView () {

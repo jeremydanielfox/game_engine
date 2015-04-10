@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 public class HudEditorTab {
 
     private Tab baseNode;
+    private HudEditor hEditor;
 
     public HudEditorTab (Image backgroundImage) {
         initialize(backgroundImage);
@@ -18,12 +19,16 @@ public class HudEditorTab {
     private void initialize (Image backgroundImage) {
         baseNode = new Tab();
         baseNode.setText("HUD Editor");
-
-        HudEditor hEditor = new HudEditor(backgroundImage);
+        
+        hEditor = new HudEditor();
         baseNode.setContent(hEditor.getObject());
         baseNode.setClosable(false);
     }
-
+    
+    public void setBackgroundImage(Image backgroundImage) {
+        hEditor.setBackgroundImage(backgroundImage);
+    }
+    
     public Tab getBaseTabNode () {
         return baseNode;
     }

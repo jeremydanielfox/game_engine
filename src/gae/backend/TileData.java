@@ -1,7 +1,7 @@
 package gae.backend;
 
 import gae.gridView.Pair;
-import gae.listView.EditableImage;
+import gae.listView.MovableImage;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -54,13 +54,13 @@ public class TileData implements Editable {
     }
 
     @Override
-    public void setEditableImage (EditableImage image) {
+    public void setEditableImage (MovableImage image) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public EditableImage getEditableImage () {
+    public MovableImage getEditableImage () {
         // TODO Auto-generated method stub
         return null;
     }

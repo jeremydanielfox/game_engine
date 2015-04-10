@@ -1,6 +1,5 @@
 package gae.listView;
 
-import javafx.scene.Node;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.weapon.Weapon;
 import gae.backend.Editable;
@@ -15,11 +14,16 @@ public class GameObjectToEditable implements Editable {
     private int Health = 100;
     private Weapon weapon;
     private Pair location;
-    private String imagePath = "/images/ArcaneTower.png";
-    private EditableImage editableImage;
+    private String imagePath;
+    private MovableImage editableImage;
+    private String name;
+    private String type;
 
     public GameObjectToEditable (GameObjectSimple gameobject) {
         gameObject = gameobject;
+        name = gameObject.getName();
+        imagePath = gameObject.getImagePath();
+        type = gameObject.getLabel();
     }
 
     @Override
@@ -33,21 +37,18 @@ public class GameObjectToEditable implements Editable {
 
     @Override
     public String getImagePath () {
-        System.out.println(gameObject.getImagePath());
-        return gameObject.getImagePath();
-//         return imagePath;
+        return imagePath;
     }
 
     @Override
     public String getName () {
-        // TODO Auto-generated method stub
-        return gameObject.getName() + myID;
+        return name + " " + myID;
     }
 
     @Override
     public String getType () {
         // TODO Auto-generated method stub
-        return gameObject.getLabel();
+        return type;
     }
 
     @Override
@@ -64,14 +65,23 @@ public class GameObjectToEditable implements Editable {
     }
 
     @Override
-    public void setEditableImage (EditableImage image) {
+    public void setEditableImage (MovableImage image) {
         // TODO Auto-generated method stub
         editableImage = image;
     }
 
     @Override
-    public EditableImage getEditableImage () {
+    public MovableImage getEditableImage () {
         return editableImage;
     }
 
+    @Override
+    public Object clone () {
+        try {
+            return super.clone();
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
 }

@@ -1,10 +1,8 @@
 package gae.backend;
 
 import java.io.Serializable;
-
 import gae.gridView.Pair;
-import gae.listView.EditableImage;
-import gae.openingView.UIObject;
+import gae.listView.MovableImage;
 
 
 public interface Editable extends Serializable {
@@ -20,9 +18,11 @@ public interface Editable extends Serializable {
 
     public Pair getLocation ();
 
-    public void setEditableImage (EditableImage image);
+    public void setEditableImage (MovableImage image);
 
-    public EditableImage getEditableImage ();
+    public MovableImage getEditableImage ();
 
     public void setID (int id);
+    
+    public Object clone();
 }

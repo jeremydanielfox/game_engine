@@ -14,7 +14,7 @@ import javafx.scene.layout.Region;
 import View.ViewUtilities;
 
 
-public class EditableImage extends Region {
+public class MovableImage extends Region {
     private final Group wrapGroup;
     private Editable editable;
     private ContainerWrapper wrapper;
@@ -22,7 +22,7 @@ public class EditableImage extends Region {
     private double startY;
     private boolean selected;
 
-    public EditableImage (ImageView placedEditableImage, Editable editable, ContainerWrapper wrapper) {
+    public MovableImage (ImageView placedEditableImage, Editable editable, ContainerWrapper wrapper) {
         this.editable = editable;
         this.wrapper = wrapper;
         wrapGroup = new Group(placedEditableImage);

@@ -26,18 +26,17 @@ public class ListViewUtilities {
 
     public static Node createCellContentWithIcon (Editable edit) {
         HBox content = new HBox();
-//        ImageView image = new ImageView(edit.getImagePath());
-//
-//        image.setFitHeight(THUMBNAIL_SIZE);
-//        image.setPreserveRatio(true);
-//        content.getChildren().addAll(image, new Label(edit.getName()));
-        content.getChildren().add(new Label(edit.getName()));
+        ImageView image = new ImageView(edit.getImagePath());
+
+        image.setFitHeight(THUMBNAIL_SIZE);
+        image.setPreserveRatio(true);
+        content.getChildren().addAll(image, new Label(edit.getName()));
         return content;
     }
 
     public static Node createList (ObservableList<Editable> editables, Scene scene) {
         ListView<Editable> list = new ListView<>();
-        list.setPrefWidth(100);
+        list.setPrefWidth(200);
         list.setItems(editables);
         list.setOnMousePressed(e -> {
             if (e.getClickCount() == 1) {
@@ -74,7 +73,6 @@ public class ListViewUtilities {
                             setGraphic(null);
                         }
                         else if (edit != null) {
-                            // TODO: add a counter
                             setGraphic(ListViewUtilities.createCellContentWithIcon(edit));
                         }
                     }

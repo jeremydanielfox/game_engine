@@ -3,19 +3,21 @@ package gae.gameView;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-
 import gae.hudEditor.HudEditor;
-
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Window;
+
 
 public class UtilitiesBar {
 
@@ -57,7 +59,7 @@ public class UtilitiesBar {
 
         Arrays.asList(playButton, pauseButton, importButton, exportButton, helpButton,
                       fullscreenButton).forEach(e -> {
-            
+
         });
 
         Arrays.asList(PLAY_IMAGE, PAUSE_IMAGE, IMPORT_IMAGE, EXPORT_IMAGE, HELP_IMAGE,
@@ -89,7 +91,7 @@ public class UtilitiesBar {
         });
 
         fullscreenButton.setOnMousePressed(e -> {
-            
+
         });
     }
 
@@ -97,13 +99,20 @@ public class UtilitiesBar {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select previous authoring environment file");
         fileChooser.getExtensionFilters().add(new ExtensionFilter(".xml"));
-        //File chosen = fileChooser.showOpenDialog();
+        // File chosen = fileChooser.showOpenDialog();
     }
 
     private void displayWebPage () {
         WebView browser = new WebView();
         WebEngine webEngine = browser.getEngine();
         webEngine.load(getClass().getResource("/html/helpPage.html").toExternalForm());
+        // temporary code to display help
+        Stage stage = new Stage();
+        stage.setTitle("Help Page");
+        VBox helpRoot = new VBox();
+        helpRoot.getChildren().add(browser);
+        stage.setScene(new Scene(helpRoot, 800, 800));
+        stage.show();
     }
 
     private void placeButtons () {
@@ -113,6 +122,6 @@ public class UtilitiesBar {
         for (int i = 0; i < buttons.size(); i++) {
             utilitiesBar.setRowIndex(buttons.get(i), 0);
             utilitiesBar.setColumnIndex(buttons.get(i), i);
-        }    
+        }
     }
 }

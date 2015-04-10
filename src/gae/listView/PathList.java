@@ -80,7 +80,8 @@ public class PathList {
         pane.setTextFill(Color.RED);
 
         final ListView<PathView> listView = new ListView<>(paths);
-        listView.setPrefSize(100, 250);
+        listView.setPrefSize(200, 250);
+        
         listView.setEditable(true);
 
         listView.setItems(paths);

@@ -2,34 +2,28 @@ package engine.gameobject;
 
 import engine.fieldsetting.Settable;
 import engine.pathfinding.EndOfPathException;
-import engine.pathfinding.Path;
 
 
 @Settable
-public class BasicMover implements Mover {
-    Path myPath;
+public abstract class BasicMover implements Mover {
     double inherentSpeed;
     double speedModifier;
     double myDistance;
     boolean frozen;
 
-    public BasicMover(Path pf, double speed){
+    public BasicMover(double speed){
             myDistance = 0;
-            myPath = pf;
             inherentSpeed = speed;
             frozen = false;
             speedModifier = 1;
     }
+    
+    @Override
+    public abstract PointSimple move (PointSimple current) throws EndOfPathException;
     /**
      * This switch statement is not worth having polymorphism/using a state pattern.
      * No incompatible extensions will be made.
      */
-    @Override
-    public PointSimple move (PointSimple current) throws EndOfPathException {
-        if (frozen != true)
-            myDistance += inherentSpeed * speedModifier;
-        return myPath.getNextLocation(current, myDistance);
-    }
 
     @Settable
     @Override
@@ -50,13 +44,11 @@ public class BasicMover implements Mover {
         speedModifier = speedModifier + percentage;
     }
 
-    
-    public BasicMover clone(){
-        return new BasicMover(myPath, inherentSpeed);
-    }
+    public abstract Mover clone();
 
-    @Settable
-    public void setPath (Path path) {
-        myPath = path;
+    protected double currentSpeed () {
+        if (frozen != true)
+            return inherentSpeed * speedModifier;
+        return 0;
     }
 }

@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.Buffable;

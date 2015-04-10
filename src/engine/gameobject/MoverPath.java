@@ -11,31 +11,30 @@ import engine.pathfinding.PathFixed;
  *
  */
 @Settable
-public class MoverPath implements Mover {
+public class MoverPath extends BasicMover {
 	Path myPath;
-	private double myDistance, mySpeed;
 	
 	public MoverPath() {
+	    super(0);
 	    myPath = new PathFixed();
-	    myDistance = 0;
-	    mySpeed = 0;
 	}
 	
 	public MoverPath(Path pf, double speed){
-		myDistance = 0;
+	        super(speed);
 		myPath = pf;
-		mySpeed = speed;
 	}
 	
+	 
+	 //This switch statement is not worth having polymorphism/using a state pattern.
+	 //No incompatible extensions will be made.
+	 /**
+	  * Moves according to path i.e. returns correct point on the path
+	  */
 	@Override
-	public PointSimple move(PointSimple current) throws EndOfPathException {
-		myDistance += mySpeed;
-		return myPath.getNextLocation(current, myDistance);
-	}
-	@Settable
-	@Override
-	public void setSpeed(double speed) {
-		mySpeed = speed;
+	public PointSimple move(PointSimple current) throws EndOfPathException{
+	        if (frozen != true)
+	            myDistance += currentSpeed();
+	        return myPath.getNextLocation(current, myDistance);
 	}
 	
 	@Settable
@@ -49,7 +48,7 @@ public class MoverPath implements Mover {
 	}
 	
 	public Mover clone(){
-	    return new MoverPath(myPath, mySpeed);
+	    return new MoverPath(myPath, inherentSpeed);
 	}
 	
 }

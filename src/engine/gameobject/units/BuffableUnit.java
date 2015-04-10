@@ -3,11 +3,30 @@ package engine.gameobject.units;
 import java.util.List;
 import engine.gameobject.BasicMover;
 import engine.gameobject.GameObjectSimple;
+import engine.pathfinding.EndOfPathException;
+import gameworld.ObjectCollection;
 
 
 public class BuffableUnit extends GameObjectSimple implements Buffable{
     private List<Buff> buffList;
 
+    @Override
+    public void update (ObjectCollection world) {
+        if (isDead()){
+            onDeath();
+            return;
+        }
+        try{
+            move();
+        }
+        catch (EndOfPathException e){
+            //TODO: ENCODE END OF PATH BEHAVIOR
+        }
+        myWeapon.fire(world, myPoint);
+        
+        
+    }
+    
     public void addBuff (Buff toAdd) {
         Buff equalBuff = findEqualBuff(toAdd);
         if (equalBuff == null) {
@@ -49,4 +68,5 @@ public class BuffableUnit extends GameObjectSimple implements Buffable{
         }
         return null;
     }
+
 }

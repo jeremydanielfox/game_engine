@@ -18,7 +18,8 @@ public class FiringRateUpgrade implements FiringRate {
 
     @Override
     public double getRate () {
-        return decorated.map(FiringRate::getRate).orElse(increment);
+        return increment;
+        //return decorated.map(FiringRate::getRate).orElse(increment);
     }
     
     @Override

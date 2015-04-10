@@ -2,14 +2,21 @@ package gae.editor;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
- * @author Eric
+ * @author Eric Saba
  *
  */
 public abstract class Editor {
+    private Map<String, ArrayList<String>> myPropertiesMap;
+    
+    public Editor() {
+        myPropertiesMap = EditingParser.getInterfaceClasses("engine.fieldsetting.implementing_classes");
+    }
 
     abstract void setDefaults();
     abstract void clearValues();
@@ -48,5 +55,9 @@ public abstract class Editor {
         }
 
         return propertyName;
+    }
+    
+    protected Map<String, ArrayList<String>> getPropertiesMap() {
+        return myPropertiesMap;
     }
 }

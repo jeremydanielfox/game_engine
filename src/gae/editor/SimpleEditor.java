@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import gae.openingView.UIObject;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 /**
@@ -12,6 +13,7 @@ import javafx.scene.layout.VBox;
  * name.
  * 
  * @author Brandon Choi
+ * @author Eric Saba
  *
  */
 
@@ -38,28 +40,32 @@ public class SimpleEditor extends Editor implements UIObject {
      * @param c 
      */
     private void createEditor (Class<?> c) {
+        Label title = new Label(c.getSimpleName());
+        simpleEditor.getChildren().add(title);
         TreeNode root = getMethodsTree(c, null);
         ArrayList<Node> editors = new ArrayList<Node>();
         for (TreeNode subNode : root.getChildren()) {
             loadArrayWithEditors(subNode, editors);
         }
-
-//        SliderEditor se = new SliderEditor("Hello", 0, 10);
-        TextEditor te = new TextEditor();
-        te.setName("Hi");
-        FileChooserEditor fe = new FileChooserEditor("File");
         simpleEditor.getChildren().addAll(editors);
-
     }
 
     private void loadArrayWithEditors (TreeNode root, ArrayList<Node> editors) {
-        if (root.getNumChildren() == 0) {
+        if (root.getNumChildren() == 0 && root.getInputType() != "null") {
             ComponentEditor component = getInstanceFromName(String.format("%s%s", CLASS_PATH, root.getInputType()));
             component.setName(Editor.getPropertyName(root.getMethod().getName()));
             editors.add(component.getObject());
         }
         else if (root.getMethod() != null){
             Class<?> klass = (Class<?>) root.getMethod().getGenericParameterTypes()[0];
+            if (getPropertiesMap().containsKey(klass.getName()))
+                try {
+                    String newName = getPropertiesMap().get(klass.getName()).get(0);
+                    klass = Class.forName(newName);
+                }
+                catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             SimpleEditor simple = new SimpleEditor(klass);
             editors.add(simple.getObject());
         }

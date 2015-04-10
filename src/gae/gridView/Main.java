@@ -20,7 +20,7 @@ public class Main extends Application{
         myStage.setWidth(SCREEN_WIDTH);
         myStage.setHeight(SCREEN_HEIGHT);
         WorldView scene = new WorldView();
-        myStage.setScene(scene.getScene());
+//        myStage.setScene(scene.getScene());
         myStage.show();
     }
 }

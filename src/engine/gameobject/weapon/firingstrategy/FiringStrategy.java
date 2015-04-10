@@ -1,8 +1,10 @@
 package engine.gameobject.weapon.firingstrategy;
 
 import java.util.ArrayList;
+import java.util.List;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
+import engine.gameobject.units.Buffable;
 import gameworld.GameWorld;
 
 /**
@@ -13,6 +15,13 @@ import gameworld.GameWorld;
  */
 public interface FiringStrategy {
     
-    public void execute(GameWorld world, ArrayList<GameObject> candidate, PointSimple location, Projectile prototype);
+    /**
+     * Returns the appropriate projectiles according to the firingstrategy and inputs
+     * @param targets
+     * @param location
+     * @param prototype
+     * @return
+     */
+    public List<Buffer> execute(List<Buffable> targets, PointSimple location, Buffer prototype);
         
 }

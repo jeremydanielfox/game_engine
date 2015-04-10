@@ -17,29 +17,25 @@ import javafx.stage.Stage;
  *
  */
 
-public class FileChooserEditor implements ComponentEditor{
+public class FileChooserEditor extends ComponentEditor {
     
-    private HBox editBox;
-    private Label label;
     private FileChooser fileChooser;
     private Button chooserOpener;
     private Stage stage;
 
     public FileChooserEditor (String name) {
-        editBox = new HBox();
-        label = new Label(name);
         fileChooser = new FileChooser();
         chooserOpener = new Button("LOAD FILE");
         stage = new Stage();
         chooserOpener.setOnMouseClicked(e -> {
             File file = fileChooser.showOpenDialog(stage);
         }); 
-        editBox.getChildren().addAll(label, chooserOpener);
+        getEditBox().getChildren().addAll(getLabel(), chooserOpener);
     }
 
     @Override
     public Node getObject () {
-        return editBox;
+        return getEditBox();
     }
 
     @Override

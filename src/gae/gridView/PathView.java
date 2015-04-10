@@ -17,6 +17,9 @@ public class PathView {
     private ArrayList<PathSet> pathSetList;
     private int index;
     private StackPane myStack;
+    private static Group container;
+    private int myID;
+
 
     public PathView (StackPane stack, Scene scene) {
         this.myScene = scene;
@@ -29,8 +32,12 @@ public class PathView {
         StackPane.setAlignment(root, Pos.CENTER);
     }
 
+    public void setContainerArea (Group container) {
+        PathView.container = container;
+    }
+
     public void makeBezierCurve () {
-        PathSet set = new PathSet(anchorList, myStack, index);
+        PathSet set = new PathSet(anchorList, myStack, index, container);
         index++;
         root.getChildren().add(set);
         set.setOnMouseEntered(e -> {
@@ -75,7 +82,16 @@ public class PathView {
         for (PathSet set : pathSetList) {
             pathList.add(set.getPathObject());
         }
+
         resetScreen();
         return pathList;
+    }
+
+    public void setID (int id) {
+        myID=id;
+    }
+    
+    public int getID () {
+        return myID;
     }
 }

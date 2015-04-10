@@ -1,6 +1,7 @@
 package View;
 
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import engine.game.Drawer;
 
 
@@ -16,6 +17,8 @@ public interface View {
     abstract void pause ();
     
     abstract void play ();
+    
+    abstract void addButton (Button b,int x,int y);
 
     abstract Node initializeView ();
 }

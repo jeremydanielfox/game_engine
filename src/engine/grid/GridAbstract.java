@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import engine.gameobject.GameObject;
-import engine.gameobject.weapon.Weapon;
+import engine.gameobject.weapon.BasicWeapon;
 import engine.interactions.ConcreteInteractionEngine;
 import engine.interactions.InteractionEngine;
 

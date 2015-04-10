@@ -48,7 +48,8 @@ public class GameManager {
 	}
 
 	public ObservableList<Editable> getLibraryDataList() {
-		return library.getObservableList();
+//		return library.getObservableList();
+	    return null;
 	}
 	
 	private void createEditorViewInTab() {

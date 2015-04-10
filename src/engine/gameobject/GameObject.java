@@ -1,8 +1,10 @@
 package engine.gameobject;
 
 import engine.gameobject.weapon.Weapon;
+
 import engine.shop.PurchasableGameObject;
 import engine.shop.Tag;
+import gameworld.ObjectCollection;
 
 
 /**
@@ -13,9 +15,13 @@ import engine.shop.Tag;
 
 public interface GameObject extends Movable, Health, Graphical, PurchasableGameObject {
     // public void updateGraphics ();//cannot implement yet
-
-    public void update ();
-
+   
+    /**
+     * Updates the object accordingly within the objectcollection (usually gameworld) given
+     * @param world
+     */
+    public void update(ObjectCollection world);
+    
     /**
      * Sets the GameObject's Weapon
      */

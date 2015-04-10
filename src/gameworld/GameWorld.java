@@ -8,13 +8,15 @@ import engine.grid.StructurePlacementException;
 import engine.pathfinding.Path;
 
 
-public interface GameWorld {
+public interface GameWorld extends ObjectCollection {
     public void updateGameObjects ();
-    public void moveObjects();
-    public void checkCollisions();
-    public void removeDeadObjects();
+
+    public void checkCollisions ();
+
+    public void removeDeadObjects ();
+
     public Path getPathFinder ();
-    public Collection<GameObject> getGameObjects();
-    public void addObject (GameObject object) throws StructurePlacementException;
-    public Collection<GameObject> objectsInRange(double range, PointSimple center);
+
+	public void addObject(GameObject toSpawn, PointSimple pixelCoords);
+	public boolean isPlacable(GameObject toSpawn, PointSimple pixelCoords);
 }

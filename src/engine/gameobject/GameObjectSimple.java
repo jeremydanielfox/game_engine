@@ -5,6 +5,7 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Weapon;
 import engine.gameobject.weapon.WeaponSimple;
 import engine.pathfinding.EndOfPathException;
+import engine.shop.NameTag;
 import engine.shop.Tag;
 
 
@@ -15,7 +16,7 @@ import engine.shop.Tag;
  *
  */
 @Settable
-public class GameObjectSimple implements GameObject {
+public abstract class GameObjectSimple implements GameObject {
     protected String myImagePath;
     protected String myLabel;
     protected PointSimple myPoint;
@@ -33,21 +34,7 @@ public class GameObjectSimple implements GameObject {
         myMover = new MoverPath();
         myWeapon = new WeaponSimple();
         myGraphic = new Graphic();
-        //myTag = new NameTag();
-    }
-
-    public void update(){
-        if(isDead()){
-            onDeath();
-            return;
-        }
-        try {
-            move();
-        }
-        catch (EndOfPathException e){
-            //TODO: Catch and perform end of path duties
-        }
-        //myWeapon.fire(world, myPoint);
+        myTag = new NameTag();
     }
     
     @Override
@@ -103,13 +90,12 @@ public class GameObjectSimple implements GameObject {
     @Settable
     @Override
     public void setSpeed (double speed) {
-        // TODO Auto-generated method stub
+       myMover.setSpeed(speed);
 
     }
 
     @Override
     public Graphic getGraphic () {
-        // TODO Auto-generated method stub
         return myGraphic;
     }
     
@@ -123,12 +109,12 @@ public class GameObjectSimple implements GameObject {
     }
     
     @Settable
-    void setImagePath (String imgpath) {
+    public void setImagePath (String imgpath) {
         myImagePath = imgpath;
     }
 
     @Settable
-    void setLabel (String label) {
+    public void setLabel (String label) {
         myLabel = label;
     }
 
@@ -138,13 +124,13 @@ public class GameObjectSimple implements GameObject {
     }
 
     @Settable
-    void setHealth (Health health) {
+    public void setHealth (Health health) {
         myHealth = health;
     }
 
 
     @Settable
-    void setGraphic (Graphic graphic) {
+    public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }
 

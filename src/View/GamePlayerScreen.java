@@ -49,9 +49,9 @@ public class GamePlayerScreen extends Application {
     private ViewConcrete2 myGameView;
 
     public GamePlayerScreen () {
-//        myGame =
-//                new ConcreteGame(new Player("myPlayer", null, null, null),
-//                                 new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
+        // myGame =
+        // new ConcreteGame(new Player("myPlayer", null, null, null),
+        // new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
         myVbox = new VBox(30);
         makeDis();
     }
@@ -73,7 +73,6 @@ public class GamePlayerScreen extends Application {
         addDetails("Instructions", "this is an example of instructions"); // this should be taken in
                                                                           // from the GAE
 
-        
         Button scoreBtn = new Button("View high scores");
         Button playBtn = new Button("play");
 
@@ -83,59 +82,52 @@ public class GamePlayerScreen extends Application {
     }
 
     private void startGame () {
-        //myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_WIDTH);
-        
+        // myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_WIDTH);
+
         Group root = new Group();
         root.getChildren().add(makeDemoGame());
         Scene scene = new Scene(root);
         myStage.setScene(scene);
-        
+
     }
 
-    public Node makeDemoGame() {
-        ConcreteLevelBoard board=new ConcreteLevelBoard();
-        
+    public Node makeDemoGame () {
+        ConcreteLevelBoard board = new ConcreteLevelBoard();
+
         GameWorld world = new BasicWorld();
-        try {
-            world.addObject(new GameObjectSimpleTest());
-        }
-        catch (StructurePlacementException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
+        world.addObject(new GameObjectSimpleTest());
         GameObjectQueue q = new ConcreteQueue(new ArrayList<GameObject>());
         TimedEvent wave = new ConstantSpacingWave(2.0, q, world);
         StoryBoard story = new StoryBoard(wave);
-        
+
         PlayerUnit health = new PlayerUnit(100, "Health");
         PlayerUnit scoreUnit = new PlayerUnit(100, "Score");
         Wallet wallet = new ConcreteWallet(scoreUnit);
-        Player myPlayer=new Player("PlayerName",health,scoreUnit,wallet);
-        myGame=new ConcreteGame(myPlayer,board,new ArrayList<ButtonWrapper>());
-        //ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
-        ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
+        Player myPlayer = new Player("PlayerName", health, scoreUnit, wallet);
+        myGame = new ConcreteGame(myPlayer, board, new ArrayList<ButtonWrapper>());
+        // ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
+        ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new NullGoal());
         myGame.addButton(wrap);
-        
-        
-        HealthDepletionGoal healthy=new HealthDepletionGoal(myPlayer);
-        List<Goal> list=new ArrayList<Goal>();
+
+        HealthDepletionGoal healthy = new HealthDepletionGoal(myPlayer);
+        List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
-        ScoreGoal score=new ScoreGoal(myPlayer,200);
-        List<Goal> list2=new ArrayList<Goal>();
+        ScoreGoal score = new ScoreGoal(myPlayer, 200);
+        List<Goal> list2 = new ArrayList<Goal>();
         list2.add(score);
-        List<Goal> list3=new ArrayList<Goal>();
-        ScoreGoal score2=new ScoreGoal(myPlayer,300);
+        List<Goal> list3 = new ArrayList<Goal>();
+        ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
         list3.add(score2);
-       
-        
-        board.addLevel(new ConcreteLevel("images/Park_Path.png",list2,list,world, story));
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg",list3,list,new BasicWorld(),story));
-        
-        myGameView = new ViewConcrete2(myGame,Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
+
+        board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new BasicWorld(),
+                                         story));
+
+        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();
         return node;
     }
-    
+
     public static void main (String[] args) {
         launch(args);
     }

@@ -6,7 +6,6 @@ import java.util.Map;
 import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
-import engine.grid.StructurePlacementException;
 import engine.prototype.Prototype;
 import gameworld.GameWorld;
 
@@ -60,15 +59,10 @@ public class ShopModel {
      * 
      * @param transitionGameObject
      */
-    public boolean purchaseGameObject (String name, double x, double y) {
-        try {
-            myGameWorld.addObject(prototypeMap.get(name).clone());
-        }
-        catch (StructurePlacementException e) {
-            return false;
-        }
-        currentPlayer.getWallet().withdraw(getPrice(((PriceTag) prototypeMap.get(name).getTag()).getValue()));
-        return true;
+    public void purchaseGameObject (String name, double x, double y) {
+        myGameWorld.addObject(prototypeMap.get(name).clone());
+        currentPlayer.getWallet().withdraw(getPrice(((PriceTag) prototypeMap.get(name).getTag())
+                                                   .getValue()));
     }
 
     /**

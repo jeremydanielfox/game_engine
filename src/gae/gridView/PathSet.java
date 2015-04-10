@@ -4,6 +4,8 @@ package gae.gridView;
  * In the process of trying to put the Anchors and the curve into one object
  */
 import java.util.ArrayList;
+import exception.ObjectOutOfBoundsException;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -25,10 +27,15 @@ public class PathSet extends Region {
     private int index;
     private PathLabel pathLabel;
     private StackPane stack;
+    private ContainerWrapper container;
 
-    public PathSet (ArrayList<Anchor> anchorList, StackPane scene, int index) {
+    public PathSet (ArrayList<Anchor> anchorList,
+                    StackPane scene,
+                    int index,
+                    ContainerWrapper container) {
         root = new Group();
         root.setManaged(false);
+        this.container = container;
         this.getChildren().add(root);
         this.anchorList = anchorList;
         this.stack = scene;
@@ -38,10 +45,14 @@ public class PathSet extends Region {
 
     public Path getPathObject () {
         // EDIT: We could just use Point2D --> this is JavaFX so not recommended
-        Pair start = new Pair(curve.getStartX(), curve.getStartY());
-        Pair end = new Pair(curve.getEndX(), curve.getEndY());
-        Pair control1 = new Pair(curve.getControlX1(), curve.getControlY1());
-        Pair control2 = new Pair(curve.getControlX2(), curve.getControlY2());
+        Point2D start =
+                container.convertCoordinates(curve.getStartX(), curve.getStartY());
+        Point2D end =
+                container.convertCoordinates(curve.getEndX(), curve.getEndY());
+        Point2D control1 =
+                container.convertCoordinates(curve.getControlX1(), curve.getControlY1());
+        Point2D control2 =
+                container.convertCoordinates(curve.getControlX2(), curve.getControlY2());
         return new Path(start, end, control1, control2);
     }
 
@@ -64,11 +75,17 @@ public class PathSet extends Region {
         return curve;
     }
 
+    private void checkBounds (double x, double y) {
+        if (container.checkBounds(x, y))
+            throw new ObjectOutOfBoundsException();
+    }
+
     private void choosePoint (CubicCurve curve) {
         stack.setOnMouseClicked(e -> {
             if (increment == 0 && makePath) {
                 startX = e.getX();
                 startY = e.getY();
+                checkBounds(startX, startY);
                 pathLabel = new PathLabel(index);
                 start = new Anchor(Color.PALEGREEN, startX, startY, pathLabel);
                 root.getChildren().add(pathLabel);
@@ -80,9 +97,12 @@ public class PathSet extends Region {
 
                     curve.setStartX(startX);
                     curve.setStartY(startY);
+                    double endX = e.getX();
+                    double endY = e.getY();
+                    checkBounds(endX, endY);
+
                     curve.setEndX(e.getX());
                     curve.setEndY(e.getY());
-
                     addAnchor(end);
                     Anchor control1 =
                             new Anchor(Color.GOLD, (startX + e.getX()) / 2, (startY + e.getY()) / 2);

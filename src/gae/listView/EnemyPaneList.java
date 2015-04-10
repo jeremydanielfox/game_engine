@@ -33,6 +33,7 @@ public class EnemyPaneList extends PaneList {
     @Override
     public TitledPane initialize (Group root, Node node, Scene scene) {
         this.root = root;
+        root.setManaged(false);
         this.workspace = node;
         this.scene = scene;
         this.stack = (StackPane) workspace;
@@ -49,6 +50,7 @@ public class EnemyPaneList extends PaneList {
     @Override
     public void removeRoot () {
         stack.getChildren().remove(root);
+        added = true;
     }
 
     @Override

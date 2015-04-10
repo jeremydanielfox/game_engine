@@ -1,13 +1,15 @@
 package gae.backend;
 
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import engine.gameobject.weapon.Weapon;
 import gae.gridView.Pair;
 import gae.listView.EditableImage;
+import gae.openingView.UIObject;
 
 
-public class TempTower implements Editable {
+public class TempTower implements Editable, UIObject {
     /**
      * 
      */
@@ -28,6 +30,11 @@ public class TempTower implements Editable {
     public void edit () {
         // TODO Auto-generated method stub
 
+    }
+    
+    //added by brandon
+    public void setImage (String i) {
+        image = i;
     }
 
     public TempTower () {
@@ -76,5 +83,11 @@ public class TempTower implements Editable {
     @Override
     public EditableImage getEditableImage () {
         return editableImage;
+    }
+
+    @Override
+    public Node getObject () {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

@@ -1,11 +1,10 @@
 package engine.shop;
 
-import java.util.Random;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.effect.Glow;
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -13,7 +12,7 @@ import javafx.scene.shape.Circle;
 /**
  * Represents an item's icon in the shop.
  * 
- * @author Nathan Prabhu
+ * @author Nathan Prabhu and Tom Puglisi
  *
  */
 public class ItemGraphic extends Parent {
@@ -21,27 +20,17 @@ public class ItemGraphic extends Parent {
     private static final double ITEM_RADIUS = 25;
     private static final double GLOW_VALUE = 0.5;
 
-    private static Random ourGenerator = new Random();
-
-    private String name;
-    private int cost;
-    private String description;
     private Circle circle;
-    private String icon;
-    private String tower;
+    private PriceTag myPriceTag;
 
-    public ItemGraphic (String icon, String tower) {
-        this.icon = icon;
-        this.tower = tower;
-        name = "name";
-        cost = ourGenerator.nextInt(100);
-        description = "this is my description";
+    public ItemGraphic (PriceTag priceTag) {
+        myPriceTag = priceTag;
         initialize();
     }
 
     private void initialize () {
         circle = new Circle(ITEM_RADIUS);
-        circle.setFill(new ImagePattern(new Image(icon)));
+        circle.setFill(new ImagePattern(((ImageView) myPriceTag.getShopGraphic().getNode()).getImage()));
         circle.setOnMouseEntered(mouseEvent -> hoverAction());
         circle.setOnMouseExited(mouseEvent -> circle.setEffect(null));
         getChildren().add(circle);
@@ -50,20 +39,21 @@ public class ItemGraphic extends Parent {
     private void hoverAction () {
         circle.setCursor(Cursor.HAND);
         circle.setEffect(new Glow(GLOW_VALUE));
-        System.out.println(String.format("Name: %s", name));
-        System.out.println(String.format("Cost: %d", cost));
-        System.out.println(String.format("Description: %s", description));
+        System.out.println(String.format("Name: %s", myPriceTag.getName()));
+        System.out.println(String.format("Cost: %d", myPriceTag.getPrice()));
+        System.out.println(String.format("Description: %s", myPriceTag.getDescription()));
     }
 
     public double getRadius () {
         return ITEM_RADIUS;
+    }
+    
+    public String getName() {
+        return myPriceTag.getName();
     }
 
     public Point2D getCenter () {
         return new Point2D(circle.getCenterX(), circle.getCenterY());
     }
 
-    public String getTower () {
-        return tower;
-    }
 }

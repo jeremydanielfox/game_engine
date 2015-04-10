@@ -9,12 +9,14 @@ public class PriceTagConcrete implements PriceTag {
     private String description;
     private Graphic shopGraphic;
     private Purchasable purchasable;
+    private static double markup;
 
     public PriceTagConcrete () {
         name = "";
         description = "";
         shopGraphic = new Graphic();
         purchasable = null;
+        markup = 1;
     }
 
     @Override
@@ -41,6 +43,11 @@ public class PriceTagConcrete implements PriceTag {
     public double getValue () {
         return purchasable.getValue();
     }
+    
+    @Override
+    public double getPrice () {
+        return getValue()*markup;
+    }
 
     @Settable
     public void setName (String name) {
@@ -60,5 +67,10 @@ public class PriceTagConcrete implements PriceTag {
     @Settable
     public void setPurchasable (Purchasable purchasable) {
         this.purchasable = purchasable;
+    }
+    
+    @Settable
+    public void setMarkup (double markup) {
+        this.markup = markup;
     }
 }

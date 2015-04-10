@@ -21,40 +21,29 @@ public class ShopModel {
     private View myShopView;
     private Player currentPlayer;
     private GameWorld myGameWorld;
-    private final double markup;
-    private Map<ItemGraphic, TransitionGameObject> itemTransitionMap;
-    private Map<TransitionGameObject, Tag> transitionPriceTagMap;
-    private Map<ItemGraphic, UpgradeBundle> itemUpgradeMap;
-    private Map<ItemGraphic, Tag> itemPurchasableMap;
+    private Map<String, PriceTag> stringPriceTagMap;
 
     public ShopModel (List<PriceTagConcrete> priceTags,
                       GameWorld myGameWorld,
                       View myShopView,
-                      Player currentPlayer, double markup) {
-        this.markup = markup;
+                      Player currentPlayer) {
         this.currentPlayer = currentPlayer;
         this.myShopView = myShopView;
-        itemTransitionMap = new HashMap<ItemGraphic, TransitionGameObject>();
-        itemUpgradeMap = new HashMap<ItemGraphic, UpgradeBundle>();
-        transitionPriceTagMap = new HashMap<TransitionGameObject, Tag>();
-        priceTags.forEach(purchasable -> addPurchasable(purchasable));
+        stringPriceTagMap = new HashMap<String, PriceTag>();
+        priceTags.forEach(purchasable -> addPriceTag(purchasable));
     }
 
     /**
      * Adds a purchasable to the appropriate maps
      * 
-     * @param purchasable
+     * @param priceTag
      */
-    public void addPurchasable (Tag purchasable) {
-        TransitionGameObject transitionGameObject = new TransitionGameObject(null);
-        ItemGraphic itemGraphic = new ItemGraphic(null, null);
-        itemTransitionMap.put(itemGraphic, transitionGameObject);
-        transitionPriceTagMap.put(transitionGameObject, purchasable);
-        itemPurchasableMap.put(itemGraphic, purchasable);
+    public void addPriceTag (PriceTag priceTag) {
+        stringPriceTagMap.put(priceTag.getName(), priceTag);
     }
 
     public TransitionGameObject getTransitionGameObject (ItemGraphic itemGraphic) {
-        return itemTransitionMap.get(itemGraphic);
+        return stringPriceTagMap.get(itemGraphic);
     }
 
     public void showUpgradeBundles (GameObject gameObject) {
@@ -103,8 +92,5 @@ public class ShopModel {
         }
         return currentPlayer.getWallet().getBalance() > price;
     }
-    
-    private double getPrice(Tag purchasable) {
-        return purchasable.getValue()*markup;
-    }
+
 }

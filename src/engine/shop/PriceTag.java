@@ -16,4 +16,6 @@ public interface PriceTag extends Tag {
      *         the receiving weapon's total value.
      */
     public double getValue ();
+
+    public double getPrice ();
 }

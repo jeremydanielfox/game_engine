@@ -1,13 +1,9 @@
 package engine.shop;
 
-import java.util.Random;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.gameobject.Graphic;
 import engine.gameobject.Graphical;
@@ -17,13 +13,11 @@ import engine.gameobject.Graphical;
  * A GameObject that has yet to neither be placed in the GameWorld nor purchased from the shop. It
  * contains the same graphic as the prototype GameObject it will instantiate if placed in the World.
  * 
- * @author Nathan Prabhu
+ * @author Nathan Prabhu and Tom Puglisi
  *
  */
 
 public class TransitionGameObject implements Graphical {
-
-    private static Random ourGenerator = new Random();
 
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
 
@@ -33,6 +27,7 @@ public class TransitionGameObject implements Graphical {
     private static final double RANGE = 30 + TOWER_RADIUS; 
   
     private Graphic myGraphic;
+    private String name;
 
     // TODO: initialize from corresponding prototype GameObject
 
@@ -43,8 +38,10 @@ public class TransitionGameObject implements Graphical {
     @XStreamOmitField
     private transient StackPane pane;
 
-    public TransitionGameObject (String image) {
-        initialize(image);
+    public TransitionGameObject (Graphic myGraphic, String name) {
+        this.myGraphic = myGraphic;
+        this.name = name;
+        initialize();
     }
 
     // This method now only needs to be called once
@@ -53,20 +50,22 @@ public class TransitionGameObject implements Graphical {
     }
 
     // Shared initialization method
-    private void initialize (String image) {
+    private void initialize () {
         pane = new StackPane();
 
         Circle rangeDetection = new Circle(RANGE, ERROR_COLOR);
         rangeDetection.setStroke(Color.BLACK);
 
-        Rectangle tower = new Rectangle(TOWER_WIDTH, TOWER_WIDTH);
-        tower.setFill(new ImagePattern(new Image(image)));
-        pane.getChildren().addAll(rangeDetection, tower);
+        pane.getChildren().addAll(rangeDetection, myGraphic.getNode());
     }
 
     @Override
     public Graphic getGraphic () {
        return myGraphic;
+    }
+    
+    public String getName () {
+        return name;
     }
 
 }

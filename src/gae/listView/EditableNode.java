@@ -1,7 +1,5 @@
 package gae.listView;
 
-import java.io.File;
-import java.io.NotSerializableException;
 import java.util.Iterator;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
@@ -11,15 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import gae.backend.Editable;
 import gae.openingView.UIObject;
-import javafx.scene.layout.Region;
-import javafx.util.Pair;
-import gae.backend.Editable;
 
 
 /**
- * A TreeNode class for handling the Editables
+ * A class that takes in an Editable and keeps a list of its copied instances
  * 
- * @author Kei Yoshikoshi
+ * @author Kei
  *
  */
 public class EditableNode implements UIObject {

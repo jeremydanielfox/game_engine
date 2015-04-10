@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -18,14 +17,23 @@ import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
-public class LeftPaneView {
-
+/**
+ * Class created to keep track of all the information stored in the Library, as well as display
+ * them. The plan is to separate out the front-end component and the back-end storing component into
+ * separate classes
+ * 
+ * @author Kei
+ *
+ */
+public class LibraryView {
+    /*
+     * should be able to get the gameObjects list from a properties file
+     */
     private String[] gameObjects = { "Tower", "Enemy", "Path" };
     private List<PaneList> listOfListObjects;
     private Group root;
@@ -44,6 +52,16 @@ public class LeftPaneView {
         return new Scene(root);
     }
 
+    /**
+     * Obtains the group that contains the view, the buttons, and all the placed objects
+     * 
+     * @param pane
+     * @param scene
+     * @param pathList
+     * @param backgroundProperty
+     * @param wrapper
+     * @return
+     */
     public Group getGroup (Node pane,
                            Scene scene,
                            ObservableList<PathView> pathList,
@@ -60,6 +78,13 @@ public class LeftPaneView {
         return root;
     }
 
+    /**
+     * Uses reflection to instantiate each GameObject's Pane subclass. Currently using a try/catch
+     * block as Path isn't part of the Generic GameObjects that we're using. Trying to figure out
+     * more common traits to be able to combine them.
+     * 
+     * @return
+     */
     private Node view () {
         listOfListObjects = new ArrayList<>();
         accordion = new Accordion();
@@ -83,11 +108,16 @@ public class LeftPaneView {
                 accordion.getPanes().add(pathTitledPane);
             }
         }
-        initialize();
+        setUpToggle();
         return accordion;
     }
 
-    private void initialize () {
+    /**
+     * Sets up the clicking such that when the Path TitledPane is clicked, all the GameObjects are
+     * gone (as it clutters the screen). On the other hand, when a GameObject TitledPane is being
+     * clicked, the paths disappear.
+     */
+    private void setUpToggle () {
         pathTitledPane.setOnMousePressed(event -> {
             for (PaneList lists : listOfListObjects) {
                 lists.removeRoot();
@@ -107,6 +137,11 @@ public class LeftPaneView {
         }
     }
 
+    /**
+     * method used to add an EditableNode to its specific list
+     * 
+     * @param node
+     */
     public void addToList (EditableNode node) {
         for (PaneList paneList : listOfListObjects) {
             if (paneList.getType().equals(node.getType())) {

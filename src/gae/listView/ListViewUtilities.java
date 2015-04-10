@@ -17,13 +17,19 @@ import gae.backend.Editable;
 /**
  * ListView utility class made to create lists and cells with icons
  * 
- * @author Nina and Kei
+ * @author Kei and Nina
  *
  */
 public class ListViewUtilities {
 
     public static final int THUMBNAIL_SIZE = 20;
 
+    /**
+     * able to create a cell with a label and icon
+     * 
+     * @param edit
+     * @return
+     */
     public static Node createCellContentWithIcon (Editable edit) {
         HBox content = new HBox();
         ImageView image = new ImageView(edit.getImagePath());
@@ -34,6 +40,14 @@ public class ListViewUtilities {
         return content;
     }
 
+    /**
+     * creates a ListView given an observable list of Editables, with specific properties, such as
+     * deleting objects and highlighting selected objects
+     * 
+     * @param editables
+     * @param scene
+     * @return
+     */
     public static Node createList (ObservableList<Editable> editables, Scene scene) {
         ListView<Editable> list = new ListView<>();
         list.setPrefWidth(200);

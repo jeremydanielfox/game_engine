@@ -10,7 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.StackPane;
 
-
+/**
+ * A subclass to keep track of Tower GameObjects that are made through the Editor.
+ * 
+ * @author Kei
+ *
+ */
 public class TowerPaneList extends PaneList {
     private ObservableList<TitledPane> towerPaneList;
     private List<EditableNode> towerEditablesList; // the list of types of Towers

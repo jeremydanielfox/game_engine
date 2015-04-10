@@ -3,7 +3,6 @@ package gae.listView;
 import gae.backend.Editable;
 import View.ViewUtilities;
 import exception.ObjectOutOfBoundsException;
-import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -11,9 +10,14 @@ import javafx.scene.Node;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
-import View.ViewUtilities;
 
 
+/**
+ * Any placed instances of an object is a MovableImage (stored in EditableNode)
+ * 
+ * @author Kei
+ *
+ */
 public class MovableImage extends Region {
     private final Group wrapGroup;
     private Editable editable;
@@ -30,6 +34,10 @@ public class MovableImage extends Region {
         enableDrag();
     }
 
+    /**
+     * enables dragging of the object, while checking for out of bounds errors and only allowing it
+     * to move if selected at the LibraryView
+     */
     private void enableDrag () {
         setOnMousePressed(e -> {
             Point2D current = ViewUtilities.getMouseLocation(e, wrapGroup);
@@ -37,7 +45,7 @@ public class MovableImage extends Region {
             startY = current.getY();
         });
         setOnMouseDragged(e -> {
-            //TODO: fix glitch where I drag select other towers not selected
+            // TODO: fix glitch where I drag select other towers not selected
             if (selected) {
                 Point2D current = ViewUtilities.getMouseLocation(e, wrapGroup);
                 double newX = current.getX();

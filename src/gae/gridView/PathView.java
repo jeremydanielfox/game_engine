@@ -18,6 +18,8 @@ public class PathView {
     private int index;
     private StackPane myStack;
     private static Group container;
+    private int myID;
+
 
     public PathView (StackPane stack, Scene scene) {
         this.myScene = scene;
@@ -80,7 +82,16 @@ public class PathView {
         for (PathSet set : pathSetList) {
             pathList.add(set.getPathObject());
         }
+
         resetScreen();
         return pathList;
+    }
+
+    public void setID (int id) {
+        myID=id;
+    }
+    
+    public int getID () {
+        return myID;
     }
 }

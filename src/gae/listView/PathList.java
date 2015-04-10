@@ -87,8 +87,7 @@ public class PathList {
                         }
                         else if (pathView != null) {
                             HBox content = new HBox();
-                            // TODO : Nina - add a counter to the path
-                            content.getChildren().add(new Label("Path"));
+                            content.getChildren().add(new Label("Path "+pathView.getID()));
                             setGraphic(content);
                         }
                     }
@@ -144,6 +143,7 @@ public class PathList {
             allPaths.add(path);
             System.out.println("ADDING INDEX : " + paths.size());
             paths.add(pathView);
+            pathView.setID(counter);
             counter++;
             pathView = new PathView(stack, this.scene);
         });

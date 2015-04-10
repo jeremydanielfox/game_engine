@@ -40,9 +40,6 @@ public class DataManager {
         }
     }
     
-//    private static void writeToXML(Object o, String filePath, String fileName) {
-//        Writer writer = new FileWriter(new File(filePath,fileName));
-//    }
     /**
      * Takes in a Class and a filePath.
      * Reads in an xml file from the filePath and constructs it as an object.

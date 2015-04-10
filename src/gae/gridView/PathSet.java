@@ -5,7 +5,6 @@ package gae.gridView;
  */
 import java.util.ArrayList;
 import exception.ObjectOutOfBoundsException;
-import gae.listView.ContainerWrapper;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.layout.Region;
@@ -76,12 +75,17 @@ public class PathSet extends Region {
         return curve;
     }
 
+    private void checkBounds (double x, double y) {
+        if (container.checkBounds(x, y))
+            throw new ObjectOutOfBoundsException();
+    }
+
     private void choosePoint (CubicCurve curve) {
         stack.setOnMouseClicked(e -> {
             if (increment == 0 && makePath) {
                 startX = e.getX();
                 startY = e.getY();
-                container.checkBounds(startX, startY);
+                checkBounds(startX, startY);
                 pathLabel = new PathLabel(index);
                 start = new Anchor(Color.PALEGREEN, startX, startY, pathLabel);
                 root.getChildren().add(pathLabel);
@@ -95,7 +99,7 @@ public class PathSet extends Region {
                     curve.setStartY(startY);
                     double endX = e.getX();
                     double endY = e.getY();
-                    container.checkBounds(endX, endY);
+                    checkBounds(endX, endY);
 
                     curve.setEndX(e.getX());
                     curve.setEndY(e.getY());

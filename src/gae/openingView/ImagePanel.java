@@ -80,6 +80,9 @@ public class ImagePanel implements UIObject {
      * @param choices
      */
     private void setUpClick (List<HoverPicture> list) {
+        /*
+         * TODO: fix error with clicking other box and changing the field type? weird.
+         */
         list.forEach(e -> {
             e.getObject().setOnMouseClicked(f -> {
                 if (!e.selected()) {
@@ -90,6 +93,7 @@ public class ImagePanel implements UIObject {
                 else if (e.selected()) {
                     e.changeSelectEffect();
                     alterRest(e);
+                    bindValue.setValue(OpeningView.DEFAULT_TYPE_MSG);
                 }
             });
         });

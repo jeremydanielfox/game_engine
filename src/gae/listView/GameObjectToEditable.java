@@ -1,23 +1,16 @@
-package gae.backend;
+package gae.listView;
 
 import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.weapon.Weapon;
+import gae.backend.Editable;
 import gae.gridView.Pair;
-import gae.listView.EditableImage;
-import gae.openingView.UIObject;
 
 
-public class TempTower implements Editable, UIObject {
-    /**
-     * 
-     */
+public class GameObjectToEditable implements Editable {
+    private GameObjectSimple gameObject;
     private static final long serialVersionUID = 1L;
-    /**
-     * 
-     */
-    private int myID=0;
+    private int myID = 0;
     private int Size = 10;
     private int Health = 100;
     private Weapon weapon;
@@ -26,22 +19,17 @@ public class TempTower implements Editable, UIObject {
     private String myName = "TempTower";
     private EditableImage editableImage;
 
+    public GameObjectToEditable (GameObjectSimple gameobject) {
+        gameObject = gameobject;
+    }
+
     @Override
     public void edit () {
         // TODO Auto-generated method stub
-
-    }
-    
-    //added by brandon
-    public void setImage (String i) {
-        image = i;
     }
 
-    public TempTower () {
-    }
-
-    public TempTower (String name) {
-        myName = name;
+    public GameObjectSimple getGameObject () {
+        return gameObject;
     }
 
     @Override
@@ -52,18 +40,18 @@ public class TempTower implements Editable, UIObject {
     @Override
     public String getName () {
         // TODO Auto-generated method stub
-        return "TempTower "+myID;
+        return gameObject.getName() + myID;
     }
 
     @Override
     public String getType () {
         // TODO Auto-generated method stub
-        return "Tower";
+        return gameObject.getLabel();
     }
-    
+
     @Override
-    public void setID(int id){
-        myID=id;
+    public void setID (int id) {
+        myID = id;
     }
 
     public Pair getLocation () {
@@ -85,9 +73,4 @@ public class TempTower implements Editable, UIObject {
         return editableImage;
     }
 
-    @Override
-    public Node getObject () {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

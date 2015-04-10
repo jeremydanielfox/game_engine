@@ -21,15 +21,20 @@ public class FileChooserEditor extends ComponentEditor {
     private FileChooser fileChooser;
     private Button chooserOpener;
     private Stage stage;
+    private File file;
 
     public FileChooserEditor (String name) {
         fileChooser = new FileChooser();
         chooserOpener = new Button("LOAD FILE");
         stage = new Stage();
         chooserOpener.setOnMouseClicked(e -> {
-            File file = fileChooser.showOpenDialog(stage);
+           file = fileChooser.showOpenDialog(stage);
         }); 
         getEditBox().getChildren().addAll(getLabel(), chooserOpener);
+    }
+    
+    public File getFile() {
+        return file;
     }
 
     @Override

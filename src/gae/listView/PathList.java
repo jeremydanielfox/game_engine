@@ -1,5 +1,14 @@
 package gae.listView;
 
+
+import java.io.File;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import gae.gridView.Path;
+import gae.gridView.PathView;
 import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
@@ -20,6 +29,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import xml.DataManager;
 import com.thoughtworks.xstream.XStream;
@@ -41,6 +52,8 @@ public class PathList {
     private Button newPath;
     private Button displayPath;
     private Button updatePath;
+    
+    
     private List<Button> buttonList;
 
     public PathList (StackPane stack, Scene scene, ContainerWrapper container) {
@@ -54,6 +67,7 @@ public class PathList {
         displayPath = displayPaths();
         updatePath = updatePath();
         buttonList = new ArrayList<>();
+                
         buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
                                                       updatePath }));
         stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);

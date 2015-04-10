@@ -35,9 +35,17 @@ public class HoverPicture implements UIObject {
         view.getChildren().addAll(i, label);
         setHoverEffect();
         selected = false;
-        setSelectEffect();
     }
 
+    /**
+     * returns the name of the HoverPicture
+     * @return
+     */
+    public String getName () {
+        return label.getText();
+    }
+    
+    
     @Override
     public Node getObject () {
         return view;
@@ -47,7 +55,7 @@ public class HoverPicture implements UIObject {
      * returns whether or not the instance of HoverPicture has been selected
      * @return
      */
-    public boolean selectStatus () {
+    public boolean selected () {
         return selected;
     }
 
@@ -63,21 +71,29 @@ public class HoverPicture implements UIObject {
                 label.setVisible(true);
             });
         }
+        else {
+            label.setVisible(false);
+        }
     }
 
     /**
-     * sets up what happens when it is clicked and selected
+     * sets the select status
      */
-    private void setSelectEffect () {
-        if (selected) {
-            view.setOnMouseClicked(e -> {
-                selected = false;
-            });
+    public void changeSelectEffect () {
+        selected = !selected;
+    }
+    
+    /**
+     * alter status of the hover picture
+     */
+    public void alter() {
+        if (image.isDisable()){
+            view.getChildren().add(label);
+            image.setDisable(false);
         }
         else {
-            view.setOnMouseClicked(e -> {
-                selected = true;
-            });
+            view.getChildren().remove(label);
+            image.setDisable(true);
         }
     }
 }

@@ -48,7 +48,7 @@ public class GenericObjectsPane implements UIObject{
     }
 
     private void newCustomObject (String type) {
-        SimpleEditor editor = new SimpleEditor(GameObjectSimple.class);
+        SimpleEditor editor = new SimpleEditor(GameObjectSimple.class, type);
         Scene editorScene = new Scene(new Pane(editor.getObject()));
         Stage editorStage = new Stage();
         editorStage.setScene(editorScene);

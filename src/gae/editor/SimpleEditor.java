@@ -25,8 +25,13 @@ public class SimpleEditor extends Editor implements UIObject {
     private List<ComponentEditor> editFields;
 
     public SimpleEditor (Class<?> c) {
-        simpleEditor = new VBox(30);
-        createEditor(c);
+        Label title = new Label(c.getSimpleName());
+        createEditor(c, title);
+    }
+    
+    public SimpleEditor(Class<?> c, String objectName) {
+        Label title = new Label(objectName);
+        createEditor(c, title);
     }
 
     @Override
@@ -39,8 +44,8 @@ public class SimpleEditor extends Editor implements UIObject {
      * fields
      * @param c 
      */
-    private void createEditor (Class<?> c) {
-        Label title = new Label(c.getSimpleName());
+    private void createEditor (Class<?> c, Label title) {
+        simpleEditor = new VBox(30);
         simpleEditor.getChildren().add(title);
         TreeNode root = getMethodsTree(c, null);
         ArrayList<Node> editors = new ArrayList<Node>();

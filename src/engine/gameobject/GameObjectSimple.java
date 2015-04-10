@@ -15,7 +15,7 @@ import engine.shop.Purchasable;
  *
  */
 @Settable
-public class GameObjectSimple implements GameObject, Purchasable {
+public abstract class GameObjectSimple implements GameObject, Purchasable {
     protected String myImagePath;
     protected String myLabel;
     protected PointSimple myPoint;
@@ -32,20 +32,6 @@ public class GameObjectSimple implements GameObject, Purchasable {
         myMover = new MoverPath();
         myWeapon = new WeaponSimple();
         myGraphic = new Graphic();
-    }
-
-    public void update(){
-        if(isDead()){
-            onDeath();
-            return;
-        }
-        try {
-            move();
-        }
-        catch (EndOfPathException e){
-            //TODO: Catch and perform end of path duties
-        }
-        //myWeapon.fire(world, myPoint);
     }
     
     @Override
@@ -95,18 +81,18 @@ public class GameObjectSimple implements GameObject, Purchasable {
         // TODO Auto-generated method stub
         PointSimple point = myMover.move(myPoint);
         myPoint = new PointSimple(new Point2D(point.getX(), point.getY()));
+        myGraphic.setPoint(myPoint);
     }
 
     @Settable
     @Override
     public void setSpeed (double speed) {
-        // TODO Auto-generated method stub
+       myMover.setSpeed(speed);
 
     }
 
     @Override
     public Graphic getGraphic () {
-        // TODO Auto-generated method stub
         return myGraphic;
     }
     

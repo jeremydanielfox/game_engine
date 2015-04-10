@@ -22,7 +22,7 @@ import engine.gameobject.weapon.upgradetree.UpgradeTreeSimple;
  *
  */
 @Settable
-public class WeaponSimple extends Weapon {
+public class WeaponSimple extends BasicWeapon {
     private Range myRange;
     private FiringRate myFiringRate;
     private List<Behavior> myBehaviors;

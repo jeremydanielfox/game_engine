@@ -15,9 +15,7 @@ public class FreezeBuff extends Buff{
     }
     
     public boolean isStrongerBuff(Buff otherBuff){
-        if(otherBuff.timeLeft() >= timeLeft())
-            return false;
-        return true;
+        return !(otherBuff.timeLeft() >= timeLeft());
     }
 
 }

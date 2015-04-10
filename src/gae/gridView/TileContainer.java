@@ -1,8 +1,10 @@
 package gae.gridView;
 
+import exception.ObjectOutOfBoundsException;
+import gae.listView.ContainerWrapper;
+import javafx.geometry.Point2D;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 
 
@@ -10,7 +12,7 @@ import javafx.stage.Screen;
  * https://www.youtube.com/watch?v=ag8U6sUptsY
  * Want to base it on this ^^^^^
  */
-public class TileContainer extends Region {
+public class TileContainer extends Region implements ContainerWrapper {
     public static final double SCREEN_HEIGHT =
             Screen.getPrimary().getVisualBounds().getHeight() - 150;
     public static final double SCREEN_WIDTH =
@@ -34,9 +36,22 @@ public class TileContainer extends Region {
             }
         }
         border.prefHeightProperty().bind(this.heightProperty());
-//         this.setMaxWidth(SCREEN_HEIGHT);
-//         this.setMaxHeight(SCREEN_HEIGHT);
-         
+        // this.setMaxWidth(SCREEN_HEIGHT);
+        // this.setMaxHeight(SCREEN_HEIGHT);
+
     }
 
+    public void checkBounds (double x, double y) {
+        Point2D point = this.screenToLocal(x, y);
+
+        if (point.getX() < 0 || point.getX() > this.getWidth() || y < 0 ||
+            y > this.getHeight()) {
+            throw new ObjectOutOfBoundsException();
+        }
+    }
+
+    @Override
+    public Point2D convertCoordinates (double x, double y) {
+        return this.parentToLocal(x, y);
+    }
 }

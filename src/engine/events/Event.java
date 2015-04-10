@@ -1,5 +1,15 @@
 package engine.events;
 
+/**
+ * Event interface contains information about actions triggered in game. The event has a start and
+ * an end that can be queried.
+ * 
+ * @author Tom
+ * @author Cosette
+ * @author Sierra
+ *
+ */
+
 public interface Event {
     public boolean update ();
 

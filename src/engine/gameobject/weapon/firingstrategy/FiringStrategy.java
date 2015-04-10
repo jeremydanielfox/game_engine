@@ -1,9 +1,8 @@
 package engine.gameobject.weapon.firingstrategy;
 
-import java.util.ArrayList;
-import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import gameworld.GameWorld;
+import engine.gameobject.units.Buffable;
+import gameworld.ObjectCollection;
 
 /**
  * Encapsulates how a weapon is fired. Examples would be a single projectile or an
@@ -13,6 +12,13 @@ import gameworld.GameWorld;
  */
 public interface FiringStrategy {
     
-    public void execute(GameWorld world, ArrayList<GameObject> candidate, PointSimple location, Projectile prototype);
+    /**
+     * Places projectiles into the world according to strategy
+     * @param target
+     * @param location
+     * @param prototype
+     * @return
+     */
+    public void execute(ObjectCollection world, Buffable target, PointSimple location, Buffer prototype);
         
 }

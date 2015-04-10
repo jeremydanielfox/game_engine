@@ -1,6 +1,7 @@
 package View;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.animation.Animation;
@@ -16,16 +17,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import engine.game.Game;
+import engine.goals.*;
 import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
 
 
-public class ViewConcrete2 implements View, Observer {
+public class ViewConcrete2 implements View, Observer, ChangeableSpeed {
 
     public static final double GAME_WIDTH_TO_HEIGHT = 1.25;
+    public static final int MAX_FRAME_RATE = 300;
+    public static final int MIN_FRAME_RATE = 200;    
 
     private Game myGame;
-    private Integer myRate = 200;
+    private Integer myRate = MIN_FRAME_RATE;
     private Timeline myAnimation;
     private LevelBoard myLevelBoard;
 
@@ -35,17 +39,21 @@ public class ViewConcrete2 implements View, Observer {
 
     // new way
     private BorderPane myPane;
-    
-    private VBox vbox=new VBox();
+
+    private VBox vbox = new VBox();
+
+    private List<ButtonWrapper> myButtonList;
 
     private double myDisplayWidth;
     private double myDisplayHeight;
+
+    private HUD myHeadsUp;
 
     public ViewConcrete2 (Game game, double width, double height) {
         myGame = game;
         myLevelBoard = myGame.getLevelBoard();
         myLevelBoard.addObserver(this);
-        //vbox=new VBox();
+        // vbox=new VBox();
         // myTotalGroup=group;
 
         myDisplayWidth = width;
@@ -65,11 +73,12 @@ public class ViewConcrete2 implements View, Observer {
     @Override
     public void initializeGameWorld () {
         setCurrentBackground();
-        HUD headsUp = new HUD(myPane);
+        myHeadsUp = new HUD(myPane);
+        addControlButtons();
         for (Displayable d : myGame.getPlayer().getDisplayables()) {
-            headsUp.addPairedDisplay(d);
+            myHeadsUp.addPairedDisplay(d);
         }
-        vbox.getChildren().add(headsUp.getDisplay());
+        vbox.getChildren().add(myHeadsUp.getDisplay());
 
         addInitialObjects();
 
@@ -85,7 +94,8 @@ public class ViewConcrete2 implements View, Observer {
         btn2.setOnAction(e -> myGame.getPlayer().changeScore(100));// .changeScore(100));
         // myTotalGroup.getChildren().addAll(btn,vbox,btn2);
         vbox.getChildren().addAll(btn, btn2);
-        myGame.getButtons().forEach(e->vbox.getChildren().add(e.getButton()));
+        myButtonList = myGame.getButtons();
+        myButtonList.forEach(e -> vbox.getChildren().add(e.getButton()));
         play();
     }
 
@@ -102,11 +112,48 @@ public class ViewConcrete2 implements View, Observer {
                             e -> executeFrameActions());
     }
 
+    public void toggleRate () {
+        // TODO
+        Animation.Status previousStatus = myAnimation.getStatus();
+        myAnimation.stop();
+        //changeFramesPerSecondValue(speedChangeMultiplier);
+        if(myRate >= MAX_FRAME_RATE){
+            myRate = MIN_FRAME_RATE;
+        }
+        else
+            myRate = MAX_FRAME_RATE;
+        buildTimeline();
+        restoreLastAnimationStatus(previousStatus);
+    }
+
+    public boolean canIncSpeed () {
+        return myRate <= MIN_FRAME_RATE;
+    }
+
+    public boolean canDecSpeed () {
+        return myRate >= MAX_FRAME_RATE;
+    }
+
+    private void restoreLastAnimationStatus (Animation.Status prevStatus) {
+        if (prevStatus.equals(Animation.Status.RUNNING))
+            play();
+    }
+
     @Override
     public void executeFrameActions () {
         // after updating game, how to update after level ends? need to look into checking something
         // like gameEnded()
-        // myGame.update();
+        myGame.update();
+
+        myButtonList.forEach(e -> {
+            if (e.isEnabled()) {
+                e.getButton().setDisable(false);
+            }
+                else {
+                    e.getButton().setDisable(true);
+                }
+            });
+
     }
 
     @Override
@@ -144,12 +191,12 @@ public class ViewConcrete2 implements View, Observer {
                 play();
             }
         }
-        
-        //Look back at this to think about if statements.
-        //Also, alternatively, check if it already exists in gameWorld opposed to just in View.
+
+        // Look back at this to think about if statements.
+        // Also, alternatively, check if it already exists in gameWorld opposed to just in View.
         if (myLevelBoard.getGameWorld().equals(o)) {
             if (!(arg.equals(null)) && arg instanceof GameObject) {
-                Node node=((GameObject) arg).getGraphic().getNode();
+                Node node = ((GameObject) arg).getGraphic().getNode();
                 if (myGameWorldPane.getChildren().contains(node)) {
                     myGameWorldPane.getChildren().remove(node);
                 }
@@ -167,7 +214,13 @@ public class ViewConcrete2 implements View, Observer {
         myGameWorldPane.getChildren().clear();
         myGameWorldPane.getChildren().add(image);
     }
-    
+
+    private void addControlButtons () {
+        myHeadsUp.addButton(new ButtonWrapper("Play", e -> play(), new NullGoal()));
+        myHeadsUp.addButton(new ButtonWrapper("Pause", e -> pause(), new NullGoal()));
+        myHeadsUp.addButton(new ButtonWrapper("Slow", e -> toggleRate(), new NullGoal()));
+        myHeadsUp.addButton(new ButtonWrapper("Fast", e -> toggleRate(), new NullGoal()));
+    }
 
     @Override
     public void pause () {
@@ -179,8 +232,8 @@ public class ViewConcrete2 implements View, Observer {
         myAnimation.play();
     }
 
-    public void addButton(Button b, int x,int y) {
+    public void addButton (Button b, int x, int y) {
         vbox.getChildren().add(b);
     }
-    
+
 }

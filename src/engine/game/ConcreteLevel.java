@@ -73,9 +73,9 @@ public class ConcreteLevel implements Level {
     @Override
     public void update () {
         // TODO Auto-generated method stub
-        myGameWorld.moveObjects();
-        myGameWorld.checkCollisions();
-        myGameWorld.removeDeadObjects();
+        myGameWorld.updateGameObjects();
+//        myGameWorld.checkCollisions();
+//        myGameWorld.removeDeadObjects();
         // move GameObjects, needs to communicate with StoryBoard
     }
 

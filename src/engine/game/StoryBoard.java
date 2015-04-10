@@ -19,6 +19,7 @@ public class StoryBoard {
     public StoryBoard (Event ... events) {
         eventList = new ArrayList<Event>();
         addEvent(events);
+        System.out.println(eventList.size());
     }
 
     public boolean addEvent (Event ... events) {
@@ -72,10 +73,18 @@ public class StoryBoard {
             currentEvent.setCanStart();
         }
     }
-    
+
     @Settable
-    public void setEvents(List<Event> events) {
+    public void setEvents (List<Event> events) {
         eventList = events;
     }
 
+    /**
+     * Returns true if the current event (which is being updated) can start. Assumes that if the
+     * current event's canStart() method evaluates to true, that it has started because we are
+     * calling update on it.
+     */
+    public boolean eventInProgress () {
+        return getCurrentEvent().canStart();
+    }
 }

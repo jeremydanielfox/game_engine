@@ -11,6 +11,7 @@ import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
+import gameworld.ObjectCollection;
 
 
 /**
@@ -165,7 +166,7 @@ public class GameObjectSimpleTest implements GameObject {
     }
 
 	@Override
-	public void update() {
+	public void update(ObjectCollection world) {
 		// TODO Auto-generated method stub
 		
 	}

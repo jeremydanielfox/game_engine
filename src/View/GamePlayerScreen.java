@@ -96,13 +96,7 @@ public class GamePlayerScreen extends Application {
         ConcreteLevelBoard board=new ConcreteLevelBoard();
         
         GameWorld world = new BasicWorld();
-        try {
-            world.addObject(new GameObjectSimpleTest());
-        }
-        catch (StructurePlacementException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
+        world.addObject(new GameObjectSimpleTest());
         GameObjectQueue q = new ConcreteQueue(new ArrayList<GameObject>());
         TimedEvent wave = new ConstantSpacingWave(2.0, q, world);
         StoryBoard story = new StoryBoard(wave);

@@ -1,5 +1,6 @@
 package gae.gameView;
 
+import engine.gameobject.GameObjectSimple;
 import gae.editor.SimpleEditor;
 import gae.openingView.UIObject;
 import javafx.event.EventHandler;
@@ -41,7 +42,7 @@ public class GenericObjectsPane implements UIObject{
     }
     
     private void newCustomObject (String type) {
-        SimpleEditor editor = new SimpleEditor();
+        SimpleEditor editor = new SimpleEditor(GameObjectSimple.class);
         Scene editorScene = new Scene(new Pane(editor.getObject()));
         Stage editorStage = new Stage();
         editorStage.setScene(editorScene);

@@ -22,10 +22,10 @@ public abstract class Editor {
             Type parameterClass = method.getGenericParameterTypes()[0];
             if (parameterClass.equals(double.class)) {
                 System.out.println("double  " + getPropertyName(method.getName()));
-                root.addToNodes(new TreeNode(method, "Slider"));
+                root.addToNodes(new TreeNode(method, "SliderEditor"));
             } else if (parameterClass.equals(String.class)) {
                 System.out.println("String  " + getPropertyName(method.getName()));
-                root.addToNodes(new TreeNode(method, "Textbox"));
+                root.addToNodes(new TreeNode(method, "TextEditor"));
             } else {
                 System.out.println(parameterClass.getTypeName() + ":");
                 root.addToNodes(getMethodsTree((Class<?>) parameterClass, method));

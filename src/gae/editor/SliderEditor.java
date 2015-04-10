@@ -1,9 +1,7 @@
 package gae.editor;
 
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.HBox;
 
 /**
  * Represents an editor based on a slider. Could be used for features such as setting movement or
@@ -13,39 +11,39 @@ import javafx.scene.layout.HBox;
  *
  */
 
-public class SliderEditor implements ComponentEditor {
+public class SliderEditor extends ComponentEditor {
 
     private static final double DEFAULT = 0;
-    private HBox editBox;
     private Slider slider;
-    private Label label;
 
     /*
-     * two constructors: one for when both sides of range are provided and one for just the upper
-     * limit
+     * Temp blank constructor. TODO: make range settable
      */
-
+    public SliderEditor() {
+        super();
+        slider = new Slider(0, 10, DEFAULT);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);   
+        getEditBox().getChildren().addAll(getLabel(), slider);
+    }
+/*
     public SliderEditor (String name, double bottom, double high) {
-        editBox = new HBox();
         slider = new Slider(bottom, high, DEFAULT);
         slider.setShowTickLabels(true);
-        slider.setShowTickMarks(true);
-        label = new Label(name);    
-        editBox.getChildren().addAll(label, slider);
+        slider.setShowTickMarks(true);   
+        getEditBox().getChildren().addAll(getLabel(), slider);
     }
 
     public SliderEditor (String name, double high) {
-        editBox = new HBox();
         slider = new Slider(DEFAULT, high, DEFAULT);
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
-        label = new Label(name);
-        editBox.getChildren().addAll(label, slider);
+        getEditBox().getChildren().addAll(getLabel(), slider);
     }
-
+*/
     @Override
     public Node getObject () {
-        return editBox;
+        return getEditBox();
     }
 
     @Override

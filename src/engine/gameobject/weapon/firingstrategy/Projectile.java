@@ -9,6 +9,7 @@ import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.units.BuffableUnit;
+import gameworld.ObjectCollection;
 
 
 public class Projectile extends GameObjectSimple implements Buffer {
@@ -71,6 +72,12 @@ public class Projectile extends GameObjectSimple implements Buffer {
             }
             changeHealth(-1);
         }
+    }
+
+    @Override
+    public void update (ObjectCollection world) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

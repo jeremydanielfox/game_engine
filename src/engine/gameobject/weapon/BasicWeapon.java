@@ -3,6 +3,7 @@ package engine.gameobject.weapon;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.upgradable.behavior.Behavior;
 import engine.gameobject.PointSimple;
@@ -15,6 +16,7 @@ import engine.gameobject.weapon.upgradable.FiringRate;
 import engine.gameobject.weapon.upgradable.Upgradable;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import gameworld.GameWorld;
+import gameworld.ObjectCollection;
 
 
 /**
@@ -37,12 +39,21 @@ public class BasicWeapon implements Weapon{
      * @see engine.gameobject.weapon.Weaopn#fire(gameworld.GameWorld, engine.gameobject.PointSimple)
      */
     @Override
-    public List<Buffer> fire (List<Buffable> targets, PointSimple location) {
-        List<Buffer> myProjectiles = new ArrayList<>();
+    public void fire (ObjectCollection world, PointSimple location) {
         if (canFire()) {
-            myProjectiles.addAll(myFiringStrategy.execute(targets, location, myProjectile));
+            List<GameObject> targets = (List<GameObject>) world.objectsInRange(myRange, location);
+            List<Buffable> buffables =
+                    targets.stream().filter(p -> p.getClass().isAssignableFrom(Buffable.class))
+                            .map(p -> (Buffable) p)
+                            .collect(Collectors.toList());
+            if (!buffables.isEmpty()) {
+                Buffable target = chooseTarget(buffables);
+                myFiringStrategy.execute(world, target, location, myProjectile);
+                timeSinceFire = 0;
+                return;
+            }
         }
-        return myProjectiles;
+        timeSinceFire++;
     }
 
     /* (non-Javadoc)
@@ -97,6 +108,12 @@ public class BasicWeapon implements Weapon{
         }
     }*/
 
+    // TODO: In bloons, we choose from the candidates using first, last, strong, weak. We could
+    // do something here as well using polymorphism. For now, we just choose a random one.
+    private Buffable chooseTarget(List<Buffable> targets){
+        return targets.get(0);
+    }
+    
     // TODO: Get the math correct here
     private double firingRateToSeconds () {
         return 60.0 / myFiringRate.getRate();

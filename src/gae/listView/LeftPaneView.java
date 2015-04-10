@@ -2,10 +2,12 @@ package gae.listView;
 
 import gae.backend.TempTower;
 import gae.gridView.PathView;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -13,7 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 public class LeftPaneView {
@@ -29,6 +35,7 @@ public class LeftPaneView {
     private Accordion accordion;
     private TitledPane pathTitledPane;
     private PathList pathList;
+    private ContainerWrapper wrapper;
 
     public Scene getScene () {
         root = new Group();
@@ -36,14 +43,20 @@ public class LeftPaneView {
         return new Scene(root);
     }
 
-    public Group getGroup (Node pane, Scene scene, ObservableList<PathView> pathList, PathView view) {
+    public Group getGroup (Node pane,
+                           Scene scene,
+                           ObservableList<PathView> pathList,
+                           PathView view,
+                           ObjectProperty<Image> backgroundProperty, ContainerWrapper wrapper) {
         this.nodeScene = pane;
         this.pathObservableList = pathList;
         this.pathView = view;
         this.myScene = scene;
+        this.wrapper = wrapper;
         root = new Group();
         objectGroup = new Group();
-        root.getChildren().addAll(view(), tempButton(), objectGroup);
+        root.getChildren().addAll(view(), tempButton(), changeBackground(backgroundProperty),
+                                  objectGroup);
         root.setManaged(false);
         return root;
     }
@@ -57,14 +70,15 @@ public class LeftPaneView {
                 Object instance = className.getConstructor().newInstance();
                 listOfListObjects.add((PaneList) instance);
                 Method setUpList =
-                        className.getMethod("initialize", Group.class, Node.class, Scene.class);
+                        className.getMethod("initialize", Group.class, Node.class, Scene.class,
+                                            ContainerWrapper.class);
                 accordion.getPanes().add((TitledPane) setUpList
-                        .invoke(instance, objectGroup, nodeScene, myScene));
+                        .invoke(instance, objectGroup, nodeScene, myScene, wrapper));
             }
             catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
                     | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException e) {
-                pathList = new PathList(pathView, (StackPane) nodeScene, myScene);
+                pathList = new PathList(pathView, (StackPane) nodeScene, myScene, wrapper);
                 pathTitledPane =
                         pathList.getTitledPane(pathObservableList, gameObjects[i]);
                 accordion.getPanes().add(pathTitledPane);
@@ -78,16 +92,17 @@ public class LeftPaneView {
         pathTitledPane.setOnMousePressed(event -> {
             for (PaneList lists : listOfListObjects) {
                 lists.removeRoot();
-                pathList.setScreen();
             }
+            pathList.setScreen();
         });
         for (TitledPane panes : accordion.getPanes()) {
             panes.setOnMouseClicked(event -> {
                 if (!panes.equals(pathTitledPane)) {
                     for (PaneList lists : listOfListObjects) {
                         lists.addRoot();
-                        pathList.disableScreen();
                     }
+                    pathList.disableScreen();
+                    System.out.println("removing path!");
                 }
             });
         }
@@ -110,4 +125,16 @@ public class LeftPaneView {
         return temp;
     }
 
+    private Button changeBackground (ObjectProperty<Image> backgroundProperty) {
+        Button background = new Button("Change Background");
+        background.setTranslateX(0);
+        background.setTranslateY(550);
+        background.setOnAction(e -> {
+            Stage stage = new Stage();
+            FileChooser fc = new FileChooser();
+            File picked = fc.showOpenDialog(stage);
+            backgroundProperty.setValue(new Image(picked.toURI().toString()));
+        });
+        return background;
+    }
 }

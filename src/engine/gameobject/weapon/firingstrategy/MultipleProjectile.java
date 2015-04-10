@@ -6,6 +6,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buffable;
 import gameworld.GameWorld;
+import gameworld.ObjectCollection;
 
 
 public class MultipleProjectile implements FiringStrategy {
@@ -18,12 +19,12 @@ public class MultipleProjectile implements FiringStrategy {
 //TODO: CLEAN THIS WHOLE CLASS UP
 //TODO: implement this
     @Override
-    public List<Buffer> execute(List<Buffable> targets, PointSimple location, Buffer prototype) {
+    public void execute(ObjectCollection world, Buffable target, PointSimple location, Buffer prototype) {
         List<Buffer> projectile = new ArrayList<Buffer>();
-        Buffable myTarget = targets.get(0);
+        Buffable myTarget = target;
         double referenceAngle = findReferenceAngle(location, myTarget.getPoint());
         //List<PointSimple> shootingLocations = getLocations(referenceAngle);
-        return projectile;
+
     }
     
     private PointSimple rotatePoint(PointSimple center, PointSimple target, double radian){

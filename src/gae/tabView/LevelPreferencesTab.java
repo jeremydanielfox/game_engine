@@ -1,6 +1,5 @@
 package gae.tabView;
 
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 

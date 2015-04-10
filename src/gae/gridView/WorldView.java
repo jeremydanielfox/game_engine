@@ -49,6 +49,10 @@ public class WorldView {
         border.setLeft(getLeftView());
         return border;
     }
+    
+    public Image getBackgroundImage() {
+        return backgroundProperty.get();
+    }
 
     private Group getLeftView () {
         StackPane stackPane = new StackPane();

@@ -143,6 +143,7 @@ public class PathList {
             allPaths.add(path);
             System.out.println("ADDING INDEX : " + paths.size());
             paths.add(pathView);
+            pathView.setID(counter);
             counter++;
             pathView = new PathView(stack, this.scene);
         });

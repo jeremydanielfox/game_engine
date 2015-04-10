@@ -1,11 +1,12 @@
 package gae.listView;
 
 import engine.gameobject.Editable;
+import exception.ObjectOutOfBoundsException;
+import gae.gridView.ContainerWrapper;
 import View.ViewUtilities;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.effect.Bloom;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
@@ -14,16 +15,24 @@ import javafx.scene.layout.Region;
 public class EditableImage extends Region {
     private final Group wrapGroup;
     private Editable editable;
+    private ContainerWrapper wrapper;
+    private double startX;
+    private double startY;
 
-    public EditableImage (ImageView placedEditableImage, Editable editable) {
+    public EditableImage (ImageView placedEditableImage, Editable editable, ContainerWrapper wrapper) {
         this.editable = editable;
+        this.wrapper = wrapper;
         wrapGroup = new Group(placedEditableImage);
         this.getChildren().add(wrapGroup);
         enableDrag();
     }
 
     private void enableDrag () {
-
+        setOnMousePressed(e -> {
+            Point2D current = ViewUtilities.getMouseLocation(e, wrapGroup);
+            startX = current.getX();
+            startY = current.getY();
+        });
         setOnMouseDragged(e -> {
             Point2D current = ViewUtilities.getMouseLocation(e, wrapGroup);
             double newX = current.getX();
@@ -36,7 +45,15 @@ public class EditableImage extends Region {
                 wrapGroup.setTranslateY(newY);
             }
             editable.setLocation(abs.getX(), abs.getY());
+            setOnMouseReleased(location -> {
+                if (wrapper.checkBounds(abs.getX(), abs.getY())) {
+                    wrapGroup.setTranslateX(startX);
+                    wrapGroup.setTranslateY(startY);
+                    throw new ObjectOutOfBoundsException();
+                }
+            });
         });
+
     }
 
     public boolean checkIntersect (Node object) {

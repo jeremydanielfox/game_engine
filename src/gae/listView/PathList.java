@@ -1,7 +1,9 @@
 package gae.listView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import gae.gridView.ContainerWrapper;
 import gae.gridView.Path;
 import gae.gridView.PathView;
 import javafx.collections.ObservableList;
@@ -27,13 +29,27 @@ public class PathList {
     private StackPane stack;
     private Scene scene;
     private int listIndex;
+    private Button bezier;
+    private Button completePath;
+    private Button newPath;
+    private Button displayPath;
+    private Button updatePath;
+    private List<Button> buttonList;
 
-    public PathList (PathView pathView, StackPane stack, Scene scene) {
-        this.pathView = pathView;
+    public PathList (StackPane stack, Scene scene, ContainerWrapper container) {
+        this.pathView = new PathView(stack, scene);
+        pathView.setContainerArea(container);
         this.stack = stack;
         this.scene = scene;
-        stack.getChildren().addAll(makeBezierCurve(), completePath(), newPath(), displayPaths(),
-                                   updatePath());
+        bezier = makeBezierCurve();
+        completePath = completePath();
+        newPath = newPath();
+        displayPath = displayPaths();
+        updatePath = updatePath();
+        buttonList = new ArrayList<>();
+        buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
+                                                      updatePath }));
+        stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
     }
 
     public TitledPane getTitledPane (ObservableList<PathView> paths, String text) {
@@ -73,8 +89,7 @@ public class PathList {
                         }
                         else if (pathView != null) {
                             HBox content = new HBox();
-                            // TODO : Nina - add a counter to the path
-                            content.getChildren().add(new Label("Path"));
+                            content.getChildren().add(new Label("Path " + pathView.getID()));
                             setGraphic(content);
                         }
                     }
@@ -85,6 +100,21 @@ public class PathList {
         listView.setMaxWidth(300);
         pane.setContent(listView);
         return pane;
+    }
+
+    public void disableScreen () {
+        pathView.resetScreen();
+        for (Button button : buttonList) {
+            button.setDisable(true);
+        }
+    }
+
+    public void setScreen () {
+        pathView.resetScreen();
+        for (Button button : buttonList) {
+            button.setDisable(false);
+        }
+        pathView = new PathView(stack, this.scene);
     }
 
     private void setOldPath (PathView view) {
@@ -115,6 +145,7 @@ public class PathList {
             allPaths.add(path);
             System.out.println("ADDING INDEX : " + paths.size());
             paths.add(pathView);
+            pathView.setID(counter);
             counter++;
             pathView = new PathView(stack, this.scene);
         });

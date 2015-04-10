@@ -1,11 +1,15 @@
 package engine.game;
 
+import java.util.ArrayList;
+import java.util.List;
+import View.ButtonWrapper;
 import engine.fieldsetting.Settable;
 
 
 /**
- * 
  * @author Jeremy
+ * @author Sierra
+ * @author Cosette
  *
  */
 @Settable
@@ -13,15 +17,20 @@ public class ConcreteGame implements Game {
 
     private Player myPlayer;
     private LevelBoard myLevelBoard;
-    
-    public ConcreteGame() {
-        myPlayer = new Player();
-        myLevelBoard = new ConcreteLevelBoard();
+    private List<ButtonWrapper> myButtons;
+
+    public ConcreteGame () {
+        initialize(new Player(), new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
     }
 
-    public ConcreteGame (Player player, LevelBoard level) {
+    public ConcreteGame (Player player, LevelBoard level, List<ButtonWrapper> buttons) {
+        initialize(player, level, buttons);
+    }
+
+    public void initialize (Player player, LevelBoard level, List<ButtonWrapper> buttons) {
         myPlayer = player;
         myLevelBoard = level;
+        myButtons = buttons;
     }
 
     @Override
@@ -36,6 +45,10 @@ public class ConcreteGame implements Game {
 
     public LevelBoard getLevelBoard () {
         return myLevelBoard;
+    }
+
+    public void addButton (ButtonWrapper button) {
+        myButtons.add(button);
     }
 
     @Override
@@ -54,4 +67,17 @@ public class ConcreteGame implements Game {
         myLevelBoard = levelBoard;
     }
 
+    @Settable
+    public void setButtonList (List<ButtonWrapper> list) {
+        myButtons = list;
+    }
+
+    @Override
+    public List<ButtonWrapper> getButtons () {
+        // TODO Auto-generated method stub
+        return myButtons;
+    }
+
+    
+    
 }

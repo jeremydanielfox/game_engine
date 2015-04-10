@@ -1,6 +1,5 @@
 package gae.gridView;
 
-import gae.listView.ContainerWrapper;
 import gae.listView.LeftPaneView;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;

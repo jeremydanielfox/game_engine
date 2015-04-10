@@ -3,6 +3,7 @@ package gae.listView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import gae.gridView.ContainerWrapper;
 import gae.gridView.Path;
 import gae.gridView.PathView;
 import javafx.collections.ObservableList;
@@ -35,10 +36,9 @@ public class PathList {
     private Button updatePath;
     private List<Button> buttonList;
 
-    public PathList (PathView pathView, StackPane stack, Scene scene, ContainerWrapper container) {
-        // this.pathView = pathView;
+    public PathList (StackPane stack, Scene scene, ContainerWrapper container) {
         this.pathView = new PathView(stack, scene);
-        this.pathView.setContainerArea(container);
+        pathView.setContainerArea(container);
         this.stack = stack;
         this.scene = scene;
         bezier = makeBezierCurve();

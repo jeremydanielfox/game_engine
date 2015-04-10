@@ -1,7 +1,6 @@
 package usecases.usecase_GAE1;
 
 import gae.backend.Editable;
-
 import java.util.ArrayList;
 import java.util.Observable;
 

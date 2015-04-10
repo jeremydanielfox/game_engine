@@ -11,6 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import gae.backend.Editable;
 import gae.openingView.UIObject;
+import javafx.scene.layout.Region;
+import javafx.util.Pair;
+import gae.backend.Editable;
 
 
 /**
@@ -39,8 +42,8 @@ public class EditableNode implements UIObject {
 
     public Editable makeNewInstance () {
         Editable copy = (Editable) DeepCopy.copy(editable);
-        myID++;
         copy.setID(myID);
+        myID++;
         myChildren.add(copy);
         return copy;
     }

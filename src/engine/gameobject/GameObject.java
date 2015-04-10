@@ -2,6 +2,7 @@ package engine.gameobject;
 
 import java.util.List;
 import engine.gameobject.weapon.Weapon;
+import gameworld.ObjectCollection;
 
 
 /**
@@ -13,7 +14,11 @@ import engine.gameobject.weapon.Weapon;
 public interface GameObject extends Movable, Health, Graphical {
     // public void updateGraphics ();//cannot implement yet
    
-    public void update();
+    /**
+     * Updates the object accordingly within the objectcollection (usually gameworld) given
+     * @param world
+     */
+    public void update(ObjectCollection world);
     
     /**
      * Sets the GameObject's Weapon

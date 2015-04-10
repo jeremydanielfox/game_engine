@@ -20,7 +20,6 @@ public abstract class Goal implements Observer {
 
     public void setIsSatisfied (boolean satisfied) {
         isSatisfied = satisfied;
-        System.out.println("setting isSatisfied to:"+satisfied);
     }
 
     public boolean getIsSatisfied() {

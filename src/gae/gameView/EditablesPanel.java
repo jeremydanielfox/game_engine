@@ -1,7 +1,6 @@
 package gae.gameView;
 
 import java.util.Collection;
-
 import gae.backend.Editable;
 
 public interface EditablesPanel {

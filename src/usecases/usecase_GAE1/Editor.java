@@ -1,7 +1,6 @@
 package usecases.usecase_GAE1;
 
 import gae.backend.Editable;
-
 import java.lang.reflect.Field;
 import java.util.Enumeration;
 import java.util.HashMap;

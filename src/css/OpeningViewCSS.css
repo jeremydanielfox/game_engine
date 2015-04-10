@@ -1,5 +1,8 @@
 .root {
 	-fx-font-family: "Courier Sans Serif";
+  -fx-background-image: url("hawaiian_pattern.jpg");
+  -fx-background-repeat: stretch; 
+  -fx-background-image-opacity: 0.4;
 	-fx-background-color: white;
 }
 

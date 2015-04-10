@@ -136,9 +136,8 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable 
     public void executeFrameActions () {
         // after updating game, how to update after level ends? need to look into checking something
         // like gameEnded()
-        addInitialObjects();
         myGame.update();
-
+        addInitialObjects();
         myButtonList.forEach(e -> {
             if (e.isEnabled()) {
                 e.getButton().setDisable(false);
@@ -159,25 +158,13 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable 
 
     private void addInitialObjects () {
         Collection<GameObject> gameObjects = myGame.getLevelBoard().getGameWorld().getGameObjects();
+        for (Node n: hack){
+            myGameWorldPane.getChildren().remove(n);
+        }
+        hack.clear();
         for (GameObject o : gameObjects) {
-            if(!myGameWorldPane.getChildren().contains(o.getGraphic().getNode()))
                     myGameWorldPane.getChildren().add(o.getGraphic().getNode());
                     hack.add(o.getGraphic().getNode());
-        }
-        List<Node> removalBuffer = new ArrayList<>();
-        for (Node n : myGameWorldPane.getChildren()){
-            boolean contains = false;
-            for (GameObject o : gameObjects){
-                if (o.getGraphic().getNode().equals(n)){
-                    contains = true;
-                }
-            }
-            if (!contains && hack.contains(n)){
-                removalBuffer.add(n);
-            }
-        }
-        for (Node n : removalBuffer){
-            myGameWorldPane.getChildren().remove(n);
         }
     }
 

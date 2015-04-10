@@ -33,7 +33,7 @@ public class GameObjectSimpleTest extends BuffableUnit{
         myImagePath = "robertDuvall.jpg";
         myLabel = "test object";
         myPoint = new PointSimple(300,300);
-        myHealth = new HealthSimple(15);
+        myHealth = new HealthSimple(10);
         
 //        myMover = new MoverPoint(new PointSimple(600,600), .2);
         

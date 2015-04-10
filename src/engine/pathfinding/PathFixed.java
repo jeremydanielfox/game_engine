@@ -33,7 +33,8 @@ public class PathFixed implements Path {
             count += seg.getLength();
             if (count >= distance) {
                 PathSegment pathSeg = seg;
-                return pathSeg.getPoint(distance - count - seg.getLength());
+                //add parenthesis to account for order of operations
+                return pathSeg.getPoint(distance - (count - seg.getLength()));
             }
         }
         throw new EndOfPathException();

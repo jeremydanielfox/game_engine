@@ -1,5 +1,6 @@
 package engine.pathfinding;
 
+import java.util.ArrayList;
 import java.util.List;
 import engine.fieldsetting.Settable;
 import engine.gameobject.PointSimple;
@@ -26,6 +27,11 @@ public class PathSegmentBezier implements PathSegment {
      * points.
      * Automatically calculates the length of the curve upon creation.
      */
+    
+    public PathSegmentBezier() {
+        myPoints = new ArrayList<>();
+        myLength = 0;
+    }
     public PathSegmentBezier (List<PointSimple> points) {
         myPoints = points;
         myLength = approximateLength(points);
@@ -37,7 +43,6 @@ public class PathSegmentBezier implements PathSegment {
      */
     @Override
     public PointSimple getPoint (double distance) {
-        // TODO Auto-generated method stub
         return BezierRecurse(myPoints, distance / myLength);
     }
 
@@ -70,7 +75,7 @@ public class PathSegmentBezier implements PathSegment {
         double currentLength = 0;
         PointSimple currentPoint = points.get(0);
         PointSimple nextPoint;
-        for (int i = 0; i < 1; i += .00001) {
+        for (double i = 0; i < 1; i += .00001) {
             nextPoint = BezierRecurse(points, i);
             currentLength += PointSimple.distance(currentPoint, nextPoint);
             currentPoint = nextPoint;

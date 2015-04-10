@@ -36,7 +36,14 @@ public class BasicWorld implements GameWorld {
     @Override
     public void updateGameObjects () {
         for (GameObject o : myObjects) {
-            o.move();
+            try {
+                o.move();
+            }
+            catch (EndOfPathException e) {
+                // TODO Figure out how to actually handle this exception
+                e.printStackTrace();
+                System.out.println("Caught end of path exception in BasicWorld");
+            }
             ArrayList<GameObject> objects =
                     (ArrayList<GameObject>) objectsInRange(o.getWeapon().getRange(), o.getPoint());
             List<Buffable> buffables =

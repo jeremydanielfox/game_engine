@@ -29,7 +29,10 @@ public abstract class PaneList {
 
     // private List<EditableImage> imageList;
 
-    public abstract TitledPane initialize (Group root, Node node, Scene scene);
+    public abstract TitledPane initialize (Group root,
+                                           Node node,
+                                           Scene scene,
+                                           ContainerWrapper wrapper);
 
     public abstract void addToGenericList (EditableNode node);
 
@@ -52,7 +55,11 @@ public abstract class PaneList {
         return accordion.getPanes();
     }
 
-    protected TitledPane setTitledPaneClick (EditableNode node, Group root, Node pane, Scene scene) {
+    protected TitledPane setTitledPaneClick (EditableNode node,
+                                             Group root,
+                                             Node pane,
+                                             Scene scene,
+                                             ContainerWrapper wrapper) {
         TitledPane newPane = new TitledPane();
         newPane.setText(node.getName());
         ObservableList<Editable> editableList = node.getChildrenList();
@@ -71,7 +78,7 @@ public abstract class PaneList {
                                                      ViewUtilities
                                                              .getMouseLocation(me, transitionImage),
                                                      KeyCode.ESCAPE);
-                    makeNodePlaceable(binder, node, root);
+                    makeNodePlaceable(binder, node, root, wrapper);
                     root.getChildren().add(binder);
 
                 });
@@ -83,7 +90,10 @@ public abstract class PaneList {
         return newPane;
     }
 
-    private void makeNodePlaceable (Node binder, EditableNode node, Group root) {
+    private void makeNodePlaceable (Node binder,
+                                    EditableNode node,
+                                    Group root,
+                                    ContainerWrapper wrapper) {
         binder.setOnMouseClicked(ev -> {
             Point2D current =
                     binder.localToParent(new Point2D(binder.getTranslateX(), binder
@@ -95,6 +105,7 @@ public abstract class PaneList {
             newEditable.setLocation(currentX, currentY);
             EditableImage edimage = new EditableImage(node.getImageView(), newEditable);
             newEditable.setEditableImage(edimage);
+            wrapper.checkBounds(currentX, currentY);
             edimage.relocate(currentX, currentY);
             // for (EditableImage image : imageList) {
             // if (edimage.checkIntersect(image)) {

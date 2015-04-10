@@ -35,8 +35,10 @@ public class PathList {
     private Button updatePath;
     private List<Button> buttonList;
 
-    public PathList (PathView pathView, StackPane stack, Scene scene) {
-        this.pathView = pathView;
+    public PathList (PathView pathView, StackPane stack, Scene scene, ContainerWrapper container) {
+        // this.pathView = pathView;
+        this.pathView = new PathView(stack, scene);
+        this.pathView.setContainerArea(container);
         this.stack = stack;
         this.scene = scene;
         bezier = makeBezierCurve();
@@ -87,7 +89,7 @@ public class PathList {
                         }
                         else if (pathView != null) {
                             HBox content = new HBox();
-                            content.getChildren().add(new Label("Path "+pathView.getID()));
+                            content.getChildren().add(new Label("Path " + pathView.getID()));
                             setGraphic(content);
                         }
                     }

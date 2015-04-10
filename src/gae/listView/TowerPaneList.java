@@ -19,6 +19,7 @@ public class TowerPaneList extends PaneList {
     private StackPane stack;
     private boolean added;
     private boolean initialized;
+    private ContainerWrapper wrapper;
 
     public TowerPaneList () {
         towerEditablesList = new ArrayList<>();
@@ -27,18 +28,19 @@ public class TowerPaneList extends PaneList {
     @Override
     public void addToGenericList (EditableNode editableNode) {
         towerEditablesList.add(editableNode);
-        TitledPane newPane = setTitledPaneClick(editableNode, root, workspace, scene);
+        TitledPane newPane = setTitledPaneClick(editableNode, root, workspace, scene, wrapper);
         towerPaneList.add(newPane);
         initialized = true;
     }
 
     @Override
-    public TitledPane initialize (Group root, Node node, Scene scene) {
+    public TitledPane initialize (Group root, Node node, Scene scene, ContainerWrapper wrapper) {
         this.root = root;
         root.setManaged(false);
         this.workspace = node;
         this.stack = (StackPane) workspace;
         this.scene = scene;
+        this.wrapper = wrapper;
         TitledPane pane = getTitledPane("Tower");
         towerPaneList = setAccordion(pane);
         return pane;

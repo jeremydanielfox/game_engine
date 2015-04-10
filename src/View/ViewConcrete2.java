@@ -26,7 +26,7 @@ import engine.gameobject.GameObject;
 public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable {
 
     public static final double GAME_WIDTH_TO_HEIGHT = 1;
-    public static final int MAX_FRAME_RATE = 300;
+    public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
 
     private Game myGame;
@@ -55,7 +55,7 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable 
         myPane = new BorderPane();
         myGameWorldPane = new Pane();
         myGameWorldPane.setMaxWidth(myDisplayHeight * GAME_WIDTH_TO_HEIGHT);
-        myPane.setLeft(myGameWorldPane);
+        myPane.setCenter(myGameWorldPane);
         initializeGameWorld();
         return myPane;
     }

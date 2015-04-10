@@ -1,5 +1,6 @@
 package View;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
@@ -21,6 +22,7 @@ import engine.game.Game;
 import engine.goals.*;
 import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
+import engine.gameobject.Graphic;
 
 
 public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable {
@@ -29,6 +31,7 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable 
     public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
 
+    private List<Node> hack = new ArrayList<Node>();
     private Game myGame;
     private Integer myRate = MIN_FRAME_RATE;
     private Timeline myAnimation;
@@ -133,6 +136,7 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable 
     public void executeFrameActions () {
         // after updating game, how to update after level ends? need to look into checking something
         // like gameEnded()
+        addInitialObjects();
         myGame.update();
 
         myButtonList.forEach(e -> {
@@ -156,7 +160,24 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable 
     private void addInitialObjects () {
         Collection<GameObject> gameObjects = myGame.getLevelBoard().getGameWorld().getGameObjects();
         for (GameObject o : gameObjects) {
-            myGameWorldPane.getChildren().add(o.getGraphic().getNode());
+            if(!myGameWorldPane.getChildren().contains(o.getGraphic().getNode()))
+                    myGameWorldPane.getChildren().add(o.getGraphic().getNode());
+                    hack.add(o.getGraphic().getNode());
+        }
+        List<Node> removalBuffer = new ArrayList<>();
+        for (Node n : myGameWorldPane.getChildren()){
+            boolean contains = false;
+            for (GameObject o : gameObjects){
+                if (o.getGraphic().getNode().equals(n)){
+                    contains = true;
+                }
+            }
+            if (!contains && hack.contains(n)){
+                removalBuffer.add(n);
+            }
+        }
+        for (Node n : removalBuffer){
+            myGameWorldPane.getChildren().remove(n);
         }
     }
 

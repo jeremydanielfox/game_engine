@@ -18,8 +18,8 @@ public class TestProjectile extends Projectile{
         myLabel = "";
         myHealth = new HealthSimple(1);
         myPoint = new PointSimple(300,300);
-        myMover = new DirectPointMover(myPoint, 1);
-        myGraphic = new Graphic(100, 100, myImagePath);
+        myMover = new DirectPointMover(myPoint, 2.2);
+        myGraphic = new Graphic(20, 20, myImagePath);
         myGraphic.setPoint(myPoint);
     }
     

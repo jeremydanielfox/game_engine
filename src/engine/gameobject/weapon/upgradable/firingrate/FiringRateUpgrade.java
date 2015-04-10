@@ -9,19 +9,19 @@ public class FiringRateUpgrade implements FiringRate {
     private Optional<FiringRate> decorated;
 
     public FiringRateUpgrade() {
-        setNullDecorated();
+        //setNullDecorated();
         increment = 0;
     }
     
     public FiringRateUpgrade (double increment) {
-        setNullDecorated();
+        //setNullDecorated();
         this.increment = increment;
     }
     
-    private void  setNullDecorated() {
+    /*private void  setNullDecorated() {
         FiringRate nullVal = null;
         decorated = Optional.of(nullVal); 
-    }
+    }*/
 
     @Override
     public double getRate () {

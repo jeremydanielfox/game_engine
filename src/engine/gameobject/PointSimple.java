@@ -52,7 +52,7 @@ public class PointSimple {
     }
 
     public static boolean pointInBetween (PointSimple start, PointSimple end, PointSimple point) {
-        return inRange(start.getX(), end.getX(), point.getX()) &&
+        return inRange(start.getX(), end.getX(), point.getX()) ||
                inRange(start.getY(), end.getY(), point.getY());
     }
 
@@ -65,7 +65,7 @@ public class PointSimple {
     }
 
     private static boolean inRange (double start, double end, double a) {
-        return a >= start && a <= end;
+        return a > start && a < end;
     }
 
     public PointSimple multiply (double factor) {

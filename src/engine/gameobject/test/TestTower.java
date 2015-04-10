@@ -13,9 +13,9 @@ public class TestTower extends BuffableUnit{
         myImagePath = "robertDuvall.jpg";
         myLabel = "";
         myHealth = new HealthSimple(3);
-        myPoint = new PointSimple(300, 300);
+        myPoint = new PointSimple(350, 350);
         myMover = new MoverNull();
-        myGraphic = new Graphic(100, 100, myImagePath);
+        myGraphic = new Graphic(60, 60, myImagePath);
         myGraphic.setPoint(myPoint);
         super.setWeapon(new TestWeapon());
     }

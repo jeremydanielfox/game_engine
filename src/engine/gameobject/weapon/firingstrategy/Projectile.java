@@ -78,6 +78,7 @@ public class Projectile extends GameObjectSimple implements Buffer {
         }
         catch (EndOfPathException e) {
             //TODO: Implement end of path behavior
+            changeHealth(-100);
         }
         
     }

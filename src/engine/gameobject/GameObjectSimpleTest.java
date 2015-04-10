@@ -125,35 +125,33 @@ public class GameObjectSimpleTest extends BuffableUnit{
     }
 
     @Settable
-    void setImagePath (String imgpath) {
+    public void setImagePath (String imgpath) {
         myImagePath = imgpath;
     }
 
     @Settable
-    void setLabel (String label) {
+    public void setLabel (String label) {
         myLabel = label;
     }
 
     @Settable
-	public
-    void setPoint (PointSimple point) {
+    public void setPoint (PointSimple point) {
         myPoint = point;
         myGraphic.setPoint(point); 
     }
 
     @Settable
-    void setHealth (Health health) {
+    public void setHealth (Health health) {
         myHealth = health;
     }
 
     @Settable
-	public
-    void setMover (Mover mover) {
+    public void setMover (Mover mover) {
         myMover = mover;
     }
 
     @Settable
-    void setGraphic (Graphic graphic) {
+    public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }
 

@@ -38,14 +38,18 @@ public class ViewUtilities {
         // EDIT: I changed this to node and it worked perfectly for me! 
         scene.getScene().setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
-                scene.setOnMouseMoved(mouseEvent -> {
-                });
+                unbindCursor(scene);
                 wrapGroup.setVisible(false);
                 // ((Group) node.getParent()).getChildren().remove(node);
             }
         });
 
         return wrapGroup;
+    }
+    
+    public static void unbindCursor(Node scene) {
+        scene.setOnMouseMoved(mouseEvent -> {
+        });
     }
 
     /**

@@ -1,11 +1,9 @@
 package engine.gameobject.weapon;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import engine.gameobject.GameObject;
-import engine.gameobject.weapon.upgradable.behavior.Behavior;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.Buffable;
@@ -13,9 +11,7 @@ import engine.gameobject.weapon.firingstrategy.Buffer;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.Projectile;
 import engine.gameobject.weapon.upgradable.FiringRate;
-import engine.gameobject.weapon.upgradable.Upgradable;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
-import gameworld.GameWorld;
 import gameworld.ObjectCollection;
 
 
@@ -32,7 +28,7 @@ public class BasicWeapon implements Weapon{
     protected FiringRate myFiringRate;
     protected Buffer myProjectile;
     protected FiringStrategy myFiringStrategy;
-    Map<Class<? extends Upgradable>, Upgradable> upgradables;
+    Map<Class<? extends Upgrade>, Upgrade> upgradables;
     protected UpgradeTree tree;
 
     /* (non-Javadoc)

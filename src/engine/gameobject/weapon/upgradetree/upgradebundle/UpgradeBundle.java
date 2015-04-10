@@ -3,7 +3,7 @@ package engine.gameobject.weapon.upgradetree.upgradebundle;
 import java.util.Map;
 import engine.gameobject.weapon.upgradable.Upgradable;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
-import engine.shop.Purchasable;
+import engine.shop.Tag;
 
 
 /**
@@ -14,7 +14,7 @@ import engine.shop.Purchasable;
  * @author Nathan Prabhu
  *
  */
-public interface UpgradeBundle extends Purchasable {
+public interface UpgradeBundle extends Tag {
 
     /**
      * Transfers the upgrades to upgradables and replaces them in the map. If the current type of

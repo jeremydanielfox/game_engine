@@ -5,7 +5,7 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Weapon;
 import engine.gameobject.weapon.WeaponSimple;
 import engine.pathfinding.EndOfPathException;
-import engine.shop.Purchasable;
+import engine.shop.Tag;
 
 
 /**
@@ -15,7 +15,7 @@ import engine.shop.Purchasable;
  *
  */
 @Settable
-public class GameObjectSimple implements GameObject, Purchasable {
+public class GameObjectSimple implements GameObject {
     protected String myImagePath;
     protected String myLabel;
     protected PointSimple myPoint;
@@ -23,6 +23,7 @@ public class GameObjectSimple implements GameObject, Purchasable {
     protected Mover myMover;
     protected Weapon myWeapon;
     protected Graphic myGraphic;
+    private Tag myTag;
 
     public GameObjectSimple () {
         myImagePath = "";
@@ -32,6 +33,7 @@ public class GameObjectSimple implements GameObject, Purchasable {
         myMover = new MoverPath();
         myWeapon = new WeaponSimple();
         myGraphic = new Graphic();
+        //myTag = new NameTag();
     }
 
     public void update(){
@@ -158,27 +160,18 @@ public class GameObjectSimple implements GameObject, Purchasable {
     }
 
     @Override
-    public String getName () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public double getValue () {
-        // TODO Auto-generated method stub
-        return 0;
+        return myWeapon.getValue();
     }
-
+    
     @Override
-    public String getDescription () {
-        // TODO Auto-generated method stub
-        return null;
+    public Tag getTag() {
+        return myTag;
     }
-
-    @Override
-    public double getPrice () {
-        // TODO Auto-generated method stub
-        return 0;
+    
+    @Settable
+    public void setTag(Tag tag) {
+        this.myTag = tag;
     }
 
 }

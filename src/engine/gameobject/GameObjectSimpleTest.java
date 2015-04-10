@@ -11,6 +11,7 @@ import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
+import engine.shop.Tag;
 
 
 /**
@@ -164,15 +165,27 @@ public class GameObjectSimpleTest implements GameObject {
         myWeapon = weapon;
     }
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void update () {
+        // TODO Auto-generated method stub
 
-	@Override
-	public BasicMover getMover() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    }
+
+    @Override
+    public BasicMover getMover () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public double getValue () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public Tag getTag () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

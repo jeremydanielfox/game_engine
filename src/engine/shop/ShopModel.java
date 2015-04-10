@@ -21,21 +21,23 @@ public class ShopModel {
     private View myShopView;
     private Player currentPlayer;
     private GameWorld myGameWorld;
+    private final double markup;
     private Map<ItemGraphic, TransitionGameObject> itemTransitionMap;
-    private Map<TransitionGameObject, Purchasable> transitionPurchasableMap;
+    private Map<TransitionGameObject, Tag> transitionPriceTagMap;
     private Map<ItemGraphic, UpgradeBundle> itemUpgradeMap;
-    private Map<ItemGraphic, Purchasable> itemPurchasableMap;
+    private Map<ItemGraphic, Tag> itemPurchasableMap;
 
-    public ShopModel (List<Purchasable> purchasables,
+    public ShopModel (List<PriceTagConcrete> priceTags,
                       GameWorld myGameWorld,
                       View myShopView,
-                      Player currentPlayer) {
+                      Player currentPlayer, double markup) {
+        this.markup = markup;
         this.currentPlayer = currentPlayer;
         this.myShopView = myShopView;
         itemTransitionMap = new HashMap<ItemGraphic, TransitionGameObject>();
         itemUpgradeMap = new HashMap<ItemGraphic, UpgradeBundle>();
-        transitionPurchasableMap = new HashMap<TransitionGameObject, Purchasable>();
-        purchasables.forEach(purchasable -> addPurchasable(purchasable));
+        transitionPriceTagMap = new HashMap<TransitionGameObject, Tag>();
+        priceTags.forEach(purchasable -> addPurchasable(purchasable));
     }
 
     /**
@@ -43,11 +45,11 @@ public class ShopModel {
      * 
      * @param purchasable
      */
-    public void addPurchasable (Purchasable purchasable) {
+    public void addPurchasable (Tag purchasable) {
         TransitionGameObject transitionGameObject = new TransitionGameObject(null);
         ItemGraphic itemGraphic = new ItemGraphic(null, null);
         itemTransitionMap.put(itemGraphic, transitionGameObject);
-        transitionPurchasableMap.put(transitionGameObject, purchasable);
+        transitionPriceTagMap.put(transitionGameObject, purchasable);
         itemPurchasableMap.put(itemGraphic, purchasable);
     }
 
@@ -72,13 +74,12 @@ public class ShopModel {
     public boolean purchase (TransitionGameObject transitionGameObject, double x, double y) {
         try {
             myGameWorld.addObject(PrototypeLocator.getService()
-                    .getInstance(transitionPurchasableMap.get(transitionGameObject).getName()));
+                    .getInstance(transitionPriceTagMap.get(transitionGameObject).getName()));
         }
         catch (StructurePlacementException e) {
             return false;
         }
-        currentPlayer.getWallet().withdraw(transitionPurchasableMap.get(transitionGameObject)
-                                                   .getPrice());
+        currentPlayer.getWallet().withdraw(getPrice(transitionPriceTagMap.get(transitionGameObject)));
         return true;
     }
 
@@ -88,18 +89,22 @@ public class ShopModel {
      * @param itemGraphic
      */
     public void purchase (ItemGraphic itemGraphic, GameObject gameObject) {
-        currentPlayer.getWallet().withdraw(itemUpgradeMap.get(itemGraphic).getPrice());
+        currentPlayer.getWallet().withdraw(getPrice(itemUpgradeMap.get(itemGraphic)));
         // gameObject.getWeapon().applyUpgrade()
     }
 
     public boolean canPurchase (ItemGraphic itemGraphic) {
         double price;
         if (itemPurchasableMap.containsKey(itemGraphic)) {
-            price = itemPurchasableMap.get(itemGraphic).getPrice();
+            price = getPrice(itemPurchasableMap.get(itemGraphic));
         }
         else {
-            price = itemUpgradeMap.get(itemGraphic).getPrice();
+            price = getPrice(itemUpgradeMap.get(itemGraphic));
         }
         return currentPlayer.getWallet().getBalance() > price;
+    }
+    
+    private double getPrice(Tag purchasable) {
+        return purchasable.getValue()*markup;
     }
 }

@@ -1,7 +1,8 @@
 package engine.gameobject;
 
-import java.util.List;
 import engine.gameobject.weapon.Weapon;
+import engine.shop.Purchasable;
+import engine.shop.Tag;
 
 
 /**
@@ -10,11 +11,11 @@ import engine.gameobject.weapon.Weapon;
  *
  */
 
-public interface GameObject extends Movable, Health, Graphical {
+public interface GameObject extends Movable, Health, Graphical, Purchasable {
     // public void updateGraphics ();//cannot implement yet
-   
-    public void update();
-    
+
+    public void update ();
+
     /**
      * Sets the GameObject's Weapon
      */
@@ -23,7 +24,7 @@ public interface GameObject extends Movable, Health, Graphical {
     /**
      * Returns the GameObject's Weapon
      */
-    public Weapon getWeapon();
+    public Weapon getWeapon ();
 
     /**
      * Labels allow the GameEngine to differentiate
@@ -31,6 +32,13 @@ public interface GameObject extends Movable, Health, Graphical {
      * @return: A string
      */
     public String getLabel ();
+
+    /**
+     * Tags contain important GameObject info (e.g. name, description, image)
+     * 
+     * @return
+     */
+    public Tag getTag ();
 
     /**
      * Creates an identical game object (with different reference).
@@ -41,9 +49,9 @@ public interface GameObject extends Movable, Health, Graphical {
      * Returns the Cartesian coordinate of the game object.
      */
     public PointSimple getPoint ();
-    
+
     public void setPoint (PointSimple point);
-    
+
     /**
      * Sets the GameObject's Weapon
      */
@@ -53,4 +61,5 @@ public interface GameObject extends Movable, Health, Graphical {
      * Returns object's mover
      */
     public BasicMover getMover ();
+
 }

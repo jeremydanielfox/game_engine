@@ -28,7 +28,7 @@ public class TransitionGameObject implements Graphical {
     @XStreamOmitField
     private transient StackPane pane;
 
-    public TransitionGameObject (Graphic myGraphic, String name, double range) {
+    public TransitionGameObject (String name, Graphic myGraphic, double range) {
         this.myGraphic = myGraphic;
         this.name = name;
         this.range = range;

@@ -21,7 +21,7 @@ import View.ViewUtilities;
 /**
  * View of the shop. Right now it is being tested using its own stage/launch().
  * 
- * @author Nathan Prabhu
+ * @author Nathan Prabhu and Tom Puglisi
  *
  */
 public class View extends Application {
@@ -29,9 +29,9 @@ public class View extends Application {
     private final static int SCENE_WIDTH = 600;
     private final static int SCENE_HEIGHT = 600;
     private final static int SHOP_WIDTH = 160;
-    private final static int ITEM_COUNT = 12;
 
     private BorderPane pane;
+    private ShopModel shopModel;
 
     @Override
     public void start (Stage stage) {

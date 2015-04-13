@@ -1,10 +1,10 @@
 package engine.shop;
 
-import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.effect.Glow;
+import engine.gameobject.Graphic;
 
 
 /**
@@ -17,16 +17,18 @@ public class ItemGraphic extends Parent {
 
     private static final double GLOW_VALUE = 0.5;
 
-    private PriceTag myPriceTag;
     private Node itemNode;
+    private String name;
+    private Graphic shopGraphic;
 
-    public ItemGraphic (PriceTag priceTag) {
-        myPriceTag = priceTag;
+    public ItemGraphic (String name, Graphic shopGraphic) {
+        this.name = name;
+        this.shopGraphic = shopGraphic;
         initialize();
     }
 
     private void initialize () {
-        itemNode = myPriceTag.getShopGraphic().getNode();
+        itemNode = shopGraphic.getNode();
         itemNode.setOnMouseEntered(mouseEvent -> hoverAction());
         itemNode.setOnMouseExited(mouseEvent -> itemNode.setEffect(null));
         getChildren().add(itemNode);
@@ -39,18 +41,9 @@ public class ItemGraphic extends Parent {
         //System.out.println(String.format("Cost: %d", myPriceTag.getPrice()));
         //System.out.println(String.format("Description: %s", myPriceTag.getDescription()));
     }
-
-    public double getRadius () {
-        //return ITEM_RADIUS;
-        return 0;
-    }
     
     public String getName() {
-        return myPriceTag.getName();
-    }
-
-    public Point2D getCenter () {
-        return new Point2D(myPriceTag.getShopGraphic().getCenterX(), myPriceTag.getShopGraphic().getCenterY());
+        return name;
     }
 
 }

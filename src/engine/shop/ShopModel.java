@@ -1,94 +1,62 @@
 package engine.shop;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import engine.game.Player;
 import engine.gameobject.GameObject;
-import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import engine.prototype.Prototype;
-import gameworld.GameWorld;
+import engine.shop.ShopModelSimple.ItemInfo;
 
 
-/**
- * Manages the maps containing the purchasable prototypes
- * 
- * @author Tom Puglisi
- *
- */
-public class ShopModel {
-    private View myShopView;
-    private Player currentPlayer;
-    private GameWorld myGameWorld;
-    private Map<String, Prototype<GameObject>> prototypeMap;
-    private Map<String, UpgradeBundle> upgradeMap;
-    private final double markup;
-
-    public ShopModel (List<Prototype<GameObject>> prototypes,
-                      GameWorld myGameWorld,
-                      View myShopView,
-                      Player currentPlayer, double markup) {
-        this.markup = markup;
-        this.currentPlayer = currentPlayer;
-        this.myShopView = myShopView;
-        prototypeMap = new HashMap<String, Prototype<GameObject>>();
-        upgradeMap = new HashMap<String, UpgradeBundle>();
-        prototypes.forEach(prototype -> addPrototype(prototype));
-    }
+public interface ShopModel {
+    /**
+     * Adds an item to the shop's inventory
+     * 
+     * @param prototype
+     */
+    public void addPrototype (Prototype<GameObject> prototype);
 
     /**
-     * Adds a purchasable to the appropriate maps
      * 
-     * @param priceTag
+     * @return a list of ItemGraphics corresponding to all objects in the shop's inventory
      */
-    public void addPrototype (Prototype<GameObject> prototype) {
-        prototypeMap.put(prototype.getTag().getName(), prototype);
-    }
-
-    public void showUpgradeBundles (GameObject gameObject) {
-        /*
-         * List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
-         * itemUpgradeMap.clear();
-         * bundles.forEach(bundle -> itemUpgradeMap.put(new ItemGraphic(null, null), bundle));
-         * myShopView.display(itemUpgradeMap.keySet());
-         */
-    }
+    public List<ItemGraphic> getItemGraphics ();
 
     /**
-     * Used to purchase items which are placed on the screen (e.g. towers)
+     * Called by the view to determine which ItemGraphics to display
      * 
-     * @param transitionGameObject
+     * @param gameObject
+     * @return a list of ItemGraphics to be displayed in the shop
      */
-    public void purchaseGameObject (String name, double x, double y) {
-        myGameWorld.addObject(prototypeMap.get(name).clone());
-        currentPlayer.getWallet().withdraw(getPrice(((PriceTag) prototypeMap.get(name).getTag())
-                                                   .getValue()));
-    }
+    public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject);
 
     /**
-     * Applies an upgrade to the given GameObject and subtracts the appropriate amount from the
-     * player's wallet.
+     * Purchases the named GameObject and places it at the given position on the screen
      * 
-     * @param itemGraphic
+     * @param name
+     * @param x
+     * @param y
      */
-    public void purchaseUpgrade (String name, GameObject gameObject) {
-        currentPlayer.getWallet().withdraw(getPrice(upgradeMap.get(name).getTag().getValue()));
-        // gameObject.getWeapon().applyUpgrade()
-    }
+    public void purchaseGameObject (String name, double x, double y);
 
-    public boolean canPurchase (String name) {
-        double price;
-        if (prototypeMap.containsKey(name)) {
-            price = getPrice(((PriceTag) prototypeMap.get(name).getTag()).getValue());
-        }
-        else {
-            price = upgradeMap.get(name).getTag().getValue();
-        }
-        return currentPlayer.getWallet().getBalance() >= price;
-    }
+    /**
+     * 
+     * @param name
+     * @return true if the current player has enough currency to purchase the given item
+     */
+    public boolean canPurchase (String name);
+
+    /**
+     * 
+     * @param name
+     * @return a TransitionGameObject corresponding to the given item name
+     */
+    public TransitionGameObject getTransitionGameObject (String name);
+
+    /**
+     * Provides item information to the view for display
+     * 
+     * @param name
+     */
+    public Map<ItemInfo, String> getInfo (String name);
     
-    public double getPrice (double value) {
-        return value*markup;
-    }
-
 }

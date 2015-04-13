@@ -1,6 +1,5 @@
 package gae.editor;
 
-import javafx.scene.Node;
 import javafx.scene.control.Slider;
 
 /**
@@ -41,11 +40,6 @@ public class SliderEditor extends ComponentEditor {
         getEditBox().getChildren().addAll(getLabel(), slider);
     }
 */
-    @Override
-    public Node getObject () {
-        return getEditBox();
-    }
-
     @Override
     public void clear () {
         slider.setValue(DEFAULT);

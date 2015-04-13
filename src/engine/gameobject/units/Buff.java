@@ -1,5 +1,7 @@
 package engine.gameobject.units;
 
+import javafx.scene.effect.ColorAdjust;
+
 /**
  * Generally, how a buff should works is apply -> advanceTime (until the end of duration) -> unapply. For example,
  * a burning unbuff will (not do anything) -> (take away health every (advanceTime) time) -> (not do anything)
@@ -41,6 +43,9 @@ public abstract class Buff {
         
     }
     
+    protected int getDuration(){
+        return duration;
+    }
     /**
      * Returns time left before buff expires
      * @return
@@ -49,10 +54,26 @@ public abstract class Buff {
         return duration - timeSinceStart;
     }
 
+    protected void adjustEffect(BuffableUnit myUnit, double hue, double saturation, double brightness, double contrast){
+        ColorAdjust initialEffect = new ColorAdjust (0, 0, 0, 0);
+        if (myUnit.getGraphic().getNode().getEffect() != null){
+            initialEffect = (ColorAdjust) myUnit.getGraphic().getNode().getEffect();
+        }
+        myUnit.getGraphic().getNode().setEffect(new ColorAdjust(initialEffect.getHue() + brightness,
+                                                                initialEffect.getSaturation() + saturation,
+                                                                initialEffect.getBrightness() + brightness, 
+                                                                initialEffect.getContrast() + contrast));
+    }
     /**
      * Comparator of buffs
      * @param otherBuff
      * @return whether it is stronger than otherBuff
      */
     public abstract boolean isStrongerBuff(Buff otherBuff);
+    
+    /**
+     * Reproduces buff. Must be defined in each buff made
+     */
+    public abstract Buff clone();
+    
 }

@@ -1,6 +1,7 @@
 package engine.gameobject;
 
 import javafx.geometry.Point2D;
+import javafx.scene.effect.Effect;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Weapon;
 import engine.gameobject.weapon.WeaponSimple;
@@ -22,7 +23,6 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     protected PointSimple myPoint;
     protected Health myHealth;
     protected Mover myMover;
-    protected Weapon myWeapon;
     protected Graphic myGraphic;
 
     public GameObjectSimple () {
@@ -32,7 +32,6 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();
-        myWeapon = new WeaponSimple();
         myGraphic = new Graphic();
     }
 
@@ -44,10 +43,6 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     @Override
     public void changeHealth (double amount) {
         myHealth.changeHealth(amount);
-    }
-
-    public void onDeath () {
-
     }
 
     // temporary
@@ -135,18 +130,6 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     @Settable
     public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
-    }
-
-    @Override
-    public Weapon getWeapon () {
-        return myWeapon;
-    }
-
-    //@Settable
-    //TODO: Make settable
-    @Override
-    public void setWeapon (Weapon weapon) {
-        myWeapon = weapon;
     }
 
     @Settable

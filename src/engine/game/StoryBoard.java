@@ -35,7 +35,9 @@ public class StoryBoard {
      * @return false if the StoryBoard has no more events to update
      */
     public boolean update () {
+        //System.out.println("In update method");
         if (eventList.size() == 0) {
+            System.out.println("In update, event list empty");
             return false;
         }
         updateEvent(getCurrentEvent());

@@ -1,7 +1,6 @@
 package engine.gameobject.units;
 
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Effect;
 
 /**
  * Generally, how a buff should works is apply -> advanceTime (until the end of duration) -> unapply. For example,

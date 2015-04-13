@@ -1,7 +1,5 @@
 package engine.gameobject.units;
 
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Effect;
 
 public class FreezeBuff extends Buff{
     
@@ -11,12 +9,12 @@ public class FreezeBuff extends Buff{
     
     public void apply(BuffableUnit myUnit){
         myUnit.getMover().setFreeze(true);
-        adjustEffect(myUnit, .66, .5, .5, .5);
+        adjustEffect(myUnit, .66, .5, .5, 0);
     }
     
     public void unapply(BuffableUnit myUnit){
         myUnit.getMover().setFreeze(false);
-        adjustEffect(myUnit, -.66, -.5, -.5, -.5);
+        adjustEffect(myUnit, -.66, -.5, -.5, 0);
     }
     
     public boolean isStrongerBuff(Buff otherBuff){

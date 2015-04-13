@@ -42,14 +42,14 @@ public class TestEngine extends Application {
         // BorderPane pane = new BorderPane();
         GameWorld world = new BasicWorld();
         world.addObject(new TestTower(2, 330, 130));
-        world.addObject(new TestTower(1, 270, 270));
+        world.addObject(new TestTower(4, 270, 270));
         world.addObject(new TestTower(3, 355, 455));
         List<GameObject> waveObjects = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             waveObjects.add(new GameObjectSimpleTest());
         }
         GameObjectQueue q = new ConcreteQueue(waveObjects);
-        TimedEvent wave = new ConstantSpacingWave(5, 2, q, world);
+        TimedEvent wave = new ConstantSpacingWave(2, 1, q, world);
         StoryBoard story = new StoryBoard(wave);
 
         Scene scene = new Scene(root);

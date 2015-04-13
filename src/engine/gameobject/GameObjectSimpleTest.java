@@ -30,7 +30,7 @@ public class GameObjectSimpleTest extends BuffableUnit{
         myImagePath = "robertDuvall.jpg";
         myLabel = "test object";
         myPoint = new PointSimple(0, 10000); //This initializes them off the screen. If we don't do this, it will show a frame at this point. Needs to be fixed in a better manner.
-        myHealth = new HealthSimple(3);
+        myHealth = new HealthSimple(4);
         super.setWeapon(new NullWeapon());
         PathFixed myPath = new PathFixed();
         PathSegmentBezier myBez = new PathSegmentBezier();
@@ -46,7 +46,7 @@ public class GameObjectSimpleTest extends BuffableUnit{
 //        File file = new File("src/gae/listView/Test.xml");
 //        myPath = (PathFixed) xstream.fromXML(file);
         myMover = new MoverPath(myPath,1);
-        myGraphic = new Graphic(40, 40, myImagePath);
+        myGraphic = new Graphic(25, 25, myImagePath);
         myGraphic.setPoint(myPoint);
     }
 

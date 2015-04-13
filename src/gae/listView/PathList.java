@@ -1,23 +1,14 @@
 package gae.listView;
 
-
-import java.io.File;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import gae.gridView.Path;
 import gae.gridView.PathView;
 import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.gridView.ContainerWrapper;
-import gae.gridView.Path;
-import gae.gridView.PathView;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,15 +20,19 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import xml.DataManager;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
-
+/**
+ * A list that keeps track of Path objects and previously created PathViews. Goal is to separate the
+ * storing of back-end and front-end objects into separate classes
+ * 
+ * @author Kei
+ *
+ */
 public class PathList {
     private PathView pathView;
     private List<List<Path>> allPaths;
@@ -52,8 +47,7 @@ public class PathList {
     private Button newPath;
     private Button displayPath;
     private Button updatePath;
-    
-    
+
     private List<Button> buttonList;
 
     public PathList (StackPane stack, Scene scene, ContainerWrapper container) {
@@ -67,12 +61,16 @@ public class PathList {
         displayPath = displayPaths();
         updatePath = updatePath();
         buttonList = new ArrayList<>();
-                
+
         buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
                                                       updatePath }));
         stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
     }
 
+    /**
+     * Creates the TitledPane for path and sets it such that objects can be removed. Looking to
+     * refactor this code soon.
+     */
     public TitledPane getTitledPane (ObservableList<PathView> paths, String text) {
         this.paths = paths;
         TitledPane pane = new TitledPane();
@@ -81,6 +79,7 @@ public class PathList {
 
         final ListView<PathView> listView = new ListView<>(paths);
         listView.setPrefSize(200, 250);
+
         listView.setEditable(true);
 
         listView.setItems(paths);
@@ -123,6 +122,9 @@ public class PathList {
         return pane;
     }
 
+    /**
+     * disables the screen by removing the root and disabling the path buttons
+     */
     public void disableScreen () {
         pathView.resetScreen();
         for (Button button : buttonList) {
@@ -130,6 +132,10 @@ public class PathList {
         }
     }
 
+    /**
+     * sets the screen by resetting the screen, enabling the buttons, and reinstantiating a PathView
+     * object
+     */
     public void setScreen () {
         pathView.resetScreen();
         for (Button button : buttonList) {
@@ -184,6 +190,10 @@ public class PathList {
         return newPath;
     }
 
+    /**
+     * This button must be clicked to not only display the path coordinates but to also write them
+     * into a XML file
+     */
     private Button displayPaths () {
         Button display = new Button("Display Paths");
         display.setTranslateX(400);
@@ -195,12 +205,12 @@ public class PathList {
             System.out.println("PRINTING OUT ALLPATHS LIST!");
             PathFixed myPath = new PathFixed();
             for (List<Path> lists : allPaths) {
-                
+
                 for (int i = 0; i < lists.size(); i++) {
-//                    System.out.println("Path " + i + "'s coordinates");
+                    // System.out.println("Path " + i + "'s coordinates");
                     Path temp = lists.get(i);
                     temp.printInfo();
-//                    System.out.println();
+                    // System.out.println();
                     PathSegmentBezier tempBez = new PathSegmentBezier();
                     List<PointSimple> points = new ArrayList<>();
                     points.add(new PointSimple(temp.getStart()));
@@ -214,11 +224,13 @@ public class PathList {
             // *****************************************//
             DataManager.writeToXML(myPath, "src/gae/listView/Test.xml");
         });
-        
+
         return display;
     }
 
-    // TODO: Must update the path if changes are made
+    /**
+     * This button must be pressed in order to update a path that had already been instantiated
+     */
     private Button updatePath () {
         Button update = new Button("Update Path");
         update.setTranslateX(400);

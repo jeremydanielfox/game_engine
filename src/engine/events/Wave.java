@@ -56,14 +56,16 @@ public abstract class Wave extends TimedEvent {
     }
 
     /**
+     * Adds an object to the game world if there are any objects left in the queue.
      * 
      * @return true if an object was released, false if no objects remain
      */
     public boolean releaseObject () {
         if (myQueue.getObjectCount() > 0) {
-                GameObject gameObject = myQueue.releaseGameObject();
-                myWaveSet.add(gameObject);
-                myWorld.addObject(gameObject); 
+            // System.out.println("Supposedly adding game object to world.");
+            GameObject gameObject = myQueue.releaseGameObject();
+            myWaveSet.add(gameObject);
+            myWorld.addObject(gameObject);
             return true;
         }
         return false;

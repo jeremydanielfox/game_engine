@@ -1,5 +1,9 @@
 package engine.shop;
 
+import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
+import gameworld.BasicWorld;
+import gameworld.GameWorld;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import engine.gameobject.units.BuffableUnit;
 import View.ViewUtilities;
 
 
@@ -31,13 +36,16 @@ public class View extends Application {
     private final static int SHOP_WIDTH = 160;
 
     private BorderPane pane;
+
     private ShopModel shopModel;
+    private GameWorld world;
 
     @Override
     public void start (Stage stage) {
         pane = new BorderPane();
         Scene scene = new Scene(pane, SCENE_WIDTH, SCENE_HEIGHT);
         stage.setScene(scene);
+        world = new BasicWorld();
 
         // FlowPane contains the entire store. This is what should be moved around.
         FlowPane shopDisplay = new FlowPane();
@@ -55,8 +63,12 @@ public class View extends Application {
         pane.setCenter(gameView);
         gameView.setBackground(new Background(new BackgroundFill(Color.BEIGE, null, null)));
         gameView.setOnMousePressed(mouseEvent -> {
-            System.out.println("Relative coordinates: " +
-                               ViewUtilities.normalizePixels(mouseEvent, gameView));
+//            System.out.println("Relative coordinates: " +
+//                               ViewUtilities.normalizePixels(mouseEvent, gameView));
+            GameObject object = new BuffableUnit();
+            world.addObject(object, new PointSimple(mouseEvent.getX(), mouseEvent.getY()));
+            object.getGraphic().getNode().relocate(mouseEvent.getX(), mouseEvent.getY());
+            
         });
         stage.show();
     }
@@ -80,6 +92,15 @@ public class View extends Application {
                 item.setOnMouseClicked(mouseEvent -> {
                     addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
                                        towerNode);
+                });
+                towerNode.setOnMouseClicked(mouseEvent -> {
+                    System.out.println(mouseEvent);
+                    GameObject object = new BuffableUnit();
+                    world.addObject(object, new PointSimple(mouseEvent.getSceneX(), mouseEvent.getSceneY())); 
+                    ViewUtilities.unbindCursor(pane);
+                    Point2D location = ViewUtilities.getMouseLocation(mouseEvent, towerNode);
+                    towerNode.relocate(location.getX(), location.getY());
+                    transitionTower.changeColor();
                 });
                 items.add(item);
             });

@@ -20,11 +20,13 @@ import engine.gameobject.Graphical;
 public class TransitionGameObject implements Graphical {
 
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
+    private static final Color WHITE_COLOR = Color.rgb(255, 255, 255, 0.5);
   
     private Graphic myGraphic;
     private String name;
     private double range;
-
+    @XStreamOmitField
+    private Circle rangeDetection;
     @XStreamOmitField
     private transient StackPane pane;
 
@@ -44,7 +46,7 @@ public class TransitionGameObject implements Graphical {
     private void initialize () {
         pane = new StackPane();
 
-        Circle rangeDetection = new Circle(range, ERROR_COLOR);
+        rangeDetection = new Circle(range, ERROR_COLOR);
         rangeDetection.setStroke(Color.BLACK);
 
         pane.getChildren().addAll(rangeDetection, myGraphic.getNode());
@@ -57,6 +59,10 @@ public class TransitionGameObject implements Graphical {
     
     public String getName () {
         return name;
+    }
+    
+    public void changeColor () {
+        rangeDetection.setFill(WHITE_COLOR);
     }
 
 }

@@ -1,10 +1,11 @@
 package gae.gameView;
 
 import java.util.EventObject;
-
 import gae.backend.GameManager;
+import gae.listView.EditableNode;
 import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
+import javafx.event.EventHandler;
 import javafx.scene.ImageCursor;
 import gae.tabView.CentralTabView;
 import javafx.scene.Scene;
@@ -42,7 +43,7 @@ public class GameView implements UIMediator {
         myScene.getStylesheets().add(GAMEVIEW_CSS);
 //        myLibrary = new LibraryView();
         utilities = new UtilitiesBar();
-        myGenericObjects = new GenericObjectsPane();
+        myGenericObjects = new GenericObjectsPane(this);
 //        myLibrary = new LibraryView();
         insertBorders();
 //        changeCursor(CURSOR_GRAPHIC);
@@ -85,5 +86,9 @@ public class GameView implements UIMediator {
         myUI.setCenter(myTabs.getObject());
         myUI.setRight(myGenericObjects.getObject());
         myUI.setRight(myGenericObjects.getObject());
+    }
+    
+    public void getAddFunction(EditableNode node) {
+        myTabs.getAddFunction(node);
     }
 }

@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import engine.gameobject.weapon.Weapon;
 import gae.gridView.Pair;
-import gae.listView.EditableImage;
+import gae.listView.MovableImage;
 import gae.openingView.UIObject;
 
 
@@ -24,7 +24,7 @@ public class TempTower implements Editable, UIObject {
     private Pair location;
     private String image = "/images/ArcaneTower.png";
     private String myName = "TempTower";
-    private EditableImage editableImage;
+    private MovableImage editableImage;
 
     @Override
     public void edit () {
@@ -75,13 +75,13 @@ public class TempTower implements Editable, UIObject {
     }
 
     @Override
-    public void setEditableImage (EditableImage image) {
+    public void setEditableImage (MovableImage image) {
         // TODO Auto-generated method stub
         editableImage = image;
     }
 
     @Override
-    public EditableImage getEditableImage () {
+    public MovableImage getEditableImage () {
         return editableImage;
     }
 
@@ -89,5 +89,13 @@ public class TempTower implements Editable, UIObject {
     public Node getObject () {
         // TODO Auto-generated method stub
         return null;
+    }
+    @Override
+    public Object clone(){  
+        try{  
+            return super.clone();  
+        }catch(Exception e){ 
+            return null; 
+        }
     }
 }

@@ -18,6 +18,7 @@ import engine.shop.Tag;
 @Settable
 public abstract class GameObjectSimple implements GameObject {
     protected String myImagePath;
+    protected String myName;
     protected String myLabel;
     protected PointSimple myPoint;
     protected Health myHealth;
@@ -29,6 +30,7 @@ public abstract class GameObjectSimple implements GameObject {
     public GameObjectSimple () {
         myImagePath = "";
         myLabel = "";
+        myName = "";
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();
@@ -36,7 +38,7 @@ public abstract class GameObjectSimple implements GameObject {
         myGraphic = new Graphic();
         myTag = new NameTag();
     }
-    
+
     @Override
     public boolean isDead () {
         return myHealth.isDead();
@@ -72,12 +74,12 @@ public abstract class GameObjectSimple implements GameObject {
         return new PointSimple(myPoint);
     }
 
-//    public void initializeNode () {
-//        Image image = new Image(myImagePath);
-//        ImageView imageView = new ImageView();
-//        imageView.setImage(image);
-//        myNode = imageView;
-//    }
+    // public void initializeNode () {
+    // Image image = new Image(myImagePath);
+    // ImageView imageView = new ImageView();
+    // imageView.setImage(image);
+    // myNode = imageView;
+    // }
 
     @Override
     public void move () throws EndOfPathException {
@@ -90,7 +92,7 @@ public abstract class GameObjectSimple implements GameObject {
     @Settable
     @Override
     public void setSpeed (double speed) {
-       myMover.setSpeed(speed);
+        myMover.setSpeed(speed);
 
     }
 
@@ -98,16 +100,21 @@ public abstract class GameObjectSimple implements GameObject {
     public Graphic getGraphic () {
         return myGraphic;
     }
-    
+
     public BasicMover getMover () {
         return (BasicMover) myMover;
     }
 
-    @Settable
+    public String getImagePath () {
+        return myImagePath;
+    }
+
+    //@Settable
+    //TODO: Make settable
     public void setMover (Mover mover) {
         myMover = mover;
     }
-    
+
     @Settable
     public void setImagePath (String imgpath) {
         myImagePath = imgpath;
@@ -128,7 +135,6 @@ public abstract class GameObjectSimple implements GameObject {
         myHealth = health;
     }
 
-
     @Settable
     public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
@@ -139,10 +145,16 @@ public abstract class GameObjectSimple implements GameObject {
         return myWeapon;
     }
 
-    @Settable
+    //@Settable
+    //TODO: Make settable
     @Override
     public void setWeapon (Weapon weapon) {
         myWeapon = weapon;
+    }
+
+    @Settable
+    public void setName (String name) {
+        myName = name;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package engine.gameobject.weapon.upgradetree.upgradebundle;
 
 import java.util.Map;
-import engine.gameobject.weapon.upgradable.Upgradable;
+import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.shop.Purchasable;
 import engine.shop.Tag;
@@ -9,7 +9,7 @@ import engine.shop.UpgradeTag;
 
 
 /**
- * A predetermined method of upgrading a weapon's Upgradables. UpgradeBundles will be purchased at
+ * A predetermined method of upgrading a weapon's Upgrades. UpgradeBundles will be purchased at
  * the shop, and so they extend Purchasable. A weapon accesses its appropriate UpgradeBundles
  * through its UpgradeTree.
  * 
@@ -19,12 +19,12 @@ import engine.shop.UpgradeTag;
 public interface UpgradeBundle extends Purchasable {
 
     /**
-     * Transfers the upgrades to upgradables and replaces them in the map. If the current type of
-     * upgradable doesn't exist, it is added as a new entry to the map.
+     * Upgrades the existing upgrades and replaces them in the map. If the current type of
+     * upgrade doesn't exist in the map, it is added as a new entry to the map.
      * 
      * @param upgradables
      */
-    public void applyUpgrades (Map<Class<? extends Upgradable>, Upgradable> upgradables);
+    public void applyUpgrades (Map<Class<? extends Upgrade>, Upgrade> upgradables);
     
     /**
      * 

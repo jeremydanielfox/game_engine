@@ -74,6 +74,7 @@ public class ConcreteLevel implements Level {
     public void update () {
         // TODO Auto-generated method stub
         myGameWorld.updateGameObjects();
+        myStoryBoard.update();
 //        myGameWorld.checkCollisions();
 //        myGameWorld.removeDeadObjects();
         // move GameObjects, needs to communicate with StoryBoard
@@ -81,7 +82,6 @@ public class ConcreteLevel implements Level {
 
     @Override
     public GameWorld getGameWorld () {
-        // TODO Auto-generated method stub
         return myGameWorld;
     }
 

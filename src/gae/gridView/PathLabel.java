@@ -8,6 +8,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 
+/**
+ * Label class made to attach to the paths as an index
+ * 
+ * @author Kei
+ *
+ */
 public class PathLabel extends Region {
     private static final int CIRCLE_RADIUS = 10;
     private Label label;

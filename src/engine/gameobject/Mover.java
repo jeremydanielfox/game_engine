@@ -1,5 +1,6 @@
 package engine.gameobject;
 
+import java.io.Serializable;
 import engine.fieldsetting.Settable;
 import engine.pathfinding.EndOfPathException;
 
@@ -11,9 +12,8 @@ import engine.pathfinding.EndOfPathException;
  *
  */
 public interface Mover {
-    
-    @Settable
 
+    @Settable
     /**
      * Based on mover's state, returns next destination for moving.
      * 
@@ -25,8 +25,7 @@ public interface Mover {
 
     @Settable
     public void setSpeed (double speed);
-    
-    public Mover clone();
-    
-}
 
+    public Mover clone ();
+
+}

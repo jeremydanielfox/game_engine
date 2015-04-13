@@ -90,7 +90,7 @@ public class DataForm implements UIObject {
      * @return
      */
     String getTitle () {
-        return title.getPromptText();
+        return title.getText();
     }
 
     String getAuthor () {
@@ -98,7 +98,7 @@ public class DataForm implements UIObject {
     }
 
     String getGameType () {
-        return gameType.getText();
+        return gameType.textProperty().get();
     }
 
     String getDescription () {
@@ -113,9 +113,15 @@ public class DataForm implements UIObject {
      * checks whether all the forms are empty or not, is a package friendly method
      * @return
      */
-    boolean isEmpty () {
-        return getTitle().isEmpty() || getAuthor().isEmpty() || getGameType().equals(OpeningView.DEFAULT_TYPE_MSG) ||
-               getDescription().isEmpty() || getInstructions().isEmpty();
+    boolean filledFields () {
+        if (getTitle().isEmpty() || getAuthor().isEmpty() || getGameType().equals(OpeningView.DEFAULT_TYPE_MSG) ||
+               getDescription().isEmpty() || getInstructions().isEmpty())
+            return false;
+        else if (!getTitle().isEmpty() || !getAuthor().isEmpty() || !getGameType().equals(OpeningView.DEFAULT_TYPE_MSG) ||
+                !getDescription().isEmpty() || !getInstructions().isEmpty())
+            return true;
+        
+        return false;
     }
 
     /**

@@ -1,19 +1,14 @@
 package gae.editor;
 
-import java.util.Arrays;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import engine.gameobject.GameObjectSimpleTest;
-import gae.backend.TempTower;
-import gae.listView.EditableImage;
-import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -22,18 +17,52 @@ import javafx.scene.layout.VBox;
  * name.
  * 
  * @author Brandon Choi
+ * @author Eric Saba
  *
  */
 
 public class SimpleEditor extends Editor implements UIObject {
 
-    private UIMediator myMediator;
+    private static final String CLASS_PATH = "gae.editor.";
+    
     private VBox simpleEditor;
     private List<ComponentEditor> editFields;
+    private TreeNode root;
+    private HashMap<Edits, TreeNode> nodeMap;
 
-    public SimpleEditor () {
-        simpleEditor = new VBox(30);
-        createEditor();
+    public SimpleEditor (Class<?> c) {
+        Label title = new Label(c.getSimpleName());
+        createEditor(c, title);
+    }
+
+    public SimpleEditor(Class<?> c, String objectName) {
+        Label title = new Label(objectName);
+        createEditor(c, title);
+    }
+    
+    
+    @Override
+    public Object createObject(Class<?> c) {
+        c = getConcreteClassFromMap(c);
+        Object obj = getInstanceFromName(c.getName());
+        for (Edits edits : nodeMap.keySet()) {
+            Method method = nodeMap.get(edits).getMethod();
+            Class<?> paramClass = method.getParameterTypes()[0];
+            Object subObject = edits.createObject(paramClass);
+            try {
+                method.invoke(obj, subObject);
+            }
+            catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+            catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        return obj;
     }
 
     @Override
@@ -44,22 +73,78 @@ public class SimpleEditor extends Editor implements UIObject {
     /**
      * creates the simple editor by iterating through all the methods and extracting the necessary
      * fields
+     * @param c 
      */
-    private void createEditor () {
-        TreeNode root = getMethodsTree(GameObjectSimpleTest.class, null);
+    private void createEditor (Class<?> c, Label title) {
+        nodeMap = new HashMap<Edits, TreeNode>();
+        simpleEditor = new VBox(30);
+        simpleEditor.getChildren().add(title);
+        root = getMethodsTree(c, null);
+        ArrayList<Node> editors = new ArrayList<Node>();
+        for (TreeNode subNode : root.getChildren()) {
+            loadArrayWithEditors(subNode, editors);
+        }
+        simpleEditor.getChildren().addAll(editors);
+    }
 
-        SliderEditor se = new SliderEditor("Hello", 0, 10);
-        TextEditor te = new TextEditor("Hi");
-        FileChooserEditor fe = new FileChooserEditor("File");
-        Button b = new Button("done");
-        simpleEditor.getChildren().addAll(Arrays.asList(se.getObject(), te.getObject(), fe.getObject(), b));
-               
-        TempTower tt = new TempTower("KEI'S TOWER");
-        b.setOnMouseClicked(e -> {  
-            tt.setImage("/images/" + fe.getFile().getName());
-            myMediator.handleEvent(tt, e);
-        });
-        System.out.println(tt.getImagePath()); 
+    private void loadArrayWithEditors (TreeNode root, ArrayList<Node> editors) {
+        if (root.getNumChildren() == 0 && root.getInputType() != "null") {
+            addComponentEditorToArray(root, editors);
+        }
+        else if (root.getMethod() != null){
+            addSimpleEditorToArray(root, editors);
+        }
+    }
+    
+    private void addComponentEditorToArray(TreeNode root, ArrayList<Node> editors) {
+        ComponentEditor component = (ComponentEditor)getInstanceFromName(String.format("%s%s", CLASS_PATH, root.getInputType()));
+        component.setName(Editor.getPropertyName(root.getMethod().getName()));
+        editors.add(component.getObject());
+        nodeMap.put(component, root);
+    }
+    
+    private void addSimpleEditorToArray(TreeNode root, ArrayList<Node> editors) {
+        Class<?> klass = (Class<?>) root.getMethod().getGenericParameterTypes()[0];
+        klass = getConcreteClassFromMap(klass);
+        SimpleEditor simple = new SimpleEditor(klass);
+        editors.add(simple.getObject());
+        nodeMap.put(simple, root);
+    }
+    
+    /**
+     * Checks to see if the input klass is an interface by looking in the properties map.
+     * 
+     * @param klass            the class to check.
+     * @return the conrete class from the map or if the input klass is not in the map, the input
+     */
+    private Class<?> getConcreteClassFromMap(Class<?> klass) {
+        if (getPropertiesMap().containsKey(klass.getName())) {
+            try {
+                String newName = getPropertiesMap().get(klass.getName()).get(0);
+                return Class.forName(newName);
+            }
+            catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return klass;
+    }
+    
+    private Object getInstanceFromName(String name) {
+        Class<?> c = null;
+        Object component = null;
+        try {
+            c = Class.forName(name);
+            component = c.newInstance();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException iae) {
+            iae.printStackTrace();
+        } catch (InstantiationException ie) {
+            ie.printStackTrace();
+        }
+        
+        return component;
     }
 
     @Override
@@ -70,5 +155,9 @@ public class SimpleEditor extends Editor implements UIObject {
     @Override
     void clearValues () {
         editFields.forEach(e -> e.clear());
+    }
+    
+    protected TreeNode getTreeNode() {
+        return root;
     }
 }

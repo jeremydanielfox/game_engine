@@ -2,17 +2,15 @@ package engine.gameobject;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import xml.DataManager;
-import engine.fieldsetting.Settable;
-import engine.gameobject.test.TestWeapon;
 import engine.gameobject.units.BuffableUnit;
 import engine.gameobject.weapon.BasicWeapon;
-import engine.gameobject.weapon.Weapon;
-import engine.pathfinding.EndOfPathException;
+import engine.gameobject.weapon.NullWeapon;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gameworld.ObjectCollection;
@@ -32,9 +30,9 @@ public class GameObjectSimpleTest extends BuffableUnit{
         //createNode();
         myImagePath = "robertDuvall.jpg";
         myLabel = "test object";
-        myPoint = new PointSimple(300,300);
-        myHealth = new HealthSimple(7);
-        super.setWeapon(new TestWeapon());
+        myPoint = new PointSimple(0, 10000); //This initializes them off the screen. If we don't do this, it will show a frame at this point. Needs to be fixed in a better manner.
+        myHealth = new HealthSimple(4);
+        super.setWeapon(new NullWeapon());
 //        myMover = new MoverPoint(new PointSimple(600,600), .2);
         PathFixed myPath = new PathFixed();
         PathSegmentBezier myBez = new PathSegmentBezier();

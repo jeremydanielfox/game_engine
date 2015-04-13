@@ -12,10 +12,17 @@ import engine.gameobject.weapon.firingstrategy.Projectile;
 
 public class TestProjectile extends Projectile{
 
-    public TestProjectile(){
+    private int myType;
+    
+    public TestProjectile(int type){
         super();
-        //addCollisionBehavior(new DirectDamage(1));
-        addCollisionBehavior(new FreezeBuff(20));
+        myType = type;
+        if (type == 1){
+            addCollisionBehavior(new DirectDamage(1));
+        }
+        if (type == 2){
+            addCollisionBehavior(new FreezeBuff(20));
+        }
         myImagePath = "robertDuvall.jpg";
         myLabel = "";
         myHealth = new HealthSimple(1);
@@ -26,6 +33,6 @@ public class TestProjectile extends Projectile{
     }
     
     public Projectile clone(){
-        return new TestProjectile();
+        return new TestProjectile(myType);
     }
 }

@@ -111,6 +111,13 @@ public class BasicWorld implements GameWorld {
 
     @Override
     public void addObject (GameObject toSpawn) {
+        try {
+            toSpawn.move();
+        }
+        catch (EndOfPathException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         myObjects.add(toSpawn);
     }
 

@@ -99,8 +99,12 @@ public class GamePlayerScreen extends Application {
         
         GameWorld world = new BasicWorld();
         world.addObject(new GameObjectSimpleTest());
-        world.addObject(new TestTower());
-        GameObjectQueue q = new ConcreteQueue(new ArrayList<GameObject>());
+        world.addObject(new TestTower(1, 270, 270));
+        List<GameObject> waveObjects = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            waveObjects.add(new GameObjectSimpleTest());
+        }
+        GameObjectQueue q = new ConcreteQueue(waveObjects);
         TimedEvent wave = new ConstantSpacingWave(2.0, q, world);
         StoryBoard story = new StoryBoard(wave);
         

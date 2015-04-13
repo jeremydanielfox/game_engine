@@ -8,16 +8,16 @@ import engine.gameobject.units.BuffableUnit;
 
 public class TestTower extends BuffableUnit{
     
-    public TestTower () {
+    public TestTower (int type, int xcor, int ycor) {
         super();
         myImagePath = "robertDuvall.jpg";
         myLabel = "";
         myHealth = new HealthSimple(3);
-        myPoint = new PointSimple(270, 270);
+        myPoint = new PointSimple(xcor, ycor);
         myMover = new MoverNull();
         myGraphic = new Graphic(60, 60, myImagePath);
         myGraphic.setPoint(myPoint);
-        super.setWeapon(new TestWeapon());
+        super.setWeapon(new TestWeapon(type));
     }
     
     

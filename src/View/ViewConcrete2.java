@@ -156,7 +156,7 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable 
 
     }
 
-    private void addInitialObjects () {
+    private void addInitialObjects () {//This is actually a rendering method now.
         Collection<GameObject> gameObjects = myGame.getLevelBoard().getGameWorld().getGameObjects();
         for (Node n: hack){
             myGameWorldPane.getChildren().remove(n);

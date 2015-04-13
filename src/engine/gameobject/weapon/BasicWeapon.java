@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.TestProjectile;
 import engine.gameobject.units.Buff;
@@ -39,7 +40,7 @@ public class BasicWeapon implements Weapon{
     public BasicWeapon(){
         timeSinceFire = 0;
         myRange = 10000;
-        myFiringRate = new FiringRateUpgrade(2.5);
+        myFiringRate = new FiringRateUpgrade(.5);
         myFiringStrategy = new SingleProjectile();
     }
     
@@ -51,7 +52,8 @@ public class BasicWeapon implements Weapon{
         if (canFire()) {
             List<GameObject> targets = (List<GameObject>) world.objectsInRange(myRange, location);
             List<Buffable> buffables =
-                    targets.stream().filter(p -> p instanceof Buffable)
+                    //targets.stream().filter(p -> p instanceof Buffable && p.getPoint().getX()!=location.getX())//This needs to be filtered by team and object type
+                      targets.stream().filter(p -> p instanceof GameObjectSimpleTest)//temporary
                             .map(p -> (Buffable) p)
                             .collect(Collectors.toList());
             if (!buffables.isEmpty()) {

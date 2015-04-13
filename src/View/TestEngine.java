@@ -19,6 +19,7 @@ import engine.game.PlayerUnit;
 import engine.game.StoryBoard;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
+import engine.gameobject.test.TestTower;
 import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.NullGoal;
@@ -39,11 +40,16 @@ public class TestEngine extends Application {
         primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add constants
         primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
         // BorderPane pane = new BorderPane();
-
         GameWorld world = new BasicWorld();
-        world.addObject(new GameObjectSimpleTest());
-        GameObjectQueue q = new ConcreteQueue(new ArrayList<GameObject>());
-        TimedEvent wave = new ConstantSpacingWave(2.0, q, world);
+        world.addObject(new TestTower(2, 330, 130));
+        world.addObject(new TestTower(4, 270, 270));
+        world.addObject(new TestTower(3, 355, 455));
+        List<GameObject> waveObjects = new ArrayList<>();
+        for (int i = 0; i < 50; i++) {
+            waveObjects.add(new GameObjectSimpleTest());
+        }
+        GameObjectQueue q = new ConcreteQueue(waveObjects);
+        TimedEvent wave = new ConstantSpacingWave(2, 1, q, world);
         StoryBoard story = new StoryBoard(wave);
 
         Scene scene = new Scene(root);

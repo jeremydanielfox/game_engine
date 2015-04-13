@@ -16,5 +16,5 @@ public interface Buffer extends GameObject{
      * Add newBuff to the list of buffs that the buffer is supposed to impart
      * @param newBuff
      */
-    public void addCollsionBehavior (Buff newBuff);
+    public void addCollisionBehavior (Buff newBuff);
 }

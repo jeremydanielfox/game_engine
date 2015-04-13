@@ -200,8 +200,14 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable 
 
     private void setCurrentBackground () {
         ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
-        image.setFitHeight(myDisplayHeight);
-        image.setFitWidth(myDisplayHeight * GAME_WIDTH_TO_HEIGHT);
+        // image.setFitHeight(myDisplayHeight);
+        // image.setFitWidth(myDisplayHeight * GAME_WIDTH_TO_HEIGHT);
+        /*
+         * I changed this to 600 because that's the size of the container - the relative thing works
+         * I think - Kei
+         */
+        image.setFitHeight(600);
+        image.setFitWidth(600);
         myGameWorldPane.getChildren().clear();
         myGameWorldPane.getChildren().add(image);
     }

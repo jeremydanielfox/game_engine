@@ -2,6 +2,7 @@ package engine.shop;
 
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
+import engine.gameobject.units.BuffableUnit;
 import gameworld.BasicWorld;
 import gameworld.GameWorld;
 import java.util.ArrayList;
@@ -19,18 +20,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import engine.gameobject.units.BuffableUnit;
-import engine.gameobject.weapon.upgradable.firingrate.FiringRate;
-import engine.gameobject.weapon.upgradable.firingrate.FiringRateUpgrade;
-import engine.gameobject.weapon.upgradable.range.Range;
-import engine.gameobject.weapon.upgradable.range.RangeUpgrade;
 import View.ViewUtilities;
 
 
 /**
  * View of the shop. Right now it is being tested using its own stage/launch().
  * 
- * @author Nathan Prabhu
+ * @author Nathan Prabhu and Tom Puglisi
  *
  */
 public class View extends Application {
@@ -38,9 +34,10 @@ public class View extends Application {
     private final static int SCENE_WIDTH = 600;
     private final static int SCENE_HEIGHT = 600;
     private final static int SHOP_WIDTH = 160;
-    private final static int ITEM_COUNT = 12;
 
     private BorderPane pane;
+
+    private ShopModel shopModel;
     private GameWorld world;
 
     @Override
@@ -87,27 +84,27 @@ public class View extends Application {
         }
 
         List<Node> items = new ArrayList<Node>();
-        for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
-            shopImages.forEach( (icon, tower) -> {
-                ItemGraphic item = new ItemGraphic(icon, tower);
-                TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
-                Node towerNode = transitionTower.getView();
-                item.setOnMouseClicked(mouseEvent -> {
-                    addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
-                                       towerNode);
-                });
-                towerNode.setOnMouseClicked(mouseEvent -> {
-                    System.out.println(mouseEvent);
-                    GameObject object = new BuffableUnit();
-                    world.addObject(object, new PointSimple(mouseEvent.getSceneX(), mouseEvent.getSceneY())); 
-                    ViewUtilities.unbindCursor(pane);
-                    Point2D location = ViewUtilities.getMouseLocation(mouseEvent, towerNode);
-                    towerNode.relocate(location.getX(), location.getY());
-                    transitionTower.changeColor();
-                });
-                items.add(item);
-            });
-        }
+//        for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
+//            shopImages.forEach( (icon, tower) -> {
+//                ItemGraphic item = new ItemGraphic(icon, tower);
+//                TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
+//                Node towerNode = transitionTower.getView();
+//                item.setOnMouseClicked(mouseEvent -> {
+//                    addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
+//                                       towerNode);
+//                });
+//                towerNode.setOnMouseClicked(mouseEvent -> {
+//                    System.out.println(mouseEvent);
+//                    GameObject object = new BuffableUnit();
+//                    world.addObject(object, new PointSimple(mouseEvent.getSceneX(), mouseEvent.getSceneY())); 
+//                    ViewUtilities.unbindCursor(pane);
+//                    Point2D location = ViewUtilities.getMouseLocation(mouseEvent, towerNode);
+//                    towerNode.relocate(location.getX(), location.getY());
+//                    transitionTower.changeColor();
+//                });
+//                items.add(item);
+//            });
+//        }
         shopDisplay.getChildren().addAll(items);
     }
 

@@ -11,6 +11,12 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.StackPane;
 
 
+/**
+ * A subclass to keep track of Enemy GameObjects that are made through the Editor.
+ * 
+ * @author Kei
+ *
+ */
 public class EnemyPaneList extends PaneList {
     private ObservableList<TitledPane> enemyPaneList;
     private List<EditableNode> enemyEditablesList;
@@ -20,16 +26,18 @@ public class EnemyPaneList extends PaneList {
     private boolean added;
     private StackPane stack;
     private ContainerWrapper wrapper;
+    private boolean initialized;
 
     public EnemyPaneList () {
         enemyEditablesList = new ArrayList<>();
     }
-
+    
     @Override
     public void addToGenericList (EditableNode editableNode) {
         enemyEditablesList.add(editableNode);
         TitledPane newPane = setTitledPaneClick(editableNode, root, workspace, scene, wrapper);
         enemyPaneList.add(newPane);
+        initialized = true;
     }
 
     @Override
@@ -52,15 +60,20 @@ public class EnemyPaneList extends PaneList {
 
     @Override
     public void removeRoot () {
-        stack.getChildren().remove(root);
-        added = true;
+        if (initialized) {
+            System.out.println("removing root");
+            // does not work if path is added first before towers are added
+            stack.getChildren().remove(root);
+            added = true;
+        }
     }
 
     @Override
     public void addRoot () {
-        if (!added) {
+        if (added && initialized) {
+            System.out.println("adding root");
             stack.getChildren().add(root);
-            added = true;
+            added = false;
         }
     }
 

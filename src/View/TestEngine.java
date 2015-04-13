@@ -42,8 +42,13 @@ public class TestEngine extends Application {
 
         GameWorld world = new BasicWorld();
         world.addObject(new GameObjectSimpleTest());
-        GameObjectQueue q = new ConcreteQueue(new ArrayList<GameObject>());
-        TimedEvent wave = new ConstantSpacingWave(2.0, q, world);
+        List<GameObject> waveObjects = new ArrayList<>();
+        waveObjects.add(new GameObjectSimpleTest());
+        waveObjects.add(new GameObjectSimpleTest());
+        waveObjects.add(new GameObjectSimpleTest());
+        waveObjects.add(new GameObjectSimpleTest());
+        GameObjectQueue q = new ConcreteQueue(waveObjects);
+        TimedEvent wave = new ConstantSpacingWave(5, 2, q, world);
         StoryBoard story = new StoryBoard(wave);
 
         Scene scene = new Scene(root);

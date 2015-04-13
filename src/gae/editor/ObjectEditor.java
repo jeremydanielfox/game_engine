@@ -1,5 +1,6 @@
 package gae.editor;
 
+import engine.gameobject.GameObjectSimple;
 import gae.openingView.UIObject;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -57,7 +58,7 @@ public class ObjectEditor extends Application implements UIObject{
 
     @Override
     public void start (Stage arg0) throws Exception {
-        SimpleEditor se = new SimpleEditor();
+        SimpleEditor se = new SimpleEditor(GameObjectSimple.class);
         
         Group root = new Group();
         root.getChildren().add(se.getObject());

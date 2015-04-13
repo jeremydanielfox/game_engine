@@ -3,8 +3,9 @@ package engine.gameobject.weapon.upgradable.firingrate;
 import java.util.Optional;
 import engine.gameobject.weapon.Upgrade;
 
+
 public class FiringRateUpgrade implements FiringRate {
-    
+
     private double increment;
     private Optional<FiringRate> decorated;
 
@@ -14,7 +15,7 @@ public class FiringRateUpgrade implements FiringRate {
     
     public FiringRateUpgrade (double increment) { 
         this.increment = increment;
-        decorated = Optional.empty();
+        this.decorated = Optional.empty();
     }
 
     @Override
@@ -25,7 +26,7 @@ public class FiringRateUpgrade implements FiringRate {
     private double getIncrementedRate (FiringRate decorated) {
         return decorated.getRate() + increment;
     }
-    
+
     @Override
     public Class<? extends Upgrade> getType () {
         return FiringRate.class;

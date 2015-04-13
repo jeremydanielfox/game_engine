@@ -1,5 +1,6 @@
 package engine.gameobject;
 
+import java.io.Serializable;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.fieldsetting.Settable;
 import javafx.scene.Node;
@@ -25,10 +26,10 @@ public class Graphic {
     private transient ImageView myImageView;
 
     public Graphic () {
-        myImageName="";
-        myImageView=new ImageView();
+        myImageName = "";
+        myImageView = new ImageView();
     }
-    
+
     public Graphic (double height, double width, String name) {
         myHeight = height;
         myWidth = width;
@@ -57,12 +58,12 @@ public class Graphic {
         myImageView.setX(point.getX());
         myImageView.setY(point.getY());
     }
-    
+
     @Settable
     public void setWidth (double width) {
         myWidth = width;
     }
-    
+
     @Settable
     public void setHeight (double height) {
         myHeight = height;
@@ -71,5 +72,15 @@ public class Graphic {
     @Settable
     public void setImageName (String imageName) {
         myImageName = imageName;
+    }
+    
+    public double getCenterX () {
+        // To do
+        return 0;
+    }
+    
+    public double getCenterY () {
+        // To do
+        return 0;
     }
 }

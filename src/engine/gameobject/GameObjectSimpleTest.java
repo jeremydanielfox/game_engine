@@ -15,6 +15,7 @@ import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
+import engine.shop.Tag;
 import gameworld.ObjectCollection;
 
 
@@ -166,23 +167,36 @@ public class GameObjectSimpleTest extends BuffableUnit{
         myWeapon = weapon;
     }
 
-	@Override
-	public BasicMover getMover() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	    public void update (ObjectCollection world) {
-	        if (isDead()){
-	            onDeath();
-	            return;
-	        }
-	        try{
-	            move();
-	        }
-	        catch (EndOfPathException e){
-	            
-	        }
-	        
-	    }
+    @Override
+    public BasicMover getMover () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public double getValue () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public Tag getTag () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void update (ObjectCollection world) {
+        if (isDead()) {
+            onDeath();
+            return;
+        }
+        try {
+            move();
+        }
+        catch (EndOfPathException e) {
+
+        }
+
+    }
 }

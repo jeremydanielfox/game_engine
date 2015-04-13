@@ -6,7 +6,8 @@ package engine.events;
  * TimedEvents can also be triggered externally through the setCanStart method (intended for use
  * with a button to activate the event early)
  * 
- * @author Tom and Sierra
+ * @author Tom
+ * @author Sierra
  *
  */
 public abstract class TimedEvent implements Event {
@@ -37,8 +38,18 @@ public abstract class TimedEvent implements Event {
         return (frameTrigger >= 0 && frameCount >= frameTrigger);
     }
 
+    /**
+     * Sets the trigger of this event to zero so that it will start on next update call
+     */
     public void setCanStart () {
         frameTrigger = 0;
+    }
+
+    /**
+     * Increments the frame count by 1
+     */
+    public void incFrameCount () {
+        frameCount++;
     }
 
 }

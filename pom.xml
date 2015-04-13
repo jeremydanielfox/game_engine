@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>javafx</artifactId>
-            <version>8.0.31</version>
+            <version>${java.version}</version>
             <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
             <scope>system</scope>
         </dependency>
@@ -46,10 +46,10 @@
                 <configuration>
                     <encoding>iso-8859-1</encoding>
                     <excludes>
-                        <exclude>src/**/*Test.java</exclude>
+                        <!--<exclude>src/**/*Test.java</exclude>
                         <exclude>src/**/Test*.java</exclude>
                         <exclude>src/**/*Test*.java</exclude>
-                        <!--<exclude>src/usecases/**</exclude>-->
+                        <exclude>src/usecases/**</exclude>-->
                     </excludes>
                     <includes>
                         <include>src/**/*.java</include>

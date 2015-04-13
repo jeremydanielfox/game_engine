@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
@@ -39,11 +40,18 @@ public class BasicWeapon implements Weapon{
 
     public BasicWeapon(){
         timeSinceFire = 0;
-        myRange = 10000;
+        myRange = 250;
         myFiringRate = new FiringRateUpgrade(.5);
         myFiringStrategy = new SingleProjectile();
     }
     
+    @Settable
+    public void setRange(double range){
+       myRange = range;
+    }
+    public void setFiringStrategy(FiringStrategy newStrategy){
+        myFiringStrategy = newStrategy;
+    }
     /* (non-Javadoc)
      * @see engine.gameobject.weapon.Weaopn#fire(gameworld.GameWorld, engine.gameobject.PointSimple)
      */

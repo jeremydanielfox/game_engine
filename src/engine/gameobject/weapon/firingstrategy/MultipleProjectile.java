@@ -15,7 +15,9 @@ public class MultipleProjectile extends BasicStrategy {
     
     @Override
     public void execute(ObjectCollection world, Buffable target, PointSimple location, Buffer prototype) {
-        PointSimple referencePoint = target.getPoint();
+        //PointSimple referencePoint = target.getPoint();
+        //A point 45 degrees to current location as reference
+        PointSimple referencePoint = new PointSimple(location.getX() + 5, location.getY() + 5);
         for (int i =0; i < projectilesCreated; i++){
             PointSimple newPoint = rotatePoint(location, referencePoint, i * 2 * Math.PI / projectilesCreated);
             Buffer newProjectile = makeProjectile(location, newPoint, prototype);
@@ -41,13 +43,16 @@ public class MultipleProjectile extends BasicStrategy {
     private double findReferenceAngle(PointSimple center, PointSimple target){
         double xDiff = target.getX() - center.getX();
         double yDiff = target.getY() - center.getY();
+        double finalAngle;
         if (xDiff == 0 && yDiff == 0)
-                return 0;
-        if (xDiff == 0)
-                return Math.toDegrees((yDiff > 0 ? 1 : -1)*Math.PI/2);
-        double finalAngle = Math.atan(yDiff/xDiff);
-        if (xDiff < 0)
+                finalAngle = 0;
+        else if (xDiff == 0)
+                finalAngle = (yDiff > 0 ? 1 : -1)*Math.PI/2;
+        else{
+            finalAngle = Math.atan(yDiff/xDiff);
+            if (xDiff < 0)
                 finalAngle += Math.PI;
+        }
         return finalAngle;
     }
     

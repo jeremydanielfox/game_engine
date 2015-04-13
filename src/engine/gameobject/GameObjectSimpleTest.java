@@ -27,13 +27,11 @@ import gameworld.ObjectCollection;
 public class GameObjectSimpleTest extends BuffableUnit{
 
     public GameObjectSimpleTest () {
-        //createNode();
         myImagePath = "robertDuvall.jpg";
         myLabel = "test object";
         myPoint = new PointSimple(0, 10000); //This initializes them off the screen. If we don't do this, it will show a frame at this point. Needs to be fixed in a better manner.
-        myHealth = new HealthSimple(4);
+        myHealth = new HealthSimple(3);
         super.setWeapon(new NullWeapon());
-//        myMover = new MoverPoint(new PointSimple(600,600), .2);
         PathFixed myPath = new PathFixed();
         PathSegmentBezier myBez = new PathSegmentBezier();
         List<PointSimple> points = new ArrayList<PointSimple>();

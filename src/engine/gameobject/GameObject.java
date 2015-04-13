@@ -21,6 +21,12 @@ public interface GameObject extends Movable, Health, Graphical {
     public void update(ObjectCollection world);
     
     /**
+     * Executes the defined ondeath behavior when the object is removed from the world.
+     * TODO: THINK ABOUT THIS EXTREMELY CAREFULLY. It's possible it shouldn't be the gameworld, but
+     * the gameobject itself that executes the ondeath behavior.
+     */
+    public void onDeath(ObjectCollection world);
+    /**
      * Labels allow the GameEngine to differentiate
      * 
      * @return: A string

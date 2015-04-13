@@ -41,8 +41,9 @@ public class TestEngine extends Application {
         primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
         // BorderPane pane = new BorderPane();
         GameWorld world = new BasicWorld();
-        world.addObject(new TestTower(1, 130, 130));
-        world.addObject(new TestTower(2, 270, 270));
+        world.addObject(new TestTower(2, 330, 130));
+        world.addObject(new TestTower(1, 270, 270));
+        world.addObject(new TestTower(3, 355, 455));
         List<GameObject> waveObjects = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             waveObjects.add(new GameObjectSimpleTest());

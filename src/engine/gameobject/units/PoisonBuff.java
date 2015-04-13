@@ -3,20 +3,24 @@ package engine.gameobject.units;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Effect;
 
-public class FreezeBuff extends Buff{
+public class PoisonBuff extends Buff{
     
-    public FreezeBuff(int duration){
+    private int damage;
+    public PoisonBuff(int duration, int tickDamage){
         super(duration);
+        damage = tickDamage;
     }
     
     public void apply(BuffableUnit myUnit){
-        myUnit.getMover().setFreeze(true);
-        adjustEffect(myUnit, .66, .5, .5, .5);
+        
+    }
+    
+    protected void changeOverTime(BuffableUnit myUnit){
+        myUnit.changeHealth(-damage);
     }
     
     public void unapply(BuffableUnit myUnit){
-        myUnit.getMover().setFreeze(false);
-        adjustEffect(myUnit, -.66, -.5, -.5, -.5);
+
     }
     
     public boolean isStrongerBuff(Buff otherBuff){

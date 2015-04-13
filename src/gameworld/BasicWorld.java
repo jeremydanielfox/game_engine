@@ -84,12 +84,13 @@ public class BasicWorld implements GameWorld {
         ArrayList<GameObject> buffer = new ArrayList<GameObject>();
         myObjects.forEach(go -> {
             if (go.isDead()) {
-                //System.out.println(go.getClass());
                 buffer.add(go);
             }
-
         });
-        buffer.forEach(go -> myObjects.remove(go));
+        for (GameObject toRemove: buffer){
+            myObjects.remove(toRemove);
+            toRemove.onDeath(this);
+        }
 
     }
 

@@ -15,7 +15,7 @@ public class TestTower extends BuffableUnit{
         myHealth = new HealthSimple(3);
         myPoint = new PointSimple(xcor, ycor);
         myMover = new MoverNull();
-        myGraphic = new Graphic(60, 60, myImagePath);
+        myGraphic = new Graphic(40, 40, myImagePath);
         myGraphic.setPoint(myPoint);
         super.setWeapon(new TestWeapon(type));
     }

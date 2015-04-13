@@ -24,13 +24,10 @@ public class BuffableUnit extends GameObjectSimple implements Buffable, Serializ
     public double getHealth(){
         return myHealth.getHealth();
     }
+    
     @Override
     public void update (ObjectCollection world) {
         advanceBuffs();
-        if (isDead()){
-            onDeath();
-            return;
-        }
         try{
             move();
         }
@@ -46,11 +43,8 @@ public class BuffableUnit extends GameObjectSimple implements Buffable, Serializ
             applyBuff(toAdd);
         }
         else if (toAdd.isStrongerBuff(equalBuff)) {
-            System.out.println(equalBuff.timeLeft());
             removeBuff(equalBuff);
             applyBuff(toAdd);
-            System.out.println("Buff is applied" + "Health: " + getHealth());
-            System.out.println(isDead());
         }
     }
     
@@ -73,11 +67,9 @@ public class BuffableUnit extends GameObjectSimple implements Buffable, Serializ
     private void applyBuff(Buff b){
         b.apply(this);
         buffList.add(b);
-        System.out.println("After adding: " + buffList.size());
     }
     
     private void removeBuff(Buff b){
-        System.out.println("Remove");
         buffList.remove(b);
         b.unapply(this);
     }
@@ -100,6 +92,12 @@ public class BuffableUnit extends GameObjectSimple implements Buffable, Serializ
     @Override
     public Weapon getWeapon () {
         return myWeapon;
+    }
+
+    @Override
+    public void onDeath (ObjectCollection world) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

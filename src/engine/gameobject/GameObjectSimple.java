@@ -1,6 +1,7 @@
 package engine.gameobject;
 
 import javafx.geometry.Point2D;
+import javafx.scene.effect.Effect;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Weapon;
 import engine.gameobject.weapon.WeaponSimple;
@@ -42,10 +43,6 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     @Override
     public void changeHealth (double amount) {
         myHealth.changeHealth(amount);
-    }
-
-    public void onDeath () {
-
     }
 
     // temporary

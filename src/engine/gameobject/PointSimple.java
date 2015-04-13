@@ -65,7 +65,7 @@ public class PointSimple {
     }
 
     private static boolean inRange (double start, double end, double a) {
-        return a > start && a < end;
+        return a >= start && a <= end;
     }
 
     public PointSimple multiply (double factor) {

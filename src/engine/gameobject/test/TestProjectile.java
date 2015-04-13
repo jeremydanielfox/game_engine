@@ -3,6 +3,7 @@ package engine.gameobject.test;
 import engine.gameobject.DirectPointMover;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
+import engine.gameobject.MoverDirection;
 import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.DirectDamage;
@@ -17,17 +18,28 @@ public class TestProjectile extends Projectile{
     public TestProjectile(int type){
         super();
         myType = type;
-        if (type == 1){
-            addCollisionBehavior(new DirectDamage(1));
-        }
-        if (type == 2){
-            addCollisionBehavior(new FreezeBuff(20));
-        }
+
+        
         myImagePath = "robertDuvall.jpg";
         myLabel = "";
         myHealth = new HealthSimple(1);
         myPoint = new PointSimple(300,300);
-        myMover = new DirectPointMover(myPoint, 2.5);
+        if (type == 1 || type == 4){
+            addCollisionBehavior(new DirectDamage(1));
+        }
+        if (type == 2){
+            addCollisionBehavior(new FreezeBuff(30));
+        }
+        if (type == 3){
+            addOnDeath(new FreezeBuff(30));
+            setOnDeathRadius(100);
+            myHealth = new HealthSimple(0);
+        }
+        myMover = new MoverDirection(myPoint, 2.5, 250);
+        if (type == 4){
+            addCollisionBehavior(new DirectDamage(1));
+            myMover = new MoverDirection(myPoint, 4, 90);
+        }
         myGraphic = new Graphic(20, 20, myImagePath);
         myGraphic.setPoint(myPoint);
     }

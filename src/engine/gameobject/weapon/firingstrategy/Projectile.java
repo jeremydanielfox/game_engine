@@ -29,6 +29,10 @@ public class Projectile extends GameObjectSimple implements Buffer {
         onCollision.add(newBuff);
     }
     
+    public void setOnDeathRadius(double radius){
+        onDeath.setRadius(radius);
+    }
+    
     public void addOnDeath(Buff newBuff){
         onDeath.addBuff(newBuff);;
     }
@@ -80,9 +84,12 @@ public class Projectile extends GameObjectSimple implements Buffer {
             //TODO: Implement end of path behavior
             changeHealth(-100);
         }
-        
     }
 
+    public void onDeath(ObjectCollection world){
+        onDeath.explode(world, myPoint.add(new PointSimple(20, 20)));
+    }
+    
     @Override
     public double getHealth () {
         return myHealth.getHealth();

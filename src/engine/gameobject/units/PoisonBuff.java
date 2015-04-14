@@ -19,6 +19,7 @@ public class PoisonBuff extends Buff{
         super(timeIncr);
         this.timeIncr = timeIncr;
         this.damageIncr = damageIncr;
+        decorated = Optional.empty();
     }
     
     public void apply(BuffableUnit myUnit){

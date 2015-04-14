@@ -16,6 +16,7 @@ public class FreezeBuff extends Buff{
     public FreezeBuff(int increment){
         super(increment);
         this.increment = increment;
+        decorated = Optional.empty();
     }
     
     public void apply(BuffableUnit myUnit){

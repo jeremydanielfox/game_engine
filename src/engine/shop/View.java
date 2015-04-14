@@ -2,6 +2,7 @@ package engine.shop;
 
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
+import engine.gameobject.units.BuffableUnit;
 import gameworld.BasicWorld;
 import gameworld.GameWorld;
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import engine.gameobject.units.BuffableUnit;
 import View.ViewUtilities;
 
 
@@ -84,27 +84,27 @@ public class View extends Application {
         }
 
         List<Node> items = new ArrayList<Node>();
-        for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
-            shopImages.forEach( (icon, tower) -> {
-                ItemGraphic item = new ItemGraphic(icon, tower);
-                TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
-                Node towerNode = transitionTower.getView();
-                item.setOnMouseClicked(mouseEvent -> {
-                    addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
-                                       towerNode);
-                });
-                towerNode.setOnMouseClicked(mouseEvent -> {
-                    System.out.println(mouseEvent);
-                    GameObject object = new BuffableUnit();
-                    world.addObject(object, new PointSimple(mouseEvent.getSceneX(), mouseEvent.getSceneY())); 
-                    ViewUtilities.unbindCursor(pane);
-                    Point2D location = ViewUtilities.getMouseLocation(mouseEvent, towerNode);
-                    towerNode.relocate(location.getX(), location.getY());
-                    transitionTower.changeColor();
-                });
-                items.add(item);
-            });
-        }
+//        for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
+//            shopImages.forEach( (icon, tower) -> {
+//                ItemGraphic item = new ItemGraphic(icon, tower);
+//                TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
+//                Node towerNode = transitionTower.getView();
+//                item.setOnMouseClicked(mouseEvent -> {
+//                    addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
+//                                       towerNode);
+//                });
+//                towerNode.setOnMouseClicked(mouseEvent -> {
+//                    System.out.println(mouseEvent);
+//                    GameObject object = new BuffableUnit();
+//                    world.addObject(object, new PointSimple(mouseEvent.getSceneX(), mouseEvent.getSceneY())); 
+//                    ViewUtilities.unbindCursor(pane);
+//                    Point2D location = ViewUtilities.getMouseLocation(mouseEvent, towerNode);
+//                    towerNode.relocate(location.getX(), location.getY());
+//                    transitionTower.changeColor();
+//                });
+//                items.add(item);
+//            });
+//        }
         shopDisplay.getChildren().addAll(items);
     }
 

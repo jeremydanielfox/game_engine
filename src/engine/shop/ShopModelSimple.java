@@ -74,6 +74,7 @@ public class ShopModelSimple implements ShopModel {
      * 
      * @param itemGraphic
      */
+    //TODO: must link upgrade bundle and specific upgrade tree w/"item graphic" selected
     public void purchaseUpgrade (String name, GameObject gameObject) {
         currentPlayer.getWallet().withdraw(getPrice(name));
         // gameObject.getWeapon().applyUpgrade()

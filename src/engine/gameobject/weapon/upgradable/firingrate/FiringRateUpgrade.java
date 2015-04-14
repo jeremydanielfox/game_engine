@@ -10,28 +10,21 @@ public class FiringRateUpgrade implements FiringRate {
     private Optional<FiringRate> decorated;
 
     public FiringRateUpgrade () {
-        setNullDecorated();
-        increment = 0;
+        this(0);
     }
 
     public FiringRateUpgrade (double increment) {
-        //setNullDecorated();
         this.increment = increment;
-    }
-
-    private void setNullDecorated () {
-        /*
-         * commented out because it was giving NullPointerException when instantiating GameObject in
-         * GAE
-         */
-        // FiringRate nullVal = null;
-        // decorated = Optional.of(nullVal);
+        this.decorated = Optional.empty();
     }
 
     @Override
     public double getRate () {
-        return increment;
-        //return decorated.map(FiringRate::getRate).orElse(increment);
+        return decorated.map(this::getIncrementedRate).orElse(increment);
+    }
+
+    private double getIncrementedRate (FiringRate decorated) {
+        return decorated.getRate() + increment;
     }
 
     @Override
@@ -46,7 +39,7 @@ public class FiringRateUpgrade implements FiringRate {
 
     @Override
     public void setDefault () {
-        this.decorated = Optional.of(new FiringRateUpgrade(0));
+        this.decorated = Optional.of(new FiringRateUpgrade());
     }
 
 }

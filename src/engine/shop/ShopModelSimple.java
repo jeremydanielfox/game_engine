@@ -53,6 +53,7 @@ public class ShopModelSimple implements ShopModel {
     }
 
     public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject) {
+        currentGameObject = gameObject;
         List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
         List<ItemGraphic> upgradeGraphics = new ArrayList<ItemGraphic>();
         upgradeMap.clear();

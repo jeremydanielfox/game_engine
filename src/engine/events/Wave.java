@@ -6,21 +6,33 @@ import java.util.List;
 import java.util.Set;
 import engine.gameobject.GameObject;
 import engine.grid.StructurePlacementException;
+import gameworld.BasicWorld;
 import gameworld.GameWorld;
 
 
 public abstract class Wave extends TimedEvent {
 
+    private static final int DEFAULT_FRAME_TRIGGER = -1;
+
     private GameWorld myWorld;
     private GameObjectQueue myQueue;
     private Set<GameObject> myWaveSet;
 
+    public Wave () {
+        super(DEFAULT_FRAME_TRIGGER);
+        initializeVars(new ConcreteQueue(), new BasicWorld());
+    }
+
     public Wave (GameObjectQueue objects, GameWorld world) {
-        this(-1, objects, world);
+        this(DEFAULT_FRAME_TRIGGER, objects, world);
     }
 
     public Wave (double startTime, GameObjectQueue objects, GameWorld world) {
         super(startTime);
+        initializeVars(objects, world);
+    }
+
+    private void initializeVars (GameObjectQueue objects, GameWorld world) {
         myQueue = objects;
         myWorld = world;
         myWaveSet = new HashSet<GameObject>();

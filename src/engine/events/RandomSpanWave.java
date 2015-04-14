@@ -27,4 +27,10 @@ public class RandomSpanWave extends Wave {
         return true;
     }
 
+    @Override
+    public void onCompleteAction () {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

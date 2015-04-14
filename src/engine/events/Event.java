@@ -23,4 +23,11 @@ public interface Event {
      * Changes the Event state to meet it's start conditions
      */
     public void setCanStart ();
+
+    /**
+     * This method will perform completion actions if the event has complete. It will only execute
+     * once the event is complete, and although it can be called multiple times, it will only
+     * execute on the first valid call.
+     */
+    public void onCompleteAction ();
 }

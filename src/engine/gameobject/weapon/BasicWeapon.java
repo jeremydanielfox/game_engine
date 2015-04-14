@@ -1,16 +1,23 @@
 package engine.gameobject.weapon;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
+import engine.gameobject.test.TestProjectile;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.weapon.firingstrategy.Buffer;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.Projectile;
+import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.upgradable.firingrate.FiringRate;
+import engine.gameobject.weapon.upgradable.firingrate.FiringRateUpgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import gameworld.ObjectCollection;
 
@@ -31,6 +38,20 @@ public class BasicWeapon implements Weapon{
     Map<Class<? extends Upgrade>, Upgrade> upgradables;
     protected UpgradeTree tree;
 
+    public BasicWeapon(){
+        timeSinceFire = 0;
+        myRange = 250;
+        myFiringRate = new FiringRateUpgrade(.5);
+        myFiringStrategy = new SingleProjectile();
+    }
+    
+    @Settable
+    public void setRange(double range){
+       myRange = range;
+    }
+    public void setFiringStrategy(FiringStrategy newStrategy){
+        myFiringStrategy = newStrategy;
+    }
     /* (non-Javadoc)
      * @see engine.gameobject.weapon.Weaopn#fire(gameworld.GameWorld, engine.gameobject.PointSimple)
      */
@@ -39,7 +60,8 @@ public class BasicWeapon implements Weapon{
         if (canFire()) {
             List<GameObject> targets = (List<GameObject>) world.objectsInRange(myRange, location);
             List<Buffable> buffables =
-                    targets.stream().filter(p -> p.getClass().isAssignableFrom(Buffable.class))
+                    //targets.stream().filter(p -> p instanceof Buffable && p.getPoint().getX()!=location.getX())//This needs to be filtered by team and object type
+                      targets.stream().filter(p -> p instanceof GameObjectSimpleTest)//temporary
                             .map(p -> (Buffable) p)
                             .collect(Collectors.toList());
             if (!buffables.isEmpty()) {
@@ -57,7 +79,7 @@ public class BasicWeapon implements Weapon{
      */
     @Override
     public void addBuff (Buff newBuff) {
-        myProjectile.addCollsionBehavior(newBuff);
+        myProjectile.addCollisionBehavior(newBuff);
     }
 
     /* (non-Javadoc)

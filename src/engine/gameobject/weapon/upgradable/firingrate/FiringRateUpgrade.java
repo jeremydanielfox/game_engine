@@ -9,11 +9,11 @@ public class FiringRateUpgrade implements FiringRate {
     private double increment;
     private Optional<FiringRate> decorated;
 
-    public FiringRateUpgrade() {
+    public FiringRateUpgrade () {
         this(0);
     }
-    
-    public FiringRateUpgrade (double increment) { 
+
+    public FiringRateUpgrade (double increment) {
         this.increment = increment;
         this.decorated = Optional.empty();
     }
@@ -22,7 +22,7 @@ public class FiringRateUpgrade implements FiringRate {
     public double getRate () {
         return decorated.map(this::getIncrementedRate).orElse(increment);
     }
-    
+
     private double getIncrementedRate (FiringRate decorated) {
         return decorated.getRate() + increment;
     }

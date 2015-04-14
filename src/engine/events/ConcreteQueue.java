@@ -14,6 +14,10 @@ public class ConcreteQueue implements GameObjectQueue {
     private Queue<GameObject> myOrderedObjects;
     private int curIndex = 0;
 
+    public ConcreteQueue(){
+        populateQueue(new ArrayList<GameObject>());
+    }
+    
     public ConcreteQueue (List<GameObject> objects) {
         populateQueue(objects);
     }

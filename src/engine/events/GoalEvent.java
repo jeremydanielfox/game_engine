@@ -45,4 +45,10 @@ public class GoalEvent implements Event {
         
     }
 
+    @Override
+    public void onCompleteAction () {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

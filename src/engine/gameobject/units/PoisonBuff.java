@@ -4,6 +4,11 @@ import java.awt.Color;
 import java.util.Optional;
 import engine.gameobject.weapon.Upgrade;
 
+/**
+ * Buff that poisons its targets. Inflicts total damage across the entire duration of the buff. 
+ * @author Danny Oh and Nathan Prabhu
+ *
+ */
 public class PoisonBuff extends Buff{
     
     private int timeIncr;

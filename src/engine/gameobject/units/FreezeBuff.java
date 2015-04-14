@@ -3,7 +3,11 @@ package engine.gameobject.units;
 import java.util.Optional;
 import engine.gameobject.weapon.Upgrade;
 
-
+/**
+ * Buff that freezes, or temporarily paralyzes, its targets.
+ * @author Danny Oh and Nathan Prabhu
+ *
+ */
 public class FreezeBuff extends Buff{
     
     private int increment;

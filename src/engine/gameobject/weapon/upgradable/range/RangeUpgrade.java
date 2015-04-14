@@ -6,8 +6,7 @@ import engine.gameobject.weapon.Upgrade;
 
 /**
  * Manages a weapon's range. It is both an upgrade and an upgradable via the decorator pattern.
- * 
- * 
+ *
  * @author Nathan Prabhu
  *
  */

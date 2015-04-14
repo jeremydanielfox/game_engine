@@ -62,7 +62,7 @@ public class TestEngine extends Application {
         // ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new
         // NoCurrentEventGoal());
         game.addButton(wrap);
-        View view = new ViewConcrete2(game, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        EngineView view = new ViewConcrete2(game, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 
         HealthDepletionGoal healthy = new HealthDepletionGoal(myPlayer);
         List<Goal> list = new ArrayList<Goal>();

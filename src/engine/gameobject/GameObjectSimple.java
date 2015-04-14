@@ -124,17 +124,17 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         myPoint = point;
     }
 
-    @Settable
+    @Settable()
     public void setHealth (Health health) {
         myHealth = health;
     }
 
-    @Settable
+    @Settable()
     public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }
 
-    @Settable
+    @Settable()
     public void setName (String name) {
         myName = name;
     }

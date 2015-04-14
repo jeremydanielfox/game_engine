@@ -6,8 +6,7 @@ import engine.gameobject.weapon.Upgrade;
 
 /**
  * Manages a weapon's range. It is both an upgrade and an upgradable via the decorator pattern.
- * 
- * 
+ *
  * @author Nathan Prabhu
  *
  */
@@ -31,8 +30,8 @@ public class RangeUpgrade implements Range, Upgrade {
         return decorated.map(this::getIncrementedRange).orElse(increment);
     }
 
-    private double getIncrementedRange (Range decorated) {
-        return decorated.getRange() + increment;
+    private double getIncrementedRange (Range sublayer) {
+        return sublayer.getRange() + increment;
     }
 
     @Override

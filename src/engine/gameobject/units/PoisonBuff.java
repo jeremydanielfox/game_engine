@@ -1,16 +1,25 @@
 package engine.gameobject.units;
 
 import java.awt.Color;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Effect;
+import java.util.Optional;
+import engine.gameobject.weapon.Upgrade;
 
+/**
+ * Buff that poisons its targets. Inflicts total damage across the entire duration of the buff. 
+ * @author Danny Oh and Nathan Prabhu
+ *
+ */
 public class PoisonBuff extends Buff{
     
-    private double damage;
+    private int timeIncr;
+    private double damageIncr;
+    private Optional<PoisonBuff> decorated;
     
-    public PoisonBuff(int duration, int totalDamage){
-        super(duration);
-        damage = totalDamage;
+    public PoisonBuff(int timeIncr, double damageIncr){
+        super(timeIncr);
+        this.timeIncr = timeIncr;
+        this.damageIncr = damageIncr;
+        decorated = Optional.empty();
     }
     
     public void apply(BuffableUnit myUnit){
@@ -25,16 +34,47 @@ public class PoisonBuff extends Buff{
         adjustEffect(myUnit, hsbvals[0], hsbvals[1], hsbvals[2], 0);
     }
     protected void changeOverTime(BuffableUnit myUnit){
-        myUnit.changeHealth(-damage/getDuration());
+        myUnit.changeHealth(-getDamage()/getDuration());
     }
     
+    private double getDamage () {
+        return decorated.map(this::getIncrementedDamage).orElse(damageIncr);
+    }
     
+    private double getIncrementedDamage (PoisonBuff sublayer) {
+        return sublayer.getDuration() + damageIncr;
+    }
+
+    @Override
+    public int getDuration () {
+        return decorated.map(this::getIncrementedDuration).orElse(timeIncr);
+    }
+    
+    private int getIncrementedDuration (PoisonBuff sublayer) {
+        return sublayer.getDuration() + timeIncr;
+    }
+
     public boolean isStrongerBuff(Buff otherBuff){
         //TODO: You need to compare leftover damage?
         return otherBuff.timeLeft() <= timeLeft();
     }
     
     public Buff clone(){
-        return new PoisonBuff(getDuration(), (int) damage);
+        return new PoisonBuff(getDuration(), (int) getDamage());
+    }
+
+    @Override
+    public Class<? extends Upgrade> getType () {
+        return this.getClass();
+    }
+
+    @Override
+    public void setDecorated (Upgrade decorated) {
+        this.decorated = Optional.of((PoisonBuff) decorated);        
+    }
+
+    @Override
+    public void setDefault () {
+        this.decorated = Optional.of(new PoisonBuff(0,0));        
     }
 }

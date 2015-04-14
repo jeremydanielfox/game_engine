@@ -20,8 +20,9 @@ public class ItemGraphic extends Parent {
     private Node itemNode;
     private String name;
     private Graphic shopGraphic;
+    private Command myOnClicked;
 
-    public ItemGraphic (String name, Graphic shopGraphic) {
+    public ItemGraphic (String name, Graphic shopGraphic, Command myOnClicked) {
         this.name = name;
         this.shopGraphic = shopGraphic;
         initialize();
@@ -44,6 +45,10 @@ public class ItemGraphic extends Parent {
     
     public String getName() {
         return name;
+    }
+    
+    public void onClicked () {
+        myOnClicked.execute();
     }
 
 }

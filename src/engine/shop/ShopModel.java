@@ -37,6 +37,8 @@ public interface ShopModel {
      * @param y
      */
     public void purchaseGameObject (String name, double x, double y);
+    
+    public void purchaseUpgrade (String name);
 
     /**
      * 

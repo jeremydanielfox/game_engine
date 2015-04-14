@@ -6,12 +6,10 @@ import java.util.List;
 import java.util.Map;
 import engine.game.Player;
 import engine.gameobject.GameObject;
-import engine.gameobject.Graphical;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import engine.prototype.Prototype;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.PriceTag;
-import engine.shop.tag.Tag;
 import gameworld.GameWorld;
 
 
@@ -28,6 +26,7 @@ public class ShopModelSimple implements ShopModel {
     private Map<String, Prototype<GameObject>> prototypeMap;
     private Map<String, UpgradeBundle> upgradeMap;
     private final double markup;
+    private GameObject currentGameObject;
 
     public ShopModelSimple (List<Prototype<GameObject>> prototypes,
                             GameWorld currentGameWorld,
@@ -43,19 +42,26 @@ public class ShopModelSimple implements ShopModel {
         prototypeMap.put(prototype.getTag().getName(), prototype);
     }
 
-    public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject) {
+    @Override
+    public List<ItemGraphic> getItemGraphics () {
+        List<ItemGraphic> items = new ArrayList<ItemGraphic>();
+        prototypeMap.values().forEach(prototype -> items.add(new ItemGraphic(prototype.getTag()
+                .getName(), ((PriceTag) prototype.getTag())
+                .getShopGraphic(), new DragOnClicked(this, prototype
+                .getTag().getName()))));
+        return items;
+    }
 
+    public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject) {
         List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
         List<ItemGraphic> upgradeGraphics = new ArrayList<ItemGraphic>();
         upgradeMap.clear();
         bundles.forEach(bundle -> {
             upgradeMap.put(bundle.getTag().getName(), bundle);
             upgradeGraphics.add(new ItemGraphic(bundle.getTag().getName(), bundle.getTag()
-                    .getShopGraphic()));
+                    .getShopGraphic(), new BuyOnClicked(this, bundle.getTag().getName())));
         });
-
-        return null;
-
+        return upgradeGraphics;
     }
 
     /**
@@ -74,10 +80,10 @@ public class ShopModelSimple implements ShopModel {
      * 
      * @param itemGraphic
      */
-    //TODO: must link upgrade bundle and specific upgrade tree w/"item graphic" selected
-    public void purchaseUpgrade (String name, GameObject gameObject) {
+    @Override
+    public void purchaseUpgrade (String name) {
         currentPlayer.getWallet().withdraw(getPrice(name));
-        // gameObject.getWeapon().applyUpgrade()
+        currentGameObject.getWeapon().applyUpgrade(upgradeMap.get(name));
     }
 
     public boolean canPurchase (String name) {
@@ -85,7 +91,7 @@ public class ShopModelSimple implements ShopModel {
     }
 
     public double getPrice (String name) {
-        return getPriceTag(name).getValue();
+        return getPriceTag(name).getValue() * markup;
     }
 
     @Override
@@ -97,20 +103,15 @@ public class ShopModelSimple implements ShopModel {
     }
 
     @Override
-    public List<ItemGraphic> getItemGraphics () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public Map<ItemInfo, String> getInfo (String name) {
         Map<ItemInfo, String> info = new HashMap<ItemInfo, String>();
         info.put(ItemInfo.NAME, name);
-        info.put(ItemInfo.DESCRIPTION, );
+        info.put(ItemInfo.DESCRIPTION, getPriceTag(name).getDescription());
+        info.put(ItemInfo.PRICE, Double.toString(getPrice(name)));
         return info;
     }
-    
-    private PriceTag getPriceTag(String name) {
+
+    private PriceTag getPriceTag (String name) {
         if (prototypeMap.containsKey(name)) {
             return (PriceTag) prototypeMap.get(name).getTag();
         }

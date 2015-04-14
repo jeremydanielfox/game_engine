@@ -1,5 +1,6 @@
 package View;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
@@ -21,6 +22,7 @@ import engine.game.Game;
 import engine.goals.*;
 import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
+import engine.gameobject.Graphic;
 
 
 public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable {
@@ -29,6 +31,7 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable 
     public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
 
+    private List<Node> hack = new ArrayList<Node>();
     private Game myGame;
     private Integer myRate = MIN_FRAME_RATE;
     private Timeline myAnimation;
@@ -134,7 +137,7 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable 
         // after updating game, how to update after level ends? need to look into checking something
         // like gameEnded()
         myGame.update();
-
+        addInitialObjects();
         myButtonList.forEach(e -> {
             if (e.isEnabled()) {
                 e.getButton().setDisable(false);
@@ -153,10 +156,15 @@ public class ViewConcrete2 implements View, Observer, ChangeableSpeed, Playable 
 
     }
 
-    private void addInitialObjects () {
+    private void addInitialObjects () {//This is actually a rendering method now.
         Collection<GameObject> gameObjects = myGame.getLevelBoard().getGameWorld().getGameObjects();
+        for (Node n: hack){
+            myGameWorldPane.getChildren().remove(n);
+        }
+        hack.clear();
         for (GameObject o : gameObjects) {
-            myGameWorldPane.getChildren().add(o.getGraphic().getNode());
+                    myGameWorldPane.getChildren().add(o.getGraphic().getNode());
+                    hack.add(o.getGraphic().getNode());
         }
     }
 

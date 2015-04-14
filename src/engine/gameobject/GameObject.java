@@ -23,14 +23,19 @@ public interface GameObject extends Movable, Health, Graphical, PurchasableGameO
     public void update(ObjectCollection world);
     
     /**
-     * Sets the GameObject's Weapon
+     * Executes the defined ondeath behavior when the object is removed from the world.
+     * TODO: THINK ABOUT THIS EXTREMELY CAREFULLY. It's possible it shouldn't be the gameworld, but
+     * the gameobject itself that executes the ondeath behavior.
      */
+
     public void setWeapon (Weapon weapon);
 
     /**
      * Returns the GameObject's Weapon
      */
     public Weapon getWeapon ();
+
+    public void onDeath(ObjectCollection world);
 
     /**
      * Labels allow the GameEngine to differentiate

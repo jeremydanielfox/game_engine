@@ -15,7 +15,7 @@ public class FiringRateUpgrade implements FiringRate {
     }
 
     public FiringRateUpgrade (double increment) {
-        setNullDecorated();
+        //setNullDecorated();
         this.increment = increment;
     }
 
@@ -30,7 +30,8 @@ public class FiringRateUpgrade implements FiringRate {
 
     @Override
     public double getRate () {
-        return decorated.map(FiringRate::getRate).orElse(increment);
+        return increment;
+        //return decorated.map(FiringRate::getRate).orElse(increment);
     }
 
     @Override

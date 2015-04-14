@@ -1,7 +1,9 @@
 package engine.gameobject;
 
-import java.util.List;
 import engine.gameobject.weapon.Weapon;
+
+import engine.shop.PurchasableGameObject;
+import engine.shop.Tag;
 import gameworld.ObjectCollection;
 
 
@@ -11,7 +13,7 @@ import gameworld.ObjectCollection;
  *
  */
 
-public interface GameObject extends Movable, Health, Graphical {
+public interface GameObject extends Movable, Health, Graphical, PurchasableGameObject {
     // public void updateGraphics ();//cannot implement yet
    
     /**
@@ -25,13 +27,29 @@ public interface GameObject extends Movable, Health, Graphical {
      * TODO: THINK ABOUT THIS EXTREMELY CAREFULLY. It's possible it shouldn't be the gameworld, but
      * the gameobject itself that executes the ondeath behavior.
      */
+
+    public void setWeapon (Weapon weapon);
+
+    /**
+     * Returns the GameObject's Weapon
+     */
+    public Weapon getWeapon ();
+
     public void onDeath(ObjectCollection world);
+
     /**
      * Labels allow the GameEngine to differentiate
      * 
      * @return: A string
      */
     public String getLabel ();
+
+    /**
+     * Tags contain important GameObject info (e.g. name, description, image)
+     * 
+     * @return
+     */
+    public Tag getTag ();
 
     /**
      * Creates an identical game object (with different reference).
@@ -42,9 +60,9 @@ public interface GameObject extends Movable, Health, Graphical {
      * Returns the Cartesian coordinate of the game object.
      */
     public PointSimple getPoint ();
-    
+
     public void setPoint (PointSimple point);
-    
+
     /**
      * Sets the GameObject's Weapon
      */
@@ -54,4 +72,5 @@ public interface GameObject extends Movable, Health, Graphical {
      * Returns object's mover
      */
     public BasicMover getMover ();
+
 }

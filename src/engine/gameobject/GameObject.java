@@ -1,6 +1,6 @@
 package engine.gameobject;
 
-import java.util.List;
+import engine.gameobject.labels.Label;
 import engine.gameobject.weapon.Weapon;
 import gameworld.ObjectCollection;
 
@@ -31,7 +31,7 @@ public interface GameObject extends Movable, Health, Graphical {
      * 
      * @return: A string
      */
-    public String getLabel ();
+    public Label getLabel ();
 
     /**
      * Creates an identical game object (with different reference).

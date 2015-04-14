@@ -3,6 +3,8 @@ package engine.gameobject;
 import javafx.geometry.Point2D;
 import javafx.scene.effect.Effect;
 import engine.fieldsetting.Settable;
+import engine.gameobject.labels.Label;
+import engine.gameobject.labels.LabelConcrete;
 import engine.gameobject.weapon.Weapon;
 import engine.gameobject.weapon.WeaponSimple;
 import engine.pathfinding.EndOfPathException;
@@ -57,7 +59,7 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     }
 
     @Override
-    public String getLabel () {
+    public Label getLabel () {
         return myLabel;
     }
 
@@ -113,7 +115,7 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     }
 
     @Settable
-    public void setLabel (String label) {
+    public void setLabel (Label label) {
         myLabel = label;
     }
 

@@ -20,6 +20,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.weapon.upgradable.firingrate.FiringRate;
+import engine.gameobject.weapon.upgradable.firingrate.FiringRateUpgrade;
+import engine.gameobject.weapon.upgradable.range.Range;
+import engine.gameobject.weapon.upgradable.range.RangeUpgrade;
 import View.ViewUtilities;
 
 

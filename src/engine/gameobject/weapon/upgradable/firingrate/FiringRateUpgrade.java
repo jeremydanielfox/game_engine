@@ -17,11 +17,11 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
     private double increment;
     private Optional<FiringRate> decorated;
 
-    public FiringRateUpgrade () {
+    public FiringRateUpgrade() {
         this(0);
     }
-
-    public FiringRateUpgrade (double increment) {
+    
+    public FiringRateUpgrade (double increment) { 
         this.increment = increment;
         decorated = Optional.empty();
     }

@@ -52,7 +52,7 @@ public abstract class Buff implements Upgrade {
      * @return
      */
     public int timeLeft () {
-        return duration - timeSinceStart;
+        return getDuration() - timeSinceStart;
     }
 
     protected void adjustEffect(BuffableUnit myUnit, double hue, double saturation, double brightness, double contrast){

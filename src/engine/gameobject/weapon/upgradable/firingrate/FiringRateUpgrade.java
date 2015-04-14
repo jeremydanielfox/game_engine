@@ -5,7 +5,7 @@ import engine.gameobject.weapon.Upgrade;
 
 
 /**
- * Manages a weapon's range. It is both an upgrade and an upgradable via the decorator pattern.
+ * Manages a weapon's firing rate. It is both an upgrade and an upgradable via the decorator pattern.
  * 
  * 
  * @author Nathan Prabhu
@@ -31,8 +31,8 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
         return decorated.map(this::getIncrementedRate).orElse(increment);
     }
 
-    private double getIncrementedRate (FiringRate decorated) {
-        return decorated.getRate() + increment;
+    private double getIncrementedRate (FiringRate sublayer) {
+        return sublayer.getRate() + increment;
     }
 
     @Override

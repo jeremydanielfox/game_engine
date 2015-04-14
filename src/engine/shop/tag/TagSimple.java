@@ -1,13 +1,13 @@
-package engine.shop;
+package engine.shop.tag;
 
 import engine.fieldsetting.Settable;
 
 
 @Settable
-public class NameTag implements Tag {
+public class TagSimple implements Tag {
     private String name;
 
-    public NameTag () {
+    public TagSimple () {
         name = "";
     }
 

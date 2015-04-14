@@ -1,9 +1,8 @@
 package engine.gameobject;
 
 import engine.gameobject.weapon.Weapon;
-
 import engine.shop.PurchasableGameObject;
-import engine.shop.Tag;
+import engine.shop.tag.Tag;
 import gameworld.ObjectCollection;
 
 

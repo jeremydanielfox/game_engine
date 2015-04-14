@@ -1,4 +1,4 @@
-package engine.shop;
+package engine.shop.tag;
 
 public interface Tag {
 

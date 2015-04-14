@@ -1,6 +1,6 @@
 package engine.prototype;
 
-import engine.shop.Tag;
+import engine.shop.tag.Tag;
 
 /**
  * 

@@ -9,6 +9,9 @@ import engine.gameobject.GameObject;
 import engine.gameobject.Graphical;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import engine.prototype.Prototype;
+import engine.shop.tag.GameObjectTag;
+import engine.shop.tag.PriceTag;
+import engine.shop.tag.Tag;
 import gameworld.GameWorld;
 
 
@@ -41,16 +44,16 @@ public class ShopModelSimple implements ShopModel {
     }
 
     public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject) {
-        /*
-         * List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
-         * List<ItemGraphic> upgradeGraphics = new ArrayList<ItemGraphic>();
-         * upgradeMap.clear();
-         * bundles.forEach(bundle -> {
-         * upgradeMap.put(bundle.getTag().getName(), bundle);
-         * upgradeGraphics.add(new ItemGraphic(bundle.getTag().getName(),
-         * bundle.getTag().getShopGraphic()));
-         * });
-         */
+
+        List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
+        List<ItemGraphic> upgradeGraphics = new ArrayList<ItemGraphic>();
+        upgradeMap.clear();
+        bundles.forEach(bundle -> {
+            upgradeMap.put(bundle.getTag().getName(), bundle);
+            upgradeGraphics.add(new ItemGraphic(bundle.getTag().getName(), bundle.getTag()
+                    .getShopGraphic()));
+        });
+
         return null;
 
     }
@@ -81,20 +84,15 @@ public class ShopModelSimple implements ShopModel {
     }
 
     public double getPrice (String name) {
-        double value;
-        if (prototypeMap.containsKey(name)) {
-            value = ((PriceTag) prototypeMap.get(name).getTag()).getValue();
-        }
-        else {
-            value = upgradeMap.get(name).getTag().getValue();
-        }
-        return value * markup;
+        return getPriceTag(name).getValue();
     }
 
     @Override
     public TransitionGameObject getTransitionGameObject (String name) {
         Prototype<GameObject> prototype = prototypeMap.get(name);
-        return new TransitionGameObject(prototype.getTag().getName(), ((PriceTag) prototype.getTag()).getGraphic(), prototype.getRange());
+        return new TransitionGameObject(prototype.getTag().getName(),
+                                        ((GameObjectTag) prototype.getTag()).getGraphic(),
+                                        prototype.getRange());
     }
 
     @Override
@@ -105,10 +103,21 @@ public class ShopModelSimple implements ShopModel {
 
     @Override
     public Map<ItemInfo, String> getInfo (String name) {
-        //public enu
-        return null;    
+        Map<ItemInfo, String> info = new HashMap<ItemInfo, String>();
+        info.put(ItemInfo.NAME, name);
+        info.put(ItemInfo.DESCRIPTION, );
+        return info;
     }
     
+    private PriceTag getPriceTag(String name) {
+        if (prototypeMap.containsKey(name)) {
+            return (PriceTag) prototypeMap.get(name).getTag();
+        }
+        else {
+            return upgradeMap.get(name).getTag();
+        }
+    }
+
     public enum ItemInfo {
         NAME, DESCRIPTION, PRICE
     }

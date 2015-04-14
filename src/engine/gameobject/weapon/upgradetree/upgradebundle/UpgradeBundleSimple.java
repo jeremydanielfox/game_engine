@@ -8,7 +8,7 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.Graphic;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
-import engine.shop.UpgradeTag;
+import engine.shop.tag.PriceTag;
 
 
 /**
@@ -24,7 +24,7 @@ public class UpgradeBundleSimple implements BuildableBundle {
     private UpgradeBundleSimple next;
     private boolean isFinal;
     private UpgradeTree parent;
-    private UpgradeTag myUpgradeTag;
+    private PriceTag myUpgradeTag;
 
     public UpgradeBundleSimple () {
 
@@ -88,7 +88,7 @@ public class UpgradeBundleSimple implements BuildableBundle {
     }
 
     @Override
-    public UpgradeTag getTag () {
+    public PriceTag getTag () {
         return myUpgradeTag;
     }
 
@@ -99,7 +99,7 @@ public class UpgradeBundleSimple implements BuildableBundle {
     }
     
     @Settable
-    public void setUpgradeTag (UpgradeTag upgradeTag) {
+    public void setUpgradeTag (PriceTag upgradeTag) {
         myUpgradeTag = upgradeTag;
     }
 

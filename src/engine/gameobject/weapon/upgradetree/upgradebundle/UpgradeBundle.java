@@ -4,8 +4,8 @@ import java.util.Map;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.shop.Purchasable;
-import engine.shop.Tag;
-import engine.shop.UpgradeTag;
+import engine.shop.tag.PriceTag;
+import engine.shop.tag.Tag;
 
 
 /**
@@ -38,6 +38,6 @@ public interface UpgradeBundle extends Purchasable {
      */
     public UpgradeTree getParent ();
 
-    public UpgradeTag getTag ();
+    public PriceTag getTag ();
 
 }

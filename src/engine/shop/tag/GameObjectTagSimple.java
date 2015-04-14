@@ -1,16 +1,17 @@
-package engine.shop;
+package engine.shop.tag;
 
 import engine.fieldsetting.Settable;
 import engine.gameobject.Graphic;
+import engine.shop.PurchasableGameObject;
 
 @Settable
-public class PriceTagSimple implements PriceTag {
+public class GameObjectTagSimple implements GameObjectTag {
     private String name;
     private String description;
     private Graphic shopGraphic;
     private PurchasableGameObject purchasable;
 
-    public PriceTagSimple () {
+    public GameObjectTagSimple () {
         name = "";
         description = "";
         shopGraphic = new Graphic();

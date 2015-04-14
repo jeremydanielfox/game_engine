@@ -6,8 +6,8 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Weapon;
 import engine.gameobject.weapon.WeaponSimple;
 import engine.pathfinding.EndOfPathException;
-import engine.shop.NameTag;
-import engine.shop.Tag;
+import engine.shop.tag.Tag;
+import engine.shop.tag.TagSimple;
 
 
 /**
@@ -36,7 +36,7 @@ public abstract class GameObjectSimple implements GameObject {
         myHealth = new HealthSimple();
         myMover = new MoverPath();
         myGraphic = new Graphic();
-        myTag = new NameTag();
+        myTag = new TagSimple();
     }
 
     @Override

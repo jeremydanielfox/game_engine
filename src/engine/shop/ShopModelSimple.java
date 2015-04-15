@@ -1,6 +1,7 @@
 package engine.shop;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,13 +106,14 @@ public class ShopModelSimple implements ShopModel {
 
     @Override
     public Map<ItemInfo, String> getInfo (String name) {
-        Map<ItemInfo, String> info = new HashMap<ItemInfo, String>();
+        Map<ItemInfo, String> info = new EnumMap<ItemInfo, String>(ItemInfo.class);
         info.put(ItemInfo.NAME, name);
         info.put(ItemInfo.DESCRIPTION, getPriceTag(name).getDescription());
         info.put(ItemInfo.PRICE, Double.toString(getPrice(name)));
         return info;
     }
 
+    //TODO: account for the possibility of a "name" not in either map
     private PriceTag getPriceTag (String name) {
         if (prototypeMap.containsKey(name)) {
             return (PriceTag) prototypeMap.get(name).getTag();

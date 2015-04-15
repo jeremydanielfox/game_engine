@@ -32,19 +32,21 @@ public class ItemGraphic extends Parent {
         itemNode = shopGraphic.getNode();
         itemNode.setOnMouseEntered(mouseEvent -> hoverAction());
         itemNode.setOnMouseExited(mouseEvent -> itemNode.setEffect(null));
+        itemNode.setOnMouseClicked(mouseEvent -> onClicked());
         getChildren().add(itemNode);
     }
 
     private void hoverAction () {
         itemNode.setCursor(Cursor.HAND);
         itemNode.setEffect(new Glow(GLOW_VALUE));
-        //System.out.println(String.format("Name: %s", myPriceTag.getName()));
-        //System.out.println(String.format("Cost: %d", myPriceTag.getPrice()));
-        //System.out.println(String.format("Description: %s", myPriceTag.getDescription()));
     }
     
     public String getName() {
         return name;
+    }
+    
+    public Node getGraphic () {
+        return shopGraphic.getNode();
     }
     
     public void onClicked () {

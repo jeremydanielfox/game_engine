@@ -2,7 +2,7 @@ package engine.gameobject;
 
 import engine.gameobject.weapon.Weapon;
 import engine.shop.PurchasableGameObject;
-import engine.shop.tag.Tag;
+import engine.shop.tag.GameObjectTag;
 import gameworld.ObjectCollection;
 
 
@@ -37,18 +37,11 @@ public interface GameObject extends Movable, Health, Graphical, PurchasableGameO
     public void onDeath(ObjectCollection world);
 
     /**
-     * Labels allow the GameEngine to differentiate
-     * 
-     * @return: A string
-     */
-    public String getLabel ();
-
-    /**
      * Tags contain important GameObject info (e.g. name, description, image)
      * 
      * @return
      */
-    public Tag getTag ();
+    public GameObjectTag getTag ();
 
     /**
      * Creates an identical game object (with different reference).

@@ -1,6 +1,6 @@
 package engine.prototype;
 
-import engine.shop.tag.Tag;
+import engine.shop.tag.GameObjectTag;
 
 /**
  * 
@@ -9,7 +9,7 @@ import engine.shop.tag.Tag;
  */
 public interface Prototype<E> {
     public E clone();
-    public Tag getTag ();
+    public GameObjectTag getTag ();
     public double getRange ();
     
 }

@@ -33,12 +33,12 @@ public class ConcreteInteractionEngine implements InteractionEngine {
         try {
             BiConsumer<GameObject, GameObject> consumer =
                     myTable.get(
-                                first.getLabel()).get(second.getLabel());
+                                first.getTag().getLabel()).get(second.getTag().getLabel());
             consumer.accept(first, second);
         }
         catch (NullPointerException e) {
             System.out.println("Interaction hasn't been defined between "
-                               + first.getLabel() + " and " + second.getLabel());
+                               + first.getTag().getLabel() + " and " + second.getTag().getLabel());
 
         }
 
@@ -54,8 +54,8 @@ public class ConcreteInteractionEngine implements InteractionEngine {
      */
     @Override
     public void put (GameObject first, GameObject second, BiConsumer consumer) {
-        String firstID = first.getLabel();
-        String secondID = second.getLabel();
+        String firstID = first.getTag().getLabel();
+        String secondID = second.getTag().getLabel();
         checkNullMap(firstID);
         checkNullMap(secondID);
         putInMap(firstID, secondID, consumer);

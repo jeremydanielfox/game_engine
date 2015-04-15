@@ -45,6 +45,7 @@ public class UpgradeBundleSimple implements BuildableBundle {
             toAdd.upgrade(upgradables.get(toAdd));
         }
         upgradables.add(toAdd);
+        //TODO: add listeners to buffs?
     }
 
     @Override

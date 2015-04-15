@@ -3,12 +3,14 @@ package engine.shop;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.BuffableUnit;
-import gameworld.BasicWorld;
+import gameworld.FixedWorld;
 import gameworld.GameWorld;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -45,7 +47,7 @@ public class View extends Application {
         pane = new BorderPane();
         Scene scene = new Scene(pane, SCENE_WIDTH, SCENE_HEIGHT);
         stage.setScene(scene);
-        world = new BasicWorld();
+        world = new FixedWorld();
 
         // FlowPane contains the entire store. This is what should be moved around.
         FlowPane shopDisplay = new FlowPane();
@@ -66,7 +68,11 @@ public class View extends Application {
 //            System.out.println("Relative coordinates: " +
 //                               ViewUtilities.normalizePixels(mouseEvent, gameView));
             GameObject object = new BuffableUnit();
-            world.addObject(object, new PointSimple(mouseEvent.getX(), mouseEvent.getY()));
+            try {
+				world.addObject(object, new PointSimple(mouseEvent.getX(), mouseEvent.getY()));
+			} catch (Exception e) {
+				//TODO HANDLE EXCEPTION
+			}
             object.getGraphic().getNode().relocate(mouseEvent.getX(), mouseEvent.getY());
             
         });

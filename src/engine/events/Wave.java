@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import engine.gameobject.GameObject;
-import engine.grid.StructurePlacementException;
-import gameworld.BasicWorld;
+import gameworld.FixedWorld;
 import gameworld.GameWorld;
+import gameworld.StructurePlacementException;
 
 
 public abstract class Wave extends TimedEvent {
@@ -20,7 +21,7 @@ public abstract class Wave extends TimedEvent {
 
     public Wave () {
         super(DEFAULT_FRAME_TRIGGER);
-        initializeVars(new ConcreteQueue(), new BasicWorld());
+        initializeVars(new ConcreteQueue(), new FixedWorld());
     }
 
     public Wave (GameObjectQueue objects, GameWorld world) {

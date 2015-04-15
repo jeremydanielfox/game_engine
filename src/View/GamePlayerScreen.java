@@ -2,6 +2,7 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -33,12 +34,12 @@ import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
-import engine.grid.StructurePlacementException;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
 import gae.gameView.Main;
-import gameworld.BasicWorld;
+import gameworld.FixedWorld;
 import gameworld.GameWorld;
+import gameworld.StructurePlacementException;
 
 
 public class GamePlayerScreen extends Application {
@@ -94,7 +95,7 @@ public class GamePlayerScreen extends Application {
     public Node makeDemoGame () {
         ConcreteLevelBoard board = new ConcreteLevelBoard();
 
-        GameWorld world = new BasicWorld();
+        GameWorld world = new FixedWorld();
         world.addObject(new GameObjectSimpleTest());
         GameObjectQueue q = new ConcreteQueue(new ArrayList<GameObject>());
         TimedEvent wave = new ConstantSpacingWave(2.0, q, world);
@@ -120,7 +121,7 @@ public class GamePlayerScreen extends Application {
         list3.add(score2);
 
         board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new BasicWorld(),
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
                                          story));
 
         myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);

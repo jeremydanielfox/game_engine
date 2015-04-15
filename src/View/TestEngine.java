@@ -28,7 +28,7 @@ import engine.goals.ScoreGoal;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
 import gae.gameView.Main;
-import gameworld.BasicWorld;
+import gameworld.FixedWorld;
 import gameworld.GameWorld;
 
 
@@ -41,7 +41,7 @@ public class TestEngine extends Application {
         primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add constants
         primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
         // BorderPane pane = new BorderPane();
-        GameWorld world = new BasicWorld();
+        GameWorld world = new FixedWorld();
         world.addObject(new TestTower(2, 330, 130));
         world.addObject(new TestTower(4, 270, 270));
         world.addObject(new TestTower(3, 355, 455));
@@ -76,7 +76,7 @@ public class TestEngine extends Application {
         list3.add(score2);
 
         board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new BasicWorld(),
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
                                          story));
         // pane.setCenter(view.initializeView());
 

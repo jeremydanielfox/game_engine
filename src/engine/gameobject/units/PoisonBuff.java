@@ -64,17 +64,7 @@ public class PoisonBuff extends Buff{
     }
 
     @Override
-    public Class<? extends Upgrade> getType () {
-        return this.getClass();
-    }
-
-    @Override
-    public void setDecorated (Upgrade decorated) {
+    public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((PoisonBuff) decorated);        
-    }
-
-    @Override
-    public void setDefault () {
-        this.decorated = Optional.of(new PoisonBuff(0,0));        
     }
 }

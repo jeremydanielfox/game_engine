@@ -35,18 +35,8 @@ public class RangeUpgrade implements Range, Upgrade {
     }
 
     @Override
-    public Class<? extends Upgrade> getType () {
-        return Range.class;
-    }
-
-    @Override
-    public void setDecorated (Upgrade decorated) {
+    public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((Range) decorated);
-    }
-
-    @Override
-    public void setDefault () {
-        this.decorated = Optional.of(new RangeUpgrade());
     }
 
 }

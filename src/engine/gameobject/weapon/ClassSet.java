@@ -9,12 +9,23 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 
+/**
+ * ClassSet allows for a unique collection of objects in which the collection only has one
+ * class-type at most, all of which extend from <T>. The motivation behind this class was that
+ * Java's sets check for duplication based on hash value, rather than by class-type.
+ * 
+ * @author Nathan Prabhu
+ *
+ * @param <T> the type of elements maintained by this set
+ */
+
 public class ClassSet<T> implements Set<T> {
 
     // Dummy value to associate with an Object in the backing Map
     private static final Object PRESENT = new Object();
-    
-    Map<String, T> classMap; // className to Object
+
+    // maps className to T
+    Map<String, T> classMap; 
 
     public <T> ClassSet () {
         this.classMap = new HashMap<>();
@@ -39,18 +50,38 @@ public class ClassSet<T> implements Set<T> {
         }
     }
 
+    /**
+     * Removes the specified element from this set if it is present.
+     * 
+     * @param obj object to be removed from this set, if present
+     * @return <tt>true</tt> if the set contained the specified element
+     */
     @Override
     public boolean remove (Object obj) {
-        return classMap.remove(obj.getClass().getName())==PRESENT;
+        String name = obj.getClass().getName();
+        if (classMap.containsKey(name)) {
+            classMap.remove(name);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean contains (Object o) {
-        return classMap.values().contains(o);
+        return classMap.keySet().contains(o.getClass().getName());
     }
 
     public void forEach (Consumer action) {
         classMap.values().forEach(action);
+    }
+
+    /**
+     * 
+     * @param obj
+     * @return
+     */
+    public T get (T obj) {
+        return classMap.get(obj.getClass().getName());
     }
 
     public void clear () {

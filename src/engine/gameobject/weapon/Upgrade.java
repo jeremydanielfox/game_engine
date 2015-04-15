@@ -23,20 +23,8 @@ public interface Upgrade {
 
     /**
      * 
-     * @return Type of Upgrade this Upgrade can be applied to. Examples are Damage and Range.
+     * @param decorated Upgrade to be decorated
      */
-    public Class<? extends Upgrade> getType ();
-
-    /**
-     * 
-     * @param decorated Upgradable to be decorated
-     */
-    public void setDecorated (Upgrade decorated);
-
-    /**
-     * sets Upgradable to a default value. Enables Upgrades if a weapon doesn't contain the existing
-     * Upgradable.
-     */
-    public void setDefault ();
+    public void upgrade (Upgrade decorated);
 
 }

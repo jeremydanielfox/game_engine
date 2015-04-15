@@ -4,13 +4,8 @@
       <myPoints>
         <engine.gameobject.PointSimple>
           <myPoint>
-<<<<<<< HEAD
             <x>11.5</x>
             <y>281.0</y>
-=======
-            <x>560</x>
-            <y>306.0</y>
->>>>>>> 8b8ac5175c61f43134c008f36626bfc85f9488cd
             <hash>0</hash>
           </myPoint>
         </engine.gameobject.PointSimple>

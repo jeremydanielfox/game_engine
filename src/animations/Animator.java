@@ -37,10 +37,10 @@ public class Animator {
     public void shake (Node node) {
         animator.setCycleCount(10);
         animator.getKeyFrames().addAll(new KeyFrame(Duration.millis(20),
-                                                    new KeyValue(node.translateXProperty(), 10,
+                                                    new KeyValue(node.translateXProperty(), 20,
                                                                  Interpolator.LINEAR)),
                                        new KeyFrame(Duration.millis(20), new KeyValue(node
-                                               .translateXProperty(), -10, Interpolator.LINEAR)));
+                                               .translateXProperty(), -20, Interpolator.LINEAR)));
         animator.play();
     }
 

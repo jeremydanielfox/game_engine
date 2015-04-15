@@ -1,6 +1,7 @@
 package engine.gameobject.weapon.upgradetree.upgradebundle;
 
 import java.util.Map;
+import engine.gameobject.weapon.ClassSet;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.shop.Purchasable;
@@ -23,7 +24,7 @@ public interface UpgradeBundle extends Purchasable {
      * 
      * @param upgradables
      */
-    public void applyUpgrades (Map<Class<? extends Upgrade>, Upgrade> upgradables);
+    public void applyUpgrades (ClassSet<Upgrade> upgradables);
     
     /**
      * 

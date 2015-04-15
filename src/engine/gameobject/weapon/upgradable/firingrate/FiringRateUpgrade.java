@@ -5,7 +5,8 @@ import engine.gameobject.weapon.Upgrade;
 
 
 /**
- * Manages a weapon's firing rate. It is both an upgrade and an upgradable via the decorator pattern.
+ * Manages a weapon's firing rate. It is both an upgrade and an upgradable via the decorator
+ * pattern.
  * 
  * 
  * @author Nathan Prabhu
@@ -17,11 +18,11 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
     private double increment;
     private Optional<FiringRate> decorated;
 
-    public FiringRateUpgrade() {
+    public FiringRateUpgrade () {
         this(0);
     }
-    
-    public FiringRateUpgrade (double increment) { 
+
+    public FiringRateUpgrade (double increment) {
         this.increment = increment;
         decorated = Optional.empty();
     }
@@ -35,19 +36,10 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
         return sublayer.getRate() + increment;
     }
 
-    @Override
-    public Class<? extends Upgrade> getType () {
-        return FiringRate.class;
-    }
 
     @Override
-    public void setDecorated (Upgrade decorated) {
+    public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((FiringRate) decorated);
-    }
-
-    @Override
-    public void setDefault () {
-        this.decorated = Optional.of(new FiringRateUpgrade());
     }
 
 }

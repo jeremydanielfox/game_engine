@@ -1,13 +1,11 @@
 package engine.gameobject;
 
 import javafx.geometry.Point2D;
-import javafx.scene.effect.Effect;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Weapon;
-import engine.gameobject.weapon.WeaponSimple;
 import engine.pathfinding.EndOfPathException;
-import engine.shop.tag.Tag;
-import engine.shop.tag.TagSimple;
+import engine.shop.tag.GameObjectTag;
+import engine.shop.tag.GameObjectTagSimple;
 
 
 /**
@@ -25,7 +23,7 @@ public abstract class GameObjectSimple implements GameObject {
     protected Health myHealth;
     protected Mover myMover;
     protected Graphic myGraphic;
-    private Tag myTag;
+    private GameObjectTag myTag;
     private Weapon myWeapon;
 
     public GameObjectSimple () {
@@ -36,7 +34,7 @@ public abstract class GameObjectSimple implements GameObject {
         myHealth = new HealthSimple();
         myMover = new MoverPath();
         myGraphic = new Graphic();
-        myTag = new TagSimple();
+        myTag = new GameObjectTagSimple();
     }
 
     @Override
@@ -55,14 +53,9 @@ public abstract class GameObjectSimple implements GameObject {
             return (GameObject) super.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.out.println(this.getLabel() + " can't be cloned");
+            System.out.println(myTag.getLabel() + " can't be cloned");
             return null;
         }
-    }
-
-    @Override
-    public String getLabel () {
-        return myLabel;
     }
 
     @Override
@@ -106,7 +99,6 @@ public abstract class GameObjectSimple implements GameObject {
     }
 
     //@Settable
-    //TODO: Make settable
     public void setMover (Mover mover) {
         myMover = mover;
     }
@@ -147,12 +139,12 @@ public abstract class GameObjectSimple implements GameObject {
     }
     
     @Override
-    public Tag getTag() {
+    public GameObjectTag getTag() {
         return myTag;
     }
     
     @Settable
-    public void setTag(Tag tag) {
+    public void setTag(GameObjectTag tag) {
         this.myTag = tag;
     }
 

@@ -36,7 +36,7 @@ public class GameObjectToEditable implements Editable {
          */
         name = gameObject.getTag().getName();
         imagePath = gameObject.getImagePath();
-        type = gameObject.getLabel();
+        type = gameObject.getTag().getLabel();
     }
 
     @Override

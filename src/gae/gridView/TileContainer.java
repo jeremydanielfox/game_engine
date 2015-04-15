@@ -2,9 +2,11 @@ package gae.gridView;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
@@ -32,14 +34,14 @@ public class TileContainer extends Region implements ContainerWrapper {
             Screen.getPrimary().getVisualBounds().getWidth() - 120;
     private BorderPane border;
     private List<TileView> tileList = new ArrayList<>();
-    private Rectangle selectionRect = getNewRectangle();
-    private ContextMenu contextmenu;
-    private boolean showMenu;
+    private SelectionRectangle selectionRect;
+    private DoubleProperty gridWidth = new SimpleDoubleProperty(SCREEN_HEIGHT);
+    private DoubleProperty gridHeight = new SimpleDoubleProperty(SCREEN_HEIGHT);
 
     public TileContainer (int size, BorderPane border) {
         this.border = border;
         addTiles(size);
-        addSelectionBox();
+        selectionRect = new SelectionRectangle(this, createContextMenu());
         this.getChildren().add(selectionRect);
     }
 
@@ -87,49 +89,12 @@ public class TileContainer extends Region implements ContainerWrapper {
         return new Point2D(point.getX(), y);
     }
 
-    /**
-     * Method that creates the a selection box when dragging the mouse on the container and gives
-     * the option of setting the tile's walkable property
-     */
-    private void addSelectionBox () {
-        DoubleProperty rectinitX = new SimpleDoubleProperty();
-        DoubleProperty rectinitY = new SimpleDoubleProperty();
-        DoubleProperty rectX = new SimpleDoubleProperty();
-        DoubleProperty rectY = new SimpleDoubleProperty();
-        contextmenu = createContextMenu();
-        selectionRect.widthProperty().bind(rectX.subtract(rectinitX));
-        selectionRect.heightProperty().bind(rectY.subtract(rectinitY));
-        this.setOnMousePressed(e -> {
-            selectionRect.setX(e.getX());
-            selectionRect.setY(e.getY());
-            rectinitX.set(e.getX());
-            rectinitY.set(e.getY());
-            contextmenu = createContextMenu();
-        });
-        this.setOnMouseDragged(e -> {
-            selectionRect.setVisible(true);
-            rectX.set(e.getX());
-            rectY.set(e.getY());
-            showMenu = true;
-        });
-        this.setOnMouseReleased(e -> {
-            if (showMenu) {
-                contextmenu.show(this, e.getScreenX(), e.getScreenY());
-                showMenu = false;
-            }
-        });
+    public DoubleProperty getGridWidthProperty () {
+        return gridWidth;
     }
 
-    /**
-     * Makes the rectangle that will appear upon dragging to select and its properties
-     * 
-     * @return selection rectangle
-     */
-    private Rectangle getNewRectangle () {
-        Rectangle rect = new Rectangle();
-        rect.setFill(Color.web("blue", 0.1));
-        rect.setStroke(Color.BLUE);
-        return rect;
+    public DoubleProperty getGridHeightProperty () {
+        return gridHeight;
     }
 
     /**

@@ -22,12 +22,13 @@ import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.test.TestTower;
 import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
+import engine.goals.*;
 import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
 import gae.gameView.Main;
-import gameworld.BasicWorld;
+import gameworld.FixedWorld;
 import gameworld.GameWorld;
 
 
@@ -40,7 +41,7 @@ public class TestEngine extends Application {
         primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add constants
         primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
         // BorderPane pane = new BorderPane();
-        GameWorld world = new BasicWorld();
+        GameWorld world = new FixedWorld();
         world.addObject(new TestTower(2, 330, 130));
         world.addObject(new TestTower(4, 270, 270));
         world.addObject(new TestTower(3, 355, 455));
@@ -49,7 +50,7 @@ public class TestEngine extends Application {
             waveObjects.add(new GameObjectSimpleTest());
         }
         GameObjectQueue q = new ConcreteQueue(waveObjects);
-        TimedEvent wave = new ConstantSpacingWave(2, 1, q, world);
+        TimedEvent wave = new ConstantSpacingWave(15, 1, q, world);
         StoryBoard story = new StoryBoard(wave);
 
         Scene scene = new Scene(root);
@@ -58,11 +59,11 @@ public class TestEngine extends Application {
         Wallet wallet = new ConcreteWallet(scoreUnit);
         Player myPlayer = new Player("PlayerName", health, scoreUnit, wallet);
         Game game = new ConcreteGame(myPlayer, board, new ArrayList<ButtonWrapper>());
-        ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new NullGoal());
+        ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new NoCurrentEventGoal(story));
         // ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new
         // NoCurrentEventGoal());
         game.addButton(wrap);
-        View view = new ViewConcrete2(game, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        EngineView view = new ViewConcrete2(game, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 
         HealthDepletionGoal healthy = new HealthDepletionGoal(myPlayer);
         List<Goal> list = new ArrayList<Goal>();
@@ -75,7 +76,7 @@ public class TestEngine extends Application {
         list3.add(score2);
 
         board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new BasicWorld(),
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
                                          story));
         // pane.setCenter(view.initializeView());
 

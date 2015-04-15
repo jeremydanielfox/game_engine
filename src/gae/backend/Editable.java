@@ -23,6 +23,9 @@ public interface Editable extends Serializable {
     public MovableImage getEditableImage ();
 
     public void setID (int id);
-    
-    public Object clone();
+
+    public int getID ();
+
+    public Object clone ();
+
 }

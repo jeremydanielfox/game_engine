@@ -8,7 +8,6 @@ import engine.gameobject.weapon.Upgrade;
 /**
  * Manages a weapon's Damage. It is both an upgrade and an upgradable via the decorator pattern.
  * 
- * 
  * @author Nathan Prabhu
  *
  */
@@ -43,17 +42,8 @@ public class DamageUpgrade implements Damage, Upgrade {
     }
 
     @Override
-    public Class<? extends Upgrade> getType () {
-        return Damage.class;
-    }
-
-    @Override
-    public void setDecorated (Upgrade decorated) {
+    public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((Damage) decorated);
     }
 
-    @Override
-    public void setDefault () {
-        this.decorated = Optional.of(new DamageUpgrade(0));
-    }
 }

@@ -1,12 +1,11 @@
 package engine.gameobject;
 
 import javafx.geometry.Point2D;
-import javafx.scene.effect.Effect;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Weapon;
-import engine.gameobject.weapon.WeaponSimple;
 import engine.pathfinding.EndOfPathException;
-import engine.shop.Purchasable;
+import engine.shop.tag.GameObjectTag;
+import engine.shop.tag.GameObjectTagSimple;
 
 
 /**
@@ -16,7 +15,7 @@ import engine.shop.Purchasable;
  *
  */
 @Settable
-public abstract class GameObjectSimple implements GameObject, Purchasable {
+public abstract class GameObjectSimple implements GameObject {
     protected String myImagePath;
     protected String myName;
     protected String myLabel;
@@ -24,6 +23,8 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     protected Health myHealth;
     protected Mover myMover;
     protected Graphic myGraphic;
+    private GameObjectTag myTag;
+    private Weapon myWeapon;
 
     public GameObjectSimple () {
         myImagePath = "";
@@ -33,6 +34,7 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         myHealth = new HealthSimple();
         myMover = new MoverPath();
         myGraphic = new Graphic();
+        myTag = new GameObjectTagSimple();
     }
 
     @Override
@@ -51,14 +53,9 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
             return (GameObject) super.clone();
         }
         catch (CloneNotSupportedException e) {
-            System.out.println(this.getLabel() + " can't be cloned");
+            System.out.println(myTag.getLabel() + " can't be cloned");
             return null;
         }
-    }
-
-    @Override
-    public String getLabel () {
-        return myLabel;
     }
 
     @Override
@@ -102,7 +99,6 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     }
 
     //@Settable
-    //TODO: Make settable
     public void setMover (Mover mover) {
         myMover = mover;
     }
@@ -138,27 +134,18 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     }
 
     @Override
-    public String getName () {
-        // TODO Auto-generated method stub
-        return myName;
-    }
-
-    @Override
     public double getValue () {
-        // TODO Auto-generated method stub
-        return 0;
+        return myWeapon.getValue();
     }
-
+    
     @Override
-    public String getDescription () {
-        // TODO Auto-generated method stub
-        return null;
+    public GameObjectTag getTag() {
+        return myTag;
     }
-
-    @Override
-    public double getPrice () {
-        // TODO Auto-generated method stub
-        return 0;
+    
+    @Settable
+    public void setTag(GameObjectTag tag) {
+        this.myTag = tag;
     }
 
 }

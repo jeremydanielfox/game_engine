@@ -19,18 +19,16 @@ import engine.pathfinding.EndOfPathException;
 import engine.pathfinding.Path;
 
 
-public class BasicWorld implements GameWorld {
+public class AbstractWorld implements GameWorld{
     private List<GameObject> myObjects;
-    private Grid myGrid;
-    private InteractionEngine myCollisionEngine;
+//    private InteractionEngine myCollisionEngine;
 
-    public BasicWorld () {
+    public AbstractWorld () {
         myObjects = new ArrayList<GameObject>();
-        myGrid = new GridFree(5, 5);
     }
 
     @Override
-    public void addObject (GameObject toSpawn, PointSimple pixelCoords) {
+    public void addObject (GameObject toSpawn, PointSimple pixelCoords) throws StructurePlacementException {
         myObjects.add(toSpawn);
         toSpawn.setPoint(pixelCoords);// TODO change from pixel coords
         // myGrid.addObject(toSpawn);
@@ -46,14 +44,7 @@ public class BasicWorld implements GameWorld {
          removeDeadObjects();
     }
 
-    @Override
-    public Path getPathFinder () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void checkCollisions () {
+    private void checkCollisions () {
         List<Buffable> buffables =
                 myObjects.stream().filter(p -> p instanceof Buffable)
                 .map(p -> (Buffable) p)
@@ -78,8 +69,7 @@ public class BasicWorld implements GameWorld {
 
     }
 
-    @Override
-    public void removeDeadObjects () {
+    private void removeDeadObjects () {
         // TODO Auto-generated method stub
         ArrayList<GameObject> buffer = new ArrayList<GameObject>();
         myObjects.forEach(go -> {
@@ -128,3 +118,4 @@ public class BasicWorld implements GameWorld {
     }
 
 }
+

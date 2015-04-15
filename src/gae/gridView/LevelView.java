@@ -17,7 +17,7 @@ import javafx.scene.layout.StackPane;
  * A class that instantiates the necessary components of the level. Contains the Library on the left
  * and grid/background in the center.
  * 
- * @author Kei
+ * @author Kei and Nina
  *
  */
 public class LevelView {
@@ -48,8 +48,8 @@ public class LevelView {
 
         stack.getChildren().addAll(root);
 
-        background.fitWidthProperty().bind(container.widthProperty());
-        background.fitHeightProperty().bind(container.heightProperty());
+        background.fitWidthProperty().bind(container.getGridWidthProperty());
+        background.fitHeightProperty().bind(container.getGridHeightProperty());
 
         wrapper = (ContainerWrapper) container;
         return stack;
@@ -79,8 +79,10 @@ public class LevelView {
     public Image getBackgroundImage () {
         return backgroundProperty.get();
     }
+
     /**
      * Temporary method to pass in the EditableNode all the way to the LibraryView
+     * 
      * @param node
      */
     public void getAddFunction (EditableNode node) {

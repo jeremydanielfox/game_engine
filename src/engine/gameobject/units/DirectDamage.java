@@ -1,20 +1,37 @@
 package engine.gameobject.units;
 
-import javafx.scene.effect.ColorAdjust;
+import java.util.Optional;
+import engine.gameobject.weapon.Upgrade;
 
-public class DirectDamage extends Buff{
-    int myDamage;
+/**
+ * Buff for direct damage.  
+ * @author Danny Oh and Nathan Prabhu
+ *
+ */
+public class DirectDamage extends Buff {
+    
+    private double increment;
+    private Optional<DirectDamage> decorated;
     private final static int graphicDuration = 20;
     
-    public DirectDamage (int damage) {
+    public DirectDamage (double increment) {
         super(graphicDuration);
-        myDamage = damage;
+        this.increment = increment;
+        decorated = Optional.empty();
     }
 
     @Override
     public void apply (BuffableUnit myUnit) {
-        myUnit.changeHealth(-1 * myDamage);
+        myUnit.changeHealth(-1 * getDamage());
         adjustEffect(myUnit, -1, 1, 0, 0);
+    }
+    
+    public double getDamage () {
+        return decorated.map(this::getIncrementedDamage).orElse(increment);
+    }
+    
+    private double getIncrementedDamage (DirectDamage sublayer) {
+        return sublayer.getDamage() + increment;
     }
 
     @Override
@@ -31,7 +48,12 @@ public class DirectDamage extends Buff{
     }
     
     public Buff clone(){
-        return new DirectDamage(myDamage);
+        return new DirectDamage(getDamage());
+    }
+
+    @Override
+    public void upgrade (Upgrade decorated) {
+        this.decorated = Optional.of((DirectDamage) decorated);
     }
 
 }

@@ -1,7 +1,5 @@
 package engine.gameobject.weapon;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,7 +7,6 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
-import engine.gameobject.test.TestProjectile;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.weapon.firingstrategy.Buffer;
@@ -19,6 +16,7 @@ import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.upgradable.firingrate.FiringRate;
 import engine.gameobject.weapon.upgradable.firingrate.FiringRateUpgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
+import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
 
 
@@ -139,6 +137,10 @@ public class BasicWeapon implements Weapon{
 
     private boolean canFire () {
         return timeSinceFire > firingRateToSeconds();
+    }
+    
+    public List<UpgradeBundle> getNextUpgrades () {
+        return tree.getNextUpgrades();
     }
 
 }

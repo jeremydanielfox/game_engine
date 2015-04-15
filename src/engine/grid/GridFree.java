@@ -2,7 +2,9 @@ package engine.grid;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import engine.gameobject.GameObject;
+import gameworld.CoordinateTransformer;
 
 public class GridFree extends GridAbstract {
 	private List<GameObject>[][] myGrid;

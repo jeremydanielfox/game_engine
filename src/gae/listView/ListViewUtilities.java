@@ -36,7 +36,7 @@ public class ListViewUtilities {
 
         image.setFitHeight(THUMBNAIL_SIZE);
         image.setPreserveRatio(true);
-        content.getChildren().addAll(image, new Label(edit.getName()));
+        content.getChildren().addAll(image, new Label(edit.getName() + edit.getID()));
         return content;
     }
 

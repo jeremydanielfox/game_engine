@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import engine.game.Drawer;
 
 
-public interface View {
+public interface EngineView {
     abstract void initializeGameWorld ();
 
     abstract void buildTimeline ();

@@ -70,7 +70,7 @@ public class HUD implements Observer {
         myWholeDisplay.getChildren().add(myStatsDisplay);
         myDisplayFields = new HashMap<>();
         myPane = pane;
-        makeShop();
+        //makeShop();
         makeDefaultButtonDisplay();
         myWholeDisplay.setAlignment(Pos.CENTER);
         myButtonWrapperList = new ArrayList<>();
@@ -133,7 +133,7 @@ public class HUD implements Observer {
         }
     }
 
-    private void makeShop () {
+/*    private void makeShop () {
         FlowPane shopDisplay = new FlowPane();
         shopDisplay.setHgap(5);
         shopDisplay.setVgap(5);
@@ -180,6 +180,6 @@ public class HUD implements Observer {
                 ViewUtilities
                         .bindCursor(node, myPane.getScene().getRoot(), initial, KeyCode.ESCAPE);
         myPane.getChildren().add(bindedTower);
-    }
+    }*/
 
 }

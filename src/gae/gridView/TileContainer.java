@@ -87,6 +87,10 @@ public class TileContainer extends Region implements ContainerWrapper {
         return new Point2D(point.getX(), y);
     }
 
+    /**
+     * Method that creates the a selection box when dragging the mouse on the container and gives
+     * the option of setting the tile's walkable property
+     */
     private void addSelectionBox () {
         DoubleProperty rectinitX = new SimpleDoubleProperty();
         DoubleProperty rectinitY = new SimpleDoubleProperty();
@@ -116,6 +120,11 @@ public class TileContainer extends Region implements ContainerWrapper {
         });
     }
 
+    /**
+     * Makes the rectangle that will appear upon dragging to select and its properties
+     * 
+     * @return selection rectangle
+     */
     private Rectangle getNewRectangle () {
         Rectangle rect = new Rectangle();
         rect.setFill(Color.web("blue", 0.1));
@@ -123,22 +132,30 @@ public class TileContainer extends Region implements ContainerWrapper {
         return rect;
     }
 
+    /**
+     * Creates context menu at the end of a drag selection to set walkable property
+     * 
+     * @return context menu
+     */
     private ContextMenu createContextMenu () {
         ContextMenu cmenu = new ContextMenu();
-        MenuItem walkable = new MenuItem("Make Walkable");
-        walkable.setOnAction(e -> {
-            tileList.stream().forEach(tile -> tile.handleSelected(selectionRect, true));
-            selectionRect.setVisible(false);
-            ;
-        });
-        MenuItem unwalkable = new MenuItem("Make Unwalkable");
-        unwalkable.setOnAction(e -> {
-            tileList.stream().forEach(tile -> tile.handleSelected(selectionRect, false));
-            selectionRect.setVisible(false);
-        });
-        cmenu.getItems().addAll(walkable, unwalkable);
+        cmenu.getItems().addAll(createMenuItem("Make Walkable", true),
+                                createMenuItem("Make Unwalkable", false));
         return cmenu;
+    }
 
+    /**
+     * Creates menu items to set whether a tile is walkable
+     * 
+     * @return menu item
+     */
+    private MenuItem createMenuItem (String name, boolean walkable) {
+        MenuItem item = new MenuItem(name);
+        item.setOnAction(e -> {
+            tileList.stream().forEach(tile -> tile.handleSelected(selectionRect, walkable));
+            selectionRect.setVisible(false);
+        });
+        return item;
     }
 
 }

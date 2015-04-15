@@ -52,18 +52,8 @@ public class DirectDamage extends Buff {
     }
 
     @Override
-    public Class<? extends Upgrade> getType () {
-        return DirectDamage.class;
-    }
-
-    @Override
-    public void setDecorated (Upgrade decorated) {
+    public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((DirectDamage) decorated);
-    }
-
-    @Override
-    public void setDefault () {
-        this.decorated = Optional.of(new DirectDamage(0));
     }
 
 }

@@ -55,7 +55,7 @@ public class GameObjectToEditable implements Editable {
 
     @Override
     public String getName () {
-        return name + " " + myID;
+        return name + " ";
     }
 
     @Override
@@ -96,5 +96,10 @@ public class GameObjectToEditable implements Editable {
         catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public int getID () {
+        return myID;
     }
 }

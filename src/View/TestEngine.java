@@ -40,6 +40,7 @@ public class TestEngine extends Application {
         primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
         // BorderPane pane = new BorderPane();
         GameWorld world = new FixedWorld();
+        GameObject prototypeTower = new TestTower(2, 330, 130);
         world.addObject(new TestTower(2, 330, 130));
         world.addObject(new TestTower(4, 270, 270));
         world.addObject(new TestTower(3, 355, 455));
@@ -63,7 +64,8 @@ public class TestEngine extends Application {
         game.addButton(wrap);
         
         // initialize ShopModel
-        ShopModel shopModel = new ShopModelSimple(world, myPlayer);
+        ShopModel shopModel = new ShopModelSimple(world, myPlayer, 1.2);
+        shopModel.addPrototype(prototypeTower);
         
         EngineView view = new ViewConcrete2(game, shopModel, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         

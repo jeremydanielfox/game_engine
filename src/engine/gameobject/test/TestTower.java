@@ -15,6 +15,9 @@ public class TestTower extends BuffableUnit{
         setHealth(new HealthSimple(3));
         setMover(new MoverNull());
         setWeapon(new TestWeapon(type));
+        getTag().setName("TestTower");
+        getTag().setDescription("Just a test tower; nothing special here...");
+        getTag().setShopGraphic(new Graphic(20, 20, "robertDuvall.jpg"));
     }
     
     

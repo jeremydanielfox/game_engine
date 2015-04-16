@@ -43,16 +43,19 @@ public class GameObjectTagSimple implements GameObjectTag {
         return purchasable.getValue();
     }
 
+    @Override
     @Settable
     public void setName (String name) {
         this.name = name;
     }
 
+    @Override
     @Settable
     public void setDescription (String description) {
         this.description = description;
     }
 
+    @Override
     @Settable
     public void setShopGraphic (Graphic shopGraphic) {
         this.shopGraphic = shopGraphic;

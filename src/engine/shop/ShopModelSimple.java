@@ -32,12 +32,12 @@ public class ShopModelSimple implements ShopModel {
     private GameObject currentGameObject;
 
     // For test only
-    public ShopModelSimple (GameWorld world, Player player) {
+    public ShopModelSimple (GameWorld world, Player player, double markup) {
         //List<Prototype<GameObject>>prototypes =
                 
-        this.markup = 1.2;
-        this.myGameWorld = null;
-        currentPlayer = new Player();
+        this.markup = markup;
+        this.myGameWorld = world;
+        currentPlayer = player;
         prototypeMap = new HashMap<>();
         upgradeMap = new HashMap<>();
         //prototypes.forEach(prototype -> addPrototype(prototype));

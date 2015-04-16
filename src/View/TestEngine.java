@@ -20,11 +20,9 @@ import engine.game.StoryBoard;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.test.TestTower;
-import engine.goals.Goal;
-import engine.goals.HealthDepletionGoal;
 import engine.goals.*;
-import engine.goals.NullGoal;
-import engine.goals.ScoreGoal;
+import engine.shop.ShopModel;
+import engine.shop.ShopModelSimple;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
 import gae.gameView.Main;
@@ -63,8 +61,12 @@ public class TestEngine extends Application {
         // ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new
         // NoCurrentEventGoal());
         game.addButton(wrap);
-        EngineView view = new ViewConcrete2(game, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
-
+        
+        // initialize ShopModel
+        ShopModel shopModel = new ShopModelSimple(world, myPlayer);
+        
+        EngineView view = new ViewConcrete2(game, shopModel, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        
         HealthDepletionGoal healthy = new HealthDepletionGoal(myPlayer);
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);

@@ -24,7 +24,7 @@ public class ViewUtilities {
      * @param key Disabling key
      * @return
      */
-    public static void bindCursor (Node node, Pane pane, Point2D initial, KeyCode key) {
+    public static Node bindCursor (Node node, Node pane, Point2D initial, KeyCode key) {
         final Group wrapGroup = new Group(node);
         wrapGroup.relocate(initial.getX(), initial.getY());
         pane.setOnMouseMoved(mouseEvent -> {
@@ -44,7 +44,7 @@ public class ViewUtilities {
             }
         });
 
-        pane.getChildren().add(wrapGroup);
+       return wrapGroup;
     }
     
     public static void unbindCursor(Node scene) {

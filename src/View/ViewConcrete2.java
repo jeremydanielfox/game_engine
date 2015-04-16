@@ -23,6 +23,7 @@ import engine.goals.*;
 import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
 import engine.gameobject.Graphic;
+import engine.shop.ShopModel;
 
 
 public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Playable {
@@ -43,12 +44,13 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private double myDisplayWidth;
     private double myDisplayHeight;
     private HUD myHeadsUp;
+    private ShopModel shop;
 
-    public ViewConcrete2 (Game game, double width, double height) {
+    public ViewConcrete2 (Game game, ShopModel shop, double width, double height) {
         myGame = game;
         myLevelBoard = myGame.getLevelBoard();
         myLevelBoard.addObserver(this);
-
+        
         myDisplayWidth = width;
         myDisplayHeight = height;
     }
@@ -66,7 +68,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     @Override
     public void initializeGameWorld () {
         setCurrentBackground();
-        myHeadsUp = new HUD(myPane);
+        myHeadsUp = new HUD(myPane, shop);
         addControlButtons();
         for (Displayable d : myGame.getPlayer().getDisplayables()) {
             myHeadsUp.addPairedDisplay(d);

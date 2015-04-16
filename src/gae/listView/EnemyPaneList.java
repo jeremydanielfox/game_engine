@@ -71,4 +71,8 @@ public class EnemyPaneList extends PaneList {
         // }
     }
 
+    @Override
+    public Map<EditableNode, ObservableList<Editable>> getMap () {
+        return instancesEditableNodeMap;
+    }
 }

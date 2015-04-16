@@ -70,4 +70,9 @@ public class TowerPaneList extends PaneList {
         }
     }
 
+    @Override
+    public Map<EditableNode, ObservableList<Editable>> getMap () {
+        return instancesEditableNodeMap;
+    }
+
 }

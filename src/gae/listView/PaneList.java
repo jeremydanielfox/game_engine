@@ -51,6 +51,8 @@ public abstract class PaneList {
     public abstract void removeRoot ();
 
     public abstract void addRoot ();
+    
+    public abstract Map<EditableNode, ObservableList<Editable>> getMap();
 
     /**
      * method created to make a simple TitledPane with a text
@@ -192,7 +194,8 @@ public abstract class PaneList {
 
             Editable newEditable = node.makeNewInstance();
             instanceList.add(newEditable);
-            newEditable.setLocation(currentX, currentY);
+            Point2D relativeLocation = wrapper.convertCoordinates(currentX, currentY);
+            newEditable.setLocation(relativeLocation.getX(), relativeLocation.getY());
             MovableImage edimage = new MovableImage(node.getImageView(), newEditable, wrapper);
             newEditable.setMovableImage(edimage);
             edimage.relocate(currentX, currentY);

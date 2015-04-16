@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import engine.gameobject.weapon.Weapon;
 import gae.gridView.Pair;
+import gae.gridView.Path;
 import gae.listView.MovableImage;
 import gae.openingView.UIObject;
 
@@ -102,5 +103,17 @@ public class TempTower implements Editable, UIObject {
     @Override
     public int getID () {
         return myID;
+    }
+
+    @Override
+    public Path getPath () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setPath (Path path) {
+        // TODO Auto-generated method stub
+        
     }
 }

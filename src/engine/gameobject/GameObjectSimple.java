@@ -141,11 +141,12 @@ public abstract class GameObjectSimple implements GameObject {
 
     // added because tag is broken and I can't test - Kei
     public String getName () {
-        return myName;
+        // works with return myName - editor not compatible
+        return myTag.getName();
     }
 
     public String getLabel () {
-        return "Tower";
+        return myTag.getLabel();
     }
 
     @Override

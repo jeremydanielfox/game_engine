@@ -47,44 +47,43 @@ public class View extends Application {
 
     @Override
     public void start (Stage stage) {
-//        pane = new BorderPane();
-//        Scene scene = new Scene(pane, SCENE_WIDTH, SCENE_HEIGHT);
-//        stage.setScene(scene);
-//        world = new FixedWorld();
-//
-//        // FlowPane contains the entire store. This is what should be moved around.
-//        FlowPane shopDisplay = new FlowPane();
-//        shopDisplay.setHgap(5);
-//        shopDisplay.setVgap(5);
-//        pane.setRight(shopDisplay);
-//        shopDisplay.setMaxWidth(SHOP_WIDTH);
-//        shopDisplay.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
-//
-//        // add Icons
-//        addIcons(shopDisplay);
-//
-//        // add general gameWorld view
-//        BorderPane gameView = new BorderPane();
-//        pane.setCenter(gameView);
-//        gameView.setBackground(new Background(new BackgroundFill(Color.BEIGE, null, null)));
-//        gameView.setOnMousePressed(mouseEvent -> {
-////            System.out.println("Relative coordinates: " +
-////                               ViewUtilities.normalizePixels(mouseEvent, gameView));
-//            GameObject object = new BuffableUnit();
-//            try {
-//				world.addObject(object, new PointSimple(mouseEvent.getX(), mouseEvent.getY()));
-//			} catch (Exception e) {
-//				//TODO HANDLE EXCEPTION
-//			}
-//            object.getGraphic().getNode().relocate(mouseEvent.getX(), mouseEvent.getY());
-//            
-//        });
-//        stage.show();
-        Set<Buff> test = new ClassSet<>();
-        test.add(new DirectDamage(5));
-        test.add(new FreezeBuff(10));
-        int x = test.size();
-        x++;
+        pane = new BorderPane();
+        Scene scene = new Scene(pane, SCENE_WIDTH, SCENE_HEIGHT);
+        stage.setScene(scene);
+        world = new FixedWorld();
+
+        // FlowPane contains the entire store. This is what should be moved around.
+        FlowPane shopDisplay = new FlowPane();
+        shopDisplay.setHgap(5);
+        shopDisplay.setVgap(5);
+        pane.setRight(shopDisplay);
+        shopDisplay.setMaxWidth(SHOP_WIDTH);
+        shopDisplay.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
+
+        // add Icons
+        addIcons(shopDisplay);
+
+        // add general gameWorld view
+        BorderPane gameView = new BorderPane();
+        pane.setCenter(gameView);
+        gameView.setBackground(new Background(new BackgroundFill(Color.BEIGE, null, null)));
+        gameView.setOnMousePressed(mouseEvent -> {
+//            System.out.println("Relative coordinates: " +
+//                               ViewUtilities.normalizePixels(mouseEvent, gameView));
+            GameObject object = new BuffableUnit();
+            try {
+				world.addObject(object, new PointSimple(mouseEvent.getX(), mouseEvent.getY()));
+			} catch (Exception e) {
+				//TODO HANDLE EXCEPTION
+			}
+            object.getGraphic().getNode().relocate(mouseEvent.getX(), mouseEvent.getY());
+            
+        });
+        stage.show();
+//        Set<Buff> test = new ClassSet<>();
+//        test.add(new DirectDamage(5));
+//        test.add(new FreezeBuff(10));
+//        System.out.println(test);
     }
 
     private void addIcons (FlowPane shopDisplay) {

@@ -20,9 +20,9 @@ public class ItemGraphic extends Parent {
     private Node itemNode;
     private String name;
     private Graphic shopGraphic;
-    private Command myOnClicked;
+    private OnClickedCommand myOnClicked;
 
-    public ItemGraphic (String name, Graphic shopGraphic, Command myOnClicked) {
+    public ItemGraphic (String name, Graphic shopGraphic, OnClickedCommand myOnClicked) {
         this.name = name;
         this.shopGraphic = shopGraphic;
         initialize();
@@ -32,23 +32,25 @@ public class ItemGraphic extends Parent {
         itemNode = shopGraphic.getNode();
         itemNode.setOnMouseEntered(mouseEvent -> hoverAction());
         itemNode.setOnMouseExited(mouseEvent -> itemNode.setEffect(null));
+        itemNode.setOnMouseClicked(mouseEvent -> onClicked());
         getChildren().add(itemNode);
     }
 
     private void hoverAction () {
         itemNode.setCursor(Cursor.HAND);
         itemNode.setEffect(new Glow(GLOW_VALUE));
-        //System.out.println(String.format("Name: %s", myPriceTag.getName()));
-        //System.out.println(String.format("Cost: %d", myPriceTag.getPrice()));
-        //System.out.println(String.format("Description: %s", myPriceTag.getDescription()));
     }
     
     public String getName() {
         return name;
     }
     
-    public void onClicked () {
-        myOnClicked.execute();
+    public Node getGraphic () {
+        return shopGraphic.getNode();
+    }
+    
+    public TransitionGameObject onClicked () {
+        return myOnClicked.execute();
     }
 
 }

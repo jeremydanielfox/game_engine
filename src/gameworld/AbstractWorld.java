@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+import javafx.scene.Node;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
@@ -113,7 +115,7 @@ public class AbstractWorld implements GameWorld{
     }
 
     @Override
-    public boolean isPlacable (GameObject toSpawn, PointSimple pixelCoords) {
+    public boolean isPlacable (Node n, PointSimple pixelCoords) {
         return true; // TODO plz replace with logic. Ex: towers cannot be placed on towers
     }
 

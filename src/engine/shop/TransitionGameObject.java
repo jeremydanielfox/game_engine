@@ -20,7 +20,7 @@ import engine.gameobject.Graphical;
 public class TransitionGameObject implements Graphical {
 
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
-    private static final Color WHITE_COLOR = Color.rgb(255, 255, 255, 0.5);
+    private static final Color WHITE_COLOR = Color.rgb(255, 255, 255, 0.5); // half-transparent white
   
     private Graphic myGraphic;
     private String name;

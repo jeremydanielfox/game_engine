@@ -1,9 +1,9 @@
 package engine.shop;
 
-import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Map;
 import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
 import engine.prototype.Prototype;
 import engine.shop.ShopModelSimple.ItemInfo;
 
@@ -68,6 +68,6 @@ public interface ShopModel {
      * @param location
      * @return true if the object is placable
      */
-    public boolean checkPlacement (String name, Point2D location);
+    public boolean checkPlacement (String name, PointSimple location);
     
 }

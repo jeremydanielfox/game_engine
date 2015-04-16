@@ -1,6 +1,6 @@
 package engine.shop;
 
-import java.util.EnumMap;
+import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Map;
 import engine.gameobject.GameObject;
@@ -61,5 +61,13 @@ public interface ShopModel {
      * @param name
      */
     public Map<ItemInfo, String> getInfo (String name);
+    
+    /**
+     * Checks if the GameObject associated with the name is placable at the given location
+     * @param name
+     * @param location
+     * @return true if the object is placable
+     */
+    public boolean checkPlacement (String name, Point2D location);
     
 }

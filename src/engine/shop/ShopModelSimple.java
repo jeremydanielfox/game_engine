@@ -85,7 +85,8 @@ public class ShopModelSimple implements ShopModel {
     @Override
     public void purchaseUpgrade (String name) {
         currentPlayer.getWallet().withdraw(getPrice(name));
-        //currentGameObject.getWeapon().applyUpgrade(upgradeMap.get(name));
+        currentGameObject.getWeapon().applyUpgrade(upgradeMap.get(name));
+        getUpgradeGraphics(currentGameObject);
     }
 
     public boolean canPurchase (String name) {

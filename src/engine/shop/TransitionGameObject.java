@@ -17,7 +17,7 @@ import engine.gameobject.Graphical;
  *
  */
 
-public class TransitionGameObject implements Graphical {
+public class TransitionGameObject {
 
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
     private static final Color WHITE_COLOR = Color.rgb(255, 255, 255, 0.5); // half-transparent white
@@ -37,11 +37,6 @@ public class TransitionGameObject implements Graphical {
         initialize();
     }
 
-    // This method now only needs to be called once
-    public Node getView () {
-        return pane;
-    }
-
     // Shared initialization method
     private void initialize () {
         pane = new StackPane();
@@ -52,17 +47,16 @@ public class TransitionGameObject implements Graphical {
         pane.getChildren().addAll(rangeDetection, myGraphic.getNode());
     }
 
-    @Override
-    public Graphic getGraphic () {
-       return myGraphic;
+    public Node getNode () {
+       return pane;
     }
     
     public String getName () {
         return name;
     }
     
-    public void changeColor () {
-        rangeDetection.setFill(WHITE_COLOR);
+    public void setRangeCircleColor (Boolean isPlacable) {
+        rangeDetection.setFill(isPlacable ? WHITE_COLOR:ERROR_COLOR);
     }
 
 }

@@ -1,9 +1,9 @@
 package engine.shop;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
 import engine.prototype.Prototype;
 import engine.shop.ShopModelSimple.ItemInfo;
 
@@ -37,7 +37,7 @@ public interface ShopModel {
      * @param x
      * @param y
      */
-    public void purchaseGameObject (String name, double x, double y);
+    public void purchaseGameObject (String name, PointSimple location);
     
     public void purchaseUpgrade (String name);
 
@@ -61,5 +61,13 @@ public interface ShopModel {
      * @param name
      */
     public Map<ItemInfo, String> getInfo (String name);
+    
+    /**
+     * Checks if the GameObject associated with the name is placable at the given location
+     * @param name
+     * @param location
+     * @return true if the object is placable
+     */
+    public boolean checkPlacement (String name, PointSimple location);
     
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import engine.game.Player;
 import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import engine.prototype.Prototype;
 import engine.shop.tag.GameObjectTag;
@@ -71,7 +72,7 @@ public class ShopModelSimple implements ShopModel {
      * 
      * @param transitionGameObject
      */
-    public void purchaseGameObject (String name, double x, double y) {
+    public void purchaseGameObject (String name, PointSimple location) {
         myGameWorld.addObject(prototypeMap.get(name).clone());
         currentPlayer.getWallet().withdraw(getPrice(name));
     }
@@ -85,7 +86,8 @@ public class ShopModelSimple implements ShopModel {
     @Override
     public void purchaseUpgrade (String name) {
         currentPlayer.getWallet().withdraw(getPrice(name));
-        //currentGameObject.getWeapon().applyUpgrade(upgradeMap.get(name));
+        currentGameObject.getWeapon().applyUpgrades(upgradeMap.get(name));
+        getUpgradeGraphics(currentGameObject);
     }
 
     public boolean canPurchase (String name) {
@@ -113,7 +115,7 @@ public class ShopModelSimple implements ShopModel {
         return info;
     }
 
-    //TODO: account for the possibility of a "name" not in either map
+    // TODO: account for the possibility of a "name" not in either map
     private PriceTag getPriceTag (String name) {
         if (prototypeMap.containsKey(name)) {
             return (PriceTag) prototypeMap.get(name).getTag();
@@ -125,6 +127,11 @@ public class ShopModelSimple implements ShopModel {
 
     public enum ItemInfo {
         NAME, DESCRIPTION, PRICE
+    }
+
+    public boolean checkPlacement (String name, PointSimple location) {
+        return myGameWorld.isPlacable(prototypeMap.get(name).getTag().getGraphic().getNode(),
+                                      location);
     }
 
 }

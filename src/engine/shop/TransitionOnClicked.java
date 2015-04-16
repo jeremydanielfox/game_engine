@@ -1,10 +1,10 @@
 package engine.shop;
 
-public class BuyOnClicked implements OnClickedCommand {
+public class TransitionOnClicked implements OnClickedCommand {
     private ShopModel myShopModel;
     private String name;
     
-    public BuyOnClicked(ShopModel shopModel, String name) {
+    public TransitionOnClicked(ShopModel shopModel, String name) {
         myShopModel = shopModel;
         this.name = name;
     }
@@ -12,8 +12,7 @@ public class BuyOnClicked implements OnClickedCommand {
     
     @Override
     public TransitionGameObject execute () {
-        myShopModel.purchaseUpgrade(name);
-        return null;
+        return myShopModel.getTransitionGameObject(name);
     }
 
 }

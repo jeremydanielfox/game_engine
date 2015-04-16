@@ -116,6 +116,7 @@ public abstract class GameObjectSimple implements GameObject {
     @Settable
     public void setPoint (PointSimple point) {
         myPoint = point;
+        myGraphic.setPoint(point);
     }
 
     @Settable

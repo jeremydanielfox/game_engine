@@ -34,9 +34,12 @@ public class GameObjectToEditable implements Editable {
          * Serializable)
          * TODO: find out how to copy the object
          */
-        name = gameObject.getTag().getName();
+        // name = gameObject.getTag().getName();
+        name = gameObject.getName();
         imagePath = gameObject.getImagePath();
-        type = gameObject.getTag().getLabel();
+        // type = gameObject.getTag().getLabel();
+        type = gameObject.getLabel();
+        gameObject = null;
     }
 
     @Override

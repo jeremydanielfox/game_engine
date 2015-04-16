@@ -1,12 +1,15 @@
 package gae.gridView;
 
+import gae.backend.TempTower;
 import gae.listView.EditableNode;
+import gae.listView.LibraryData;
 import gae.listView.LibraryView;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -29,6 +32,7 @@ public class LevelView {
     private ObservableList<PathView> paths =
             FXCollections.observableArrayList();
     private LibraryView libraryview;
+    private LibraryData libraryData;
 
     /**
      * Creates a StackPane that includes the background image and the TileContainer, put together in
@@ -62,7 +66,8 @@ public class LevelView {
      * @return
      */
     private Group getLibraryView () {
-        libraryview = new LibraryView();
+        libraryData = LibraryData.getInstance();
+        libraryview = new LibraryView(libraryData.getObservableList());
         Group leftview =
                 libraryview.getGroup(stack, scene, paths, backgroundProperty, wrapper);
         // TODO: can't do the above since it messes up the coordinates - got to fix
@@ -86,6 +91,15 @@ public class LevelView {
      * @param node
      */
     public void getAddFunction (EditableNode node) {
-        libraryview.addToList(node);
+        libraryData.addToList(node);
+    }
+
+    private Button tempButton () {
+        Button temp = new Button("add to List");
+        temp.setTranslateX(0);
+        temp.setTranslateY(500);
+        EditableNode node = new EditableNode(new TempTower());
+        temp.setOnAction(e -> libraryData.addToList(node));
+        return temp;
     }
 }

@@ -39,7 +39,7 @@ public class EditableNode implements UIObject {
         Editable copy = (Editable) DeepCopy.copy(editable);
         copy.setID(myID);
         myID++;
-        myChildren.add(copy);
+//        myChildren.add(copy);
         return copy;
     }
 
@@ -55,7 +55,6 @@ public class EditableNode implements UIObject {
     public ImageView getImageView () {
         return ImageUtilities.changeImageSize(new ImageView(new Image(editable.getImagePath())),
                                               75, 75);
-
     }
 
     public String getName () {

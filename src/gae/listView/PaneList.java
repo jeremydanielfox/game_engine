@@ -41,16 +41,8 @@ public abstract class PaneList {
     public abstract TitledPane initialize (Group root,
                                            Node node,
                                            Scene scene,
-                                           ContainerWrapper wrapper);
-
-    /**
-     * adds the EditableNode to its specific list
-     * 
-     * @param node
-     */
-    public abstract void addToGenericList (EditableNode node);
-
-    public abstract String getType ();
+                                           ContainerWrapper wrapper,
+                                           ObservableList<EditableNode> observableList);
 
     public abstract void removeRoot ();
 
@@ -94,15 +86,17 @@ public abstract class PaneList {
      * @return
      */
     protected TitledPane setTitledPaneClick (EditableNode node,
+                                             ObservableList<Editable> instanceList,
                                              Group root,
                                              Node pane,
                                              Scene scene,
                                              ContainerWrapper wrapper) {
         TitledPane newPane = new TitledPane();
         newPane.setText(node.getName());
-        ObservableList<Editable> editableList = node.getChildrenList();
+        // ObservableList<Editable> editableList = node.getChildrenList();
         // imageList = new ArrayList<>();
-        newPane.setContent(ListViewUtilities.createList(editableList, scene));
+        // newPane.setContent(ListViewUtilities.createList(editableList, scene));
+        newPane.setContent(ListViewUtilities.createList(instanceList, scene));
         newPane.setOnMousePressed(me -> {
             if (me.isSecondaryButtonDown()) {
                 ContextMenu contextmenu = new ContextMenu();
@@ -116,7 +110,7 @@ public abstract class PaneList {
                                                      ViewUtilities
                                                              .getMouseLocation(me, transitionImage),
                                                      KeyCode.ESCAPE);
-                    makeNodePlaceable(binder, node, root, wrapper);
+                    makeNodePlaceable(binder, node, root, wrapper, instanceList);
                     root.getChildren().add(binder);
 
                 });
@@ -140,7 +134,7 @@ public abstract class PaneList {
     private void makeNodePlaceable (Node binder,
                                     EditableNode node,
                                     Group root,
-                                    ContainerWrapper wrapper) {
+                                    ContainerWrapper wrapper, ObservableList<Editable> instanceList) {
         binder.setOnMouseClicked(ev -> {
             Point2D current =
                     binder.localToParent(new Point2D(binder.getTranslateX(), binder
@@ -151,6 +145,7 @@ public abstract class PaneList {
                 throw new ObjectOutOfBoundsException();
 
             Editable newEditable = node.makeNewInstance();
+            instanceList.add(newEditable);
             newEditable.setLocation(currentX, currentY);
             MovableImage edimage = new MovableImage(node.getImageView(), newEditable, wrapper);
             newEditable.setEditableImage(edimage);

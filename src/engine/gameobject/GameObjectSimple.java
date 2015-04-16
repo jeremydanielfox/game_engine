@@ -98,7 +98,7 @@ public abstract class GameObjectSimple implements GameObject {
         return myImagePath;
     }
 
-    //@Settable
+    // @Settable
     public void setMover (Mover mover) {
         myMover = mover;
     }
@@ -138,14 +138,23 @@ public abstract class GameObjectSimple implements GameObject {
     public double getValue () {
         return myWeapon.getValue();
     }
-    
+
+    // added because tag is broken and I can't test - Kei
+    public String getName () {
+        return myName;
+    }
+
+    public String getLabel () {
+        return "Tower";
+    }
+
     @Override
-    public GameObjectTag getTag() {
+    public GameObjectTag getTag () {
         return myTag;
     }
-    
+
     @Settable
-    public void setTag(GameObjectTag tag) {
+    public void setTag (GameObjectTag tag) {
         this.myTag = tag;
     }
 

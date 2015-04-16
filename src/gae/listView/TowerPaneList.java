@@ -1,14 +1,20 @@
 package gae.listView;
 
+import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.StackPane;
+
 
 /**
  * A subclass to keep track of Tower GameObjects that are made through the Editor.
@@ -17,50 +23,54 @@ import javafx.scene.layout.StackPane;
  *
  */
 public class TowerPaneList extends PaneList {
-    private ObservableList<TitledPane> towerPaneList;
-    private List<EditableNode> towerEditablesList; // the list of types of Towers
+    private Map<EditableNode, ObservableList<Editable>> instancesEditableNodeMap;
     private Group root;
-    private Node workspace;
-    private Scene scene;
     private StackPane stack;
     private boolean added;
     private boolean initialized;
-    private ContainerWrapper wrapper;
 
     public TowerPaneList () {
-        towerEditablesList = new ArrayList<>();
+        instancesEditableNodeMap = new HashMap<>();
     }
 
     @Override
-    public void addToGenericList (EditableNode editableNode) {
-        towerEditablesList.add(editableNode);
-        TitledPane newPane = setTitledPaneClick(editableNode, root, workspace, scene, wrapper);
-        towerPaneList.add(newPane);
-        initialized = true;
-    }
-
-    @Override
-    public TitledPane initialize (Group root, Node node, Scene scene, ContainerWrapper wrapper) {
+    public TitledPane initialize (Group root,
+                                  Node node,
+                                  Scene scene,
+                                  ContainerWrapper wrapper,
+                                  ObservableList<EditableNode> observableList) {
         this.root = root;
         root.setManaged(false);
-        this.workspace = node;
-        this.stack = (StackPane) workspace;
-        this.scene = scene;
-        this.wrapper = wrapper;
+        this.stack = (StackPane) node;
         TitledPane pane = getTitledPane("Tower");
-        towerPaneList = setAccordion(pane);
-        return pane;
-    }
+        ObservableList<TitledPane> towerPaneList = setAccordion(pane);
+        observableList.addListener(new ListChangeListener<EditableNode>() {
+            public void onChanged (javafx.collections.ListChangeListener.Change<? extends EditableNode> change) {
+                while (change.next()) {
+                    if (change.wasAdded()) { // if an editablenode was added
+                        EditableNode added = (EditableNode) change.getAddedSubList().get(0);
+                        if (added.getType().equals("Tower")) {
+                            ObservableList<Editable> instanceList =
+                                    FXCollections.observableArrayList();
+                            instancesEditableNodeMap.put(added, instanceList);
+                            TitledPane newPane =
+                                    setTitledPaneClick(added, instanceList, root, node, scene,
+                                                       wrapper);
+                            towerPaneList.add(newPane);
+                            initialized = true;
+                        }
+                    }
+                }
+            }
+        });
 
-    @Override
-    public String getType () {
-        return "Tower";
+        return pane;
     }
 
     @Override
     public void removeRoot () {
         if (initialized) {
-            System.out.println("removing root");
+            System.out.println("removing tower root");
             // does not work if path is added first before towers are added
             stack.getChildren().remove(root);
             added = true;
@@ -70,7 +80,7 @@ public class TowerPaneList extends PaneList {
     @Override
     public void addRoot () {
         if (added && initialized) {
-            System.out.println("adding root");
+            System.out.println("adding tower root");
             stack.getChildren().add(root);
             added = false;
         }

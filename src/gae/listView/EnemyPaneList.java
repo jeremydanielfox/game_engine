@@ -28,6 +28,7 @@ public class EnemyPaneList extends PaneList {
     private boolean added;
     private StackPane stack;
     private boolean initialized;
+    private static final String TYPE = "Enemy";
 
     public EnemyPaneList () {
         instancesEditableNodeMap = new HashMap<>();
@@ -42,40 +43,11 @@ public class EnemyPaneList extends PaneList {
         this.root = root;
         root.setManaged(false);
         this.stack = (StackPane) node;
-        TitledPane pane = getTitledPane("Enemy");
-        ObservableList<TitledPane> enemyPaneList = setAccordion(pane);
-        for (EditableNode previousNode : observableList) {
-            if (previousNode.getType().equals("Enemy")) {
-                ObservableList<Editable> instanceList =
-                        FXCollections.observableArrayList();
-                instancesEditableNodeMap.put(previousNode, instanceList);
-                TitledPane newPane =
-                        setTitledPaneClick(previousNode, instanceList, root, node, scene,
-                                           wrapper);
-                enemyPaneList.add(newPane);
-
-            }
-        }
-        observableList.addListener(new ListChangeListener<EditableNode>() {
-            public void onChanged (javafx.collections.ListChangeListener.Change<? extends EditableNode> change) {
-                while (change.next()) {
-                    if (change.wasAdded()) { // if an editablenode was added
-                        EditableNode added = (EditableNode) change.getAddedSubList().get(0);
-                        if (added.getType().equals("Enemy")) {
-                            ObservableList<Editable> instanceList =
-                                    FXCollections.observableArrayList();
-                            instancesEditableNodeMap.put(added, instanceList);
-                            TitledPane newPane =
-                                    setTitledPaneClick(added, instanceList, root, node, scene,
-                                                       wrapper);
-                            enemyPaneList.add(newPane);
-                            initialized = true;
-                        }
-                    }
-                }
-            }
-        });
-
+        TitledPane pane = getTitledPane(TYPE);
+        ObservableList<TitledPane> towerPaneList = setAccordion(pane);
+        setUpObservableList(towerPaneList, observableList, TYPE, instancesEditableNodeMap, root,
+                            node, scene, wrapper);
+        initialized = true;
         return pane;
     }
 

@@ -1,10 +1,14 @@
 package gae.listView;
 
+import java.util.List;
+import java.util.Map;
 import gae.backend.Editable;
 import View.ViewUtilities;
 import exception.ObjectOutOfBoundsException;
 import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -74,6 +78,50 @@ public abstract class PaneList {
         return accordion.getPanes();
     }
 
+    protected void setUpObservableList (ObservableList<TitledPane> paneList,
+                                        ObservableList<EditableNode> observableList,
+                                        String type,
+                                        Map<EditableNode, ObservableList<Editable>> map,
+                                        Group root,
+                                        Node node,
+                                        Scene scene,
+                                        ContainerWrapper wrapper) {
+
+        for (EditableNode previousNode : observableList) {
+            setUpNewInstanceList(paneList, previousNode, map, root, node, scene, wrapper, type);
+        }
+        observableList.addListener(new ListChangeListener<EditableNode>() {
+            public void onChanged (javafx.collections.ListChangeListener.Change<? extends EditableNode> change) {
+                while (change.next()) {
+                    if (change.wasAdded()) { // if an editablenode was added
+                        EditableNode added = (EditableNode) change.getAddedSubList().get(0);
+                        setUpNewInstanceList(paneList, added, map, root, node, scene, wrapper, type);
+                    }
+                }
+            }
+        });
+
+    }
+
+    private void setUpNewInstanceList (ObservableList<TitledPane> paneList,
+                                       EditableNode editableNode,
+                                       Map<EditableNode, ObservableList<Editable>> map,
+                                       Group root,
+                                       Node node,
+                                       Scene scene,
+                                       ContainerWrapper wrapper,
+                                       String type) {
+        if (editableNode.getType().equals(type)) {
+            ObservableList<Editable> instanceList =
+                    FXCollections.observableArrayList();
+            map.put(editableNode, instanceList);
+            TitledPane newPane =
+                    setTitledPaneClick(editableNode, instanceList, root, node, scene,
+                                       wrapper);
+            paneList.add(newPane);
+        }
+    }
+
     /**
      * sets up the clicking of the TitledPane such that one can instantiate an object by right
      * clicking the object. Also deals with binding the image to the cursor
@@ -93,9 +141,6 @@ public abstract class PaneList {
                                              ContainerWrapper wrapper) {
         TitledPane newPane = new TitledPane();
         newPane.setText(node.getName());
-        // ObservableList<Editable> editableList = node.getChildrenList();
-        // imageList = new ArrayList<>();
-        // newPane.setContent(ListViewUtilities.createList(editableList, scene));
         newPane.setContent(ListViewUtilities.createList(instanceList, scene));
         newPane.setOnMousePressed(me -> {
             if (me.isSecondaryButtonDown()) {
@@ -148,7 +193,7 @@ public abstract class PaneList {
             instanceList.add(newEditable);
             newEditable.setLocation(currentX, currentY);
             MovableImage edimage = new MovableImage(node.getImageView(), newEditable, wrapper);
-            newEditable.setEditableImage(edimage);
+            newEditable.setMovableImage(edimage);
             edimage.relocate(currentX, currentY);
             // for (EditableImage image : imageList) {
             // if (edimage.checkIntersect(image)) {

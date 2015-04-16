@@ -20,7 +20,7 @@ import javafx.scene.layout.StackPane;
  * A class that instantiates the necessary components of the level. Contains the Library on the left
  * and grid/background in the center.
  * 
- * @author Kei and Nina
+ * @author Kei
  *
  */
 public class LevelView {
@@ -33,6 +33,26 @@ public class LevelView {
             FXCollections.observableArrayList();
     private LibraryView libraryview;
     private LibraryData libraryData;
+
+    public BorderPane getBorder (Scene scene) {
+        border = new BorderPane();
+        border.setCenter(getStack(scene));
+        border.setLeft(getLibraryView());
+        return border;
+    }
+
+    public Image getBackgroundImage () {
+        return backgroundProperty.get();
+    }
+
+    /**
+     * Temporary method to pass in the EditableNode all the way to the LibraryView
+     * 
+     * @param node
+     */
+    public void getAddFunction (EditableNode node) {
+        libraryData.addToList(node);
+    }
 
     /**
      * Creates a StackPane that includes the background image and the TileContainer, put together in
@@ -72,26 +92,6 @@ public class LevelView {
                 libraryview.getGroup(stack, scene, paths, backgroundProperty, wrapper);
         // TODO: can't do the above since it messes up the coordinates - got to fix
         return leftview;
-    }
-
-    public BorderPane getBorder (Scene scene) {
-        border = new BorderPane();
-        border.setCenter(getStack(scene));
-        border.setLeft(getLibraryView());
-        return border;
-    }
-
-    public Image getBackgroundImage () {
-        return backgroundProperty.get();
-    }
-
-    /**
-     * Temporary method to pass in the EditableNode all the way to the LibraryView
-     * 
-     * @param node
-     */
-    public void getAddFunction (EditableNode node) {
-        libraryData.addToList(node);
     }
 
     private Button tempButton () {

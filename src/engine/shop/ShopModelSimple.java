@@ -72,7 +72,7 @@ public class ShopModelSimple implements ShopModel {
      * 
      * @param transitionGameObject
      */
-    public void purchaseGameObject (String name, double x, double y) {
+    public void purchaseGameObject (String name, PointSimple location) {
         myGameWorld.addObject(prototypeMap.get(name).clone());
         currentPlayer.getWallet().withdraw(getPrice(name));
     }

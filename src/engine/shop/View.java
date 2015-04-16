@@ -121,11 +121,11 @@ public class View extends Application {
         shopDisplay.getChildren().addAll(items);
     }
 
-    private void addTransitionTower (Point2D initial, Node node) {
-        Node bindedTower =
-                ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE);
-        pane.getChildren().add(bindedTower);
-    }
+//    private void addTransitionTower (Point2D initial, Node node) {
+//        Node bindedTower =
+//                ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE);
+//        pane.getChildren().add(bindedTower);
+//    }
 
     public static void main (String[] args) {
         launch(args);

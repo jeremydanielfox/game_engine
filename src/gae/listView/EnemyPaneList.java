@@ -44,6 +44,18 @@ public class EnemyPaneList extends PaneList {
         this.stack = (StackPane) node;
         TitledPane pane = getTitledPane("Enemy");
         ObservableList<TitledPane> enemyPaneList = setAccordion(pane);
+        for (EditableNode previousNode : observableList) {
+            if (previousNode.getType().equals("Enemy")) {
+                ObservableList<Editable> instanceList =
+                        FXCollections.observableArrayList();
+                instancesEditableNodeMap.put(previousNode, instanceList);
+                TitledPane newPane =
+                        setTitledPaneClick(previousNode, instanceList, root, node, scene,
+                                           wrapper);
+                enemyPaneList.add(newPane);
+
+            }
+        }
         observableList.addListener(new ListChangeListener<EditableNode>() {
             public void onChanged (javafx.collections.ListChangeListener.Change<? extends EditableNode> change) {
                 while (change.next()) {

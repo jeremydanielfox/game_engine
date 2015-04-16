@@ -1,6 +1,7 @@
 package engine.shop;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,18 @@ public class ShopModelSimple implements ShopModel {
     private Map<String, UpgradeBundle> upgradeMap;
     private final double markup;
     private GameObject currentGameObject;
+
+    // For test only
+    public ShopModelSimple (GameWorld world, Player player) {
+        //List<Prototype<GameObject>>prototypes =
+                
+        this.markup = 1.2;
+        this.myGameWorld = null;
+        currentPlayer = new Player();
+        prototypeMap = new HashMap<>();
+        upgradeMap = new HashMap<>();
+        //prototypes.forEach(prototype -> addPrototype(prototype));
+    }
 
     public ShopModelSimple (List<Prototype<GameObject>> prototypes,
                             GameWorld currentGameWorld,

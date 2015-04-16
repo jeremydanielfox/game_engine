@@ -10,6 +10,9 @@ import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.BuffableUnit;
 import engine.shop.ItemGraphic;
+import engine.shop.ShopModel;
+import engine.shop.ShopModelSimple;
+import engine.shop.ShopView;
 import engine.shop.TransitionGameObject;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
@@ -46,10 +49,12 @@ public class HUD implements Observer {
     private VBox myWholeDisplay;
     private BorderPane myPane;
     private HBox myDefaultButtonDisplay;
+    private ShopModel shop;
 
     private List<ButtonWrapper> myButtonWrapperList;
 
-    public HUD (BorderPane pane) {
+    public HUD (BorderPane pane, ShopModel shop) {
+        this.shop = shop;
         initialize(pane);
     }
 
@@ -70,7 +75,7 @@ public class HUD implements Observer {
         myWholeDisplay.getChildren().add(myStatsDisplay);
         myDisplayFields = new HashMap<>();
         myPane = pane;
-        //makeShop();
+        makeShop();
         makeDefaultButtonDisplay();
         myWholeDisplay.setAlignment(Pos.CENTER);
         myButtonWrapperList = new ArrayList<>();
@@ -133,7 +138,10 @@ public class HUD implements Observer {
         }
     }
 
-/*    private void makeShop () {
+    private void makeShop () {
+        myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
+    }
+    /*
         FlowPane shopDisplay = new FlowPane();
         shopDisplay.setHgap(5);
         shopDisplay.setVgap(5);

@@ -1,12 +1,15 @@
 package gae.gridView;
 
+import gae.backend.TempTower;
 import gae.listView.EditableNode;
+import gae.listView.LibraryData;
 import gae.listView.LibraryView;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -17,7 +20,7 @@ import javafx.scene.layout.StackPane;
  * A class that instantiates the necessary components of the level. Contains the Library on the left
  * and grid/background in the center.
  * 
- * @author Kei and Nina
+ * @author Kei
  *
  */
 public class LevelView {
@@ -29,6 +32,27 @@ public class LevelView {
     private ObservableList<PathView> paths =
             FXCollections.observableArrayList();
     private LibraryView libraryview;
+    private LibraryData libraryData;
+
+    public BorderPane getBorder (Scene scene) {
+        border = new BorderPane();
+        border.setCenter(getStack(scene));
+        border.setLeft(getLibraryView());
+        return border;
+    }
+
+    public Image getBackgroundImage () {
+        return backgroundProperty.get();
+    }
+
+    /**
+     * Temporary method to pass in the EditableNode all the way to the LibraryView
+     * 
+     * @param node
+     */
+    public void getAddFunction (EditableNode node) {
+        libraryData.addToList(node);
+    }
 
     /**
      * Creates a StackPane that includes the background image and the TileContainer, put together in
@@ -62,30 +86,20 @@ public class LevelView {
      * @return
      */
     private Group getLibraryView () {
-        libraryview = new LibraryView();
+        libraryData = LibraryData.getInstance();
+        libraryview = new LibraryView(libraryData.getObservableList());
         Group leftview =
                 libraryview.getGroup(stack, scene, paths, backgroundProperty, wrapper);
         // TODO: can't do the above since it messes up the coordinates - got to fix
         return leftview;
     }
 
-    public BorderPane getBorder (Scene scene) {
-        border = new BorderPane();
-        border.setCenter(getStack(scene));
-        border.setLeft(getLibraryView());
-        return border;
-    }
-
-    public Image getBackgroundImage () {
-        return backgroundProperty.get();
-    }
-
-    /**
-     * Temporary method to pass in the EditableNode all the way to the LibraryView
-     * 
-     * @param node
-     */
-    public void getAddFunction (EditableNode node) {
-        libraryview.addToList(node);
+    private Button tempButton () {
+        Button temp = new Button("add to List");
+        temp.setTranslateX(0);
+        temp.setTranslateY(500);
+        EditableNode node = new EditableNode(new TempTower());
+        temp.setOnAction(e -> libraryData.addToList(node));
+        return temp;
     }
 }

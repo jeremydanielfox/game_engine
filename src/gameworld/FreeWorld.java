@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import javafx.scene.Node;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
@@ -40,7 +41,7 @@ public class FreeWorld extends AbstractWorld {
 
     @Override
     public void addObject (GameObject toSpawn, PointSimple pixelCoords) throws StructurePlacementException { 
-		if(!isPlacable(toSpawn,pixelCoords)){
+		if(!isPlacable(toSpawn.getGraphic().getNode(),pixelCoords)){
 			throw new StructurePlacementException();
 		}
 		GridCell c = myTransform.transformWorldToGrid(toSpawn.getPoint());
@@ -50,8 +51,8 @@ public class FreeWorld extends AbstractWorld {
     }
 
     @Override
-    public boolean isPlacable (GameObject toSpawn, PointSimple pixelCoords) {
-    	GridCell c = myTransform.transformWorldToGrid(toSpawn.getPoint());
+    public boolean isPlacable (Node n, PointSimple pixelCoords) {
+    	GridCell c = myTransform.transformWorldToGrid(pixelCoords);
     	return myGrid[c.getRow()][c.getCol()] == null;
     }
 

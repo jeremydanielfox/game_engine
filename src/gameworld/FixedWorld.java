@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import javafx.scene.Node;
 import javafx.scene.shape.Circle;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
@@ -27,7 +28,7 @@ public class FixedWorld extends AbstractWorld {
 	private Path myPath;
 	
     @Override
-    public boolean isPlacable (GameObject toSpawn, PointSimple pixelCoords) {
+    public boolean isPlacable (Node n, PointSimple pixelCoords) {
     	int i = 0;
     	Circle c = new Circle(myPathWidth);
     	while(true){
@@ -35,7 +36,7 @@ public class FixedWorld extends AbstractWorld {
 				PointSimple pathPoint = myPath.getNextLocation(i);
 				c.setCenterX(pathPoint.getX());
 				c.setCenterY(pathPoint.getY());
-				if(c.intersects(toSpawn.getGraphic().getNode().getBoundsInLocal())){
+				if(c.intersects(n.getBoundsInLocal())){
 					return false;
 				}
 			} catch (EndOfPathException e) {

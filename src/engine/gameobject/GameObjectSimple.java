@@ -1,14 +1,14 @@
 package engine.gameobject;
 
 import javafx.geometry.Point2D;
-import javafx.scene.effect.Effect;
 import engine.fieldsetting.Settable;
 import engine.gameobject.labels.Label;
 import engine.gameobject.labels.LabelConcrete;
 import engine.gameobject.weapon.Weapon;
-import engine.gameobject.weapon.WeaponSimple;
 import engine.pathfinding.EndOfPathException;
-import engine.shop.Purchasable;
+import engine.shop.tag.GameObjectTag;
+import engine.shop.tag.GameObjectTagSimple;
+import gae.listView.DeepCopy;
 
 
 /**
@@ -18,44 +18,40 @@ import engine.shop.Purchasable;
  *
  */
 @Settable
-public abstract class GameObjectSimple implements GameObject, Purchasable {
-    protected String myImagePath;
-    protected String myName;
-    protected Label myLabel;
-    protected PointSimple myPoint;
-    protected Health myHealth;
-    protected Mover myMover;
-    protected Graphic myGraphic;
+public abstract class GameObjectSimple implements GameObject {
+    private Label myLabel;
+    private PointSimple myPoint;
+    private Health myHealth;
+    private Mover myMover;
+    private Graphic myGraphic;
+    private Weapon myWeapon;
+    private GameObjectTag myTag;
 
     public GameObjectSimple () {
-        myImagePath = "";
         myLabel = new LabelConcrete();
-        myName = "";
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();
         myGraphic = new Graphic();
+        myTag = new GameObjectTagSimple();
     }
 
-    @Override
-    public boolean isDead () {
-        return myHealth.isDead();
-    }
-
-    @Override
-    public void changeHealth (double amount) {
-        myHealth.changeHealth(amount);
-    }
-
-    // temporary
     public GameObject clone () {
-        try {
-            return (GameObject) super.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.out.println(this.getLabel() + " can't be cloned");
-            return null;
-        }
+        return (GameObject) DeepCopy.copy(this);
+    }
+
+    // public void initializeNode () {
+    // Image image = new Image(myImagePath);
+    // ImageView imageView = new ImageView();
+    // imageView.setImage(image);
+    // myNode = imageView;
+    // }
+
+    @Override
+    public void move () throws EndOfPathException {
+        // TODO Auto-generated method stub
+        PointSimple point = myMover.move(myPoint);
+        setPoint(new PointSimple(new Point2D(point.getX(), point.getY())));
     }
 
     @Override
@@ -68,47 +64,37 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         return new PointSimple(myPoint);
     }
 
-
     @Override
-    public void move () throws EndOfPathException {
-        // TODO Auto-generated method stub
-        PointSimple point = myMover.move(myPoint);
-        myPoint = new PointSimple(new Point2D(point.getX(), point.getY()));
-        myGraphic.setPoint(myPoint);
+    public double getHealth () {
+        return myHealth.getHealth();
+    }
+    
+    @Override
+    public void changeHealth (double amount) {
+        myHealth.changeHealth(amount);
     }
 
-    @Settable
     @Override
-    public void setSpeed (double speed) {
-        myMover.setSpeed(speed);
-
+    public Mover getMover () {
+        return myMover;
     }
-
+    
     @Override
     public Graphic getGraphic () {
         return myGraphic;
     }
 
-    public BasicMover getMover () {
-        return (BasicMover) myMover;
+    @Override
+    public Weapon getWeapon () {
+        return myWeapon;
     }
 
-    public String getImagePath () {
-        return myImagePath;
-    }
-
-    //@Settable
-    //TODO: Make settable
-    public void setMover (Mover mover) {
-        myMover = mover;
+    @Override
+    public GameObjectTag getTag () {
+        return myTag;
     }
 
     @Settable
-    public void setImagePath (String imgpath) {
-        myImagePath = imgpath;
-    }
-
-    @Settable(primary = true)
     public void setLabel (Label label) {
         myLabel = label;
     }
@@ -116,45 +102,52 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
     @Settable
     public void setPoint (PointSimple point) {
         myPoint = point;
+        myGraphic.setPoint(point);
     }
 
-    @Settable()
+    @Settable
     public void setHealth (Health health) {
         myHealth = health;
     }
 
-    @Settable(primary = true)
+    // @Settable
+    public void setMover (Mover mover) { 
+        myMover = mover;
+    }
+
+    @Settable
     public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }
-
-    @Settable()
-    public void setName (String name) {
-        myName = name;
+    
+    @Settable
+    public void setWeapon (Weapon weapon) {
+        myWeapon = weapon;
     }
 
-    @Override
-    public String getName () {
-        // TODO Auto-generated method stub
-        return myName;
+    @Settable
+    public void setTag (GameObjectTag tag) {
+        this.myTag = tag;
     }
 
     @Override
     public double getValue () {
-        // TODO Auto-generated method stub
-        return 0;
+        return myWeapon.getValue();
     }
 
     @Override
-    public String getDescription () {
-        // TODO Auto-generated method stub
-        return null;
+    public double getRange () {
+        return myWeapon.getRange();
     }
-
+    
     @Override
-    public double getPrice () {
-        // TODO Auto-generated method stub
-        return 0;
+    public void setSpeed (double speed) {
+        myMover.setSpeed(speed);
     }
-
+    
+    @Override
+    public boolean isDead () {
+        return getHealth() <= 0;
+    }
+    
 }

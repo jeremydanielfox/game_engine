@@ -7,7 +7,7 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.ClassSet;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
-import engine.shop.tag.PriceTag;
+import engine.shop.tag.UpgradeTag;
 
 
 /**
@@ -23,7 +23,7 @@ public class UpgradeBundleSimple implements BuildableBundle {
     private UpgradeBundleSimple next;
     private boolean isFinal;
     private UpgradeTree parent;
-    private PriceTag myUpgradeTag;
+    private UpgradeTag myUpgradeTag;
 
     public UpgradeBundleSimple () {
 
@@ -45,6 +45,7 @@ public class UpgradeBundleSimple implements BuildableBundle {
             toAdd.upgrade(upgradables.get(toAdd));
         }
         upgradables.add(toAdd);
+        //TODO: add listeners to buffs?
     }
 
     @Override
@@ -79,7 +80,7 @@ public class UpgradeBundleSimple implements BuildableBundle {
     }
 
     @Override
-    public PriceTag getTag () {
+    public UpgradeTag getTag () {
         return myUpgradeTag;
     }
 
@@ -90,7 +91,7 @@ public class UpgradeBundleSimple implements BuildableBundle {
     }
 
     @Settable
-    public void setUpgradeTag (PriceTag upgradeTag) {
+    public void setUpgradeTag (UpgradeTag upgradeTag) {
         myUpgradeTag = upgradeTag;
     }
 

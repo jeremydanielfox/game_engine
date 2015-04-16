@@ -1,5 +1,6 @@
 package engine.gameobject;
 
+
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -82,6 +83,7 @@ public class Graphic {
     @Settable(primary = true)
     public void setImageName (String imageName) {
         myImageName = imageName;
+        initializeImageView();
     }
 
     /**
@@ -100,13 +102,19 @@ public class Graphic {
         return myImageView;
     }
 
-    // public double getCenterX () {
-    // // To do
-    // return 0;
-    // }
-    //
-    // public double getCenterY () {
-    // // To do
-    // return 0;
-    // }
+
+     public double getCenterX () {
+     // To do
+     return 0;
+     }
+    
+     public double getCenterY () {
+     // To do
+     return 0;
+     }
+
+    
+    public String getImagePath () {
+        return DEFAULT_IMAGE_PATH_PREFIX + myImageName;
+    }
 }

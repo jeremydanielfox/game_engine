@@ -1,6 +1,5 @@
 package gae.listView;
 
-import gae.backend.TempTower;
 import gae.gridView.ContainerWrapper;
 import gae.gridView.PathView;
 import java.io.File;
@@ -40,15 +39,21 @@ public class LibraryView {
     private Group objectGroup;
     private Node nodeScene;
     private ObservableList<PathView> pathObservableList;
+    private ObservableList<EditableNode> editableNodeObservableList;
     private Scene myScene;
     private Accordion accordion;
     private TitledPane pathTitledPane;
     private PathList pathList;
     private ContainerWrapper wrapper;
 
+    public LibraryView (ObservableList<EditableNode> editableNodeObservableList) {
+        this.editableNodeObservableList = editableNodeObservableList;
+    }
+
     public Scene getScene () {
         root = new Group();
-        root.getChildren().addAll(view(), tempButton());
+        // root.getChildren().addAll(view(), tempButton());
+        root.getChildren().add(view());
         return new Scene(root);
     }
 
@@ -72,7 +77,7 @@ public class LibraryView {
         this.wrapper = wrapper;
         root = new Group();
         objectGroup = new Group();
-        root.getChildren().addAll(view(), tempButton(), changeBackground(backgroundProperty),
+        root.getChildren().addAll(view(), changeBackground(backgroundProperty),
                                   objectGroup);
         root.setManaged(false);
         return root;
@@ -95,9 +100,10 @@ public class LibraryView {
                 listOfListObjects.add((PaneList) instance);
                 Method setUpList =
                         className.getMethod("initialize", Group.class, Node.class, Scene.class,
-                                            ContainerWrapper.class);
+                                            ContainerWrapper.class, ObservableList.class);
                 accordion.getPanes().add((TitledPane) setUpList
-                        .invoke(instance, objectGroup, nodeScene, myScene, wrapper));
+                        .invoke(instance, objectGroup, nodeScene, myScene,
+                                wrapper, editableNodeObservableList));
             }
             catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
                     | IllegalAccessException | IllegalArgumentException
@@ -119,44 +125,33 @@ public class LibraryView {
      */
     private void setUpToggle () {
         pathTitledPane.setOnMousePressed(event -> {
-            for (PaneList lists : listOfListObjects) {
-                lists.removeRoot();
+            for (PaneList list : listOfListObjects) {
+                list.removeRoot();
             }
             pathList.setScreen();
         });
-        for (TitledPane panes : accordion.getPanes()) {
-            panes.setOnMouseClicked(event -> {
-                if (!panes.equals(pathTitledPane)) {
-                    for (PaneList lists : listOfListObjects) {
-                        lists.addRoot();
+        // for (TitledPane panes : accordion.getPanes()) {
+
+        for (int i = 0; i < accordion.getPanes().size(); i++) {
+            TitledPane chosen = accordion.getPanes().get(i);
+            chosen.setOnMouseClicked(event -> {
+                if (!chosen.equals(pathTitledPane) && event.getClickCount() == 1) {
+                    for (PaneList list : listOfListObjects) {
+                        list.addRoot();
                     }
+                    // attempt at trying to
+                    // PaneList correct =
+                    // listOfListObjects.get(accordion.getPanes().indexOf(chosen));
+                    // correct.addRoot();
+                    // for (PaneList lists : listOfListObjects) {
+                    // if (!correct.equals(lists))
+                    // lists.removeRoot();
+                    // }
                     pathList.disableScreen();
                     System.out.println("removing path!");
                 }
             });
         }
-    }
-
-    /**
-     * method used to add an EditableNode to its specific list
-     * 
-     * @param node
-     */
-    public void addToList (EditableNode node) {
-        for (PaneList paneList : listOfListObjects) {
-            if (paneList.getType().equals(node.getType())) {
-                paneList.addToGenericList(node);
-            }
-        }
-    }
-
-    private Button tempButton () {
-        Button temp = new Button("add to List");
-        temp.setTranslateX(0);
-        temp.setTranslateY(500);
-        EditableNode node = new EditableNode(new TempTower());
-        temp.setOnAction(e -> addToList(node));
-        return temp;
     }
 
     private Button changeBackground (ObjectProperty<Image> backgroundProperty) {

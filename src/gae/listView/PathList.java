@@ -9,14 +9,17 @@ import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.gridView.ContainerWrapper;
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -42,6 +45,7 @@ public class PathList {
     private StackPane stack;
     private Scene scene;
     private int listIndex;
+    private List<Boolean> buttonStates;
     private Button bezier;
     private Button completePath;
     private Button newPath;
@@ -61,10 +65,12 @@ public class PathList {
         displayPath = displayPaths();
         updatePath = updatePath();
         buttonList = new ArrayList<>();
+        buttonStates = new ArrayList<>();
 
         buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
                                                       updatePath }));
-        stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
+        // stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
+        stack.getChildren().add(makeGridPane());
     }
 
     /**
@@ -96,26 +102,22 @@ public class PathList {
                 }
             });
         });
-        listView.setCellFactory(new Callback<ListView<PathView>, ListCell<PathView>>() {
-            @Override
-            public ListCell<PathView> call (ListView<PathView> p) {
-                ListCell<PathView> cell = new ListCell<PathView>() {
-                    @Override
-                    protected void updateItem (PathView pathView, boolean bln) {
-                        super.updateItem(pathView, bln);
-                        if (bln) {
-                            setText(null);
-                            setGraphic(null);
-                        }
-                        else if (pathView != null) {
-                            HBox content = new HBox();
-                            content.getChildren().add(new Label("Path " + pathView.getID()));
-                            setGraphic(content);
-                        }
+        listView.setCellFactory( (myList) -> {
+            return new ListCell<PathView>() {
+                @Override
+                protected void updateItem (PathView pathView, boolean bln) {
+                    super.updateItem(pathView, bln);
+                    if (bln) {
+                        setText(null);
+                        setGraphic(null);
                     }
-                };
-                return cell;
-            }
+                    else if (pathView != null) {
+                        HBox content = new HBox();
+                        content.getChildren().add(new Label("Path " + pathView.getID()));
+                        setGraphic(content);
+                    }
+                }
+            };
         });
         listView.setMaxWidth(300);
         pane.setContent(listView);
@@ -127,7 +129,9 @@ public class PathList {
      */
     public void disableScreen () {
         pathView.resetScreen();
+        System.out.println("disabling screen");
         for (Button button : buttonList) {
+            buttonStates.add(button.disableProperty().get());
             button.setDisable(true);
         }
     }
@@ -138,8 +142,13 @@ public class PathList {
      */
     public void setScreen () {
         pathView.resetScreen();
-        for (Button button : buttonList) {
-            button.setDisable(false);
+        try {
+            for (int i = 0; i < buttonList.size(); i++) {
+                buttonList.get(i).setDisable(buttonStates.get(i));
+            }
+        }
+        catch (IndexOutOfBoundsException e) {
+            // means Path Pane was clicked first
         }
         pathView = new PathView(stack, this.scene);
     }
@@ -152,8 +161,6 @@ public class PathList {
 
     private Button makeBezierCurve () {
         Button makeCurve = new Button("Make Path");
-        makeCurve.setTranslateX(400);
-        makeCurve.setTranslateY(0);
         makeCurve.setOnMouseClicked(e -> {
             pathView.makeBezierCurve();
         });
@@ -161,9 +168,7 @@ public class PathList {
     }
 
     private Button completePath () {
-        Button complete = new Button("Path Complete");
-        complete.setTranslateX(400);
-        complete.setTranslateY(50);
+        Button complete = new Button("Add to Path List");
         allPaths = new ArrayList<>();
         previousPaths = new ArrayList<>();
         complete.setOnMouseClicked(e -> {
@@ -175,17 +180,17 @@ public class PathList {
             pathView.setID(counter);
             counter++;
             pathView = new PathView(stack, this.scene);
+            completePath.setDisable(true);
         });
         return complete;
     }
 
     private Button newPath () {
-        Button newPath = new Button("New Path");
-        newPath.setTranslateX(400);
-        newPath.setTranslateY(100);
+        Button newPath = new Button("Make New Path");
         newPath.setOnMouseClicked(e -> {
             pathView.resetScreen();
             pathView = new PathView(stack, this.scene);
+            completePath.setDisable(false);
         });
         return newPath;
     }
@@ -195,9 +200,7 @@ public class PathList {
      * into a XML file
      */
     private Button displayPaths () {
-        Button display = new Button("Display Paths");
-        display.setTranslateX(400);
-        display.setTranslateY(150);
+        Button display = new Button("make XML");
         XStream xst = new XStream(new DomDriver());
         display.setOnMouseClicked(e -> {
             // this is the information that'll be passed into XML (allPaths)
@@ -232,12 +235,23 @@ public class PathList {
      * This button must be pressed in order to update a path that had already been instantiated
      */
     private Button updatePath () {
-        Button update = new Button("Update Path");
-        update.setTranslateX(400);
-        update.setTranslateY(200);
+        Button update = new Button("Update Path List");
+        completePath.disableProperty().addListener(e -> {
+            update.setDisable(!completePath.disabledProperty().get());
+        });
         update.setOnMouseClicked(e -> {
             allPaths.set(listIndex, pathView.createPathObjects());
         });
         return update;
+    }
+
+    private GridPane makeGridPane () {
+        GridPane grid = new GridPane();
+        grid.setHgap(0);
+        grid.setTranslateX(900);
+        for (int i = 0; i < buttonList.size(); i++) {
+            grid.add(buttonList.get(i), 0, i);
+        }
+        return grid;
     }
 }

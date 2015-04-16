@@ -87,25 +87,7 @@ public class Projectile extends GameObjectSimple implements Buffer {
     }
 
     public void onDeath(ObjectCollection world){
-        onDeath.explode(world, myPoint.add(new PointSimple(20, 20)));
+        onDeath.explode(world, getPoint().add(new PointSimple(20, 20)));
     }
-    
-    @Override
-    public double getHealth () {
-        return myHealth.getHealth();
-    }
-
-    @Override
-    public void setWeapon (Weapon weapon) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public Weapon getWeapon () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 
 }

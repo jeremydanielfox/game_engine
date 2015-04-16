@@ -50,4 +50,9 @@ public class NullWeapon implements Weapon{
         // TODO Auto-generated method stub
         return null;
     }
+    
+    @Override
+    public void applyUpgrades (UpgradeBundle bundle){
+        
+    }
 }

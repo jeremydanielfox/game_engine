@@ -2,6 +2,7 @@ package gae.backend;
 
 import java.io.Serializable;
 import gae.gridView.Pair;
+import gae.gridView.Path;
 import gae.listView.MovableImage;
 
 
@@ -18,9 +19,9 @@ public interface Editable extends Serializable {
 
     public Pair getLocation ();
 
-    public void setEditableImage (MovableImage image);
+    public void setMovableImage (MovableImage image);
 
-    public MovableImage getEditableImage ();
+    public MovableImage getMovableImage ();
 
     public void setID (int id);
 
@@ -28,4 +29,7 @@ public interface Editable extends Serializable {
 
     public Object clone ();
 
+    public Path getPath ();
+
+    public void setPath (Path path);
 }

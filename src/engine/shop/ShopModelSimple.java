@@ -1,11 +1,14 @@
 package engine.shop;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import engine.game.Player;
 import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import engine.prototype.Prototype;
 import engine.shop.tag.GameObjectTag;
@@ -28,6 +31,18 @@ public class ShopModelSimple implements ShopModel {
     private final double markup;
     private GameObject currentGameObject;
 
+    // For test only
+    public ShopModelSimple (GameWorld world, Player player, double markup) {
+        //List<Prototype<GameObject>>prototypes =
+                
+        this.markup = markup;
+        this.myGameWorld = world;
+        currentPlayer = player;
+        prototypeMap = new HashMap<>();
+        upgradeMap = new HashMap<>();
+        //prototypes.forEach(prototype -> addPrototype(prototype));
+    }
+
     public ShopModelSimple (List<Prototype<GameObject>> prototypes,
                             GameWorld currentGameWorld,
                             Player currentPlayer, double markup) {
@@ -47,7 +62,7 @@ public class ShopModelSimple implements ShopModel {
         List<ItemGraphic> items = new ArrayList<ItemGraphic>();
         prototypeMap.values().forEach(prototype -> items.add(new ItemGraphic(prototype.getTag()
                 .getName(), ((PriceTag) prototype.getTag())
-                .getShopGraphic(), new DragOnClicked(this, prototype
+                .getShopGraphic(), new TransitionOnClicked(this, prototype
                 .getTag().getName()))));
         return items;
     }
@@ -70,7 +85,7 @@ public class ShopModelSimple implements ShopModel {
      * 
      * @param transitionGameObject
      */
-    public void purchaseGameObject (String name, double x, double y) {
+    public void purchaseGameObject (String name, PointSimple location) {
         myGameWorld.addObject(prototypeMap.get(name).clone());
         currentPlayer.getWallet().withdraw(getPrice(name));
     }
@@ -84,7 +99,8 @@ public class ShopModelSimple implements ShopModel {
     @Override
     public void purchaseUpgrade (String name) {
         currentPlayer.getWallet().withdraw(getPrice(name));
-        //currentGameObject.getWeapon().applyUpgrade(upgradeMap.get(name));
+        currentGameObject.getWeapon().applyUpgrades(upgradeMap.get(name));
+        getUpgradeGraphics(currentGameObject);
     }
 
     public boolean canPurchase (String name) {
@@ -105,13 +121,14 @@ public class ShopModelSimple implements ShopModel {
 
     @Override
     public Map<ItemInfo, String> getInfo (String name) {
-        Map<ItemInfo, String> info = new HashMap<ItemInfo, String>();
+        Map<ItemInfo, String> info = new EnumMap<ItemInfo, String>(ItemInfo.class);
         info.put(ItemInfo.NAME, name);
         info.put(ItemInfo.DESCRIPTION, getPriceTag(name).getDescription());
         info.put(ItemInfo.PRICE, Double.toString(getPrice(name)));
         return info;
     }
 
+    // TODO: account for the possibility of a "name" not in either map
     private PriceTag getPriceTag (String name) {
         if (prototypeMap.containsKey(name)) {
             return (PriceTag) prototypeMap.get(name).getTag();
@@ -123,6 +140,11 @@ public class ShopModelSimple implements ShopModel {
 
     public enum ItemInfo {
         NAME, DESCRIPTION, PRICE
+    }
+
+    public boolean checkPlacement (String name, PointSimple location) {
+        return myGameWorld.isPlacable(prototypeMap.get(name).getTag().getGraphic().getNode(),
+                                      location);
     }
 
 }

@@ -2,6 +2,9 @@ package gae.gridView;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.event.ChangeListener;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;

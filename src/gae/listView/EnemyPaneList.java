@@ -53,21 +53,22 @@ public class EnemyPaneList extends PaneList {
 
     @Override
     public void removeRoot () {
-        if (initialized) {
-            System.out.println("removing enemy root");
-            // does not work if path is added first before towers are added
-            stack.getChildren().remove(root);
-            added = true;
-        }
+        // if (initialized) {
+        // System.out.println("removing enemy root");
+        // // does not work if path is added first before towers are added
+        // stack.getChildren().remove(root);
+        // added = true;
+        // }
     }
 
     @Override
     public void addRoot () {
-        if (added && initialized) {
-            System.out.println("adding enemy root");
-            stack.getChildren().add(root);
-            added = false;
-        }
+        // all the objects are being added to the same root, makes sense to only remove it once
+        // if (added && initialized) {
+        // System.out.println("adding enemy root");
+        // stack.getChildren().add(root);
+        // added = false;
+        // }
     }
 
 }

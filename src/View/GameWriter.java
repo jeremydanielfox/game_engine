@@ -30,7 +30,7 @@ import gameworld.GameWorld;
 
 public class GameWriter extends Application {
     static GameWriter myWriter;
-private static final String FILE_DESTINATION = "src/View/Game.xml";
+private static final String FILE_DESTINATION = "src/xml/Game.xml";
     /**
      * @param world
      * @return

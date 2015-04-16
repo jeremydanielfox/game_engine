@@ -17,16 +17,11 @@ public class TestEngine extends Application {
         Group root = new Group();
         primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add constants
         primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
-        // BorderPane pane = new BorderPane();
-        // GameWorld world = makeWorld();
-        // StoryBoard story = makeStoryBoard(world);
 
         Scene scene = new Scene(root);
-        // Player myPlayer = makePlayer();
-        // ConcreteLevelBoard board = makeLevelBoard(world, story, myPlayer);
         Game game = loadGame();
         System.out.println("Read");
-        View view = new ViewConcrete2(game, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        EngineView view = new ViewConcrete2(game, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 
         // pane.setCenter(view.initializeView());
 
@@ -38,8 +33,14 @@ public class TestEngine extends Application {
     }
 
     private Game loadGame () {
+        GameWriter gw = new GameWriter();
+        // return gw.makeGame(gw.makePlayer(), gw.makeWorld());
         return DataManager.readFromXML(Game.class, FILE_SOURCE);
 
+    }
+
+    public static void main (String[] args) {
+        launch(args);
     }
 
 }

@@ -8,6 +8,7 @@ import engine.gameobject.GameObjectSimple;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
+import engine.shop.tag.GameObjectTag;
 import gameworld.ObjectCollection;
 
 
@@ -98,6 +99,12 @@ public class BuffableUnit extends GameObjectSimple implements Buffable, Serializ
     public void onDeath (ObjectCollection world) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public GameObjectTag getTag () {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

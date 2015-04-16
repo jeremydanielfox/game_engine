@@ -4,49 +4,42 @@ import java.util.Optional;
 import engine.gameobject.weapon.Upgrade;
 
 
-public class FiringRateUpgrade implements FiringRate {
+/**
+ * Manages a weapon's firing rate. It is both an upgrade and an upgradable via the decorator
+ * pattern.
+ * 
+ * 
+ * @author Nathan Prabhu
+ *
+ */
+
+public class FiringRateUpgrade implements FiringRate, Upgrade {
 
     private double increment;
     private Optional<FiringRate> decorated;
 
     public FiringRateUpgrade () {
-        setNullDecorated();
-        increment = 0;
+        this(0);
     }
 
     public FiringRateUpgrade (double increment) {
-        //setNullDecorated();
         this.increment = increment;
-    }
-
-    private void setNullDecorated () {
-        /*
-         * commented out because it was giving NullPointerException when instantiating GameObject in
-         * GAE
-         */
-        // FiringRate nullVal = null;
-        // decorated = Optional.of(nullVal);
+        decorated = Optional.empty();
     }
 
     @Override
     public double getRate () {
-        return increment;
-        //return decorated.map(FiringRate::getRate).orElse(increment);
+        return decorated.map(this::getIncrementedRate).orElse(increment);
     }
 
-    @Override
-    public Class<? extends Upgrade> getType () {
-        return FiringRate.class;
+    private double getIncrementedRate (FiringRate sublayer) {
+        return sublayer.getRate() + increment;
     }
 
+
     @Override
-    public void setDecorated (Upgrade decorated) {
+    public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((FiringRate) decorated);
-    }
-
-    @Override
-    public void setDefault () {
-        this.decorated = Optional.of(new FiringRateUpgrade(0));
     }
 
 }

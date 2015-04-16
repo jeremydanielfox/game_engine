@@ -7,55 +7,63 @@ import engine.goals.Goal;
 import javafx.scene.control.Button;
 import engine.goals.NullGoal;
 
+
 @Settable
 public class ButtonWrapper {
 
     @XStreamOmitField
     private transient Button myButton;
     private Goal myEnableCondition;
-    
-    public ButtonWrapper(){
+    private String myLabel;
+    private Consumer<? extends Object> myAction;
+    private Goal myGoal;
+
+    public ButtonWrapper () {
         initializeFields("", e -> this.doNothing(), new NullGoal());
     }
-    
-    public ButtonWrapper(String l, Consumer<? extends Object> action, Goal enable) {
-        initializeFields(l, action, enable);
+
+    public ButtonWrapper (String l, Consumer<? extends Object> action, Goal enable) {
+        myLabel = l;
+        myAction = action;
+        myGoal = enable;
     }
-    
-    private void initializeFields(String label, Consumer<? extends Object> action, Goal enable){
-        myButton=new Button(label);
+
+    private void initializeFields (String label, Consumer<? extends Object> action, Goal enable) {
+        myButton = new Button(label);
         myButton.setOnAction(e -> action.accept(null));
         myEnableCondition = enable;
     }
-    
-    private void doNothing(){
-        
+
+    private void doNothing () {
+
     }
-    //TODO: make initialize fields work
-    public Button getButton(){
+
+    // TODO: make initialize fields work
+    public Button getButton () {
         if (myButton == null)
-            myButton = new Button();
+            initializeFields(myLabel,myAction,myGoal);
         return myButton;
     }
-    
-    public boolean isEnabled(){
+
+    public boolean isEnabled () {
+        if (myEnableCondition==null)
+            initializeFields(myLabel,myAction,myGoal);
         return myEnableCondition.isSatisfied();
     }
-    
+
     @Settable
-    public void setLabel(String s){
+    public void setLabel (String s) {
         myButton.setText(s);
     }
-    
+
     @Settable
-    public void setAction(Consumer<? extends Object> action){
-        myButton.setOnAction( e -> action.accept(null));
+    public void setAction (Consumer<? extends Object> action) {
+        myButton.setOnAction(e -> action.accept(null));
     }
-    
+
     @Settable
-    public void setEnableCondition(Goal enable){
+    public void setEnableCondition (Goal enable) {
         myEnableCondition = enable;
     }
-    
-    
+
 }

@@ -95,5 +95,17 @@ public class Projectile extends GameObjectSimple implements Buffer {
         return myHealth.getHealth();
     }
 
+    @Override
+    public void setWeapon (Weapon weapon) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Weapon getWeapon () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 
 }

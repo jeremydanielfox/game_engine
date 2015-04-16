@@ -1,7 +1,9 @@
 package engine.grid;
 
 import java.util.List;
+
 import engine.gameobject.GameObject;
+import gameworld.StructurePlacementException;
 
 /**
  * 

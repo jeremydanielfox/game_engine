@@ -1,19 +1,15 @@
 package gae.openingView;
 
 import gae.gameView.GameView;
-
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EventObject;
+import java.util.HashMap;
 import java.util.List;
-
-import com.sun.glass.events.KeyEvent;
-
-import View.PopUpScreen;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import java.util.Map;
+import animations.Animator;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableStringValue;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -30,13 +26,15 @@ import javafx.stage.Stage;
 
 public class OpeningView implements UIMediator {
 
-    static final String DEFAULT_TYPE_MSG = "NOT SELECTED YET";
+    static final Animator myAnimator = new Animator();
+    static final String DEFAULT_TYPE_MSG = "Choose from right ->";
     private static final String OPENINGVIEW_CSS = "css/OpeningViewCSS.css";
     private Stage myStage;
     private BorderPane myPane;
     private Scene myScene;
     private List<UIObject> myUIObjects;
     private UIObject dataForm, imagePanel;
+    private Map<String, String> dataResults;
 
     private SimpleStringProperty gameSelected;
 
@@ -50,8 +48,9 @@ public class OpeningView implements UIMediator {
         gameSelected.set(DEFAULT_TYPE_MSG);
         imagePanel = new ImagePanel(this, gameSelected);
         dataForm = new DataForm(this, gameSelected);
+        dataResults = new HashMap<>();
         insertBorders();
-        
+
         /*
          * to make it easier for us to test!
          */
@@ -84,7 +83,7 @@ public class OpeningView implements UIMediator {
 
     @Override
     public void handleEvent (UIObject usedObject, EventObject action) {
-        
+
         /*
          * changes the scene to display the GameView if button in DataForm has been pressed
          */
@@ -96,21 +95,10 @@ public class OpeningView implements UIMediator {
             }
         }
         else {
-            PopUpScreen popup = new PopUpScreen();
-            popup.makeScreen("Fill out the forms, dummy!", "WILL DO!");
+            myAnimator.shake(dataForm.getObject());
         }
-
-        
-        
-        /*
-         * if game type is selected, gray out rest of the options
-         */
-
-        /*
-         * enable author to proceed if all fields are filled out & game type is selected
-         */
-
     }
+
 
     /**
      * indicates whether data form has any empty fields or not
@@ -119,6 +107,25 @@ public class OpeningView implements UIMediator {
      */
     private boolean fieldsCompleted () {
         DataForm dt = (DataForm) dataForm;
+        extractFields(dt);
         return dt.filledFields();
+    }
+    
+    /**
+     * extracts text from data form into map via reflection on the method name
+     * 
+     * @param data
+     */
+    private void extractFields(DataForm data) {
+        Arrays.asList("Author", "Description", "Game Type", "Instructions", "Title").forEach(e -> {
+            String methodName = "get" + e.replaceAll(" ", "");
+            try {
+                Method method = data.getClass().getDeclaredMethod(methodName);
+                dataResults.put(e, method.invoke(data).toString());
+            }
+            catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
     }
 }

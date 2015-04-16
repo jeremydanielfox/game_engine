@@ -1,5 +1,6 @@
 package engine.gameobject.units;
 
+import engine.gameobject.weapon.Upgrade;
 import javafx.scene.effect.ColorAdjust;
 
 
@@ -12,7 +13,7 @@ import javafx.scene.effect.ColorAdjust;
  * @author Danny
  *
  */
-public abstract class Buff {
+public abstract class Buff implements Upgrade {
     private int duration;
     private int timeSinceStart;
 
@@ -60,7 +61,7 @@ public abstract class Buff {
      * @return
      */
     public int timeLeft () {
-        return duration - timeSinceStart;
+        return getDuration() - timeSinceStart;
     }
 
     protected void adjustEffect (BuffableUnit myUnit,

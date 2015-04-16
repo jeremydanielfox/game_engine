@@ -68,12 +68,6 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         return new PointSimple(myPoint);
     }
 
-    // public void initializeNode () {
-    // Image image = new Image(myImagePath);
-    // ImageView imageView = new ImageView();
-    // imageView.setImage(image);
-    // myNode = imageView;
-    // }
 
     @Override
     public void move () throws EndOfPathException {

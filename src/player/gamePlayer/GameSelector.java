@@ -11,59 +11,79 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * The middle section of the PlayerOpener with the images of the game and the arrows that allow the
+ * user to navigate around the player
+ * 
+ * @author Brandon Choi
+ *
+ */
+
 public class GameSelector {
-    
+
     private static final String LEFT = "left";
     private static final String RIGHT = "right";
     private static final ImageView rightArrow = new ImageView("/images/right_arrow.jpg");
     private static final ImageView leftArrow = new ImageView("/images/left_arrow.jpg");
-    
+
     private GridPane chooser;
     private ImageView right, left;
     private List<SelectOption> options;
     private Pane currentView;
     private int index;
-    
 
     public GameSelector (Scene s) {
         chooser = new GridPane();
         chooser.setId("gameChooser");
         right = rightArrow;
         left = leftArrow;
+        right.setId("arrow");
+        left.setId("arrow");
         options = new ArrayList<>();
-        
-        //manually add new SelectOption for testing
+
+        /*
+         * manually adding select options to test out player
+         */
         SelectOption s1 = new SelectOption(new ImageView("/images/bloonsdefense.jpg"), "Bloons");
-        SelectOption s2 = new SelectOption(new ImageView("/images/desktopdefense.jpg"), "Desktop Tower Defense");
+        SelectOption s2 = new SelectOption(new ImageView("/images/desktopdefense.jpg"),
+                                           "Desktop Tower Defense");
         SelectOption s3 = new SelectOption(new ImageView("/images/cartoonwars.jpg"), "Cartoon Wars");
-        options.addAll(Arrays.asList(s1,s2,s3));
-        
+        options.addAll(Arrays.asList(s1, s2, s3));
+
         index = 0;
         currentView = new Pane(options.get(index).getOption());
         setUpGrid();
         setUpFunctions();
     }
-    
+
     @SuppressWarnings("static-access")
-    private void setUpGrid() {
+    private void setUpGrid () {
         List<Node> optionNodes = Arrays.asList(left, currentView, right);
         optionNodes.forEach(e -> {
             chooser.setRowIndex(e, 0);
             chooser.setColumnIndex(e, optionNodes.indexOf(e));
-        });  
+        });
         chooser.getChildren().addAll(left, currentView, right);
     }
-    
-    private void setUpFunctions () {    
+
+    /**
+     * sets up functionalities and clickables for the player UI
+     */
+    private void setUpFunctions () {
         right.setOnMouseClicked(e -> {
             swipe(RIGHT);
-        });    
+        });
         left.setOnMouseClicked(e -> {
-           swipe(LEFT);
+            swipe(LEFT);
         });
     }
-    
-    private void swipe(String s){
+
+    /**
+     * swipes the images to the next option in the respective direction (left or right)
+     * 
+     * @param s
+     */
+    private void swipe (String s) {
         if (s.equals(RIGHT) && options.get(index + 1) != null)
             index += 1;
         else if (s.equals(LEFT) && options.get(index - 1) != null)
@@ -73,11 +93,17 @@ public class GameSelector {
         currentView.getChildren().add(options.get(index).getOption());
     }
 
-    public Node getChooser() {
+    public Node getChooser () {
         return chooser;
     }
 
-    
+    /**
+     * Represents one option the user can select from. Comprised of an image of the game and its
+     * label.
+     * 
+     * @author Brandon Choi
+     *
+     */
     private class SelectOption {
 
         private VBox display;

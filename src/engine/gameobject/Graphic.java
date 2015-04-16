@@ -1,10 +1,10 @@
 package engine.gameobject;
 
-import java.io.Serializable;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import engine.fieldsetting.Settable;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import engine.fieldsetting.Settable;
 
 
 /**
@@ -18,15 +18,18 @@ public class Graphic {
 
     // note to self: need to change this image path default when using data files
     private static final String DEFAULT_IMAGE_PATH_PREFIX = "images/";
+    private static final String DEFAULT_IMAGE_NAME = "robertDuvall.jpg";
 
     private double myHeight;
     private double myWidth;
     private String myImageName;
+    private Point2D myPoint;
     @XStreamOmitField
     private transient ImageView myImageView;
 
     public Graphic () {
-        myImageName = "";
+        myImageName = DEFAULT_IMAGE_NAME;
+        myPoint = new Point2D(0, 0);
         myImageView = new ImageView();
     }
 
@@ -34,11 +37,12 @@ public class Graphic {
         myHeight = height;
         myWidth = width;
         myImageName = name;
-        initializeImageView();
     }
 
     private void initializeImageView () {
         myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
+        myImageView.setX(myPoint.getX());
+        myImageView.setY(myPoint.getY());
         myImageView.setFitHeight(myHeight);
         myImageView.setFitWidth(myWidth);
     }
@@ -54,7 +58,13 @@ public class Graphic {
         return getImageView();
     }
 
+    /**
+     * Assign the given point to both the ImageView and a copy of the point in this class.
+     * 
+     * @param point
+     */
     public void setPoint (PointSimple point) {
+        myPoint = new Point2D(point.getX(), point.getY());
         getImageView().setX(point.getX());
         getImageView().setY(point.getY());
     }
@@ -73,10 +83,30 @@ public class Graphic {
     public void setImageName (String imageName) {
         myImageName = imageName;
     }
-    
-    private ImageView getImageView() {
-        if (myImageView == null) 
+
+    /**
+     * This method will be called both before and after this object is written to xstream. Thus,
+     * At some point, the ImageView will be null because this object will have been written out of
+     * xstream,
+     * and the imageview will have been omitted. At this point, the method re-initializes the
+     * imageview
+     * using the stored criteria.
+     * 
+     * @return
+     */
+    private ImageView getImageView () {
+        if (myImageView == null)
             initializeImageView();
         return myImageView;
     }
+
+    // public double getCenterX () {
+    // // To do
+    // return 0;
+    // }
+    //
+    // public double getCenterY () {
+    // // To do
+    // return 0;
+    // }
 }

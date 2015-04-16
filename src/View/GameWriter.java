@@ -2,6 +2,8 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import xml.DataManager;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
@@ -23,11 +25,12 @@ import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
-import gameworld.BasicWorld;
+import gameworld.FixedWorld;
 import gameworld.GameWorld;
 
-public class GameWriter {
-private static final String FILE_DESTINATION = "";
+public class GameWriter extends Application {
+    static GameWriter myWriter;
+private static final String FILE_DESTINATION = "src/View/Game.xml";
     /**
      * @param world
      * @return
@@ -62,7 +65,7 @@ private static final String FILE_DESTINATION = "";
         list3.add(score2);
 
         board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new BasicWorld(),
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
                                          story));
         return board;
     }
@@ -70,7 +73,7 @@ private static final String FILE_DESTINATION = "";
     /**
      * @return
      */
-    private Player makePlayer () {
+    public Player makePlayer () {
         PlayerUnit health = new PlayerUnit(100, "Health");
         PlayerUnit scoreUnit = new PlayerUnit(100, "Score");
         Wallet wallet = new ConcreteWallet(scoreUnit);
@@ -90,8 +93,8 @@ private static final String FILE_DESTINATION = "";
     /**
      * @return
      */
-    private GameWorld makeWorld () {
-        GameWorld world = new BasicWorld();
+    public GameWorld makeWorld () {
+        GameWorld world = new FixedWorld();
         world.addObject(new TestTower(2, 330, 130));
         world.addObject(new TestTower(4, 270, 270));
         world.addObject(new TestTower(3, 355, 455));
@@ -99,8 +102,8 @@ private static final String FILE_DESTINATION = "";
     }
 
     public static void main (String[] args) {
-        GameWriter mine = new GameWriter();
-        mine.writeGame();
+        myWriter = new GameWriter();
+        myWriter.writeGame();
     }
 
 
@@ -110,6 +113,7 @@ private static final String FILE_DESTINATION = "";
         Game myGame = makeGame(myPlayer, myWorld);
 
         DataManager.writeToXML(myGame, FILE_DESTINATION);
+        System.out.println("Written");
     }
 
     /**
@@ -117,7 +121,7 @@ private static final String FILE_DESTINATION = "";
      * @param myWorld
      * @return
      */
-    private Game makeGame (Player myPlayer, GameWorld myWorld) {
+    public Game makeGame (Player myPlayer, GameWorld myWorld) {
         StoryBoard myStory = makeStoryBoard(myWorld);
         Game myGame =
                 new ConcreteGame(myPlayer, makeLevelBoard(myWorld, myStory,
@@ -128,6 +132,12 @@ private static final String FILE_DESTINATION = "";
         // NoCurrentEventGoal());
         myGame.addButton(wrap);
         return myGame;
+    }
+
+    @Override
+    public void start (Stage primaryStage) throws Exception {
+        // TODO Auto-generated method stub
+        
     }
 
 }

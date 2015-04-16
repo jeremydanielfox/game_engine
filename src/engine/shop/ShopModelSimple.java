@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.geometry.Point2D;
 import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
@@ -85,7 +86,7 @@ public class ShopModelSimple implements ShopModel {
     @Override
     public void purchaseUpgrade (String name) {
         currentPlayer.getWallet().withdraw(getPrice(name));
-        currentGameObject.getWeapon().applyUpgrade(upgradeMap.get(name));
+        currentGameObject.getWeapon().applyUpgrades(upgradeMap.get(name));
         getUpgradeGraphics(currentGameObject);
     }
 
@@ -126,6 +127,10 @@ public class ShopModelSimple implements ShopModel {
 
     public enum ItemInfo {
         NAME, DESCRIPTION, PRICE
+    }
+    
+    public boolean checkPlacement (String name, Point2D location) {
+        return myGameWorld.isPlacable(prototypeMap.get(name).getTag().getGraphic().getNode(), location);
     }
 
 }

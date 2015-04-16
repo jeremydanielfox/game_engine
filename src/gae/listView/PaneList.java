@@ -90,6 +90,7 @@ public abstract class PaneList {
         for (EditableNode previousNode : observableList) {
             setUpNewInstanceList(paneList, previousNode, map, root, node, scene, wrapper, type);
         }
+        // use lambda functions to refactor this vvvv
         observableList.addListener(new ListChangeListener<EditableNode>() {
             public void onChanged (javafx.collections.ListChangeListener.Change<? extends EditableNode> change) {
                 while (change.next()) {

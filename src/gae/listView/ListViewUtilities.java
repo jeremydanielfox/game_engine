@@ -82,10 +82,8 @@ public class ListViewUtilities {
                 }
 
             });
-        list.setCellFactory(new Callback<ListView<Editable>, ListCell<Editable>>() {
-            @Override
-            public ListCell<Editable> call (ListView<Editable> p) {
-                ListCell<Editable> cell = new ListCell<Editable>() {
+        list.setCellFactory((myList) -> {
+            return new ListCell<Editable>() {
                     @Override
                     protected void updateItem (Editable edit, boolean bln) {
                         super.updateItem(edit, bln);
@@ -98,8 +96,6 @@ public class ListViewUtilities {
                         }
                     }
                 };
-                return cell;
-            }
         });
 
         return list;

@@ -133,7 +133,7 @@ public class GamePlayerScreen extends Application {
         
         board.addLevel(new ConcreteLevel("images/Park_Path.png",list2,list,world, story));
         board.addLevel(new ConcreteLevel("images/example_path.jpeg",list3,list,new FixedWorld(),story));
-        ShopModel shop = new ShopModelSimple(null, null);
+        ShopModel shop = new ShopModelSimple(world, myPlayer, 1.2);
         myGameView = new ViewConcrete2(myGame, shop, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();
         return node;

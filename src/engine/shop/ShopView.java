@@ -89,8 +89,7 @@ public class ShopView extends Parent {
     private void addIcons () {
         shopIcons.setHgap(5);
         shopIcons.setVgap(5);
-        //List<ItemGraphic> icons = model.getItemGraphics();
-        List<ItemGraphic> icons = new ArrayList<>();
+        List<ItemGraphic> icons = model.getItemGraphics();
 
         icons.forEach(gameObjectIcon -> {
             gameObjectIcon.setOnMouseEntered(mouseEvent -> displayGameObjectInfo(gameObjectIcon));

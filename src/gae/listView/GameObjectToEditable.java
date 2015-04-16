@@ -35,8 +35,8 @@ public class GameObjectToEditable implements Editable {
          * TODO: find out how to copy the object
          */
         name = gameObject.getTag().getName();
-        imagePath = gameObject.getImagePath();
-        type = gameObject.getTag().getLabel();
+        imagePath = gameObject.getTag().getGraphic().getImagePath();
+        type = gameObject.getLabel();
     }
 
     @Override

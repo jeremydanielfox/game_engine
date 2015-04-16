@@ -1,9 +1,8 @@
 package engine.gameobject.units;
 
-import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import engine.gameobject.BasicMover;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.Weapon;
@@ -21,10 +20,6 @@ public class BuffableUnit extends GameObjectSimple implements Buffable, Serializ
         myWeapon = new BasicWeapon();
     }
     
-    public double getHealth(){
-        return myHealth.getHealth();
-    }
-    
     @Override
     public void update (ObjectCollection world) {
         advanceBuffs();
@@ -34,7 +29,7 @@ public class BuffableUnit extends GameObjectSimple implements Buffable, Serializ
         catch (EndOfPathException e){
             //TODO: ENCODE END OF PATH BEHAVIOR
         }
-        myWeapon.fire(world, myPoint);        
+        myWeapon.fire(world, getPoint());        
     }
     
     public void addBuff (Buff toAdd) {
@@ -98,6 +93,11 @@ public class BuffableUnit extends GameObjectSimple implements Buffable, Serializ
     public void onDeath (ObjectCollection world) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public double getRange () {
+        return getWeapon().getRange();
     }
 
 }

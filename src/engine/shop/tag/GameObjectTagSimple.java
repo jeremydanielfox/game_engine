@@ -7,7 +7,6 @@ import engine.shop.PurchasableGameObject;
 @Settable
 public class GameObjectTagSimple implements GameObjectTag {
     private String name;
-    private String label;
     private String description;
     private Graphic shopGraphic;
     private PurchasableGameObject purchasable;
@@ -22,12 +21,6 @@ public class GameObjectTagSimple implements GameObjectTag {
     @Override
     public String getName () {
         return name;
-    }
-    
-
-    @Override
-    public String getLabel () {
-        return label;
     }
 
     @Override
@@ -53,11 +46,6 @@ public class GameObjectTagSimple implements GameObjectTag {
     @Settable
     public void setName (String name) {
         this.name = name;
-    }
-    
-    @Settable
-    public void setLabel (String label) {
-        this.label = label;
     }
 
     @Settable

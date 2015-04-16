@@ -6,6 +6,7 @@ import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.GameObjectTagSimple;
+import gae.listView.DeepCopy;
 
 
 /**
@@ -16,20 +17,16 @@ import engine.shop.tag.GameObjectTagSimple;
  */
 @Settable
 public abstract class GameObjectSimple implements GameObject {
-    protected String myImagePath;
-    protected String myName;
-    protected String myLabel;
-    protected PointSimple myPoint;
-    protected Health myHealth;
-    protected Mover myMover;
-    protected Graphic myGraphic;
-    private GameObjectTag myTag;
+    private String myLabel;
+    private PointSimple myPoint;
+    private Health myHealth;
+    private Mover myMover;
+    private Graphic myGraphic;
     private Weapon myWeapon;
+    private GameObjectTag myTag;
 
     public GameObjectSimple () {
-        myImagePath = "";
         myLabel = "";
-        myName = "";
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();
@@ -37,30 +34,8 @@ public abstract class GameObjectSimple implements GameObject {
         myTag = new GameObjectTagSimple();
     }
 
-    @Override
-    public boolean isDead () {
-        return myHealth.isDead();
-    }
-
-    @Override
-    public void changeHealth (double amount) {
-        myHealth.changeHealth(amount);
-    }
-
-    // temporary
     public GameObject clone () {
-        try {
-            return (GameObject) super.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            System.out.println(myTag.getLabel() + " can't be cloned");
-            return null;
-        }
-    }
-
-    @Override
-    public PointSimple getPoint () {
-        return new PointSimple(myPoint);
+        return (GameObject) DeepCopy.copy(this);
     }
 
     // public void initializeNode () {
@@ -74,38 +49,47 @@ public abstract class GameObjectSimple implements GameObject {
     public void move () throws EndOfPathException {
         // TODO Auto-generated method stub
         PointSimple point = myMover.move(myPoint);
-        myPoint = new PointSimple(new Point2D(point.getX(), point.getY()));
-        myGraphic.setPoint(myPoint);
+        setPoint(new PointSimple(new Point2D(point.getX(), point.getY())));
     }
 
-    @Settable
     @Override
-    public void setSpeed (double speed) {
-        myMover.setSpeed(speed);
-
+    public String getLabel () {
+        return myLabel;
     }
 
+    @Override
+    public PointSimple getPoint () {
+        return new PointSimple(myPoint);
+    }
+
+    @Override
+    public double getHealth () {
+        return myHealth.getHealth();
+    }
+    
+    @Override
+    public void changeHealth (double amount) {
+        myHealth.changeHealth(amount);
+    }
+
+    @Override
+    public Mover getMover () {
+        return myMover;
+    }
+    
     @Override
     public Graphic getGraphic () {
         return myGraphic;
     }
 
-    public BasicMover getMover () {
-        return (BasicMover) myMover;
+    @Override
+    public Weapon getWeapon () {
+        return myWeapon;
     }
 
-    public String getImagePath () {
-        return myImagePath;
-    }
-
-    //@Settable
-    public void setMover (Mover mover) {
-        myMover = mover;
-    }
-
-    @Settable
-    public void setImagePath (String imgpath) {
-        myImagePath = imgpath;
+    @Override
+    public GameObjectTag getTag () {
+        return myTag;
     }
 
     @Settable
@@ -124,29 +108,44 @@ public abstract class GameObjectSimple implements GameObject {
         myHealth = health;
     }
 
+    // @Settable
+    public void setMover (Mover mover) { 
+        myMover = mover;
+    }
+
     @Settable
     public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }
+    
+    @Settable
+    public void setWeapon (Weapon weapon) {
+        myWeapon = weapon;
+    }
 
     @Settable
-    public void setName (String name) {
-        myName = name;
+    public void setTag (GameObjectTag tag) {
+        this.myTag = tag;
     }
 
     @Override
     public double getValue () {
         return myWeapon.getValue();
     }
+
+    @Override
+    public double getRange () {
+        return myWeapon.getRange();
+    }
     
     @Override
-    public GameObjectTag getTag() {
-        return myTag;
+    public void setSpeed (double speed) {
+        myMover.setSpeed(speed);
     }
     
-    @Settable
-    public void setTag(GameObjectTag tag) {
-        this.myTag = tag;
+    @Override
+    public boolean isDead () {
+        return getHealth() <= 0;
     }
-
+    
 }

@@ -1,10 +1,9 @@
 package engine.gameobject;
 
-import java.io.Serializable;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import engine.fieldsetting.Settable;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import engine.fieldsetting.Settable;
 
 
 /**
@@ -72,6 +71,7 @@ public class Graphic {
     @Settable
     public void setImageName (String imageName) {
         myImageName = imageName;
+        initializeImageView();
     }
     
     public double getCenterX () {
@@ -82,5 +82,9 @@ public class Graphic {
     public double getCenterY () {
         // To do
         return 0;
+    }
+    
+    public String getImagePath () {
+        return DEFAULT_IMAGE_PATH_PREFIX + myImageName;
     }
 }

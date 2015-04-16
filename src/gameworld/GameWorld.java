@@ -1,11 +1,8 @@
 package gameworld;
 
-import java.util.Collection;
-import java.util.List;
 import javafx.scene.Node;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import engine.pathfinding.Path;
 
 
 public interface GameWorld extends ObjectCollection {

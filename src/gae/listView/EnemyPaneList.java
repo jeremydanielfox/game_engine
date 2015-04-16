@@ -1,8 +1,13 @@
 package gae.listView;
 
+import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -18,50 +23,54 @@ import javafx.scene.layout.StackPane;
  *
  */
 public class EnemyPaneList extends PaneList {
-    private ObservableList<TitledPane> enemyPaneList;
-    private List<EditableNode> enemyEditablesList;
+    private Map<EditableNode, ObservableList<Editable>> instancesEditableNodeMap;
     private Group root;
-    private Node workspace;
-    private Scene scene;
     private boolean added;
     private StackPane stack;
-    private ContainerWrapper wrapper;
     private boolean initialized;
 
     public EnemyPaneList () {
-        enemyEditablesList = new ArrayList<>();
-    }
-    
-    @Override
-    public void addToGenericList (EditableNode editableNode) {
-        enemyEditablesList.add(editableNode);
-        TitledPane newPane = setTitledPaneClick(editableNode, root, workspace, scene, wrapper);
-        enemyPaneList.add(newPane);
-        initialized = true;
+        instancesEditableNodeMap = new HashMap<>();
     }
 
     @Override
-    public TitledPane initialize (Group root, Node node, Scene scene, ContainerWrapper wrapper) {
+    public TitledPane initialize (Group root,
+                                  Node node,
+                                  Scene scene,
+                                  ContainerWrapper wrapper,
+                                  ObservableList<EditableNode> observableList) {
         this.root = root;
         root.setManaged(false);
-        this.workspace = node;
-        this.scene = scene;
-        this.stack = (StackPane) workspace;
-        this.wrapper = wrapper;
+        this.stack = (StackPane) node;
         TitledPane pane = getTitledPane("Enemy");
-        enemyPaneList = setAccordion(pane);
-        return pane;
-    }
+        ObservableList<TitledPane> enemyPaneList = setAccordion(pane);
+        observableList.addListener(new ListChangeListener<EditableNode>() {
+            public void onChanged (javafx.collections.ListChangeListener.Change<? extends EditableNode> change) {
+                while (change.next()) {
+                    if (change.wasAdded()) { // if an editablenode was added
+                        EditableNode added = (EditableNode) change.getAddedSubList().get(0);
+                        if (added.getType().equals("Tower")) {
+                            ObservableList<Editable> instanceList =
+                                    FXCollections.observableArrayList();
+                            instancesEditableNodeMap.put(added, instanceList);
+                            TitledPane newPane =
+                                    setTitledPaneClick(added, instanceList, root, node, scene,
+                                                       wrapper);
+                            enemyPaneList.add(newPane);
+                            initialized = true;
+                        }
+                    }
+                }
+            }
+        });
 
-    @Override
-    public String getType () {
-        return "Enemy";
+        return pane;
     }
 
     @Override
     public void removeRoot () {
         if (initialized) {
-            System.out.println("removing root");
+            System.out.println("removing enemy root");
             // does not work if path is added first before towers are added
             stack.getChildren().remove(root);
             added = true;
@@ -71,7 +80,7 @@ public class EnemyPaneList extends PaneList {
     @Override
     public void addRoot () {
         if (added && initialized) {
-            System.out.println("adding root");
+            System.out.println("adding enemy root");
             stack.getChildren().add(root);
             added = false;
         }

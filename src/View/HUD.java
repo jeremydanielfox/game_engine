@@ -139,7 +139,7 @@ public class HUD implements Observer {
     }
 
     private void makeShop () {
-     //   myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
+        myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
     }
     /*
         FlowPane shopDisplay = new FlowPane();

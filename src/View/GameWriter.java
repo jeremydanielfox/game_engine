@@ -23,14 +23,18 @@ import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
+import engine.shop.ShopModel;
+import engine.shop.ShopModelSimple;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
 import gameworld.FixedWorld;
 import gameworld.GameWorld;
 
+
 public class GameWriter extends Application {
     static GameWriter myWriter;
-private static final String FILE_DESTINATION = "src/xml/Game.xml";
+    private static final String FILE_DESTINATION = "src/xml/Game.xml";
+
     /**
      * @param world
      * @return
@@ -106,14 +110,18 @@ private static final String FILE_DESTINATION = "src/xml/Game.xml";
         myWriter.writeGame();
     }
 
-
     private void writeGame () {
         Player myPlayer = makePlayer();
         GameWorld myWorld = makeWorld();
-        Game myGame = makeGame(myPlayer, myWorld);
+        ShopModel myShop = new ShopModelSimple(myWorld, myPlayer, 1);
+        Game myGame = makeGame(myPlayer, myWorld, myShop);
 
         DataManager.writeToXML(myGame, FILE_DESTINATION);
         System.out.println("Written");
+    }
+
+    public ShopModel makeShop (Player player, GameWorld world) {
+        return new ShopModelSimple(world, player, 1.2);
     }
 
     /**
@@ -121,13 +129,14 @@ private static final String FILE_DESTINATION = "src/xml/Game.xml";
      * @param myWorld
      * @return
      */
-    public Game makeGame (Player myPlayer, GameWorld myWorld) {
+    public Game makeGame (Player myPlayer, GameWorld myWorld, ShopModel myShop) {
         StoryBoard myStory = makeStoryBoard(myWorld);
         Game myGame =
-                new ConcreteGame(myPlayer, makeLevelBoard(myWorld, myStory,
-                                                          myPlayer),
+                new ConcreteGame(myShop, myPlayer, makeLevelBoard(myWorld, myStory,
+                                                                  myPlayer),
                                  new ArrayList<ButtonWrapper>());
-        ButtonWrapper wrap = new ButtonWrapper("wave", e -> myStory.startNextEvent(), new NullGoal());
+        ButtonWrapper wrap =
+                new ButtonWrapper("wave", e -> myStory.startNextEvent(), new NullGoal());
         // ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new
         // NoCurrentEventGoal());
         myGame.addButton(wrap);
@@ -137,7 +146,7 @@ private static final String FILE_DESTINATION = "src/xml/Game.xml";
     @Override
     public void start (Stage primaryStage) throws Exception {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

@@ -1,7 +1,9 @@
 package View;
 
 import engine.game.Game;
+import engine.game.Player;
 import gae.gameView.Main;
+import gameworld.GameWorld;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -34,8 +36,10 @@ public class TestEngine extends Application {
 
     private Game loadGame () {
         GameWriter gw = new GameWriter();
-        // return gw.makeGame(gw.makePlayer(), gw.makeWorld());
-        return DataManager.readFromXML(Game.class, FILE_SOURCE);
+        GameWorld world = gw.makeWorld();
+        Player player = gw.makePlayer();
+        return gw.makeGame(player, world, gw.makeShop(player, world));
+        //return DataManager.readFromXML(Game.class, FILE_SOURCE);
 
     }
 

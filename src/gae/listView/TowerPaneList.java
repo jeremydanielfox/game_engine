@@ -44,6 +44,18 @@ public class TowerPaneList extends PaneList {
         this.stack = (StackPane) node;
         TitledPane pane = getTitledPane("Tower");
         ObservableList<TitledPane> towerPaneList = setAccordion(pane);
+        for (EditableNode previousNode : observableList) {
+            if (previousNode.getType().equals("Tower")) {
+                ObservableList<Editable> instanceList =
+                        FXCollections.observableArrayList();
+                instancesEditableNodeMap.put(previousNode, instanceList);
+                TitledPane newPane =
+                        setTitledPaneClick(previousNode, instanceList, root, node, scene,
+                                           wrapper);
+                towerPaneList.add(newPane);
+
+            }
+        }
         observableList.addListener(new ListChangeListener<EditableNode>() {
             public void onChanged (javafx.collections.ListChangeListener.Change<? extends EditableNode> change) {
                 while (change.next()) {

@@ -49,7 +49,7 @@ public class EnemyPaneList extends PaneList {
                 while (change.next()) {
                     if (change.wasAdded()) { // if an editablenode was added
                         EditableNode added = (EditableNode) change.getAddedSubList().get(0);
-                        if (added.getType().equals("Tower")) {
+                        if (added.getType().equals("Enemy")) {
                             ObservableList<Editable> instanceList =
                                     FXCollections.observableArrayList();
                             instancesEditableNodeMap.put(added, instanceList);

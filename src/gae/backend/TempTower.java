@@ -52,7 +52,7 @@ public class TempTower implements Editable, UIObject {
     @Override
     public String getName () {
         // TODO Auto-generated method stub
-        return "TempTower "+myID;
+        return "TempTower ";
     }
 
     @Override
@@ -97,5 +97,10 @@ public class TempTower implements Editable, UIObject {
         }catch(Exception e){ 
             return null; 
         }
+    }
+
+    @Override
+    public int getID () {
+        return myID;
     }
 }

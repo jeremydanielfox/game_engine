@@ -12,6 +12,7 @@ import gae.gridView.ContainerWrapper;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -65,6 +66,7 @@ public class PathList {
         buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
                                                       updatePath }));
         stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
+        // stack.getChildren().add(makeComboBox());
     }
 
     /**
@@ -239,5 +241,14 @@ public class PathList {
             allPaths.set(listIndex, pathView.createPathObjects());
         });
         return update;
+    }
+
+    /**
+     * make a combobox
+     */
+    private ComboBox<Button> makeComboBox () {
+        ComboBox<Button> box = new ComboBox<Button>();
+        box.getItems().addAll(buttonList);
+        return box;
     }
 }

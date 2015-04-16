@@ -10,8 +10,8 @@ import engine.goals.NullGoal;
 @Settable
 public class ButtonWrapper {
 
-    //@XStreamOmitField
-    private Button myButton;
+    @XStreamOmitField
+    private transient Button myButton;
     private Goal myEnableCondition;
     
     public ButtonWrapper(){
@@ -31,8 +31,10 @@ public class ButtonWrapper {
     private void doNothing(){
         
     }
-    
+    //TODO: make initialize fields work
     public Button getButton(){
+        if (myButton == null)
+            myButton = new Button();
         return myButton;
     }
     
@@ -54,5 +56,6 @@ public class ButtonWrapper {
     public void setEnableCondition(Goal enable){
         myEnableCondition = enable;
     }
+    
     
 }

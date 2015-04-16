@@ -45,18 +45,18 @@ public class Graphic {
 
     // note: may not need get method if resizeGraphic returns node
     public Node getNode () {
-        return myImageView;
+        return getImageView();
     }
 
     public Node getResizedGraphic (double scaleFactor) {
-        myImageView.setPreserveRatio(true);
-        myImageView.setFitHeight(myHeight * scaleFactor);
-        return myImageView;
+        getImageView().setPreserveRatio(true);
+        getImageView().setFitHeight(myHeight * scaleFactor);
+        return getImageView();
     }
 
     public void setPoint (PointSimple point) {
-        myImageView.setX(point.getX());
-        myImageView.setY(point.getY());
+        getImageView().setX(point.getX());
+        getImageView().setY(point.getY());
     }
 
     @Settable
@@ -69,8 +69,14 @@ public class Graphic {
         myHeight = height;
     }
 
-    @Settable
+    @Settable(primary = true)
     public void setImageName (String imageName) {
         myImageName = imageName;
+    }
+    
+    private ImageView getImageView() {
+        if (myImageView == null) 
+            initializeImageView();
+        return myImageView;
     }
 }

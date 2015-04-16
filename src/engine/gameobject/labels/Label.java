@@ -16,4 +16,6 @@ public interface Label {
     
     public void addSubLabel(Label label);
     
+    public void removeSubLabel(Label label);
+    
 }

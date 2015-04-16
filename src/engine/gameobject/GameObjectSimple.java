@@ -21,7 +21,7 @@ import engine.shop.Purchasable;
 public abstract class GameObjectSimple implements GameObject, Purchasable {
     protected String myImagePath;
     protected String myName;
-    protected String myLabel;
+    protected Label myLabel;
     protected PointSimple myPoint;
     protected Health myHealth;
     protected Mover myMover;
@@ -29,7 +29,7 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
 
     public GameObjectSimple () {
         myImagePath = "";
-        myLabel = "";
+        myLabel = new LabelConcrete();
         myName = "";
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
@@ -114,7 +114,7 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         myImagePath = imgpath;
     }
 
-    @Settable
+    @Settable(primary = true)
     public void setLabel (Label label) {
         myLabel = label;
     }
@@ -129,7 +129,7 @@ public abstract class GameObjectSimple implements GameObject, Purchasable {
         myHealth = health;
     }
 
-    @Settable()
+    @Settable(primary = true)
     public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }

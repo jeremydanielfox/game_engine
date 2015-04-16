@@ -1,6 +1,7 @@
 package engine.gameobject.labels;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 
 
@@ -11,12 +12,12 @@ import java.util.HashSet;
  *
  */
 public class LabelBase implements Label {
-    private static String myName = "Base";
+    private static String name = "Base";
     private static Collection<Label> mySubLabels = new HashSet<>();
 
     @Override
     public String getLabel () {
-        return myName;
+        return name;
     }
 
     
@@ -27,7 +28,7 @@ public class LabelBase implements Label {
 
     @Override
     public Collection<Label> getSubLabels () {
-        return mySubLabels;
+        return Collections.unmodifiableCollection(mySubLabels);
     }
 
     @Override
@@ -44,5 +45,13 @@ public class LabelBase implements Label {
     public void addSubLabel (Label label) {
         mySubLabels.add(label);
     }
+
+
+    @Override
+    public void removeSubLabel (Label label) {
+        mySubLabels.remove(label);
+        
+    }
+    
 
 }

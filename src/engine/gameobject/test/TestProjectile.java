@@ -4,6 +4,7 @@ import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
+import engine.gameobject.labels.LabelConcrete;
 import engine.gameobject.units.DirectDamage;
 import engine.gameobject.units.FreezeBuff;
 import engine.gameobject.units.PoisonBuff;
@@ -19,7 +20,7 @@ public class TestProjectile extends Projectile{
 
         
         myImagePath = "robertDuvall.jpg";
-        myLabel = "";
+        myLabel = new LabelConcrete();
         myHealth = new HealthSimple(1);
         myPoint = new PointSimple(300,300);
         if (type == 1 || type == 4){

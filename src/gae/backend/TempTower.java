@@ -75,13 +75,13 @@ public class TempTower implements Editable, UIObject {
     }
 
     @Override
-    public void setEditableImage (MovableImage image) {
+    public void setMovableImage (MovableImage image) {
         // TODO Auto-generated method stub
         editableImage = image;
     }
 
     @Override
-    public MovableImage getEditableImage () {
+    public MovableImage getMovableImage () {
         return editableImage;
     }
 

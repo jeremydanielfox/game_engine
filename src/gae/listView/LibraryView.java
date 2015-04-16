@@ -1,6 +1,5 @@
 package gae.listView;
 
-import gae.backend.TempTower;
 import gae.gridView.ContainerWrapper;
 import gae.gridView.PathView;
 import java.io.File;
@@ -154,19 +153,6 @@ public class LibraryView {
             });
         }
     }
-
-    // /**
-    // * method used to add an EditableNode to its specific list
-    // *
-    // * @param node
-    // */
-    // public void addToList (EditableNode node) {
-    // for (PaneList paneList : listOfListObjects) {
-    // if (paneList.getType().equals(node.getType())) {
-    // paneList.addToGenericList(node);
-    // }
-    // }
-    // }
 
     private Button changeBackground (ObjectProperty<Image> backgroundProperty) {
         Button background = new Button("Change Background");

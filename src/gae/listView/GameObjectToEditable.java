@@ -4,6 +4,7 @@ import engine.gameobject.GameObjectSimple;
 import engine.gameobject.weapon.Weapon;
 import gae.backend.Editable;
 import gae.gridView.Pair;
+import gae.gridView.Path;
 
 
 /**
@@ -23,9 +24,10 @@ public class GameObjectToEditable implements Editable {
     private Weapon weapon;
     private Pair location;
     private String imagePath;
-    private MovableImage editableImage;
+    private MovableImage movableImage;
     private String name;
     private String type;
+    private Path myPath;
 
     public GameObjectToEditable (GameObjectSimple gameobject) {
         gameObject = gameobject;
@@ -39,6 +41,7 @@ public class GameObjectToEditable implements Editable {
         imagePath = gameObject.getImagePath();
         // type = gameObject.getTag().getLabel();
         type = gameObject.getLabel();
+        // gameobject is not serializable and gives an error so must set to null
         gameObject = null;
     }
 
@@ -81,14 +84,14 @@ public class GameObjectToEditable implements Editable {
     }
 
     @Override
-    public void setEditableImage (MovableImage image) {
+    public void setMovableImage (MovableImage image) {
         // TODO Auto-generated method stub
-        editableImage = image;
+        movableImage = image;
     }
 
     @Override
-    public MovableImage getEditableImage () {
-        return editableImage;
+    public MovableImage getMovableImage () {
+        return movableImage;
     }
 
     @Override
@@ -104,5 +107,17 @@ public class GameObjectToEditable implements Editable {
     @Override
     public int getID () {
         return myID;
+    }
+
+    @Override
+    public Path getPath () {
+        // TODO Auto-generated method stub
+        return myPath;
+    }
+
+    @Override
+    public void setPath (Path path) {
+        // TODO Auto-generated method stub
+        myPath = path;
     }
 }

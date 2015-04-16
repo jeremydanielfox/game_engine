@@ -35,8 +35,8 @@ public class BasicWeapon implements Weapon {
     protected FiringRate myFiringRate;
     protected Buffer myProjectile;
     protected FiringStrategy myFiringStrategy;
-    private ClassSet<Upgrade> upgradables = new ClassSet<Upgrade>(new Upgrade[] { myRange,
-                                                                                 myFiringRate });
+//    private ClassSet<Upgrade> upgradables = new ClassSet<Upgrade>(new Upgrade[] { myRange,
+//                                                                                 myFiringRate });
     protected UpgradeTree tree;
 
     public BasicWeapon () {
@@ -168,7 +168,7 @@ public class BasicWeapon implements Weapon {
     }
     
     public void applyUpgrades (UpgradeBundle bundle) {
-        bundle.applyUpgrades(upgradables);
+//        bundle.applyUpgrades(upgradables);
         bundle.getParent().updateCurrent(bundle.getParent());
     }
 

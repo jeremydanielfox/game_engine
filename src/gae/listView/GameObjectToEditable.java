@@ -28,7 +28,7 @@ public class GameObjectToEditable implements Editable {
     private String type;
 
     public GameObjectToEditable (GameObjectSimple gameobject) {
-        gameObject = gameobject;
+        this.gameObject = gameobject;
         /*
          * doing the following instantiation because it doesn't copy GameObjectSimple (not
          * Serializable)

@@ -1,7 +1,6 @@
 package engine.gameobject.weapon;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
@@ -35,8 +34,7 @@ public class BasicWeapon implements Weapon {
     protected FiringRate myFiringRate;
     protected Buffer myProjectile;
     protected FiringStrategy myFiringStrategy;
-    private ClassSet<Upgrade> upgradables = new ClassSet<Upgrade>(new Upgrade[] { myRange,
-                                                                                 myFiringRate });
+    private ClassSet<Upgrade> upgradables;
     protected UpgradeTree tree;
 
     public BasicWeapon () {
@@ -44,6 +42,8 @@ public class BasicWeapon implements Weapon {
         myRange = new RangeUpgrade(250);
         myFiringRate = new FiringRateUpgrade(.5);
         myFiringStrategy = new SingleProjectile();
+        upgradables = new ClassSet<Upgrade>(new Upgrade[] { myRange,
+                                                           myFiringRate });
     }
 
     @Settable
@@ -166,7 +166,7 @@ public class BasicWeapon implements Weapon {
     public List<UpgradeBundle> getNextUpgrades () {
         return tree.getNextUpgrades();
     }
-    
+
     public void applyUpgrades (UpgradeBundle bundle) {
         bundle.applyUpgrades(upgradables);
         bundle.getParent().updateCurrent(bundle.getParent());

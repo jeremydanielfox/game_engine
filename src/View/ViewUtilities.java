@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 
 public class ViewUtilities {
@@ -18,17 +19,16 @@ public class ViewUtilities {
      * scene, when the appropriate key is pressed.
      * 
      * @param node Node to be bound
-     * @param scene Scene of the node
+     * @param pane Scene of the node
      * @param initial Initial position
      * @param key Disabling key
      * @return
      */
-    public static Node bindCursor (Node node, Node scene, Point2D initial, KeyCode key) {
+    public static void bindCursor (Node node, Pane pane, Point2D initial, KeyCode key) {
         final Group wrapGroup = new Group(node);
         wrapGroup.relocate(initial.getX(), initial.getY());
-        scene.setOnMouseMoved(mouseEvent -> {
+        pane.setOnMouseMoved(mouseEvent -> {
             Point2D current = getMouseLocation(mouseEvent, node);
-
             wrapGroup.relocate(current.getX(), current.getY());
 
             previous = current;
@@ -36,15 +36,15 @@ public class ViewUtilities {
 
         // TODO: figure out why keyPressed caller must be scene, and not pane or node
         // EDIT: I changed this to node and it worked perfectly for me! 
-        scene.getScene().setOnKeyPressed(keyEvent -> {
+        pane.getScene().setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
-                unbindCursor(scene);
+                unbindCursor(pane);
                 wrapGroup.setVisible(false);
                 // ((Group) node.getParent()).getChildren().remove(node);
             }
         });
 
-        return wrapGroup;
+        pane.getChildren().add(wrapGroup);
     }
     
     public static void unbindCursor(Node scene) {

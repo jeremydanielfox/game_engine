@@ -2,6 +2,8 @@ package engine.gameobject;
 
 import javafx.geometry.Point2D;
 import engine.fieldsetting.Settable;
+import engine.gameobject.labels.Label;
+import engine.gameobject.labels.LabelConcrete;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import engine.shop.tag.GameObjectTag;
@@ -17,7 +19,7 @@ import gae.listView.DeepCopy;
  */
 @Settable
 public abstract class GameObjectSimple implements GameObject {
-    private String myLabel;
+    private Label myLabel;
     private PointSimple myPoint;
     private Health myHealth;
     private Mover myMover;
@@ -26,7 +28,7 @@ public abstract class GameObjectSimple implements GameObject {
     private GameObjectTag myTag;
 
     public GameObjectSimple () {
-        myLabel = "";
+        myLabel = new LabelConcrete();
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();
@@ -53,7 +55,7 @@ public abstract class GameObjectSimple implements GameObject {
     }
 
     @Override
-    public String getLabel () {
+    public Label getLabel () {
         return myLabel;
     }
 
@@ -93,7 +95,7 @@ public abstract class GameObjectSimple implements GameObject {
     }
 
     @Settable
-    public void setLabel (String label) {
+    public void setLabel (Label label) {
         myLabel = label;
     }
 

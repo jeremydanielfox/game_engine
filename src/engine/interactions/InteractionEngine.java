@@ -1,7 +1,8 @@
 package engine.interactions;
 
-import engine.gameobject.GameObject;
 import java.util.function.BiConsumer;
+import engine.gameobject.GameObject;
+import engine.gameobject.labels.Label;
 
 
 /**
@@ -12,7 +13,7 @@ import java.util.function.BiConsumer;
 public interface InteractionEngine {
     public void interact (GameObject first, GameObject second);
 
-    public void put (GameObject first,
-                     GameObject second,
+    public void put (Label first,
+                     Label second,
                      BiConsumer<GameObject, GameObject> consumer);
 }

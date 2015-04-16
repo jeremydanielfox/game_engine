@@ -1,5 +1,6 @@
 package engine.gameobject;
 
+import engine.gameobject.labels.Label;
 import engine.gameobject.weapon.Weapon;
 import engine.prototype.Prototype;
 import engine.shop.PurchasableGameObject;
@@ -39,19 +40,13 @@ public interface GameObject extends Movable, Health, PurchasableGameObject, Prot
     
     public Mover getMover ();
 
-    /**
-     * Labels allow the GameEngine to differentiate between GameObject types (e.g. towers vs.
-     * enemies).
-     * 
-     * @return: A string
-     */
-    public String getLabel ();
-
+    public Label getLabel ();
     /**
      * Tags contain important GameObject info (e.g. name, description, image)
      * 
      * @return
      */
+   
     public GameObjectTag getTag ();
 
     /**

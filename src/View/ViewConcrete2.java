@@ -45,6 +45,14 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private double myDisplayHeight;
     private HUD myHeadsUp;
     private ShopModel shop;
+    
+    public ViewConcrete2 (Game game, double width, double height) {
+        myGame = game;
+        myLevelBoard = myGame.getLevelBoard();
+        myLevelBoard.addObserver(this);
+        myDisplayWidth = width;
+        myDisplayHeight = height;
+    }
 
     public ViewConcrete2 (Game game, ShopModel shop, double width, double height) {
         myGame = game;

@@ -79,8 +79,8 @@ public class TileContainer extends Region implements ContainerWrapper {
      */
     public boolean checkBounds (double x, double y) {
         Point2D point = this.screenToLocal(x, y);
-        System.out.println("THE WIDTH IS : " + this.getWidth());
-        System.out.println("THE HEIGHT IS : " + this.getHeight());
+        System.out.println("X IS : " + point.getX());
+        System.out.println("Y IS : " + y);
         if (point.getX() < 0 || point.getX() > this.getWidth() || y < 0 ||
             y > this.getHeight()) {
             return true;
@@ -93,8 +93,6 @@ public class TileContainer extends Region implements ContainerWrapper {
      */
     public PointSimple convertCoordinates (double x, double y) {
         Point2D point = this.screenToLocal(x, y);
-        System.out.println("X IS : " + point.getX());
-        System.out.println("Y IS : " + y);
         return new PointSimple(point.getX(), y);
     }
 

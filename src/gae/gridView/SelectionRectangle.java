@@ -56,7 +56,7 @@ public class SelectionRectangle extends Rectangle {
 
         parent.setOnMouseDragged(e -> {
             setVisible(true);
-            double width = parent.getGridWidthProperty().get();
+            double width = parent.getGridHeightProperty().get();
             double height = parent.getGridHeightProperty().get();
             rectX.set((e.getX() > 0 && e.getX() < width) ? e.getX() : width *
                                                                       Math.round(e.getX() / width));

@@ -92,6 +92,7 @@ public class OpeningView implements UIMediator {
                 UIMediator author = new GameView();
                 myScene = author.getScene();
                 myStage.setScene(myScene);
+                myStage.setFullScreen(true);
             }
         }
         else {

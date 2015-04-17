@@ -18,6 +18,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -76,7 +79,7 @@ public class ShopView extends Parent {
         addIcons();
 
         // initialize InfoBox
-        infoBox.setBackground(new Background(new BackgroundFill(Color.rgb(235, 255, 255, 0.8),
+        infoBox.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.8),
                                                                 null, null)));
         infoBox.setMinHeight(INFO_HEIGHT);
 
@@ -105,23 +108,27 @@ public class ShopView extends Parent {
 
     private void displayGameObjectInfo (ItemGraphic icon) {
         VBox base = new VBox();
-        base.setBackground(new Background(new BackgroundFill(Color.WHITE,
+        base.setSpacing(10);
+        base.setPadding(new Insets(10,10,10,10));
+        base.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                                                              null, null)));
 
         Map<ItemInfo, Label> labels = makeInfoLabels(model.getInfo(icon.getName()));
         base.getChildren().addAll(labels.values());
+        Label name = labels.get(ItemInfo.NAME);
+        name.setStyle("-fx-font-weight: bold");
         infoBox.getChildren().add(base);
     }
 
     private Map<ItemInfo, Label> makeInfoLabels (Map<ItemInfo, String> infoMap) {
         Map<ItemInfo, Label> result = new EnumMap<ItemInfo, Label>(ItemInfo.class);
         result.put(ItemInfo.NAME, new Label(infoMap.get(ItemInfo.NAME)));
+        result.put(ItemInfo.DESCRIPTION, new Label(infoMap.get(ItemInfo.DESCRIPTION)));
         result.put(ItemInfo.PRICE,
                    new Label(String.format("Cost: %s", infoMap.get(ItemInfo.PRICE))));
-        result.put(ItemInfo.DESCRIPTION, new Label(infoMap.get(ItemInfo.DESCRIPTION)));
         result.values().forEach(label -> {
             label.setWrapText(true);
-            label.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.8),
+            label.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                                                                   null, null)));
         });
 

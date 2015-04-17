@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
+import javafx.event.WeakEventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -166,16 +168,16 @@ public class ShopView extends Parent {
     private void initializeTransition (TransitionGameObject transition, MouseEvent mouseEvent) {
         Node transNode = transition.getNode();
         Point2D location = ViewUtilities.getMouseLocation(mouseEvent, transNode);
-        transNode.relocate(location.getX(), location.getY());
-        bindCursor(location, transition.getGraphic());
-
+        bindCursor(location, transNode);
         transNode.setOnMouseMoved(event2 -> {
+            event2.consume();
             transition.setRangeCircleColor(model.checkPlacement(transition.getName(),
                                                                 new PointSimple(location)));
         });
 
         transNode.setOnMouseClicked(event2 -> {
-            model.purchaseGameObject(transition.getName(), new PointSimple(location));
+            model.purchaseGameObject(transition.getName(),
+                                     new PointSimple(event2.getX(), event2.getY()));
         });
     }
 }

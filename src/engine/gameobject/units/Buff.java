@@ -28,14 +28,14 @@ public abstract class Buff implements Upgrade {
      * 
      * @param myUnit
      */
-    public abstract void apply (Buffable myUnit);
+    public abstract void apply (GameObject myUnit);
 
     /**
      * Unapplies the initial effect
      * 
      * @param myUnit
      */
-    public abstract void unapply (Buffable myUnit);
+    public abstract void unapply (GameObject myUnit);
 
     /**
      * What the buff does each timeunit
@@ -43,12 +43,12 @@ public abstract class Buff implements Upgrade {
      * @param timePassed
      * @param myUnit
      */
-    public void advanceTime (int timePassed, BuffTracker myUnit) {
+    public void advanceTime (int timePassed, GameObject myUnit) {
         timeSinceStart = timeSinceStart + timePassed;
         changeOverTime(myUnit);
     }
 
-    protected void changeOverTime (BuffTracker myUnit) {
+    protected void changeOverTime (GameObject myUnit) {
 
     }
 
@@ -73,12 +73,11 @@ public abstract class Buff implements Upgrade {
      * @param brightness
      * @param contrast
      */
-    protected void adjustEffect (Buffable myUnit,
+    protected void adjustEffect (GameObject myObject,
                                  double hue,
                                  double saturation,
                                  double brightness,
                                  double contrast) {
-        GameObject myObject = (GameObject) myUnit;
         ColorAdjust initialEffect = new ColorAdjust(0, 0, 0, 0);
         if (myObject.getGraphic().getNode().getEffect() != null) {
             initialEffect = (ColorAdjust) myObject.getGraphic().getNode().getEffect();

@@ -35,7 +35,7 @@ public class Explosion {
         HashSet<GameObject> objectsInRange = new HashSet<>(world.objectsInRange(radius, location));
         for (GameObject target : objectsInRange) {
             if (checkTeam(target)) {
-                applyBuffs((BuffTracker) target);
+                applyBuffs(target);
             }
         }
     }
@@ -56,7 +56,7 @@ public class Explosion {
         this.radius = radius;
     }
     
-    private void applyBuffs (BuffTracker target) {
+    private void applyBuffs (GameObject target) {
         for (Buff b : effects) {
             target.addBuff(b.clone());
         }

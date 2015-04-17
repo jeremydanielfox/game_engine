@@ -2,6 +2,7 @@ package engine.gameobject.units;
 
 import java.awt.Color;
 import java.util.Optional;
+import engine.gameobject.GameObject;
 import engine.gameobject.weapon.Upgrade;
 
 /**
@@ -22,18 +23,20 @@ public class PoisonBuff extends Buff{
         decorated = Optional.empty();
     }
     
-    public void apply(BuffTracker myUnit){
+    public void apply(GameObject myUnit){
         float[] hsbvals = new float[3];
         Color.RGBtoHSB(139, 0, 139, hsbvals);
         adjustEffect(myUnit, -hsbvals[0], -hsbvals[1], -hsbvals[2], 0);
     }
     
-    public void unapply(BuffTracker myUnit){
+    public void unapply(GameObject myUnit){
         float[] hsbvals = new float[3];
         Color.RGBtoHSB(139, 0, 139, hsbvals);
         adjustEffect(myUnit, hsbvals[0], hsbvals[1], hsbvals[2], 0);
     }
-    protected void changeOverTime(BuffTracker myUnit){
+    
+    @Override
+    protected void changeOverTime(GameObject myUnit){
         myUnit.changeHealth(-getDamage()/getDuration());
     }
     

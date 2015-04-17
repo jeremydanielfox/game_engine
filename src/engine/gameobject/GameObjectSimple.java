@@ -25,7 +25,7 @@ import gameworld.ObjectCollection;
  *
  */
 @Settable
-public class GameObjectSimple implements GameObject, Firing, Colliding  {
+public class GameObjectSimple implements GameObject{
     private Label myLabel;
     private PointSimple myPoint;
     private Health myHealth;
@@ -56,7 +56,7 @@ public class GameObjectSimple implements GameObject, Firing, Colliding  {
      * Give the object a buff e.g. burn this object
      */
     public void addBuff(Buff buff){
-        myBuffs.addBuff(buff);
+        myBuffs.addBuff(buff, this);
     }
     
 /*
@@ -219,7 +219,7 @@ public class GameObjectSimple implements GameObject, Firing, Colliding  {
 
     @Override
     public void update (ObjectCollection world) {
-        myBuffs.update();
+        myBuffs.update(this);
         fire(world);
         try {
             move();

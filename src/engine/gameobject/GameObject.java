@@ -2,6 +2,8 @@ package engine.gameobject;
 
 import engine.gameobject.labels.Label;
 import engine.gameobject.units.Buffable;
+import engine.gameobject.units.Colliding;
+import engine.gameobject.units.Firing;
 import engine.prototype.Prototype;
 import engine.shop.PurchasableGameObject;
 import engine.shop.tag.GameObjectTag;
@@ -14,7 +16,7 @@ import gameworld.ObjectCollection;
  *
  */
 
-public interface GameObject extends Buffable, Movable, Health, PurchasableGameObject, Prototype<GameObject> {
+public interface GameObject extends Firing, Colliding, Buffable, Movable, Health, PurchasableGameObject, Prototype<GameObject> {
     // public void updateGraphics ();//cannot implement yet
 
     /**

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
@@ -32,7 +33,7 @@ public class BasicWeapon implements Weapon {
     protected int timeSinceFire;
     protected Range myRange;
     protected FiringRate myFiringRate;
-    protected Buffer myProjectile;
+    protected GameObjectSimple myProjectile;
     protected FiringStrategy myFiringStrategy;
     private ClassSet<Upgrade> upgradables;
     protected UpgradeTree tree;

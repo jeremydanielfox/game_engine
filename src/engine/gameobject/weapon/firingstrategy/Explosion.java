@@ -7,7 +7,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
-import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.units.BuffTracker;
 import gameworld.ObjectCollection;
 
 
@@ -35,7 +35,7 @@ public class Explosion {
         HashSet<GameObject> objectsInRange = new HashSet<>(world.objectsInRange(radius, location));
         for (GameObject target : objectsInRange) {
             if (checkTeam(target)) {
-                applyBuffs((BuffableUnit) target);
+                applyBuffs((BuffTracker) target);
             }
         }
     }
@@ -56,7 +56,7 @@ public class Explosion {
         this.radius = radius;
     }
     
-    private void applyBuffs (BuffableUnit target) {
+    private void applyBuffs (BuffTracker target) {
         for (Buff b : effects) {
             target.addBuff(b.clone());
         }

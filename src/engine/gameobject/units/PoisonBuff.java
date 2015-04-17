@@ -22,18 +22,18 @@ public class PoisonBuff extends Buff{
         decorated = Optional.empty();
     }
     
-    public void apply(BuffableUnit myUnit){
+    public void apply(BuffTracker myUnit){
         float[] hsbvals = new float[3];
         Color.RGBtoHSB(139, 0, 139, hsbvals);
         adjustEffect(myUnit, -hsbvals[0], -hsbvals[1], -hsbvals[2], 0);
     }
     
-    public void unapply(BuffableUnit myUnit){
+    public void unapply(BuffTracker myUnit){
         float[] hsbvals = new float[3];
         Color.RGBtoHSB(139, 0, 139, hsbvals);
         adjustEffect(myUnit, hsbvals[0], hsbvals[1], hsbvals[2], 0);
     }
-    protected void changeOverTime(BuffableUnit myUnit){
+    protected void changeOverTime(BuffTracker myUnit){
         myUnit.changeHealth(-getDamage()/getDuration());
     }
     

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import xml.DataManager;
 import engine.gameobject.labels.LabelConcrete;
-import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.units.BuffTracker;
 import engine.gameobject.weapon.NullWeapon;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
@@ -18,7 +18,7 @@ import engine.pathfinding.PathSegmentBezier;
  * @author Jeremy
  *
  */
-public class GameObjectSimpleTest extends BuffableUnit{
+public class GameObjectSimpleTest extends BuffTracker{
 
     public GameObjectSimpleTest () {
         setLabel(new LabelConcrete());

@@ -20,7 +20,7 @@ public class FreezeBuff extends Buff{
         decorated = Optional.empty();
     }
     
-    public void apply(BuffableUnit myUnit){
+    public void apply(BuffTracker myUnit){
         ((BasicMover) myUnit.getMover()).setFreeze(true);
         adjustEffect(myUnit, .66, .5, .5, 0);
     }
@@ -34,7 +34,7 @@ public class FreezeBuff extends Buff{
         return sublayer.getDuration() + increment;
     }
     
-    public void unapply(BuffableUnit myUnit){
+    public void unapply(BuffTracker myUnit){
         ((BasicMover) myUnit.getMover()).setFreeze(false);
         adjustEffect(myUnit, -.66, -.5, -.5, 0);
     }

@@ -21,7 +21,7 @@ public class DirectDamage extends Buff {
     }
 
     @Override
-    public void apply (BuffableUnit myUnit) {
+    public void apply (BuffTracker myUnit) {
         myUnit.changeHealth(-1 * getDamage());
         adjustEffect(myUnit, -1, 1, 0, 0);
     }
@@ -35,7 +35,7 @@ public class DirectDamage extends Buff {
     }
 
     @Override
-    public void unapply (BuffableUnit myUnit) {
+    public void unapply (BuffTracker myUnit) {
         adjustEffect(myUnit, 1, -1, 0, 0);
     }
 

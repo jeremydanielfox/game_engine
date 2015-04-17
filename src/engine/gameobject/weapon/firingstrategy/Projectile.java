@@ -7,12 +7,17 @@ import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.Buffable;
-import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.units.BuffTracker;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import gameworld.ObjectCollection;
 
-
+/**
+ * 
+ * @author Danny
+ * @deprecated Only use GameObjectSimple now.
+ */
+@Deprecated
 public class Projectile extends GameObjectSimple implements Buffer {
     protected Set<String> collidedID;
     protected Set<Buff> onCollision;
@@ -66,10 +71,10 @@ public class Projectile extends GameObjectSimple implements Buffer {
         return true;
     }
 
-    private void onCollision (Buffable obstacle) {
-        if (effectiveCollision(obstacle)) {
+    private void onCollision (Buffable target) {
+        if (effectiveCollision((GameObject) target)) {
             for (Buff b: onCollision){
-                obstacle.addBuff(b);
+                target.addBuff(b);
             }
             changeHealth(-1);
         }

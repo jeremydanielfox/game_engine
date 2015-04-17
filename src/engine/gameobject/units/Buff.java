@@ -1,5 +1,6 @@
 package engine.gameobject.units;
 
+import engine.gameobject.GameObject;
 import engine.gameobject.weapon.Upgrade;
 import javafx.scene.effect.ColorAdjust;
 
@@ -27,14 +28,14 @@ public abstract class Buff implements Upgrade {
      * 
      * @param myUnit
      */
-    public abstract void apply (BuffableUnit myUnit);
+    public abstract void apply (Buffable myUnit);
 
     /**
      * Unapplies the initial effect
      * 
      * @param myUnit
      */
-    public abstract void unapply (BuffableUnit myUnit);
+    public abstract void unapply (Buffable myUnit);
 
     /**
      * What the buff does each timeunit
@@ -42,12 +43,12 @@ public abstract class Buff implements Upgrade {
      * @param timePassed
      * @param myUnit
      */
-    public void advanceTime (int timePassed, BuffableUnit myUnit) {
+    public void advanceTime (int timePassed, BuffTracker myUnit) {
         timeSinceStart = timeSinceStart + timePassed;
         changeOverTime(myUnit);
     }
 
-    protected void changeOverTime (BuffableUnit myUnit) {
+    protected void changeOverTime (BuffTracker myUnit) {
 
     }
 
@@ -64,16 +65,25 @@ public abstract class Buff implements Upgrade {
         return getDuration() - timeSinceStart;
     }
 
-    protected void adjustEffect (BuffableUnit myUnit,
+    /**
+     * Simple implementation of a graphic effect.
+     * @param myUnit
+     * @param hue
+     * @param saturation
+     * @param brightness
+     * @param contrast
+     */
+    protected void adjustEffect (Buffable myUnit,
                                  double hue,
                                  double saturation,
                                  double brightness,
                                  double contrast) {
+        GameObject myObject = (GameObject) myUnit;
         ColorAdjust initialEffect = new ColorAdjust(0, 0, 0, 0);
-        if (myUnit.getGraphic().getNode().getEffect() != null) {
-            initialEffect = (ColorAdjust) myUnit.getGraphic().getNode().getEffect();
+        if (myObject.getGraphic().getNode().getEffect() != null) {
+            initialEffect = (ColorAdjust) myObject.getGraphic().getNode().getEffect();
         }
-        myUnit.getGraphic().getNode()
+        myObject.getGraphic().getNode()
                 .setEffect(new ColorAdjust(initialEffect.getHue() + brightness,
                                            initialEffect.getSaturation() + saturation,
                                            initialEffect.getBrightness() + brightness,

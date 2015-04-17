@@ -3,7 +3,7 @@ package engine.shop;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
-import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.units.BuffTracker;
 import engine.gameobject.units.DirectDamage;
 import engine.gameobject.units.FreezeBuff;
 import engine.gameobject.weapon.ClassSet;
@@ -70,7 +70,7 @@ public class View extends Application {
         gameView.setOnMousePressed(mouseEvent -> {
 //            System.out.println("Relative coordinates: " +
 //                               ViewUtilities.normalizePixels(mouseEvent, gameView));
-            GameObject object = new BuffableUnit();
+            GameObject object = new BuffTracker();
             try {
 				world.addObject(object, new PointSimple(mouseEvent.getX(), mouseEvent.getY()));
 			} catch (Exception e) {

@@ -142,7 +142,7 @@ public abstract class GameObjectSimple implements GameObject {
     
     @Override
     public boolean isDead () {
-        return getHealth() <= 0;
+        return myHealth.isDead();
     }
     
 }

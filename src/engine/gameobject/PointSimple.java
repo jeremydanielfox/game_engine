@@ -90,5 +90,9 @@ public class PointSimple {
     public void setY (double y) {
         myPoint = new Point2D(myPoint.getX(), y);
     }
+    
+    public String toString(){
+    	return myPoint.toString();
+    }
 
 }

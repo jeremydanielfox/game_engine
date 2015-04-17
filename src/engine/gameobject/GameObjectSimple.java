@@ -49,7 +49,6 @@ public abstract class GameObjectSimple implements GameObject {
 
     @Override
     public void move () throws EndOfPathException {
-        // TODO Auto-generated method stub
         PointSimple point = myMover.move(myPoint);
         setPoint(new PointSimple(new Point2D(point.getX(), point.getY())));
     }

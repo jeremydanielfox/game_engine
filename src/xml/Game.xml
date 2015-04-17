@@ -78,16 +78,16 @@
                 <name>TestTower</name>
                 <description>Just a test tower; nothing special here...</description>
                 <shopGraphic>
-                  <myHeight>20.0</myHeight>
-                  <myWidth>20.0</myWidth>
-                  <myImageName>robertDuvall.jpg</myImageName>
+                  <myHeight>40.0</myHeight>
+                  <myWidth>40.0</myWidth>
+                  <myImageName>Bloons_TackShooterIcon.png</myImageName>
                 </shopGraphic>
               </myTag>
               <buffList/>
               <myWeapon class="engine.gameobject.test.TestWeapon">
                 <timeSinceFire>0</timeSinceFire>
                 <myRange class="engine.gameobject.weapon.upgradable.range.RangeUpgrade">
-                  <increment>250.0</increment>
+                  <increment>90.0</increment>
                   <decorated/>
                 </myRange>
                 <myFiringRate class="engine.gameobject.weapon.upgradable.firingrate.FiringRateUpgrade">
@@ -110,7 +110,7 @@
                     <myHealth>1.0</myHealth>
                   </myHealth>
                   <myMover class="engine.gameobject.MoverDirection">
-                    <inherentSpeed>3.3</inherentSpeed>
+                    <inherentSpeed>4.0</inherentSpeed>
                     <speedModifier>1.0</speedModifier>
                     <myDistance>0.0</myDistance>
                     <frozen>false</frozen>
@@ -121,7 +121,7 @@
                         <hash>0</hash>
                       </myPoint>
                     </myPoint>
-                    <distanceLimit>250.0</distanceLimit>
+                    <distanceLimit>90.0</distanceLimit>
                     <distanceTraveled>0.0</distanceTraveled>
                     <pastPoint>false</pastPoint>
                   </myMover>
@@ -151,20 +151,22 @@
                   </myTag>
                   <collidedID/>
                   <onCollision>
-                    <engine.gameobject.units.FreezeBuff>
-                      <duration>30</duration>
+                    <engine.gameobject.units.DirectDamage>
+                      <duration>20</duration>
                       <timeSinceStart>0</timeSinceStart>
-                      <increment>30</increment>
+                      <increment>1.0</increment>
                       <decorated reference="../../../../myRange/decorated"/>
-                    </engine.gameobject.units.FreezeBuff>
+                    </engine.gameobject.units.DirectDamage>
                   </onCollision>
                   <onDeath>
                     <radius>0.0</radius>
                     <effects/>
                   </onDeath>
-                  <myType>2</myType>
+                  <myType>4</myType>
                 </myProjectile>
-                <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile"/>
+                <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.MultipleProjectile">
+                  <projectilesCreated>8</projectilesCreated>
+                </myFiringStrategy>
                 <upgradables>
                   <classMap>
                     <entry>
@@ -173,7 +175,10 @@
                     </entry>
                     <entry>
                       <string>RangeUpgrade</string>
-                      <engine.gameobject.weapon.upgradable.range.RangeUpgrade reference="../../../../myRange"/>
+                      <engine.gameobject.weapon.upgradable.range.RangeUpgrade>
+                        <increment>250.0</increment>
+                        <decorated reference="../../../../../myRange/decorated"/>
+                      </engine.gameobject.weapon.upgradable.range.RangeUpgrade>
                     </entry>
                   </classMap>
                 </upgradables>
@@ -209,9 +214,9 @@
                 <name>TestTower</name>
                 <description>Just a test tower; nothing special here...</description>
                 <shopGraphic>
-                  <myHeight>20.0</myHeight>
-                  <myWidth>20.0</myWidth>
-                  <myImageName>robertDuvall.jpg</myImageName>
+                  <myHeight>40.0</myHeight>
+                  <myWidth>40.0</myWidth>
+                  <myImageName>Bloons_TackShooterIcon.png</myImageName>
                 </shopGraphic>
               </myTag>
               <buffList/>
@@ -345,16 +350,16 @@
                 <name>TestTower</name>
                 <description>Just a test tower; nothing special here...</description>
                 <shopGraphic>
-                  <myHeight>20.0</myHeight>
-                  <myWidth>20.0</myWidth>
-                  <myImageName>robertDuvall.jpg</myImageName>
+                  <myHeight>40.0</myHeight>
+                  <myWidth>40.0</myWidth>
+                  <myImageName>Bloons_TackShooterIcon.png</myImageName>
                 </shopGraphic>
               </myTag>
               <buffList/>
               <myWeapon class="engine.gameobject.test.TestWeapon">
                 <timeSinceFire>0</timeSinceFire>
                 <myRange class="engine.gameobject.weapon.upgradable.range.RangeUpgrade">
-                  <increment>250.0</increment>
+                  <increment>90.0</increment>
                   <decorated reference="../../../../engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
                 </myRange>
                 <myFiringRate class="engine.gameobject.weapon.upgradable.firingrate.FiringRateUpgrade">
@@ -374,10 +379,10 @@
                     </myPoint>
                   </myPoint>
                   <myHealth class="engine.gameobject.HealthSimple">
-                    <myHealth>0.0</myHealth>
+                    <myHealth>1.0</myHealth>
                   </myHealth>
                   <myMover class="engine.gameobject.MoverDirection">
-                    <inherentSpeed>3.3</inherentSpeed>
+                    <inherentSpeed>4.0</inherentSpeed>
                     <speedModifier>1.0</speedModifier>
                     <myDistance>0.0</myDistance>
                     <frozen>false</frozen>
@@ -388,7 +393,7 @@
                         <hash>0</hash>
                       </myPoint>
                     </myPoint>
-                    <distanceLimit>250.0</distanceLimit>
+                    <distanceLimit>90.0</distanceLimit>
                     <distanceTraveled>0.0</distanceTraveled>
                     <pastPoint>false</pastPoint>
                   </myMover>
@@ -417,28 +422,23 @@
                     </shopGraphic>
                   </myTag>
                   <collidedID/>
-                  <onCollision/>
+                  <onCollision>
+                    <engine.gameobject.units.DirectDamage>
+                      <duration>20</duration>
+                      <timeSinceStart>0</timeSinceStart>
+                      <increment>1.0</increment>
+                      <decorated reference="../../../../../../engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
+                    </engine.gameobject.units.DirectDamage>
+                  </onCollision>
                   <onDeath>
-                    <radius>100.0</radius>
-                    <effects>
-                      <engine.gameobject.units.PoisonBuff>
-                        <duration>1000</duration>
-                        <timeSinceStart>0</timeSinceStart>
-                        <timeIncr>1000</timeIncr>
-                        <damageIncr>4.0</damageIncr>
-                        <decorated reference="../../../../../../../engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
-                      </engine.gameobject.units.PoisonBuff>
-                      <engine.gameobject.units.FreezeBuff>
-                        <duration>30</duration>
-                        <timeSinceStart>0</timeSinceStart>
-                        <increment>30</increment>
-                        <decorated reference="../../../../../../../engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
-                      </engine.gameobject.units.FreezeBuff>
-                    </effects>
+                    <radius>0.0</radius>
+                    <effects/>
                   </onDeath>
-                  <myType>3</myType>
+                  <myType>4</myType>
                 </myProjectile>
-                <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile"/>
+                <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.MultipleProjectile">
+                  <projectilesCreated>8</projectilesCreated>
+                </myFiringStrategy>
                 <upgradables>
                   <classMap>
                     <entry>
@@ -447,7 +447,10 @@
                     </entry>
                     <entry>
                       <string>RangeUpgrade</string>
-                      <engine.gameobject.weapon.upgradable.range.RangeUpgrade reference="../../../../myRange"/>
+                      <engine.gameobject.weapon.upgradable.range.RangeUpgrade>
+                        <increment>250.0</increment>
+                        <decorated reference="../../../../../../../engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
+                      </engine.gameobject.weapon.upgradable.range.RangeUpgrade>
                     </entry>
                   </classMap>
                 </upgradables>
@@ -455,6 +458,142 @@
             </engine.gameobject.test.TestTower>
           </myObjects>
           <myPathWidth>10.0</myPathWidth>
+          <myPath class="engine.pathfinding.PathFixed">
+            <myPathSegments class="linked-list">
+              <engine.pathfinding.PathSegmentBezier>
+                <myPoints>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>567.5</x>
+                      <y>306.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>472.5</x>
+                      <y>310.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>472.5</x>
+                      <y>310.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>377.5</x>
+                      <y>314.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                </myPoints>
+                <myLength>0.0</myLength>
+              </engine.pathfinding.PathSegmentBezier>
+              <engine.pathfinding.PathSegmentBezier>
+                <myPoints>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>377.5</x>
+                      <y>314.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>285.5</x>
+                      <y>396.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>248.5</x>
+                      <y>433.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>210.5</x>
+                      <y>301.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                </myPoints>
+                <myLength>0.0</myLength>
+              </engine.pathfinding.PathSegmentBezier>
+              <engine.pathfinding.PathSegmentBezier>
+                <myPoints>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>210.5</x>
+                      <y>301.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>200.5</x>
+                      <y>269.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>237.5</x>
+                      <y>220.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>288.5</x>
+                      <y>199.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                </myPoints>
+                <myLength>0.0</myLength>
+              </engine.pathfinding.PathSegmentBezier>
+              <engine.pathfinding.PathSegmentBezier>
+                <myPoints>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>288.5</x>
+                      <y>199.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>299.5</x>
+                      <y>216.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>329.5</x>
+                      <y>109.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                  <engine.gameobject.PointSimple>
+                    <myPoint>
+                      <x>240.5</x>
+                      <y>137.0</y>
+                      <hash>0</hash>
+                    </myPoint>
+                  </engine.gameobject.PointSimple>
+                </myPoints>
+                <myLength>0.0</myLength>
+              </engine.pathfinding.PathSegmentBezier>
+            </myPathSegments>
+          </myPath>
         </myGameWorld>
         <myStoryBoard>
           <eventList>
@@ -9689,6 +9828,13 @@
     </myLevels>
     <curLevelIndex>0</curLevelIndex>
   </myLevelBoard>
+  <myShop class="engine.shop.ShopModelSimple">
+    <currentPlayer reference="../../myPlayer"/>
+    <myGameWorld class="gameworld.FixedWorld" reference="../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myGameWorld"/>
+    <prototypeMap/>
+    <upgradeMap/>
+    <markup>1.0</markup>
+  </myShop>
   <myButtons>
     <View.ButtonWrapper>
       <myLabel>wave</myLabel>

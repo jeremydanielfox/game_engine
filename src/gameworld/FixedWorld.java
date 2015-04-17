@@ -29,6 +29,7 @@ public class FixedWorld extends AbstractWorld {
 	
     @Override
     public boolean isPlacable (Node n, PointSimple pixelCoords) {
+    	System.out.println(pixelCoords);
     	int i = 0;
     	Circle c = new Circle(myPathWidth);
     	while(true){
@@ -36,7 +37,12 @@ public class FixedWorld extends AbstractWorld {
 				PointSimple pathPoint = myPath.getNextLocation(i);
 				c.setCenterX(pathPoint.getX());
 				c.setCenterY(pathPoint.getY());
-				if(c.intersects(n.getBoundsInLocal())){
+//				System.out.printf("%f, %f, %f", pathPoint.getX(), pathPoint.getY(), PointSimple.distance(pathPoint, myPath.getNextLocation(i+1)));
+//				if(c.getBoundsInParent().intersects(n.getBoundsInParent())){
+//				System.out.println(PointSimple.distance(pathPoint, pixelCoords));
+
+				if(pathPoint.withinRange(pixelCoords, 100)){
+					System.out.println("false");
 					return false;
 				}
 			} catch (EndOfPathException e) {
@@ -44,6 +50,7 @@ public class FixedWorld extends AbstractWorld {
 			}
     		i++;
     	}
+    	System.out.println("true");
     	return true;
     }
     

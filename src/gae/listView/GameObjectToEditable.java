@@ -1,5 +1,8 @@
 package gae.listView;
 
+import View.ImageUtilities;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
@@ -31,6 +34,7 @@ public class GameObjectToEditable implements Editable {
     private Path myPath;
     private int width;
     private int height;
+    private ImageView imageView;
 
     public GameObjectToEditable (GameObjectSimple gameobject) {
         this.gameObject = gameobject;
@@ -42,6 +46,7 @@ public class GameObjectToEditable implements Editable {
         name = gameObject.getTag().getName();
         imagePath = gameObject.getTag().getGraphic().getImagePath();
         type = gameObject.getLabel().getLabel();
+        imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
         // gameobject is not serializable and gives an error so must set to null
         gameObject = null;
     }
@@ -148,5 +153,25 @@ public class GameObjectToEditable implements Editable {
     public void setLocation (PointSimple point) {
         // TODO Auto-generated method stub
         location = point;
+    }
+
+    @Override
+    public ImageView getImageView () {
+        // currently hardcoding imageView but if Tag + Graphic work then...
+        // return ImageUtilities.changeImageSize(new ImageView(new Image(imagePath)),
+        // 75, 75);
+        //
+        //
+        // imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
+        return imageView;
+    }
+
+    @Override
+    public Editable makeNewInstance () {
+        Editable copy = (Editable) DeepCopy.copy(this);
+        // need way to figure out ID
+        // copy.setID(myID);
+        // myID++;
+        return copy;
     }
 }

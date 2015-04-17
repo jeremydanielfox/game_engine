@@ -30,10 +30,10 @@ import javafx.scene.paint.Color;
  *
  */
 public class PaneList {
-    private Map<EditableNode, ObservableList<Editable>> instancesEditableNodeMap;
+    private Map<Editable, ObservableList<Editable>> instancesEditableMap;
     private Group root;
     private StackPane stack;
-    private ObservableList<EditableNode> observableList;
+    private ObservableList<Editable> observableList;
     private ContainerWrapper wrapper;
     private String type;
     private Scene scene;
@@ -52,16 +52,16 @@ public class PaneList {
                                   Node node,
                                   Scene scene,
                                   ContainerWrapper wrapper,
-                                  ObservableList<EditableNode> observableList,
+                                  ObservableList<Editable> editableObservableList,
                                   String type) {
         this.root = root;
         this.node = node;
         this.stack = (StackPane) node;
-        this.observableList = observableList;
+        this.observableList = editableObservableList;
         this.wrapper = wrapper;
         this.type = type;
         this.scene = scene;
-        instancesEditableNodeMap = new HashMap<>();
+        instancesEditableMap = new HashMap<>();
         root.setManaged(false);
         TitledPane pane = getTitledPane(type);
         Accordion accordion = new Accordion();
@@ -81,8 +81,8 @@ public class PaneList {
         }
     }
 
-    public Map<EditableNode, ObservableList<Editable>> getMap () {
-        return instancesEditableNodeMap;
+    public Map<Editable, ObservableList<Editable>> getMap () {
+        return instancesEditableMap;
     }
 
     /**
@@ -100,13 +100,13 @@ public class PaneList {
 
     private void setUpObservableList (ObservableList<TitledPane> paneList) {
 
-        for (EditableNode previousNode : observableList) {
-            setUpNewInstanceList(paneList, previousNode);
+        for (Editable previous : observableList) {
+            setUpNewInstanceList(paneList, previous);
         }
-        observableList.addListener( (ListChangeListener.Change<? extends EditableNode> change) -> {
+        observableList.addListener( (ListChangeListener.Change<? extends Editable> change) -> {
             while (change.next()) {
                 if (change.wasAdded()) { // if an editablenode was added
-                    EditableNode added = (EditableNode) change.getAddedSubList().get(0);
+                    Editable added = (Editable) change.getAddedSubList().get(0);
                     setUpNewInstanceList(paneList, added);
                 }
             }
@@ -114,12 +114,12 @@ public class PaneList {
     }
 
     private void setUpNewInstanceList (ObservableList<TitledPane> paneList,
-                                       EditableNode editableNode) {
-        if (editableNode.getType().equals(type)) {
+                                       Editable editable) {
+        if (editable.getType().equals(type)) {
             ObservableList<Editable> instanceList =
                     FXCollections.observableArrayList();
-            instancesEditableNodeMap.put(editableNode, instanceList);
-            TitledPane newPane = setTitledPaneClick(editableNode, instanceList);
+            instancesEditableMap.put(editable, instanceList);
+            TitledPane newPane = setTitledPaneClick(editable, instanceList);
             paneList.add(newPane);
         }
     }
@@ -135,17 +135,17 @@ public class PaneList {
      * @param wrapper
      * @return
      */
-    private TitledPane setTitledPaneClick (EditableNode editablenode,
+    private TitledPane setTitledPaneClick (Editable editable,
                                            ObservableList<Editable> instanceList) {
         TitledPane newPane = new TitledPane();
-        newPane.setText(editablenode.getName());
+        newPane.setText(editable.getName());
         newPane.setContent(ListViewUtilities.createList(instanceList, scene));
         newPane.setOnMousePressed(me -> {
             if (me.isSecondaryButtonDown()) {
                 ContextMenu contextmenu = new ContextMenu();
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
-                    DraggableUtilities.makeNodePlaceable(me, editablenode, node, instanceList,
+                    DraggableUtilities.makeEditablePlaceable(me, editable, node, instanceList,
                                                          wrapper, root);
                 });
                 contextmenu.getItems().add(item);

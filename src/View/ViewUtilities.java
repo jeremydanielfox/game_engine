@@ -26,18 +26,28 @@ public class ViewUtilities {
      * @param key Disabling key
      * @return
      */
-    public static Node bindCursor (Node node, Node pane, Point2D initial, KeyCode key) {
+    public static Node bindCursor (Node node, Node pane, Point2D initial, KeyCode key, boolean scene) {
         final Group wrapGroup = new Group(node);
         wrapGroup.relocate(initial.getX(), initial.getY());
-        pane.getScene().setOnMouseMoved(mouseEvent -> {
-            //mouseEvent.consume();
-            Point2D current = getMouseLocation(mouseEvent, node);
-            wrapGroup.relocate(current.getX(), current.getY());
-            previous = current;
-        });
+        if (scene) {
+            pane.getScene().setOnMouseMoved(mouseEvent -> {
+                // mouseEvent.consume();
+                Point2D current = getMouseLocation(mouseEvent, node);
+                wrapGroup.relocate(current.getX(), current.getY());
+                previous = current;
+            });
+        }
+        else {
+            pane.setOnMouseMoved(mouseEvent -> {
+                // mouseEvent.consume();
+                Point2D current = getMouseLocation(mouseEvent, node);
+                wrapGroup.relocate(current.getX(), current.getY());
+                previous = current;
+            });
+        }
 
         // TODO: figure out why keyPressed caller must be scene, and not pane or node
-        // EDIT: I changed this to node and it worked perfectly for me! 
+        // EDIT: I changed this to node and it worked perfectly for me!
         pane.getScene().setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
                 unbindCursor(pane);
@@ -46,16 +56,17 @@ public class ViewUtilities {
             }
         });
 
-       return wrapGroup;
+        return wrapGroup;
     }
-    
-    public static void unbindCursor(Node scene) {
+
+    public static void unbindCursor (Node scene) {
         scene.setOnMouseMoved(null);
     }
 
-    public static void addMouseMovementHandler(){
-        
+    public static void addMouseMovementHandler () {
+
     }
+
     /**
      * Determines the normalized ratio (0 to 1) of width and height within a parent
      * container from local pixel coordinates
@@ -94,12 +105,12 @@ public class ViewUtilities {
         return new Point2D(mouseEvent.getX() + getCenterOffSetX(node),
                            mouseEvent.getY() + getCenterOffSetY(node));
     }
-    
+
     public static Point2D getMouseSceneLoc (MouseEvent mouseEvent, Node node) {
         return new Point2D(mouseEvent.getSceneX() + getCenterOffSetX(node),
                            mouseEvent.getSceneY() + getCenterOffSetY(node));
     }
-    
+
     /**
      * Used to find the center of a node. Gets the X offset.
      * 

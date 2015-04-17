@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
+import gae.backend.Editable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -24,26 +25,26 @@ public class LibraryData {
         return instance;
     }
 
-    private ObservableList<EditableNode> editableNodeList = FXCollections.observableArrayList();
+    private ObservableList<Editable> editableList = FXCollections.observableArrayList();
 
-    public ObservableList<EditableNode> getObservableList () {
-        return editableNodeList;
+    public ObservableList<Editable> getObservableList () {
+        return editableList;
     }
 
-    public void addToList (EditableNode editableNode) {
-        editableNodeList.add(editableNode);
+    public void addToList (Editable editable) {
+        editableList.add(editable);
     }
 
     public List<GameObjectSimple> getGameObjectList () {
         List<GameObjectSimple> gameObjectList = new ArrayList<>();
-        for (EditableNode editableNode : editableNodeList) {
+        for (Editable editable : editableList) {
             // can't instatiate GameObject - how to send it to XML
             GameObjectSimple object = new GameObjectSimple();
-            object.setGraphic(new Graphic(editableNode.getWidth(), editableNode.getHeight(),
-                                          editableNode.getImagePath()));
+            object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
+                                          editable.getImagePath()));
             // object.setLabel(editableNode.getLabel());
             // object.setTag(editableNode.getTag());
-            object.setPoint(editableNode.getLocation());
+            object.setPoint(editable.getLocation());
         }
         return null;
     }

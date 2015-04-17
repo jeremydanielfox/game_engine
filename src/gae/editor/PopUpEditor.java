@@ -2,7 +2,6 @@ package gae.editor;
 
 import engine.gameobject.GameObjectSimple;
 import gae.gameView.GameView;
-import gae.listView.EditableNode;
 import gae.listView.GameObjectToEditable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -24,7 +23,7 @@ public class PopUpEditor extends SimpleEditor{
         Button addButton = new Button("Add");
         addButton.setOnAction(e -> {
             Object obj = createObject(c);
-            gameView.getAddFunction(new EditableNode(new GameObjectToEditable((GameObjectSimple)obj)));
+            gameView.getAddFunction(new GameObjectToEditable((GameObjectSimple)obj));
         });
         editor.getChildren().add(addButton);
     }

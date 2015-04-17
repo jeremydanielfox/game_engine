@@ -21,8 +21,8 @@ import javafx.scene.text.Text;
 
 public class GameSelector {
 
-    private static final String LEFT = "left";
-    private static final String RIGHT = "right";
+    private static final int LEFT = -1;
+    private static final int RIGHT = 1;
     private static final ImageView rightArrow = new ImageView("/images/right_arrow.jpg");
     private static final ImageView leftArrow = new ImageView("/images/left_arrow.jpg");
 
@@ -34,12 +34,13 @@ public class GameSelector {
 
     public GameSelector (Scene s) {
         chooser = new GridPane();
-        chooser.setId("gameChooser");
         right = rightArrow;
         left = leftArrow;
+        options = new ArrayList<>();
+
+        chooser.setId("gameChooser");
         right.setId("arrow");
         left.setId("arrow");
-        options = new ArrayList<>();
 
         /*
          * manually adding select options to test out player
@@ -56,6 +57,9 @@ public class GameSelector {
         setUpFunctions();
     }
 
+    /**
+     * sets up the gridpane of the arrows and the select options
+     */
     @SuppressWarnings("static-access")
     private void setUpGrid () {
         List<Node> optionNodes = Arrays.asList(left, currentView, right);
@@ -79,16 +83,18 @@ public class GameSelector {
     }
 
     /**
-     * swipes the images to the next option in the respective direction (left or right)
+     * swipes the images to the next option in the respective direction (left or right). loops
+     * around if it reaches an end
      * 
      * @param s
      */
-    private void swipe (String s) {
-        if (s.equals(RIGHT) && options.get(index + 1) != null)
-            index += 1;
-        else if (s.equals(LEFT) && options.get(index - 1) != null)
-            index -= 1;
-
+    private void swipe (int i) {
+        if (index == options.size() - 1 && i == RIGHT)
+            index = 0;
+        else if (index == 0 && i == LEFT)
+            index = options.size() - 1;
+        else
+            index += i;
         currentView.getChildren().clear();
         currentView.getChildren().add(options.get(index).getOption());
     }
@@ -112,11 +118,13 @@ public class GameSelector {
 
         public SelectOption (ImageView picture, String name) {
             display = new VBox(10);
-            display.setId("selectOption");
             gamePicture = picture;
-            gamePicture.setId("gameIcon");
             gameName = new Text(name);
+
+            display.setId("selectOption");
+            gamePicture.setId("gameIcon");
             gameName.setId("gameName");
+
             createDisplay();
         }
 

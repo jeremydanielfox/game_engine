@@ -1,6 +1,8 @@
 package player.gamePlayer;
 
+import java.io.File;
 import java.util.Arrays;
+
 import gae.gameView.Main;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -8,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -31,19 +34,15 @@ public class PlayerOpener extends Application {
     public PlayerOpener () {
         view = new BorderPane();
         playerScene = new Scene(view);
-        playerScene.getStylesheets().add("/css/GamePlayerCSS.css");
         options = new HBox(50);
-        options.setId("optionBox");
         header = new Text(headerText);
-        header.setId("playerHeader");
         gameSelector = new GameSelector(playerScene);
-        setUpButtons();
-        setUpBorderPane();
-        createOptions();
-    }
 
-    private void createOptions () {
-        options.getChildren().addAll(loadB, playB);
+        playerScene.getStylesheets().add("/css/GamePlayerCSS.css");
+        options.setId("optionBox");
+        header.setId("playerHeader");
+
+        setUpBorderPane();
     }
 
     /**
@@ -52,16 +51,33 @@ public class PlayerOpener extends Application {
     private void setUpButtons () {
         loadB = new Button("LOAD GAME");
         loadB.setOnMousePressed(e -> {
-
+            openFileChooser();
         });
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
-
+            /*
+             * change scene to next player scene
+             */
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {
             e.setId("playerButton");
         });
+
+        createOptions();
+    }
+
+    private void openFileChooser () {
+        FileChooser fc = new FileChooser();
+        Stage fileStage = new Stage();
+        File chosen = fc.showOpenDialog(fileStage);
+    }
+
+    /**
+     * adds buttons to options box
+     */
+    private void createOptions () {
+        options.getChildren().addAll(loadB, playB);
     }
 
     /**
@@ -70,12 +86,22 @@ public class PlayerOpener extends Application {
     private void setUpBorderPane () {
         view.setCenter(gameSelector.getChooser());
         view.setTop(header);
+        setUpButtons();
         view.setBottom(options);
     }
 
+    /**
+     * returns the Player scene
+     * 
+     * @return
+     */
     public Scene getPlayer () {
         return playerScene;
     }
+
+    /*
+     * Main to start the Player
+     */
 
     public static void main (String[] args) {
         launch(args);

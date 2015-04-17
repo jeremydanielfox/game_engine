@@ -30,21 +30,21 @@ public class ShopModelSimple implements ShopModel {
     private Map<String, UpgradeBundle> upgradeMap;
     private final double markup;
     private GameObject currentGameObject;
-    
+
     public ShopModelSimple () {
         markup = 1;
     }
 
     // For test only
     public ShopModelSimple (GameWorld world, Player player, double markup) {
-        //List<Prototype<GameObject>>prototypes =
-                
+        // List<Prototype<GameObject>>prototypes =
+
         this.markup = markup;
         this.myGameWorld = world;
         currentPlayer = player;
         prototypeMap = new HashMap<>();
         upgradeMap = new HashMap<>();
-        //prototypes.forEach(prototype -> addPrototype(prototype));
+        // prototypes.forEach(prototype -> addPrototype(prototype));
     }
 
     public ShopModelSimple (List<Prototype<GameObject>> prototypes,
@@ -56,8 +56,6 @@ public class ShopModelSimple implements ShopModel {
         upgradeMap = new HashMap<String, UpgradeBundle>();
         prototypes.forEach(prototype -> addPrototype(prototype));
     }
-
-
 
     public void addPrototype (Prototype<GameObject> prototype) {
         prototypeMap.put(prototype.getTag().getName(), prototype);
@@ -92,8 +90,10 @@ public class ShopModelSimple implements ShopModel {
      * @param transitionGameObject
      */
     public void purchaseGameObject (String name, PointSimple location) {
-        myGameWorld.addObject(prototypeMap.get(name).clone());
-        currentPlayer.getWallet().withdraw(getPrice(name));
+        if (canPurchase(name) && checkPlacement(name, location)) {
+            currentPlayer.getWallet().withdraw(getPrice(name));
+            myGameWorld.addObject(prototypeMap.get(name).clone());
+        }
     }
 
     /**

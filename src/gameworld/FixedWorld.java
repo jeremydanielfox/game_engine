@@ -29,7 +29,7 @@ public class FixedWorld extends AbstractWorld {
 	
     @Override
     public boolean isPlacable (Node n, PointSimple pixelCoords) {
-    	System.out.println(pixelCoords);
+    	//System.out.println(pixelCoords);
     	int i = 0;
     	Circle c = new Circle(myPathWidth);
     	while(true){

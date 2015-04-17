@@ -1,74 +1,66 @@
-package gae.listView;
+package gae.backend;
 
-import engine.gameobject.GameObjectSimple;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
-import gae.backend.Editable;
 import gae.gridView.Pair;
 import gae.gridView.Path;
+import gae.listView.MovableImage;
+import gae.openingView.UIObject;
 
 
-/**
- * A temporary adaptor class that converts the engine's GameObjectSimple object to an Editable
- * object, as GAE has been working with Editables. Essentially takes in the engine's object and
- * takes out necessary information from it for GAE use.
- * 
- * @author Kei
- *
- */
-public class GameObjectToEditable implements Editable {
-    private GameObjectSimple gameObject;
+public class TempEnemy implements Editable, UIObject {
+    /**
+     * 
+     */
     private static final long serialVersionUID = 1L;
+    /**
+     * 
+     */
     private int myID = 0;
     private int Size = 10;
     private int Health = 100;
     private Weapon weapon;
     private PointSimple location;
-    private String imagePath;
-    private MovableImage movableImage;
-    private String name;
-    private String type;
-    private Path myPath;
-    private int width;
-    private int height;
-
-    public GameObjectToEditable (GameObjectSimple gameobject) {
-        this.gameObject = gameobject;
-        /*
-         * doing the following instantiation because it doesn't copy GameObjectSimple (not
-         * Serializable)
-         * TODO: find out how to copy the object
-         */
-        name = gameObject.getTag().getName();
-        imagePath = gameObject.getTag().getGraphic().getImagePath();
-        type = gameObject.getLabel().getLabel();
-        // gameobject is not serializable and gives an error so must set to null
-        gameObject = null;
-    }
+    private String image = "/images/robertDuvall.jpg";
+    private String myName = "TempTower";
+    private MovableImage editableImage;
 
     @Override
     public void edit () {
         // TODO Auto-generated method stub
+
     }
 
-    public GameObjectSimple getGameObject () {
-        return gameObject;
+    // added by brandon
+    public void setImage (String i) {
+        image = i;
+    }
+
+    public TempEnemy () {
+    }
+
+    public TempEnemy (String name) {
+        myName = name;
     }
 
     @Override
     public String getImagePath () {
-        return imagePath;
+        return image;
     }
 
     @Override
     public String getName () {
-        return name + " ";
+        // TODO Auto-generated method stub
+        return "TempEnemy ";
     }
 
     @Override
     public String getType () {
         // TODO Auto-generated method stub
-        return type;
+        return "Enemy";
     }
 
     @Override
@@ -79,12 +71,18 @@ public class GameObjectToEditable implements Editable {
     @Override
     public void setMovableImage (MovableImage image) {
         // TODO Auto-generated method stub
-        movableImage = image;
+        editableImage = image;
     }
 
     @Override
     public MovableImage getMovableImage () {
-        return movableImage;
+        return editableImage;
+    }
+
+    @Override
+    public Node getObject () {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
@@ -105,43 +103,43 @@ public class GameObjectToEditable implements Editable {
     @Override
     public Path getPath () {
         // TODO Auto-generated method stub
-        return myPath;
+        return null;
     }
 
     @Override
     public void setPath (Path path) {
         // TODO Auto-generated method stub
-        myPath = path;
-    }
 
-    @Override
-    public int getWidth () {
-        // TODO Auto-generated method stub
-        return width;
-    }
-
-    @Override
-    public int getHeight () {
-        // TODO Auto-generated method stub
-        return height;
     }
 
     @Override
     public void setWidth (int width) {
         // TODO Auto-generated method stub
-        this.width = width;
+
     }
 
     @Override
     public void setHeight (int height) {
         // TODO Auto-generated method stub
-        this.height = height;
+
+    }
+
+    @Override
+    public int getWidth () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getHeight () {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
     public PointSimple getLocation () {
         // TODO Auto-generated method stub
-        return location;
+        return null;
     }
 
     @Override

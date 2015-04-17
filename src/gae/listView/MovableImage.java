@@ -2,6 +2,7 @@ package gae.listView;
 
 import gae.backend.Editable;
 import View.ViewUtilities;
+import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
 import gae.gridView.ContainerWrapper;
 import javafx.geometry.Point2D;
@@ -57,7 +58,7 @@ public class MovableImage extends Region {
                 if (abs.getY() > 0 && abs.getY() < getScene().getHeight()) {
                     wrapGroup.setTranslateY(newY);
                 }
-                editable.setLocation(abs.getX(), abs.getY());
+                editable.setLocation(new PointSimple(abs.getX(), abs.getY()));
                 setOnMouseReleased(location -> {
                     if (wrapper.checkBounds(abs.getX(), abs.getY())) {
                         wrapGroup.setTranslateX(startX);

@@ -31,7 +31,6 @@ public class ViewUtilities {
             //mouseEvent.consume();
             Point2D current = getMouseLocation(mouseEvent, node);
             wrapGroup.relocate(current.getX(), current.getY());
-
             previous = current;
         });
 

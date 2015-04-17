@@ -9,6 +9,7 @@ import engine.pathfinding.EndOfPathException;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.GameObjectTagSimple;
 import gae.listView.DeepCopy;
+import gameworld.ObjectCollection;
 
 
 /**
@@ -18,7 +19,7 @@ import gae.listView.DeepCopy;
  *
  */
 @Settable
-public abstract class GameObjectSimple implements GameObject {
+public class GameObjectSimple implements GameObject {
     private Label myLabel;
     private PointSimple myPoint;
     private Health myHealth;
@@ -62,7 +63,7 @@ public abstract class GameObjectSimple implements GameObject {
     public PointSimple getPoint () {
         return new PointSimple(myPoint);
     }
-    
+
     @Override
     public void changeHealth (double amount) {
         myHealth.changeHealth(amount);
@@ -72,7 +73,7 @@ public abstract class GameObjectSimple implements GameObject {
     public Mover getMover () {
         return myMover;
     }
-    
+
     @Override
     public Graphic getGraphic () {
         return myGraphic;
@@ -105,7 +106,7 @@ public abstract class GameObjectSimple implements GameObject {
     }
 
     // @Settable
-    public void setMover (Mover mover) { 
+    public void setMover (Mover mover) {
         myMover = mover;
     }
 
@@ -113,7 +114,7 @@ public abstract class GameObjectSimple implements GameObject {
     public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }
-    
+
     @Settable
     public void setWeapon (Weapon weapon) {
         myWeapon = weapon;
@@ -129,19 +130,40 @@ public abstract class GameObjectSimple implements GameObject {
         return myWeapon.getValue();
     }
 
+    // // added because tag is broken and I can't test - Kei
+    // public String getName () {
+    // // works with return myName - editor not compatible
+    // return myTag.getName();
+    // }
+
+    // public String getLabel () {
+    // return myTag.getLabel();
+    // }
     @Override
     public double getRange () {
         return myWeapon.getRange();
     }
-    
+
     @Override
     public void setSpeed (double speed) {
         myMover.setSpeed(speed);
     }
-    
+
     @Override
     public boolean isDead () {
         return myHealth.isDead();
     }
-    
+
+    @Override
+    public void update (ObjectCollection world) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void onDeath (ObjectCollection world) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

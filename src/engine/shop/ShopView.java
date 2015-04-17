@@ -94,7 +94,7 @@ public class ShopView extends Parent {
             gameObjectIcon.setOnMouseExited(mouseEvent -> infoBox.getChildren().clear());
             gameObjectIcon.setOnMouseClicked(mouseEvent ->{
                 TransitionGameObject transition = model.getTransitionGameObject(gameObjectIcon.getName());
-                Point2D location = ViewUtilities.getMouseLocation(mouseEvent, transition.getNode());
+                Point2D location = ViewUtilities.getMouseSceneLoc(mouseEvent, transition.getNode());
                 initializeTransition(model.getTransitionGameObject(gameObjectIcon.getName()),
                                      location);
             });
@@ -175,14 +175,14 @@ public class ShopView extends Parent {
         bindCursor(initial, transNode);
 
         transNode.setOnMouseMoved(event -> {
-            Point2D current = ViewUtilities.getMouseLocation(event, transNode);
+            Point2D current = ViewUtilities.getMouseSceneLoc(event, transNode);
             transition.setRangeCircleColor(model.checkPlacement(transition.getName(),
                                                                 new PointSimple(current)));
         });
 
         transNode.setOnMouseClicked(event -> {
             model.purchaseGameObject(transition.getName(),
-                                     new PointSimple(event.getSceneX(), event.getSceneY()));
+                                     new PointSimple(ViewUtilities.getMouseSceneLoc(event, transNode)));
         });
     }
 }

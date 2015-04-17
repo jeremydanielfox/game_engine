@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
+import javafx.event.WeakEventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -90,13 +92,14 @@ public class ShopView extends Parent {
         shopIcons.setHgap(5);
         shopIcons.setVgap(5);
         List<ItemGraphic> icons = model.getItemGraphics();
-
         icons.forEach(gameObjectIcon -> {
             gameObjectIcon.setOnMouseEntered(mouseEvent -> displayGameObjectInfo(gameObjectIcon));
             gameObjectIcon.setOnMouseExited(mouseEvent -> infoBox.getChildren().clear());
-            gameObjectIcon.setOnMouseClicked(mouseEvent -> initializeTransition(gameObjectIcon
-                    .onClicked(), mouseEvent));
+            gameObjectIcon.setOnMouseClicked(mouseEvent ->
+                    initializeTransition(model.getTransitionGameObject(gameObjectIcon.getName()),
+                                         mouseEvent));
         });
+        shopIcons.getChildren().addAll(icons);
     }
 
     private void displayGameObjectInfo (ItemGraphic icon) {
@@ -113,8 +116,9 @@ public class ShopView extends Parent {
         Map<ItemInfo, Label> result = new EnumMap<ItemInfo, Label>(ItemInfo.class);
         result.put(ItemInfo.NAME, new Label(infoMap.get(ItemInfo.NAME)));
         result.put(ItemInfo.PRICE,
-                   new Label(String.format("Cost: %f", infoMap.get(ItemInfo.PRICE))));
+                   new Label(String.format("Cost: %s", infoMap.get(ItemInfo.PRICE))));
         result.put(ItemInfo.DESCRIPTION, new Label(infoMap.get(ItemInfo.DESCRIPTION)));
+        result.values().forEach(label -> label.setWrapText(true));
         return result;
     }
 
@@ -165,14 +169,15 @@ public class ShopView extends Parent {
         Node transNode = transition.getNode();
         Point2D location = ViewUtilities.getMouseLocation(mouseEvent, transNode);
         bindCursor(location, transNode);
-
         transNode.setOnMouseMoved(event2 -> {
+            event2.consume();
             transition.setRangeCircleColor(model.checkPlacement(transition.getName(),
                                                                 new PointSimple(location)));
         });
 
         transNode.setOnMouseClicked(event2 -> {
-            model.purchaseGameObject(transition.getName(), new PointSimple(location));
+            model.purchaseGameObject(transition.getName(),
+                                     new PointSimple(event2.getX(), event2.getY()));
         });
     }
 }

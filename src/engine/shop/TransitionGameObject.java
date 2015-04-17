@@ -22,7 +22,7 @@ public class TransitionGameObject {
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
     private static final Color WHITE_COLOR = Color.rgb(255, 255, 255, 0.5); // half-transparent white
   
-    private Graphic myGraphic;
+    private Graphic graphic;
     private String name;
     private double range;
     @XStreamOmitField
@@ -31,7 +31,7 @@ public class TransitionGameObject {
     private transient StackPane pane;
 
     public TransitionGameObject (String name, Graphic myGraphic, double range) {
-        this.myGraphic = myGraphic;
+        this.graphic = myGraphic;
         this.name = name;
         this.range = range;
         initialize();
@@ -44,7 +44,7 @@ public class TransitionGameObject {
         rangeDetection = new Circle(range, ERROR_COLOR);
         rangeDetection.setStroke(Color.BLACK);
 
-        pane.getChildren().addAll(rangeDetection, myGraphic.getNode());
+        pane.getChildren().addAll(rangeDetection, graphic.getNode());
     }
 
     public Node getNode () {

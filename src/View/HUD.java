@@ -8,6 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
+import engine.gameobject.test.TestTower;
 import engine.gameobject.units.BuffableUnit;
 import engine.shop.ItemGraphic;
 import engine.shop.ShopModel;
@@ -139,6 +140,8 @@ public class HUD implements Observer {
     }
 
     private void makeShop () {
+        //TESTING purposes:
+        shop.addPrototype(new TestTower(0,0,0));
         myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
     }
     /*

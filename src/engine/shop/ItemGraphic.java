@@ -32,7 +32,6 @@ public class ItemGraphic extends Parent {
         itemNode = shopGraphic.getNode();
         itemNode.setOnMouseEntered(mouseEvent -> hoverAction());
         itemNode.setOnMouseExited(mouseEvent -> itemNode.setEffect(null));
-        itemNode.setOnMouseClicked(mouseEvent -> onClicked());
         getChildren().add(itemNode);
     }
 

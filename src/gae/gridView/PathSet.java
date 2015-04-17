@@ -4,12 +4,15 @@ package gae.gridView;
  * In the process of trying to put the Anchors and the curve into one object
  */
 import java.util.ArrayList;
+import java.util.Arrays;
 import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -31,6 +34,7 @@ public class PathSet extends Region {
     private PathLabel pathLabel;
     private StackPane stack;
     private ContainerWrapper container;
+    private ArrayList<Node> visibleList;
     private ObjectProperty<Integer> addPath = new SimpleObjectProperty<Integer>();
     private ObjectProperty<String> addPathInstructions = new SimpleObjectProperty<String>();
 
@@ -45,7 +49,11 @@ public class PathSet extends Region {
         this.anchorList = anchorList;
         this.stack = scene;
         this.index = index;
-        init();
+        curve = new CubicCurve();
+        curve.setFill(Color.TRANSPARENT);
+        makePath = true;
+        choosePoint(curve);
+        visibleList = new ArrayList<>();
     }
 
     public Path getPathObject () {
@@ -69,11 +77,10 @@ public class PathSet extends Region {
         pathLabel.changeValue(value);
     }
 
-    private void init () {
-        curve = new CubicCurve();
-        curve.setFill(Color.TRANSPARENT);
-        makePath = true;
-        choosePoint(curve);
+    public void makeVisible (boolean visible) {
+        for(Node node: visibleList) {
+            node.setVisible(visible);
+        }
     }
 
     public CubicCurve getCurve () {
@@ -112,7 +119,6 @@ public class PathSet extends Region {
                     addPath.setValue(increment);
                     addPathInstructions.setValue("Make Path");
                     Anchor end = new Anchor(Color.TOMATO, e.getX(), e.getY());
-
                     curve.setStartX(startX);
                     curve.setStartY(startY);
                     double endX = e.getX();
@@ -143,7 +149,8 @@ public class PathSet extends Region {
                     Line controlLine2 =
                             new BoundLine(curve.controlX2Property(), curve.controlY2Property(),
                                           curve.endXProperty(), curve.endYProperty());
-
+                    visibleList.addAll(Arrays.asList(new Node[] { control1, control2, controlLine1,
+                                                                 controlLine2 }));
                     root.getChildren()
                             .addAll(curve, control1, control2, controlLine1, controlLine2);
                 }

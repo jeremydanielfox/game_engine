@@ -39,7 +39,7 @@ public class DraggableUtilities {
                                          node,
                                          ViewUtilities
                                                  .getMouseLocation(me, transitionImage),
-                                         KeyCode.ESCAPE);
+                                         KeyCode.ESCAPE, false);
         binder.setOnMouseClicked(ev -> {
             Point2D current =
                     binder.localToParent(new Point2D(binder.getTranslateX(), binder

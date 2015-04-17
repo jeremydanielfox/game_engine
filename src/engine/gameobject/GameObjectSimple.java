@@ -63,11 +63,6 @@ public abstract class GameObjectSimple implements GameObject {
     public PointSimple getPoint () {
         return new PointSimple(myPoint);
     }
-
-    @Override
-    public double getHealth () {
-        return myHealth.getHealth();
-    }
     
     @Override
     public void changeHealth (double amount) {

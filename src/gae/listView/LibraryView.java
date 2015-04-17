@@ -1,5 +1,6 @@
 package gae.listView;
 
+import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
 import gae.gridView.PathView;
 import java.io.File;
@@ -39,15 +40,15 @@ public class LibraryView {
     private Group objectGroup;
     private Node nodeScene;
     private ObservableList<PathView> pathObservableList;
-    private ObservableList<EditableNode> editableNodeObservableList;
+    private ObservableList<Editable> editableObservableList;
     private Scene myScene;
     private Accordion accordion;
     private TitledPane pathTitledPane;
     private PathList pathList;
     private ContainerWrapper wrapper;
 
-    public LibraryView (ObservableList<EditableNode> editableNodeObservableList) {
-        this.editableNodeObservableList = editableNodeObservableList;
+    public LibraryView (ObservableList<Editable> editableObservableList) {
+        this.editableObservableList = editableObservableList;
     }
 
     public Scene getScene () {
@@ -94,25 +95,11 @@ public class LibraryView {
         listOfListObjects = new ArrayList<>();
         accordion = new Accordion();
         for (int i = 0; i < gameObjects.length; i++) {
-            try {
-                // Class<?> className = Class.forName("gae.listView." + gameObjects[i] +
-                // "PaneList");
-                Class<?> className = Class.forName("gae.listView." + "PaneList");
-                Object instance = className.getConstructor().newInstance();
-                listOfListObjects.add((PaneList) instance);
-                Method setUpList =
-                        className.getMethod("initialize", Group.class, Node.class, Scene.class,
-                                            ContainerWrapper.class, ObservableList.class,
-                                            String.class);
-                accordion.getPanes().add((TitledPane) setUpList
-                        .invoke(instance, objectGroup, nodeScene, myScene,
-                                wrapper, editableNodeObservableList, gameObjects[i]));
-            }
-            catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
-                    | IllegalAccessException | IllegalArgumentException
-                    | InvocationTargetException e) {
-                System.out.println("WOOPS AN ERROR");
-            }
+            PaneList paneList = new PaneList();
+            listOfListObjects.add(paneList);
+            accordion.getPanes().add(paneList.initialize(objectGroup, nodeScene, myScene, wrapper,
+                                editableObservableList, gameObjects[i]));
+
         }
         pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
         pathTitledPane =

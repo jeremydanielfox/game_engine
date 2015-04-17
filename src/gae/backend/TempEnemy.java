@@ -1,5 +1,6 @@
 package gae.backend;
 
+import View.ImageUtilities;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -7,6 +8,7 @@ import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
 import gae.gridView.Pair;
 import gae.gridView.Path;
+import gae.listView.DeepCopy;
 import gae.listView.MovableImage;
 import gae.openingView.UIObject;
 
@@ -32,18 +34,6 @@ public class TempEnemy implements Editable, UIObject {
     public void edit () {
         // TODO Auto-generated method stub
 
-    }
-
-    // added by brandon
-    public void setImage (String i) {
-        image = i;
-    }
-
-    public TempEnemy () {
-    }
-
-    public TempEnemy (String name) {
-        myName = name;
     }
 
     @Override
@@ -139,12 +129,25 @@ public class TempEnemy implements Editable, UIObject {
     @Override
     public PointSimple getLocation () {
         // TODO Auto-generated method stub
-        return null;
+        return location;
     }
 
     @Override
     public void setLocation (PointSimple point) {
         // TODO Auto-generated method stub
         location = point;
+    }
+
+    @Override
+    public ImageView getImageView () {
+        return ImageUtilities.changeImageSize(new ImageView(new Image(image)),
+                                              75, 75);
+    }
+
+    @Override
+    public Editable makeNewInstance () {
+        // need to keep track of ID some other way because no more EditableNode
+        Editable copy = (Editable) DeepCopy.copy(this);
+        return copy;
     }
 }

@@ -1,7 +1,7 @@
 package gae.tabView;
 
+import gae.backend.Editable;
 import gae.gridView.LevelView;
-import gae.listView.EditableNode;
 import gae.openingView.UIObject;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -19,7 +19,7 @@ public class CentralTabView implements UIObject{
     private int levelCount;
     private Scene scene;
     private HudEditorTab hudTab;
-    private LevelView worldView;
+    private LevelView levelView;
 
     public CentralTabView (Scene sceneIn) {
         scene = sceneIn;
@@ -42,17 +42,15 @@ public class CentralTabView implements UIObject{
     }
 
     private void createNewLevel () {
-        worldView = new LevelView();
+        levelView = new LevelView();
         LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
         LevelTabSet newLevel =
-                new LevelTabSet(worldView.getBorder(scene), levelPrefs.getStack());
-        // temporarily --> real code is :
-        // LevelTabSet newLevel = new LevelTabSet(worldView.getStack(scene),levelPrefs.getStack());
+                new LevelTabSet(levelView.getBorder(scene), levelPrefs.getStack());
         Tab newTab = new Tab("Level:" + levelCount++);
         newTab.setContent(newLevel.getBaseNode());
         newTab.setClosable(false);
         tabView.getTabs().add(newTab);
-        hudTab.setBackgroundImage(worldView.getBackgroundImage());
+        hudTab.setBackgroundImage(levelView.getBackgroundImage());
     }
 
     @Override
@@ -60,7 +58,7 @@ public class CentralTabView implements UIObject{
         return baseNode;
     }
     
-    public void getAddFunction(EditableNode node) {
-        worldView.getAddFunction(node);
+    public void getAddFunction(Editable editable) {
+        levelView.getAddFunction(editable);
     }
 }

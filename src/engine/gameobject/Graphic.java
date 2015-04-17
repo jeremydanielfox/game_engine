@@ -62,7 +62,7 @@ public class Graphic {
         getImageView().setFitHeight(myHeight * scaleFactor);
         return getImageView();
     }
-
+    
     /**
      * Assign the given point to both the ImageView and a copy of the point in this class.
      * 

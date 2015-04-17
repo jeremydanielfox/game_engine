@@ -26,13 +26,13 @@ public class DraggableUtilities {
      * @param wrapper: The object which determines the bounds of where the object can be placed
      * @param root: where the Image will be placed
      */
-    public static void makeNodePlaceable (MouseEvent me,
-                                          EditableNode editablenode,
+    public static void makeEditablePlaceable (MouseEvent me,
+                                          Editable editable,
                                           Node node,
                                           ObservableList<Editable> instanceList,
                                           ContainerWrapper wrapper,
                                           Group root) {
-        ImageView transitionImage = editablenode.getImageView();
+        ImageView transitionImage = editable.getImageView();
         // TODO: implement popup error when overlapping - collision detection
         Node binder =
                 ViewUtilities.bindCursor(transitionImage,
@@ -49,12 +49,12 @@ public class DraggableUtilities {
             if (wrapper.checkBounds(currentX, currentY))
                 throw new ObjectOutOfBoundsException();
 
-            Editable newEditable = editablenode.makeNewInstance();
+            Editable newEditable = editable.makeNewInstance();
             instanceList.add(newEditable);
             PointSimple relativeLocation = wrapper.convertCoordinates(currentX, currentY);
             newEditable.setLocation(relativeLocation);
             MovableImage edimage =
-                    new MovableImage(editablenode.getImageView(), newEditable, wrapper);
+                    new MovableImage(editable.getImageView(), newEditable, wrapper);
             newEditable.setMovableImage(edimage);
             edimage.relocate(currentX, currentY);
             root.getChildren().add(edimage);

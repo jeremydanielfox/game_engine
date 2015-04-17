@@ -1,8 +1,8 @@
 package gae.gridView;
 
+import gae.backend.Editable;
 import gae.backend.TempEnemy;
 import gae.backend.TempTower;
-import gae.listView.EditableNode;
 import gae.listView.LibraryData;
 import gae.listView.LibraryView;
 import javafx.beans.property.ObjectProperty;
@@ -51,8 +51,8 @@ public class LevelView {
      * 
      * @param node
      */
-    public void getAddFunction (EditableNode node) {
-        libraryData.addToList(node);
+    public void getAddFunction (Editable editable) {
+        libraryData.addToList(editable);
     }
 
     /**
@@ -99,8 +99,8 @@ public class LevelView {
         Button temp = new Button("add Tower");
         temp.setTranslateX(600);
         temp.setTranslateY(500);
-        EditableNode node = new EditableNode(new TempTower());
-        temp.setOnAction(e -> libraryData.addToList(node));
+        Editable editable = new TempTower();
+        temp.setOnAction(e -> libraryData.addToList(editable));
         return temp;
     }
 
@@ -108,8 +108,8 @@ public class LevelView {
         Button temp = new Button("add Enemy");
         temp.setTranslateX(700);
         temp.setTranslateY(500);
-        EditableNode node = new EditableNode(new TempEnemy());
-        temp.setOnAction(e -> libraryData.addToList(node));
+        Editable editable = new TempEnemy();
+        temp.setOnAction(e -> libraryData.addToList(editable));
         return temp;
     }
 }

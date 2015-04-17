@@ -4,7 +4,10 @@ package gae.gridView;
  * In the process of trying to put the Anchors and the curve into one object
  */
 import java.util.ArrayList;
+import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.layout.Region;
@@ -28,6 +31,8 @@ public class PathSet extends Region {
     private PathLabel pathLabel;
     private StackPane stack;
     private ContainerWrapper container;
+    private ObjectProperty<Integer> addPath = new SimpleObjectProperty<Integer>();
+    private ObjectProperty<String> addPathInstructions = new SimpleObjectProperty<String>();
 
     public PathSet (ArrayList<Anchor> anchorList,
                     StackPane scene,
@@ -45,13 +50,13 @@ public class PathSet extends Region {
 
     public Path getPathObject () {
         // EDIT: We could just use Point2D --> this is JavaFX so not recommended
-        Point2D start =
+        PointSimple start =
                 container.convertCoordinates(curve.getStartX(), curve.getStartY());
-        Point2D end =
+        PointSimple end =
                 container.convertCoordinates(curve.getEndX(), curve.getEndY());
-        Point2D control1 =
+        PointSimple control1 =
                 container.convertCoordinates(curve.getControlX1(), curve.getControlY1());
-        Point2D control2 =
+        PointSimple control2 =
                 container.convertCoordinates(curve.getControlX2(), curve.getControlY2());
         return new Path(start, end, control1, control2);
     }
@@ -75,6 +80,14 @@ public class PathSet extends Region {
         return curve;
     }
 
+    public ObjectProperty<Integer> addPathProperty () {
+        return addPath;
+    }
+
+    public ObjectProperty<String> addPathInstructionsProperty () {
+        return addPathInstructions;
+    }
+
     private void checkBounds (double x, double y) {
         if (container.checkBounds(x, y))
             throw new ObjectOutOfBoundsException();
@@ -90,9 +103,14 @@ public class PathSet extends Region {
                 start = new Anchor(Color.PALEGREEN, startX, startY, pathLabel);
                 root.getChildren().add(pathLabel);
                 addAnchor(start);
+                addPath.setValue(increment);
+                addPathInstructions.setValue("Place Ending Point");
                 increment++;
+
             }
                 else if (increment == 1 && makePath) {
+                    addPath.setValue(increment);
+                    addPathInstructions.setValue("Make Path");
                     Anchor end = new Anchor(Color.TOMATO, e.getX(), e.getY());
 
                     curve.setStartX(startX);

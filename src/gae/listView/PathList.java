@@ -160,9 +160,23 @@ public class PathList {
     }
 
     private Button makeBezierCurve () {
-        Button makeCurve = new Button("Make Path");
+        Button makeCurve = new Button();
+        Label label = new Label("Make Path");
+        makeCurve.setGraphic(label);
         makeCurve.setOnMouseClicked(e -> {
             pathView.makeBezierCurve();
+            label.textProperty().bind(pathView.addPathInstructionsProperty());
+            pathView.addPathInstructionsProperty().setValue("Place Starting Point");
+            label.setTextFill(Color.RED);
+            pathView.addPathProperty().addListener( (observable, oldValue, newValue) -> {
+                if (newValue.intValue() == 0) {
+                    makeCurve.setDisable(true);
+                }
+                else {
+                    makeCurve.setDisable(false);
+                    label.setTextFill(Color.BLACK);
+                }
+            });
         });
         return makeCurve;
     }
@@ -236,6 +250,7 @@ public class PathList {
      */
     private Button updatePath () {
         Button update = new Button("Update Path List");
+        update.setDisable(true);
         completePath.disableProperty().addListener(e -> {
             update.setDisable(!completePath.disabledProperty().get());
         });

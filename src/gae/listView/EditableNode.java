@@ -1,6 +1,7 @@
 package gae.listView;
 
 import java.util.Iterator;
+import engine.gameobject.PointSimple;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +13,7 @@ import gae.openingView.UIObject;
 
 
 /**
- * A class that takes in an Editable and keeps a list of its copied instances
+ * When all the stats are set, consider deleting this class!!
  * 
  * @author Kei
  *
@@ -39,7 +40,7 @@ public class EditableNode implements UIObject {
         Editable copy = (Editable) DeepCopy.copy(editable);
         copy.setID(myID);
         myID++;
-//        myChildren.add(copy);
+        // myChildren.add(copy);
         return copy;
     }
 
@@ -57,6 +58,18 @@ public class EditableNode implements UIObject {
                                               75, 75);
     }
 
+    public int getWidth () {
+        return editable.getWidth();
+    }
+
+    public int getHeight () {
+        return editable.getHeight();
+    }
+
+    public String getImagePath () {
+        return editable.getImagePath();
+    }
+
     public String getName () {
         return myName;
     }
@@ -67,6 +80,10 @@ public class EditableNode implements UIObject {
 
     public ObservableList<Editable> getChildrenList () {
         return myChildren;
+    }
+
+    public PointSimple getLocation () {
+        return editable.getLocation();
     }
 
     @Override

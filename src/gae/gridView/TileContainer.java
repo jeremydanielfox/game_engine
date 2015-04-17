@@ -2,6 +2,7 @@ package gae.gridView;
 
 import java.util.ArrayList;
 import java.util.List;
+import engine.gameobject.PointSimple;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -84,9 +85,9 @@ public class TileContainer extends Region implements ContainerWrapper {
     /**
      * Important method that converts other coordinate systems to that relative to the grid
      */
-    public Point2D convertCoordinates (double x, double y) {
+    public PointSimple convertCoordinates (double x, double y) {
         Point2D point = this.screenToLocal(x, y);
-        return new Point2D(point.getX(), y);
+        return new PointSimple(point.getX(), y);
     }
 
     public DoubleProperty getGridWidthProperty () {

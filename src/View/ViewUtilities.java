@@ -30,7 +30,6 @@ public class ViewUtilities {
         pane.setOnMouseMoved(mouseEvent -> {
             Point2D current = getMouseLocation(mouseEvent, node);
             wrapGroup.relocate(current.getX(), current.getY());
-
             previous = current;
         });
 

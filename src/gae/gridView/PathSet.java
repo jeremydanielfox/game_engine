@@ -4,6 +4,7 @@ package gae.gridView;
  * In the process of trying to put the Anchors and the curve into one object
  */
 import java.util.ArrayList;
+import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -49,13 +50,13 @@ public class PathSet extends Region {
 
     public Path getPathObject () {
         // EDIT: We could just use Point2D --> this is JavaFX so not recommended
-        Point2D start =
+        PointSimple start =
                 container.convertCoordinates(curve.getStartX(), curve.getStartY());
-        Point2D end =
+        PointSimple end =
                 container.convertCoordinates(curve.getEndX(), curve.getEndY());
-        Point2D control1 =
+        PointSimple control1 =
                 container.convertCoordinates(curve.getControlX1(), curve.getControlY1());
-        Point2D control2 =
+        PointSimple control2 =
                 container.convertCoordinates(curve.getControlX2(), curve.getControlY2());
         return new Path(start, end, control1, control2);
     }

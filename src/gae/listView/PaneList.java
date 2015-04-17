@@ -1,11 +1,10 @@
 package gae.listView;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import gae.backend.Editable;
 import View.ViewUtilities;
 import exception.ObjectOutOfBoundsException;
-import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -20,6 +19,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 
@@ -29,10 +29,16 @@ import javafx.scene.paint.Color;
  * @author Kei & Nina
  *
  */
-public abstract class PaneList {
-    public static final int THUMBNAIL_SIZE = 20;
+public class PaneList {
+    private Map<EditableNode, ObservableList<Editable>> instancesEditableNodeMap;
+    private Group root;
+    private StackPane stack;
+    private ObservableList<EditableNode> observableList;
+    private ContainerWrapper wrapper;
+    private String type;
+    private Scene scene;
+    private Node node;
 
-    // private List<EditableImage> imageList;
     /**
      * Initializes the specific pane class
      * 
@@ -42,17 +48,42 @@ public abstract class PaneList {
      * @param wrapper
      * @return
      */
-    public abstract TitledPane initialize (Group root,
-                                           Node node,
-                                           Scene scene,
-                                           ContainerWrapper wrapper,
-                                           ObservableList<EditableNode> observableList);
+    public TitledPane initialize (Group root,
+                                  Node node,
+                                  Scene scene,
+                                  ContainerWrapper wrapper,
+                                  ObservableList<EditableNode> observableList,
+                                  String type) {
+        this.root = root;
+        this.node = node;
+        this.stack = (StackPane) node;
+        this.observableList = observableList;
+        this.wrapper = wrapper;
+        this.type = type;
+        this.scene = scene;
+        instancesEditableNodeMap = new HashMap<>();
+        root.setManaged(false);
+        TitledPane pane = getTitledPane(type);
+        Accordion accordion = new Accordion();
+        pane.setContent(accordion);
+        ObservableList<TitledPane> paneList = accordion.getPanes();
+        setUpObservableList(paneList);
+        return pane;
+    }
 
-    public abstract void removeRoot ();
+    public void removeRoot () {
+        stack.getChildren().remove(root);
+    }
 
-    public abstract void addRoot ();
-    
-    public abstract Map<EditableNode, ObservableList<Editable>> getMap();
+    public void addRoot () {
+        if (!stack.getChildren().contains(root)) {
+            stack.getChildren().add(root);
+        }
+    }
+
+    public Map<EditableNode, ObservableList<Editable>> getMap () {
+        return instancesEditableNodeMap;
+    }
 
     /**
      * method created to make a simple TitledPane with a text
@@ -60,67 +91,35 @@ public abstract class PaneList {
      * @param text
      * @return
      */
-    protected TitledPane getTitledPane (String text) {
+    private TitledPane getTitledPane (String text) {
         TitledPane pane = new TitledPane();
         pane.setText(text);
         pane.setTextFill(Color.RED);
         return pane;
     }
 
-    /**
-     * sets up the Accordion given the pane. The pane in this case is a generic object (Tower,
-     * Enemy, etc) and the Accordion keeps track of created objects (FireTower, IceEnemy, etc.)
-     * 
-     * @param pane
-     * @return
-     */
-    protected ObservableList<TitledPane> setAccordion (TitledPane pane) {
-        Accordion accordion = new Accordion();
-        pane.setContent(accordion);
-        return accordion.getPanes();
-    }
-
-    protected void setUpObservableList (ObservableList<TitledPane> paneList,
-                                        ObservableList<EditableNode> observableList,
-                                        String type,
-                                        Map<EditableNode, ObservableList<Editable>> map,
-                                        Group root,
-                                        Node node,
-                                        Scene scene,
-                                        ContainerWrapper wrapper) {
+    private void setUpObservableList (ObservableList<TitledPane> paneList) {
 
         for (EditableNode previousNode : observableList) {
-            setUpNewInstanceList(paneList, previousNode, map, root, node, scene, wrapper, type);
+            setUpNewInstanceList(paneList, previousNode);
         }
-        // use lambda functions to refactor this vvvv
-        observableList.addListener(new ListChangeListener<EditableNode>() {
-            public void onChanged (javafx.collections.ListChangeListener.Change<? extends EditableNode> change) {
-                while (change.next()) {
-                    if (change.wasAdded()) { // if an editablenode was added
-                        EditableNode added = (EditableNode) change.getAddedSubList().get(0);
-                        setUpNewInstanceList(paneList, added, map, root, node, scene, wrapper, type);
-                    }
+        observableList.addListener( (ListChangeListener.Change<? extends EditableNode> change) -> {
+            while (change.next()) {
+                if (change.wasAdded()) { // if an editablenode was added
+                    EditableNode added = (EditableNode) change.getAddedSubList().get(0);
+                    setUpNewInstanceList(paneList, added);
                 }
             }
         });
-
     }
 
     private void setUpNewInstanceList (ObservableList<TitledPane> paneList,
-                                       EditableNode editableNode,
-                                       Map<EditableNode, ObservableList<Editable>> map,
-                                       Group root,
-                                       Node node,
-                                       Scene scene,
-                                       ContainerWrapper wrapper,
-                                       String type) {
+                                       EditableNode editableNode) {
         if (editableNode.getType().equals(type)) {
             ObservableList<Editable> instanceList =
                     FXCollections.observableArrayList();
-            map.put(editableNode, instanceList);
-            TitledPane newPane =
-                    setTitledPaneClick(editableNode, instanceList, root, node, scene,
-                                       wrapper);
+            instancesEditableNodeMap.put(editableNode, instanceList);
+            TitledPane newPane = setTitledPaneClick(editableNode, instanceList);
             paneList.add(newPane);
         }
     }
@@ -136,31 +135,18 @@ public abstract class PaneList {
      * @param wrapper
      * @return
      */
-    protected TitledPane setTitledPaneClick (EditableNode node,
-                                             ObservableList<Editable> instanceList,
-                                             Group root,
-                                             Node pane,
-                                             Scene scene,
-                                             ContainerWrapper wrapper) {
+    private TitledPane setTitledPaneClick (EditableNode editablenode,
+                                           ObservableList<Editable> instanceList) {
         TitledPane newPane = new TitledPane();
-        newPane.setText(node.getName());
+        newPane.setText(editablenode.getName());
         newPane.setContent(ListViewUtilities.createList(instanceList, scene));
         newPane.setOnMousePressed(me -> {
             if (me.isSecondaryButtonDown()) {
                 ContextMenu contextmenu = new ContextMenu();
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
-                    ImageView transitionImage = node.getImageView();
-                    // TODO: implement popup error when overlapping - collision detection
-                    Node binder =
-                            ViewUtilities.bindCursor(transitionImage,
-                                                     pane,
-                                                     ViewUtilities
-                                                             .getMouseLocation(me, transitionImage),
-                                                     KeyCode.ESCAPE);
-                    makeNodePlaceable(binder, node, root, wrapper, instanceList);
-                    root.getChildren().add(binder);
-
+                    DraggableUtilities.makeNodePlaceable(me, editablenode, node, instanceList,
+                                                         wrapper, root);
                 });
                 contextmenu.getItems().add(item);
                 contextmenu.show(newPane, me.getSceneX(), me.getSceneY());
@@ -169,51 +155,4 @@ public abstract class PaneList {
         });
         return newPane;
     }
-
-    /**
-     * places the node on the location clicked. When the location is clicked, a new instance of the
-     * object is added to a list and a MovableImage is placed on the location.
-     * 
-     * @param binder
-     * @param node
-     * @param root
-     * @param wrapper
-     */
-    private void makeNodePlaceable (Node binder,
-                                    EditableNode node,
-                                    Group root,
-                                    ContainerWrapper wrapper, ObservableList<Editable> instanceList) {
-        binder.setOnMouseClicked(ev -> {
-            Point2D current =
-                    binder.localToParent(new Point2D(binder.getTranslateX(), binder
-                            .getTranslateY()));
-            Double currentX = current.getX();
-            Double currentY = current.getY();
-            if (wrapper.checkBounds(currentX, currentY))
-                throw new ObjectOutOfBoundsException();
-
-            Editable newEditable = node.makeNewInstance();
-            instanceList.add(newEditable);
-            Point2D relativeLocation = wrapper.convertCoordinates(currentX, currentY);
-            newEditable.setLocation(relativeLocation.getX(), relativeLocation.getY());
-            MovableImage edimage = new MovableImage(node.getImageView(), newEditable, wrapper);
-            newEditable.setMovableImage(edimage);
-            edimage.relocate(currentX, currentY);
-            // for (EditableImage image : imageList) {
-            // if (edimage.checkIntersect(image)) {
-            // System.out.println("intersecting");
-            // }
-            // }
-            root.getChildren().add(edimage);
-            // imageList.add(edimage);
-
-            // for (Editable editables : editableList) {
-            // System.out.println("X IS : " + editables.getLocation().getX());
-            // System.out.println("Y IS : " + editables.getLocation().getY());
-            // System.out.println();
-            // }
-
-        });
-    }
-
 }

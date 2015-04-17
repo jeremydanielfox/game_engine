@@ -1,7 +1,7 @@
 package gae.backend;
 
 import java.io.Serializable;
-import gae.gridView.Pair;
+import engine.gameobject.PointSimple;
 import gae.gridView.Path;
 import gae.listView.MovableImage;
 
@@ -15,9 +15,17 @@ public interface Editable extends Serializable {
 
     public String getImagePath ();
 
-    public void setLocation (double x, double y);
+    public PointSimple getLocation ();
 
-    public Pair getLocation ();
+    public int getID ();
+
+    public Path getPath ();
+    
+    public int getWidth();
+    
+    public int getHeight();
+
+    public void setLocation (PointSimple point);
 
     public void setMovableImage (MovableImage image);
 
@@ -25,11 +33,12 @@ public interface Editable extends Serializable {
 
     public void setID (int id);
 
-    public int getID ();
+    public void setPath (Path path);
+
+    public void setWidth (int width);
+
+    public void setHeight (int height);
 
     public Object clone ();
 
-    public Path getPath ();
-
-    public void setPath (Path path);
 }

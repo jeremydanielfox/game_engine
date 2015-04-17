@@ -1,5 +1,6 @@
 package gae.gridView;
 
+import gae.backend.TempEnemy;
 import gae.backend.TempTower;
 import gae.listView.EditableNode;
 import gae.listView.LibraryData;
@@ -68,7 +69,7 @@ public class LevelView {
         backgroundProperty = background.imageProperty();
         Group root = new Group();
         TileContainer container = new TileContainer(20, border);
-        root.getChildren().addAll(background, container);
+        root.getChildren().addAll(background, container, tempButtonTower(), tempButtonEnemy());
 
         stack.getChildren().addAll(root);
 
@@ -94,11 +95,20 @@ public class LevelView {
         return leftview;
     }
 
-    private Button tempButton () {
-        Button temp = new Button("add to List");
-        temp.setTranslateX(0);
+    private Button tempButtonTower () {
+        Button temp = new Button("add Tower");
+        temp.setTranslateX(600);
         temp.setTranslateY(500);
         EditableNode node = new EditableNode(new TempTower());
+        temp.setOnAction(e -> libraryData.addToList(node));
+        return temp;
+    }
+
+    private Button tempButtonEnemy () {
+        Button temp = new Button("add Enemy");
+        temp.setTranslateX(700);
+        temp.setTranslateY(500);
+        EditableNode node = new EditableNode(new TempEnemy());
         temp.setOnAction(e -> libraryData.addToList(node));
         return temp;
     }

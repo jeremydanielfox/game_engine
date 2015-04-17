@@ -1,5 +1,7 @@
 package View;
 
+import java.util.function.Consumer;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -48,10 +50,12 @@ public class ViewUtilities {
     }
     
     public static void unbindCursor(Node scene) {
-        scene.setOnMouseMoved(mouseEvent -> {
-        });
+        scene.setOnMouseMoved(null);
     }
 
+    public static void addMouseMovementHandler(){
+        
+    }
     /**
      * Determines the normalized ratio (0 to 1) of width and height within a parent
      * container from local pixel coordinates

@@ -13,7 +13,7 @@ import gae.listView.MovableImage;
 import gae.openingView.UIObject;
 
 
-public class TempTower implements Editable, UIObject {
+public class TempEnemy implements Editable, UIObject {
     /**
      * 
      */
@@ -26,7 +26,7 @@ public class TempTower implements Editable, UIObject {
     private int Health = 100;
     private Weapon weapon;
     private PointSimple location;
-    private String image = "/images/ArcaneTower.png";
+    private String image = "/images/robertDuvall.jpg";
     private String myName = "TempTower";
     private MovableImage editableImage;
 
@@ -44,13 +44,13 @@ public class TempTower implements Editable, UIObject {
     @Override
     public String getName () {
         // TODO Auto-generated method stub
-        return "TempTower ";
+        return "TempEnemy ";
     }
 
     @Override
     public String getType () {
         // TODO Auto-generated method stub
-        return "Tower";
+        return "Enemy";
     }
 
     @Override

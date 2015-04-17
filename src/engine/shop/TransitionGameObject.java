@@ -20,8 +20,9 @@ import engine.gameobject.Graphical;
 public class TransitionGameObject {
 
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
-    private static final Color WHITE_COLOR = Color.rgb(255, 255, 255, 0.5); // half-transparent white
-  
+    private static final Color WHITE_COLOR = Color.rgb(255, 255, 255, 0.5); // half-transparent
+                                                                            // white
+
     private Graphic graphic;
     private String name;
     private double range;
@@ -48,15 +49,19 @@ public class TransitionGameObject {
     }
 
     public Node getNode () {
-       return pane;
+        return pane;
     }
-    
+
+    public Node getGraphic () {
+        return graphic.getNode();
+    }
+
     public String getName () {
         return name;
     }
-    
+
     public void setRangeCircleColor (Boolean isPlacable) {
-        rangeDetection.setFill(isPlacable ? WHITE_COLOR:ERROR_COLOR);
+        rangeDetection.setFill(isPlacable ? WHITE_COLOR : ERROR_COLOR);
     }
 
 }

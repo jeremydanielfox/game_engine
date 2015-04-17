@@ -29,6 +29,8 @@ public class PathView {
     private StackPane myStack;
     private static ContainerWrapper container;
     private int myID;
+    private ObjectProperty<Integer> addPath;
+    private ObjectProperty<String> addPathInstructions;
 
     public PathView (StackPane stack, Scene scene) {
         this.myScene = scene;
@@ -50,15 +52,26 @@ public class PathView {
         PathView.container = container;
     }
 
+    public ObjectProperty<Integer> addPathProperty () {
+        return addPath;
+    }
+
+    public ObjectProperty<String> addPathInstructionsProperty () {
+        return addPathInstructions;
+    }
+
     /**
      * Creates a Bezier curve by creating a PathSet. Also gives it the ability to delete if selected
      */
     public void makeBezierCurve () {
         PathSet set = new PathSet(anchorList, myStack, index, container);
+        addPath = set.addPathProperty();
+        addPathInstructions = set.addPathInstructionsProperty();
         index++;
         root.getChildren().add(set);
         set.setOnMouseEntered(e -> {
             set.changeColor(Color.YELLOW);
+            set.makeVisible(true);
             myScene.setOnKeyPressed(f -> {
                 if (f.getCode().equals(KeyCode.BACK_SPACE)) {
                     root.getChildren().remove(set);
@@ -70,6 +83,7 @@ public class PathView {
 
         set.setOnMouseExited(e -> {
             set.changeColor(Color.FORESTGREEN);
+            set.makeVisible(false);
         });
 
         System.out.println("I'm adding onto : " + this);

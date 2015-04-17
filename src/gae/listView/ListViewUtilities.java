@@ -1,24 +1,15 @@
 package gae.listView;
 
-import java.util.List;
-import java.util.Map;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TitledPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
-import javafx.util.Callback;
 import gae.backend.Editable;
-import gae.gridView.ContainerWrapper;
 
 
 /**

@@ -1,7 +1,8 @@
 package gae.gridView;
 
+import gae.backend.Editable;
+import gae.backend.TempEnemy;
 import gae.backend.TempTower;
-import gae.listView.EditableNode;
 import gae.listView.LibraryData;
 import gae.listView.LibraryView;
 import javafx.beans.property.ObjectProperty;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 
@@ -50,8 +52,8 @@ public class LevelView {
      * 
      * @param node
      */
-    public void getAddFunction (EditableNode node) {
-        libraryData.addToList(node);
+    public void getAddFunction (Editable editable) {
+        libraryData.addToList(editable);
     }
 
     /**
@@ -68,7 +70,7 @@ public class LevelView {
         backgroundProperty = background.imageProperty();
         Group root = new Group();
         TileContainer container = new TileContainer(20, border);
-        root.getChildren().addAll(background, container);
+        root.getChildren().addAll(background, container, tempGrid());
 
         stack.getChildren().addAll(root);
 
@@ -94,12 +96,26 @@ public class LevelView {
         return leftview;
     }
 
-    private Button tempButton () {
-        Button temp = new Button("add to List");
-        temp.setTranslateX(0);
-        temp.setTranslateY(500);
-        EditableNode node = new EditableNode(new TempTower());
-        temp.setOnAction(e -> libraryData.addToList(node));
+    private GridPane tempGrid () {
+        GridPane grid = new GridPane();
+        grid.setHgap(0);
+        grid.setTranslateX(500);
+        grid.add(tempButtonTower(), 0, 0);
+        grid.add(tempButtonEnemy(), 0, 1);
+        return grid;
+    }
+
+    private Button tempButtonTower () {
+        Button temp = new Button("add Tower");
+        Editable editable = new TempTower();
+        temp.setOnAction(e -> libraryData.addToList(editable));
+        return temp;
+    }
+
+    private Button tempButtonEnemy () {
+        Button temp = new Button("add Enemy");
+        Editable editable = new TempEnemy();
+        temp.setOnAction(e -> libraryData.addToList(editable));
         return temp;
     }
 }

@@ -1,8 +1,8 @@
 package gae.gameView;
 
 import java.util.EventObject;
+import gae.backend.Editable;
 import gae.backend.GameManager;
-import gae.listView.EditableNode;
 import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
 import javafx.event.EventHandler;
@@ -88,7 +88,7 @@ public class GameView implements UIMediator {
         myUI.setRight(myGenericObjects.getObject());
     }
     
-    public void getAddFunction(EditableNode node) {
-        myTabs.getAddFunction(node);
+    public void getAddFunction(Editable editable) {
+        myTabs.getAddFunction(editable);
     }
 }

@@ -3,6 +3,7 @@ package gae.listView;
 import java.util.ArrayList;
 import java.util.List;
 import engine.gameobject.GameObjectSimple;
+import engine.gameobject.Graphic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -37,7 +38,12 @@ public class LibraryData {
         List<GameObjectSimple> gameObjectList = new ArrayList<>();
         for (EditableNode editableNode : editableNodeList) {
             // can't instatiate GameObject - how to send it to XML
-            // GameObjectSimple object = new GameObjectSimple();
+            GameObjectSimple object = new GameObjectSimple();
+            object.setGraphic(new Graphic(editableNode.getWidth(), editableNode.getHeight(),
+                                          editableNode.getImagePath()));
+            // object.setLabel(editableNode.getLabel());
+            // object.setTag(editableNode.getTag());
+            object.setPoint(editableNode.getLocation());
         }
         return null;
     }

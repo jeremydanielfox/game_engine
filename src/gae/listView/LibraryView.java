@@ -33,7 +33,7 @@ public class LibraryView {
     /*
      * should be able to get the gameObjects list from a properties file
      */
-    private String[] gameObjects = { "Tower", "Enemy", "Path" };
+    private String[] gameObjects = { "Tower", "Enemy" };
     private List<PaneList> listOfListObjects;
     private Group root;
     private Group objectGroup;
@@ -95,25 +95,29 @@ public class LibraryView {
         accordion = new Accordion();
         for (int i = 0; i < gameObjects.length; i++) {
             try {
-                Class<?> className = Class.forName("gae.listView." + gameObjects[i] + "PaneList");
+                // Class<?> className = Class.forName("gae.listView." + gameObjects[i] +
+                // "PaneList");
+                Class<?> className = Class.forName("gae.listView." + "PaneList");
                 Object instance = className.getConstructor().newInstance();
                 listOfListObjects.add((PaneList) instance);
                 Method setUpList =
                         className.getMethod("initialize", Group.class, Node.class, Scene.class,
-                                            ContainerWrapper.class, ObservableList.class);
+                                            ContainerWrapper.class, ObservableList.class,
+                                            String.class);
                 accordion.getPanes().add((TitledPane) setUpList
                         .invoke(instance, objectGroup, nodeScene, myScene,
-                                wrapper, editableNodeObservableList));
+                                wrapper, editableNodeObservableList, gameObjects[i]));
             }
             catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
                     | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException e) {
-                pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
-                pathTitledPane =
-                        pathList.getTitledPane(pathObservableList, gameObjects[i]);
-                accordion.getPanes().add(pathTitledPane);
+                System.out.println("WOOPS AN ERROR");
             }
         }
+        pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
+        pathTitledPane =
+                pathList.getTitledPane(pathObservableList, "Path");
+        accordion.getPanes().add(pathTitledPane);
         setUpToggle();
         return accordion;
     }

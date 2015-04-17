@@ -2,6 +2,7 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import xml.DataManager;
@@ -23,6 +24,7 @@ import engine.goals.Goal;
 import engine.goals.HealthDepletionGoal;
 import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
+import engine.pathfinding.PathFixed;
 import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;
 import engine.shop.wallet.ConcreteWallet;
@@ -98,10 +100,11 @@ public class GameWriter extends Application {
      * @return
      */
     public GameWorld makeWorld () {
-        GameWorld world = new FixedWorld();
+        FixedWorld world = new FixedWorld();
         world.addObject(new TestTower(2, 330, 130));
         world.addObject(new TestTower(4, 270, 270));
         world.addObject(new TestTower(3, 355, 455));
+        world.setPath(DataManager.readFromXML(PathFixed.class, "src/gae/listView/Test.xml"));
         return world;
     }
 

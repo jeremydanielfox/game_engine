@@ -5,6 +5,8 @@ package gae.gridView;
  */
 import java.util.ArrayList;
 import exception.ObjectOutOfBoundsException;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.layout.Region;
@@ -28,6 +30,8 @@ public class PathSet extends Region {
     private PathLabel pathLabel;
     private StackPane stack;
     private ContainerWrapper container;
+    private ObjectProperty<Integer> addPath = new SimpleObjectProperty<Integer>();
+    private ObjectProperty<String> addPathInstructions = new SimpleObjectProperty<String>();
 
     public PathSet (ArrayList<Anchor> anchorList,
                     StackPane scene,
@@ -75,6 +79,14 @@ public class PathSet extends Region {
         return curve;
     }
 
+    public ObjectProperty<Integer> addPathProperty () {
+        return addPath;
+    }
+
+    public ObjectProperty<String> addPathInstructionsProperty () {
+        return addPathInstructions;
+    }
+
     private void checkBounds (double x, double y) {
         if (container.checkBounds(x, y))
             throw new ObjectOutOfBoundsException();
@@ -90,9 +102,14 @@ public class PathSet extends Region {
                 start = new Anchor(Color.PALEGREEN, startX, startY, pathLabel);
                 root.getChildren().add(pathLabel);
                 addAnchor(start);
+                addPath.setValue(increment);
+                addPathInstructions.setValue("Place Ending Point");
                 increment++;
+
             }
                 else if (increment == 1 && makePath) {
+                    addPath.setValue(increment);
+                    addPathInstructions.setValue("Make Path");
                     Anchor end = new Anchor(Color.TOMATO, e.getX(), e.getY());
 
                     curve.setStartX(startX);

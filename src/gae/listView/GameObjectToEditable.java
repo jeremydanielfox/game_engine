@@ -30,17 +30,15 @@ public class GameObjectToEditable implements Editable {
     private Path myPath;
 
     public GameObjectToEditable (GameObjectSimple gameobject) {
-        gameObject = gameobject;
+        this.gameObject = gameobject;
         /*
          * doing the following instantiation because it doesn't copy GameObjectSimple (not
          * Serializable)
          * TODO: find out how to copy the object
          */
-        // name = gameObject.getTag().getName();
-        name = gameObject.getName();
-        imagePath = gameObject.getImagePath();
-        // type = gameObject.getTag().getLabel();
-        type = gameObject.getLabel();
+        name = gameObject.getTag().getName();
+        imagePath = gameObject.getTag().getGraphic().getImagePath();
+        type = gameObject.getLabel().getLabel();
         // gameobject is not serializable and gives an error so must set to null
         gameObject = null;
     }

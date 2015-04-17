@@ -1,9 +1,9 @@
 package engine.shop;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import View.ViewUtilities;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Point2D;
@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
@@ -20,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import View.ViewUtilities;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.shop.ShopModelSimple.ItemInfo;
@@ -51,9 +53,9 @@ public class ShopView extends Parent {
 
     private BooleanProperty infoBoxActive;
 
-    public ShopView (ShopModel model, Scene scene) {
+    public ShopView (ShopModel model, Pane pane) {
         this.model = model;
-        this.scene = scene;
+        this.pane = pane;
         infoBoxActive = new SimpleBooleanProperty(false);
         initialize();
     }
@@ -92,22 +94,8 @@ public class ShopView extends Parent {
         icons.forEach(gameObjectIcon -> {
             gameObjectIcon.setOnMouseEntered(mouseEvent -> displayGameObjectInfo(gameObjectIcon));
             gameObjectIcon.setOnMouseExited(mouseEvent -> infoBox.getChildren().clear());
-            gameObjectIcon.setOnMouseClicked(mouseEvent -> {
-                
-                TransitionGameObject transition = gameObjectIcon.onClicked();
-                Node transNode = transition.getNode();
-                Point2D location = ViewUtilities.getMouseLocation(mouseEvent, transNode);
-                bindCursor(location, transNode);
-                
-                transNode.setOnMouseMoved(event2 -> {
-                    transition.setRangeCircleColor(model.checkPlacement(transition.getName(),
-                                                                        new PointSimple(location)));
-                });
-                
-                transNode.setOnMouseClicked(event2 -> {
-                    model.purchaseGameObject(transition.getName(), new PointSimple(location));
-                });
-            });
+            gameObjectIcon.setOnMouseClicked(mouseEvent -> initializeTransition(gameObjectIcon
+                    .onClicked(), mouseEvent));
         });
     }
 
@@ -169,8 +157,22 @@ public class ShopView extends Parent {
     }
 
     private void bindCursor (Point2D initial, Node node) {
-        // Node bindedTower =
-        ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE);
-        // pane.getChildren().add(bindedTower);
+        Node result = ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE);
+        pane.getChildren().add(result);
+    }
+
+    private void initializeTransition (TransitionGameObject transition, MouseEvent mouseEvent) {
+        Node transNode = transition.getNode();
+        Point2D location = ViewUtilities.getMouseLocation(mouseEvent, transNode);
+        bindCursor(location, transNode);
+
+        transNode.setOnMouseMoved(event2 -> {
+            transition.setRangeCircleColor(model.checkPlacement(transition.getName(),
+                                                                new PointSimple(location)));
+        });
+
+        transNode.setOnMouseClicked(event2 -> {
+            model.purchaseGameObject(transition.getName(), new PointSimple(location));
+        });
     }
 }

@@ -3,10 +3,14 @@ package player.gamePlayer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -26,6 +30,7 @@ public class GameSelector {
     private static final ImageView rightArrow = new ImageView("/images/right_arrow.jpg");
     private static final ImageView leftArrow = new ImageView("/images/left_arrow.jpg");
 
+    private Scene myScene;
     private GridPane chooser;
     private ImageView right, left;
     private List<SelectOption> options;
@@ -33,7 +38,9 @@ public class GameSelector {
     private int index;
 
     public GameSelector (Scene s) {
+        myScene = s;
         chooser = new GridPane();
+        chooser.setAlignment(Pos.CENTER);
         right = rightArrow;
         left = leftArrow;
         options = new ArrayList<>();
@@ -71,7 +78,7 @@ public class GameSelector {
     }
 
     /**
-     * sets up functionalities and clickables for the player UI
+     * sets up key board functionalities and clickables for the player UI
      */
     private void setUpFunctions () {
         right.setOnMouseClicked(e -> {
@@ -79,6 +86,13 @@ public class GameSelector {
         });
         left.setOnMouseClicked(e -> {
             swipe(LEFT);
+        });
+        
+        myScene.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.RIGHT))
+                swipe(RIGHT);
+            else if (e.getCode().equals(KeyCode.LEFT))
+                swipe(LEFT);
         });
     }
 
@@ -114,16 +128,29 @@ public class GameSelector {
 
         private VBox display;
         private ImageView gamePicture;
+        private HBox textBox;
         private Text gameName;
 
         public SelectOption (ImageView picture, String name) {
             display = new VBox(10);
             gamePicture = picture;
+            
+            /*
+             * set width and height to ratio of the screen
+             */
+            gamePicture.setFitWidth(400);
+            gamePicture.setFitHeight(300);
+            
+            textBox = new HBox();
             gameName = new Text(name);
+            textBox.getChildren().add(gameName);
+            textBox.setAlignment(Pos.CENTER);
+            
 
             display.setId("selectOption");
             gamePicture.setId("gameIcon");
             gameName.setId("gameName");
+            textBox.setId("textBox");
 
             createDisplay();
         }
@@ -133,7 +160,7 @@ public class GameSelector {
         }
 
         private void createDisplay () {
-            display.getChildren().addAll(gameName, gamePicture);
+            display.getChildren().addAll(textBox, gamePicture);
         }
     }
 

@@ -1,6 +1,7 @@
 package engine.gameobject.weapon.upgradable.firingrate;
 
 import java.util.Optional;
+import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 
 
@@ -25,6 +26,11 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
     public FiringRateUpgrade (double increment) {
         this.increment = increment;
         decorated = Optional.empty();
+    }
+    
+    @Settable
+    public void setIncrement (double increment) {
+        this.increment = increment;
     }
 
     @Override

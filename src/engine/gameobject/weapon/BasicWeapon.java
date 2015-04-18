@@ -109,7 +109,7 @@ public class BasicWeapon implements Weapon {
      * engine.gameobject.weapon.Weaopn#setProjectile(engine.gameobject.weapon.firingstrategy.Projectile
      * )
      */
-    @Override
+    @Override @Settable
     public void setProjectile (Projectile projectile) {
         myProjectile = projectile;
     }

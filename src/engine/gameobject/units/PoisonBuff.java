@@ -2,6 +2,7 @@ package engine.gameobject.units;
 
 import java.awt.Color;
 import java.util.Optional;
+import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 
 /**
@@ -20,6 +21,16 @@ public class PoisonBuff extends Buff{
         this.timeIncr = timeIncr;
         this.damageIncr = damageIncr;
         decorated = Optional.empty();
+    }
+    
+    @Settable
+    public void setTime (int timeIncr) {
+        this.timeIncr = timeIncr;
+    }
+    
+    @Settable
+    public void setDamage (double damageIncr) {
+        this.damageIncr = damageIncr;
     }
     
     public void apply(BuffableUnit myUnit){

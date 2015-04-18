@@ -10,7 +10,7 @@ public class TestTower extends BuffableUnit{
     
     public TestTower (int type, int xcor, int ycor) {
         super();
-        setGraphic(new Graphic(40, 40, "robertDuvall.jpg"));
+        setGraphic(new Graphic(40, 40, "Bloons_TackShooter.png"));
         setPoint(new PointSimple(xcor, ycor));
         setHealth(new HealthSimple(3));
         setMover(new MoverNull());

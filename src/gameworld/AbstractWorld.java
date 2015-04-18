@@ -42,34 +42,15 @@ public class AbstractWorld implements GameWorld{
          for (GameObject o: currentObjects){
              o.update(this);
          }
+         //TODO: Tell each object to fire.
          checkCollisions();
          removeDeadObjects();
     }
 
     private void checkCollisions () {
-        List<Buffable> buffables =
-                myObjects.stream().filter(p -> p instanceof Buffable)
-                .map(p -> (Buffable) p)
-                .collect(Collectors.toList());
-        List<Buffer> buffers =
-                myObjects.stream().filter(p -> p instanceof Buffer)
-                .map(p -> (Buffer) p)
-                .collect(Collectors.toList());
-        buffers.forEach(buffer -> {
-            buffables.forEach(buffable -> {
-                if (buffer.getGraphic().getNode().getBoundsInParent()
-                        .intersects(buffable.getGraphic().getNode().getBoundsInParent())){
-                    //myCollisionEngine.interact(go1, go2);
-                    //buffer.collide(buffable);
-                    //TODO: Actually make teams and collide correctly
-                    if((buffable instanceof GameObjectSimpleTest)){
-                        buffer.impartBuffs(buffable);
-                    }
-                }
-            });
-        });
-
+        //TODO: Use collision engine to do all colisions
     }
+    
 
     private void removeDeadObjects () {
         // TODO Auto-generated method stub

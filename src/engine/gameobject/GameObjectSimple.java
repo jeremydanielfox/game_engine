@@ -68,8 +68,8 @@ public class GameObjectSimple implements GameObject{
         myWeapon = weapon;
     }
     
-    public void fire(ObjectCollection world){
-        myWeapon.fire(world, myPoint);
+    public void fire(ObjectCollection world, GameObject target){
+        myWeapon.fire(world, target, myPoint);
     }
     
     public Weapon getWeapon(){
@@ -220,7 +220,7 @@ public class GameObjectSimple implements GameObject{
     @Override
     public void update (ObjectCollection world) {
         myBuffs.update(this);
-        fire(world);
+        myWeapon.advanceTime();
         try {
             move();
         }

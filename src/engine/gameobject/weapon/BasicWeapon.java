@@ -30,13 +30,13 @@ import gameworld.ObjectCollection;
  *
  */
 public class BasicWeapon implements Weapon {
-    protected int timeSinceFire;
-    protected Range myRange;
-    protected FiringRate myFiringRate;
-    protected GameObjectSimple myProjectile;
-    protected FiringStrategy myFiringStrategy;
+    private int timeSinceFire;
+    private Range myRange;
+    private FiringRate myFiringRate;
+    private GameObject myProjectile;
+    private FiringStrategy myFiringStrategy;
     private ClassSet<Upgrade> upgradables;
-    protected UpgradeTree tree;
+    private UpgradeTree tree;
 
     public BasicWeapon () {
         timeSinceFire = 0;
@@ -47,40 +47,40 @@ public class BasicWeapon implements Weapon {
                                                            myFiringRate });
     }
 
-    @Settable
+    @Override @Settable
     public void setRange (double range) {
         myRange = new RangeUpgrade(range);
     }
 
+    @Override @Settable
+    public void setFiringRate (double firingRate){
+        myFiringRate = new FiringRateUpgrade(firingRate);
+    }
+    
+    @Override @Settable
     public void setFiringStrategy (FiringStrategy newStrategy) {
         myFiringStrategy = newStrategy;
     }
 
+    @Override @Settable
+    public void setProjectile (GameObject projectile) {
+        myProjectile = projectile;
+    }
+    
     /*
      * (non-Javadoc)
      * 
      * @see engine.gameobject.weapon.Weaopn#fire(gameworld.GameWorld, engine.gameobject.PointSimple)
      */
     @Override
-    public void fire (ObjectCollection world, PointSimple location) {
+    public void fire (ObjectCollection world, GameObject target, PointSimple location) {
         if (canFire()) {
-            List<GameObject> targets =
-                    (List<GameObject>) world.objectsInRange(myRange.getRange(), location);
-            List<Buffable> buffables =
-                    // targets.stream().filter(p -> p instanceof Buffable &&
-                    // p.getPoint().getX()!=location.getX())//This needs to be filtered by team and
-                    // object type
-                    targets.stream().filter(p -> p instanceof GameObjectSimpleTest)// temporary
-                            .map(p -> (Buffable) p)
-                            .collect(Collectors.toList());
-            if (!buffables.isEmpty()) {
-                Buffable target = chooseTarget(buffables);
                 myFiringStrategy.execute(world, target, location, myProjectile);
                 timeSinceFire = 0;
-                return;
-            }
         }
-        timeSinceFire++;
+        else {
+            timeSinceFire++; 
+        }
     }
 
     /*
@@ -90,7 +90,7 @@ public class BasicWeapon implements Weapon {
      */
     @Override
     public void addBuff (Buff newBuff) {
-        myProjectile.addCollisionBehavior(newBuff);
+        myProjectile.getCollider().addCollisionBehavior(newBuff);
     }
 
     /*
@@ -102,18 +102,6 @@ public class BasicWeapon implements Weapon {
     public double getValue () {
         return tree.getValue();
     };
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * engine.gameobject.weapon.Weaopn#setProjectile(engine.gameobject.weapon.firingstrategy.Projectile
-     * )
-     */
-    @Override
-    public void setProjectile (Projectile projectile) {
-        myProjectile = projectile;
-    }
 
     /*
      * (non-Javadoc)
@@ -135,6 +123,10 @@ public class BasicWeapon implements Weapon {
         return myFiringRate.getRate();
     }
 
+    @Override
+    public void advanceTime(){
+        timeSinceFire++;
+    }
     /*
      * Utility that we may need in the future
      * private void fireAtEnemyInRange (GameWorld world, PointSimple center) {
@@ -148,12 +140,6 @@ public class BasicWeapon implements Weapon {
      * }
      * }
      */
-
-    // TODO: In bloons, we choose from the candidates using first, last, strong, weak. We could
-    // do something here as well using polymorphism. For now, we just choose a random one.
-    private Buffable chooseTarget (List<Buffable> targets) {
-        return targets.get(0);
-    }
 
     // TODO: Get the math correct here
     private double firingRateToSeconds () {
@@ -172,5 +158,4 @@ public class BasicWeapon implements Weapon {
         bundle.applyUpgrades(upgradables);
         bundle.getParent().updateCurrent(bundle.getParent());
     }
-
 }

@@ -18,7 +18,7 @@ import engine.pathfinding.PathSegmentBezier;
  * @author Jeremy
  *
  */
-public class GameObjectSimpleTest extends BuffTracker{
+public class GameObjectSimpleTest extends GameObjectSimple{
 
     public GameObjectSimpleTest () {
         setLabel(new LabelConcrete());

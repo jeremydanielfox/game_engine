@@ -173,7 +173,7 @@ public class ShopView extends Parent {
     }
 
     private void bindCursor (Point2D initial, Node node) {
-        Node result = ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE);
+        Node result = ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE, true);//TODO nathan i added true as a 5th param - kaighn
         pane.getChildren().add(result);
     }
 

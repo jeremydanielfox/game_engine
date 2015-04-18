@@ -43,7 +43,7 @@ public class GameWriter extends Application {
      */
     private StoryBoard makeStoryBoard (GameWorld world) {
         List<GameObject> waveObjects = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 10; i++) {
             waveObjects.add(new GameObjectSimpleTest());
         }
         GameObjectQueue q = new ConcreteQueue(waveObjects);
@@ -101,9 +101,9 @@ public class GameWriter extends Application {
      */
     public GameWorld makeWorld () {
         FixedWorld world = new FixedWorld();
-        world.addObject(new TestTower(2, 330, 130));
-        world.addObject(new TestTower(4, 270, 270));
-        world.addObject(new TestTower(3, 355, 455));
+//        world.addObject(new TestTower(2, 330, 130));
+//        world.addObject(new TestTower(4, 270, 270));
+//        world.addObject(new TestTower(3, 355, 455));
         world.setPath(DataManager.readFromXML(PathFixed.class, "src/gae/listView/Test.xml"));
         return world;
     }

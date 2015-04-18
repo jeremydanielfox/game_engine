@@ -140,6 +140,10 @@ public abstract class GameObjectSimple implements GameObject {
     public void setName (String name) {
         myName = name;
     }
+    
+    public String getName() {
+        return myName;
+    }
 
     @Override
     public double getValue () {

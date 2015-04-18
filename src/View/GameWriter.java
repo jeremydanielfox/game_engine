@@ -2,13 +2,13 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import xml.DataManager;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
+import engine.events.RandomSpanWave;
 import engine.events.TimedEvent;
 import engine.game.ConcreteGame;
 import engine.game.ConcreteLevel;
@@ -47,7 +47,8 @@ public class GameWriter extends Application {
             waveObjects.add(new GameObjectSimpleTest());
         }
         GameObjectQueue q = new ConcreteQueue(waveObjects);
-        TimedEvent wave = new ConstantSpacingWave(2, 1, q, world);
+        TimedEvent wave = new RandomSpanWave(2, 20, q, world);
+        //TimedEvent wave = new ConstantSpacingWave(2, 1, q, world);
         StoryBoard story = makeStoryBoard(wave);
         return story;
     }

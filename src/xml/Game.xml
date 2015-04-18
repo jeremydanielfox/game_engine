@@ -48,7 +48,6 @@
         </myLosingGoals>
         <myGameWorld class="gameworld.FixedWorld">
           <myObjects/>
-          <i>0</i>
           <myPathWidth>17.0</myPathWidth>
           <myPath class="engine.pathfinding.PathFixed">
             <myPathSegments class="linked-list">
@@ -189,14 +188,15 @@
         </myGameWorld>
         <myStoryBoard>
           <eventList>
-            <engine.events.ConstantSpacingWave>
+            <engine.events.RandomSpanWave>
               <frameTrigger>120</frameTrigger>
               <frameCount>0</frameCount>
               <myWorld class="gameworld.FixedWorld" reference="../../../../myGameWorld"/>
               <myQueue class="engine.events.ConcreteQueue">
                 <myOrderedObjects class="linked-list">
                   <engine.gameobject.GameObjectSimpleTest>
-                    <myLabel class="engine.gameobject.labels.LabelConcrete">
+                    <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <myName>Enemy</myName>
                       <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
                       <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
@@ -380,7 +380,8 @@
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
-                    <myLabel class="engine.gameobject.labels.LabelConcrete">
+                    <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <myName>Enemy</myName>
                       <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
                       <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
@@ -564,7 +565,8 @@
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
-                    <myLabel class="engine.gameobject.labels.LabelConcrete">
+                    <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <myName>Enemy</myName>
                       <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
                       <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
@@ -748,7 +750,8 @@
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
-                    <myLabel class="engine.gameobject.labels.LabelConcrete">
+                    <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <myName>Enemy</myName>
                       <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
                       <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
@@ -932,7 +935,8 @@
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
-                    <myLabel class="engine.gameobject.labels.LabelConcrete">
+                    <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <myName>Enemy</myName>
                       <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
                       <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
@@ -1116,7 +1120,8 @@
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
-                    <myLabel class="engine.gameobject.labels.LabelConcrete">
+                    <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <myName>Enemy</myName>
                       <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
                       <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
@@ -1300,7 +1305,8 @@
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
-                    <myLabel class="engine.gameobject.labels.LabelConcrete">
+                    <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <myName>Enemy</myName>
                       <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
                       <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
@@ -1484,7 +1490,8 @@
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
-                    <myLabel class="engine.gameobject.labels.LabelConcrete">
+                    <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <myName>Enemy</myName>
                       <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
                       <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
@@ -1668,7 +1675,8 @@
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
-                    <myLabel class="engine.gameobject.labels.LabelConcrete">
+                    <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <myName>Enemy</myName>
                       <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
                       <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
@@ -1852,7 +1860,8 @@
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
-                    <myLabel class="engine.gameobject.labels.LabelConcrete">
+                    <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <myName>Enemy</myName>
                       <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
                       <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
@@ -2039,9 +2048,21 @@
                 <curIndex>0</curIndex>
               </myQueue>
               <myWaveSet/>
-              <myFramesBetweenEnemies>60</myFramesBetweenEnemies>
-              <myFramesSinceLastRelease>0</myFramesSinceLastRelease>
-            </engine.events.ConstantSpacingWave>
+              <myFrameDuration>1200</myFrameDuration>
+              <myFramesSinceStart>0</myFramesSinceStart>
+              <myReleaseTimes>
+                <int>937</int>
+                <int>405</int>
+                <int>778</int>
+                <int>270</int>
+                <int>106</int>
+                <int>1045</int>
+                <int>133</int>
+                <int>780</int>
+                <int>72</int>
+                <int>257</int>
+              </myReleaseTimes>
+            </engine.events.RandomSpanWave>
           </eventList>
         </myStoryBoard>
       </engine.game.ConcreteLevel>
@@ -2053,7 +2074,6 @@
         <myLosingGoals reference="../../engine.game.ConcreteLevel/myLosingGoals"/>
         <myGameWorld class="gameworld.FixedWorld">
           <myObjects/>
-          <i>0</i>
           <myPathWidth>17.0</myPathWidth>
         </myGameWorld>
         <myStoryBoard reference="../../engine.game.ConcreteLevel/myStoryBoard"/>

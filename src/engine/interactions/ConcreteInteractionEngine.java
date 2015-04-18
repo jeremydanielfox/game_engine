@@ -20,15 +20,15 @@ import gameworld.GameWorld;
  */
 @Settable
 public class ConcreteInteractionEngine implements InteractionEngine {
-    private Map<Label, Map<Label, BiConsumer<GameObject, GameObject>>> myTable = new HashMap<>();
+    private Map<Label, Map<Label, Interaction>> myTable = new HashMap<>();
     private GameWorld myGameWorld;
 
     @Override
     public void interact (GameObject first, GameObject second) {
         Label firstLabel = first.getLabel();
         Label secondLabel = second.getLabel();
-        Map<Label, BiConsumer<GameObject, GameObject>> chosenMap;
-        BiConsumer<GameObject, GameObject> interaction = null;
+        Map<Label, Interaction> chosenMap;
+        Interaction interaction = null;
         while (firstLabel != null && !myTable.containsKey(firstLabel)) {
             chosenMap = myTable.get(firstLabel);
             while (secondLabel != null && !chosenMap.containsKey(secondLabel)) {
@@ -37,6 +37,7 @@ public class ConcreteInteractionEngine implements InteractionEngine {
             }
             firstLabel = firstLabel.getSuperLabel();
         }
+        interaction.setGameWorld(myGameWorld);
         interaction.accept(first, second);
     }
 
@@ -50,7 +51,6 @@ public class ConcreteInteractionEngine implements InteractionEngine {
      */
     @Override
     public void put (Label first, Label second, Interaction interaction) {
-        interaction.setGameWorld(myGameWorld);
         checkNullMap(first);
         checkNullMap(second);
         putInMap(first, second, interaction);
@@ -65,7 +65,7 @@ public class ConcreteInteractionEngine implements InteractionEngine {
     private void checkNullMap (Label label) {
         if (myTable.get(label) == null)
             myTable.put(label,
-                        new HashMap<Label, BiConsumer<GameObject, GameObject>>());
+                        new HashMap<Label, Interaction>());
     }
 
     /**
@@ -83,7 +83,6 @@ public class ConcreteInteractionEngine implements InteractionEngine {
 
     @Override
     public void setWorld (GameWorld world) {
-        // TODO Auto-generated method stub
         myGameWorld=world;
     }
 

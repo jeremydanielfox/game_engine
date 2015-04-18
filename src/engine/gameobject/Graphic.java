@@ -70,10 +70,10 @@ public class Graphic {
      */
     public void setPoint (PointSimple point) {
         myPoint =
-                new Point2D(point.getX(),//  + ViewUtilities.getCenterOffsetX(myImageView),
-                            point.getY());// + ViewUtilities.getCenterOffsetY(myImageView));
-        getImageView().setX(point.getX());
-        getImageView().setY(point.getY());
+                new Point2D(point.getX()  + ViewUtilities.getCenterOffsetX(myImageView),
+                            point.getY() + ViewUtilities.getCenterOffsetY(myImageView));
+        getImageView().setX(myPoint.getX());
+        getImageView().setY(myPoint.getY());
     }
 
     @Settable

@@ -1,7 +1,9 @@
 package engine.gameobject.weapon.firingstrategy;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
@@ -22,6 +24,12 @@ public class Projectile extends GameObjectSimple implements Buffer {
         onCollision = new HashSet<Buff>();
         onDeath = new Explosion();
         super.setLabel(new ProjectileLabel());
+    }
+    
+    @Settable
+    public void setCollisionBuffs(Buff... buffs){
+        onCollision.clear();
+        onCollision.addAll(Arrays.asList(buffs));
     }
 
     public void addCollisionBehavior(Buff newBuff){

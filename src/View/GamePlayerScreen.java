@@ -30,7 +30,7 @@ import engine.game.StoryBoard;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
-import engine.goals.HealthDepletionGoal;
+import engine.goals.HealthGoal;
 import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
 import engine.shop.ShopModel;
@@ -113,7 +113,7 @@ public class GamePlayerScreen extends Application {
         ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new NullGoal());
         myGame.addButton(wrap);
 
-        HealthDepletionGoal healthy = new HealthDepletionGoal(myPlayer);
+        HealthGoal healthy = new HealthGoal(myPlayer);
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
         ScoreGoal score = new ScoreGoal(myPlayer, 200);

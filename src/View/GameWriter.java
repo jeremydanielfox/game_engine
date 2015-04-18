@@ -21,7 +21,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.test.TestTower;
 import engine.goals.Goal;
-import engine.goals.HealthDepletionGoal;
+import engine.goals.HealthGoal;
 import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
 import engine.pathfinding.PathFixed;
@@ -61,7 +61,7 @@ public class GameWriter extends Application {
      */
     private ConcreteLevelBoard makeLevelBoard (GameWorld world, StoryBoard story, Player myPlayer) {
         ConcreteLevelBoard board = new ConcreteLevelBoard();
-        HealthDepletionGoal healthy = new HealthDepletionGoal(myPlayer);
+        HealthGoal healthy = new HealthGoal(myPlayer);
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
         ScoreGoal score = new ScoreGoal(myPlayer, 200);

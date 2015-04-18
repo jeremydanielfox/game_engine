@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 
@@ -69,7 +70,7 @@ public class LevelView {
         backgroundProperty = background.imageProperty();
         Group root = new Group();
         TileContainer container = new TileContainer(20, border);
-        root.getChildren().addAll(background, container, tempButtonTower(), tempButtonEnemy());
+        root.getChildren().addAll(background, container, tempGrid());
 
         stack.getChildren().addAll(root);
 
@@ -95,10 +96,17 @@ public class LevelView {
         return leftview;
     }
 
+    private GridPane tempGrid () {
+        GridPane grid = new GridPane();
+        grid.setHgap(0);
+        grid.setTranslateX(500);
+        grid.add(tempButtonTower(), 0, 0);
+        grid.add(tempButtonEnemy(), 0, 1);
+        return grid;
+    }
+
     private Button tempButtonTower () {
         Button temp = new Button("add Tower");
-        temp.setTranslateX(600);
-        temp.setTranslateY(500);
         Editable editable = new TempTower();
         temp.setOnAction(e -> libraryData.addToList(editable));
         return temp;
@@ -106,8 +114,6 @@ public class LevelView {
 
     private Button tempButtonEnemy () {
         Button temp = new Button("add Enemy");
-        temp.setTranslateX(700);
-        temp.setTranslateY(500);
         Editable editable = new TempEnemy();
         temp.setOnAction(e -> libraryData.addToList(editable));
         return temp;

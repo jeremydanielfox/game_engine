@@ -71,6 +71,7 @@ public class PathView {
         root.getChildren().add(set);
         set.setOnMouseEntered(e -> {
             set.changeColor(Color.YELLOW);
+            set.makeVisible(true);
             myScene.setOnKeyPressed(f -> {
                 if (f.getCode().equals(KeyCode.BACK_SPACE)) {
                     root.getChildren().remove(set);
@@ -82,6 +83,7 @@ public class PathView {
 
         set.setOnMouseExited(e -> {
             set.changeColor(Color.FORESTGREEN);
+            set.makeVisible(false);
         });
 
         System.out.println("I'm adding onto : " + this);

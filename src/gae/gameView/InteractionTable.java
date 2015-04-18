@@ -36,11 +36,14 @@ public class InteractionTable extends Application{
         adder = new Button(ADD_TEXT);
         container.setTop(adder);
         interactions = new ArrayList<>();
-        content = new VBox();
+        content = new VBox(35);
         scroller.setContent(content);
         setUpButtons();
     }
 
+    /**
+     * Sets up Buttons and their pressed functions
+     */
     private void setUpButtons () {
         adder.setOnMouseClicked(e -> {
             Interaction i = new Interaction();

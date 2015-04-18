@@ -93,6 +93,7 @@ public class Interaction {
         private ScrollPane scroller;
         private List<String> options;
         private Button adder;
+        private HBox addBox;
 
         public ObjectContainer() { 
             container = new VBox();
@@ -101,7 +102,12 @@ public class Interaction {
             scroller = new ScrollPane();
             options = new ArrayList<>();
             adder = new Button();
-            adder.setGraphic(new ImageView("/images/plus_sign.jpg"));
+            addBox = new HBox();
+            addBox.getChildren().addAll(new Text("Add Labels"), adder);
+            ImageView buttonGraphic = new ImageView("/images/plus_sign.jpg");
+            adder.setGraphic(buttonGraphic);
+            buttonGraphic.setFitWidth(25);
+            buttonGraphic.setFitHeight(25);
             createObjectContainer();
         }
         
@@ -110,7 +116,7 @@ public class Interaction {
             adder.setOnMouseClicked(e -> {
                 
             });
-            container.getChildren().addAll(selected, adder);
+            container.getChildren().addAll(selected, addBox);
         }
         
         public Node getContainer(){

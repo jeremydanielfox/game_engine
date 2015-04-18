@@ -1,7 +1,9 @@
-package View;
+package engine.gameobject.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import View.ButtonWrapper;
+import View.ViewConcrete2;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -51,9 +53,9 @@ public class GamePlayerScreen extends Application {
     private ViewConcrete2 myGameView;
 
     public GamePlayerScreen () {
-        // myGame =
-        // new ConcreteGame(new Player("myPlayer", null, null, null),
-        // new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
+//        myGame =
+//                new ConcreteGame(new Player("myPlayer", null, null, null),
+//                                 new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
         myVbox = new VBox(30);
         makeDis();
     }
@@ -75,6 +77,7 @@ public class GamePlayerScreen extends Application {
         addDetails("Instructions", "this is an example of instructions"); // this should be taken in
                                                                           // from the GAE
 
+        
         Button scoreBtn = new Button("View high scores");
         Button playBtn = new Button("play");
 
@@ -84,54 +87,60 @@ public class GamePlayerScreen extends Application {
     }
 
     private void startGame () {
-        // myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_WIDTH);
-
+        //myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_WIDTH);
+        
         Group root = new Group();
         root.getChildren().add(makeDemoGame());
         Scene scene = new Scene(root);
         myStage.setScene(scene);
-
+        
     }
 
-    public Node makeDemoGame () {
-        ConcreteLevelBoard board = new ConcreteLevelBoard();
-
+    public Node makeDemoGame() {
+        ConcreteLevelBoard board=new ConcreteLevelBoard();
+        
         GameWorld world = new FixedWorld();
         world.addObject(new GameObjectSimpleTest());
-        GameObjectQueue q = new ConcreteQueue(new ArrayList<GameObject>());
+        world.addObject(new TestTower(1, 270, 270));
+        List<GameObject> waveObjects = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            waveObjects.add(new GameObjectSimpleTest());
+        }
+        GameObjectQueue q = new ConcreteQueue(waveObjects);
         TimedEvent wave = new ConstantSpacingWave(2.0, q, world);
         StoryBoard story = new StoryBoard(wave);
-
+        
         PlayerUnit health = new PlayerUnit(100, "Health");
         PlayerUnit scoreUnit = new PlayerUnit(100, "Score");
         Wallet wallet = new ConcreteWallet(scoreUnit);
-        Player myPlayer = new Player("PlayerName", health, scoreUnit, wallet);
-        
+        Player myPlayer=new Player("PlayerName",health,scoreUnit,wallet);
         // EDIT: temp change -- game won't have accurate shop - Nathan
         myGame = new ConcreteGame(new ShopModelSimple(), myPlayer, board, new ArrayList<ButtonWrapper>());
-        // ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
-        ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new NullGoal());
+        //ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
+        ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
         myGame.addButton(wrap);
-
-        HealthGoal healthy = new HealthGoal(myPlayer, 0);
-        List<Goal> list = new ArrayList<Goal>();
+        
+        
+        HealthGoal healthy=new HealthGoal(myPlayer, 0);
+        List<Goal> list=new ArrayList<Goal>();
         list.add(healthy);
-        ScoreGoal score = new ScoreGoal(myPlayer, 200);
-        List<Goal> list2 = new ArrayList<Goal>();
+        ScoreGoal score=new ScoreGoal(myPlayer,200);
+        List<Goal> list2=new ArrayList<Goal>();
         list2.add(score);
-        List<Goal> list3 = new ArrayList<Goal>();
-        ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
+        List<Goal> list3=new ArrayList<Goal>();
+        ScoreGoal score2=new ScoreGoal(myPlayer,300);
         list3.add(score2);
-
-        board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
-                                         story));
-        ShopModel shop = new ShopModelSimple(world, myPlayer, 0);
-        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
+       
+        
+        board.addLevel(new ConcreteLevel("images/Park_Path.png",list2,list,world, story));
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg",list3,list,new FixedWorld(),story));
+        ShopModel shop = new ShopModelSimple(world, myPlayer, 1.2);
+        // EDIT: temp change -- game won't have accurate shop - Nathan
+        myGame = new ConcreteGame(new ShopModelSimple(), myPlayer, board, new ArrayList<ButtonWrapper>());
         Node node = myGameView.initializeView();
         return node;
     }
-
+    
     public static void main (String[] args) {
         launch(args);
     }

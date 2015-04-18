@@ -124,10 +124,6 @@ public class GameObjectSimple implements GameObject {
     public void setTag (GameObjectTag tag) {
         this.myTag = tag;
     }
-    
-    public String getName() {
-        return myName;
-    }
 
     @Override
     public double getValue () {

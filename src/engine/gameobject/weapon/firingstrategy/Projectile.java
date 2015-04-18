@@ -5,10 +5,9 @@ import java.util.Set;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
+import engine.gameobject.test.ProjectileLabel;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.Buffable;
-import engine.gameobject.units.BuffableUnit;
-import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import gameworld.ObjectCollection;
 
@@ -22,6 +21,7 @@ public class Projectile extends GameObjectSimple implements Buffer {
         collidedID = new HashSet<String>();
         onCollision = new HashSet<Buff>();
         onDeath = new Explosion();
+        super.setLabel(new ProjectileLabel());
     }
 
     public void addCollisionBehavior(Buff newBuff){

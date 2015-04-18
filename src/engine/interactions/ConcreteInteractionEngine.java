@@ -6,6 +6,7 @@ import java.util.function.BiConsumer;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.labels.Label;
+import gameworld.GameWorld;
 
 
 /**
@@ -20,6 +21,7 @@ import engine.gameobject.labels.Label;
 @Settable
 public class ConcreteInteractionEngine implements InteractionEngine {
     private Map<Label, Map<Label, BiConsumer<GameObject, GameObject>>> myTable = new HashMap<>();
+    private GameWorld myGameWorld;
 
     @Override
     public void interact (GameObject first, GameObject second) {
@@ -40,18 +42,19 @@ public class ConcreteInteractionEngine implements InteractionEngine {
 
     /**
      * This method lets someone define the action that occurs between two
-     * GameObjects
+     * GameObjects. Specifically, this action occurs from first onto second.
      * 
      * @param first
      * @param second
      * @param consumer
      */
     @Override
-    public void put (Label first, Label second, BiConsumer consumer) {
+    public void put (Label first, Label second, Interaction interaction) {
+        interaction.setGameWorld(myGameWorld);
         checkNullMap(first);
         checkNullMap(second);
-        putInMap(first, second, consumer);
-        putInMap(second, first, consumer);
+        putInMap(first, second, interaction);
+        putInMap(second, first, interaction);
     }
 
     /**
@@ -73,10 +76,15 @@ public class ConcreteInteractionEngine implements InteractionEngine {
      * @param second
      * @param consumer
      */
-    private void putInMap (Label first, Label second, BiConsumer consumer) {
+    private void putInMap (Label first, Label second, Interaction interaction) {
         Map temp = myTable.get(first);
-        temp.put(second, consumer);
+        temp.put(second, interaction);
     }
-    
+
+    @Override
+    public void setWorld (GameWorld world) {
+        // TODO Auto-generated method stub
+        myGameWorld=world;
+    }
 
 }

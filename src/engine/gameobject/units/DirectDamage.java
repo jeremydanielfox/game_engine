@@ -1,6 +1,7 @@
 package engine.gameobject.units;
 
 import java.util.Optional;
+import engine.gameobject.GameObject;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 
@@ -27,7 +28,7 @@ public class DirectDamage extends Buff {
     }
 
     @Override
-    public void apply (BuffableUnit myUnit) {
+    public void apply (GameObject myUnit) {
         myUnit.changeHealth(-1 * getDamage());
         adjustEffect(myUnit, -1, 1, 0, 0);
     }
@@ -41,7 +42,7 @@ public class DirectDamage extends Buff {
     }
 
     @Override
-    public void unapply (BuffableUnit myUnit) {
+    public void unapply (GameObject myUnit) {
         adjustEffect(myUnit, 1, -1, 0, 0);
     }
 

@@ -4,6 +4,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.Buffable;
 
+@Deprecated
 public interface Buffer extends GameObject{
 
     /**

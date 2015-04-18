@@ -40,6 +40,8 @@ public class TestEngine extends Application {
         Player player = gw.makePlayer();
         return gw.makeGame(player, world, gw.makeShop(player, world));
         //return DataManager.readFromXML(Game.class, FILE_SOURCE);
+//        return DataManager.readFromXML(Game.class, FILE_SOURCE);
+
 
     }
 

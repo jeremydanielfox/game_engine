@@ -103,11 +103,6 @@ public class BasicWeapon implements Weapon {
         return tree.getValue();
     };
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see engine.gameobject.weapon.Weaopn#getRange()
-     */
     @Override
     public double getRange () {
         return myRange.getRange();

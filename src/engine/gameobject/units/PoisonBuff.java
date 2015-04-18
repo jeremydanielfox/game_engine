@@ -3,6 +3,7 @@ package engine.gameobject.units;
 import java.awt.Color;
 import java.util.Optional;
 import engine.gameobject.GameObject;
+import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 
 /**
@@ -16,11 +17,26 @@ public class PoisonBuff extends Buff{
     private double damageIncr;
     private Optional<PoisonBuff> decorated;
     
+    /**
+     * Makes a poison buff
+     * @param timeIncr: Time the damage occurs over
+     * @param damageIncr: Total damage
+     */
     public PoisonBuff(int timeIncr, double damageIncr){
         super(timeIncr);
         this.timeIncr = timeIncr;
         this.damageIncr = damageIncr;
         decorated = Optional.empty();
+    }
+    
+    @Settable
+    public void setTime (int timeIncr) {
+        this.timeIncr = timeIncr;
+    }
+    
+    @Settable
+    public void setDamage (double damageIncr) {
+        this.damageIncr = damageIncr;
     }
     
     public void apply(GameObject myUnit){

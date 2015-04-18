@@ -1,6 +1,7 @@
 package engine.gameobject.units;
 
 import java.util.Optional;
+import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.BasicMover;
 import engine.gameobject.GameObject;
@@ -19,6 +20,11 @@ public class FreezeBuff extends Buff{
         super(increment);
         this.increment = increment;
         decorated = Optional.empty();
+    }
+
+    @Settable
+    public void setIncrement (int increment) {
+        this.increment = increment;
     }
     
     public void apply(GameObject myUnit){

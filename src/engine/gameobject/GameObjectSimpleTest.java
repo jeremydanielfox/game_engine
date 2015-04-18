@@ -3,8 +3,7 @@ package engine.gameobject;
 import java.util.ArrayList;
 import java.util.List;
 import xml.DataManager;
-import engine.gameobject.labels.LabelConcrete;
-import engine.gameobject.units.BuffTracker;
+import engine.gameobject.test.EnemyLabel;
 import engine.gameobject.weapon.NullWeapon;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
@@ -21,7 +20,7 @@ import engine.pathfinding.PathSegmentBezier;
 public class GameObjectSimpleTest extends GameObjectSimple{
 
     public GameObjectSimpleTest () {
-        setLabel(new LabelConcrete());
+        setLabel(new EnemyLabel());
         setGraphic(new Graphic(25, 25, "robertDuvall.jpg"));
         setPoint(new PointSimple(0, 10000)); //This initializes them off the screen. If we don't do this, it will show a frame at this point. Needs to be fixed in a better manner.
         setHealth(new HealthSimple(4));

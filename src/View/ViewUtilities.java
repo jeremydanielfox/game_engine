@@ -1,5 +1,6 @@
 package View;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -94,21 +95,34 @@ public class ViewUtilities {
     }
 
     /**
-     * Returns the global (scene-wide) mouseLocation triggered by a MouseEvent
-     * on a node
+     * Returns the local (parent-wide) mouseLocation triggered by a MouseEvent
+     * on a node. Is used for cursor binding.
      * 
      * @param mouseEvent MouseEvent
      * @param node Node
      * @return
      */
     public static Point2D getMouseLocation (MouseEvent mouseEvent, Node node) {
-        return new Point2D(mouseEvent.getX() + getCenterOffSetX(node),
-                           mouseEvent.getY() + getCenterOffSetY(node));
+        return new Point2D(mouseEvent.getX() + getCenterOffsetX(node),
+                           mouseEvent.getY() + getCenterOffsetY(node));
     }
 
+    /**
+     * Returns the global (scene-wide) mouseLocation triggered by a MouseEvent
+     * on a node. Is used for cursor binding.
+     * 
+     * @param mouseEvent MouseEvent
+     * @param node Node
+     * @return
+     */
     public static Point2D getMouseSceneLoc (MouseEvent mouseEvent, Node node) {
-        return new Point2D(mouseEvent.getSceneX() + getCenterOffSetX(node),
-                           mouseEvent.getSceneY() + getCenterOffSetY(node));
+        return new Point2D(mouseEvent.getSceneX() + getCenterOffsetX(node),
+                           mouseEvent.getSceneY() + getCenterOffsetY(node));
+    }
+    
+    
+    public static double getCenterX (Node node){
+        return 0; //node.getScene()
     }
 
     /**
@@ -117,8 +131,9 @@ public class ViewUtilities {
      * @param node Node
      * @return
      */
-    public static double getCenterOffSetX (Node node) {
-        return -node.getBoundsInLocal().getWidth() / 2;
+    public static double getCenterOffsetX (Node node) {
+        return (node != null) ? -node.getBoundsInLocal().getWidth() / 2 : 0.0;
+        //return opt.map(nd -> -nd.getBoundsInLocal().getWidth() / 2).orElse(0.0);
     }
 
     /**
@@ -127,7 +142,8 @@ public class ViewUtilities {
      * @param node Node
      * @return
      */
-    public static double getCenterOffSetY (Node node) {
-        return -node.getBoundsInLocal().getHeight() / 2;
+    public static double getCenterOffsetY (Node node) {
+        return (node != null) ? -node.getBoundsInLocal().getHeight() / 2 : 0.0;
+        //return opt.map(nd -> -node.getBoundsInLocal().getHeight() / 2).orElse(0.0);
     }
 }

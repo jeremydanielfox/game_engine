@@ -11,7 +11,7 @@ public class TestTower extends GameObjectSimple{
     
     public TestTower (int type, int xcor, int ycor) {
         super();
-        setGraphic(new Graphic(40, 40, "robertDuvall.jpg"));
+        setGraphic(new Graphic(40, 40, "Bloons_TackShooter.png"));
         setPoint(new PointSimple(xcor, ycor));
         setHealth(new HealthSimple(3));
         setMover(new MoverNull());
@@ -19,6 +19,7 @@ public class TestTower extends GameObjectSimple{
         getTag().setName("TestTower");
         getTag().setDescription("Just a test tower; nothing special here...");
         getTag().setShopGraphic(new Graphic(40, 40, "Bloons_TackShooterIcon.png"));
+        super.setLabel(new TowerLabel());
     }
     
     

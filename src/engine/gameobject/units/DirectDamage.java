@@ -2,6 +2,7 @@ package engine.gameobject.units;
 
 import java.util.Optional;
 import engine.gameobject.GameObject;
+import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 
 /**
@@ -19,6 +20,11 @@ public class DirectDamage extends Buff {
         super(graphicDuration);
         this.increment = increment;
         decorated = Optional.empty();
+    }
+    
+    @Settable
+    public void setIncrement (double increment) {
+        this.increment = increment;
     }
 
     @Override

@@ -34,10 +34,11 @@ public class AbstractWorld implements GameWorld{
         myObjects.add(toSpawn);
         toSpawn.setPoint(pixelCoords);// TODO change from pixel coords
         // myGrid.addObject(toSpawn);
-    }
+        }
 
     @Override
     public void updateGameObjects () {
+    	
          ArrayList<GameObject> currentObjects = new ArrayList<GameObject>(myObjects);
          for (GameObject o: currentObjects){
              o.update(this);
@@ -85,13 +86,6 @@ public class AbstractWorld implements GameWorld{
 
     @Override
     public void addObject (GameObject toSpawn) {
-        try {
-            toSpawn.move();
-        }
-        catch (EndOfPathException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         myObjects.add(toSpawn);
     }
 

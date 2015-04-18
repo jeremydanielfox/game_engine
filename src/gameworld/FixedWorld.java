@@ -34,9 +34,8 @@ public class FixedWorld extends AbstractWorld {
 
 	@Override
 	public boolean isPlacable (Node n, PointSimple pixelCoords) {
-		n.setLayoutX(pixelCoords.getX()+60);
-		n.setLayoutY(pixelCoords.getY()+63);
-		PointSimple newCoords = new PointSimple(pixelCoords.getX()+60,pixelCoords.getY()+60);
+		n.setLayoutX(pixelCoords.getX());
+		n.setLayoutY(pixelCoords.getY());
 		int i = 0;
 		Circle c = new Circle(myPathWidth);
 		while(true){

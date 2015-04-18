@@ -95,13 +95,14 @@ public class ShopView extends Parent {
         icons.forEach(gameObjectIcon -> {
             gameObjectIcon.setOnMouseEntered(mouseEvent -> displayGameObjectInfo(gameObjectIcon));
             gameObjectIcon.setOnMouseExited(mouseEvent -> infoBox.getChildren().clear());
-            gameObjectIcon.setOnMouseClicked(mouseEvent ->{
-                TransitionGameObject transition = model.getTransitionGameObject(gameObjectIcon.getName());
+            gameObjectIcon.setOnMouseClicked(mouseEvent -> {
+                TransitionGameObject transition =
+                        model.getTransitionGameObject(gameObjectIcon.getName());
                 Point2D location = ViewUtilities.getMouseSceneLoc(mouseEvent, transition.getNode());
                 initializeTransition(model.getTransitionGameObject(gameObjectIcon.getName()),
                                      location);
             });
-                    
+
         });
         shopIcons.getChildren().addAll(icons);
     }
@@ -109,7 +110,7 @@ public class ShopView extends Parent {
     private void displayGameObjectInfo (ItemGraphic icon) {
         VBox base = new VBox();
         base.setSpacing(10);
-        base.setPadding(new Insets(10,10,10,10));
+        base.setPadding(new Insets(10, 10, 10, 10));
         base.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                                                              null, null)));
 
@@ -173,7 +174,7 @@ public class ShopView extends Parent {
     }
 
     private void bindCursor (Point2D initial, Node node) {
-        Node result = ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE);
+        Node result = ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE, true);
         pane.getChildren().add(result);
     }
 
@@ -182,14 +183,14 @@ public class ShopView extends Parent {
         bindCursor(initial, transNode);
 
         transNode.setOnMouseMoved(event -> {
-            Point2D current = ViewUtilities.getMouseSceneLoc(event, transNode);
+            PointSimple current = new PointSimple(event.getSceneX(), event.getSceneY());
             transition.setRangeCircleColor(model.checkPlacement(transition.getName(),
-                                                                new PointSimple(current)));
+                                                                current));
         });
 
         transNode.setOnMouseClicked(event -> {
-            model.purchaseGameObject(transition.getName(),
-                                     new PointSimple(ViewUtilities.getMouseSceneLoc(event, transNode)));
+            PointSimple current = new PointSimple(event.getSceneX(), event.getSceneY());
+            model.purchaseGameObject(transition.getName(), current);
         });
     }
 }

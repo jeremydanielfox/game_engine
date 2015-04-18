@@ -1,9 +1,9 @@
 package engine.gameobject;
 
-
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import View.ViewUtilities;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.fieldsetting.Settable;
 
@@ -43,7 +43,7 @@ public class Graphic {
     private void initializeImageView () {
         myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
         // for TEST purpose:
-        if (myPoint==null){
+        if (myPoint == null) {
             myPoint = new Point2D(0, 0);
         }
         myImageView.setX(myPoint.getX());
@@ -62,14 +62,16 @@ public class Graphic {
         getImageView().setFitHeight(myHeight * scaleFactor);
         return getImageView();
     }
-    
+
     /**
      * Assign the given point to both the ImageView and a copy of the point in this class.
      * 
      * @param point
      */
     public void setPoint (PointSimple point) {
-        myPoint = new Point2D(point.getX(), point.getY());
+        myPoint =
+                new Point2D(point.getX(),//  + ViewUtilities.getCenterOffsetX(myImageView),
+                            point.getY());// + ViewUtilities.getCenterOffsetY(myImageView));
         getImageView().setX(point.getX());
         getImageView().setY(point.getY());
     }
@@ -106,18 +108,14 @@ public class Graphic {
         return myImageView;
     }
 
+    public double getCenterX () {
+        return myImageView.getX() + ViewUtilities.getCenterOffsetX(myImageView);
+    }
 
-     public double getCenterX () {
-     // To do
-     return 0;
-     }
-    
-     public double getCenterY () {
-     // To do
-     return 0;
-     }
+    public double getCenterY () {
+        return myImageView.getY() + ViewUtilities.getCenterOffsetY(myImageView);
+    }
 
-    
     public String getImagePath () {
         return DEFAULT_IMAGE_PATH_PREFIX + myImageName;
     }

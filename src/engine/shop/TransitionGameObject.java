@@ -52,8 +52,8 @@ public class TransitionGameObject {
         return pane;
     }
 
-    public Node getGraphic () {
-        return graphic.getNode();
+    public Graphic getGraphic () {
+        return graphic;
     }
 
     public String getName () {

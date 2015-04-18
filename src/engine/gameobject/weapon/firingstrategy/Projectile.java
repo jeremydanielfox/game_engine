@@ -1,7 +1,9 @@
 package engine.gameobject.weapon.firingstrategy;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
@@ -11,7 +13,12 @@ import engine.gameobject.units.Buffable;
 import engine.pathfinding.EndOfPathException;
 import gameworld.ObjectCollection;
 
-
+/**
+ * 
+ * @author Danny
+ * @deprecated Only use GameObjectSimple now.
+ */
+@Deprecated
 public class Projectile extends GameObjectSimple implements Buffer {
     protected Set<String> collidedID;
     protected Set<Buff> onCollision;
@@ -22,6 +29,12 @@ public class Projectile extends GameObjectSimple implements Buffer {
         onCollision = new HashSet<Buff>();
         onDeath = new Explosion();
         super.setLabel(new ProjectileLabel());
+    }
+    
+    @Settable
+    public void setCollisionBuffs(Buff... buffs){
+        onCollision.clear();
+        onCollision.addAll(Arrays.asList(buffs));
     }
 
     public void addCollisionBehavior(Buff newBuff){
@@ -66,10 +79,10 @@ public class Projectile extends GameObjectSimple implements Buffer {
         return true;
     }
 
-    private void onCollision (Buffable obstacle) {
-        if (effectiveCollision(obstacle)) {
+    private void onCollision (Buffable target) {
+        if (effectiveCollision((GameObject) target)) {
             for (Buff b: onCollision){
-                obstacle.addBuff(b);
+                target.addBuff(b);
             }
             changeHealth(-1);
         }

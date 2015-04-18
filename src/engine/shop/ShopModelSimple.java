@@ -6,14 +6,17 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
+import engine.gameobject.test.TestTower;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import engine.prototype.Prototype;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.PriceTag;
 import gameworld.GameWorld;
+import gameworld.StructurePlacementException;
 
 
 /**
@@ -92,7 +95,13 @@ public class ShopModelSimple implements ShopModel {
     public void purchaseGameObject (String name, PointSimple location) {
         if (canPurchase(name) && checkPlacement(name, location)) {
             currentPlayer.getWallet().withdraw(getPrice(name));
-            myGameWorld.addObject(prototypeMap.get(name).clone());
+//            myGameWorld.addObject(prototypeMap.get(name).clone());
+            try {
+				myGameWorld.addObject(new TestTower(100, 100, 100), location);
+			} catch (StructurePlacementException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 

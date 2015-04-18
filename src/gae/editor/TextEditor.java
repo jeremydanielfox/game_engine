@@ -22,11 +22,6 @@ public class TextEditor extends ComponentEditor {
     }
 
     @Override
-    public Node getObject () {
-        return getEditBox();
-    }
-
-    @Override
     public void clear () {
         field.clear();
     }

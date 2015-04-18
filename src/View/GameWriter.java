@@ -2,13 +2,13 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import xml.DataManager;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
+import engine.events.RandomSpanWave;
 import engine.events.TimedEvent;
 import engine.game.ConcreteGame;
 import engine.game.ConcreteLevel;
@@ -21,7 +21,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.test.TestTower;
 import engine.goals.Goal;
-import engine.goals.HealthDepletionGoal;
+import engine.goals.HealthGoal;
 import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
 import engine.pathfinding.PathFixed;
@@ -43,11 +43,12 @@ public class GameWriter extends Application {
      */
     private StoryBoard makeStoryBoard (GameWorld world) {
         List<GameObject> waveObjects = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 10; i++) {
             waveObjects.add(new GameObjectSimpleTest());
         }
         GameObjectQueue q = new ConcreteQueue(waveObjects);
-        TimedEvent wave = new ConstantSpacingWave(2, 1, q, world);
+        TimedEvent wave = new RandomSpanWave(2, 20, q, world);
+        //TimedEvent wave = new ConstantSpacingWave(2, 1, q, world);
         StoryBoard story = makeStoryBoard(wave);
         return story;
     }
@@ -60,7 +61,7 @@ public class GameWriter extends Application {
      */
     private ConcreteLevelBoard makeLevelBoard (GameWorld world, StoryBoard story, Player myPlayer) {
         ConcreteLevelBoard board = new ConcreteLevelBoard();
-        HealthDepletionGoal healthy = new HealthDepletionGoal(myPlayer);
+        HealthGoal healthy = new HealthGoal(myPlayer, 0);
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
         ScoreGoal score = new ScoreGoal(myPlayer, 200);
@@ -101,9 +102,9 @@ public class GameWriter extends Application {
      */
     public GameWorld makeWorld () {
         FixedWorld world = new FixedWorld();
-        world.addObject(new TestTower(2, 330, 130));
-        world.addObject(new TestTower(4, 270, 270));
-        world.addObject(new TestTower(3, 355, 455));
+//        world.addObject(new TestTower(2, 330, 130));
+//        world.addObject(new TestTower(4, 270, 270));
+//        world.addObject(new TestTower(3, 355, 455));
         world.setPath(DataManager.readFromXML(PathFixed.class, "src/gae/listView/Test.xml"));
         return world;
     }

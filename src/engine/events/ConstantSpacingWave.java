@@ -3,6 +3,12 @@ package engine.events;
 import engine.fieldsetting.Settable;
 import gameworld.GameWorld;
 
+/**
+ * 
+ * @author Sierra Smith
+ * @author Cosette Goldstein
+ *
+ */
 
 @Settable
 public class ConstantSpacingWave extends Wave {
@@ -47,13 +53,7 @@ public class ConstantSpacingWave extends Wave {
             return true;
         }
         if (myFramesSinceLastRelease == myFramesBetweenEnemies) {
-            // release enemy
-            // if (!releaseObject()) {
-            // return false;
-            // }
             releaseObject();
-
-            // reset frame counter
             myFramesSinceLastRelease = 0;
         }
         else {

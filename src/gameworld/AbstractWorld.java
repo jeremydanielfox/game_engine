@@ -34,42 +34,24 @@ public class AbstractWorld implements GameWorld{
         myObjects.add(toSpawn);
         toSpawn.setPoint(pixelCoords);// TODO change from pixel coords
         // myGrid.addObject(toSpawn);
-    }
+        }
 
     @Override
     public void updateGameObjects () {
+    	
          ArrayList<GameObject> currentObjects = new ArrayList<GameObject>(myObjects);
          for (GameObject o: currentObjects){
              o.update(this);
          }
+         //TODO: Tell each object to fire.
          checkCollisions();
          removeDeadObjects();
     }
 
     private void checkCollisions () {
-        List<Buffable> buffables =
-                myObjects.stream().filter(p -> p instanceof Buffable)
-                .map(p -> (Buffable) p)
-                .collect(Collectors.toList());
-        List<Buffer> buffers =
-                myObjects.stream().filter(p -> p instanceof Buffer)
-                .map(p -> (Buffer) p)
-                .collect(Collectors.toList());
-        buffers.forEach(buffer -> {
-            buffables.forEach(buffable -> {
-                if (buffer.getGraphic().getNode().getBoundsInParent()
-                        .intersects(buffable.getGraphic().getNode().getBoundsInParent())){
-                    //myCollisionEngine.interact(go1, go2);
-                    //buffer.collide(buffable);
-                    //TODO: Actually make teams and collide correctly
-                    if((buffable instanceof GameObjectSimpleTest)){
-                        buffer.impartBuffs(buffable);
-                    }
-                }
-            });
-        });
-
+        //TODO: Use collision engine to do all colisions
     }
+    
 
     private void removeDeadObjects () {
         // TODO Auto-generated method stub
@@ -104,13 +86,6 @@ public class AbstractWorld implements GameWorld{
 
     @Override
     public void addObject (GameObject toSpawn) {
-        try {
-            toSpawn.move();
-        }
-        catch (EndOfPathException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         myObjects.add(toSpawn);
     }
 

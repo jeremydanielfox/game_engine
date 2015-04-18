@@ -1,5 +1,6 @@
 package engine.goals;
 
+import engine.fieldsetting.Settable;
 import engine.game.Player;
 import java.util.Observable;
 
@@ -27,4 +28,9 @@ public abstract class PlayerGoal extends Goal {
 
     protected abstract void checkCondition (Player p);
 
+    @Settable
+    public void setPlayer(Player p){
+        myPlayer = p;
+    }
+    
 }

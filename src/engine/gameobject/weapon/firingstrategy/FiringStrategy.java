@@ -1,5 +1,6 @@
 package engine.gameobject.weapon.firingstrategy;
 
+import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buffable;
 import gameworld.ObjectCollection;
@@ -19,6 +20,6 @@ public interface FiringStrategy {
      * @param prototype
      * @return
      */
-    public void execute(ObjectCollection world, Buffable target, PointSimple location, Buffer prototype);
+    public void execute(ObjectCollection world, GameObject target, PointSimple location, GameObject prototype);
         
 }

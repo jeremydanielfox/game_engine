@@ -1,7 +1,9 @@
 package gae.backend;
 
 import java.io.Serializable;
-import gae.gridView.Pair;
+import javafx.scene.image.ImageView;
+import engine.gameobject.PointSimple;
+import gae.gridView.Path;
 import gae.listView.MovableImage;
 
 
@@ -14,15 +16,34 @@ public interface Editable extends Serializable {
 
     public String getImagePath ();
 
-    public void setLocation (double x, double y);
+    public ImageView getImageView ();
 
-    public Pair getLocation ();
+    public PointSimple getLocation ();
 
-    public void setEditableImage (MovableImage image);
+    public int getID ();
 
-    public MovableImage getEditableImage ();
+    public Path getPath ();
+
+    public int getWidth ();
+
+    public int getHeight ();
+
+    public void setLocation (PointSimple point);
+
+    public void setMovableImage (MovableImage image);
+
+    public MovableImage getMovableImage ();
 
     public void setID (int id);
+
+    public void setPath (Path path);
+
+    public void setWidth (int width);
+
+    public void setHeight (int height);
+
+    public Object clone ();
     
-    public Object clone();
+    public Editable makeNewInstance();
+
 }

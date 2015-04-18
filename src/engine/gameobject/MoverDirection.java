@@ -2,38 +2,50 @@ package engine.gameobject;
 
 import engine.pathfinding.EndOfPathException;
 
-//WE MIGHT NOT NEED THIS CLASS
-public class MoverDirection implements Mover{
-    private double speed;
-    private double distance;
+public class MoverDirection extends MoverPoint{
+    private double distanceLimit;
     private double distanceTraveled;
-    private double direction;
+    private boolean pastPoint;
     
-    //TODO: Use hierarchy to remove this constructor and setSpeed method
-    public MoverDirection(double distance, double direction, double speed){
-        this.distance = distance;
-        this.direction = direction;
-        this.speed = speed;
+    /**
+     * Makes a mover that will move with set speed for length distanceLimit towards direction.
+     * @param direction
+     * @param speed
+     * @param distanceLimit
+     */
+    public MoverDirection(PointSimple direction, double speed, double distanceLimit){
+        super(direction, speed);
+        this.distanceLimit = distanceLimit;
         distanceTraveled = 0;
+        pastPoint = false;
     }
     
     @Override
-    public PointSimple move (PointSimple current) throws EndOfPathException {
-        distanceTraveled+=speed;
-        if(distanceTraveled>distance)
+    public PointSimple move (PointSimple current) throws EndOfPathException{
+        distanceTraveled += currentSpeed();
+        if(distanceTraveled>distanceLimit)
             throw new EndOfPathException();
-        double newX = current.getX() + speed * Math.cos(Math.toRadians(direction));
-        double newY = current.getY() + speed * Math.sin(Math.toRadians(direction));
-        return new PointSimple(newX, newY);
+        //This switch statement is here to determine whether to find the point TOWARDS or AWAY FROM the reference.
+        PointSimple newPoint = new PointSimple();
+        if (!pastPoint){
+            newPoint = PointSimple.pointOnLine(current, getPoint(), currentSpeed());
+        }
+        else {
+            newPoint = PointSimple.pointOnLine(current, getPoint(), -currentSpeed());
+        }
+        if (currentSpeed() > PointSimple.distance(current, getPoint()) && !pastPoint) {
+            pastPoint = true;
+        }
+        return newPoint;
     }
-
+    
+    
     @Override
-    public void setSpeed (double speed) {
-        this.speed = speed;    
+    public void setPoint(PointSimple myPoint){
+        super.setPoint(myPoint);
     }
     
     public Mover clone (){
-        return new MoverDirection(distance, direction, speed);
+        return new MoverDirection(getPoint(), inherentSpeed, distanceLimit);
     }
-
 }

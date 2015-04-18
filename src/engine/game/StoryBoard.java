@@ -85,6 +85,9 @@ public class StoryBoard {
      * calling update on it.
      */
     public boolean eventInProgress () {
-        return getCurrentEvent().canStart();
+        if(getCurrentEvent() != null){
+            return getCurrentEvent().canStart();
+        }
+        return false;
     }
 }

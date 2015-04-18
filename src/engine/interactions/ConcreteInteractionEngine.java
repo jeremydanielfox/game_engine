@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
+import engine.gameobject.labels.Label;
+import gameworld.GameWorld;
 
 
 /**
@@ -18,48 +20,41 @@ import engine.gameobject.GameObject;
  */
 @Settable
 public class ConcreteInteractionEngine implements InteractionEngine {
-    private Map<String, Map<String, BiConsumer<GameObject, GameObject>>> myTable = new HashMap<>();
+    private Map<Label, Map<Label, Interaction>> myTable = new HashMap<>();
+    private GameWorld myGameWorld;
 
-    /**
-     * This method takes in two GameObjects, locates the correct BiConsumer for
-     * their interaction in the table, and lets the BiConsumer act upon these
-     * GameObjects.
-     * 
-     * @param first
-     * @param second
-     */
     @Override
     public void interact (GameObject first, GameObject second) {
-        try {
-            BiConsumer<GameObject, GameObject> consumer =
-                    myTable.get(
-                                first.getLabel()).get(second.getLabel());
-            consumer.accept(first, second);
+        Label firstLabel = first.getLabel();
+        Label secondLabel = second.getLabel();
+        Map<Label, Interaction> chosenMap;
+        Interaction interaction = null;
+        while (firstLabel != null && !myTable.containsKey(firstLabel)) {
+            chosenMap = myTable.get(firstLabel);
+            while (secondLabel != null && !chosenMap.containsKey(secondLabel)) {
+                interaction = chosenMap.get(secondLabel);
+                secondLabel = secondLabel.getSuperLabel();
+            }
+            firstLabel = firstLabel.getSuperLabel();
         }
-        catch (NullPointerException e) {
-            System.out.println("Interaction hasn't been defined between "
-                               + first.getLabel() + " and " + second.getLabel());
-
-        }
-
+        interaction.setGameWorld(myGameWorld);
+        interaction.accept(first, second);
     }
 
     /**
      * This method lets someone define the action that occurs between two
-     * GameObjects
+     * GameObjects. Specifically, this action occurs from first onto second.
      * 
      * @param first
      * @param second
      * @param consumer
      */
     @Override
-    public void put (GameObject first, GameObject second, BiConsumer consumer) {
-        String firstID = first.getLabel();
-        String secondID = second.getLabel();
-        checkNullMap(firstID);
-        checkNullMap(secondID);
-        putInMap(firstID, secondID, consumer);
-        putInMap(secondID, firstID, consumer);
+    public void put (Label first, Label second, Interaction interaction) {
+        checkNullMap(first);
+        checkNullMap(second);
+        putInMap(first, second, interaction);
+        putInMap(second, first, interaction);
     }
 
     /**
@@ -67,10 +62,10 @@ public class ConcreteInteractionEngine implements InteractionEngine {
      * HashMap,
      * with another HashMap as its value
      */
-    private void checkNullMap (String str) {
-        if (myTable.get(str) == null)
-            myTable.put(str,
-                        new HashMap<String, BiConsumer<GameObject, GameObject>>());
+    private void checkNullMap (Label label) {
+        if (myTable.get(label) == null)
+            myTable.put(label,
+                        new HashMap<Label, Interaction>());
     }
 
     /**
@@ -81,9 +76,14 @@ public class ConcreteInteractionEngine implements InteractionEngine {
      * @param second
      * @param consumer
      */
-    private void putInMap (String first, String second, BiConsumer consumer) {
+    private void putInMap (Label first, Label second, Interaction interaction) {
         Map temp = myTable.get(first);
-        temp.put(second, consumer);
+        temp.put(second, interaction);
+    }
+
+    @Override
+    public void setWorld (GameWorld world) {
+        myGameWorld=world;
     }
 
 }

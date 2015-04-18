@@ -1,10 +1,17 @@
 .root {
+	-fx-background-image: url("hawaiian_pattern.jpg");
+	-fx-background-repeat: stretch; 
+	-fx-background-image-opacity: 0.4;
 	-fx-background-color: white;
 	-fx-font-family: "Courier Sans Serif";
 }
 
 #playerHeader {
 	-fx-font-size: 90;
+}
+
+#headerText {
+	-fx-padding: 50 200 50 200;
 }
 
 #optionBox {
@@ -29,4 +36,9 @@
 }
 
 #gameChooser {
+	-fx-padding: 50 200 50 200;
+}
+
+#arrow:hover  {
+	-fx-opacity: 0.7;
 }

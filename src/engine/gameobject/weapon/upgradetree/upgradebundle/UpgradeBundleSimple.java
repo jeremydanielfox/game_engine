@@ -3,11 +3,11 @@ package engine.gameobject.weapon.upgradetree.upgradebundle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import engine.fieldsetting.Settable;
-import engine.gameobject.Graphic;
+import engine.gameobject.weapon.ClassSet;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
+import engine.shop.tag.UpgradeTag;
 
 
 /**
@@ -23,6 +23,7 @@ public class UpgradeBundleSimple implements BuildableBundle {
     private UpgradeBundleSimple next;
     private boolean isFinal;
     private UpgradeTree parent;
+    private UpgradeTag myUpgradeTag;
 
     public UpgradeBundleSimple () {
 
@@ -35,23 +36,16 @@ public class UpgradeBundleSimple implements BuildableBundle {
     }
 
     @Override
-    public void applyUpgrades (Map<Class<? extends Upgrade>, Upgrade> upgradables) {
-        upgrades.forEach(upgrade -> {
-            Class<? extends Upgrade> upgradeType = upgrade.getType();
+    public void applyUpgrades (ClassSet<Upgrade> upgradables) {
+        upgrades.forEach(upgrade -> addUpgrade(upgrade, upgradables));
+    }
 
-            // TODO: add Optional to clean this up?
-            if (upgradables.keySet().contains(upgradeType)) {
-                // upgrade existing upgrade
-                upgrade.setDecorated(upgradables.get(upgradeType));
-            }
-            // create new upgrade
-            else {
-                upgrade.setDefault();
-            }
-            // either way, put new upgradable in the map
-            upgradables.put(upgradeType, upgradeType.cast(upgrade));
-            // TODO: must add listener to Behavior list to update
-            });
+    private void addUpgrade (Upgrade toAdd, ClassSet<Upgrade> upgradables) {
+        if (upgradables.contains(toAdd)) {
+            toAdd.upgrade(upgradables.get(toAdd));
+        }
+        upgradables.add(toAdd);
+        //TODO: add listeners to buffs?
     }
 
     @Override
@@ -86,32 +80,19 @@ public class UpgradeBundleSimple implements BuildableBundle {
     }
 
     @Override
-    public String getName () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public double getPrice () {
-        // TODO Auto-generated method stub
-        return 0;
+    public UpgradeTag getTag () {
+        return myUpgradeTag;
     }
 
     @Override
     public double getValue () {
+        // TODO Auto-generated method stub
         return 0;
     }
 
-    @Override
-    public Graphic getGraphic () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getDescription () {
-        // TODO Auto-generated method stub
-        return null;
+    @Settable
+    public void setUpgradeTag (UpgradeTag upgradeTag) {
+        myUpgradeTag = upgradeTag;
     }
 
 }

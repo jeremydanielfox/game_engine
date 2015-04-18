@@ -1,8 +1,10 @@
 package engine.gameobject.weapon;
 
+import java.util.List;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.weapon.firingstrategy.Projectile;
+import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
 
 
@@ -46,5 +48,10 @@ public interface Weapon {
      * @return
      */
     public abstract double getFiringRate ();
+    
+    public abstract List<UpgradeBundle> getNextUpgrades ();
+    
+    public void applyUpgrades (UpgradeBundle bundle);
+      
 
 }

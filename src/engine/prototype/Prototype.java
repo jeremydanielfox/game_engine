@@ -1,5 +1,7 @@
 package engine.prototype;
 
+import engine.shop.tag.GameObjectTag;
+
 /**
  * 
  * @author Tom Puglisi
@@ -7,5 +9,7 @@ package engine.prototype;
  */
 public interface Prototype<E> {
     public E clone();
-    public String getName();
+    public GameObjectTag getTag ();
+    public double getRange ();
+    
 }

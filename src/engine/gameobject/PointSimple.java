@@ -52,7 +52,7 @@ public class PointSimple {
     }
 
     public static boolean pointInBetween (PointSimple start, PointSimple end, PointSimple point) {
-        return inRange(start.getX(), end.getX(), point.getX()) &&
+        return inRange(start.getX(), end.getX(), point.getX()) ||
                inRange(start.getY(), end.getY(), point.getY());
     }
 
@@ -89,6 +89,10 @@ public class PointSimple {
     @Settable
     public void setY (double y) {
         myPoint = new Point2D(myPoint.getX(), y);
+    }
+    
+    public String toString(){
+    	return myPoint.toString();
     }
 
 }

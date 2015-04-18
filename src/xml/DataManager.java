@@ -19,7 +19,8 @@ public class DataManager {
 
     /**
      * Takes in an object and a filePath and writes the object out to the file located at the given
-     * filePath
+     * filePath. If there is no file located at the given file path, this method will create a file
+     * at that location and write to it.
      */
     public static void writeToXML (Object o, String filePath) {
         Writer writer = null;

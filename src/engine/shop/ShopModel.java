@@ -1,100 +1,73 @@
 package engine.shop;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import engine.game.Player;
 import engine.gameobject.GameObject;
-import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
-import engine.grid.StructurePlacementException;
-import engine.prototype.PrototypeLocator;
-import gameworld.GameWorld;
+import engine.gameobject.PointSimple;
+import engine.prototype.Prototype;
+import engine.shop.ShopModelSimple.ItemInfo;
 
 
-/**
- * Manages the maps containing the purchasable prototypes
- * 
- * @author Tom Puglisi
- *
- */
-public class ShopModel {
-    private View myShopView;
-    private Player currentPlayer;
-    private GameWorld myGameWorld;
-    private Map<ItemGraphic, TransitionGameObject> itemTransitionMap;
-    private Map<TransitionGameObject, Purchasable> transitionPurchasableMap;
-    private Map<ItemGraphic, UpgradeBundle> itemUpgradeMap;
-    private Map<ItemGraphic, Purchasable> itemPurchasableMap;
-
-    public ShopModel (List<Purchasable> purchasables,
-                      GameWorld myGameWorld,
-                      View myShopView,
-                      Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
-        this.myShopView = myShopView;
-        itemTransitionMap = new HashMap<ItemGraphic, TransitionGameObject>();
-        itemUpgradeMap = new HashMap<ItemGraphic, UpgradeBundle>();
-        transitionPurchasableMap = new HashMap<TransitionGameObject, Purchasable>();
-        purchasables.forEach(purchasable -> addPurchasable(purchasable));
-    }
+public interface ShopModel {
+    /**
+     * Adds an item to the shop's inventory
+     * 
+     * @param prototype
+     */
+    public void addPrototype (Prototype<GameObject> prototype);
 
     /**
-     * Adds a purchasable to the appropriate maps
      * 
-     * @param purchasable
+     * @return a list of ItemGraphics corresponding to all objects in the shop's inventory
      */
-    public void addPurchasable (Purchasable purchasable) {
-        TransitionGameObject transitionGameObject = new TransitionGameObject(null);
-        ItemGraphic itemGraphic = new ItemGraphic(null, null);
-        itemTransitionMap.put(itemGraphic, transitionGameObject);
-        transitionPurchasableMap.put(transitionGameObject, purchasable);
-        itemPurchasableMap.put(itemGraphic, purchasable);
-    }
-
-    public TransitionGameObject getTransitionGameObject (ItemGraphic itemGraphic) {
-        return itemTransitionMap.get(itemGraphic);
-    }
-
-    public void showUpgradeBundles (GameObject gameObject) {
-        /*
-         * List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
-         * itemUpgradeMap.clear();
-         * bundles.forEach(bundle -> itemUpgradeMap.put(new ItemGraphic(null, null), bundle));
-         * myShopView.display(itemUpgradeMap.keySet());
-         */
-    }
+    public List<ItemGraphic> getItemGraphics ();
 
     /**
-     * Used to purchase items which are placed on the screen (e.g. towers)
+     * Called by the view to determine which ItemGraphics to display
      * 
-     * @param transitionGameObject
+     * @param gameObject
+     * @return a list of ItemGraphics to be displayed in the shop
      */
-    public boolean purchase (TransitionGameObject transitionGameObject, double x, double y) {
-            myGameWorld.addObject(PrototypeLocator.getService()
-                    .getInstance(transitionPurchasableMap.get(transitionGameObject).getName()));
-        currentPlayer.getWallet().withdraw(transitionPurchasableMap.get(transitionGameObject)
-                                                   .getPrice());
-        return true;
-    }
+    public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject);
 
     /**
-     * Used to purchase items which are not placed on the screen (upgrades)
+     * Purchases the named GameObject and places it at the given position on the screen
      * 
-     * @param itemGraphic
+     * @param name
+     * @param x
+     * @param y
      */
-    public void purchase (ItemGraphic itemGraphic, GameObject gameObject) {
-        currentPlayer.getWallet().withdraw(itemUpgradeMap.get(itemGraphic).getPrice());
-        // gameObject.getWeapon().applyUpgrade()
-    }
+    public void purchaseGameObject (String name, PointSimple location);
+    
+    public void purchaseUpgrade (String name);
 
-    public boolean canPurchase (ItemGraphic itemGraphic) {
-        double price;
-        if (itemPurchasableMap.containsKey(itemGraphic)) {
-            price = itemPurchasableMap.get(itemGraphic).getPrice();
-        }
-        else {
-            price = itemUpgradeMap.get(itemGraphic).getPrice();
-        }
-        return currentPlayer.getWallet().getBalance() > price;
-    }
+    /**
+     * 
+     * @param name
+     * @return true if the current player has enough currency to purchase the given item
+     */
+    public boolean canPurchase (String name);
+
+    /**
+     * 
+     * @param name
+     * @return a TransitionGameObject corresponding to the given item name
+     */
+    public TransitionGameObject getTransitionGameObject (String name);
+
+    /**
+     * Provides item information to the view for display
+     * 
+     * @param name
+     */
+    public Map<ItemInfo, String> getInfo (String name);
+    
+    /**
+     * Checks if the GameObject associated with the name is placable at the given location
+     * @param name
+     * @param location
+     * @return true if the object is placable
+     */
+    public boolean checkPlacement (String name, PointSimple location);
+    
 }

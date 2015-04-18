@@ -1,15 +1,20 @@
 package gae.gridView;
 
-import gae.listView.EditableNode;
+import gae.backend.Editable;
+import gae.backend.TempEnemy;
+import gae.backend.TempTower;
+import gae.listView.LibraryData;
 import gae.listView.LibraryView;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 
@@ -29,6 +34,27 @@ public class LevelView {
     private ObservableList<PathView> paths =
             FXCollections.observableArrayList();
     private LibraryView libraryview;
+    private LibraryData libraryData;
+
+    public BorderPane getBorder (Scene scene) {
+        border = new BorderPane();
+        border.setCenter(getStack(scene));
+        border.setLeft(getLibraryView());
+        return border;
+    }
+
+    public Image getBackgroundImage () {
+        return backgroundProperty.get();
+    }
+
+    /**
+     * Temporary method to pass in the EditableNode all the way to the LibraryView
+     * 
+     * @param node
+     */
+    public void getAddFunction (Editable editable) {
+        libraryData.addToList(editable);
+    }
 
     /**
      * Creates a StackPane that includes the background image and the TileContainer, put together in
@@ -44,12 +70,12 @@ public class LevelView {
         backgroundProperty = background.imageProperty();
         Group root = new Group();
         TileContainer container = new TileContainer(20, border);
-        root.getChildren().addAll(background, container);
+        root.getChildren().addAll(background, container, tempGrid());
 
         stack.getChildren().addAll(root);
 
-        background.fitWidthProperty().bind(container.widthProperty());
-        background.fitHeightProperty().bind(container.heightProperty());
+        background.fitWidthProperty().bind(container.getGridWidthProperty());
+        background.fitHeightProperty().bind(container.getGridHeightProperty());
 
         wrapper = (ContainerWrapper) container;
         return stack;
@@ -62,28 +88,34 @@ public class LevelView {
      * @return
      */
     private Group getLibraryView () {
-        libraryview = new LibraryView();
+        libraryData = LibraryData.getInstance();
+        libraryview = new LibraryView(libraryData.getObservableList());
         Group leftview =
                 libraryview.getGroup(stack, scene, paths, backgroundProperty, wrapper);
         // TODO: can't do the above since it messes up the coordinates - got to fix
         return leftview;
     }
 
-    public BorderPane getBorder (Scene scene) {
-        border = new BorderPane();
-        border.setCenter(getStack(scene));
-        border.setLeft(getLibraryView());
-        return border;
+    private GridPane tempGrid () {
+        GridPane grid = new GridPane();
+        grid.setHgap(0);
+        grid.setTranslateX(500);
+        grid.add(tempButtonTower(), 0, 0);
+        grid.add(tempButtonEnemy(), 0, 1);
+        return grid;
     }
 
-    public Image getBackgroundImage () {
-        return backgroundProperty.get();
+    private Button tempButtonTower () {
+        Button temp = new Button("add Tower");
+        Editable editable = new TempTower();
+        temp.setOnAction(e -> libraryData.addToList(editable));
+        return temp;
     }
-    /**
-     * Temporary method to pass in the EditableNode all the way to the LibraryView
-     * @param node
-     */
-    public void getAddFunction (EditableNode node) {
-        libraryview.addToList(node);
+
+    private Button tempButtonEnemy () {
+        Button temp = new Button("add Enemy");
+        Editable editable = new TempEnemy();
+        temp.setOnAction(e -> libraryData.addToList(editable));
+        return temp;
     }
 }

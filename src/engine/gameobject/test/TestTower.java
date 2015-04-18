@@ -1,16 +1,17 @@
 package engine.gameobject.test;
 
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverNull;
 import engine.gameobject.PointSimple;
-import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.units.BuffTracker;
 
-public class TestTower extends BuffableUnit{
+public class TestTower extends GameObjectSimple{
     
     public TestTower (int type, int xcor, int ycor) {
         super();
-        setGraphic(new Graphic(40, 40, "robertDuvall.jpg"));
+        setGraphic(new Graphic(40, 40, "Bloons_TackShooter.png"));
         setPoint(new PointSimple(xcor, ycor));
         setHealth(new HealthSimple(3));
         setMover(new MoverNull());

@@ -132,8 +132,8 @@ public class ViewUtilities {
      * @return
      */
     public static double getCenterOffsetX (Node node) {
-        Optional<Node> opt = Optional.of(node);
-        return opt.map(nd -> -nd.getBoundsInLocal().getWidth() / 2).orElse(0.0);
+        return (node != null) ? -node.getBoundsInLocal().getWidth() / 2 : 0.0;
+        //return opt.map(nd -> -nd.getBoundsInLocal().getWidth() / 2).orElse(0.0);
     }
 
     /**
@@ -143,7 +143,7 @@ public class ViewUtilities {
      * @return
      */
     public static double getCenterOffsetY (Node node) {
-        Optional<Node> opt = Optional.of(node);
-        return opt.map(nd -> -node.getBoundsInLocal().getHeight() / 2).orElse(0.0);
+        return (node != null) ? -node.getBoundsInLocal().getHeight() / 2 : 0.0;
+        //return opt.map(nd -> -node.getBoundsInLocal().getHeight() / 2).orElse(0.0);
     }
 }

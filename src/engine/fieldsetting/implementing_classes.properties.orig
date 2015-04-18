@@ -11,6 +11,8 @@ engine.gameobject.Health = engine.gameobject.HealthSimple, engine.gameobject.Gam
 engine.gameobject.Movable = engine.gameobject.GameObjectSimple
 engine.gameobject.Graphical = TransitionGameObject, engine.gameobject.GameObject
 engine.gameobject.weapon.Weapon = engine.gameobject.weapon.BasicWeapon
+<<<<<<< HEAD
+=======
 
 
 // Weapon
@@ -20,6 +22,7 @@ engine.gameobject.weapon.upgradable.firingrate.FiringRate = engine.gameobject.we
 
 // Projectile
 engine.gameobject.units.Buff = engine.gameobject.units.DirectDamage, engine.gameobject.units.FreezeBuff, engine.gameobject.units.PoisonBuff
+>>>>>>> 18b607a9daa5258bf0c27e4cf951ce69e31c404f
 
 // PriceTag
 engine.shop.tag.PriceTag = engine.shop.tag.GameObjectTag, engine.shop.tag.UpgradeTag

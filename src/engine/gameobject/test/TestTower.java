@@ -18,6 +18,7 @@ public class TestTower extends BuffableUnit{
         getTag().setName("TestTower");
         getTag().setDescription("Just a test tower; nothing special here...");
         getTag().setShopGraphic(new Graphic(40, 40, "Bloons_TackShooterIcon.png"));
+        super.setLabel(new TowerLabel());
     }
     
     

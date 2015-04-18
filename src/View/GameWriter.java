@@ -61,7 +61,7 @@ public class GameWriter extends Application {
      */
     private ConcreteLevelBoard makeLevelBoard (GameWorld world, StoryBoard story, Player myPlayer) {
         ConcreteLevelBoard board = new ConcreteLevelBoard();
-        HealthGoal healthy = new HealthGoal(myPlayer);
+        HealthGoal healthy = new HealthGoal(myPlayer, 0);
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
         ScoreGoal score = new ScoreGoal(myPlayer, 200);

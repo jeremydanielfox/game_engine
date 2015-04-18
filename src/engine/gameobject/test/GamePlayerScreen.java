@@ -121,7 +121,7 @@ public class GamePlayerScreen extends Application {
         myGame.addButton(wrap);
         
         
-        HealthGoal healthy=new HealthGoal(myPlayer);
+        HealthGoal healthy=new HealthGoal(myPlayer, 0);
         List<Goal> list=new ArrayList<Goal>();
         list.add(healthy);
         ScoreGoal score=new ScoreGoal(myPlayer,200);

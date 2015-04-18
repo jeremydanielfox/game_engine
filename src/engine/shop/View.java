@@ -1,12 +1,8 @@
 package engine.shop;
 
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
-import engine.gameobject.units.Buff;
-import engine.gameobject.units.BuffableUnit;
-import engine.gameobject.units.DirectDamage;
-import engine.gameobject.units.FreezeBuff;
-import engine.gameobject.weapon.ClassSet;
 import gameworld.FixedWorld;
 import gameworld.GameWorld;
 import java.util.ArrayList;
@@ -70,7 +66,7 @@ public class View extends Application {
         gameView.setOnMousePressed(mouseEvent -> {
 //            System.out.println("Relative coordinates: " +
 //                               ViewUtilities.normalizePixels(mouseEvent, gameView));
-            GameObject object = new BuffableUnit();
+            GameObject object = new GameObjectSimple();
             try {
 				world.addObject(object, new PointSimple(mouseEvent.getX(), mouseEvent.getY()));
 			} catch (Exception e) {

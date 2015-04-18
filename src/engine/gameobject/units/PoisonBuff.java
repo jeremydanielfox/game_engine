@@ -2,6 +2,7 @@ package engine.gameobject.units;
 
 import java.awt.Color;
 import java.util.Optional;
+import engine.gameobject.GameObject;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 
@@ -16,6 +17,11 @@ public class PoisonBuff extends Buff{
     private double damageIncr;
     private Optional<PoisonBuff> decorated;
     
+    /**
+     * Makes a poison buff
+     * @param timeIncr: Time the damage occurs over
+     * @param damageIncr: Total damage
+     */
     public PoisonBuff(int timeIncr, double damageIncr){
         super(timeIncr);
         this.timeIncr = timeIncr;
@@ -33,18 +39,20 @@ public class PoisonBuff extends Buff{
         this.damageIncr = damageIncr;
     }
     
-    public void apply(BuffableUnit myUnit){
+    public void apply(GameObject myUnit){
         float[] hsbvals = new float[3];
         Color.RGBtoHSB(139, 0, 139, hsbvals);
         adjustEffect(myUnit, -hsbvals[0], -hsbvals[1], -hsbvals[2], 0);
     }
     
-    public void unapply(BuffableUnit myUnit){
+    public void unapply(GameObject myUnit){
         float[] hsbvals = new float[3];
         Color.RGBtoHSB(139, 0, 139, hsbvals);
         adjustEffect(myUnit, hsbvals[0], hsbvals[1], hsbvals[2], 0);
     }
-    protected void changeOverTime(BuffableUnit myUnit){
+    
+    @Override
+    protected void changeOverTime(GameObject myUnit){
         myUnit.changeHealth(-getDamage()/getDuration());
     }
     

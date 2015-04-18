@@ -1,12 +1,13 @@
 package engine.gameobject.test;
 
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverNull;
 import engine.gameobject.PointSimple;
-import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.units.BuffTracker;
 
-public class TestTower extends BuffableUnit{
+public class TestTower extends GameObjectSimple{
     
     public TestTower (int type, int xcor, int ycor) {
         super();

@@ -84,7 +84,7 @@ public class WeaponSimple extends BasicWeapon {
         myFiringStrategy = firingStrategy;
     }
 
-    @Settable
+    //@Settable
     public void setBehaviors (List<Behavior> behaviors) {
         myBehaviors = behaviors;
     }

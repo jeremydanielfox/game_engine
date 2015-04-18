@@ -1,7 +1,8 @@
-package engine.shop;
+package engine.shop.tag;
 
 import engine.fieldsetting.Settable;
 import engine.gameobject.Graphic;
+import engine.shop.Purchasable;
 
 @Settable
 public class UpgradeTagSimple implements UpgradeTag {

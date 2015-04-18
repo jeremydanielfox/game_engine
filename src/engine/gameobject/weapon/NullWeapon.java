@@ -1,8 +1,10 @@
 package engine.gameobject.weapon;
 
+import java.util.List;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.weapon.firingstrategy.Projectile;
+import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
 
 public class NullWeapon implements Weapon{
@@ -41,5 +43,16 @@ public class NullWeapon implements Weapon{
     public double getFiringRate () {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public List<UpgradeBundle> getNextUpgrades () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
+    @Override
+    public void applyUpgrades (UpgradeBundle bundle){
+        
     }
 }

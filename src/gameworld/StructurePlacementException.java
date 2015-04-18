@@ -1,4 +1,4 @@
-package engine.grid;
+package gameworld;
 
 /**
  * Thrown if structure cannot be placed at specified location.

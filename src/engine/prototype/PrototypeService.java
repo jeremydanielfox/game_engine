@@ -16,7 +16,7 @@ public class PrototypeService {
     
     public PrototypeService(List<Prototype<GameObject>> prototypes) {
         prototypeMap = new HashMap<String, Prototype<GameObject>>();
-        prototypes.stream().forEach(prototype -> prototypeMap.put(prototype.getName(), prototype));
+        //prototypes.stream().forEach(prototype -> prototypeMap.put(prototype.getName(), prototype));
     }
     
     public GameObject getInstance(String name) {
@@ -24,6 +24,6 @@ public class PrototypeService {
     }
     
     public void addPrototype(Prototype<GameObject> prototype) {
-        prototypeMap.put(prototype.getName(), prototype);
+        //prototypeMap.put(prototype.getName(), prototype);
     }
 }

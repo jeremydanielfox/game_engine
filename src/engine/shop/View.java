@@ -2,12 +2,18 @@ package engine.shop;
 
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import gameworld.BasicWorld;
+import engine.gameobject.units.Buff;
+import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.units.DirectDamage;
+import engine.gameobject.units.FreezeBuff;
+import engine.gameobject.weapon.ClassSet;
+import gameworld.FixedWorld;
 import gameworld.GameWorld;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -19,11 +25,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import engine.gameobject.units.BuffableUnit;
-import engine.gameobject.weapon.upgradable.firingrate.FiringRate;
-import engine.gameobject.weapon.upgradable.firingrate.FiringRateUpgrade;
-import engine.gameobject.weapon.upgradable.range.Range;
-import engine.gameobject.weapon.upgradable.range.RangeUpgrade;
 import View.ViewUtilities;
 
 
@@ -49,7 +50,7 @@ public class View extends Application {
         pane = new BorderPane();
         Scene scene = new Scene(pane, SCENE_WIDTH, SCENE_HEIGHT);
         stage.setScene(scene);
-        world = new BasicWorld();
+        world = new FixedWorld();
 
         // FlowPane contains the entire store. This is what should be moved around.
         FlowPane shopDisplay = new FlowPane();
@@ -70,11 +71,19 @@ public class View extends Application {
 //            System.out.println("Relative coordinates: " +
 //                               ViewUtilities.normalizePixels(mouseEvent, gameView));
             GameObject object = new BuffableUnit();
-            world.addObject(object, new PointSimple(mouseEvent.getX(), mouseEvent.getY()));
+            try {
+				world.addObject(object, new PointSimple(mouseEvent.getX(), mouseEvent.getY()));
+			} catch (Exception e) {
+				//TODO HANDLE EXCEPTION
+			}
             object.getGraphic().getNode().relocate(mouseEvent.getX(), mouseEvent.getY());
             
         });
         stage.show();
+//        Set<Buff> test = new ClassSet<>();
+//        test.add(new DirectDamage(5));
+//        test.add(new FreezeBuff(10));
+//        System.out.println(test);
     }
 
     private void addIcons (FlowPane shopDisplay) {
@@ -88,35 +97,35 @@ public class View extends Application {
         }
 
         List<Node> items = new ArrayList<Node>();
-        for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
-            shopImages.forEach( (icon, tower) -> {
-                ItemGraphic item = new ItemGraphic(icon, tower);
-                TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
-                Node towerNode = transitionTower.getView();
-                item.setOnMouseClicked(mouseEvent -> {
-                    addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
-                                       towerNode);
-                });
-                towerNode.setOnMouseClicked(mouseEvent -> {
-                    System.out.println(mouseEvent);
-                    GameObject object = new BuffableUnit();
-                    world.addObject(object, new PointSimple(mouseEvent.getSceneX(), mouseEvent.getSceneY())); 
-                    ViewUtilities.unbindCursor(pane);
-                    Point2D location = ViewUtilities.getMouseLocation(mouseEvent, towerNode);
-                    towerNode.relocate(location.getX(), location.getY());
-                    transitionTower.changeColor();
-                });
-                items.add(item);
-            });
-        }
+//        for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
+//            shopImages.forEach( (icon, tower) -> {
+//                ItemGraphic item = new ItemGraphic(icon, tower);
+//                TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
+//                Node towerNode = transitionTower.getView();
+//                item.setOnMouseClicked(mouseEvent -> {
+//                    addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
+//                                       towerNode);
+//                });
+//                towerNode.setOnMouseClicked(mouseEvent -> {
+//                    System.out.println(mouseEvent);
+//                    GameObject object = new BuffableUnit();
+//                    world.addObject(object, new PointSimple(mouseEvent.getSceneX(), mouseEvent.getSceneY())); 
+//                    ViewUtilities.unbindCursor(pane);
+//                    Point2D location = ViewUtilities.getMouseLocation(mouseEvent, towerNode);
+//                    towerNode.relocate(location.getX(), location.getY());
+//                    transitionTower.changeColor();
+//                });
+//                items.add(item);
+//            });
+//        }
         shopDisplay.getChildren().addAll(items);
     }
 
-    private void addTransitionTower (Point2D initial, Node node) {
-        Node bindedTower =
-                ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE);
-        pane.getChildren().add(bindedTower);
-    }
+//    private void addTransitionTower (Point2D initial, Node node) {
+//        Node bindedTower =
+//                ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE);
+//        pane.getChildren().add(bindedTower);
+//    }
 
     public static void main (String[] args) {
         launch(args);

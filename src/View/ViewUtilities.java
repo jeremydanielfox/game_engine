@@ -1,5 +1,8 @@
 package View;
 
+import java.util.Optional;
+import java.util.function.Consumer;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -7,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 
 public class ViewUtilities {
@@ -18,27 +22,36 @@ public class ViewUtilities {
      * scene, when the appropriate key is pressed.
      * 
      * @param node Node to be bound
-     * @param scene Scene of the node
+     * @param pane Scene of the node
      * @param initial Initial position
      * @param key Disabling key
      * @return
      */
-    public static Node bindCursor (Node node, Node scene, Point2D initial, KeyCode key) {
+    public static Node bindCursor (Node node, Node pane, Point2D initial, KeyCode key, boolean scene) {
         final Group wrapGroup = new Group(node);
         wrapGroup.relocate(initial.getX(), initial.getY());
-        scene.setOnMouseMoved(mouseEvent -> {
-            Point2D current = getMouseLocation(mouseEvent, node);
-
-            wrapGroup.relocate(current.getX(), current.getY());
-
-            previous = current;
-        });
+        if (scene) {
+            pane.getScene().setOnMouseMoved(mouseEvent -> {
+                // mouseEvent.consume();
+                Point2D current = getMouseLocation(mouseEvent, node);
+                wrapGroup.relocate(current.getX(), current.getY());
+                previous = current;
+            });
+        }
+        else {
+            pane.setOnMouseMoved(mouseEvent -> {
+                // mouseEvent.consume();
+                Point2D current = getMouseLocation(mouseEvent, node);
+                wrapGroup.relocate(current.getX(), current.getY());
+                previous = current;
+            });
+        }
 
         // TODO: figure out why keyPressed caller must be scene, and not pane or node
-        // EDIT: I changed this to node and it worked perfectly for me! 
-        scene.getScene().setOnKeyPressed(keyEvent -> {
+        // EDIT: I changed this to node and it worked perfectly for me!
+        pane.getScene().setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
-                unbindCursor(scene);
+                unbindCursor(pane);
                 wrapGroup.setVisible(false);
                 // ((Group) node.getParent()).getChildren().remove(node);
             }
@@ -46,10 +59,13 @@ public class ViewUtilities {
 
         return wrapGroup;
     }
-    
-    public static void unbindCursor(Node scene) {
-        scene.setOnMouseMoved(mouseEvent -> {
-        });
+
+    public static void unbindCursor (Node scene) {
+        scene.setOnMouseMoved(null);
+    }
+
+    public static void addMouseMovementHandler () {
+
     }
 
     /**
@@ -79,26 +95,34 @@ public class ViewUtilities {
     }
 
     /**
-     * Returns the global (scene-wide) mouseLocation triggered by a MouseEvent
-     * on a node
+     * Returns the local (parent-wide) mouseLocation triggered by a MouseEvent
+     * on a node. Is used for cursor binding.
      * 
      * @param mouseEvent MouseEvent
      * @param node Node
      * @return
      */
     public static Point2D getMouseLocation (MouseEvent mouseEvent, Node node) {
-        return new Point2D(mouseEvent.getX() + getCenterOffSetX(node),
-                           mouseEvent.getY() + getCenterOffSetY(node));
+        return new Point2D(mouseEvent.getX() + getCenterOffsetX(node),
+                           mouseEvent.getY() + getCenterOffsetY(node));
     }
-    
+
     /**
-     * Used to find the center of a node. Gets the X offset.
+     * Returns the global (scene-wide) mouseLocation triggered by a MouseEvent
+     * on a node. Is used for cursor binding.
      * 
+     * @param mouseEvent MouseEvent
      * @param node Node
      * @return
      */
-    public static double getCenterOffSetX (Node node) {
-        return -node.getBoundsInLocal().getWidth() / 2;
+    public static Point2D getMouseSceneLoc (MouseEvent mouseEvent, Node node) {
+        return new Point2D(mouseEvent.getSceneX() + getCenterOffsetX(node),
+                           mouseEvent.getSceneY() + getCenterOffsetY(node));
+    }
+    
+    
+    public static double getCenterX (Node node){
+        return 0; //node.getScene()
     }
 
     /**
@@ -107,7 +131,19 @@ public class ViewUtilities {
      * @param node Node
      * @return
      */
-    public static double getCenterOffSetY (Node node) {
-        return -node.getBoundsInLocal().getHeight() / 2;
+    public static double getCenterOffsetX (Node node) {
+        Optional<Node> opt = Optional.of(node);
+        return opt.map(nd -> -nd.getBoundsInLocal().getWidth() / 2).orElse(0.0);
+    }
+
+    /**
+     * Used to find the center of a node. Gets the X offset.
+     * 
+     * @param node Node
+     * @return
+     */
+    public static double getCenterOffsetY (Node node) {
+        Optional<Node> opt = Optional.of(node);
+        return opt.map(nd -> -node.getBoundsInLocal().getHeight() / 2).orElse(0.0);
     }
 }

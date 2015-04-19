@@ -1,5 +1,6 @@
 package gae.tabView;
 
+import java.util.function.Consumer;
 import gae.backend.Editable;
 import gae.gridView.LevelView;
 import gae.openingView.UIObject;
@@ -63,5 +64,11 @@ public class CentralTabView implements UIObject {
 
     public void getAddFunction (Editable editable) {
         levelView.getAddFunction(editable);
+    }
+
+    public Consumer<Object> getConsumer () {
+        //TODO Initially create a levelView so the consumer can be passed to the GameView
+        //return levelView.getConsumer();
+        return null;
     }
 }

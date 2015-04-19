@@ -1,5 +1,6 @@
 package gae.gridView;
 
+import java.util.function.Consumer;
 import gae.backend.Editable;
 import gae.backend.TempEnemy;
 import gae.backend.TempTower;
@@ -120,5 +121,10 @@ public class LevelView {
         Editable editable = new TempEnemy();
         temp.setOnAction(e -> libraryData.addToList(editable));
         return temp;
+    }
+
+    public Consumer<Editable> getConsumer () {
+        Consumer<Editable> consumer = e -> libraryData.addToList(e);
+        return consumer;
     }
 }

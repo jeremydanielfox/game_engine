@@ -1,5 +1,7 @@
 package engine.events;
 
+import java.util.function.Consumer;
+
 /**
  * An Event that is triggered by a specified frame count.
  * 
@@ -16,6 +18,7 @@ public abstract class TimedEvent implements Event {
     
     private int frameTrigger;
     private int frameCount;
+    private Consumer<? extends Object> myAction;
     
     /**
      * 
@@ -29,6 +32,7 @@ public abstract class TimedEvent implements Event {
     
     private void initializeVars(double seconds){
         frameCount = 0;
+        
         this.frameTrigger = SecondsToFrames.getFramesForSeconds(seconds);
     }
 
@@ -60,4 +64,11 @@ public abstract class TimedEvent implements Event {
         frameCount++;
     }
 
+    public void onCompleteAction () {
+        // TODO Auto-generated method stub
+        if (myAction!=null) {
+            myAction.accept(null);
+        }
+    }
+    
 }

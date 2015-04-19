@@ -2,6 +2,7 @@ package engine.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import View.Displayable;
 import engine.fieldsetting.Settable;
 import engine.goals.Goal;
 import gameworld.GameWorld;
@@ -26,12 +27,13 @@ public class ConcreteLevel implements Level {
     private List<Goal> myLosingGoals;
     private GameWorld myGameWorld;
     private StoryBoard myStoryBoard;
+    private Timer myTimer;
 
-    public ConcreteLevel() {
+    public ConcreteLevel () {
         myImagePath = "";
         myWinningGoals = new ArrayList<Goal>();
         myLosingGoals = new ArrayList<Goal>();
-        //TODO:intialize GameWorld
+        // TODO:intialize GameWorld
         myStoryBoard = new StoryBoard();
     }
 
@@ -45,6 +47,11 @@ public class ConcreteLevel implements Level {
         myLosingGoals = losingGoals;
         myGameWorld = gameWorld;
         myStoryBoard = storyBoard;
+    }
+
+    @Settable
+    public void addTimer (Timer t) {
+        myTimer = t;
     }
 
     public String getLevelBackground () {
@@ -72,11 +79,13 @@ public class ConcreteLevel implements Level {
 
     @Override
     public void update () {
-        // TODO Auto-generated method stub
         myGameWorld.updateGameObjects();
         myStoryBoard.update();
-//        myGameWorld.checkCollisions();
-//        myGameWorld.removeDeadObjects();
+        if (myTimer != null) {
+            myTimer.update();
+        }
+        // myGameWorld.checkCollisions();
+        // myGameWorld.removeDeadObjects();
         // move GameObjects, needs to communicate with StoryBoard
     }
 
@@ -108,6 +117,18 @@ public class ConcreteLevel implements Level {
     @Settable
     public void setStoryBoard (StoryBoard storyBoard) {
         myStoryBoard = storyBoard;
+    }
+
+    /**
+     * Returns a list of displayable things.
+     */
+    @Override
+    public List<Displayable> getDisplayables () {
+        List<Displayable> displays = new ArrayList<>();
+        if (myTimer != null) {
+            displays.add(myTimer);
+        }
+        return displays;
     }
 
 }

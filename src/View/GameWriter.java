@@ -10,13 +10,7 @@ import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
 import engine.events.RandomSpanWave;
 import engine.events.TimedEvent;
-import engine.game.ConcreteGame;
-import engine.game.ConcreteLevel;
-import engine.game.ConcreteLevelBoard;
-import engine.game.Game;
-import engine.game.Player;
-import engine.game.PlayerUnit;
-import engine.game.StoryBoard;
+import engine.game.*;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.test.TestTower;
@@ -71,9 +65,13 @@ public class GameWriter extends Application {
         ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
         list3.add(score2);
 
-        board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
+        Timer t = new TimerConcrete(5,10,"time");
+        Level levelOne = new ConcreteLevel("images/Park_Path.png", list2, list, world, story);
+        levelOne.addTimer(t);
+        board.addLevel(levelOne);
         board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
                                          story));
+        
         return board;
     }
 

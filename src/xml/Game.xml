@@ -2,19 +2,20 @@
   <myPlayer>
     <changed>false</changed>
     <obs>
-      <engine.goals.HealthDepletionGoal>
+      <engine.goals.HealthGoal>
         <isSatisfied>false</isSatisfied>
         <myPlayer reference="../../.."/>
-      </engine.goals.HealthDepletionGoal>
+        <myHealthGoal>0.0</myHealthGoal>
+      </engine.goals.HealthGoal>
       <engine.goals.ScoreGoal>
         <isSatisfied>false</isSatisfied>
         <myPlayer reference="../../.."/>
-        <myScoreGoal>200</myScoreGoal>
+        <myScoreGoal>200.0</myScoreGoal>
       </engine.goals.ScoreGoal>
       <engine.goals.ScoreGoal>
         <isSatisfied>false</isSatisfied>
         <myPlayer reference="../../.."/>
-        <myScoreGoal>300</myScoreGoal>
+        <myScoreGoal>300.0</myScoreGoal>
       </engine.goals.ScoreGoal>
     </obs>
     <myName>PlayerName</myName>
@@ -44,7 +45,7 @@
           <engine.goals.ScoreGoal reference="../../../../../myPlayer/obs/engine.goals.ScoreGoal"/>
         </myWinningGoals>
         <myLosingGoals>
-          <engine.goals.HealthDepletionGoal reference="../../../../../myPlayer/obs/engine.goals.HealthDepletionGoal"/>
+          <engine.goals.HealthGoal reference="../../../../../myPlayer/obs/engine.goals.HealthGoal"/>
         </myLosingGoals>
         <myGameWorld class="gameworld.FixedWorld">
           <myObjects/>
@@ -376,8 +377,18 @@
                         </myPoint>
                       </shopGraphic>
                     </myTag>
-                    <buffList/>
+                    <myBuffs>
+                      <buffList/>
+                    </myBuffs>
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
+                    <myCollider>
+                      <collidedID/>
+                      <onCollision/>
+                      <onDeath>
+                        <radius>0.0</radius>
+                        <effects/>
+                      </onDeath>
+                    </myCollider>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
@@ -561,8 +572,18 @@
                         </myPoint>
                       </shopGraphic>
                     </myTag>
-                    <buffList/>
+                    <myBuffs>
+                      <buffList/>
+                    </myBuffs>
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
+                    <myCollider>
+                      <collidedID/>
+                      <onCollision/>
+                      <onDeath>
+                        <radius>0.0</radius>
+                        <effects/>
+                      </onDeath>
+                    </myCollider>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
@@ -746,8 +767,18 @@
                         </myPoint>
                       </shopGraphic>
                     </myTag>
-                    <buffList/>
+                    <myBuffs>
+                      <buffList/>
+                    </myBuffs>
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
+                    <myCollider>
+                      <collidedID/>
+                      <onCollision/>
+                      <onDeath>
+                        <radius>0.0</radius>
+                        <effects/>
+                      </onDeath>
+                    </myCollider>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
@@ -931,8 +962,18 @@
                         </myPoint>
                       </shopGraphic>
                     </myTag>
-                    <buffList/>
+                    <myBuffs>
+                      <buffList/>
+                    </myBuffs>
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
+                    <myCollider>
+                      <collidedID/>
+                      <onCollision/>
+                      <onDeath>
+                        <radius>0.0</radius>
+                        <effects/>
+                      </onDeath>
+                    </myCollider>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
@@ -1116,8 +1157,18 @@
                         </myPoint>
                       </shopGraphic>
                     </myTag>
-                    <buffList/>
+                    <myBuffs>
+                      <buffList/>
+                    </myBuffs>
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
+                    <myCollider>
+                      <collidedID/>
+                      <onCollision/>
+                      <onDeath>
+                        <radius>0.0</radius>
+                        <effects/>
+                      </onDeath>
+                    </myCollider>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
@@ -1301,8 +1352,18 @@
                         </myPoint>
                       </shopGraphic>
                     </myTag>
-                    <buffList/>
+                    <myBuffs>
+                      <buffList/>
+                    </myBuffs>
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
+                    <myCollider>
+                      <collidedID/>
+                      <onCollision/>
+                      <onDeath>
+                        <radius>0.0</radius>
+                        <effects/>
+                      </onDeath>
+                    </myCollider>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
@@ -1486,8 +1547,18 @@
                         </myPoint>
                       </shopGraphic>
                     </myTag>
-                    <buffList/>
+                    <myBuffs>
+                      <buffList/>
+                    </myBuffs>
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
+                    <myCollider>
+                      <collidedID/>
+                      <onCollision/>
+                      <onDeath>
+                        <radius>0.0</radius>
+                        <effects/>
+                      </onDeath>
+                    </myCollider>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
@@ -1671,8 +1742,18 @@
                         </myPoint>
                       </shopGraphic>
                     </myTag>
-                    <buffList/>
+                    <myBuffs>
+                      <buffList/>
+                    </myBuffs>
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
+                    <myCollider>
+                      <collidedID/>
+                      <onCollision/>
+                      <onDeath>
+                        <radius>0.0</radius>
+                        <effects/>
+                      </onDeath>
+                    </myCollider>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
@@ -1856,8 +1937,18 @@
                         </myPoint>
                       </shopGraphic>
                     </myTag>
-                    <buffList/>
+                    <myBuffs>
+                      <buffList/>
+                    </myBuffs>
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
+                    <myCollider>
+                      <collidedID/>
+                      <onCollision/>
+                      <onDeath>
+                        <radius>0.0</radius>
+                        <effects/>
+                      </onDeath>
+                    </myCollider>
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
@@ -2041,8 +2132,18 @@
                         </myPoint>
                       </shopGraphic>
                     </myTag>
-                    <buffList/>
+                    <myBuffs>
+                      <buffList/>
+                    </myBuffs>
                     <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
+                    <myCollider>
+                      <collidedID/>
+                      <onCollision/>
+                      <onDeath>
+                        <radius>0.0</radius>
+                        <effects/>
+                      </onDeath>
+                    </myCollider>
                   </engine.gameobject.GameObjectSimpleTest>
                 </myOrderedObjects>
                 <curIndex>0</curIndex>
@@ -2051,20 +2152,28 @@
               <myFrameDuration>1200</myFrameDuration>
               <myFramesSinceStart>0</myFramesSinceStart>
               <myReleaseTimes>
-                <int>937</int>
-                <int>405</int>
-                <int>778</int>
-                <int>270</int>
-                <int>106</int>
-                <int>1045</int>
-                <int>133</int>
-                <int>780</int>
-                <int>72</int>
-                <int>257</int>
+                <int>911</int>
+                <int>271</int>
+                <int>766</int>
+                <int>1035</int>
+                <int>393</int>
+                <int>643</int>
+                <int>1193</int>
+                <int>243</int>
+                <int>300</int>
+                <int>738</int>
               </myReleaseTimes>
             </engine.events.RandomSpanWave>
           </eventList>
         </myStoryBoard>
+        <myTimer class="engine.game.TimerConcrete">
+          <changed>false</changed>
+          <obs/>
+          <myMinutes>5</myMinutes>
+          <mySeconds>10</mySeconds>
+          <myLabel>time</myLabel>
+          <myFramesSinceUpdate>0</myFramesSinceUpdate>
+        </myTimer>
       </engine.game.ConcreteLevel>
       <engine.game.ConcreteLevel>
         <myImagePath>images/example_path.jpeg</myImagePath>

@@ -71,13 +71,20 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
 
     @Override
     public GameWorld getGameWorld () {
-        // TODO Auto-generated method stub
         return myLevels.get(curLevelIndex).getGameWorld();
     }
 
     @Settable
     public void setLevels (List<Level> levels) {
         myLevels = levels;
+    }
+
+    @Override
+    public Level getCurrentLevel () {
+        if(myLevels.size() > curLevelIndex){
+            return myLevels.get(curLevelIndex);
+        }
+        return null;
     }
 
 }

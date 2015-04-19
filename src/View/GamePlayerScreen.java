@@ -27,6 +27,8 @@ import engine.game.Game;
 import engine.game.Player;
 import engine.game.PlayerUnit;
 import engine.game.StoryBoard;
+import engine.game.Timer;
+import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
@@ -123,9 +125,11 @@ public class GamePlayerScreen extends Application {
         ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
         list3.add(score2);
 
-        board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
+        Timer t = new TimerConcrete(5,10,"time");
+        
+        board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story,t));
         board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
-                                         story));
+                                         story,t));
         ShopModel shop = new ShopModelSimple(world, myPlayer, 0);
         myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();

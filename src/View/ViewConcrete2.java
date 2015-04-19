@@ -73,6 +73,9 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         for (Displayable d : myGame.getPlayer().getDisplayables()) {
             myHeadsUp.addPairedDisplay(d);
         }
+        for (Displayable d : myGame.getLevelBoard().getCurrentLevel().getDisplayables()) {
+            myHeadsUp.addPairedDisplay(d);
+        }
         vbox.getChildren().add(myHeadsUp.getDisplay());
 
         addInitialObjects();

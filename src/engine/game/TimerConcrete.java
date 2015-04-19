@@ -12,7 +12,7 @@ import View.ViewConcrete2;
  *
  */
 @Settable
-public class TimerConcrete extends Displayable implements Timer {
+public class TimerConcrete extends Timer {
 
     public static final String DEFAULT_LABEL = "Time left";
     public static final int MINUTE_DEFAULT = 0;
@@ -30,19 +30,19 @@ public class TimerConcrete extends Displayable implements Timer {
     public TimerConcrete (int min, int sec, String label) {
         initialize(min, sec, label);
     }
-    
+
     @Settable
-    public void setLabel(String label){
+    public void setLabel (String label) {
         myLabel = label;
     }
-    
+
     @Settable
-    public void setMinutes(int mins){
+    public void setMinutes (int mins) {
         myMinutes = mins;
     }
-    
+
     @Settable
-    public void setSeconds(int secs){
+    public void setSeconds (int secs) {
         mySeconds = secs;
     }
 
@@ -54,6 +54,9 @@ public class TimerConcrete extends Displayable implements Timer {
 
     @Override
     public String getStringValue () {
+        if(mySeconds < 10){
+            return myMinutes + ":0" + mySeconds;
+        }
         return myMinutes + ":" + mySeconds;
     }
 
@@ -65,20 +68,27 @@ public class TimerConcrete extends Displayable implements Timer {
     @Override
     public void update () {
         myFramesSinceUpdate++;
-        if(myFramesSinceUpdate == ViewConcrete2.DEFAULT_FRAMES_SECOND){
-            if(mySeconds > 0){
+        if (myFramesSinceUpdate == ViewConcrete2.DEFAULT_FRAMES_SECOND) {
+            if (mySeconds > 0) {
                 mySeconds--;
             }
-            else if (myMinutes > 0){
+            else if (myMinutes > 0) {
                 mySeconds = 60;
                 myMinutes--;
             }
+            myFramesSinceUpdate =0;
         }
+        updateObservers();
     }
 
     @Override
     public int getSecondsLeft () {
         return mySeconds + (myMinutes * 60);
+    }
+    
+    private void updateObservers () {
+        setChanged();
+        notifyObservers();
     }
 
 }

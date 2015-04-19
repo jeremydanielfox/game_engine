@@ -52,7 +52,8 @@ public class GamePlayerScreen {
     private Stage myStage;
     private EngineView myGameView;
 
-    public GamePlayerScreen () {
+    public GamePlayerScreen (Stage s) {
+        myStage = s;
         // myGame =
         // new ConcreteGame(new Player("myPlayer", null, null, null),
         // new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());

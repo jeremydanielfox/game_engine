@@ -159,6 +159,9 @@ public class GameSelector {
             return display;
         }
 
+        /**
+         * adds all necessary nodes to the display VBox
+         */
         private void createDisplay () {
             display.getChildren().addAll(textBox, gamePicture);
         }

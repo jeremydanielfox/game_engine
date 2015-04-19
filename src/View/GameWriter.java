@@ -18,6 +18,7 @@ import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
+import engine.goals.TimerGoal;
 import engine.pathfinding.PathFixed;
 import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;
@@ -56,16 +57,16 @@ public class GameWriter extends Application {
     private ConcreteLevelBoard makeLevelBoard (GameWorld world, StoryBoard story, Player myPlayer) {
         ConcreteLevelBoard board = new ConcreteLevelBoard();
         HealthGoal healthy = new HealthGoal(myPlayer, 0);
+        Timer t = new TimerConcrete(1,5,"time");
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
+        list.add(new TimerGoal(t, 0));
         ScoreGoal score = new ScoreGoal(myPlayer, 200);
         List<Goal> list2 = new ArrayList<Goal>();
         list2.add(score);
         List<Goal> list3 = new ArrayList<Goal>();
         ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
         list3.add(score2);
-
-        Timer t = new TimerConcrete(5,10,"time");
         Level levelOne = new ConcreteLevel("images/Park_Path.png", list2, list, world, story);
         levelOne.addTimer(t);
         board.addLevel(levelOne);

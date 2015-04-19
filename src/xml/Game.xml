@@ -46,6 +46,18 @@
         </myWinningGoals>
         <myLosingGoals>
           <engine.goals.HealthGoal reference="../../../../../myPlayer/obs/engine.goals.HealthGoal"/>
+          <engine.goals.TimerGoal>
+            <isSatisfied>false</isSatisfied>
+            <myTimer class="engine.game.TimerConcrete">
+              <changed>false</changed>
+              <obs/>
+              <myMinutes>1</myMinutes>
+              <mySeconds>5</mySeconds>
+              <myLabel>time</myLabel>
+              <myFramesSinceUpdate>0</myFramesSinceUpdate>
+            </myTimer>
+            <mySecondsGoal>0</mySecondsGoal>
+          </engine.goals.TimerGoal>
         </myLosingGoals>
         <myGameWorld class="gameworld.FixedWorld">
           <myObjects/>
@@ -2152,28 +2164,21 @@
               <myFrameDuration>1200</myFrameDuration>
               <myFramesSinceStart>0</myFramesSinceStart>
               <myReleaseTimes>
-                <int>911</int>
-                <int>271</int>
-                <int>766</int>
-                <int>1035</int>
-                <int>393</int>
-                <int>643</int>
-                <int>1193</int>
-                <int>243</int>
-                <int>300</int>
-                <int>738</int>
+                <int>37</int>
+                <int>918</int>
+                <int>844</int>
+                <int>655</int>
+                <int>285</int>
+                <int>193</int>
+                <int>610</int>
+                <int>905</int>
+                <int>141</int>
+                <int>1132</int>
               </myReleaseTimes>
             </engine.events.RandomSpanWave>
           </eventList>
         </myStoryBoard>
-        <myTimer class="engine.game.TimerConcrete">
-          <changed>false</changed>
-          <obs/>
-          <myMinutes>5</myMinutes>
-          <mySeconds>10</mySeconds>
-          <myLabel>time</myLabel>
-          <myFramesSinceUpdate>0</myFramesSinceUpdate>
-        </myTimer>
+        <myTimer class="engine.game.TimerConcrete" reference="../myLosingGoals/engine.goals.TimerGoal/myTimer"/>
       </engine.game.ConcreteLevel>
       <engine.game.ConcreteLevel>
         <myImagePath>images/example_path.jpeg</myImagePath>

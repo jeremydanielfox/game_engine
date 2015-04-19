@@ -51,19 +51,15 @@ public class ViewUtil {
         // EDIT: I changed this to node and it worked perfectly for me!
         pane.getScene().setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
-                unbindCursor(pane);
-                removeNode(node);
+                unbindCursor(pane, node);
             }
         });
 
         return wrapGroup;
     }
 
-    public static void unbindCursor (Node node) {
-        node.getScene().setOnMouseMoved(null);
-    }
-    
-    public static void removeNode (Node node) {
+    public static void unbindCursor (Node pane, Node node) {
+        pane.getScene().setOnMouseMoved(null);
         node.setVisible(false);
         ((Group) node.getParent()).getChildren().remove(node);
     }

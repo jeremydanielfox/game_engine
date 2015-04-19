@@ -6,7 +6,6 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
@@ -96,15 +95,18 @@ public class ShopModelSimple implements ShopModel {
     public boolean purchaseGameObject (String name, PointSimple location) {
         if (canPurchase(name) && checkPlacement(name, location)) {
             currentPlayer.getWallet().withdraw(getPrice(name));
-//            myGameWorld.addObject(prototypeMap.get(name).clone());
+            // myGameWorld.addObject(prototypeMap.get(name).clone());
             try {
-				myGameWorld.addObject(new TestTower(100, 100, 100), location);
-				return true;
-			} catch (StructurePlacementException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return false;
-			}
+                GameObject tower = new TestTower(100, 100, 100);
+                //TODO: add listener of some sort to access ShopView?
+                myGameWorld.addObject(tower, location);
+                return true;
+            }
+            catch (StructurePlacementException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return false;
+            }
         }
         return false;
     }

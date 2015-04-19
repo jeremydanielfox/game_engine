@@ -11,11 +11,18 @@ import java.util.HashSet;
  * @author Jeremy
  *
  */
-public class LabelBase implements Label {
-    private static String name = "Base";
-    private static Collection<Label> mySubLabels = new HashSet<>();
+public class LabelBase extends SimpleLabel {
+    /*private static String name = "Base";
+    private static Collection<Label> mySubLabels = new HashSet<>();*/
 
-    @Override
+    private static String myName = "Base";
+    private static Label superLabel = null;
+    
+    public LabelBase(){
+        super(myName, superLabel);
+    }
+    
+   /* @Override
     public String getLabel () {
         return name;
     }
@@ -51,7 +58,7 @@ public class LabelBase implements Label {
     public void removeSubLabel (Label label) {
         mySubLabels.remove(label);
         
-    }
+    }*/
     
 
 }

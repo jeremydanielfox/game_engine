@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import engine.events.Event;
 import engine.fieldsetting.Settable;
+import engine.fieldsetting.Triggerable;
 
 
 /**
@@ -35,6 +36,7 @@ public class StoryBoard {
      * @return false if the StoryBoard has no more events to update
      */
     public boolean update () {
+        System.out.println(eventList.size());
         if (eventList.size() == 0) {
             return false;
         }
@@ -67,6 +69,7 @@ public class StoryBoard {
     /**
      * Sets the current event's start conditions to true, but only if they are not already true
      */
+    @Triggerable
     public void startNextEvent () {
         Event currentEvent = getCurrentEvent();
         if (currentEvent != null && !currentEvent.canStart()) {

@@ -50,33 +50,12 @@ public class Collider {
         }
     }
     
-    /**
-     * We expect this to now be done in the collision engine
-     * @param obstacle
-     * @return
-     */
-    private boolean effectiveCollision (GameObject obstacle) {
-        //TODO: Enable the following code by adding "object identification" and "teams"
-        /*if (!collidedID.contains(obstacle.getID())){
-            if(obstacle.getTeam()!= getTeam())
-                return true;
-        }*/
-        return true;
-    }
-
-    /**
-     * What to do on collision
-     * @InteractionEngine we should handle this in the interaction engine
-     * @param target
-     */
     private void onCollision (GameObject target) {
-        //This check may no longer have to be done.
-        if (effectiveCollision(target)) {
-            for (Buff b: onCollision){
-                ((Buffable) target).addBuff(b);
-            }
+        for (Buff b : onCollision) {
+            target.addBuff(b);
         }
     }
+    
     
     /**
      * Returns the deep clone, but must test to see if behavior is correct

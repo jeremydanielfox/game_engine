@@ -45,7 +45,7 @@ public class GameObjectToEditable implements Editable {
          */
         name = gameObject.getTag().getName();
         imagePath = gameObject.getTag().getGraphic().getImagePath();
-        type = gameObject.getLabel().getLabel();
+        type = gameObject.getLabel().getName();
         imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
         // gameobject is not serializable and gives an error so must set to null
         gameObject = null;

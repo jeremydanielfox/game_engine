@@ -4,31 +4,52 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 import javafx.scene.Node;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
-import engine.gameobject.test.TestTower;
-import engine.gameobject.units.Buffable;
-import engine.gameobject.weapon.firingstrategy.Buffer;
-import engine.grid.Grid;
-import engine.grid.GridFree;
+import engine.gameobject.labels.SimpleLabel;
+import engine.gameobject.test.EnemyLabel;
+import engine.gameobject.test.ProjectileLabel;
+import engine.gameobject.test.TowerLabel;
+import engine.interactions.BuffImparter;
+import engine.interactions.CollisionEngine;
+import engine.interactions.ConcreteInteractionEngine;
 import engine.interactions.InteractionEngine;
+import engine.interactions.RangeEngine;
+import engine.interactions.ShootAt;
 import engine.pathfinding.EndOfPathException;
 import engine.pathfinding.Path;
 
 
 public class AbstractWorld implements GameWorld{
     private List<GameObject> myObjects;
-//    private InteractionEngine myCollisionEngine;
-
+    private InteractionEngine myCollisionEngine;
+    private InteractionEngine myRangeEngine;
+    
     public AbstractWorld () {
         myObjects = new ArrayList<GameObject>();
+        initiateCollisionEngine();
+        initiateRangeEngine();
     }
 
+/*
+ * The private methods that follow is unofficial code:
+ * sets up the interaction engines to defaults. Set interaction engine methods may be needed.
+ */
+    
+    private void initiateCollisionEngine(){
+        myCollisionEngine = new CollisionEngine();
+        myCollisionEngine.setWorld(this);
+        myCollisionEngine.put(new ProjectileLabel(), new EnemyLabel(), new BuffImparter());
+    }
+    
+    private void initiateRangeEngine(){
+        myRangeEngine = new RangeEngine();
+        myRangeEngine.setWorld(this);
+        myRangeEngine.put(new TowerLabel(), new EnemyLabel(), new ShootAt());
+    }
+    
     @Override
     public void addObject (GameObject toSpawn, PointSimple pixelCoords) throws StructurePlacementException {
         myObjects.add(toSpawn);
@@ -40,21 +61,19 @@ public class AbstractWorld implements GameWorld{
     public void updateGameObjects () {
     	
          ArrayList<GameObject> currentObjects = new ArrayList<GameObject>(myObjects);
-         for (GameObject o: currentObjects){
-             o.update(this);
+         for (GameObject object: currentObjects){
+             object.update(this);
+             for (GameObject interactObject: currentObjects){
+                 if (interactObject != object){
+                     myCollisionEngine.interact(object, interactObject);
+                     myRangeEngine.interact(object, interactObject);
+                 }
+             }
          }
-         //TODO: Tell each object to fire.
-         checkCollisions();
          removeDeadObjects();
     }
-
-    private void checkCollisions () {
-        //TODO: Use collision engine to do all colisions
-    }
     
-
     private void removeDeadObjects () {
-        // TODO Auto-generated method stub
         ArrayList<GameObject> buffer = new ArrayList<GameObject>();
         myObjects.forEach(go -> {
             if (go.isDead()) {

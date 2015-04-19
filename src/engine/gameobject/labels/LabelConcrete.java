@@ -7,7 +7,7 @@ import java.util.Set;
 import engine.fieldsetting.Settable;
 
 
-public class LabelConcrete implements Label {
+public abstract class LabelConcrete implements Label {
     private String myName;
     private Label mySuperLabel;
     private Label myBaseLabel;
@@ -23,21 +23,21 @@ public class LabelConcrete implements Label {
     }
 
     @Override
-    public String getLabel () {
+    public String getName () {
         return myName;
     }
 
-    @Override
+    //@Override
     public boolean hasSubLabel () {
         return mySubLabels.size() > 0;
     }
 
-    @Override
+    //@Override
     public Collection<Label> getSubLabels () {
         return Collections.unmodifiableCollection(mySubLabels);
     }
 
-    @Override
+    //@Override
     public boolean hasSuperLabel () {
         return mySuperLabel != null;
     }
@@ -47,21 +47,21 @@ public class LabelConcrete implements Label {
         return mySuperLabel;
     }
 
-    @Override
+    //@Override
     public void addSubLabel (Label label) {
         mySubLabels.add(label);
 
     }
 
-    @Settable
+    /*
     private void setSuperLabel (Label superLabel) {
-//        if (mySuperLabel.getSubLabels().contains(this))
-//            mySuperLabel.removeSubLabel(this);
+        if (mySuperLabel.getSubLabels().contains(this))
+           mySuperLabel.removeSubLabel(this);
         mySuperLabel = superLabel;
         superLabel.addSubLabel(this);
-    }
+    }*/
 
-    @Override
+    //@Override
     public void removeSubLabel (Label label) {
         mySubLabels.remove(label);
     }
@@ -73,13 +73,13 @@ public class LabelConcrete implements Label {
 
     /**
      * Recursively returns all sublabels for any given label
-     */
+     *//*
     public Collection<Label> getAllSubLabels (Label label) {
         if (label.hasSubLabel() == false)
             return new HashSet<>();
         Set<Label> returnSet = new HashSet<>();
         label.getSubLabels().forEach(sl -> returnSet.addAll(getAllSubLabels(sl)));
         return returnSet;
-    }
+    }*/
 
 }

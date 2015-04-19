@@ -41,6 +41,8 @@ public class LevelView {
         border = new BorderPane();
         border.setCenter(getStack(scene));
         border.setLeft(getLibraryView());
+        border.prefHeightProperty().bind(scene.heightProperty());
+        border.prefWidthProperty().bind(scene.widthProperty());
         return border;
     }
 
@@ -70,12 +72,12 @@ public class LevelView {
         ImageView background = new ImageView(new Image("/images/Park_Path.png"));
         backgroundProperty = background.imageProperty();
         Group root = new Group();
-        TileContainer container = new TileContainer(20, border);
+        TileContainer container = new TileContainer(20, scene, border);
         root.getChildren().addAll(background, container, tempGrid());
 
         stack.getChildren().addAll(root);
 
-        background.fitWidthProperty().bind(container.getGridWidthProperty());
+        background.fitWidthProperty().bind(container.getGridHeightProperty());
         background.fitHeightProperty().bind(container.getGridHeightProperty());
 
         wrapper = (ContainerWrapper) container;

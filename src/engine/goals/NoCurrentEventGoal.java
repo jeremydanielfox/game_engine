@@ -5,35 +5,29 @@ import engine.fieldsetting.Settable;
 import engine.game.StoryBoard;
 
 @Settable
-public class NoCurrentEventGoal extends Goal {
-
-    private StoryBoard myStoryBoard;
+public class NoCurrentEventGoal extends StoryBoardGoal {
     
     public NoCurrentEventGoal () {
-        initialize(new StoryBoard());
+        super();
     }
 
     public NoCurrentEventGoal (StoryBoard storyBoard) {
-        initialize(storyBoard);
-    }
-    
-    private void initialize(StoryBoard storyBoard) {
-        myStoryBoard=storyBoard;
+        super(storyBoard);
     }
     
     @Settable
     public void setStoryBoard(StoryBoard s){
-        myStoryBoard = s;
+        super.setStoryBoard(s);
     }
     
     @Override
     public boolean isSatisfied () {
-        return !(myStoryBoard.eventInProgress());
+        return !(getStoryBoard().eventInProgress());
     }
     
     @Override
     public void update (Observable o, Object arg) {
-        // doesn't observe anything
+        // doesn't rely on updates
     }
 
 }

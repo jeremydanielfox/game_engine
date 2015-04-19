@@ -3,6 +3,7 @@ package player.gamePlayer;
 import java.io.File;
 import java.util.Arrays;
 
+import View.GamePlayerScreen;
 import gae.gameView.Main;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -62,7 +63,8 @@ public class PlayerOpener extends Application {
         
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
-            myStage.setScene(null);
+            GamePlayerScreen screen = new GamePlayerScreen();
+            myStage.setScene(screen.makeScene());
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {

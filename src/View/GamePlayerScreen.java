@@ -91,7 +91,6 @@ public class GamePlayerScreen {
         root.getChildren().add(makeDemoGame());
         Scene scene = new Scene(root);
         myStage.setScene(scene);
-
     }
 
     public Node makeDemoGame () {

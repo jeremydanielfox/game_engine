@@ -17,6 +17,9 @@ public class PauseScene {
         pause = new Button();
         restart = new Button();
         mainMenu = new Button();
+        
+        container.setId("");
+        
     }
     
     public Scene getScene() {

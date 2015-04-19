@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -23,9 +24,8 @@ import javafx.scene.text.Text;
  */
 
 /*
- * label1 [collide || no collide] label2
- * -need access to library view for labels / objects
- * -create tree of hierarchy for labels
+ * label1 [collide || no collide] label2 -need access to library view for labels / objects -create
+ * tree of hierarchy for labels
  */
 
 public class Interaction {
@@ -35,18 +35,21 @@ public class Interaction {
     private ObjectContainer box1, box2;
 
     public Interaction () {
-        container = new HBox();
-        interactionType = new DropDown("Interaction Type", Arrays.asList("Collide", "Do not collide"));
+        container = new HBox(80);
+        interactionType = new DropDown("Interaction Type", Arrays.asList("Collide",
+                                                                         "Do not collide", "Shoot",
+                                                                         "Do not shoot"));
         box1 = new ObjectContainer();
         box2 = new ObjectContainer();
         createInteraction();
     }
 
     private void createInteraction () {
-        container.getChildren().addAll(box1.getContainer(), interactionType.getDropDown(), box2.getContainer());
+        container.getChildren().addAll(box1.getContainer(), interactionType.getDropDown(),
+                                       box2.getContainer());
     }
-    
-    public Node getInteractionSetter() {
+
+    public Node getInteractionSetter () {
         return container;
     }
 
@@ -87,7 +90,7 @@ public class Interaction {
      *
      */
     private class ObjectContainer {
-        
+
         private VBox container;
         private VBox selected;
         private ScrollPane scroller;
@@ -95,31 +98,32 @@ public class Interaction {
         private Button adder;
         private HBox addBox;
 
-        public ObjectContainer() { 
+        public ObjectContainer () {
             container = new VBox();
             selected = new VBox();
             container.setId("interactionBox");
             scroller = new ScrollPane();
             options = new ArrayList<>();
             adder = new Button();
-            addBox = new HBox();
-            addBox.getChildren().addAll(new Text("Add Labels"), adder);
+            addBox = new HBox(15);
+            Text addText = new Text("Add Labels");
+            addBox.getChildren().addAll(addText, adder);
             ImageView buttonGraphic = new ImageView("/images/plus_sign.jpg");
             adder.setGraphic(buttonGraphic);
             buttonGraphic.setFitWidth(25);
             buttonGraphic.setFitHeight(25);
             createObjectContainer();
         }
-        
-        private void createObjectContainer() {
+
+        private void createObjectContainer () {
             scroller.setContent(container);
             adder.setOnMouseClicked(e -> {
-                
+
             });
             container.getChildren().addAll(selected, addBox);
         }
-        
-        public Node getContainer(){
+
+        public Node getContainer () {
             return scroller;
         }
     }

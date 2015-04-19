@@ -50,7 +50,9 @@
             <isSatisfied>false</isSatisfied>
             <myTimer class="engine.game.TimerConcrete">
               <changed>false</changed>
-              <obs/>
+              <obs>
+                <engine.goals.TimerGoal reference="../../.."/>
+              </obs>
               <myMinutes>1</myMinutes>
               <mySeconds>5</mySeconds>
               <myLabel>time</myLabel>
@@ -2164,18 +2166,27 @@
               <myFrameDuration>1200</myFrameDuration>
               <myFramesSinceStart>0</myFramesSinceStart>
               <myReleaseTimes>
-                <int>37</int>
-                <int>918</int>
-                <int>844</int>
-                <int>655</int>
-                <int>285</int>
-                <int>193</int>
-                <int>610</int>
                 <int>905</int>
-                <int>141</int>
-                <int>1132</int>
+                <int>332</int>
+                <int>1185</int>
+                <int>1169</int>
+                <int>361</int>
+                <int>223</int>
+                <int>486</int>
+                <int>380</int>
+                <int>191</int>
+                <int>352</int>
               </myReleaseTimes>
             </engine.events.RandomSpanWave>
+            <engine.events.ConstantSpacingWave>
+              <frameTrigger>120</frameTrigger>
+              <frameCount>0</frameCount>
+              <myWorld class="gameworld.FixedWorld" reference="../../../../myGameWorld"/>
+              <myQueue class="engine.events.ConcreteQueue" reference="../../engine.events.RandomSpanWave/myQueue"/>
+              <myWaveSet/>
+              <myFramesBetweenEnemies>120</myFramesBetweenEnemies>
+              <myFramesSinceLastRelease>0</myFramesSinceLastRelease>
+            </engine.events.ConstantSpacingWave>
           </eventList>
         </myStoryBoard>
         <myTimer class="engine.game.TimerConcrete" reference="../myLosingGoals/engine.goals.TimerGoal/myTimer"/>
@@ -2206,8 +2217,9 @@
     <View.ButtonWrapper>
       <myLabel>wave</myLabel>
       <myAction class="null"/>
-      <myGoal class="engine.goals.NullGoal">
-        <isSatisfied>true</isSatisfied>
+      <myGoal class="engine.goals.NoCurrentEventGoal">
+        <isSatisfied>false</isSatisfied>
+        <myStoryBoard reference="../../../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myStoryBoard"/>
       </myGoal>
     </View.ButtonWrapper>
   </myButtons>

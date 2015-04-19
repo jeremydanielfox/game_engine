@@ -30,8 +30,8 @@ public class ConcreteInteractionEngine implements InteractionEngine {
         Label secondLabel = second.getLabel();
         Interaction interaction = findInteraction(firstLabel, secondLabel);
         if (interaction!= null){
-        interaction.setGameWorld(myGameWorld);
-        interaction.accept(first, second);
+            interaction.setGameWorld(myGameWorld);
+            interaction.accept(first, second);
         }
     }
     

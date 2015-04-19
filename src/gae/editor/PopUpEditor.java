@@ -1,29 +1,30 @@
 package gae.editor;
 
+import java.util.function.Consumer;
 import engine.gameobject.GameObjectSimple;
-import gae.gameView.GameView;
+import gae.backend.Editable;
 import gae.listView.GameObjectToEditable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class PopUpEditor extends SimpleEditor{
 
-    public PopUpEditor (Class<?> c, GameView gameView) {
+    public PopUpEditor (Class<?> c, Consumer<Object> function) {
         super(c);
-        init(c, gameView);
+        init(c, function);
     }
     
-    public PopUpEditor (Class<?> c, String title, GameView gameView) {
+    public PopUpEditor (Class<?> c, String title, Consumer<Object> function) {
         super(c, title);
-        init(c, gameView);
+        init(c, function);
     }
     
-    private void init(Class<?> c, GameView gameView) {
+    private void init(Class<?> c, Consumer<Object> function) {
         VBox editor = (VBox)getObject();
         Button addButton = new Button("Add");
         addButton.setOnAction(e -> {
             Object obj = createObject(c);
-            gameView.getAddFunction(new GameObjectToEditable((GameObjectSimple)obj));
+            function.accept(obj);
         });
         editor.getChildren().add(addButton);
     }

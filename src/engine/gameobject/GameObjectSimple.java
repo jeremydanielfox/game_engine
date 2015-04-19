@@ -95,6 +95,7 @@ public class GameObjectSimple implements GameObject{
     
     public void collide(GameObject target){
         myCollider.collide(target);
+        changeHealth(-1);
     }
     
 /*

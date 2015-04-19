@@ -47,7 +47,7 @@ public class PlayerUnit extends Displayable {
         return myLabel;
     }
 
-    public void updateObservers () {
+    private void updateObservers () {
         setChanged();
         notifyObservers();
     }

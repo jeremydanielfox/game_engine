@@ -38,7 +38,6 @@ public class TestProjectile extends GameObjectSimple{
             setHealth(new HealthSimple(0));
         }
         if (type == 4){
-            getCollider().addCollisionBehavior(new DirectDamage(1));
             setMover(new MoverDirection(getPoint(), 4, 90));
         }
     }

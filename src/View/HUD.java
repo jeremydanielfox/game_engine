@@ -87,7 +87,6 @@ public class HUD implements Observer {
         myDefaultButtonDisplay = new HBox();
         myDefaultButtonDisplay.setAlignment(Pos.CENTER);
         myWholeDisplay.getChildren().add(myDefaultButtonDisplay);
-        System.out.println("pane:" + myPane.getWidth());
     }
 
     public void addButton (ButtonWrapper button) {

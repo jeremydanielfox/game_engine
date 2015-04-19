@@ -46,6 +46,21 @@
         </myWinningGoals>
         <myLosingGoals>
           <engine.goals.HealthGoal reference="../../../../../myPlayer/obs/engine.goals.HealthGoal"/>
+<<<<<<< HEAD
+=======
+          <engine.goals.TimerGoal>
+            <isSatisfied>false</isSatisfied>
+            <myTimer class="engine.game.TimerConcrete">
+              <changed>false</changed>
+              <obs/>
+              <myMinutes>1</myMinutes>
+              <mySeconds>5</mySeconds>
+              <myLabel>time</myLabel>
+              <myFramesSinceUpdate>0</myFramesSinceUpdate>
+            </myTimer>
+            <mySecondsGoal>0</mySecondsGoal>
+          </engine.goals.TimerGoal>
+>>>>>>> df0f0d8d212f2eb4b1fe6ce7fd4382e5cd48acd5
         </myLosingGoals>
         <myGameWorld class="gameworld.FixedWorld">
           <myObjects/>
@@ -2210,6 +2225,7 @@
               <myFrameDuration>1200</myFrameDuration>
               <myFramesSinceStart>0</myFramesSinceStart>
               <myReleaseTimes>
+<<<<<<< HEAD
                 <int>1115</int>
                 <int>106</int>
                 <int>28</int>
@@ -2220,10 +2236,23 @@
                 <int>278</int>
                 <int>738</int>
                 <int>940</int>
+=======
+                <int>37</int>
+                <int>918</int>
+                <int>844</int>
+                <int>655</int>
+                <int>285</int>
+                <int>193</int>
+                <int>610</int>
+                <int>905</int>
+                <int>141</int>
+                <int>1132</int>
+>>>>>>> df0f0d8d212f2eb4b1fe6ce7fd4382e5cd48acd5
               </myReleaseTimes>
             </engine.events.RandomSpanWave>
           </eventList>
         </myStoryBoard>
+        <myTimer class="engine.game.TimerConcrete" reference="../myLosingGoals/engine.goals.TimerGoal/myTimer"/>
       </engine.game.ConcreteLevel>
       <engine.game.ConcreteLevel>
         <myImagePath>images/example_path.jpeg</myImagePath>

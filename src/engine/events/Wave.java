@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import gameworld.FixedWorld;
 import gameworld.GameWorld;
@@ -28,6 +28,16 @@ public abstract class Wave extends TimedEvent {
         this(DEFAULT_FRAME_TRIGGER, objects, world);
     }
 
+    @Settable
+    public void setObjectQueue(GameObjectQueue objects){
+        myQueue = objects;
+    }
+    
+    @Settable
+    public void setGameWorld(GameWorld world){
+        myWorld = world;
+    }
+    
     public Wave (double startTime, GameObjectQueue objects, GameWorld world) {
         super(startTime);
         initializeVars(objects, world);

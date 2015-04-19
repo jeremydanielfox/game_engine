@@ -90,19 +90,23 @@ public class ShopModelSimple implements ShopModel {
     /**
      * Purchases and item and places it at the selected position on the screen
      * 
-     * @param transitionGameObject
+     * @param name Name of GameObject
+     * @param location Location to be placed
      */
-    public void purchaseGameObject (String name, PointSimple location) {
+    public boolean purchaseGameObject (String name, PointSimple location) {
         if (canPurchase(name) && checkPlacement(name, location)) {
             currentPlayer.getWallet().withdraw(getPrice(name));
 //            myGameWorld.addObject(prototypeMap.get(name).clone());
             try {
 				myGameWorld.addObject(new TestTower(100, 100, 100), location);
+				return true;
 			} catch (StructurePlacementException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			}
         }
+        return false;
     }
 
     /**

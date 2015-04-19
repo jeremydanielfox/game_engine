@@ -27,7 +27,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import View.ViewUtilities;
+import View.ViewUtil;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.shop.ShopModelSimple.ItemInfo;
@@ -98,7 +98,7 @@ public class ShopView extends Parent {
             gameObjectIcon.setOnMouseClicked(mouseEvent -> {
                 TransitionGameObject transition =
                         model.getTransitionGameObject(gameObjectIcon.getName());
-                Point2D location = ViewUtilities.getMouseSceneLoc(mouseEvent, transition.getNode());
+                Point2D location = ViewUtil.getMouseSceneLoc(mouseEvent, transition.getNode());
                 initializeTransition(model.getTransitionGameObject(gameObjectIcon.getName()),
                                      location);
             });
@@ -174,7 +174,7 @@ public class ShopView extends Parent {
     }
 
     private void bindCursor (Point2D initial, Node node) {
-        Node result = ViewUtilities.bindCursor(node, pane, initial, KeyCode.ESCAPE, true);
+        Node result = ViewUtil.bindCursor(node, pane, initial, KeyCode.ESCAPE, true);
         pane.getChildren().add(result);
     }
 
@@ -190,7 +190,13 @@ public class ShopView extends Parent {
 
         transNode.setOnMouseClicked(event -> {
             PointSimple current = new PointSimple(event.getSceneX(), event.getSceneY());
-            model.purchaseGameObject(transition.getName(), current);
+            if (model.purchaseGameObject(transition.getName(), current)){
+                ViewUtil.removeNode(transNode);
+                // new TestTower
+                // onClicked - show radius
+                // onClicked - show available upgrades -- call displayUpgrades
+                
+            };
         });
     }
 }

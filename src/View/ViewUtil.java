@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 
-public class ViewUtilities {
+public class ViewUtil {
 
     private static Point2D previous;
 
@@ -52,16 +52,20 @@ public class ViewUtilities {
         pane.getScene().setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
                 unbindCursor(pane);
-                wrapGroup.setVisible(false);
-                // ((Group) node.getParent()).getChildren().remove(node);
+                removeNode(node);
             }
         });
 
         return wrapGroup;
     }
 
-    public static void unbindCursor (Node scene) {
-        scene.setOnMouseMoved(null);
+    public static void unbindCursor (Node node) {
+        node.getScene().setOnMouseMoved(null);
+    }
+    
+    public static void removeNode (Node node) {
+        node.setVisible(false);
+        ((Group) node.getParent()).getChildren().remove(node);
     }
 
     public static void addMouseMovementHandler () {
@@ -120,10 +124,6 @@ public class ViewUtilities {
                            mouseEvent.getSceneY() + getCenterOffsetY(node));
     }
     
-    
-    public static double getCenterX (Node node){
-        return 0; //node.getScene()
-    }
 
     /**
      * Used to find the center of a node. Gets the X offset.

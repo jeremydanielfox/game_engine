@@ -1,7 +1,9 @@
 package engine.gameobject;
 
 import engine.gameobject.labels.Label;
-import engine.gameobject.weapon.Weapon;
+import engine.gameobject.units.Buffable;
+import engine.gameobject.units.Colliding;
+import engine.gameobject.units.Firing;
 import engine.prototype.Prototype;
 import engine.shop.PurchasableGameObject;
 import engine.shop.tag.GameObjectTag;
@@ -14,7 +16,7 @@ import gameworld.ObjectCollection;
  *
  */
 
-public interface GameObject extends Movable, Health, PurchasableGameObject, Prototype<GameObject> {
+public interface GameObject extends Firing, Colliding, Buffable, Movable, Health, PurchasableGameObject, Prototype<GameObject> {
     // public void updateGraphics ();//cannot implement yet
 
     /**
@@ -31,22 +33,18 @@ public interface GameObject extends Movable, Health, PurchasableGameObject, Prot
      */
     public void onDeath (ObjectCollection world);
 
-    public void setWeapon (Weapon weapon);
-
-    /**
-     * Returns the GameObject's Weapon
-     */
-    public Weapon getWeapon ();
-    
     public Mover getMover ();
 
     public Label getLabel ();
+
+    public void setGraphic (Graphic graphic);
+    
+    public void setLabel (Label label);
     /**
      * Tags contain important GameObject info (e.g. name, description, image)
      * 
      * @return
      */
-   
     public GameObjectTag getTag ();
 
     /**
@@ -54,6 +52,11 @@ public interface GameObject extends Movable, Health, PurchasableGameObject, Prot
      */
     public PointSimple getPoint ();
 
+    /**
+     * Sets the object's location to point
+     * 
+     * @param point
+     */
     public void setPoint (PointSimple point);
 
     /**

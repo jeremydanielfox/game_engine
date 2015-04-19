@@ -9,7 +9,7 @@ import java.util.Observer;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.TestTower;
-import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.units.BuffTracker;
 import engine.shop.ItemGraphic;
 import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;

@@ -1,5 +1,6 @@
 package engine.goals;
 
+import engine.fieldsetting.Settable;
 import engine.game.Player;
 import java.util.Observable;
 
@@ -11,20 +12,36 @@ import java.util.Observable;
  * @author Sierra Smith
  *
  */
+@Settable
 public class ScoreGoal extends PlayerGoal {
 
-    private int myScoreGoal;
+    public static final double DEFAULT_SCORE = 1000;
+    
+    private double myScoreGoal;
 
+    public ScoreGoal(){
+        super(new Player());
+        myScoreGoal = DEFAULT_SCORE;
+    }
+    
     public ScoreGoal (Player player, int score) {
         super(player);
         myScoreGoal = score;
     }
 
+    @Settable
+    public void setPlayer(Player p){
+        super.setPlayer(p);
+    }
+    
+    @Settable
+    public void setScoreTarget(int target){
+        myScoreGoal = target;
+    }
+    
     @Override
     protected void checkCondition (Player p) {
        setIsSatisfied(p.getScore() >= myScoreGoal);
-       System.out.println(p.getScore());
-       System.out.println("Score:"+super.getIsSatisfied());
     }
 
 }

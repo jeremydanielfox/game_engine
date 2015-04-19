@@ -78,9 +78,6 @@ public class BasicWeapon implements Weapon {
                 myFiringStrategy.execute(world, target, location, myProjectile);
                 timeSinceFire = 0;
         }
-        else {
-            timeSinceFire++; 
-        }
     }
 
     /*

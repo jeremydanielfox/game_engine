@@ -4,7 +4,15 @@ import java.util.Collection;
 
 public interface Label {
 
-    public String getLabel();
+    public void setName(String name);
+    
+    public String getName();
+    
+    public Label getSuperLabel();
+    
+    public void setSuperLabel(Label parent);
+    
+    /*public String getLabel();
     
     public boolean hasSubLabel();
     
@@ -16,6 +24,6 @@ public interface Label {
     
     public void addSubLabel(Label label);
     
-    public void removeSubLabel(Label label);
+    public void removeSubLabel(Label label);*/
     
 }

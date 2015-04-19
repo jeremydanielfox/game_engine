@@ -46,6 +46,8 @@
         </myWinningGoals>
         <myLosingGoals>
           <engine.goals.HealthGoal reference="../../../../../myPlayer/obs/engine.goals.HealthGoal"/>
+<<<<<<< HEAD
+=======
           <engine.goals.TimerGoal>
             <isSatisfied>false</isSatisfied>
             <myTimer class="engine.game.TimerConcrete">
@@ -58,9 +60,58 @@
             </myTimer>
             <mySecondsGoal>0</mySecondsGoal>
           </engine.goals.TimerGoal>
+>>>>>>> df0f0d8d212f2eb4b1fe6ce7fd4382e5cd48acd5
         </myLosingGoals>
         <myGameWorld class="gameworld.FixedWorld">
           <myObjects/>
+          <myCollisionEngine class="engine.interactions.CollisionEngine">
+            <myTable>
+              <entry>
+                <engine.gameobject.test.EnemyLabel>
+                  <superLabel class="engine.gameobject.labels.LabelBase">
+                    <myName>Base</myName>
+                  </superLabel>
+                  <myName>Enemy</myName>
+                </engine.gameobject.test.EnemyLabel>
+                <map>
+                  <entry>
+                    <engine.gameobject.test.TowerLabel>
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
+                      <myName>Tower</myName>
+                    </engine.gameobject.test.TowerLabel>
+                    <engine.interactions.BuffImparter/>
+                  </entry>
+                </map>
+              </entry>
+            </myTable>
+            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
+          </myCollisionEngine>
+          <myRangeEngine class="engine.interactions.RangeEngine">
+            <myTable>
+              <entry>
+                <engine.gameobject.test.TowerLabel>
+                  <superLabel class="engine.gameobject.labels.LabelBase">
+                    <myName>Base</myName>
+                  </superLabel>
+                  <myName>Tower</myName>
+                </engine.gameobject.test.TowerLabel>
+                <map>
+                  <entry>
+                    <engine.gameobject.test.EnemyLabel>
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
+                      <myName>Enemy</myName>
+                    </engine.gameobject.test.EnemyLabel>
+                    <engine.interactions.ShootAt/>
+                  </entry>
+                </map>
+              </entry>
+            </myTable>
+            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
+          </myRangeEngine>
           <myPathWidth>17.0</myPathWidth>
           <myPath class="engine.pathfinding.PathFixed">
             <myPathSegments class="linked-list">
@@ -209,9 +260,10 @@
                 <myOrderedObjects class="linked-list">
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
                       <myName>Enemy</myName>
-                      <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
-                      <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
                     <myPoint>
                       <myPoint>
@@ -404,9 +456,10 @@
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
                       <myName>Enemy</myName>
-                      <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
-                      <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
                     <myPoint>
                       <myPoint>
@@ -599,9 +652,10 @@
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
                       <myName>Enemy</myName>
-                      <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
-                      <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
                     <myPoint>
                       <myPoint>
@@ -794,9 +848,10 @@
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
                       <myName>Enemy</myName>
-                      <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
-                      <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
                     <myPoint>
                       <myPoint>
@@ -989,9 +1044,10 @@
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
                       <myName>Enemy</myName>
-                      <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
-                      <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
                     <myPoint>
                       <myPoint>
@@ -1184,9 +1240,10 @@
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
                       <myName>Enemy</myName>
-                      <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
-                      <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
                     <myPoint>
                       <myPoint>
@@ -1379,9 +1436,10 @@
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
                       <myName>Enemy</myName>
-                      <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
-                      <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
                     <myPoint>
                       <myPoint>
@@ -1574,9 +1632,10 @@
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
                       <myName>Enemy</myName>
-                      <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
-                      <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
                     <myPoint>
                       <myPoint>
@@ -1769,9 +1828,10 @@
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
                       <myName>Enemy</myName>
-                      <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
-                      <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
                     <myPoint>
                       <myPoint>
@@ -1964,9 +2024,10 @@
                   </engine.gameobject.GameObjectSimpleTest>
                   <engine.gameobject.GameObjectSimpleTest>
                     <myLabel class="engine.gameobject.test.EnemyLabel">
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
                       <myName>Enemy</myName>
-                      <mySuperLabel class="engine.gameobject.labels.LabelBase"/>
-                      <myBaseLabel class="engine.gameobject.labels.LabelBase" reference="../mySuperLabel"/>
                     </myLabel>
                     <myPoint>
                       <myPoint>
@@ -2164,6 +2225,18 @@
               <myFrameDuration>1200</myFrameDuration>
               <myFramesSinceStart>0</myFramesSinceStart>
               <myReleaseTimes>
+<<<<<<< HEAD
+                <int>1115</int>
+                <int>106</int>
+                <int>28</int>
+                <int>193</int>
+                <int>994</int>
+                <int>379</int>
+                <int>1118</int>
+                <int>278</int>
+                <int>738</int>
+                <int>940</int>
+=======
                 <int>37</int>
                 <int>918</int>
                 <int>844</int>
@@ -2174,6 +2247,7 @@
                 <int>905</int>
                 <int>141</int>
                 <int>1132</int>
+>>>>>>> df0f0d8d212f2eb4b1fe6ce7fd4382e5cd48acd5
               </myReleaseTimes>
             </engine.events.RandomSpanWave>
           </eventList>
@@ -2188,6 +2262,54 @@
         <myLosingGoals reference="../../engine.game.ConcreteLevel/myLosingGoals"/>
         <myGameWorld class="gameworld.FixedWorld">
           <myObjects/>
+          <myCollisionEngine class="engine.interactions.CollisionEngine">
+            <myTable>
+              <entry>
+                <engine.gameobject.test.EnemyLabel>
+                  <superLabel class="engine.gameobject.labels.LabelBase">
+                    <myName>Base</myName>
+                  </superLabel>
+                  <myName>Enemy</myName>
+                </engine.gameobject.test.EnemyLabel>
+                <map>
+                  <entry>
+                    <engine.gameobject.test.TowerLabel>
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
+                      <myName>Tower</myName>
+                    </engine.gameobject.test.TowerLabel>
+                    <engine.interactions.BuffImparter/>
+                  </entry>
+                </map>
+              </entry>
+            </myTable>
+            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
+          </myCollisionEngine>
+          <myRangeEngine class="engine.interactions.RangeEngine">
+            <myTable>
+              <entry>
+                <engine.gameobject.test.TowerLabel>
+                  <superLabel class="engine.gameobject.labels.LabelBase">
+                    <myName>Base</myName>
+                  </superLabel>
+                  <myName>Tower</myName>
+                </engine.gameobject.test.TowerLabel>
+                <map>
+                  <entry>
+                    <engine.gameobject.test.EnemyLabel>
+                      <superLabel class="engine.gameobject.labels.LabelBase">
+                        <myName>Base</myName>
+                      </superLabel>
+                      <myName>Enemy</myName>
+                    </engine.gameobject.test.EnemyLabel>
+                    <engine.interactions.ShootAt/>
+                  </entry>
+                </map>
+              </entry>
+            </myTable>
+            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
+          </myRangeEngine>
           <myPathWidth>17.0</myPathWidth>
         </myGameWorld>
         <myStoryBoard reference="../../engine.game.ConcreteLevel/myStoryBoard"/>

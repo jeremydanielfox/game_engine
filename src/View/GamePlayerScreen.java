@@ -45,7 +45,7 @@ import gameworld.GameWorld;
 import gameworld.StructurePlacementException;
 
 
-public class GamePlayerScreen extends Application {
+public class GamePlayerScreen {
 
     private VBox myVbox;
     private Game myGame;
@@ -57,7 +57,7 @@ public class GamePlayerScreen extends Application {
         // new ConcreteGame(new Player("myPlayer", null, null, null),
         // new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
         myVbox = new VBox(30);
-        makeSideBar();
+        //makeSideBar();
     }
 
     private void addDetails (String label, String text) {
@@ -86,7 +86,6 @@ public class GamePlayerScreen extends Application {
     }
 
     private void startGame () {
-        // myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_WIDTH);
 
         Group root = new Group();
         root.getChildren().add(makeDemoGame());
@@ -131,8 +130,6 @@ public class GamePlayerScreen extends Application {
         
         myGame=loadGame();
         
-        ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new NullGoal());
-        myGame.addButton(wrap);
         
         board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
         board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
@@ -154,31 +151,23 @@ public class GamePlayerScreen extends Application {
 
     }
     
-    public static void main (String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start (Stage primaryStage) throws Exception {
-        myStage = primaryStage;
-        myStage.setWidth(Main.SCREEN_WIDTH);
-        myStage.setHeight(Main.SCREEN_HEIGHT);
+    public Scene makeScene() {
         BorderPane pane = new BorderPane();
         pane.setPadding(new Insets(0, 40, 0, 0));
         Scene scene = new Scene(pane);
+        makeSideBar();
         myVbox.setAlignment(Pos.CENTER);
         pane.setRight(myVbox);
-        VBox veebz = new VBox();
+        
+        
+        VBox gameTypeImageVBox = new VBox();
         ImageView image = new ImageView("images/Park_Path.png");
         image.setPreserveRatio(true);
         image.setFitHeight(Main.SCREEN_HEIGHT);
-        Label label = new Label("Game Type");
-        label.setTextFill(Color.BLUE);
-        veebz.getChildren().addAll(image, label);
-        veebz.setAlignment(Pos.CENTER);
-        pane.setLeft(veebz);
-        myStage.setScene(scene);
-        myStage.show();
+        gameTypeImageVBox.getChildren().addAll(image);
+        gameTypeImageVBox.setAlignment(Pos.CENTER);
+        pane.setLeft(gameTypeImageVBox);
+        return scene;
     }
 
 }

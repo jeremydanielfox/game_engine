@@ -96,10 +96,10 @@ public class RandomSpanWave extends Wave {
         }
     }
 
-    @Override
-    public void onCompleteAction () {
-        // TODO Auto-generated method stub
-
-    }
+    //@Override
+//    public void onCompleteAction () {
+//        // TODO Auto-generated method stub
+//
+//    }
 
 }

@@ -233,7 +233,7 @@ public class PathList {
                 }
             }
             // *****************************************//
-            DataManager.writeToXML(myPath, "src/xml/Path.xml");
+            DataManager.writeToXML(myPath, "src/gae/listView/Test.xml");
         });
 
         return display;

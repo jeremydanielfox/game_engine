@@ -73,6 +73,7 @@ public class LevelView {
         Group root = new Group();
         TileContainer container = new TileContainer(20, scene, border);
         root.getChildren().addAll(background, container, tempGrid());
+//        root.getChildren().addAll(background, container);
 
         stack.getChildren().addAll(root);
 

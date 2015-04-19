@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 
-public class CentralTabView implements UIObject{
+public class CentralTabView implements UIObject {
     private VBox baseNode;
     private TabPane tabView;
     private int levelCount;
@@ -31,9 +31,12 @@ public class CentralTabView implements UIObject{
 
         baseNode = new VBox();
         tabView = new TabPane();
+        // refactor this code
         ShopTab shopTab = new ShopTab();
         hudTab = new HudEditorTab(null);
-        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode());
+        GameObjectEditorTab gameObjectTab = new GameObjectEditorTab();
+        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode(),
+                                 gameObjectTab.getBaseTabNode());
 
         Button newLevel = new Button("Add Level");
         newLevel.setOnAction(e -> createNewLevel());
@@ -57,8 +60,8 @@ public class CentralTabView implements UIObject{
     public Node getObject () {
         return baseNode;
     }
-    
-    public void getAddFunction(Editable editable) {
+
+    public void getAddFunction (Editable editable) {
         levelView.getAddFunction(editable);
     }
 }

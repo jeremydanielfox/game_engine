@@ -70,7 +70,7 @@ public class GameObjectSimple implements GameObject{
     }
     
     public void fire(ObjectCollection world, GameObject target){
-        myWeapon.fire(world, target, myPoint);
+//        myWeapon.fire(world, target, myPoint);
     }
     
     public Weapon getWeapon(){
@@ -94,8 +94,8 @@ public class GameObjectSimple implements GameObject{
     }
     
     public void collide(GameObject target){
-        myCollider.collide(target);
-        changeHealth(-1);
+//        myCollider.collide(target);
+//        changeHealth(-1);
     }
     
 /*

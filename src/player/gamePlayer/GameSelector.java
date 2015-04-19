@@ -63,6 +63,17 @@ public class GameSelector {
         setUpGrid();
         setUpFunctions();
     }
+    
+    public Node getChooser () {
+        return chooser;
+    }
+    
+    /**
+     * for adding an option to the game selector once the user loads in a new game
+     */
+    public void addOption () {
+        
+    }
 
     /**
      * sets up the gridpane of the arrows and the select options
@@ -113,10 +124,6 @@ public class GameSelector {
         currentView.getChildren().add(options.get(index).getOption());
     }
 
-    public Node getChooser () {
-        return chooser;
-    }
-
     /**
      * Represents one option the user can select from. Comprised of an image of the game and its
      * label.
@@ -146,7 +153,6 @@ public class GameSelector {
             textBox.getChildren().add(gameName);
             textBox.setAlignment(Pos.CENTER);
             
-
             display.setId("selectOption");
             gamePicture.setId("gameIcon");
             gameName.setId("gameName");

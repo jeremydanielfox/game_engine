@@ -127,9 +127,9 @@ public class GamePlayerScreen extends Application {
 
         Timer t = new TimerConcrete(5,10,"time");
         
-        board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story,t));
+        board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
         board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
-                                         story,t));
+                                         story));
         ShopModel shop = new ShopModelSimple(world, myPlayer, 0);
         myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();

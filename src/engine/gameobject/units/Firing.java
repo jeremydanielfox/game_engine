@@ -8,7 +8,9 @@ import gameworld.ObjectCollection;
 public interface Firing {
 
     /**
-     * Fires, perhaps using a weapon, at enemies with relevance.
+     * Fires, perhaps using a weapon, in the world at target
+     * @param world
+     * @param target
      */
     public void fire (ObjectCollection world, GameObject target);
     

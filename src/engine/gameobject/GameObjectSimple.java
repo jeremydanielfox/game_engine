@@ -4,6 +4,7 @@ import javafx.geometry.Point2D;
 import engine.fieldsetting.Settable;
 import engine.gameobject.labels.Label;
 import engine.gameobject.labels.LabelConcrete;
+import engine.gameobject.labels.SimpleLabel;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
 import engine.gameobject.units.Collider;
@@ -37,7 +38,7 @@ public class GameObjectSimple implements GameObject{
     private Collider myCollider;
     
     public GameObjectSimple () {
-        myLabel = new LabelConcrete();
+        myLabel = new SimpleLabel();
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();

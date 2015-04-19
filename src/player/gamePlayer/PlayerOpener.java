@@ -3,6 +3,7 @@ package player.gamePlayer;
 import java.io.File;
 import java.util.Arrays;
 
+import View.GamePlayerScreen;
 import gae.gameView.Main;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -25,6 +26,7 @@ public class PlayerOpener extends Application {
 
     private static final String headerText = "Select a Game";
 
+    private Stage myStage;
     private Scene playerScene;
     private BorderPane view;
     private HBox options;
@@ -58,11 +60,11 @@ public class PlayerOpener extends Application {
         loadB.setOnMousePressed(e -> {
             openFileChooser();
         });
+        
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
-            /*
-             * change scene to next player scene
-             */
+            GamePlayerScreen screen = new GamePlayerScreen();
+            myStage.setScene(screen.makeScene());
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {
@@ -117,7 +119,7 @@ public class PlayerOpener extends Application {
 
     @Override
     public void start (Stage arg0) throws Exception {
-        Stage myStage = new Stage();
+        myStage = new Stage();
         myStage.setWidth(Main.SCREEN_WIDTH);
         myStage.setHeight(Main.SCREEN_HEIGHT);
         myStage.setScene(playerScene);

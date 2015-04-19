@@ -91,7 +91,6 @@ public class GamePlayerScreen {
         root.getChildren().add(makeDemoGame());
         Scene scene = new Scene(root);
         myStage.setScene(scene);
-
     }
 
     public Node makeDemoGame () {
@@ -127,14 +126,10 @@ public class GamePlayerScreen {
         list3.add(score2);
 
         Timer t = new TimerConcrete(5,10,"time");
-        
-        myGame=loadGame();
-        
-        
         board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
-                                         story));
-        //ShopModel shop = new ShopModelSimple(world, myPlayer, 0);
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),                                   story));
+        ShopModel shop = new ShopModelSimple(world, myPlayer, 0);
+        myGame=loadGame();
         myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();
         return node;

@@ -4,7 +4,7 @@ import java.util.Observable;
 
 public abstract class Displayable extends Observable {
 
-    public abstract double getValue();
+    public abstract String getStringValue();
     public abstract String getLabel();
     
 }

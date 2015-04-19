@@ -2,7 +2,6 @@ package engine.gameobject.test;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import View.ButtonWrapper;
 import View.ViewConcrete2;
 import javafx.application.Application;
@@ -33,9 +32,11 @@ import engine.game.StoryBoard;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
-import engine.goals.HealthDepletionGoal;
+import engine.goals.HealthGoal;
 import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
+import engine.shop.ShopModel;
+import engine.shop.ShopModelSimple;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
 import gae.gameView.Main;
@@ -113,13 +114,14 @@ public class GamePlayerScreen extends Application {
         PlayerUnit scoreUnit = new PlayerUnit(100, "Score");
         Wallet wallet = new ConcreteWallet(scoreUnit);
         Player myPlayer=new Player("PlayerName",health,scoreUnit,wallet);
-        myGame= new ConcreteGame(myPlayer,board,new ArrayList<ButtonWrapper>());
+        // EDIT: temp change -- game won't have accurate shop - Nathan
+        myGame = new ConcreteGame(new ShopModelSimple(), myPlayer, board, new ArrayList<ButtonWrapper>());
         //ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
         ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
         myGame.addButton(wrap);
         
         
-        HealthDepletionGoal healthy=new HealthDepletionGoal(myPlayer);
+        HealthGoal healthy=new HealthGoal(myPlayer, 0);
         List<Goal> list=new ArrayList<Goal>();
         list.add(healthy);
         ScoreGoal score=new ScoreGoal(myPlayer,200);
@@ -132,8 +134,9 @@ public class GamePlayerScreen extends Application {
         
         board.addLevel(new ConcreteLevel("images/Park_Path.png",list2,list,world, story));
         board.addLevel(new ConcreteLevel("images/example_path.jpeg",list3,list,new FixedWorld(),story));
-        
-        myGameView = new ViewConcrete2(myGame,Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
+        ShopModel shop = new ShopModelSimple(world, myPlayer, 1.2);
+        // EDIT: temp change -- game won't have accurate shop - Nathan
+        myGame = new ConcreteGame(new ShopModelSimple(), myPlayer, board, new ArrayList<ButtonWrapper>());
         Node node = myGameView.initializeView();
         return node;
     }

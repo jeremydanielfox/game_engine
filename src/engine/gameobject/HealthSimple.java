@@ -20,9 +20,6 @@ public class HealthSimple implements Health {
         myHealth = health;
     }
     
-    public double getHealth(){
-        return myHealth;
-    }
     @Override
     public boolean isDead () {
         return myHealth <= 0;

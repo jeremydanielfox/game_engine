@@ -1,7 +1,10 @@
 package engine.gameobject.units;
 
 import java.util.Optional;
+import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
+import engine.gameobject.BasicMover;
+import engine.gameobject.GameObject;
 
 /**
  * Buff that freezes, or temporarily paralyzes, its targets.
@@ -18,9 +21,14 @@ public class FreezeBuff extends Buff{
         this.increment = increment;
         decorated = Optional.empty();
     }
+
+    @Settable
+    public void setIncrement (int increment) {
+        this.increment = increment;
+    }
     
-    public void apply(BuffableUnit myUnit){
-        myUnit.getMover().setFreeze(true);
+    public void apply(GameObject myUnit){
+        ((BasicMover) myUnit.getMover()).setFreeze(true);
         adjustEffect(myUnit, .66, .5, .5, 0);
     }
     
@@ -33,8 +41,8 @@ public class FreezeBuff extends Buff{
         return sublayer.getDuration() + increment;
     }
     
-    public void unapply(BuffableUnit myUnit){
-        myUnit.getMover().setFreeze(false);
+    public void unapply(GameObject myUnit){
+        ((BasicMover) myUnit.getMover()).setFreeze(false);
         adjustEffect(myUnit, -.66, -.5, -.5, 0);
     }
     

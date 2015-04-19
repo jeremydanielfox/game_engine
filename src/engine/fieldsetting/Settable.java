@@ -17,5 +17,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Settable {
-    
+    boolean primary () default false;
 }

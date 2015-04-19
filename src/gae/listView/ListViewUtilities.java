@@ -6,11 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
-import javafx.util.Callback;
 import gae.backend.Editable;
 
 
@@ -55,30 +53,28 @@ public class ListViewUtilities {
         list.setOnMousePressed(e -> {
             if (e.getClickCount() == 1) {
                 Editable selected = list.getSelectionModel().getSelectedItem();
-                selected.getEditableImage().selectEditableImage();
+                selected.getMovableImage().selectEditableImage();
                 scene.setOnKeyPressed(keyEvent -> {
                     if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
                         editables.remove(selected);
-                        selected.getEditableImage().deleteImage();
+                        selected.getMovableImage().deleteImage();
                     }
                 });
                 for (Editable editable : list.getItems()) {
                     if (editable != selected)
-                        editable.getEditableImage().unselectEditableImage();
+                        editable.getMovableImage().unselectEditableImage();
                 }
             }
                 else if (e.getClickCount() == 2) {
-                    list.getSelectionModel().getSelectedItem().getEditableImage()
+                    list.getSelectionModel().getSelectedItem().getMovableImage()
                             .unselectEditableImage();
 
                     list.getSelectionModel().clearSelection();
                 }
 
             });
-        list.setCellFactory(new Callback<ListView<Editable>, ListCell<Editable>>() {
-            @Override
-            public ListCell<Editable> call (ListView<Editable> p) {
-                ListCell<Editable> cell = new ListCell<Editable>() {
+        list.setCellFactory((myList) -> {
+            return new ListCell<Editable>() {
                     @Override
                     protected void updateItem (Editable edit, boolean bln) {
                         super.updateItem(edit, bln);
@@ -91,8 +87,6 @@ public class ListViewUtilities {
                         }
                     }
                 };
-                return cell;
-            }
         });
 
         return list;

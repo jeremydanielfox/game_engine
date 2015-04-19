@@ -30,4 +30,10 @@ public interface PriceTag {
      */
     public double getValue ();
 
+    public void setName (String name);
+
+    public void setShopGraphic (Graphic graphic);
+
+    public void setDescription (String description);
+
 }

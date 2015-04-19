@@ -34,9 +34,12 @@ public class PlayerUnit extends Displayable {
         updateObservers();
     }
 
-    @Override
     public double getValue () {
         return myValue;
+    }
+    
+    public String getStringValue () {
+        return myValue+"";
     }
 
     @Override
@@ -44,7 +47,7 @@ public class PlayerUnit extends Displayable {
         return myLabel;
     }
 
-    public void updateObservers () {
+    private void updateObservers () {
         setChanged();
         notifyObservers();
     }

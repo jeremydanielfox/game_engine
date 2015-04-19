@@ -8,8 +8,12 @@ import java.util.Observable;
 import java.util.Observer;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import engine.gameobject.units.BuffableUnit;
+import engine.gameobject.test.TestTower;
+import engine.gameobject.units.BuffTracker;
 import engine.shop.ItemGraphic;
+import engine.shop.ShopModel;
+import engine.shop.ShopModelSimple;
+import engine.shop.ShopView;
 import engine.shop.TransitionGameObject;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
@@ -31,7 +35,8 @@ import javafx.scene.text.Text;
  * This class acts as a heads up display, which contains player stats and the shop for the game.
  * It can display "displayable" objects as well as any other nodes.
  * 
- * @author Sierra Smith and Cosette Goldstein
+ * @author Sierra Smith 
+ * @author Cosette Goldstein
  *
  */
 public class HUD implements Observer {
@@ -46,10 +51,12 @@ public class HUD implements Observer {
     private VBox myWholeDisplay;
     private BorderPane myPane;
     private HBox myDefaultButtonDisplay;
+    private ShopModel shop;
 
     private List<ButtonWrapper> myButtonWrapperList;
 
-    public HUD (BorderPane pane) {
+    public HUD (BorderPane pane, ShopModel shop) {
+        this.shop = shop;
         initialize(pane);
     }
 
@@ -70,7 +77,7 @@ public class HUD implements Observer {
         myWholeDisplay.getChildren().add(myStatsDisplay);
         myDisplayFields = new HashMap<>();
         myPane = pane;
-        //makeShop();
+        makeShop();
         makeDefaultButtonDisplay();
         myWholeDisplay.setAlignment(Pos.CENTER);
         myButtonWrapperList = new ArrayList<>();
@@ -80,7 +87,6 @@ public class HUD implements Observer {
         myDefaultButtonDisplay = new HBox();
         myDefaultButtonDisplay.setAlignment(Pos.CENTER);
         myWholeDisplay.getChildren().add(myDefaultButtonDisplay);
-        System.out.println("pane:" + myPane.getWidth());
     }
 
     public void addButton (ButtonWrapper button) {
@@ -93,7 +99,7 @@ public class HUD implements Observer {
         HBox newBox = new HBox(TEXT_SPACING);
         Text label = new Text(d.getLabel());
         formatText(label, 30);
-        Text value = new Text(d.getValue() + "");
+        Text value = new Text(d.getStringValue());
         formatText(value, 30);
         newBox.getChildren().addAll(label, value);
         newBox.setAlignment(Pos.CENTER);
@@ -127,13 +133,18 @@ public class HUD implements Observer {
     public void update (Observable o, Object arg) {
         for (Displayable d : myDisplayFields.keySet()) {
             if (d.equals(o)) {
-                myDisplayFields.get(d).setText(d.getValue() + "");
+                myDisplayFields.get(d).setText(d.getStringValue());
                 break;
             }
         }
     }
 
-/*    private void makeShop () {
+    private void makeShop () {
+        //TESTING purposes:
+        shop.addPrototype(new TestTower(0,0,0));
+        myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
+    }
+    /*
         FlowPane shopDisplay = new FlowPane();
         shopDisplay.setHgap(5);
         shopDisplay.setVgap(5);

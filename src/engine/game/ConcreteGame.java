@@ -3,7 +3,9 @@ package engine.game;
 import java.util.ArrayList;
 import java.util.List;
 import View.ButtonWrapper;
+import View.Displayable;
 import engine.fieldsetting.Settable;
+import engine.shop.ShopModel;
 
 
 /**
@@ -17,17 +19,25 @@ public class ConcreteGame implements Game {
 
     private Player myPlayer;
     private LevelBoard myLevelBoard;
+    private ShopModel myShop;
     private List<ButtonWrapper> myButtons;
 
     public ConcreteGame () {
-        initialize(new Player(), new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
+        // initialize(new Player(), new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
     }
 
-    public ConcreteGame (Player player, LevelBoard level, List<ButtonWrapper> buttons) {
-        initialize(player, level, buttons);
+    public ConcreteGame (ShopModel shop,
+                         Player player,
+                         LevelBoard level,
+                         List<ButtonWrapper> buttons) {
+        initialize(shop, player, level, buttons);
     }
 
-    public void initialize (Player player, LevelBoard level, List<ButtonWrapper> buttons) {
+    public void initialize (ShopModel shop,
+                            Player player,
+                            LevelBoard level,
+                            List<ButtonWrapper> buttons) {
+        myShop = shop;
         myPlayer = player;
         myLevelBoard = level;
         myButtons = buttons;
@@ -49,6 +59,11 @@ public class ConcreteGame implements Game {
 
     public void addButton (ButtonWrapper button) {
         myButtons.add(button);
+    }
+
+    @Override
+    public ShopModel getShop () {
+        return myShop;
     }
 
     @Override
@@ -78,6 +93,4 @@ public class ConcreteGame implements Game {
         return myButtons;
     }
 
-    
-    
 }

@@ -1,8 +1,10 @@
 package engine.gameobject.weapon;
 
 import java.util.List;
+import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
+import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.Projectile;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
@@ -15,8 +17,19 @@ public interface Weapon {
      * 
      * @param location takes in the GameObject's location
      */
-    public void fire (ObjectCollection world, PointSimple location);
+    public void fire (ObjectCollection world, GameObject target, PointSimple location);
 
+    /**
+     * Sets the weapon's range to parameter range
+     * @param range
+     */
+    public void setRange(double range);
+    
+    /**
+     * Sets the weapon's firing rate to firingRate per second
+     * @param firingRate
+     */
+    public void setFiringRate(double firingRate);
     /**
      * Adds a behavior to the given weapon. Will automatically upgrade existing one.
      * 
@@ -35,8 +48,13 @@ public interface Weapon {
      * Sets the projectile the weapon shoots
      * @param projectile
      */
-    public abstract void setProjectile (Projectile projectile);
+    public abstract void setProjectile (GameObject projectile);
 
+    /**
+     * Advances time stored in weapon by 1
+     */
+    public void advanceTime();
+    
     /**
      * Returns range of weapon
      * @return
@@ -50,6 +68,10 @@ public interface Weapon {
     public abstract double getFiringRate ();
     
     public abstract List<UpgradeBundle> getNextUpgrades ();
+    
+    public void applyUpgrades (UpgradeBundle bundle);
+
+    public void setFiringStrategy (FiringStrategy newStrategy);
       
 
 }

@@ -17,7 +17,6 @@ import gae.openingView.UIObject;
 public abstract class ComponentEditor implements UIObject, Edits {
     private HBox editBox;
     private Label label;
-    private String fullName;
     
     public ComponentEditor() {
         editBox = new HBox();
@@ -43,7 +42,6 @@ public abstract class ComponentEditor implements UIObject, Edits {
      * sets name of the Object
      */
     void setName(String name) {
-        fullName = name;
         label.setText(Editor.getPropertyName(name));
     }
     

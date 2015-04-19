@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import gae.openingView.UIObject;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 

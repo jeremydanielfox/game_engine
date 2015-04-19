@@ -1,7 +1,6 @@
 package gae.editor;
 
 import java.util.function.Consumer;
-import gae.gameView.GameView;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

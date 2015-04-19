@@ -1,9 +1,6 @@
 package gae.editor;
 
 import java.util.function.Consumer;
-import engine.gameobject.GameObjectSimple;
-import gae.backend.Editable;
-import gae.listView.GameObjectToEditable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 

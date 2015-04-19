@@ -1,9 +1,14 @@
 package gae.listView;
 
+import View.ImageUtilities;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import engine.gameobject.GameObjectSimple;
+import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
 import gae.backend.Editable;
 import gae.gridView.Pair;
+import gae.gridView.Path;
 
 
 /**
@@ -21,22 +26,29 @@ public class GameObjectToEditable implements Editable {
     private int Size = 10;
     private int Health = 100;
     private Weapon weapon;
-    private Pair location;
+    private PointSimple location;
     private String imagePath;
-    private MovableImage editableImage;
+    private MovableImage movableImage;
     private String name;
     private String type;
+    private Path myPath;
+    private int width;
+    private int height;
+    private ImageView imageView;
 
     public GameObjectToEditable (GameObjectSimple gameobject) {
-        gameObject = gameobject;
+        this.gameObject = gameobject;
         /*
          * doing the following instantiation because it doesn't copy GameObjectSimple (not
          * Serializable)
          * TODO: find out how to copy the object
          */
         name = gameObject.getTag().getName();
-        imagePath = gameObject.getImagePath();
-        type = gameObject.getTag().getLabel();
+        imagePath = gameObject.getTag().getGraphic().getImagePath();
+        type = gameObject.getLabel().getName();
+        imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
+        // gameobject is not serializable and gives an error so must set to null
+        gameObject = null;
     }
 
     @Override
@@ -69,23 +81,15 @@ public class GameObjectToEditable implements Editable {
         myID = id;
     }
 
-    public Pair getLocation () {
-        return location;
-    }
-
-    public void setLocation (double x, double y) {
-        location = new Pair(x, y);
-    }
-
     @Override
-    public void setEditableImage (MovableImage image) {
+    public void setMovableImage (MovableImage image) {
         // TODO Auto-generated method stub
-        editableImage = image;
+        movableImage = image;
     }
 
     @Override
-    public MovableImage getEditableImage () {
-        return editableImage;
+    public MovableImage getMovableImage () {
+        return movableImage;
     }
 
     @Override
@@ -101,5 +105,73 @@ public class GameObjectToEditable implements Editable {
     @Override
     public int getID () {
         return myID;
+    }
+
+    @Override
+    public Path getPath () {
+        // TODO Auto-generated method stub
+        return myPath;
+    }
+
+    @Override
+    public void setPath (Path path) {
+        // TODO Auto-generated method stub
+        myPath = path;
+    }
+
+    @Override
+    public int getWidth () {
+        // TODO Auto-generated method stub
+        return width;
+    }
+
+    @Override
+    public int getHeight () {
+        // TODO Auto-generated method stub
+        return height;
+    }
+
+    @Override
+    public void setWidth (int width) {
+        // TODO Auto-generated method stub
+        this.width = width;
+    }
+
+    @Override
+    public void setHeight (int height) {
+        // TODO Auto-generated method stub
+        this.height = height;
+    }
+
+    @Override
+    public PointSimple getLocation () {
+        // TODO Auto-generated method stub
+        return location;
+    }
+
+    @Override
+    public void setLocation (PointSimple point) {
+        // TODO Auto-generated method stub
+        location = point;
+    }
+
+    @Override
+    public ImageView getImageView () {
+        // currently hardcoding imageView but if Tag + Graphic work then...
+        // return ImageUtilities.changeImageSize(new ImageView(new Image(imagePath)),
+        // 75, 75);
+        //
+        //
+        // imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
+        return imageView;
+    }
+
+    @Override
+    public Editable makeNewInstance () {
+        Editable copy = (Editable) DeepCopy.copy(this);
+        // need way to figure out ID
+        // copy.setID(myID);
+        // myID++;
+        return copy;
     }
 }

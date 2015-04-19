@@ -1,6 +1,6 @@
 package engine.shop;
 
-public class BuyOnClicked implements Command {
+public class BuyOnClicked implements OnClickedCommand {
     private ShopModel myShopModel;
     private String name;
     
@@ -11,8 +11,9 @@ public class BuyOnClicked implements Command {
     
     
     @Override
-    public void execute () {
+    public TransitionGameObject execute () {
         myShopModel.purchaseUpgrade(name);
+        return null;
     }
 
 }

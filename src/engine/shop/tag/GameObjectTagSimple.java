@@ -4,10 +4,10 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.Graphic;
 import engine.shop.PurchasableGameObject;
 
+
 @Settable
 public class GameObjectTagSimple implements GameObjectTag {
     private String name;
-    private String label;
     private String description;
     private Graphic shopGraphic;
     private PurchasableGameObject purchasable;
@@ -23,12 +23,6 @@ public class GameObjectTagSimple implements GameObjectTag {
     public String getName () {
         return name;
     }
-    
-
-    @Override
-    public String getLabel () {
-        return label;
-    }
 
     @Override
     public String getDescription () {
@@ -37,7 +31,8 @@ public class GameObjectTagSimple implements GameObjectTag {
 
     @Override
     public Graphic getGraphic () {
-        return purchasable.getGraphic();
+        return (purchasable != null) ? purchasable.getGraphic()
+                                    : new Graphic(40, 40, "Bloons_TackShooter.png");
     }
 
     @Override
@@ -47,24 +42,22 @@ public class GameObjectTagSimple implements GameObjectTag {
 
     @Override
     public double getValue () {
-        return purchasable.getValue();
+        return (purchasable != null) ? purchasable.getValue() : 10;
     }
 
+    @Override
     @Settable
     public void setName (String name) {
         this.name = name;
     }
-    
-    @Settable
-    public void setLabel (String label) {
-        this.label = label;
-    }
 
+    @Override
     @Settable
     public void setDescription (String description) {
         this.description = description;
     }
 
+    @Override
     @Settable
     public void setShopGraphic (Graphic shopGraphic) {
         this.shopGraphic = shopGraphic;

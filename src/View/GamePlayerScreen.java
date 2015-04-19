@@ -2,7 +2,6 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,12 +27,16 @@ import engine.game.Game;
 import engine.game.Player;
 import engine.game.PlayerUnit;
 import engine.game.StoryBoard;
+import engine.game.Timer;
+import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
-import engine.goals.HealthDepletionGoal;
+import engine.goals.HealthGoal;
 import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
+import engine.shop.ShopModel;
+import engine.shop.ShopModelSimple;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
 import gae.gameView.Main;
@@ -105,12 +108,14 @@ public class GamePlayerScreen extends Application {
         PlayerUnit scoreUnit = new PlayerUnit(100, "Score");
         Wallet wallet = new ConcreteWallet(scoreUnit);
         Player myPlayer = new Player("PlayerName", health, scoreUnit, wallet);
-        myGame = new ConcreteGame(myPlayer, board, new ArrayList<ButtonWrapper>());
+        
+        // EDIT: temp change -- game won't have accurate shop - Nathan
+        myGame = new ConcreteGame(new ShopModelSimple(), myPlayer, board, new ArrayList<ButtonWrapper>());
         // ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
         ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new NullGoal());
         myGame.addButton(wrap);
 
-        HealthDepletionGoal healthy = new HealthDepletionGoal(myPlayer);
+        HealthGoal healthy = new HealthGoal(myPlayer, 0);
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
         ScoreGoal score = new ScoreGoal(myPlayer, 200);
@@ -120,11 +125,13 @@ public class GamePlayerScreen extends Application {
         ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
         list3.add(score2);
 
-        board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
+        Timer t = new TimerConcrete(5,10,"time");
+        
+        board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story,t));
         board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
-                                         story));
-
-        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+                                         story,t));
+        ShopModel shop = new ShopModelSimple(world, myPlayer, 0);
+        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();
         return node;
     }

@@ -1,7 +1,7 @@
 package engine.gameobject.weapon.firingstrategy;
 
+import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import engine.gameobject.units.Buffable;
 import gameworld.ObjectCollection;
 
 
@@ -14,13 +14,13 @@ public class MultipleProjectile extends BasicStrategy {
     }
     
     @Override
-    public void execute(ObjectCollection world, Buffable target, PointSimple location, Buffer prototype) {
+    public void execute(ObjectCollection world, GameObject target, PointSimple location, GameObject prototype) {
         //PointSimple referencePoint = target.getPoint();
-        //A point 45 degrees to current location as reference
+        //A point 45 degrees to current location as reference TODO: This only works for 8 projectiles right now.
         PointSimple referencePoint = new PointSimple(location.getX() + 5, location.getY() + 5);
         for (int i =0; i < projectilesCreated; i++){
             PointSimple newPoint = rotatePoint(location, referencePoint, i * 2 * Math.PI / projectilesCreated);
-            Buffer newProjectile = makeProjectile(location, newPoint, prototype);
+            GameObject newProjectile = makeProjectile(location, newPoint, prototype);
             world.addObject(newProjectile);
         }
     }

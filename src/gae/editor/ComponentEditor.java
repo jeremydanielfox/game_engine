@@ -1,5 +1,6 @@
 package gae.editor;
 
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import gae.openingView.UIObject;
@@ -20,6 +21,11 @@ public abstract class ComponentEditor implements UIObject, Edits {
     public ComponentEditor() {
         editBox = new HBox();
         label = new Label();
+    }
+    
+    @Override
+    public Node getObject () {
+        return getEditBox();
     }
     
     /**

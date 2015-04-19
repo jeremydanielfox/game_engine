@@ -10,9 +10,9 @@ import java.util.function.Consumer;
 
 
 /**
- * ClassSet allows for a unique collection of objects in which the collection only has one
- * class-type at most, all of which extend from <T>. The motivation behind this class was that
- * Java's sets check for duplication based on hash value, rather than by class-type.
+ * ClassSet is a collection that contains only one class-type at most, all of which extend from <T>.
+ * The motivation behind this class was that Java's Sets can only check for duplication based on
+ * hash value, rather than by class-type.
  * 
  * @author Nathan Prabhu
  *
@@ -25,11 +25,15 @@ public class ClassSet<T> implements Set<T> {
     private static final Object PRESENT = new Object();
 
     // maps className to T
-    Map<String, T> classMap; 
+    Map<String, T> classMap;
 
     public <T> ClassSet () {
         this.classMap = new HashMap<>();
+    }
 
+    public ClassSet (T ... objects) {
+        this.classMap = new HashMap<>();
+        addAll(objects);
     }
 
     /**
@@ -41,7 +45,7 @@ public class ClassSet<T> implements Set<T> {
      */
     @Override
     public boolean add (T obj) {
-        return classMap.put(obj.getClass().getName(), obj) == null;
+        return classMap.put(obj.getClass().getSimpleName(), obj) == null;
     }
 
     public void addAll (T ... objects) {
@@ -58,7 +62,7 @@ public class ClassSet<T> implements Set<T> {
      */
     @Override
     public boolean remove (Object obj) {
-        String name = obj.getClass().getName();
+        String name = obj.getClass().getSimpleName();
         if (classMap.containsKey(name)) {
             classMap.remove(name);
             return true;
@@ -68,20 +72,22 @@ public class ClassSet<T> implements Set<T> {
 
     @Override
     public boolean contains (Object o) {
-        return classMap.keySet().contains(o.getClass().getName());
+        return classMap.keySet().contains(o.getClass().getSimpleName());
     }
 
+    @Override
     public void forEach (Consumer action) {
         classMap.values().forEach(action);
     }
 
     /**
+     * Obtains object of the same class-type in this set if it exists
      * 
-     * @param obj
-     * @return
+     * @param obj object's class-type counterpart to be retrieved from this set, if present
+     * @return object if it exists, otherwise null
      */
     public T get (T obj) {
-        return classMap.get(obj.getClass().getName());
+        return classMap.get(obj.getClass().getSimpleName());
     }
 
     public void clear () {
@@ -135,6 +141,15 @@ public class ClassSet<T> implements Set<T> {
         Collection<T> copy = new HashSet<T>(classMap.values());
         c.forEach(this::remove);
         return classMap.values().containsAll(copy);
+    }
+
+    @Override
+    public String toString () {
+        String result = "";
+        for (String key : classMap.keySet()) {
+            result += String.format("%s: %s \n", key, classMap.get(key));
+        }
+        return result;
     }
 
 }

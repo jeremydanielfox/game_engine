@@ -17,7 +17,6 @@ public interface Health {
 	 */
 	public boolean isDead();
 	
-	public double getHealth();
 	/**
 	 * Changes health (presumably representing taking damage, or healing).
 	 * @param amount +/- amount by which to affect health

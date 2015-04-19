@@ -53,7 +53,6 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
         boolean answer =
                 ((curLevelIndex == myLevels.size() - 1) && (myLevels.get(curLevelIndex).isWon())) ||
                         myLevels.get(curLevelIndex).isLost();
-        System.out.println(answer);
         return answer;
     }
 

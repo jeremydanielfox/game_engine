@@ -18,7 +18,7 @@ public class ShootAt extends Interaction {
     @Override
     public void accept (GameObject t, GameObject u) {
         if (t.getPoint().withinRange(u.getPoint(), t.getRange()))
-            t.fire(super.getGameWorld());
+            t.fire(super.getGameWorld(), u);
 
     }
 

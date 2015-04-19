@@ -35,7 +35,8 @@ import javafx.scene.text.Text;
  * This class acts as a heads up display, which contains player stats and the shop for the game.
  * It can display "displayable" objects as well as any other nodes.
  * 
- * @author Sierra Smith and Cosette Goldstein
+ * @author Sierra Smith 
+ * @author Cosette Goldstein
  *
  */
 public class HUD implements Observer {
@@ -86,7 +87,6 @@ public class HUD implements Observer {
         myDefaultButtonDisplay = new HBox();
         myDefaultButtonDisplay.setAlignment(Pos.CENTER);
         myWholeDisplay.getChildren().add(myDefaultButtonDisplay);
-        System.out.println("pane:" + myPane.getWidth());
     }
 
     public void addButton (ButtonWrapper button) {
@@ -99,7 +99,7 @@ public class HUD implements Observer {
         HBox newBox = new HBox(TEXT_SPACING);
         Text label = new Text(d.getLabel());
         formatText(label, 30);
-        Text value = new Text(d.getValue() + "");
+        Text value = new Text(d.getStringValue());
         formatText(value, 30);
         newBox.getChildren().addAll(label, value);
         newBox.setAlignment(Pos.CENTER);
@@ -133,7 +133,7 @@ public class HUD implements Observer {
     public void update (Observable o, Object arg) {
         for (Displayable d : myDisplayFields.keySet()) {
             if (d.equals(o)) {
-                myDisplayFields.get(d).setText(d.getValue() + "");
+                myDisplayFields.get(d).setText(d.getStringValue());
                 break;
             }
         }

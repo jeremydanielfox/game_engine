@@ -14,11 +14,7 @@ import engine.game.*;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.test.TestTower;
-import engine.goals.Goal;
-import engine.goals.HealthGoal;
-import engine.goals.NullGoal;
-import engine.goals.ScoreGoal;
-import engine.goals.TimerGoal;
+import engine.goals.*;
 import engine.pathfinding.PathFixed;
 import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;
@@ -43,8 +39,16 @@ public class GameWriter extends Application {
         }
         GameObjectQueue q = new ConcreteQueue(waveObjects);
         TimedEvent wave = new RandomSpanWave(2, 20, q, world);
-        //TimedEvent wave = new ConstantSpacingWave(2, 1, q, world);
+        
+        List<GameObject> waveObjects2 = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            waveObjects2.add(new GameObjectSimpleTest());
+        }
+        GameObjectQueue q2 = new ConcreteQueue(waveObjects2);
+        TimedEvent wave2 = new ConstantSpacingWave(2, q2, world);
+        
         StoryBoard story = makeStoryBoard(wave);
+        story.addEvent(wave2);
         return story;
     }
 
@@ -57,7 +61,7 @@ public class GameWriter extends Application {
     private ConcreteLevelBoard makeLevelBoard (GameWorld world, StoryBoard story, Player myPlayer) {
         ConcreteLevelBoard board = new ConcreteLevelBoard();
         HealthGoal healthy = new HealthGoal(myPlayer, 0);
-        Timer t = new TimerConcrete(1,5,"time");
+        Timer t = new TimerConcrete(3,5,"time");
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
         list.add(new TimerGoal(t, 0));
@@ -139,7 +143,7 @@ public class GameWriter extends Application {
                                                                   myPlayer),
                                  new ArrayList<ButtonWrapper>());
         ButtonWrapper wrap =
-                new ButtonWrapper("wave", e -> myStory.startNextEvent(), new NullGoal());
+                new ButtonWrapper("wave", e -> myStory.startNextEvent(), new NoCurrentEventGoal(myStory));
         // ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new
         // NoCurrentEventGoal());
         myGame.addButton(wrap);

@@ -46,6 +46,6 @@ public class LibraryData {
             // object.setTag(editableNode.getTag());
             object.setPoint(editable.getLocation());
         }
-        return null;
+        return gameObjectList;
     }
 }

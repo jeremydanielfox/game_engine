@@ -85,9 +85,9 @@ public class DraggableTransform {
     }
 
     private static final class DragContext {
-        public double mouseAnchorX;
-        public double mouseAnchorY;
-        public double initialTranslateX;
-        public double initialTranslateY;
+        private double mouseAnchorX;
+        private double mouseAnchorY;
+        private double initialTranslateX;
+        private double initialTranslateY;
     }
 }

@@ -1,17 +1,13 @@
 package gae.gameView;
 
-import java.util.Arrays;
 import java.util.List;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimple;
-import javafx.application.Application;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * List of options that can be checked to indicate selection
@@ -33,7 +29,7 @@ public class CheckList {
         });
     }
 
-    public VBox getCheckList () {
+    public Node getCheckList () {
         return checkList;
     }
 
@@ -44,8 +40,9 @@ public class CheckList {
      */
     private void createCheckOption (GameObject o) {
         HBox checkOption = new HBox(10);
-        CheckBox checker = new CheckBox("s");
+        Label label = (Label) o.getLabel();
+        CheckBox checker = new CheckBox();
         checkOption.getChildren().add(checker);
-        checkList.getChildren().add(checkOption);
+        checkList.getChildren().addAll(label,checkOption);
     }
 }

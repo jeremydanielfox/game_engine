@@ -34,6 +34,11 @@ public class InteractionInstance {
     private DropDown interactionType;
     private ObjectContainer box1, box2;
 
+    /*
+     * TODO: pull classes via reflection and then map the options in the interactionType to specific
+     * interaction classes in the engine
+     */
+
     public InteractionInstance () {
         container = new HBox(80);
         interactionType = new DropDown("Interaction Type", Arrays.asList("Collide",

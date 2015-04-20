@@ -19,6 +19,7 @@ import gae.gridView.Path;
 public class GameObjectToEditable implements Editable {
     private GameObjectSimple gameObject;
     private static final long serialVersionUID = 1L;
+    private static int ourID=0;
     private int myID = 0;
     private int Size = 10;
     private int Health = 100;
@@ -166,9 +167,8 @@ public class GameObjectToEditable implements Editable {
     @Override
     public Editable makeNewInstance () {
         Editable copy = (Editable) DeepCopy.copy(this);
-        // need way to figure out ID
-        // copy.setID(myID);
-        // myID++;
+        copy.setID(ourID);
+        ourID++;
         return copy;
     }
 }

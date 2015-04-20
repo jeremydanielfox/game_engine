@@ -1,9 +1,11 @@
-package engine.gameobject.units;
+package engine.gameobject.units.poison;
 
 import java.awt.Color;
 import java.util.Optional;
 import engine.gameobject.GameObject;
 import engine.fieldsetting.Settable;
+import engine.gameobject.units.Buff;
+import engine.gameobject.units.BuffType;
 import engine.gameobject.weapon.Upgrade;
 
 /**
@@ -11,11 +13,12 @@ import engine.gameobject.weapon.Upgrade;
  * @author Danny Oh and Nathan Prabhu
  *
  */
-public class PoisonBuff extends Buff{
+public class PoisonBuff extends Buff implements Poison{
     
     private int timeIncr;
     private double damageIncr;
     private Optional<PoisonBuff> decorated;
+    private BuffType type;
     
     /**
      * Makes a poison buff
@@ -27,6 +30,11 @@ public class PoisonBuff extends Buff{
         this.timeIncr = timeIncr;
         this.damageIncr = damageIncr;
         decorated = Optional.empty();
+    }
+    
+    @Settable
+    public void setBuffType (BuffType type){
+        this.type = type;
     }
     
     @Settable
@@ -56,7 +64,8 @@ public class PoisonBuff extends Buff{
         myUnit.changeHealth(-getDamage()/getDuration());
     }
     
-    private double getDamage () {
+    @Override
+    public double getDamage () {
         return decorated.map(this::getIncrementedDamage).orElse(damageIncr);
     }
     
@@ -85,5 +94,10 @@ public class PoisonBuff extends Buff{
     @Override
     public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((PoisonBuff) decorated);        
+    }
+
+    @Override
+    public BuffType getType () {
+       return type;
     }
 }

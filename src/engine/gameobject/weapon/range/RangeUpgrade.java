@@ -1,4 +1,4 @@
-package engine.gameobject.weapon.upgradable.range;
+package engine.gameobject.weapon.range;
 
 import java.util.Optional;
 import engine.fieldsetting.Settable;

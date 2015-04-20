@@ -3,7 +3,7 @@ package engine.gameobject;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import View.ViewUtilities;
+import View.ViewUtil;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.fieldsetting.Settable;
 
@@ -70,8 +70,8 @@ public class Graphic {
      */
     public void setPoint (PointSimple point) {
         myPoint =
-                new Point2D(point.getX()  + ViewUtilities.getCenterOffsetX(myImageView),
-                            point.getY() + ViewUtilities.getCenterOffsetY(myImageView));
+                new Point2D(point.getX()  + ViewUtil.getCenterOffsetX(myImageView),
+                            point.getY() + ViewUtil.getCenterOffsetY(myImageView));
         getImageView().setX(myPoint.getX());
         getImageView().setY(myPoint.getY());
     }
@@ -109,11 +109,11 @@ public class Graphic {
     }
 
     public double getCenterX () {
-        return myImageView.getX() + ViewUtilities.getCenterOffsetX(myImageView);
+        return myImageView.getX() + ViewUtil.getCenterOffsetX(myImageView);
     }
 
     public double getCenterY () {
-        return myImageView.getY() + ViewUtilities.getCenterOffsetY(myImageView);
+        return myImageView.getY() + ViewUtil.getCenterOffsetY(myImageView);
     }
 
     public String getImagePath () {

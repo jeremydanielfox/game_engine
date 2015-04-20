@@ -1,5 +1,6 @@
 package engine.gameobject.units;
 
+import java.util.Set;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.Upgrade;
 import javafx.scene.effect.ColorAdjust;
@@ -14,7 +15,7 @@ import javafx.scene.effect.ColorAdjust;
  * @author Danny
  *
  */
-public abstract class Buff implements Upgrade {
+public abstract class Buff {
     private int duration;
     private int timeSinceStart;
 
@@ -101,5 +102,6 @@ public abstract class Buff implements Upgrade {
      * Reproduces buff. Must be defined in each buff made
      */
     public abstract Buff clone ();
-
+    
+    public abstract BuffType getType ();
 }

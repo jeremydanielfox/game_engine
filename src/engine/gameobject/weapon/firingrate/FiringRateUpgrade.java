@@ -1,4 +1,4 @@
-package engine.gameobject.weapon.upgradable.firingrate;
+package engine.gameobject.weapon.firingrate;
 
 import java.util.Optional;
 import engine.fieldsetting.Settable;

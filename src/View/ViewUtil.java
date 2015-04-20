@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 
-public class ViewUtilities {
+public class ViewUtil {
 
     private static Point2D previous;
 
@@ -51,17 +51,17 @@ public class ViewUtilities {
         // EDIT: I changed this to node and it worked perfectly for me!
         pane.getScene().setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
-                unbindCursor(pane);
-                wrapGroup.setVisible(false);
-                // ((Group) node.getParent()).getChildren().remove(node);
+                unbindCursor(pane, node);
             }
         });
 
         return wrapGroup;
     }
 
-    public static void unbindCursor (Node scene) {
-        scene.setOnMouseMoved(null);
+    public static void unbindCursor (Node pane, Node node) {
+        pane.getScene().setOnMouseMoved(null);
+        node.setVisible(false);
+        ((Group) node.getParent()).getChildren().remove(node);
     }
 
     public static void addMouseMovementHandler () {
@@ -120,10 +120,6 @@ public class ViewUtilities {
                            mouseEvent.getSceneY() + getCenterOffsetY(node));
     }
     
-    
-    public static double getCenterX (Node node){
-        return 0; //node.getScene()
-    }
 
     /**
      * Used to find the center of a node. Gets the X offset.

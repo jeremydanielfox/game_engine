@@ -1,6 +1,8 @@
 package engine.gameobject.weapon;
 
 import java.util.List;
+import java.util.Set;
+import javafx.collections.SetChangeListener.Change;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
@@ -38,31 +40,78 @@ public class BasicWeapon implements Weapon {
         myRange = new RangeUpgrade(250);
         myFiringRate = new FiringRateUpgrade(.5);
         myFiringStrategy = new SingleProjectile();
-        upgradables = new UpgradeSet<Upgrade>(new Upgrade[] { myRange,
-                                                           myFiringRate });
+        upgradables = initializeUpgrades();
         tree = new UpgradeForest();
     }
 
-    @Override @Settable
+    private UpgradeSet<Upgrade> initializeUpgrades () {
+        UpgradeSet<Upgrade> result =
+                new UpgradeSet<Upgrade>(new Upgrade[] { myRange, myFiringRate });
+        Set<Buff> collisionBuffs = myProjectile.getCollider().getCollisionBuffs();
+        Set<Buff> explosBuffs = myProjectile.getCollider().getCollisionBuffs();
+        result.addAll(collisionBuffs);
+        result.addAll(explosBuffs);
+        result.addListener(change -> syncBuffs(change, collisionBuffs, explosBuffs));
+        return result;
+    }
+
+    private void syncBuffs (Change<? extends Upgrade> change,
+                            Set<Buff> collisionBuffs,
+                            Set<Buff> explosBuffs) {
+
+        Buff buff = (change.wasAdded()) ? (Buff) change.getElementAdded() :
+                                       (Buff) change.getElementRemoved();
+        switch (buff.getBuffType()) {
+            case COLLISION:
+                if (change.wasAdded()) {
+                    collisionBuffs.add(buff);
+                }
+                else {
+                    collisionBuffs.remove(buff);
+                }
+                break;
+            case EXPLOSION:
+                if (change.wasAdded()) {
+                    explosBuffs.add(buff);
+                }
+                else {
+                    explosBuffs.remove(buff);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    @Settable
     public void setRange (double range) {
         myRange = new RangeUpgrade(range);
     }
 
-    @Override @Settable
-    public void setFiringRate (double firingRate){
+    @Override
+    @Settable
+    public void setFiringRate (double firingRate) {
         myFiringRate = new FiringRateUpgrade(firingRate);
     }
-    
-    @Override @Settable
+
+    @Override
+    @Settable
     public void setFiringStrategy (FiringStrategy newStrategy) {
         myFiringStrategy = newStrategy;
     }
 
-    @Override @Settable
+    @Override
+    @Settable
     public void setProjectile (GameObject projectile) {
         myProjectile = projectile;
     }
-    
+
+    @Settable
+    public void setTree (UpgradeTree tree) {
+        this.tree = tree;
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -71,8 +120,8 @@ public class BasicWeapon implements Weapon {
     @Override
     public void fire (ObjectCollection world, GameObject target, PointSimple location) {
         if (canFire()) {
-                myFiringStrategy.execute(world, target, location, myProjectile);
-                timeSinceFire = 0;
+            myFiringStrategy.execute(world, target, location, myProjectile);
+            timeSinceFire = 0;
         }
     }
 
@@ -112,9 +161,10 @@ public class BasicWeapon implements Weapon {
     }
 
     @Override
-    public void advanceTime(){
+    public void advanceTime () {
         timeSinceFire++;
     }
+
     /*
      * Utility that we may need in the future
      * private void fireAtEnemyInRange (GameWorld world, PointSimple center) {

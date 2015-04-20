@@ -56,8 +56,8 @@ public class GameObjectSimple implements GameObject{
     /**
      * Give the object a buff e.g. burn this object
      */
-    public void addBuff(Buff buff){
-        myBuffs.addBuff(buff, this);
+    public void receiveBuff(Buff buff){
+        myBuffs.receiveBuff(buff, this);
     }
     
 /*

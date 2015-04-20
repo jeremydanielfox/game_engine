@@ -5,9 +5,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffType;
 
@@ -25,18 +27,18 @@ import engine.gameobject.units.BuffType;
 
 public class UpgradeSet<T extends Upgrade> implements Set<T> {
 
-    // maps className to T
-    private Map<UpgradeType, T> upgradeMap;
-    
+    // maps UpgradeType (String) to T
+    private HashMap<String, T> upgradeMap;
+
     public <T> UpgradeSet () {
         this.upgradeMap = new HashMap<>();
     }
-    
+
     public UpgradeSet (T ... objects) {
         this.upgradeMap = new HashMap<>();
         addAll(Arrays.asList(objects));
     }
-    
+
     /**
      * Obtains object of the same UpgradeType in this set if it exists
      * 
@@ -47,6 +49,12 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
         return upgradeMap.get(new UpgradeType(obj));
     }
 
+    public void addListener (SetChangeListener<T> listener) {
+        ObservableSet<T> obs =
+                FXCollections.observableSet(upgradeMap.values().stream()
+                        .collect(Collectors.toSet()));
+        obs.addListener(listener);
+    }
 
     @Override
     public int size () {
@@ -62,7 +70,7 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
     public boolean contains (Object o) {
         if (o instanceof Upgrade) {
             UpgradeType type = new UpgradeType((Upgrade) o);
-            return upgradeMap.containsKey(type);
+            return upgradeMap.containsKey(type.toString());
         }
         return false;
     }
@@ -91,17 +99,17 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
      */
     @Override
     public boolean add (T e) {
-        return upgradeMap.put(new UpgradeType(e), e) == null;
+        UpgradeType toAdd = new UpgradeType(e);
+        return upgradeMap.put(toAdd.toString(), e) == null;
     }
 
     @Override
     public boolean remove (Object o) {
         if (o instanceof Upgrade) {
             UpgradeType type = new UpgradeType((Upgrade) o);
-            if (upgradeMap.containsKey(type)) {
-                upgradeMap.remove(type);
-                return true;
-            }
+            upgradeMap.remove(upgradeMap.get(type));
+            return true;
+
         }
         return false;
     }
@@ -127,15 +135,26 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
     public boolean removeAll (Collection<?> c) {
         return upgradeMap.keySet().removeAll(makeUpgradeTypes(c));
     }
-    
-    private Set<UpgradeType> makeUpgradeTypes (Collection<?> c) {
+
+    private Set<String> makeUpgradeTypes (Collection<?> c) {
         return c.stream().filter(o -> (o instanceof Upgrade))
-                .map(o -> new UpgradeType((Upgrade) o)).collect(Collectors.toSet());
+                .map(o -> new UpgradeType((Upgrade) o))
+                .map(UpgradeType::toString)
+                .collect(Collectors.toSet());
     }
 
     @Override
     public void clear () {
         upgradeMap.clear();
+    }
+
+    @Override
+    public String toString () {
+        String result = "";
+        for (String key : upgradeMap.keySet()) {
+            result += String.format("%s: %s \n", key, upgradeMap.get(key));
+        }
+        return result;
     }
 
     /**
@@ -151,22 +170,35 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
 
         private UpgradeType (Upgrade upg) {
             this.upgrade = upg;
-            buffType = (upg instanceof Buff) ? ((Buff) upg).getType() : BuffType.COLLISION;
+            buffType = (upg instanceof Buff) ? ((Buff) upg).getBuffType() : BuffType.NULL;
         }
 
         @Override
         public boolean equals (Object obj) {
-            if (!(obj instanceof Upgrade)) { return false; }
-            Upgrade upg = (Upgrade) obj;
-            if (upg instanceof Buff) {
-                Buff buff = (Buff) upg;
-                return equalsUpgrade(buff) && buffType.equals(buff.getType());
-            }
-            return equalsUpgrade(upg);
+            if (!(obj instanceof UpgradeSet.UpgradeType)) { return false; }
+            UpgradeType type = (UpgradeSet.UpgradeType) obj;
+            boolean bool1 = getUpgClass(upgrade).equals(getUpgClass(type.getUpgrade()));
+            boolean bool2 = buffType.equals(type.getBuffType());
+            return bool1 && bool2;
         }
 
-        private boolean equalsUpgrade (Upgrade upg) {
-            return upgrade.getClass().getName().equals(upg.getClass().getName());
+        private String getUpgClass (Upgrade upg) {
+            return upg.getClass().getSimpleName();
+        }
+
+        public Upgrade getUpgrade () {
+            return upgrade;
+        }
+
+        public BuffType getBuffType () {
+            return buffType;
+        }
+
+        @Override
+        public String toString () {
+            String buffTypeString = (buffType != null) ? buffType.toString() : "null";
+            return String.format("[Upgrade: %s, BuffType: %s]", upgrade.getClass().getSimpleName(),
+                                 buffTypeString);
         }
     }
 

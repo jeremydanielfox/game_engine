@@ -103,5 +103,5 @@ public abstract class Buff implements Upgrade {
      */
     public abstract Buff clone ();
     
-    public abstract BuffType getType ();
+    public abstract BuffType getBuffType ();
 }

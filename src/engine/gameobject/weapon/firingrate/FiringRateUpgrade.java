@@ -2,6 +2,7 @@ package engine.gameobject.weapon.firingrate;
 
 import java.util.Optional;
 import engine.fieldsetting.Settable;
+import engine.gameobject.units.BuffType;
 import engine.gameobject.weapon.Upgrade;
 
 
@@ -47,5 +48,4 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
     public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((FiringRate) decorated);
     }
-
 }

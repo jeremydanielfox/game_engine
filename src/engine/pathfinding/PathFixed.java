@@ -26,7 +26,7 @@ public class PathFixed implements Path {
     }
 
     @Override
-    public PointSimple getNextLocation (double distance)
+    public PointSimple getNextLocation (double distance, PointSimple current)
                                                                              throws EndOfPathException {
         double count = 0;
         for (PathSegment seg : myPathSegments) {

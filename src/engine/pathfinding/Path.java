@@ -21,7 +21,7 @@ public interface Path {
 	 * @return point of the next destination
 	 * @throws EndOfPathException if no more points exist on the path
 	 */
-	public PointSimple getNextLocation(double distance)
+	public PointSimple getNextLocation(double distance, PointSimple current)
 			throws EndOfPathException;
 
 	/**

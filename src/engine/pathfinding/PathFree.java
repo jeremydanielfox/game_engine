@@ -12,7 +12,7 @@ import engine.gameobject.PointSimple;
 public class PathFree implements Path {
 
 	@Override
-	public PointSimple getNextLocation(double distance)
+	public PointSimple getNextLocation(double distance, PointSimple current)
 			throws EndOfPathException {
 		// TODO Auto-generated method stub
 		return null;

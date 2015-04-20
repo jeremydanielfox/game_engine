@@ -41,8 +41,8 @@ public class FixedWorld extends AbstractWorld {
 		while(true){
 			try {
 				PointSimple pathPoint = myPath.getNextLocation(i);
-				c.setCenterX(pathPoint.getX());
-				c.setCenterY(pathPoint.getY());
+				c.setCenterX(pathPoint.getX()+28);
+				c.setCenterY(pathPoint.getY()+28);
 				if(c.intersects(n.getBoundsInParent())){
 					return false;
 				}

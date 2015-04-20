@@ -1,5 +1,6 @@
 package gae.listView;
 
+import java.util.List;
 import javafx.scene.image.ImageView;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
@@ -22,17 +23,17 @@ public class GameObjectToEditable implements Editable {
     private static int ourID=0;
     private int myID = 0;
     private int Size = 10;
-    private int Health = 100;
     private Weapon weapon;
     private PointSimple location;
     private String imagePath;
     private MovableImage movableImage;
     private String name;
     private String type;
-    private Path myPath;
+    private List<List<Path>> myPath;
     private int width;
     private int height;
     private ImageView imageView;
+    private double health;
 
     public GameObjectToEditable (GameObjectSimple gameobject) {
         this.gameObject = gameobject;
@@ -106,13 +107,13 @@ public class GameObjectToEditable implements Editable {
     }
 
     @Override
-    public Path getPath () {
+    public List<List<Path>> getPath () {
         // TODO Auto-generated method stub
         return myPath;
     }
 
     @Override
-    public void setPath (Path path) {
+    public void setPath (List<List<Path>> path) {
         // TODO Auto-generated method stub
         myPath = path;
     }
@@ -170,5 +171,29 @@ public class GameObjectToEditable implements Editable {
         copy.setID(ourID);
         ourID++;
         return copy;
+    }
+
+    @Override
+    public double getHealth () {
+        // TODO Auto-generated method stub
+        return health;
+    }
+
+    @Override
+    public double setHealth (double health) {
+        // TODO Auto-generated method stub
+        return this.health = health;
+    }
+
+    @Override
+    public Weapon getWeapon () {
+        // TODO Auto-generated method stub
+        return weapon;
+    }
+
+    @Override
+    public void setWeapon (Weapon weapon) {
+        // TODO Auto-generated method stub
+        this.weapon = weapon;
     }
 }

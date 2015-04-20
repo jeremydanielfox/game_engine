@@ -40,7 +40,8 @@ public abstract class Editor implements Edits {
                 }
             } else {
                 System.out.println(parameterClass.getTypeName() + ":");
-                root.addToNodes(getMethodsTree((Class<?>) parameterClass, method));
+//                root.addToNodes(getMethodsTree((Class<?>) parameterClass, method));
+                root.addToNodes(new TreeNode(method, "ObjectComponentEditor"));
             }
         }
         return root;

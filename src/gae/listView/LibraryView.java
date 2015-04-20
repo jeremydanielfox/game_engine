@@ -4,8 +4,6 @@ import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
 import gae.gridView.PathView;
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.ObjectProperty;
@@ -53,7 +51,6 @@ public class LibraryView {
 
     public Scene getScene () {
         root = new Group();
-        // root.getChildren().addAll(view(), tempButton());
         root.getChildren().add(view());
         return new Scene(root);
     }
@@ -98,7 +95,7 @@ public class LibraryView {
             PaneList paneList = new PaneList();
             listOfListObjects.add(paneList);
             accordion.getPanes().add(paneList.initialize(objectGroup, nodeScene, myScene, wrapper,
-                                editableObservableList, gameObjects[i]));
+                                                         editableObservableList, gameObjects[i]));
 
         }
         pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
@@ -121,8 +118,6 @@ public class LibraryView {
             }
             pathList.setScreen();
         });
-        // for (TitledPane panes : accordion.getPanes()) {
-
         for (int i = 0; i < accordion.getPanes().size(); i++) {
             TitledPane chosen = accordion.getPanes().get(i);
             chosen.setOnMouseClicked(event -> {
@@ -130,16 +125,7 @@ public class LibraryView {
                     for (PaneList list : listOfListObjects) {
                         list.addRoot();
                     }
-                    // attempt at trying to
-                    // PaneList correct =
-                    // listOfListObjects.get(accordion.getPanes().indexOf(chosen));
-                    // correct.addRoot();
-                    // for (PaneList lists : listOfListObjects) {
-                    // if (!correct.equals(lists))
-                    // lists.removeRoot();
-                    // }
                     pathList.disableScreen();
-                    System.out.println("removing path!");
                 }
             });
         }

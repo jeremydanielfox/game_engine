@@ -1,9 +1,7 @@
 package gae.gameView;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-import gae.hudEditor.HudEditor;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,7 +14,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Window;
 
 
 public class UtilitiesBar {
@@ -91,7 +88,7 @@ public class UtilitiesBar {
         });
 
         fullscreenButton.setOnMousePressed(e -> {
-
+            
         });
     }
 

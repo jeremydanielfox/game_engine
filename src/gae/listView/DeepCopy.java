@@ -1,6 +1,5 @@
 package gae.listView;
 
-import gae.backend.Editable;
 import java.io.IOException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

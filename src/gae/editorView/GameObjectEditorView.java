@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
@@ -57,6 +58,9 @@ public class GameObjectEditorView implements UIObject {
 
         VBox top = new VBox();
         top.setPrefSize(vboxWidth, vboxHeight);
+        
+        Label temp = new Label("SimpleEditor should go here.");
+        top.getChildren().add(temp);
 
         bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
         bottom.setPrefSize(vboxWidth, vboxHeight);
@@ -69,7 +73,7 @@ public class GameObjectEditorView implements UIObject {
         anchor = new AnchorPane(topHalf, bottomHalf);
 
         AnchorPane.setTopAnchor(topHalf, 0.0);
-        AnchorPane.setBottomAnchor(bottomHalf, 5.0);
+        AnchorPane.setTopAnchor(bottomHalf, vboxHeight);
         return anchor;
     }
 

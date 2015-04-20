@@ -16,6 +16,7 @@ import gae.gridView.Path;
 
 
 public class MoverEditorOpener extends EditorOpener {
+    private static final String TITLE = "Path Editor";
     private LibraryData libraryData;
     private VBox optionBox;
     private boolean first = true;
@@ -31,6 +32,7 @@ public class MoverEditorOpener extends EditorOpener {
         s.setWidth(300);
         s.setHeight(500);
         s.setScene(scene);
+        s.setTitle(TITLE);
         s.show();
     }
 

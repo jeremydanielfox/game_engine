@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 /**
  * Defines a single interaction between game objects
  * 
+ * 
  * @author Brandon Choi
  *
  */
@@ -130,6 +131,10 @@ public class InteractionInstance {
             createObjectContainer();
         }
 
+        /**
+         * creates the object container by adding nodes to the VBox and setting up functionalities
+         * such as button pressing
+         */
         private void createObjectContainer () {
             scroller.setContent(container);
             adder.setOnMouseClicked(e -> {

@@ -1,33 +1,33 @@
 package engine.goals;
 
 import java.util.Observable;
+import engine.fieldsetting.Settable;
 import engine.game.StoryBoard;
 
-public class NoCurrentEventGoal extends Goal {
-
-    private StoryBoard myStoryBoard;
+@Settable
+public class NoCurrentEventGoal extends StoryBoardGoal {
     
     public NoCurrentEventGoal () {
-        initialize(new StoryBoard());
+        super();
     }
 
     public NoCurrentEventGoal (StoryBoard storyBoard) {
-        initialize(storyBoard);
+        super(storyBoard);
     }
     
-    private void initialize(StoryBoard storyBoard) {
-        myStoryBoard=storyBoard;
+    @Settable
+    public void setStoryBoard(StoryBoard s){
+        super.setStoryBoard(s);
     }
     
     @Override
     public boolean isSatisfied () {
-        return !(myStoryBoard.eventInProgress());
+        return !(getStoryBoard().eventInProgress());
     }
     
     @Override
     public void update (Observable o, Object arg) {
-        // doesn't observe anything
-        
+        // doesn't rely on updates
     }
 
 }

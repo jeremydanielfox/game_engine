@@ -11,7 +11,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
-
+/**
+ * 
+ * @author Kei Yoshikoshi and Eric Saba
+ *
+ */
 public class LibraryData {
 
     
@@ -23,11 +27,16 @@ public class LibraryData {
      */
 
     public void addToList (Editable editable) {
+        System.out.println("added" + editable.getName());
         String editableType = editable.getClass().getSimpleName();
         if (!database.containsKey(editableType)) {
             database.put(editableType, FXCollections.observableList(new ArrayList<>()));
         }
         database.get(editableType).add(editable);
+    }
+    
+    public void addObjectToList(Object object) {
+        
     }
 
     public Map<String, ObservableList<Editable>> getMap () {

@@ -31,6 +31,8 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     public static final double GAME_WIDTH_TO_HEIGHT = 1;
     public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
+    //TODO need to update this to be a function of min frame rate 
+    public static final int DEFAULT_FRAMES_SECOND = 60;
 
     private List<Node> hack = new ArrayList<Node>();
     private Game myGame;
@@ -69,6 +71,9 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myHeadsUp = new HUD(myPane, myGame.getShop());
         addControlButtons();
         for (Displayable d : myGame.getPlayer().getDisplayables()) {
+            myHeadsUp.addPairedDisplay(d);
+        }
+        for (Displayable d : myGame.getLevelBoard().getCurrentLevel().getDisplayables()) {
             myHeadsUp.addPairedDisplay(d);
         }
         vbox.getChildren().add(myHeadsUp.getDisplay());

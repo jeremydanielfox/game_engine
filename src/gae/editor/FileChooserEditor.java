@@ -1,10 +1,7 @@
 package gae.editor;
 
 import java.io.File;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -22,8 +19,8 @@ public class FileChooserEditor extends ComponentEditor {
     private Button chooserOpener;
     private Stage stage;
     private File file;
-
-    public FileChooserEditor (String name) {
+    
+    public FileChooserEditor() {
         fileChooser = new FileChooser();
         chooserOpener = new Button("LOAD FILE");
         stage = new Stage();
@@ -38,11 +35,6 @@ public class FileChooserEditor extends ComponentEditor {
     }
 
     @Override
-    public Node getObject () {
-        return getEditBox();
-    }
-
-    @Override
     public void clear () {
         
     }
@@ -54,7 +46,6 @@ public class FileChooserEditor extends ComponentEditor {
 
     @Override
     public Object createObject (Class<?> c) {
-        // TODO Auto-generated method stub
-        return null;
+        return file.getAbsolutePath();
     }
 }

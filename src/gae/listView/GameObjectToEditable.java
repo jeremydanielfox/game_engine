@@ -1,13 +1,10 @@
 package gae.listView;
 
-import View.ImageUtilities;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
 import gae.backend.Editable;
-import gae.gridView.Pair;
 import gae.gridView.Path;
 
 
@@ -45,7 +42,7 @@ public class GameObjectToEditable implements Editable {
          */
         name = gameObject.getTag().getName();
         imagePath = gameObject.getTag().getGraphic().getImagePath();
-        type = gameObject.getLabel().getLabel();
+        type = gameObject.getLabel().getName();
         imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
         // gameobject is not serializable and gives an error so must set to null
         gameObject = null;

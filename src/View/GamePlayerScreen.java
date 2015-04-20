@@ -27,10 +27,12 @@ import engine.game.Game;
 import engine.game.Player;
 import engine.game.PlayerUnit;
 import engine.game.StoryBoard;
+import engine.game.Timer;
+import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
-import engine.goals.HealthDepletionGoal;
+import engine.goals.HealthGoal;
 import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
 import engine.shop.ShopModel;
@@ -43,19 +45,20 @@ import gameworld.GameWorld;
 import gameworld.StructurePlacementException;
 
 
-public class GamePlayerScreen extends Application {
+public class GamePlayerScreen {
 
     private VBox myVbox;
     private Game myGame;
     private Stage myStage;
-    private ViewConcrete2 myGameView;
+    private EngineView myGameView;
 
-    public GamePlayerScreen () {
+    public GamePlayerScreen (Stage s) {
+        myStage = s;
         // myGame =
         // new ConcreteGame(new Player("myPlayer", null, null, null),
         // new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
         myVbox = new VBox(30);
-        makeDis();
+        //makeSideBar();
     }
 
     private void addDetails (String label, String text) {
@@ -68,7 +71,7 @@ public class GamePlayerScreen extends Application {
         myVbox.getChildren().addAll(insideBox);
     }
 
-    public void makeDis () {
+    public void makeSideBar () {
         addDetails("Name", "this is an example of a name"); // this should be taken in from the GAE
         addDetails("Description", "this is an example of a description"); // this should be taken in
                                                                           // from the GAE
@@ -84,13 +87,11 @@ public class GamePlayerScreen extends Application {
     }
 
     private void startGame () {
-        // myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_WIDTH);
 
         Group root = new Group();
         root.getChildren().add(makeDemoGame());
         Scene scene = new Scene(root);
         myStage.setScene(scene);
-
     }
 
     public Node makeDemoGame () {
@@ -108,12 +109,14 @@ public class GamePlayerScreen extends Application {
         Player myPlayer = new Player("PlayerName", health, scoreUnit, wallet);
         
         // EDIT: temp change -- game won't have accurate shop - Nathan
-        myGame = new ConcreteGame(new ShopModelSimple(), myPlayer, board, new ArrayList<ButtonWrapper>());
+        
+        //myGame = new ConcreteGame(new ShopModelSimple(), myPlayer, board, new ArrayList<ButtonWrapper>());
+        
         // ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
-        ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new NullGoal());
-        myGame.addButton(wrap);
+//        ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new NullGoal());
+//        myGame.addButton(wrap);
 
-        HealthDepletionGoal healthy = new HealthDepletionGoal(myPlayer);
+        HealthGoal healthy = new HealthGoal(myPlayer, 0);
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
         ScoreGoal score = new ScoreGoal(myPlayer, 200);
@@ -123,40 +126,44 @@ public class GamePlayerScreen extends Application {
         ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
         list3.add(score2);
 
+        Timer t = new TimerConcrete(5,10,"time");
         board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
-                                         story));
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),                                   story));
         ShopModel shop = new ShopModelSimple(world, myPlayer, 0);
+        myGame=loadGame();
         myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();
         return node;
     }
 
-    public static void main (String[] args) {
-        launch(args);
-    }
+    private Game loadGame () {
+        GameWriter gw = new GameWriter();
+        GameWorld world = gw.makeWorld();
+        Player player = gw.makePlayer();
+        return gw.makeGame(player, world, gw.makeShop(player, world));
+        //return DataManager.readFromXML(Game.class, FILE_SOURCE);
+//        return DataManager.readFromXML(Game.class, FILE_SOURCE);
 
-    @Override
-    public void start (Stage primaryStage) throws Exception {
-        myStage = primaryStage;
-        myStage.setWidth(Main.SCREEN_WIDTH);
-        myStage.setHeight(Main.SCREEN_HEIGHT);
+
+    }
+    
+    public Scene makeScene() {
         BorderPane pane = new BorderPane();
         pane.setPadding(new Insets(0, 40, 0, 0));
         Scene scene = new Scene(pane);
+        makeSideBar();
         myVbox.setAlignment(Pos.CENTER);
         pane.setRight(myVbox);
-        VBox veebz = new VBox();
+        
+        
+        VBox gameTypeImageVBox = new VBox();
         ImageView image = new ImageView("images/Park_Path.png");
         image.setPreserveRatio(true);
         image.setFitHeight(Main.SCREEN_HEIGHT);
-        Label label = new Label("Game Type");
-        label.setTextFill(Color.BLUE);
-        veebz.getChildren().addAll(image, label);
-        veebz.setAlignment(Pos.CENTER);
-        pane.setLeft(veebz);
-        myStage.setScene(scene);
-        myStage.show();
+        gameTypeImageVBox.getChildren().addAll(image);
+        gameTypeImageVBox.setAlignment(Pos.CENTER);
+        pane.setLeft(gameTypeImageVBox);
+        return scene;
     }
 
 }

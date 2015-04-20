@@ -1,5 +1,9 @@
 package engine.events;
 
+import java.util.function.Consumer;
+import engine.fieldsetting.Settable;
+
+
 /**
  * An Event that is triggered by a specified frame count.
  * 
@@ -11,27 +15,36 @@ package engine.events;
  *
  */
 public abstract class TimedEvent implements Event {
-    
+
     private static final int DEFAULT_START_TIME = -1;
-    
+
     private int frameTrigger;
     private int frameCount;
-    
+    private Consumer<? extends Object> myAction;
+
     /**
      * 
      * @param frameTrigger frame count at which the event occurs (optional)
      * @param goals goals which trigger the event to start
      */
     public TimedEvent (double seconds) {
-        frameCount = 0;
-        this.frameTrigger = SecondsToFrames.getFramesForSeconds(seconds);
+        initializeVars(seconds);
+    }
+
+    public TimedEvent(){
+        initializeVars(DEFAULT_START_TIME);
     }
     
-    private void initializeVars(double seconds){
+    private void initializeVars (double seconds) {
         frameCount = 0;
         this.frameTrigger = SecondsToFrames.getFramesForSeconds(seconds);
     }
 
+    @Settable
+    public void setEndingAction(Consumer<? extends Object> action){
+        myAction = action;
+    }
+    
     /**
      * 
      * @return false if the event is complete
@@ -58,6 +71,16 @@ public abstract class TimedEvent implements Event {
      */
     public void incFrameCount () {
         frameCount++;
+    }
+
+    /**
+     * This method is to be called when the wave is complete to execute the end of wave
+     * action/lambda.
+     */
+    public void onCompleteAction () {
+        if (myAction != null) {
+            myAction.accept(null);
+        }
     }
 
 }

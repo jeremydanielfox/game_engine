@@ -1,6 +1,5 @@
 package gae.editor;
 
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 /**
@@ -19,11 +18,6 @@ public class TextEditor extends ComponentEditor {
         super();
         field = new TextField();      
         getEditBox().getChildren().addAll(getLabel(), field);
-    }
-
-    @Override
-    public Node getObject () {
-        return getEditBox();
     }
 
     @Override

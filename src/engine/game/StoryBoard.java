@@ -2,18 +2,22 @@ package engine.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import engine.events.Event;
 import engine.fieldsetting.Settable;
+import engine.fieldsetting.Triggerable;
 
 
 /**
  * Manages the event progression for a level
  * 
  * @author Tom Puglisi
+ * @author Sierra Smith
+ * @author Cosette Goldstein
  *
  */
 @Settable
-public class StoryBoard {
+public class StoryBoard extends Observable {
     private List<Event> eventList;
 
     public StoryBoard (Event ... events) {
@@ -35,6 +39,7 @@ public class StoryBoard {
      * @return false if the StoryBoard has no more events to update
      */
     public boolean update () {
+        System.out.println(eventList.size());
         if (eventList.size() == 0) {
             return false;
         }
@@ -50,6 +55,9 @@ public class StoryBoard {
     private void updateEvent (Event event) {
         if (!event.update()) {
             eventList.remove(event);
+            event.onCompleteAction();
+            setChanged();
+            notifyObservers();
         }
     }
 
@@ -67,6 +75,7 @@ public class StoryBoard {
     /**
      * Sets the current event's start conditions to true, but only if they are not already true
      */
+    @Triggerable
     public void startNextEvent () {
         Event currentEvent = getCurrentEvent();
         if (currentEvent != null && !currentEvent.canStart()) {
@@ -85,9 +94,19 @@ public class StoryBoard {
      * calling update on it.
      */
     public boolean eventInProgress () {
-        if(getCurrentEvent() != null){
+        if (getCurrentEvent() != null) {
             return getCurrentEvent().canStart();
         }
         return false;
     }
+
+    /**
+     * Returns the number of events left in the storyboard.
+     * 
+     * @return no. of events left in storyboard
+     */
+    public int currentEventCount () {
+        return eventList.size();
+    }
+
 }

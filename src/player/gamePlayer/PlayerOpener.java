@@ -1,13 +1,18 @@
 package player.gamePlayer;
 
+import java.io.File;
 import java.util.Arrays;
+
+import View.GamePlayerScreen;
 import gae.gameView.Main;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -21,9 +26,11 @@ public class PlayerOpener extends Application {
 
     private static final String headerText = "Select a Game";
 
+    private Stage myStage;
     private Scene playerScene;
     private BorderPane view;
     private HBox options;
+    private HBox headerBox;
     private Text header;
     private Button loadB, playB;
     private GameSelector gameSelector;
@@ -31,19 +38,18 @@ public class PlayerOpener extends Application {
     public PlayerOpener () {
         view = new BorderPane();
         playerScene = new Scene(view);
-        playerScene.getStylesheets().add("/css/GamePlayerCSS.css");
         options = new HBox(50);
-        options.setId("optionBox");
+        headerBox = new HBox();
         header = new Text(headerText);
-        header.setId("playerHeader");
+        headerBox.getChildren().add(header);
         gameSelector = new GameSelector(playerScene);
-        setUpButtons();
-        setUpBorderPane();
-        createOptions();
-    }
 
-    private void createOptions () {
-        options.getChildren().addAll(loadB, playB);
+        playerScene.getStylesheets().add("/css/GamePlayerCSS.css");
+        options.setId("optionBox");
+        header.setId("playerHeader");
+        headerBox.setId("headerBox");
+
+        setUpBorderPane();
     }
 
     /**
@@ -52,16 +58,34 @@ public class PlayerOpener extends Application {
     private void setUpButtons () {
         loadB = new Button("LOAD GAME");
         loadB.setOnMousePressed(e -> {
-
+            openFileChooser();
         });
+        
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
-
+            GamePlayerScreen screen = new GamePlayerScreen(myStage);
+            myStage.setScene(screen.makeScene());
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {
             e.setId("playerButton");
+            e.setFocusTraversable(false);
         });
+
+        createOptions();
+    }
+
+    private void openFileChooser () {
+        FileChooser fc = new FileChooser();
+        Stage fileStage = new Stage();
+        File chosen = fc.showOpenDialog(fileStage);
+    }
+
+    /**
+     * adds buttons to options box
+     */
+    private void createOptions () {
+        options.getChildren().addAll(loadB, playB);
     }
 
     /**
@@ -69,13 +93,25 @@ public class PlayerOpener extends Application {
      */
     private void setUpBorderPane () {
         view.setCenter(gameSelector.getChooser());
-        view.setTop(header);
+        headerBox.setAlignment(Pos.CENTER);
+        view.setTop(headerBox);
+        setUpButtons();
         view.setBottom(options);
+        options.setAlignment(Pos.CENTER);
     }
 
+    /**
+     * returns the Player scene
+     * 
+     * @return
+     */
     public Scene getPlayer () {
         return playerScene;
     }
+
+    /*
+     * Main to start the Player
+     */
 
     public static void main (String[] args) {
         launch(args);
@@ -83,7 +119,7 @@ public class PlayerOpener extends Application {
 
     @Override
     public void start (Stage arg0) throws Exception {
-        Stage myStage = new Stage();
+        myStage = new Stage();
         myStage.setWidth(Main.SCREEN_WIDTH);
         myStage.setHeight(Main.SCREEN_HEIGHT);
         myStage.setScene(playerScene);

@@ -1,7 +1,6 @@
 package gae.gridView;
 
 import engine.gameobject.PointSimple;
-import javafx.geometry.Point2D;
 
 
 /**

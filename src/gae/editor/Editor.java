@@ -31,11 +31,17 @@ public abstract class Editor implements Edits {
                 System.out.println("double  " + getPropertyName(method.getName()));
                 root.addToNodes(new TreeNode(method, "SliderEditor"));
             } else if (parameterClass.equals(String.class)) {
-                System.out.println("String  " + getPropertyName(method.getName()));
-                root.addToNodes(new TreeNode(method, "TextEditor"));
+                if (getPropertyName(method.getName()).equals("Image Path")) {
+                    System.out.println("FileChooser  " + getPropertyName(method.getName()));
+                    root.addToNodes(new TreeNode(method, "FileChooserEditor"));
+                } else {
+                    System.out.println("String  " + getPropertyName(method.getName()));
+                    root.addToNodes(new TreeNode(method, "TextEditor"));
+                }
             } else {
                 System.out.println(parameterClass.getTypeName() + ":");
-                root.addToNodes(getMethodsTree((Class<?>) parameterClass, method));
+//                root.addToNodes(getMethodsTree((Class<?>) parameterClass, method));
+                root.addToNodes(new TreeNode(method, "ObjectComponentEditor"));
             }
         }
         return root;

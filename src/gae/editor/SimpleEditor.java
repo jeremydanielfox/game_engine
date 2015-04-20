@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import gae.openingView.UIObject;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -88,27 +87,16 @@ public class SimpleEditor extends Editor implements UIObject {
     }
 
     private void loadArrayWithEditors (TreeNode root, ArrayList<Node> editors) {
-        if (root.getNumChildren() == 0 && root.getInputType() != "null") {
-            addComponentEditorToArray(root, editors);
+        ComponentEditor component;
+        if (root.getInputType().equals("ObjectComponentEditor")) {
+            Class<?> klass = (Class<?>) root.getMethod().getGenericParameterTypes()[0];
+            klass = getConcreteClassFromMap(klass);
+            component = new ObjectComponentEditor(klass);
         }
-        else if (root.getMethod() != null){
-            addSimpleEditorToArray(root, editors);
-        }
-    }
-    
-    private void addComponentEditorToArray(TreeNode root, ArrayList<Node> editors) {
-        ComponentEditor component = (ComponentEditor)getInstanceFromName(String.format("%s%s", CLASS_PATH, root.getInputType()));
-        component.setName(Editor.getPropertyName(root.getMethod().getName()));
+        else component = (ComponentEditor)getInstanceFromName(String.format("%s%s", CLASS_PATH, root.getInputType()));
+        component.setName(root.getMethod().getName());
         editors.add(component.getObject());
         nodeMap.put(component, root);
-    }
-    
-    private void addSimpleEditorToArray(TreeNode root, ArrayList<Node> editors) {
-        Class<?> klass = (Class<?>) root.getMethod().getGenericParameterTypes()[0];
-        klass = getConcreteClassFromMap(klass);
-        SimpleEditor simple = new SimpleEditor(klass);
-        editors.add(simple.getObject());
-        nodeMap.put(simple, root);
     }
     
     /**

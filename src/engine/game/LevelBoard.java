@@ -16,4 +16,6 @@ public interface LevelBoard {
     public void addObserver(Observer o);
     
     public GameWorld getGameWorld();
+    
+    public Level getCurrentLevel();
 }

@@ -1,7 +1,7 @@
 package gae.listView;
 
 import gae.backend.Editable;
-import View.ViewUtilities;
+import View.ViewUtil;
 import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
 import gae.gridView.ContainerWrapper;
@@ -41,14 +41,14 @@ public class MovableImage extends Region {
      */
     private void enableDrag () {
         setOnMousePressed(e -> {
-            Point2D current = ViewUtilities.getMouseLocation(e, wrapGroup);
+            Point2D current = ViewUtil.getMouseLocation(e, wrapGroup);
             startX = current.getX();
             startY = current.getY();
         });
         setOnMouseDragged(e -> {
             // TODO: fix glitch where I drag select other towers not selected
             if (selected) {
-                Point2D current = ViewUtilities.getMouseLocation(e, wrapGroup);
+                Point2D current = ViewUtil.getMouseLocation(e, wrapGroup);
                 double newX = current.getX();
                 double newY = current.getY();
                 Point2D abs = localToParent(new Point2D(newX, newY));

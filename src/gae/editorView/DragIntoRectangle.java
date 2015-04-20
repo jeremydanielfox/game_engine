@@ -1,13 +1,17 @@
 package gae.editorView;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import View.ViewUtil;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -22,9 +26,11 @@ public class DragIntoRectangle extends Group {
     private double rectSize;
     private Rectangle rect;
     private List<Node> nodesList;
+    private Scene scene;
 
-    public DragIntoRectangle (double width, String label) {
+    public DragIntoRectangle (double width, String label, Scene scene) {
         this.width = width;
+        this.scene = scene;
         type = label;
         rectSize = width / 5;
         rect = new Rectangle(rectSize, rectSize, Color.TRANSPARENT);
@@ -65,10 +71,39 @@ public class DragIntoRectangle extends Group {
         this.getChildren().add(image);
         image.setLayoutX(rectSize / 2 + ViewUtil.getCenterOffsetX(image));
         image.setLayoutY(rectSize / 2 + ViewUtil.getCenterOffsetY(image));
+        setUpEditorOpener();
+        image.setOnMouseClicked(e -> {
+            image.setEffect(new Glow(1));
+            scene.setOnKeyPressed(keyEvent -> {
+                if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
+                    this.getChildren().remove(image);
+                    setVisible();
+                }
+            });
+
+        });
         setInvisible();
+    }
+
+    private void setUpEditorOpener () {
+        try {
+            Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
+            Object instance = className.getConstructor().newInstance();
+            Method setUpList = className.getMethod("initialize");
+            setUpList.invoke(instance);
+        }
+        catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
+                | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            
+        }
     }
 
     private void setInvisible () {
         nodesList.forEach(node -> node.setVisible(false));
+    }
+
+    private void setVisible () {
+        nodesList.forEach(node -> node.setVisible(true));
     }
 }

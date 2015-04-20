@@ -6,7 +6,14 @@ import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.Health;
 import engine.gameobject.HealthSimple;
+import engine.gameobject.Mover;
+import engine.gameobject.MoverPath;
+import engine.gameobject.PointSimple;
+import gae.gridView.Path;
+import engine.pathfinding.PathFixed;
+import engine.pathfinding.PathSegmentBezier;
 import gae.backend.Editable;
+import gae.gridView.PathView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -28,13 +35,22 @@ public class LibraryData {
     }
 
     private ObservableList<Editable> editableList = FXCollections.observableArrayList();
+    private ObservableList<PathView> pathList = FXCollections.observableArrayList();
 
-    public ObservableList<Editable> getObservableList () {
+    public ObservableList<Editable> getEditableObservableList () {
         return editableList;
     }
 
-    public void addToList (Editable editable) {
+    public ObservableList<PathView> getPathObservableList () {
+        return pathList;
+    }
+
+    public void addEditableToList (Editable editable) {
         editableList.add(editable);
+    }
+
+    public void addPathToList (PathView pathView) {
+        pathList.add(pathView);
     }
 
     public List<GameObjectSimple> getGameObjectList () {
@@ -45,11 +61,37 @@ public class LibraryData {
                                           editable.getImagePath()));
             // object.setLabel(editableNode.getLabel());
             // object.setTag(editableNode.getTag());
+            object.setMover(getMover(editable));
             object.setPoint(editable.getLocation());
-//            object.setHealth(new HealthSimple(editable.getHealth()));
+            object.setHealth(new HealthSimple(editable.getHealth()));
             // WHAT IS TAG/LABEL
             // set Collider
         }
         return gameObjectList;
+    }
+
+    private MoverPath getMover (Editable editable) {
+        List<List<Path>> allPaths = editable.getPath();
+        MoverPath mover = new MoverPath();
+        PathFixed myPath = new PathFixed();
+        for (List<Path> lists : allPaths) {
+
+            for (int i = 0; i < lists.size(); i++) {
+                // System.out.println("Path " + i + "'s coordinates");
+                Path temp = lists.get(i);
+                temp.printInfo();
+                // System.out.println();
+                PathSegmentBezier tempBez = new PathSegmentBezier();
+                List<PointSimple> points = new ArrayList<>();
+                points.add(temp.getStart());
+                points.add(temp.getControlOne());
+                points.add(temp.getControlTwo());
+                points.add(temp.getEnd());
+                tempBez.setPoints(points);
+                myPath.addPathSegment(tempBez);
+            }
+        }
+        mover.setPath(myPath);
+        return mover;
     }
 }

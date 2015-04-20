@@ -3,6 +3,7 @@ package gae.editorView;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -12,15 +13,15 @@ import javafx.scene.text.FontWeight;
 
 public class GameObjectContainer extends VBox {
     private double width;
-    private double height;
     private String[] settable = { "Weapon", "Health", "Mover" };
     private List<DragIntoRectangle> rectangleList;
+    private Scene scene;
 
-    public GameObjectContainer (double width, double height) {
+    public GameObjectContainer (double width, double height, Scene scene) {
         rectangleList = new ArrayList<>();
         this.setPrefSize(width, height);
         this.width = width;
-        this.height = height;
+        this.scene = scene;
         this.setSpacing(100);
         this.getChildren().add(getLabel());
         this.getChildren().add(addRectangles());
@@ -38,7 +39,7 @@ public class GameObjectContainer extends VBox {
         this.setSpacing(width / 10);
         System.out.println("total width is : " + width);
         for (int i = 1; i <= 3; i++) {
-            DragIntoRectangle rect = new DragIntoRectangle(width, settable[i - 1]);
+            DragIntoRectangle rect = new DragIntoRectangle(width, settable[i - 1], scene);
             rect.setTranslateX((3 * i - 2) * width / 10);
             hbox.getChildren().add(rect);
             rectangleList.add(rect);

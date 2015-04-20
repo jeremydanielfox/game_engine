@@ -18,6 +18,7 @@ import gae.backend.Editable;
 import gae.backend.TempTower;
 import gae.gridView.ContainerWrapper;
 import gae.listView.DraggableUtilities;
+import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
 import gae.openingView.UIObject;
 
@@ -26,7 +27,6 @@ public class GameObjectEditorView implements UIObject {
     private ObservableList<Node> optionList = FXCollections.observableArrayList();
     private String[] imagePaths = { "/images/WeaponImage.png", "/images/HealthImage.jpeg",
                                    "/images/PathImage.png" };
-    private String[] settable = { "Weapon", "Health", "Mover" };
     private Group root;
     private Scene scene;
     private BorderPane border;
@@ -34,6 +34,7 @@ public class GameObjectEditorView implements UIObject {
     private static final int SIDE_WIDTH = 430;
     private GameObjectContainer bottom;
     private AnchorPane anchor;
+    private Editable editable;
 
     public GameObjectEditorView (Scene scene) {
         root = new Group();
@@ -57,7 +58,7 @@ public class GameObjectEditorView implements UIObject {
         VBox top = new VBox();
         top.setPrefSize(vboxWidth, vboxHeight);
 
-        bottom = new GameObjectContainer(vboxWidth, vboxHeight);
+        bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
 

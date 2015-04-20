@@ -9,7 +9,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import gae.backend.Editable;
 
 
@@ -42,7 +41,6 @@ public class ListViewUtilities {
             return content;
         }
         else { // vertical
-            System.out.println("IMAGEVIEW");
             ImageView image = (ImageView) object;
             image.setFitHeight(THUMBNAIL_SIZE_VERTICAL);
             image.setPreserveRatio(true);

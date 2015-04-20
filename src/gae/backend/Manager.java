@@ -13,11 +13,11 @@ public class Manager {
     public void init (Stage s) {
         this.s = s;
         LibraryData data = new LibraryData();
-        data.addToList(new TempTower());
-        data.addToList(new TempTower());
+        data.addEditableToList(new TempTower());
+        data.addEditableToList(new TempTower());
         // DummyLibraryView view = new DummyLibraryView(s, data.getMap());
         TempTower tower = new TempTower();
-        data.addToList(tower);
+        data.addEditableToList(tower);
         // EditorView view = new EditorView(tower, s);
         // view.setGUI();
 

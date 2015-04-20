@@ -3,12 +3,14 @@ package gae.listView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import gae.backend.Editable;
 import gae.gridView.Path;
 import gae.gridView.PathView;
 import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.gridView.ContainerWrapper;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -35,7 +37,7 @@ public class PathList {
     private PathView pathView;
     private List<List<Path>> allPaths;
     private List<PathView> previousPaths;
-    private int counter;
+    private static int counter;
     private ObservableList<PathView> paths;
     private StackPane stack;
     private Scene scene;
@@ -82,8 +84,7 @@ public class PathList {
         listView.setPrefSize(200, 250);
 
         listView.setEditable(true);
-
-        listView.setItems(paths);
+        
         listView.setOnMouseClicked(e -> {
             PathView selected = listView.getSelectionModel().getSelectedItem();
             setOldPath(selected);
@@ -93,7 +94,7 @@ public class PathList {
                     paths.remove(selected);
 
                     allPaths.remove(listIndex);
-                    selected.resetScreen();
+                    selected.resetScreen(stack);
                 }
             });
         });
@@ -123,7 +124,7 @@ public class PathList {
      * disables the screen by removing the root and disabling the path buttons
      */
     public void disableScreen () {
-        pathView.resetScreen();
+        pathView.resetScreen(stack);
         for (Button button : buttonList) {
             buttonStates.add(button.disableProperty().get());
             button.setDisable(true);
@@ -135,7 +136,7 @@ public class PathList {
      * object
      */
     public void setScreen () {
-        pathView.resetScreen();
+        pathView.resetScreen(stack);
         try {
             for (int i = 0; i < buttonList.size(); i++) {
                 buttonList.get(i).setDisable(buttonStates.get(i));
@@ -148,9 +149,9 @@ public class PathList {
     }
 
     private void setOldPath (PathView view) {
-        pathView.resetScreen();
+        pathView.resetScreen(stack);
         pathView = view;
-        pathView.remakePath();
+        pathView.remakePath(stack);
     }
 
     private Button makeBezierCurve () {
@@ -166,11 +167,11 @@ public class PathList {
                 if (newValue.intValue() == 0) {
                     makeCurve.setDisable(true);
                 }
-                else {
-                    makeCurve.setDisable(false);
-                    label.setTextFill(Color.BLACK);
-                }
-            });
+                                                   else {
+                                                       makeCurve.setDisable(false);
+                                                       label.setTextFill(Color.BLACK);
+                                                   }
+                                               });
         });
         return makeCurve;
     }
@@ -196,7 +197,7 @@ public class PathList {
     private Button newPath () {
         Button newPath = new Button("Make New Path");
         newPath.setOnMouseClicked(e -> {
-            pathView.resetScreen();
+            pathView.resetScreen(stack);
             pathView = new PathView(stack, this.scene);
             completePath.setDisable(false);
         });
@@ -209,7 +210,7 @@ public class PathList {
      */
     private Button displayPaths () {
         Button display = new Button("make XML");
-//        XStream xst = new XStream(new DomDriver());
+        // XStream xst = new XStream(new DomDriver());
         display.setOnMouseClicked(e -> {
             // this is the information that'll be passed into XML (allPaths)
             // *****************************************//
@@ -224,10 +225,10 @@ public class PathList {
                     // System.out.println();
                     PathSegmentBezier tempBez = new PathSegmentBezier();
                     List<PointSimple> points = new ArrayList<>();
-                    points.add(new PointSimple(temp.getStart()));
-                    points.add(new PointSimple(temp.getControlOne()));
-                    points.add(new PointSimple(temp.getControlTwo()));
-                    points.add(new PointSimple(temp.getEnd()));
+                    points.add(temp.getStart());
+                    points.add(temp.getControlOne());
+                    points.add(temp.getControlTwo());
+                    points.add(temp.getEnd());
                     tempBez.setPoints(points);
                     myPath.addPathSegment(tempBez);
                 }

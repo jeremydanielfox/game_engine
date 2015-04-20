@@ -3,6 +3,7 @@ package gae.tabView;
 import java.util.function.Consumer;
 import gae.backend.Editable;
 import gae.gridView.LevelView;
+import gae.listView.LibraryData;
 import gae.openingView.UIObject;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -21,6 +22,7 @@ public class CentralTabView implements UIObject {
     private Scene scene;
     private HudEditorTab hudTab;
     private LevelView levelView;
+    private LibraryData libraryData;
 
     public CentralTabView (Scene sceneIn) {
         scene = sceneIn;
@@ -28,6 +30,7 @@ public class CentralTabView implements UIObject {
     }
 
     private void initialize () {
+        libraryData = LibraryData.getInstance();
         levelCount = 1;
 
         baseNode = new VBox();
@@ -36,15 +39,13 @@ public class CentralTabView implements UIObject {
         ShopTab shopTab = new ShopTab();
         hudTab = new HudEditorTab(null);
         GameObjectEditorTab gameObjectTab = new GameObjectEditorTab(scene);
+
         tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode(),
                                  gameObjectTab.getBaseTabNode());
 
-        
         Button newLevel = new Button("Add Level");
         newLevel.setOnAction(e -> createNewLevel());
 
-        
-        createNewLevel();
         baseNode.getChildren().addAll(newLevel, tabView);
     }
 
@@ -52,7 +53,7 @@ public class CentralTabView implements UIObject {
         levelView = new LevelView();
         LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
         LevelTabSet newLevel =
-                new LevelTabSet(levelView.getBorder(scene), levelPrefs.getStack());
+                new LevelTabSet(levelView.getBorder(scene, libraryData), levelPrefs.getStack());
         Tab newTab = new Tab("Level:" + levelCount++);
         newTab.setContent(newLevel.getBaseNode());
         newTab.setClosable(false);
@@ -70,8 +71,8 @@ public class CentralTabView implements UIObject {
     }
 
     public Consumer<Object> getConsumer () {
-        //TODO Initially create a levelView so the consumer can be passed to the GameView
-        //return levelView.getConsumer();
+        // TODO Initially create a levelView so the consumer can be passed to the GameView
+        // return levelView.getConsumer();
         return null;
     }
 }

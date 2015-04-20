@@ -19,6 +19,11 @@ import javafx.stage.Stage;
  *
  */
 
+/*
+ * TODO: singleton model, holds RangeEngine, CollisionEngine
+ * instantiate BuffImparter, ShootAt
+ */
+
 public class InteractionTable extends Application{
 
     private static final String ADD_TEXT = "Add New Interaction";
@@ -27,7 +32,7 @@ public class InteractionTable extends Application{
     private ScrollPane scroller;
     private VBox content;
     private Button adder;
-    private List<Interaction> interactions;
+    private List<InteractionInstance> interactions;
 
     public InteractionTable () {
         container = new BorderPane();
@@ -46,7 +51,7 @@ public class InteractionTable extends Application{
      */
     private void setUpButtons () {
         adder.setOnMouseClicked(e -> {
-            Interaction i = new Interaction();
+            InteractionInstance i = new InteractionInstance();
             interactions.add(i);
             content.getChildren().add(i.getInteractionSetter());
         });

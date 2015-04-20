@@ -28,13 +28,13 @@ import javafx.scene.text.Text;
  * tree of hierarchy for labels
  */
 
-public class Interaction {
+public class InteractionInstance {
 
     private HBox container;
     private DropDown interactionType;
     private ObjectContainer box1, box2;
 
-    public Interaction () {
+    public InteractionInstance () {
         container = new HBox(80);
         interactionType = new DropDown("Interaction Type", Arrays.asList("Collide",
                                                                          "Do not collide", "Shoot",
@@ -67,6 +67,7 @@ public class Interaction {
 
         public DropDown (String n, List<String> options) {
             container = new VBox();
+            container.setAlignment(Pos.CENTER);
             container.setId("interactionOptions");
             label = new Label(n);
             choices = new ComboBox();

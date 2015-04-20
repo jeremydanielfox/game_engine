@@ -20,6 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -55,6 +57,8 @@ public class LevelView {
     private ContainerWrapper wrapper;
     private LibraryView libraryview;
     private LibraryData libraryData;
+    private TileContainer container;
+    private VBox gridOptions;
 
     public BorderPane getBorder (Scene scene, LibraryData libraryData) {
         this.libraryData = libraryData;
@@ -93,7 +97,7 @@ public class LevelView {
         backgroundProperty = background.imageProperty();
         gridSizeProperty = new SimpleObjectProperty<>(DEFAULT_GRID_DIMENSIONS);
         Pane root = new Pane();
-        TileContainer container = new TileContainer(gridSizeProperty, scene, border);
+        container = new TileContainer(gridSizeProperty, scene, border);
         root.getChildren().addAll(background, container, tempGrid());
         // root.getChildren().addAll(background, container);
 
@@ -118,7 +122,8 @@ public class LevelView {
         Group leftview =
                 libraryview.getGroup(stack, scene, libraryData.getPathObservableList(), wrapper);
         // TODO: can't do the above since it messes up the coordinates - got to fix
-        leftview.getChildren().add(gridOptions());
+        setGridOptions();
+        leftview.getChildren().add(gridOptions);
         return leftview;
     }
 
@@ -133,15 +138,22 @@ public class LevelView {
         return background;
     }
 
-    private Node gridOptions () {
-        VBox vbox = new VBox();
-        vbox.setTranslateX(scene.getWidth()*2/3);
-        vbox.setTranslateY(scene.getHeight()/2);
+    private void setGridOptions () {
+        gridOptions = new VBox();
+        gridOptions.setTranslateX(scene.getWidth()*2/3);
+        gridOptions.setTranslateY(scene.getHeight()/2);
         Text title = new Text("Grid Properties");
-        Label widthLabel = new Label("# Tile Rows");
+        
+        gridOptions.getChildren().addAll(title, changeBackground(backgroundProperty));
+        makeTileDimensions();
+        makeGridToggle();
+    }
+    
+    private void makeTileDimensions () {
+        Label widthLabel = new Label("# Rows");
         TextField setWidth = new NumberTextField();
         setWidth.setMaxWidth(TEXT_BOX_WIDTH);
-        Label heightLabel = new Label("# Tile Columns");
+        Label heightLabel = new Label("# Columns");
         TextField setHeight = new NumberTextField();
         setHeight.setMaxWidth(TEXT_BOX_WIDTH);
         GridPane grid = new GridPane();
@@ -149,20 +161,41 @@ public class LevelView {
         grid.add(setWidth, 1, 0);
         grid.add(heightLabel, 0, 1);
         grid.add(setHeight, 1,1);
-        Button setDimensions = new Button("Change Grid Dimensions");
+        Button setDimensions = new Button("Change Grid Dimensions");        
         setDimensions.setOnAction(e -> {
             gridSizeProperty.setValue(new Dimension(Integer.parseInt(setWidth.getText()), Integer
                     .parseInt(setHeight.getText())));
         });
-        vbox.getChildren().addAll(title, changeBackground(backgroundProperty), grid,
-                                  setDimensions);
-        return vbox;
+        gridOptions.getChildren().addAll(grid, setDimensions);
+    }
+    
+    private void makeGridToggle(){
+        ToggleGroup group=new ToggleGroup();
+        group.selectedToggleProperty().addListener((obs, old, up)->{
+            container.setVisible((boolean) up.getUserData());
+        });
+        ToggleButton show=makeBooleanToggle("Show Grid", true);
+        show.setUserData(true);
+        ToggleButton hide=makeBooleanToggle("Hide Grid", false);
+        hide.setUserData(false);
+        group.getToggles().addAll(show, hide);
+        HBox hbox=new HBox();
+        hbox.getChildren().addAll(show, hide);
+        gridOptions.getChildren().add(hbox);
+    }
+    
+    private ToggleButton makeBooleanToggle(String label, boolean bool){
+        ToggleButton showGrid = new ToggleButton(label);
+        showGrid.setOnAction(e->{
+            container.setVisible(bool);
+        });
+        return showGrid;
     }
 
     private GridPane tempGrid () {
         GridPane grid = new GridPane();
         grid.setHgap(0);
-        grid.setTranslateX(500);
+        grid.setTranslateX(200);
         grid.add(tempButtonTower(), 0, 0);
         grid.add(tempButtonEnemy(), 0, 1);
         return grid;

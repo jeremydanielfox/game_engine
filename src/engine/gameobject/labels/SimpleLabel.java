@@ -25,6 +25,10 @@ public class SimpleLabel implements Label{
         myName = name;
     }
     
+    public String getName(){
+        return myName;
+    }
+    
     public void setSuperLabel(Label parent){
         superLabel = parent;
     }
@@ -32,8 +36,8 @@ public class SimpleLabel implements Label{
         return superLabel;
     }
     
-    public String getName(){
-        return myName;
+    public Label clone(){
+        return new SimpleLabel(myName, superLabel);
     }
     
     //TODO: equals method needs work... possibly should go all the way down to baselabel

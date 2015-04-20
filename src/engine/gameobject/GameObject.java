@@ -64,4 +64,8 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
      */
     public void setMover (Mover mover);
 
+    public void setHealth (Health clone);
+
+    public void setTag (GameObjectTag myTag);
+
 }

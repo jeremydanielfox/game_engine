@@ -40,10 +40,19 @@ public class BasicWeapon implements Weapon {
         myRange = new RangeUpgrade(250);
         myFiringRate = new FiringRateUpgrade(.5);
         myFiringStrategy = new SingleProjectile();
-        upgradables = initializeUpgrades();
         tree = new UpgradeForest();
     }
 
+    @Override
+    public Weapon clone(){
+        BasicWeapon clone = new BasicWeapon();
+        clone.setFiringRate(myFiringRate.getRate());
+        clone.setRange(myRange.getRange());
+        clone.setFiringStrategy(myFiringStrategy);
+        clone.setProjectile(myProjectile);
+        return clone;
+    }
+    
     private UpgradeSet<Upgrade> initializeUpgrades () {
         UpgradeSet<Upgrade> result =
                 new UpgradeSet<Upgrade>(new Upgrade[] { myRange, myFiringRate });
@@ -105,6 +114,7 @@ public class BasicWeapon implements Weapon {
     @Settable
     public void setProjectile (GameObject projectile) {
         myProjectile = projectile;
+        initializeUpgrades();
     }
 
     @Settable

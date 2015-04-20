@@ -6,20 +6,25 @@ import java.util.Set;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.firingstrategy.Explosion;
-import gae.listView.DeepCopy;
 import gameworld.ObjectCollection;
 
 public class Collider {
-    private Set<String> collidedID;
+
+    private Set<GameObject> collidedID;
     private Set<Buff> collisionBuffs;
     private Explosion onDeath;
     
     public Collider () {
-        collidedID = new HashSet<String>();
+        collidedID = new HashSet<GameObject>();
         collisionBuffs = new HashSet<Buff>();
         onDeath = new Explosion();
     }
 
+    public Collider (Set<Buff> onCollision, Explosion onDeath) {
+        collidedID = new HashSet<GameObject>();
+        this.collisionBuffs = onCollision;
+        this.onDeath = onDeath;
+    }
     public void addCollisionBehavior(Buff newBuff){
         removeDuplicateBuff(newBuff);
         collisionBuffs.add(newBuff);
@@ -34,9 +39,10 @@ public class Collider {
     }
     
     public void collide (GameObject target) {
-        onCollision(target);
-        //TODO: Keep track of things that have been collided using something like
-        //collidedID.add(target.getName());
+        if (!collidedID.contains(target)){
+            collidedID.add(target);
+            onCollision(target);
+        }
     }
     
     public void explode (ObjectCollection world, PointSimple location){
@@ -57,12 +63,8 @@ public class Collider {
         }
     }
     
-    
-    /**
-     * Returns the deep clone, but must test to see if behavior is correct
-     */
     public Collider clone(){
-        return (Collider) DeepCopy.copy(this);
+        return new Collider(new HashSet<>(collisionBuffs), onDeath.clone());
     }
     
     public Set<Buff> getCollisionBuffs () {

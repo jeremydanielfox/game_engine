@@ -16,14 +16,14 @@ public class Explosion {
     private double radius;
     private Set<Buff> explosBuffs;
 
-    public Explosion (int radius, Collection<Buff> buffSet) {
-        this.explosBuffs = new HashSet<Buff>(buffSet);
-        this.radius = radius;
-    }
-
     public Explosion () {
         radius = 0;
         explosBuffs = new HashSet<Buff>();
+    }
+    
+    public Explosion (double radius, Collection<Buff> buffSet) {
+        this.explosBuffs = new HashSet<Buff>(buffSet);
+        this.radius = radius;
     }
 
     /**
@@ -69,6 +69,10 @@ public class Explosion {
         return false;
     }
     
+    public Explosion clone(){
+        return new Explosion(radius, explosBuffs);
+    }
+
     public Set<Buff> getBuffSet () {
         return Collections.unmodifiableSet(explosBuffs);
     }

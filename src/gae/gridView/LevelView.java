@@ -42,7 +42,7 @@ import javafx.stage.Stage;
  * A class that instantiates the necessary components of the level. Contains the Library on the left
  * and grid/background in the center.
  * 
- * @author Kei
+ * @author Kei and Nina
  *
  */
 public class LevelView {
@@ -127,6 +127,11 @@ public class LevelView {
         return leftview;
     }
 
+    /**
+     * creates button to change the background. added into gridoptions
+     * 
+     * @return
+     */
     private Button changeBackground (ObjectProperty<Image> backgroundProperty) {
         Button background = new Button("Change Background");
         background.setOnAction(e -> {
@@ -138,6 +143,10 @@ public class LevelView {
         return background;
     }
 
+    /**
+     * Sets location of VBox and fills grid options
+     * 
+     */
     private void setGridOptions () {
         gridOptions = new VBox();
         gridOptions.setTranslateX(scene.getWidth()*2/3);
@@ -149,6 +158,10 @@ public class LevelView {
         makeGridToggle();
     }
     
+    /**
+     * Makes fields for changing Grid dimensions. Called in setGridOptions()
+     * 
+     */
     private void makeTileDimensions () {
         Label widthLabel = new Label("# Rows");
         TextField setWidth = new NumberTextField();
@@ -169,27 +182,23 @@ public class LevelView {
         gridOptions.getChildren().addAll(grid, setDimensions);
     }
     
+    /**
+     * Makes grid view toggle. Called in setGridOptions()
+     * 
+     */
     private void makeGridToggle(){
         ToggleGroup group=new ToggleGroup();
         group.selectedToggleProperty().addListener((obs, old, up)->{
             container.setVisible((boolean) up.getUserData());
         });
-        ToggleButton show=makeBooleanToggle("Show Grid", true);
+        ToggleButton show=new ToggleButton("Show Grid");
         show.setUserData(true);
-        ToggleButton hide=makeBooleanToggle("Hide Grid", false);
+        ToggleButton hide=new ToggleButton("Hide Grid");
         hide.setUserData(false);
         group.getToggles().addAll(show, hide);
         HBox hbox=new HBox();
         hbox.getChildren().addAll(show, hide);
         gridOptions.getChildren().add(hbox);
-    }
-    
-    private ToggleButton makeBooleanToggle(String label, boolean bool){
-        ToggleButton showGrid = new ToggleButton(label);
-        showGrid.setOnAction(e->{
-            container.setVisible(bool);
-        });
-        return showGrid;
     }
 
     private GridPane tempGrid () {

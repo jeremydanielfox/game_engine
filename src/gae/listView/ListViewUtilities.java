@@ -20,7 +20,8 @@ import gae.backend.Editable;
  */
 public class ListViewUtilities {
 
-    public static final int THUMBNAIL_SIZE = 20;
+    public static final int THUMBNAIL_SIZE_HORIZONTAL = 20;
+    public static final int THUMBNAIL_SIZE_VERTICAL = 200;
 
     /**
      * able to create a cell with a label and icon
@@ -28,15 +29,25 @@ public class ListViewUtilities {
      * @param edit
      * @return
      */
-    public static Node createCellContentWithIcon (Editable edit) {
-        HBox content = new HBox();
-        ImageView image = new ImageView(edit.getImagePath());
+    public static Node createCellContentWithIcon (Object object) {
+        if (object instanceof gae.backend.Editable) { // horizontal
+            HBox content = new HBox();
+            Editable edit = (Editable) object;
+            ImageView image = new ImageView(edit.getImagePath());
 
-        image.setFitHeight(THUMBNAIL_SIZE);
-        image.setPreserveRatio(true);
-        content.getChildren().addAll(image, new Label(edit.getName() + edit.getID()));
-        return content;
+            image.setFitHeight(THUMBNAIL_SIZE_HORIZONTAL);
+            image.setPreserveRatio(true);
+            content.getChildren().addAll(image, new Label(edit.getName() + edit.getID()));
+            return content;
+        }
+        else { // vertical
+            ImageView image = (ImageView) object;
+            image.setFitHeight(THUMBNAIL_SIZE_VERTICAL);
+            image.setPreserveRatio(true);
+            return image;
+        }
     }
+
 
     /**
      * creates a ListView given an observable list of Editables, with specific properties, such as
@@ -73,20 +84,52 @@ public class ListViewUtilities {
                 }
 
             });
-        list.setCellFactory((myList) -> {
+        list.setCellFactory( (myList) -> {
             return new ListCell<Editable>() {
-                    @Override
-                    protected void updateItem (Editable edit, boolean bln) {
-                        super.updateItem(edit, bln);
-                        if (bln) {
-                            setText(null);
-                            setGraphic(null);
-                        }
-                        else if (edit != null) {
-                            setGraphic(ListViewUtilities.createCellContentWithIcon(edit));
-                        }
+                @Override
+                protected void updateItem (Editable edit, boolean bln) {
+                    super.updateItem(edit, bln);
+                    if (bln) {
+                        setText(null);
+                        setGraphic(null);
                     }
-                };
+                    else if (edit != null) {
+                        setGraphic(ListViewUtilities.createCellContentWithIcon(edit));
+                    }
+                }
+            };
+        });
+
+        return list;
+    }
+
+    /**
+     * creates a ListView given an observable list of Editables, with specific properties, such as
+     * deleting objects and highlighting selected objects
+     * 
+     * @param editables
+     * @param scene
+     * @return
+     */
+    public static ListView<Node> createList (ObservableList<Node> editables) {
+        ListView<Node> list = new ListView<>();
+        list.setPrefWidth(200);
+        list.setItems(editables);
+
+        list.setCellFactory( (myList) -> {
+            return new ListCell<Node>() {
+                @Override
+                protected void updateItem (Node object, boolean bln) {
+                    super.updateItem(object, bln);
+                    if (bln) {
+                        setText(null);
+                        setGraphic(null);
+                    }
+                    else if (object != null) {
+                        setGraphic(ListViewUtilities.createCellContentWithIcon(object));
+                    }
+                }
+            };
         });
 
         return list;

@@ -98,15 +98,15 @@ public class PathView {
     /**
      * Called when user needs the objects back on the screen.
      */
-    public void remakePath () {
-        myStack.getChildren().add(root);
+    public void remakePath (StackPane stack) {
+        stack.getChildren().add(root);
     }
 
     /**
      * Called when user needs the objects off the screen.
      */
-    public void resetScreen () {
-        myStack.getChildren().remove(root);
+    public void resetScreen (StackPane stack) {
+        stack.getChildren().remove(root);
     }
 
     /**
@@ -121,7 +121,7 @@ public class PathView {
             pathList.add(set.getPathObject());
         }
 
-        resetScreen();
+        resetScreen(myStack);
         return pathList;
     }
 

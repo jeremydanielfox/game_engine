@@ -15,7 +15,7 @@ import javafx.scene.effect.ColorAdjust;
  * @author Danny
  *
  */
-public abstract class Buff {
+public abstract class Buff implements Upgrade {
     private int duration;
     private int timeSinceStart;
 
@@ -103,5 +103,5 @@ public abstract class Buff {
      */
     public abstract Buff clone ();
     
-    public abstract BuffType getType ();
+    public abstract BuffType getBuffType ();
 }

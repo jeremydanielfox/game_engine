@@ -35,4 +35,7 @@ public class HealthSimple implements Health {
         myHealth = health;
     }
 
+    public Health clone(){
+        return new HealthSimple(myHealth);
+    }
 }

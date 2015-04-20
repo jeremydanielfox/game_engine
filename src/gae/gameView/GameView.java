@@ -2,7 +2,7 @@ package gae.gameView;
 
 import java.util.EventObject;
 import gae.backend.Editable;
-import gae.backend.GameManager;
+//import gae.backend.GameManager;
 import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
 import javafx.event.EventHandler;
@@ -34,7 +34,7 @@ public class GameView implements UIMediator {
     //private LibraryView myLibrary;
     private UtilitiesBar utilities;
     private GenericObjectsPane myGenericObjects;
-    private GameManager myGameManager;
+//    private GameManager myGameManager;
 
     public GameView () {
         myUI = new BorderPane();
@@ -84,8 +84,7 @@ public class GameView implements UIMediator {
     private void insertBorders () {
         myUI.setTop(utilities.getUtilitiesBar());
         myUI.setCenter(myTabs.getObject());
-        myUI.setRight(myGenericObjects.getObject());
-        myUI.setRight(myGenericObjects.getObject());
+        myUI.setRight(myGenericObjects.getObject());    
     }
     
     public void getAddFunction(Editable editable) {

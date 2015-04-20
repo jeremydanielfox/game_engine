@@ -82,7 +82,7 @@ public class Projectile extends GameObjectSimple implements Buffer {
     private void onCollision (Buffable target) {
         if (effectiveCollision((GameObject) target)) {
             for (Buff b: onCollision){
-                target.addBuff(b);
+                target.receiveBuff(b);
             }
             changeHealth(-1);
         }

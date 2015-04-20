@@ -1,8 +1,11 @@
 package engine.gameobject.weapon.firingstrategy;
 
 import engine.gameobject.GameObject;
+import engine.gameobject.Graphic;
 import engine.gameobject.MoverPoint;
 import engine.gameobject.PointSimple;
+import engine.gameobject.weapon.BasicWeapon;
+import engine.gameobject.weapon.Weapon;
 
 public abstract class BasicStrategy implements FiringStrategy {
     /**

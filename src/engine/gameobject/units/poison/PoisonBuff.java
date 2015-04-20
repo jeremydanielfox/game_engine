@@ -97,7 +97,7 @@ public class PoisonBuff extends Buff implements Poison{
     }
 
     @Override
-    public BuffType getType () {
+    public BuffType getBuffType () {
        return type;
     }
 }

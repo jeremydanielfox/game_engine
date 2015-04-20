@@ -10,7 +10,7 @@ import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
 
 
-public interface Weapon {
+public interface Weapon{
 
     /**
      * Attacks targets, inflicting the appropriate damage upon them.
@@ -72,6 +72,8 @@ public interface Weapon {
     public void applyUpgrades (UpgradeBundle bundle);
 
     public void setFiringStrategy (FiringStrategy newStrategy);
+
+    public Weapon clone ();
       
 
 }

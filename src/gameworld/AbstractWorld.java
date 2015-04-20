@@ -6,20 +6,15 @@ import java.util.Collections;
 import java.util.List;
 import javafx.scene.Node;
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
-import engine.gameobject.labels.SimpleLabel;
 import engine.gameobject.test.EnemyLabel;
 import engine.gameobject.test.ProjectileLabel;
 import engine.gameobject.test.TowerLabel;
 import engine.interactions.BuffImparter;
 import engine.interactions.CollisionEngine;
-import engine.interactions.ConcreteInteractionEngine;
 import engine.interactions.InteractionEngine;
 import engine.interactions.RangeEngine;
 import engine.interactions.ShootAt;
-import engine.pathfinding.EndOfPathException;
-import engine.pathfinding.Path;
 
 
 public class AbstractWorld implements GameWorld{

@@ -12,6 +12,7 @@ CollisionEngine
 
 // Possible Interactions
 // The below interaction is the collide with interaction
+
 BuffImparter
 ShootAt
 NoInteraction

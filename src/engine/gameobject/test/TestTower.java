@@ -1,10 +1,16 @@
 package engine.gameobject.test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
+import engine.gameobject.MoverDirection;
 import engine.gameobject.MoverNull;
 import engine.gameobject.PointSimple;
+import gameworld.ObjectCollection;
 
 public class TestTower extends GameObjectSimple{
     
@@ -24,7 +30,4 @@ public class TestTower extends GameObjectSimple{
         setLabel(new TowerLabel());
     }
     
-    public TestTower clone(){
-        return new TestTower(type, 0, 0);
-    }
 }

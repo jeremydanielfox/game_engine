@@ -41,3 +41,8 @@
 #arrow:hover  {
 	-fx-opacity: 0.8;
 }
+
+#pauseContainer {
+	-fx-background-color: purple;
+	-fx-opacity: 0.7;
+}

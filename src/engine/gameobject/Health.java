@@ -22,4 +22,6 @@ public interface Health {
 	 * @param amount +/- amount by which to affect health
 	 */
 	public void changeHealth(double amount);
+	
+	public Health clone();
 }

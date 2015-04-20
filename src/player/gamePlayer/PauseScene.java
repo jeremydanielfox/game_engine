@@ -1,29 +1,48 @@
 package player.gamePlayer;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * PauseScene will be a drop down screen that holds options such as resume, restart, and return to
+ * main menu
+ * 
+ * @author Brandon Choi
+ *
+ */
+
 public class PauseScene {
-    
+
     private Scene myScene;
     private BorderPane container;
-    private Button pause, restart, mainMenu;
-    
-    public PauseScene() {
+    private Button resume, restart, mainMenu;
+    private EventHandler<ActionEvent> exitPause;
+
+    public PauseScene (EventHandler<ActionEvent> lambda) {
         container = new BorderPane();
         myScene = new Scene(container);
         myScene.getStylesheets().add("/css/GamePlayerCSS.css");
-        pause = new Button();
+        resume = new Button();
         restart = new Button();
         mainMenu = new Button();
-        
-        container.setId("");
-        
-    }
-    
-    public Scene getScene() {
-        return myScene;
+        exitPause = lambda;
+
+        container.setId("pauseContainer");
     }
 
+    private void setUpFunctions () {
+        myScene.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ESCAPE)) {
+                
+            }
+        });
+    }
+
+    public Scene getScene () {
+        return myScene;
+    }
 }

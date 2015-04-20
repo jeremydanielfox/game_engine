@@ -17,9 +17,8 @@ public abstract class BasicStrategy implements FiringStrategy {
     protected GameObject makeProjectile(PointSimple location, PointSimple target, GameObject prototype){
         MoverPoint newMover = (MoverPoint) prototype.getMover().clone();
         newMover.setPoint(target);
-        BasicWeapon newWeapon = (BasicWeapon) prototype.getWeapon().clone();
-        
         GameObject newProjectile = (GameObject) prototype.clone();
+        System.out.println(newProjectile.getLabel().getName());
         newProjectile.setPoint(location);
         newProjectile.setMover(newMover);
         return newProjectile;

@@ -19,15 +19,17 @@ import javafx.stage.Stage;
  *
  */
 
-public class InteractionTable extends Application{
+public class InteractionTable extends Application {
 
     private static final String ADD_TEXT = "Add New Interaction";
-    
+
+    private static InteractionTable instance;
+
     private BorderPane container;
     private ScrollPane scroller;
     private VBox content;
     private Button adder;
-    private List<Interaction> interactions;
+    private List<InteractionInstance> interactions;
 
     public InteractionTable () {
         container = new BorderPane();
@@ -42,17 +44,28 @@ public class InteractionTable extends Application{
     }
 
     /**
+     * implements the Singleton design pattern
+     * 
+     * @return
+     */
+    public static synchronized InteractionTable getInstance () {
+        if (instance == null)
+            instance = new InteractionTable();
+
+        return instance;
+    }
+
+    /**
      * Sets up Buttons and their pressed functions
      */
     private void setUpButtons () {
         adder.setOnMouseClicked(e -> {
-            Interaction i = new Interaction();
+            InteractionInstance i = new InteractionInstance();
             interactions.add(i);
             content.getChildren().add(i.getInteractionSetter());
         });
     }
 
-    
     public static void main (String[] args) {
         launch(args);
     }

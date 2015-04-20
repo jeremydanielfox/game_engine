@@ -30,6 +30,7 @@ public class SelectionRectangle extends Rectangle {
         contextmenu = cm;
         this.setFill(Color.web("blue", 0.1));
         this.setStroke(Color.BLUE);
+        this.setVisible(false);
         setMouseEvents();
     }
 

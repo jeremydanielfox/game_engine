@@ -12,6 +12,7 @@ public interface Label {
     
     public void setSuperLabel(Label parent);
     
+    public Label clone();
     /*public String getLabel();
     
     public boolean hasSubLabel();

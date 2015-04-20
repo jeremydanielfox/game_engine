@@ -45,7 +45,4 @@ public class TestProjectile extends GameObjectSimple{
         }
     }
     
-    public GameObjectSimple clone(){
-        return new TestProjectile(myType);
-    }
 }

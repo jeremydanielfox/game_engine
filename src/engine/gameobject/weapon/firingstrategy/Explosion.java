@@ -16,7 +16,7 @@ public class Explosion {
     private double radius;
     private Set<Buff> effects;
 
-    public Explosion (int radius, Collection<Buff> effects) {
+    public Explosion (double radius, Collection<Buff> effects) {
         effects = new HashSet<Buff>(effects);
         this.radius = radius;
     }
@@ -67,5 +67,9 @@ public class Explosion {
         if (target instanceof GameObjectSimpleTest)
             return true;
         return false;
+    }
+    
+    public Explosion clone(){
+        return new Explosion(radius, effects);
     }
 }

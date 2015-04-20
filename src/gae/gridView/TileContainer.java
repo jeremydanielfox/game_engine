@@ -1,5 +1,6 @@
 package gae.gridView;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import engine.gameobject.PointSimple;
@@ -122,6 +123,17 @@ public class TileContainer extends Region implements ContainerWrapper {
             selectionRect.setVisible(false);
         });
         return item;
+    }
+    
+    public List<Point> getUnwalkableTiles(){
+        List<Point> unwalkableTiles=new ArrayList<>();
+        tileList.stream().forEach(tile-> {
+            if(!tile.getData().getWalkableProperty().get()){
+                unwalkableTiles.add(tile.getData().getGridLocation());
+                
+            }           
+        });
+        return unwalkableTiles;
     }
 
 }

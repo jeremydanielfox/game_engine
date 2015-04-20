@@ -49,18 +49,18 @@ public class LevelView {
     private static final int TEXT_BOX_WIDTH=100;
     private StackPane stack;
     private Scene scene;
-    private BorderPane border;
+    private Pane border;
     private ObjectProperty<Image> backgroundProperty;
     private ObjectProperty<Dimension> gridSizeProperty;
     private ContainerWrapper wrapper;
     private LibraryView libraryview;
     private LibraryData libraryData;
 
-    public BorderPane getBorder (Scene scene, LibraryData libraryData) {
+    public Pane getBorder (Scene scene, LibraryData libraryData) {
         this.libraryData = libraryData;
-        border = new BorderPane();
-        border.setCenter(getStack(scene));
-        border.setLeft(getLibraryView());
+        border = new Pane();
+        border.getChildren().add(getStack(scene));
+        border.getChildren().add(getLibraryView());
         border.prefHeightProperty().bind(scene.heightProperty());
         border.prefWidthProperty().bind(scene.widthProperty());
         return border;

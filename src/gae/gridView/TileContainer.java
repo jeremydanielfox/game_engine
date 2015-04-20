@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.stage.Screen;
 
@@ -30,13 +31,13 @@ import javafx.stage.Screen;
  */
 public class TileContainer extends Region implements ContainerWrapper {
     private static final int TAB_HEIGHT = 128;
-    private BorderPane border;
+    private Pane border;
     private List<TileView> tileList = new ArrayList<>();
     private SelectionRectangle selectionRect;
-    private DoubleProperty gridWidthProperty=new SimpleDoubleProperty(623);
-    private DoubleProperty gridHeightProperty=new SimpleDoubleProperty(623);
+    private DoubleProperty gridWidthProperty = new SimpleDoubleProperty(623);
+    private DoubleProperty gridHeightProperty = new SimpleDoubleProperty(623);
 
-    public TileContainer (ObjectProperty<Dimension> sizeProp, Scene scene, BorderPane border) {
+    public TileContainer (ObjectProperty<Dimension> sizeProp, Scene scene, Pane border) {
         this.border = border;
         double maxHeight = scene.getHeight() - TAB_HEIGHT;
         addTiles(sizeProp.get(), maxHeight);
@@ -52,7 +53,7 @@ public class TileContainer extends Region implements ContainerWrapper {
                     this.getChildren().remove(view);
                 }
             }
-            gridHeightProperty.set( scene.getHeight() - TAB_HEIGHT);
+            gridHeightProperty.set(scene.getHeight() - TAB_HEIGHT);
             addTiles(sizeProp.getValue(), gridHeightProperty.get());
         });
     }
@@ -74,8 +75,8 @@ public class TileContainer extends Region implements ContainerWrapper {
                 tileView.setLayoutY(j * length);
                 this.getChildren().add(tileView);
                 tileList.add(tileView);
-                gridWidthProperty.set(i*length+length);
-                gridHeightProperty.set(j*length+length);
+                gridWidthProperty.set(i * length + length);
+                gridHeightProperty.set(j * length + length);
             }
 
         }
@@ -104,12 +105,12 @@ public class TileContainer extends Region implements ContainerWrapper {
     }
 
     public DoubleProperty getGridHeightProperty () {
-        //return new SimpleDoubleProperty(maxHeight);
+        // return new SimpleDoubleProperty(maxHeight);
         return gridHeightProperty;
     }
 
     public DoubleProperty getGridWidthProperty () {
-        //return new SimpleDoubleProperty(maxHeight);
+        // return new SimpleDoubleProperty(maxHeight);
         return gridWidthProperty;
     }
 
@@ -138,13 +139,13 @@ public class TileContainer extends Region implements ContainerWrapper {
         });
         return item;
     }
-    
-    private void removeTiles (){
+
+    private void removeTiles () {
         if (tileList != null) {
             for (TileView view : tileList) {
                 this.getChildren().remove(view);
             }
-       }
+        }
     }
 
     public List<Point> getUnwalkableTiles () {

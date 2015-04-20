@@ -28,5 +28,6 @@ public class Main extends Application {
         OpeningView opener = new OpeningView(myStage);
         myStage.setScene(opener.getScene());
         myStage.show();
+        
     }
 }

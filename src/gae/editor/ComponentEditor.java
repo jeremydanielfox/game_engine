@@ -42,7 +42,7 @@ public abstract class ComponentEditor implements UIObject, Edits {
      * sets name of the Object
      */
     void setName(String name) {
-        label.setText(name);
+        label.setText(Editor.getPropertyName(name));
     }
     
     protected HBox getEditBox() {

@@ -3,34 +3,34 @@ package gameworld;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javafx.scene.Node;
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
-import engine.gameobject.labels.SimpleLabel;
 import engine.gameobject.test.EnemyLabel;
 import engine.gameobject.test.ProjectileLabel;
 import engine.gameobject.test.TowerLabel;
 import engine.interactions.BuffImparter;
 import engine.interactions.CollisionEngine;
-import engine.interactions.ConcreteInteractionEngine;
 import engine.interactions.InteractionEngine;
 import engine.interactions.RangeEngine;
 import engine.interactions.ShootAt;
-import engine.pathfinding.EndOfPathException;
-import engine.pathfinding.Path;
 
 
 public class AbstractWorld implements GameWorld{
     private List<GameObject> myObjects;
     private InteractionEngine myCollisionEngine;
     private InteractionEngine myRangeEngine;
+    private Map<Node,GameObject> myNodeToGameObjectMap;
     
     public AbstractWorld () {
         myObjects = new ArrayList<GameObject>();
         initiateCollisionEngine();
         initiateRangeEngine();
+        myNodeToGameObjectMap = new HashMap<>();
     }
 
 /*
@@ -53,7 +53,8 @@ public class AbstractWorld implements GameWorld{
     @Override
     public void addObject (GameObject toSpawn, PointSimple pixelCoords) throws StructurePlacementException {
         myObjects.add(toSpawn);
-        toSpawn.setPoint(pixelCoords);// TODO change from pixel coords
+        toSpawn.setPoint(pixelCoords);
+        myNodeToGameObjectMap.put(toSpawn.getGraphic().getNode(), toSpawn);
         // myGrid.addObject(toSpawn);
         }
 
@@ -106,12 +107,18 @@ public class AbstractWorld implements GameWorld{
     @Override
     public void addObject (GameObject toSpawn) {
         myObjects.add(toSpawn);
+        myNodeToGameObjectMap.put(toSpawn.getGraphic().getNode(), toSpawn);
     }
 
     @Override
     public boolean isPlacable (Node n, PointSimple pixelCoords) {
         return true; // TODO plz replace with logic. Ex: towers cannot be placed on towers
     }
+
+	@Override
+	public GameObject getObjectFromNode(Node n) {
+		return myNodeToGameObjectMap.get(n);
+	}
 
 }
 

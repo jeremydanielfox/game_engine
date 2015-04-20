@@ -1,7 +1,9 @@
-package engine.gameobject.units;
+package engine.gameobject.units.freeze;
 
 import java.util.Optional;
 import engine.fieldsetting.Settable;
+import engine.gameobject.units.Buff;
+import engine.gameobject.units.BuffType;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.BasicMover;
 import engine.gameobject.GameObject;
@@ -11,20 +13,27 @@ import engine.gameobject.GameObject;
  * @author Danny Oh and Nathan Prabhu
  *
  */
-public class FreezeBuff extends Buff{
+public class FreezeBuff extends Buff implements Freeze{
     
     private int increment;
-    private Optional<FreezeBuff> decorated;
+    private BuffType type;
+    private Optional<Freeze> decorated;
 
     public FreezeBuff(int increment){
         super(increment);
         this.increment = increment;
+        this.type = BuffType.COLLISION;
         decorated = Optional.empty();
     }
 
     @Settable
     public void setIncrement (int increment) {
         this.increment = increment;
+    }
+    
+    @Settable
+    public void setBuffType (BuffType type){
+        this.type = type;
     }
     
     public void apply(GameObject myUnit){
@@ -37,7 +46,7 @@ public class FreezeBuff extends Buff{
         return decorated.map(this::getIncrementedDuration).orElse(increment);
     }
     
-    private int getIncrementedDuration (FreezeBuff sublayer) {
+    private int getIncrementedDuration (Freeze sublayer) {
         return sublayer.getDuration() + increment;
     }
     
@@ -56,6 +65,11 @@ public class FreezeBuff extends Buff{
 
     @Override
     public void upgrade (Upgrade decorated) {
-        this.decorated = Optional.of((FreezeBuff) decorated);
+        this.decorated = Optional.of((Freeze) decorated);
+    }
+
+    @Override
+    public BuffType getType () {
+        return type;
     }
 }

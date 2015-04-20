@@ -1,6 +1,6 @@
 package gae.listView;
 
-import View.ViewUtilities;
+import View.ViewUtil;
 import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
 import gae.backend.Editable;
@@ -35,9 +35,9 @@ public class DraggableUtilities {
         ImageView transitionImage = editable.getImageView();
         // TODO: implement popup error when overlapping - collision detection
         Node binder =
-                ViewUtilities.bindCursor(transitionImage,
+                ViewUtil.bindCursor(transitionImage,
                                          node,
-                                         ViewUtilities
+                                         ViewUtil
                                                  .getMouseLocation(me, transitionImage),
                                          KeyCode.ESCAPE, false);
         binder.setOnMouseClicked(ev -> {

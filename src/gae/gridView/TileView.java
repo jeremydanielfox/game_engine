@@ -51,4 +51,8 @@ public class TileView extends Group {
             data.setWalkable(walkable);
         }
     }
+
+    public TileData getData () {
+        return data;
+    }
 }

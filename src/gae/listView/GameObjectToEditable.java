@@ -1,13 +1,10 @@
 package gae.listView;
 
-import View.ImageUtilities;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
 import gae.backend.Editable;
-import gae.gridView.Pair;
 import gae.gridView.Path;
 
 

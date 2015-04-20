@@ -47,6 +47,16 @@ public class BasicWeapon implements Weapon {
                                                            myFiringRate });
     }
 
+    @Override
+    public Weapon clone(){
+        BasicWeapon clone = new BasicWeapon();
+        clone.setFiringRate(myFiringRate.getRate());
+        clone.setRange(myRange.getRange());
+        clone.setFiringStrategy(myFiringStrategy);
+        clone.setProjectile(myProjectile);
+        return clone;
+    }
+    
     @Override @Settable
     public void setRange (double range) {
         myRange = new RangeUpgrade(range);

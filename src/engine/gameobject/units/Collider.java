@@ -1,5 +1,6 @@
 package engine.gameobject.units;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import engine.gameobject.GameObject;
@@ -10,18 +11,18 @@ import gameworld.ObjectCollection;
 
 public class Collider {
     private Set<String> collidedID;
-    private Set<Buff> onCollision;
+    private Set<Buff> collisionBuffs;
     private Explosion onDeath;
     
     public Collider () {
         collidedID = new HashSet<String>();
-        onCollision = new HashSet<Buff>();
+        collisionBuffs = new HashSet<Buff>();
         onDeath = new Explosion();
     }
 
     public void addCollisionBehavior(Buff newBuff){
         removeDuplicateBuff(newBuff);
-        onCollision.add(newBuff);
+        collisionBuffs.add(newBuff);
     }
  
     public void setExplosionRadius(double radius){
@@ -43,16 +44,16 @@ public class Collider {
     }
     
     private void removeDuplicateBuff(Buff newBuff){
-        for (Buff b: onCollision){
+        for (Buff b: collisionBuffs){
             if (b.getClass().equals(newBuff.getClass())){
-                onCollision.remove(b);
+                collisionBuffs.remove(b);
             }
         }
     }
     
     private void onCollision (GameObject target) {
-        for (Buff b : onCollision) {
-            target.addBuff(b);
+        for (Buff b : collisionBuffs) {
+            target.receiveBuff(b);
         }
     }
     
@@ -62,6 +63,14 @@ public class Collider {
      */
     public Collider clone(){
         return (Collider) DeepCopy.copy(this);
+    }
+    
+    public Set<Buff> getCollisionBuffs () {
+        return Collections.unmodifiableSet(collisionBuffs);
+    }
+    
+    public Set<Buff> getExplosionBuffs () {
+        return onDeath.getBuffSet();
     }
 
 }

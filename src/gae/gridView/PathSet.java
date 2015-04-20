@@ -101,8 +101,8 @@ public class PathSet extends Region {
     private void choosePoint (CubicCurve curve) {
         stack.setOnMouseClicked(e -> {
             if (increment == 0 && makePath) {
-                startX = e.getScreenX();
-                startY = e.getScreenY();
+                startX = e.getX();
+                startY = e.getY();
                 checkBounds(startX, startY);
                 pathLabel = new PathLabel(index);
                 start = new Anchor(Color.PALEGREEN, startX, startY, pathLabel);
@@ -116,21 +116,21 @@ public class PathSet extends Region {
                 else if (increment == 1 && makePath) {
                     addPath.setValue(increment);
                     addPathInstructions.setValue("Make Path");
-                    Anchor end = new Anchor(Color.TOMATO, e.getScreenX(), e.getScreenY());
+                    Anchor end = new Anchor(Color.TOMATO, e.getX(), e.getY());
                     curve.setStartX(startX);
                     curve.setStartY(startY);
-                    double endX = e.getScreenX();
-                    double endY = e.getScreenY();
+                    double endX = e.getX();
+                    double endY = e.getY();
                     checkBounds(endX, endY);
 
-                    curve.setEndX(e.getScreenX());
-                    curve.setEndY(e.getScreenY());
+                    curve.setEndX(e.getX());
+                    curve.setEndY(e.getY());
                     addAnchor(end);
                     Anchor control1 =
-                            new Anchor(Color.GOLD, (startX + e.getScreenX()) / 2, (startY + e.getScreenY()) / 2);
+                            new Anchor(Color.GOLD, (startX + e.getX()) / 2, (startY + e.getY()) / 2);
                     Anchor control2 =
-                            new Anchor(Color.GOLDENROD, (startX + e.getScreenX()) / 2,
-                                       (startY + e.getScreenY()) / 2);
+                            new Anchor(Color.GOLDENROD, (startX + e.getX()) / 2,
+                                       (startY + e.getY()) / 2);
 
                     bindProperties(curve, start, end, control1, control2);
 

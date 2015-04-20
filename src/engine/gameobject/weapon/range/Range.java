@@ -1,4 +1,4 @@
-package engine.gameobject.weapon.upgradable.range;
+package engine.gameobject.weapon.range;
 
 import engine.gameobject.weapon.Upgrade;
 

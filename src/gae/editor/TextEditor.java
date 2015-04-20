@@ -1,6 +1,5 @@
 package gae.editor;
 
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 /**

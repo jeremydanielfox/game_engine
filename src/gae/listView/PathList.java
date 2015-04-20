@@ -9,11 +9,9 @@ import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.gridView.ContainerWrapper;
-import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -23,10 +21,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.util.Callback;
 import xml.DataManager;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
 /**
@@ -129,7 +124,6 @@ public class PathList {
      */
     public void disableScreen () {
         pathView.resetScreen();
-        System.out.println("disabling screen");
         for (Button button : buttonList) {
             buttonStates.add(button.disableProperty().get());
             button.setDisable(true);
@@ -215,7 +209,7 @@ public class PathList {
      */
     private Button displayPaths () {
         Button display = new Button("make XML");
-        XStream xst = new XStream(new DomDriver());
+//        XStream xst = new XStream(new DomDriver());
         display.setOnMouseClicked(e -> {
             // this is the information that'll be passed into XML (allPaths)
             // *****************************************//
@@ -239,7 +233,7 @@ public class PathList {
                 }
             }
             // *****************************************//
-            DataManager.writeToXML(myPath, "src/gae/listView/TestDemo2.xml");
+            DataManager.writeToXML(myPath, "src/xml/Path.xml");
         });
 
         return display;

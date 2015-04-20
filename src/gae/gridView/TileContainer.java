@@ -1,19 +1,17 @@
 package gae.gridView;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import engine.gameobject.PointSimple;
-import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 
 
@@ -29,21 +27,28 @@ import javafx.stage.Screen;
  *
  */
 public class TileContainer extends Region implements ContainerWrapper {
-    public static final double SCREEN_HEIGHT =
-            Screen.getPrimary().getVisualBounds().getHeight() - 150;
-    public static final double SCREEN_WIDTH =
-            Screen.getPrimary().getVisualBounds().getWidth() - 120;
+    private static final int TAB_HEIGHT = 128;
     private BorderPane border;
     private List<TileView> tileList = new ArrayList<>();
     private SelectionRectangle selectionRect;
-    private DoubleProperty gridWidth = new SimpleDoubleProperty(SCREEN_HEIGHT);
-    private DoubleProperty gridHeight = new SimpleDoubleProperty(SCREEN_HEIGHT);
+    double height;
 
-    public TileContainer (int size, BorderPane border) {
+    public TileContainer (int size, Scene scene, BorderPane border) {
         this.border = border;
-        addTiles(size);
+        height = scene.getHeight() - TAB_HEIGHT;
+        System.out.println("HEIGHT IS :" + height);
+        addTiles(size, height);
         selectionRect = new SelectionRectangle(this, createContextMenu());
         this.getChildren().add(selectionRect);
+        scene.heightProperty().addListener( (p, o, n) -> {
+            if (tileList != null) {
+                for (TileView view : tileList) {
+                    this.getChildren().remove(view);
+                }
+            }
+            height = scene.getHeight() - TAB_HEIGHT;
+            addTiles(size, height);
+        });
     }
 
     /**
@@ -52,10 +57,10 @@ public class TileContainer extends Region implements ContainerWrapper {
      * 
      * @param size
      */
-    private void addTiles (int size) {
-        double length = SCREEN_HEIGHT / size;
-        for (double i = 0; Math.round(i) < SCREEN_HEIGHT; i += SCREEN_HEIGHT / size) {
-            for (double j = 0; Math.round(j) < SCREEN_HEIGHT; j += SCREEN_HEIGHT / size) {
+    private void addTiles (int size, double height) {
+        double length = height / size;
+        for (double i = 0; Math.round(i) < height; i += height / size) {
+            for (double j = 0; Math.round(j) < height; j += height / size) {
                 TileView tileView =
                         new TileView(length, new TileData(i / length, j / length));
                 tileView.setLayoutX(i);
@@ -64,7 +69,7 @@ public class TileContainer extends Region implements ContainerWrapper {
                 tileList.add(tileView);
             }
         }
-        border.prefHeightProperty().bind(this.heightProperty());
+//        this.prefHeightProperty().bind(border.prefHeightProperty());
         // this.setMaxWidth(SCREEN_HEIGHT);
         // this.setMaxHeight(SCREEN_HEIGHT);
 
@@ -75,6 +80,8 @@ public class TileContainer extends Region implements ContainerWrapper {
      */
     public boolean checkBounds (double x, double y) {
         Point2D point = this.screenToLocal(x, y);
+        System.out.println("X IS : " + point.getX());
+        System.out.println("Y IS : " + y);
         if (point.getX() < 0 || point.getX() > this.getWidth() || y < 0 ||
             y > this.getHeight()) {
             return true;
@@ -90,12 +97,8 @@ public class TileContainer extends Region implements ContainerWrapper {
         return new PointSimple(point.getX(), y);
     }
 
-    public DoubleProperty getGridWidthProperty () {
-        return gridWidth;
-    }
-
     public DoubleProperty getGridHeightProperty () {
-        return gridHeight;
+        return new SimpleDoubleProperty(height);
     }
 
     /**
@@ -122,6 +125,17 @@ public class TileContainer extends Region implements ContainerWrapper {
             selectionRect.setVisible(false);
         });
         return item;
+    }
+    
+    public List<Point> getUnwalkableTiles(){
+        List<Point> unwalkableTiles=new ArrayList<>();
+        tileList.stream().forEach(tile-> {
+            if(!tile.getData().getWalkableProperty().get()){
+                unwalkableTiles.add(tile.getData().getGridLocation());
+                
+            }           
+        });
+        return unwalkableTiles;
     }
 
 }

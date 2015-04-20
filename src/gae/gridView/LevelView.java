@@ -1,5 +1,6 @@
 package gae.gridView;
 
+import java.util.function.Consumer;
 import gae.backend.Editable;
 import gae.backend.TempEnemy;
 import gae.backend.TempTower;
@@ -16,6 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 
 /**
@@ -26,6 +29,7 @@ import javafx.scene.layout.StackPane;
  *
  */
 public class LevelView {
+    public static final String DEFAULT_IMAGE_PATH="/images/Park_Path.png";
     private StackPane stack;
     private Scene scene;
     private BorderPane border;
@@ -35,11 +39,13 @@ public class LevelView {
             FXCollections.observableArrayList();
     private LibraryView libraryview;
     private LibraryData libraryData;
-
+    
     public BorderPane getBorder (Scene scene) {
         border = new BorderPane();
         border.setCenter(getStack(scene));
         border.setLeft(getLibraryView());
+        border.prefHeightProperty().bind(scene.heightProperty());
+        border.prefWidthProperty().bind(scene.widthProperty());
         return border;
     }
 
@@ -66,15 +72,15 @@ public class LevelView {
     private StackPane getStack (Scene scene) {
         stack = new StackPane();
         this.scene = scene;
-        ImageView background = new ImageView(new Image("/images/Park_Path.png"));
+        ImageView background = new ImageView(new Image(DEFAULT_IMAGE_PATH));
         backgroundProperty = background.imageProperty();
         Group root = new Group();
-        TileContainer container = new TileContainer(20, border);
+        TileContainer container = new TileContainer(20, scene, border);
         root.getChildren().addAll(background, container, tempGrid());
 
         stack.getChildren().addAll(root);
 
-        background.fitWidthProperty().bind(container.getGridWidthProperty());
+        background.fitWidthProperty().bind(container.getGridHeightProperty());
         background.fitHeightProperty().bind(container.getGridHeightProperty());
 
         wrapper = (ContainerWrapper) container;
@@ -117,5 +123,10 @@ public class LevelView {
         Editable editable = new TempEnemy();
         temp.setOnAction(e -> libraryData.addToList(editable));
         return temp;
+    }
+
+    public Consumer<Editable> getConsumer () {
+        Consumer<Editable> consumer = e -> libraryData.addToList(e);
+        return consumer;
     }
 }

@@ -39,6 +39,7 @@ public class StoryBoard extends Observable {
      * @return false if the StoryBoard has no more events to update
      */
     public boolean update () {
+        System.out.println(eventList.size());
         if (eventList.size() == 0) {
             return false;
         }
@@ -54,6 +55,7 @@ public class StoryBoard extends Observable {
     private void updateEvent (Event event) {
         if (!event.update()) {
             eventList.remove(event);
+            event.onCompleteAction();
             setChanged();
             notifyObservers();
         }

@@ -53,12 +53,11 @@ public class LevelView {
     private ObjectProperty<Image> backgroundProperty;
     private ObjectProperty<Dimension> gridSizeProperty;
     private ContainerWrapper wrapper;
-    private ObservableList<PathView> paths =
-            FXCollections.observableArrayList();
     private LibraryView libraryview;
     private LibraryData libraryData;
 
-    public BorderPane getBorder (Scene scene) {
+    public BorderPane getBorder (Scene scene, LibraryData libraryData) {
+        this.libraryData = libraryData;
         border = new BorderPane();
         border.setCenter(getStack(scene));
         border.setLeft(getLibraryView());
@@ -77,7 +76,7 @@ public class LevelView {
      * @param node
      */
     public void getAddFunction (Editable editable) {
-        libraryData.addToList(editable);
+        libraryData.addEditableToList(editable);
     }
 
     /**
@@ -96,6 +95,7 @@ public class LevelView {
         Pane root = new Pane();
         TileContainer container = new TileContainer(gridSizeProperty, scene, border);
         root.getChildren().addAll(background, container, tempGrid());
+        // root.getChildren().addAll(background, container);
 
         stack.getChildren().addAll(root);
         root.setTranslateX(scene.getWidth()/6);
@@ -113,10 +113,10 @@ public class LevelView {
      * @return
      */
     private Group getLibraryView () {
-        libraryData = LibraryData.getInstance();
-        libraryview = new LibraryView(libraryData.getObservableList());
+        libraryview =
+                new LibraryView(libraryData.getEditableObservableList());
         Group leftview =
-                libraryview.getGroup(stack, scene, paths, wrapper);
+                libraryview.getGroup(stack, scene, libraryData.getPathObservableList(), wrapper);
         // TODO: can't do the above since it messes up the coordinates - got to fix
         leftview.getChildren().add(gridOptions());
         return leftview;
@@ -171,19 +171,19 @@ public class LevelView {
     private Button tempButtonTower () {
         Button temp = new Button("add Tower");
         Editable editable = new TempTower();
-        temp.setOnAction(e -> libraryData.addToList(editable));
+        temp.setOnAction(e -> libraryData.addEditableToList(editable));
         return temp;
     }
 
     private Button tempButtonEnemy () {
         Button temp = new Button("add Enemy");
         Editable editable = new TempEnemy();
-        temp.setOnAction(e -> libraryData.addToList(editable));
+        temp.setOnAction(e -> libraryData.addEditableToList(editable));
         return temp;
     }
 
     public Consumer<Editable> getConsumer () {
-        Consumer<Editable> consumer = e -> libraryData.addToList(e);
+        Consumer<Editable> consumer = e -> libraryData.addEditableToList(e);
         return consumer;
     }
 }

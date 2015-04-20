@@ -1,5 +1,6 @@
 package gae.backend;
 
+import java.util.List;
 import View.ImageUtilities;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -91,17 +92,17 @@ public class TempEnemy implements Editable, UIObject {
         return myID;
     }
 
-    @Override
-    public Path getPath () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setPath (Path path) {
-        // TODO Auto-generated method stub
-
-    }
+//    @Override
+//    public Path getPath () {
+//        // TODO Auto-generated method stub
+//        return null;
+//    }
+//
+//    @Override
+//    public void setPath (Path path) {
+//        // TODO Auto-generated method stub
+//
+//    }
 
     @Override
     public void setWidth (int width) {
@@ -152,5 +153,41 @@ public class TempEnemy implements Editable, UIObject {
         copy.setID(ourID);
         ourID++;
         return copy;
+    }
+
+    @Override
+    public List<List<Path>> getPath () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setPath (List<List<Path>> path) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public double getHealth () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public double setHealth (double health) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public Weapon getWeapon () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setWeapon (Weapon weapon) {
+        // TODO Auto-generated method stub
+        
     }
 }

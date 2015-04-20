@@ -1,9 +1,9 @@
 package gae.listView;
 
-import java.util.HashMap;
-import java.util.Map;
 import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;

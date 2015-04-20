@@ -1,8 +1,10 @@
-package engine.gameobject.units;
+package engine.gameobject.units.directdamage;
 
 import java.util.Optional;
-import engine.gameobject.GameObject;
 import engine.fieldsetting.Settable;
+import engine.gameobject.GameObject;
+import engine.gameobject.units.Buff;
+import engine.gameobject.units.BuffType;
 import engine.gameobject.weapon.Upgrade;
 
 /**
@@ -10,14 +12,16 @@ import engine.gameobject.weapon.Upgrade;
  * @author Danny Oh and Nathan Prabhu
  *
  */
-public class DirectDamage extends Buff {
+public class DamageBuff extends Buff implements DirectDamage {
     
     private double increment;
+    private BuffType type;
     private Optional<DirectDamage> decorated;
     private final static int graphicDuration = 20;
     
-    public DirectDamage (double increment) {
+    public DamageBuff (double increment) {
         super(graphicDuration);
+        this.type = BuffType.COLLISION; // could be overridden
         this.increment = increment;
         decorated = Optional.empty();
     }
@@ -25,6 +29,11 @@ public class DirectDamage extends Buff {
     @Settable
     public void setIncrement (double increment) {
         this.increment = increment;
+    }
+    
+    @Settable
+    public void setType (BuffType type) {
+        this.type = type;
     }
 
     @Override
@@ -53,14 +62,20 @@ public class DirectDamage extends Buff {
     public boolean isStrongerBuff (Buff otherBuff) {
         return true;
     }
-    
-    public Buff clone(){
-        return new DirectDamage(getDamage());
-    }
 
     @Override
     public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((DirectDamage) decorated);
+    }
+
+    @Override
+    public Buff clone () {
+        return new DamageBuff(getDamage());
+    }
+
+    @Override
+    public BuffType getType () {
+        return type;
     }
 
 }

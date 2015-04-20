@@ -25,7 +25,7 @@ public class ClassSet<T> implements Set<T> {
     private static final Object PRESENT = new Object();
 
     // maps className to T
-    Map<String, T> classMap;
+    private Map<String, T> classMap;
 
     public <T> ClassSet () {
         this.classMap = new HashMap<>();

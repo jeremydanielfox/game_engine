@@ -3,11 +3,9 @@ package engine.gameobject.weapon.upgradetree.upgradebundle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import engine.fieldsetting.Settable;
-import engine.gameobject.units.Buff;
-import engine.gameobject.weapon.ClassSet;
 import engine.gameobject.weapon.Upgrade;
+import engine.gameobject.weapon.UpgradeSet;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.shop.tag.UpgradeTag;
 
@@ -26,8 +24,6 @@ public class UpgradeBundleSimple implements BuildableBundle {
     private boolean isFinal;
     private UpgradeTree parent;
     private UpgradeTag myUpgradeTag;
-    private Set<Buff> collisionBuffs;
-    private Set<Buff> explosionBuffs;
 
     public UpgradeBundleSimple () {
 
@@ -40,30 +36,15 @@ public class UpgradeBundleSimple implements BuildableBundle {
     }
 
     @Override
-    public void applyUpgrades (ClassSet<Upgrade> upgradables) {
+    public void applyUpgrades (UpgradeSet<Upgrade> upgradables) {
         upgrades.forEach(upgrade -> addUpgrade(upgrade, upgradables));
     }
 
-    private void addUpgrade (Upgrade toAdd, ClassSet<Upgrade> upgradables) {
+    private void addUpgrade (Upgrade toAdd, UpgradeSet<Upgrade> upgradables) {
         if (upgradables.contains(toAdd)) {
             toAdd.upgrade(upgradables.get(toAdd));
         }
-        else {
-            initializeBuff((Buff) toAdd); // firing rate/range always in upgradables
-        }
         upgradables.add(toAdd);
-        // TODO: add listeners to buffs?
-    }
-
-    private void initializeBuff (Buff toAdd) {
-        switch (toAdd.getType()) {
-            case COLLISION:
-                collisionBuffs.add(toAdd);
-                break;
-            case EXPLOSION:
-                explosionBuffs.add(toAdd);
-                break;
-        }
     }
 
     @Override

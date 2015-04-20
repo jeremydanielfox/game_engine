@@ -37,8 +37,7 @@ public abstract class BasicMover implements Mover {
     public void setSpeed (double speed) {
         inherentSpeed = speed;
     }
-
-    @Settable
+    
     public void setFreeze (boolean frozen) {
         this.frozen = frozen;
     }

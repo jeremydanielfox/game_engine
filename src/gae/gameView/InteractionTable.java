@@ -19,15 +19,12 @@ import javafx.stage.Stage;
  *
  */
 
-/*
- * TODO: singleton model, holds RangeEngine, CollisionEngine
- * instantiate BuffImparter, ShootAt
- */
-
-public class InteractionTable extends Application{
+public class InteractionTable extends Application {
 
     private static final String ADD_TEXT = "Add New Interaction";
-    
+
+    private static InteractionTable instance;
+
     private BorderPane container;
     private ScrollPane scroller;
     private VBox content;
@@ -47,6 +44,18 @@ public class InteractionTable extends Application{
     }
 
     /**
+     * implements the Singleton design pattern
+     * 
+     * @return
+     */
+    public static synchronized InteractionTable getInstance () {
+        if (instance == null)
+            instance = new InteractionTable();
+
+        return instance;
+    }
+
+    /**
      * Sets up Buttons and their pressed functions
      */
     private void setUpButtons () {
@@ -57,7 +66,6 @@ public class InteractionTable extends Application{
         });
     }
 
-    
     public static void main (String[] args) {
         launch(args);
     }

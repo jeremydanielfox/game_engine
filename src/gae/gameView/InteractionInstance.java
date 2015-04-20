@@ -33,6 +33,7 @@ public class InteractionInstance {
     private HBox container;
     private DropDown interactionType;
     private ObjectContainer box1, box2;
+    private Button create;
 
     /*
      * TODO: pull classes via reflection and then map the options in the interactionType to specific
@@ -46,12 +47,22 @@ public class InteractionInstance {
                                                                          "Do not shoot"));
         box1 = new ObjectContainer();
         box2 = new ObjectContainer();
+        create = new Button("CREATE");
+        createButtonFunction();
         createInteraction();
+    }
+
+    private void createButtonFunction () {
+        create.setOnMousePressed(e -> {
+            /*
+             * TODO
+             */
+        });
     }
 
     private void createInteraction () {
         container.getChildren().addAll(box1.getContainer(), interactionType.getDropDown(),
-                                       box2.getContainer());
+                                       box2.getContainer(), create);
     }
 
     public Node getInteractionSetter () {

@@ -2,7 +2,9 @@ package gae.gameView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import engine.gameobject.GameObject;
 import engine.interactions.BuffImparter;
@@ -23,15 +25,21 @@ import engine.interactions.ShootAt;
 
 public class InteractionData {
 
+    private static final List<String> MAP_KEYS = Arrays.asList("Collide", "Do not collide", "Shoot", "Do not shoot");
+    //private static final List<Interaction> MAP_VALUES = Arrays.asList();
+    
     private List<InteractionEngine> myInteractionEngines;
     private InteractionEngine myCollisions;
     private InteractionEngine myShoots;
+    private Map<String, Interaction> interactionMap;
 
     public InteractionData () {
         myInteractionEngines = new ArrayList<>();
         myCollisions = new CollisionEngine();
         myShoots = new RangeEngine();
         myInteractionEngines.addAll(Arrays.asList(myCollisions, myShoots));
+        interactionMap = new HashMap<>();
+        fillMap();
     }
 
     /**
@@ -41,6 +49,24 @@ public class InteractionData {
      */
     public List<InteractionEngine> getEngines () {
         return myInteractionEngines;
+    }
+
+    /**
+     * returns map of strings that are mapped to the type of interaction in the engine
+     * 
+     * @return
+     */
+    public Map<String, Interaction> getInteractionMap () {
+        return interactionMap;
+    }
+
+    /**
+     * fills the map with the correct corresponding values between strings and interactions
+     */
+    private void fillMap () {
+        MAP_KEYS.forEach(e -> {
+            interactionMap.put(e, null);
+        });
     }
 
     /**

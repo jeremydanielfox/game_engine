@@ -35,7 +35,7 @@ public class CentralTabView implements UIObject {
         // refactor this code
         ShopTab shopTab = new ShopTab();
         hudTab = new HudEditorTab(null);
-        GameObjectEditorTab gameObjectTab = new GameObjectEditorTab();
+        GameObjectEditorTab gameObjectTab = new GameObjectEditorTab(scene);
         tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode(),
                                  gameObjectTab.getBaseTabNode());
 

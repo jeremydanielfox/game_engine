@@ -12,7 +12,7 @@ public class BuffTracker{
         buffList = new ArrayList<>();
     }
 
-    public void addBuff (Buff toAdd, GameObject myObject) {
+    public void receiveBuff (Buff toAdd, GameObject myObject) {
         Buff equalBuff = findEqualBuff(toAdd);
         if (equalBuff == null) {
             applyBuff(toAdd, myObject);

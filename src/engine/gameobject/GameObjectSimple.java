@@ -56,8 +56,8 @@ public class GameObjectSimple implements GameObject{
     /**
      * Give the object a buff e.g. burn this object
      */
-    public void addBuff(Buff buff){
-        myBuffs.addBuff(buff, this);
+    public void receiveBuff(Buff buff){
+        myBuffs.receiveBuff(buff, this);
     }
     
 /*
@@ -106,9 +106,19 @@ public class GameObjectSimple implements GameObject{
         return myWeapon.getRange();
     }
     
+    //TODO: Tag cloning not done, Weapon upgrade cloning not done
     @Override
     public GameObject clone () {
-        return (GameObject) DeepCopy.copy(this);
+        GameObject clone = new GameObjectSimple();
+        clone.setLabel(myLabel);
+        clone.setTag(myTag);
+        clone.setPoint(new PointSimple(myPoint));
+        clone.setHealth(myHealth.clone());
+        clone.setGraphic(myGraphic.clone());
+        clone.setWeapon(myWeapon.clone());
+        clone.setCollider(myCollider.clone());
+        clone.setMover(myMover.clone());
+        return clone;
     }
     
     @Override

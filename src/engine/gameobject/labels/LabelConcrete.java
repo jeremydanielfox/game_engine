@@ -22,6 +22,9 @@ public abstract class LabelConcrete implements Label {
         setSuperLabel(superLabel);
     }
 
+    public Label clone(){
+        return null;
+    }
     @Override
     public String getName () {
         return myName;

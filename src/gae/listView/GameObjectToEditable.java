@@ -20,6 +20,7 @@ import gae.gridView.Path;
 public class GameObjectToEditable implements Editable {
     private GameObjectSimple gameObject;
     private static final long serialVersionUID = 1L;
+    private static int ourID=0;
     private int myID = 0;
     private int Size = 10;
     private Weapon weapon;
@@ -167,6 +168,8 @@ public class GameObjectToEditable implements Editable {
     @Override
     public Editable makeNewInstance () {
         Editable copy = (Editable) DeepCopy.copy(this);
+        copy.setID(ourID);
+        ourID++;
         return copy;
     }
 

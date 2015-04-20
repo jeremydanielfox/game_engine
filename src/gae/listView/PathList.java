@@ -258,7 +258,7 @@ public class PathList {
     private GridPane makeGridPane () {
         GridPane grid = new GridPane();
         grid.setHgap(0);
-        grid.setTranslateX(900);
+        grid.setTranslateX(scene.getWidth()*2/3);
         for (int i = 0; i < buttonList.size(); i++) {
             grid.add(buttonList.get(i), 0, i);
         }

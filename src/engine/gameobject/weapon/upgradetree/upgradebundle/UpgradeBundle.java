@@ -1,7 +1,7 @@
 package engine.gameobject.weapon.upgradetree.upgradebundle;
 
-import engine.gameobject.weapon.ClassSet;
 import engine.gameobject.weapon.Upgrade;
+import engine.gameobject.weapon.UpgradeSet;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.shop.Purchasable;
 import engine.shop.tag.UpgradeTag;
@@ -23,7 +23,7 @@ public interface UpgradeBundle extends Purchasable {
      * 
      * @param upgradables
      */
-    public void applyUpgrades (ClassSet<Upgrade> upgradables);
+    public void applyUpgrades (UpgradeSet<Upgrade> upgradables);
     
     /**
      * 

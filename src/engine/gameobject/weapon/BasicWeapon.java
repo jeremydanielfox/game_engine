@@ -1,22 +1,17 @@
 package engine.gameobject.weapon;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimple;
-import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
-import engine.gameobject.units.Buffable;
 import engine.gameobject.weapon.firingrate.FiringRate;
 import engine.gameobject.weapon.firingrate.FiringRateUpgrade;
-import engine.gameobject.weapon.firingstrategy.Buffer;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
-import engine.gameobject.weapon.firingstrategy.Projectile;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.range.Range;
 import engine.gameobject.weapon.range.RangeUpgrade;
+import engine.gameobject.weapon.upgradetree.UpgradeForest;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
@@ -35,7 +30,7 @@ public class BasicWeapon implements Weapon {
     private FiringRate myFiringRate;
     private GameObject myProjectile;
     private FiringStrategy myFiringStrategy;
-    private ClassSet<Upgrade> upgradables;
+    private UpgradeSet<Upgrade> upgradables;
     private UpgradeTree tree;
 
     public BasicWeapon () {
@@ -43,8 +38,9 @@ public class BasicWeapon implements Weapon {
         myRange = new RangeUpgrade(250);
         myFiringRate = new FiringRateUpgrade(.5);
         myFiringStrategy = new SingleProjectile();
-        upgradables = new ClassSet<Upgrade>(new Upgrade[] { myRange,
+        upgradables = new UpgradeSet<Upgrade>(new Upgrade[] { myRange,
                                                            myFiringRate });
+        tree = new UpgradeForest();
     }
 
     @Override @Settable

@@ -22,6 +22,7 @@ public class TempTower implements Editable, UIObject {
      * 
      */
     private int myID = 0;
+    private static int ourID=0;
     private int Size = 10;
     private int Health = 100;
     private Weapon weapon;
@@ -148,6 +149,8 @@ public class TempTower implements Editable, UIObject {
     public Editable makeNewInstance () {
         // need to keep track of ID some other way because no more EditableNode
         Editable copy = (Editable) DeepCopy.copy(this);
+        copy.setID(ourID);
+        ourID++;
         return copy;
     }
 }

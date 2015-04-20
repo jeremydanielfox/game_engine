@@ -17,6 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 
 /**
@@ -27,6 +29,7 @@ import javafx.scene.layout.StackPane;
  *
  */
 public class LevelView {
+    public static final String DEFAULT_IMAGE_PATH="/images/Park_Path.png";
     private StackPane stack;
     private Scene scene;
     private BorderPane border;
@@ -36,7 +39,7 @@ public class LevelView {
             FXCollections.observableArrayList();
     private LibraryView libraryview;
     private LibraryData libraryData;
-
+    
     public BorderPane getBorder (Scene scene) {
         border = new BorderPane();
         border.setCenter(getStack(scene));
@@ -69,7 +72,7 @@ public class LevelView {
     private StackPane getStack (Scene scene) {
         stack = new StackPane();
         this.scene = scene;
-        ImageView background = new ImageView(new Image("/images/Park_Path.png"));
+        ImageView background = new ImageView(new Image(DEFAULT_IMAGE_PATH));
         backgroundProperty = background.imageProperty();
         Group root = new Group();
         TileContainer container = new TileContainer(20, scene, border);

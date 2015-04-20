@@ -30,9 +30,10 @@ public class ListViewUtilities {
      * @param edit
      * @return
      */
-    public static Node createCellContentWithIcon (Editable edit, boolean orientation) {
-        if (orientation) { // horizontal
+    public static Node createCellContentWithIcon (Object object) {
+        if (object instanceof gae.backend.Editable) { // horizontal
             HBox content = new HBox();
+            Editable edit = (Editable) object;
             ImageView image = new ImageView(edit.getImagePath());
 
             image.setFitHeight(THUMBNAIL_SIZE_HORIZONTAL);
@@ -41,15 +42,14 @@ public class ListViewUtilities {
             return content;
         }
         else { // vertical
-            VBox content = new VBox();
-            ImageView image = new ImageView(edit.getImagePath());
-
+            System.out.println("IMAGEVIEW");
+            ImageView image = (ImageView) object;
             image.setFitHeight(THUMBNAIL_SIZE_VERTICAL);
             image.setPreserveRatio(true);
-            content.getChildren().addAll(image, new Label(edit.getName()));
-            return content;
+            return image;
         }
     }
+
 
     /**
      * creates a ListView given an observable list of Editables, with specific properties, such as
@@ -96,7 +96,7 @@ public class ListViewUtilities {
                         setGraphic(null);
                     }
                     else if (edit != null) {
-                        setGraphic(ListViewUtilities.createCellContentWithIcon(edit, true));
+                        setGraphic(ListViewUtilities.createCellContentWithIcon(edit));
                     }
                 }
             };
@@ -113,39 +113,22 @@ public class ListViewUtilities {
      * @param scene
      * @return
      */
-    public static ListView<Editable> createList (ObservableList<Editable> editables) {
-        ListView<Editable> list = new ListView<>();
+    public static ListView<Node> createList (ObservableList<Node> editables) {
+        ListView<Node> list = new ListView<>();
         list.setPrefWidth(200);
         list.setItems(editables);
-        list.setOnMousePressed(e -> {
-            if (e.getClickCount() == 1) {
-                Editable selected = list.getSelectionModel().getSelectedItem();
-                selected.getMovableImage().selectEditableImage();
 
-                for (Editable editable : list.getItems()) {
-                    if (editable != selected)
-                        editable.getMovableImage().unselectEditableImage();
-                }
-            }
-                else if (e.getClickCount() == 2) {
-                    list.getSelectionModel().getSelectedItem().getMovableImage()
-                            .unselectEditableImage();
-
-                    list.getSelectionModel().clearSelection();
-                }
-
-            });
         list.setCellFactory( (myList) -> {
-            return new ListCell<Editable>() {
+            return new ListCell<Node>() {
                 @Override
-                protected void updateItem (Editable edit, boolean bln) {
-                    super.updateItem(edit, bln);
+                protected void updateItem (Node object, boolean bln) {
+                    super.updateItem(object, bln);
                     if (bln) {
                         setText(null);
                         setGraphic(null);
                     }
-                    else if (edit != null) {
-                        setGraphic(ListViewUtilities.createCellContentWithIcon(edit, false));
+                    else if (object != null) {
+                        setGraphic(ListViewUtilities.createCellContentWithIcon(object));
                     }
                 }
             };

@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -22,60 +23,69 @@ import gae.openingView.UIObject;
 
 
 public class GameObjectEditorView implements UIObject {
-    private ObservableList<Editable> createdList = FXCollections.observableArrayList();
+    private ObservableList<Node> optionList = FXCollections.observableArrayList();
+    private String[] imagePaths = { "/images/WeaponImage.png", "/images/HealthImage.jpeg",
+                                   "/images/PathImage.png" };
+    private String[] settable = { "Weapon", "Health", "Mover" };
     private Group root;
     private Scene scene;
     private BorderPane border;
-    private static final int TAB_HEIGHT = 128;
+    private static final int TAB_HEIGHT = 160;
+    private static final int SIDE_WIDTH = 430;
+    private GameObjectContainer bottom;
+    private AnchorPane anchor;
 
     public GameObjectEditorView (Scene scene) {
         root = new Group();
+        root.setManaged(false);
         this.scene = scene;
     }
 
     private BorderPane setUpBorder () {
         border = new BorderPane();
-        
+
         border.setRight(setUpList());
         border.setCenter(setUpAnchor());
-        
 
         return border;
     }
 
     private AnchorPane setUpAnchor () {
+        double vboxHeight = (Screen.getPrimary().getVisualBounds().getHeight() - TAB_HEIGHT) / 2;
+        double vboxWidth = Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH;
+
+        VBox top = new VBox();
+        top.setPrefSize(vboxWidth, vboxHeight);
+
+        bottom = new GameObjectContainer(vboxWidth, vboxHeight);
+        bottom.setPrefSize(vboxWidth, vboxHeight);
+        bottom.getChildren().add(root);
 
         ScrollPane topHalf = new ScrollPane();
-        VBox top = new VBox();
-        // top.setPrefSize(arg0, arg1);
-        double vboxHeight = (Screen.getPrimary().getVisualBounds().getHeight() - TAB_HEIGHT) / 2;
-        top.setPrefHeight(vboxHeight);
-        VBox bottom = new VBox();
-        bottom.setPrefHeight(vboxHeight);
         topHalf.setContent(top);
-        System.out.println(border.getPrefWidth());
-        ScrollPane bottomHalf = new GameObjectContainer();
+        ScrollPane bottomHalf = new ScrollPane();
         bottomHalf.setContent(bottom);
-        AnchorPane anchor = new AnchorPane(topHalf, bottomHalf);
+        anchor = new AnchorPane(topHalf, bottomHalf);
+
         AnchorPane.setTopAnchor(topHalf, 0.0);
-        AnchorPane.setBottomAnchor(bottomHalf, 0.0);
+        AnchorPane.setBottomAnchor(bottomHalf, 5.0);
         return anchor;
     }
 
-    private ListView<Editable> setUpList () {
-        ListView<Editable> list = ListViewUtilities.createList(createdList);
-        createdList.add(new TempTower());
-        createdList.add(new TempTower());
-        createdList.add(new TempTower());
-        createdList.add(new TempTower());
-        createdList.add(new TempTower());
-        createdList.add(new TempTower());
-        createdList.add(new TempTower());
-        createdList.add(new TempTower());
+    private ListView<Node> setUpList () {
+        ListView<Node> list = ListViewUtilities.createList(optionList);
+        for (String path : imagePaths) {
+            optionList.add(new ImageView(path));
+        }
         list.setOnMouseClicked(me -> {
-            Editable selected = list.getSelectionModel().getSelectedItem();
-            // DraggableUtilities.makeEditablePlaceable(me, selected, anchor, createdList, wrapper,
-            // root);
+            ImageView selected = (ImageView) list.getSelectionModel().getSelectedItem();
+
+            for (int i = 0; i < bottom.getRectangles().size(); i++) {
+                if (i == list.getSelectionModel().getSelectedIndex()) {
+                    DraggableUtilities.makeImagePlaceable(me, selected, bottom, bottom
+                            .getRectangles().get(i), root);
+                }
+            }
         });
         return list;
     }

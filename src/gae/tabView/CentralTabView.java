@@ -39,9 +39,12 @@ public class CentralTabView implements UIObject {
         tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode(),
                                  gameObjectTab.getBaseTabNode());
 
+        
         Button newLevel = new Button("Add Level");
         newLevel.setOnAction(e -> createNewLevel());
 
+        
+        createNewLevel();
         baseNode.getChildren().addAll(newLevel, tabView);
     }
 

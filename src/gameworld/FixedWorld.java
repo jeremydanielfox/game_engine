@@ -40,7 +40,7 @@ public class FixedWorld extends AbstractWorld {
 		Circle c = new Circle(myPathWidth);
 		while(true){
 			try {
-				PointSimple pathPoint = myPath.getNextLocation(i);
+				PointSimple pathPoint = myPath.getNextLocation(i, new PointSimple(c.getCenterX(),c.getCenterY()));
 				c.setCenterX(pathPoint.getX()+28);
 				c.setCenterY(pathPoint.getY()+28);
 				if(c.intersects(n.getBoundsInParent())){

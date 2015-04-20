@@ -47,6 +47,7 @@ public class FreeWorld extends AbstractWorld {
 		GridCell c = myTransform.transformWorldToGrid(pixelCoords);
 		myGrid[c.getRow()][c.getCol()] = toSpawn;
         super.addObject(toSpawn);
+        System.out.println("HELLO");
         toSpawn.setPoint(myTransform.tranformGridToWorld(c));
     }
 

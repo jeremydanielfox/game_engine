@@ -42,6 +42,7 @@ public class WavePart implements UIObject {
         
         rootNode.getChildren().addAll(new Text("Enemy Type: "), comboBox, new Text ("Quantity"), quantityField, deleteButton);
         rootNode.setSpacing(5);
+        
     }
 
     @Override

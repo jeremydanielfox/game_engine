@@ -46,13 +46,12 @@ public class WaveSelectorPane implements UIObject {
         VBox scrollContents = new VBox();
         scrollContents.getChildren().addAll(listView, newWaveButton);
         
-        rootNode.addEventHandler(KeyEvent.KEY_PRESSED, e -> checkKeyPressed(e, listView));
+        rootNode.setOnKeyPressed(e -> checkKeyPressed(e, listView));
         rootNode.setContent(scrollContents);
     }
 
     private void checkKeyPressed (KeyEvent e, ListView<WaveEnemyTable> listView) {
-        System.out.println("Check");
-        if (e.getCode().equals(KeyCode.DELETE)) {
+        if (e.getCode() == KeyCode.BACK_SPACE) {
             waves.remove((listView.getSelectionModel().getSelectedItem()));
         }
     }

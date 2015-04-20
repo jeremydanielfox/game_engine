@@ -22,7 +22,7 @@ public class LevelTabSet {
         
         Tab prefsTab = new Tab("Preferences");
         prefsTab.setContent(prefs);
-        worldTab.setClosable(false);
+        prefsTab.setClosable(false);
 
         baseNode.getTabs().addAll(worldTab, prefsTab);
     }

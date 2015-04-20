@@ -2,18 +2,15 @@ package gae.gameView;
 
 import engine.gameobject.GameObjectSimple;
 import gae.editor.PopUpEditor;
-import gae.editor.SimpleEditor;
 import gae.openingView.UIObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;

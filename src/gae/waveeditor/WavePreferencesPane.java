@@ -28,9 +28,9 @@ public class WavePreferencesPane implements UIObject {
         // TODO: Pull established levels
         ObservableList<String> options =
                 FXCollections.observableArrayList(
-                                                  "Option 1",
-                                                  "Option 2",
-                                                  "Option 3"
+                                                  "Level 1",
+                                                  "Level 2",
+                                                  "Level 3"
                         );
         ComboBox<String> levelSelector = new ComboBox<String>(options);
         

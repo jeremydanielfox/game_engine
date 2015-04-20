@@ -36,6 +36,7 @@ public class WaveEnemyTable implements UIObject {
         scrollContents.getChildren().addAll(wavePartsBox, newWavePart);
         scrollContents.setSpacing(10);
         
+        
         rootNode.setContent(scrollContents);
     }
 
@@ -67,8 +68,8 @@ public class WaveEnemyTable implements UIObject {
     }
 
     public void deleteWavePart (WavePart wavePart) {
-//        myWaveParts.remove(wavePart);
-//        updateWavePartsBox();
+        myWaveParts.remove(wavePart);
+        updateWavePartsBox();
     }
 
 }

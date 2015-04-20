@@ -14,7 +14,7 @@ public class WaveEditor implements UIObject {
 
     private void initialize () {
         rootNode = new BorderPane();
-        WaveSelectorPane waveSelectorPane = new WaveSelectorPane();
+        WaveSelectorPane waveSelectorPane = new WaveSelectorPane(this);
         
         rootNode.setLeft(waveSelectorPane.getObject());
     }

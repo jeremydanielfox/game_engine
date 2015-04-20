@@ -38,7 +38,6 @@ public class CentralTabView implements UIObject{
 
         Button newLevel = new Button("Add Level");
         newLevel.setOnAction(e -> createNewLevel());
-
         baseNode.getChildren().addAll(newLevel, tabView);
     }
 

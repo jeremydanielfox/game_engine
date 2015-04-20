@@ -1,29 +1,29 @@
 package engine.gameobject.weapon.firingstrategy;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
-import engine.gameobject.units.BuffTracker;
 import gameworld.ObjectCollection;
 
 
 public class Explosion {
 
     private double radius;
-    private Set<Buff> effects;
-
-    public Explosion (double radius, Collection<Buff> effects) {
-        effects = new HashSet<Buff>(effects);
-        this.radius = radius;
-    }
+    private Set<Buff> explosBuffs;
 
     public Explosion () {
         radius = 0;
-        effects = new HashSet<Buff>();
+        explosBuffs = new HashSet<Buff>();
+    }
+    
+    public Explosion (double radius, Collection<Buff> buffSet) {
+        this.explosBuffs = new HashSet<Buff>(buffSet);
+        this.radius = radius;
     }
 
     /**
@@ -45,7 +45,7 @@ public class Explosion {
      * @param newBuff
      */
     public void addBuff(Buff newBuff){
-        effects.add(newBuff);
+        explosBuffs.add(newBuff);
     }
 
     /**
@@ -57,8 +57,8 @@ public class Explosion {
     }
     
     private void applyBuffs (GameObject target) {
-        for (Buff b : effects) {
-            target.addBuff(b.clone());
+        for (Buff b : explosBuffs) {
+            target.receiveBuff(b.clone());
         }
     }
 
@@ -70,6 +70,10 @@ public class Explosion {
     }
     
     public Explosion clone(){
-        return new Explosion(radius, effects);
+        return new Explosion(radius, explosBuffs);
+    }
+
+    public Set<Buff> getBuffSet () {
+        return Collections.unmodifiableSet(explosBuffs);
     }
 }

@@ -69,7 +69,7 @@ public class FreezeBuff extends Buff implements Freeze{
     }
 
     @Override
-    public BuffType getType () {
+    public BuffType getBuffType () {
         return type;
     }
 }

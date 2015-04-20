@@ -2,5 +2,5 @@ package engine.gameobject.units;
 
 public enum BuffType {
 
-    COLLISION, EXPLOSION;
+    COLLISION, EXPLOSION, NULL
 }

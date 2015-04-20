@@ -74,7 +74,7 @@ public class DamageBuff extends Buff implements DirectDamage {
     }
 
     @Override
-    public BuffType getType () {
+    public BuffType getBuffType () {
         return type;
     }
 

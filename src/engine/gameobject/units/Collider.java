@@ -1,32 +1,33 @@
 package engine.gameobject.units;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.firingstrategy.Explosion;
-import gae.listView.DeepCopy;
 import gameworld.ObjectCollection;
 
 public class Collider {
+
     private Set<GameObject> collidedID;
-    private Set<Buff> onCollision;
+    private Set<Buff> collisionBuffs;
     private Explosion onDeath;
     
     public Collider () {
         collidedID = new HashSet<GameObject>();
-        onCollision = new HashSet<Buff>();
+        collisionBuffs = new HashSet<Buff>();
         onDeath = new Explosion();
     }
 
     public Collider (Set<Buff> onCollision, Explosion onDeath) {
         collidedID = new HashSet<GameObject>();
-        this.onCollision = onCollision;
+        this.collisionBuffs = onCollision;
         this.onDeath = onDeath;
     }
     public void addCollisionBehavior(Buff newBuff){
         removeDuplicateBuff(newBuff);
-        onCollision.add(newBuff);
+        collisionBuffs.add(newBuff);
     }
  
     public void setExplosionRadius(double radius){
@@ -49,21 +50,29 @@ public class Collider {
     }
     
     private void removeDuplicateBuff(Buff newBuff){
-        for (Buff b: onCollision){
+        for (Buff b: collisionBuffs){
             if (b.getClass().equals(newBuff.getClass())){
-                onCollision.remove(b);
+                collisionBuffs.remove(b);
             }
         }
     }
     
     private void onCollision (GameObject target) {
-        for (Buff b : onCollision) {
-            target.addBuff(b);
+        for (Buff b : collisionBuffs) {
+            target.receiveBuff(b);
         }
     }
     
     public Collider clone(){
-        return new Collider(new HashSet<>(onCollision), onDeath.clone());
+        return new Collider(new HashSet<>(collisionBuffs), onDeath.clone());
+    }
+    
+    public Set<Buff> getCollisionBuffs () {
+        return Collections.unmodifiableSet(collisionBuffs);
+    }
+    
+    public Set<Buff> getExplosionBuffs () {
+        return onDeath.getBuffSet();
     }
 
 }

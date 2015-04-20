@@ -22,12 +22,10 @@ public class UpgradeTreeSimple implements UpgradeTree {
     private BuildableBundle current;
     
     public UpgradeTreeSimple() {
-        //TODO: Initialize first and current
-        // EDIT: ^No, GAE needs to pass a list of nodes
     }
     
     @Settable
-    void setUpgradeBundles(List<BuildableBundle> nodes){
+    public void setUpgradeBundles(List<BuildableBundle> nodes){
         buildTree(nodes);
     }
     

@@ -1,7 +1,6 @@
 package engine.game;
 
 import engine.fieldsetting.Settable;
-import View.Displayable;
 import View.ViewConcrete2;
 
 

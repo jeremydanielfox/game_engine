@@ -19,17 +19,15 @@ import engine.shop.wallet.Wallet;
 @Settable
 public class Player extends Observable {
 
+    private static final String DEFAULT_NAME = "Player 1";
+
     private String myName;
     private PlayerUnit myHealth;
     private PlayerUnit myScore;
     private Wallet myWallet;
 
-    // note: wallet needs to be initialzed with the right player unit before passed in here?
-    // alternative: could pass in a string or something to indicate which player unit to assign the
-    // wallet
-
     public Player () {
-        myName = "";
+        myName = DEFAULT_NAME;
         myHealth = new PlayerUnit();
         myScore = new PlayerUnit();
         myWallet = new ConcreteWallet();
@@ -49,6 +47,7 @@ public class Player extends Observable {
 
     /**
      * Adds the specifies amount to the player's score unit.
+     * 
      * @param toAdd
      */
     public void changeScore (int toAdd) {
@@ -59,6 +58,7 @@ public class Player extends Observable {
 
     /**
      * Adds the specified amount to the player's health unit.
+     * 
      * @param change
      */
     public void changeHealth (int change) {
@@ -83,6 +83,11 @@ public class Player extends Observable {
         return myName;
     }
 
+    /**
+     * Returns a list of items from the player that implement the displayable interface.
+     * 
+     * @return
+     */
     public List<Displayable> getDisplayables () {
         List<Displayable> toReturn = new ArrayList<>();
         toReturn.add(myHealth);

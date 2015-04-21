@@ -81,11 +81,18 @@ public class GamePlayerScreen {
         Button scoreBtn = new Button("View high scores");
         Button playBtn = new Button("play");
 
-        playBtn.setOnAction(e -> startGame());
+        playBtn.setOnAction(e -> openMainMenu());
 
         myVbox.getChildren().addAll(scoreBtn, playBtn);
     }
 
+    private void openMainMenu() {
+      MainMenuScreen menu=new MainMenuScreen("Hi","hi","hi");
+      Scene scene=menu.makeMenu();
+      myStage.setScene(scene);
+      menu.getButton().setOnAction(e->startGame());
+    }
+    
     private void startGame () {
 
         Group root = new Group();

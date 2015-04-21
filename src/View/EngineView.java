@@ -11,8 +11,6 @@ public interface EngineView {
     abstract void buildTimeline ();
 
     abstract void executeFrameActions ();
-
-    abstract void displayShop ();
     
     abstract void pause ();
     

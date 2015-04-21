@@ -1,6 +1,5 @@
 package gae.waveeditor;
 
-import engine.events.GameObjectQueue;
 import gae.openingView.UIObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,8 +13,9 @@ import javafx.scene.text.Text;
 public class WavePart implements UIObject {
 
     private HBox rootNode;
-    private GameObjectQueue myWaveQueue;
     private WaveEnemyTable parent;
+    private TextField quantityField;
+    private ComboBox<String> gameObjectSelector;
 
     public WavePart(WaveEnemyTable parent) {
         this.parent = parent;
@@ -32,15 +32,15 @@ public class WavePart implements UIObject {
                                                   "Enemy 2",
                                                   "Enemy 3"
                         );
-        ComboBox<String> comboBox = new ComboBox<String>(options);
+        gameObjectSelector = new ComboBox<String>(options);
         
-        TextField quantityField = new TextField("Enter Quantity");
+        quantityField = new TextField("Enter Quantity");
         quantityField.setEditable(true);
         
         Button deleteButton = new Button("Delete");
         deleteButton.setOnAction(e -> parent.deleteWavePart(this));
         
-        rootNode.getChildren().addAll(new Text("Enemy Type: "), comboBox, new Text ("Quantity"), quantityField, deleteButton);
+        rootNode.getChildren().addAll(new Text("Enemy Type: "), gameObjectSelector, new Text ("Quantity"), quantityField, deleteButton);
         rootNode.setSpacing(5);
         
     }
@@ -49,4 +49,12 @@ public class WavePart implements UIObject {
     public Node getObject () {
         return rootNode;
     }
+
+    public int getQuantity () {
+        return Integer.parseInt(quantityField.getText());
+    }
+    
+//    public GameObject getGameObject() {
+//        return gameObjectSelector.getSelectionModel().getSelectedItem();
+//    }
 }

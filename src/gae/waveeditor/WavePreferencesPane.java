@@ -14,8 +14,10 @@ import javafx.scene.text.Text;
 public class WavePreferencesPane implements UIObject {
 
     private ScrollPane rootNode;
+    private double waveSpacing;
 
     public WavePreferencesPane () {
+        waveSpacing = 2; // TODO: Change this to not hardcoded
         initialize();
     }
 
@@ -24,13 +26,13 @@ public class WavePreferencesPane implements UIObject {
         rootNode.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         rootNode.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 
-        Text levelLabel = new Text("Level");
+        Text levelLabel = new Text("Options");
         // TODO: Pull established levels
         ObservableList<String> options =
                 FXCollections.observableArrayList(
-                                                  "Level 1",
-                                                  "Level 2",
-                                                  "Level 3"
+                                                  "Option 1",
+                                                  "Option 2",
+                                                  "Option 3"
                         );
         ComboBox<String> levelSelector = new ComboBox<String>(options);
         
@@ -42,6 +44,10 @@ public class WavePreferencesPane implements UIObject {
     @Override
     public Node getObject () {
         return rootNode;
+    }
+
+    public double getSpacingTime () {
+        return waveSpacing;
     }
 
 }

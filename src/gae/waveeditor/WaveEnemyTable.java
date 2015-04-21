@@ -1,6 +1,9 @@
 package gae.waveeditor;
 
+import engine.gameobject.GameObject;
 import gae.openingView.UIObject;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -36,7 +39,6 @@ public class WaveEnemyTable implements UIObject {
         scrollContents.getChildren().addAll(wavePartsBox, newWavePart);
         scrollContents.setSpacing(10);
         
-        
         rootNode.setContent(scrollContents);
     }
 
@@ -58,7 +60,7 @@ public class WaveEnemyTable implements UIObject {
         return rootNode;
     }
 
-    public UIObject getPreferencesPane () {
+    public WavePreferencesPane getPreferencesPane () {
         return myPreferences;
     }
     
@@ -70,6 +72,16 @@ public class WaveEnemyTable implements UIObject {
     public void deleteWavePart (WavePart wavePart) {
         myWaveParts.remove(wavePart);
         updateWavePartsBox();
+    }
+
+    public List<GameObject> getEnemiesAsList () {
+        List<GameObject> enemies = new ArrayList<GameObject>();
+        for (WavePart wp: myWaveParts) {
+            for (int i = 0; i < wp.getQuantity(); i++) {                
+//                enemies.add(wp.getGameObject());
+            }
+        }
+        return enemies;
     }
 
 }

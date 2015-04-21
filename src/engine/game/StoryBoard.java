@@ -9,7 +9,7 @@ import engine.fieldsetting.Settable;
 /**
  * Manages the event progression for a level
  * 
- * @author Tom Puglisi
+ * @author Sierra Smith and Tom Puglisi 
  *
  */
 @Settable

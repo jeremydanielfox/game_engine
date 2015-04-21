@@ -1,5 +1,9 @@
 package gae.waveeditor;
 
+import engine.events.ConcreteQueue;
+import engine.events.ConstantSpacingWave;
+import engine.events.GameObjectQueue;
+import engine.events.Wave;
 import gae.openingView.UIObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,8 +47,12 @@ public class WaveSelectorPane implements UIObject {
         Button newWaveButton = new Button ("New Wave");
         newWaveButton.setOnAction(e -> makeNewWave());
         
+        Button saveButton = new Button ("Save Waves");
+        saveButton.setOnAction(e -> saveWaves());
+        
         VBox scrollContents = new VBox();
-        scrollContents.getChildren().addAll(listView, newWaveButton);
+        scrollContents.getChildren().addAll(listView, newWaveButton, saveButton);
+        scrollContents.setSpacing(5);
         
         rootNode.setOnKeyPressed(e -> checkKeyPressed(e, listView));
         rootNode.setContent(scrollContents);
@@ -59,6 +67,14 @@ public class WaveSelectorPane implements UIObject {
     private void makeNewWave () {
         waves.add(new WaveEnemyTable(waves.size()+1));
     }
+    
+    private void saveWaves () {
+        for (WaveEnemyTable wave : waves) {            
+            GameObjectQueue wQueue = new ConcreteQueue(wave.getEnemiesAsList());
+            Wave newWave = new ConstantSpacingWave(wave.getPreferencesPane().getSpacingTime(), wQueue, null); //Last argument is a GameWorld object
+//            myLevel.getStoryboard().addEvent(newWave);
+        }
+  }
 
     @Override
     public Node getObject () {

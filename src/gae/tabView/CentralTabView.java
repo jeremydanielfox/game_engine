@@ -3,6 +3,7 @@ package gae.tabView;
 import gae.backend.Editable;
 import gae.gridView.LevelView;
 import gae.openingView.UIObject;
+import gae.waveeditor.WaveEditor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -30,9 +31,8 @@ public class CentralTabView implements UIObject{
         baseNode = new VBox();
         tabView = new TabPane();
         ShopTab shopTab = new ShopTab();
-        WaveEditorTab waveTab = new WaveEditorTab();
         hudTab = new HudEditorTab(null);
-        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode(), waveTab.getBaseTabNode());
+        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode());
 
         Button newLevel = new Button("Add Level");
         newLevel.setOnAction(e -> createNewLevel());
@@ -43,8 +43,9 @@ public class CentralTabView implements UIObject{
     private void createNewLevel () {
         levelView = new LevelView();
         LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
+        WaveEditor waves = new WaveEditor();
         LevelTabSet newLevel =
-                new LevelTabSet(levelView.getBorder(scene), levelPrefs.getStack());
+                new LevelTabSet(levelView.getBorder(scene), levelPrefs.getStack(), waves.getObject());
         Tab newTab = new Tab("Level:" + levelCount++);
         newTab.setContent(newLevel.getBaseNode());
         newTab.setClosable(false);

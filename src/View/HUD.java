@@ -71,7 +71,6 @@ public class HUD implements Observer {
         myStatsDisplay = new VBox(10);
         myWholeDisplay = new VBox(10);
         myWholeDisplay.setAlignment(Pos.CENTER);
-        System.out.println("stats:" + myStatsDisplay.getWidth());
         myStatsDisplay.setAlignment(Pos.CENTER_RIGHT);
         myWholeDisplay.setAlignment(Pos.CENTER);
         myWholeDisplay.getChildren().add(myStatsDisplay);

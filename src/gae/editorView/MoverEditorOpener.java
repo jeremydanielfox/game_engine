@@ -2,11 +2,19 @@ package gae.editorView;
 
 import java.util.ArrayList;
 import java.util.List;
+import gae.editorView.TestEngine;
+import xml.DataManager;
+import engine.gameobject.PointSimple;
+import engine.pathfinding.PathFixed;
+import engine.pathfinding.PathSegmentBezier;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,7 +37,7 @@ public class MoverEditorOpener extends EditorOpener {
         createdDropDownList = new ArrayList<>();
         Stage s = new Stage();
         Scene scene = new Scene(setVBoxPopup());
-        s.setWidth(300);
+        s.setWidth(330);
         s.setHeight(500);
         s.setScene(scene);
         s.setTitle(TITLE);
@@ -54,6 +62,7 @@ public class MoverEditorOpener extends EditorOpener {
             List<Path> path = pathView.createPathObjects();
             // we need to add it to an Editable, which will then be converted to GameObjectSimple
             // later
+
             });
     }
 
@@ -94,11 +103,14 @@ public class MoverEditorOpener extends EditorOpener {
                     }
                 }
             };
+
         });
         if (first) {
             Button plus = new Button("+");
             plus.setOnAction(e -> addMoreOptions());
-            hbox.getChildren().addAll(dropDown, plus);
+            Button view = new Button("View currently selected animation");
+            view.setOnAction(e -> setEngineDemo(dropDown.getSelectionModel().getSelectedItem()));
+            hbox.getChildren().addAll(dropDown, plus, view);
             first = false;
         }
         else {
@@ -111,6 +123,36 @@ public class MoverEditorOpener extends EditorOpener {
         optionBox.getChildren().add(createHBox());
     }
 
+    private void setEngineDemo (PathView selected) {
+        if (selected != null) {
+            selected.createPathObjects();
+            List<Path> list = selected.createPathObjects();
+            PathFixed myPath = new PathFixed();
+            for (int i = 0; i < list.size(); i++) {
+                // System.out.println("Path " + i + "'s coordinates");
+                Path temp = list.get(i);
+                temp.printInfo();
+                // System.out.println();
+                PathSegmentBezier tempBez = new PathSegmentBezier();
+                List<PointSimple> points = new ArrayList<>();
+                points.add(temp.getStart());
+                points.add(temp.getControlOne());
+                points.add(temp.getControlTwo());
+                points.add(temp.getEnd());
+                tempBez.setPoints(points);
+                myPath.addPathSegment(tempBez);
+            }
+            DataManager.writeToXML(myPath, "src/gae/listView/Test.xml");
+            TestEngine test = new TestEngine();
+            try {
+                test.start(new Stage());
+            }
+            catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
     // private void deleteOption() {
     // optionBox.getChildren()
     // }

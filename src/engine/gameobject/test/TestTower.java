@@ -1,18 +1,10 @@
 package engine.gameobject.test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
-import engine.gameobject.MoverDirection;
 import engine.gameobject.MoverNull;
 import engine.gameobject.PointSimple;
-import engine.gameobject.weapon.BasicWeapon;
-import engine.gameobject.weapon.firingrate.FiringRate;
-import gameworld.ObjectCollection;
 
 public class TestTower extends GameObjectSimple{
     
@@ -31,6 +23,7 @@ public class TestTower extends GameObjectSimple{
         getTag().setShopGraphic(new Graphic(40, 40, "Bloons_TackShooterIcon.png"));
         setLabel(new TowerLabel());
     }
- 
+    
+    
     
 }

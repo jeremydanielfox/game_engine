@@ -1,6 +1,5 @@
 package engine.gameobject.labels;
 
-import java.util.Collection;
 
 public interface Label {
 

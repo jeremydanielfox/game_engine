@@ -1,7 +1,7 @@
 package gameworld;
 
+import voogasalad.util.pathsearch.graph.GridCell;
 import engine.gameobject.PointSimple;
-import engine.grid.GridCell;
 
 /**
  * Provides a function to convert from game world coordinates to a (row,col) entry

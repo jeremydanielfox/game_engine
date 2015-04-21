@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import voogasalad.util.pathsearch.pathalgorithms.NoPathExistsException;
 import xml.DataManager;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
@@ -14,13 +15,18 @@ import engine.events.TimedEvent;
 import engine.game.*;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
+import engine.gameobject.Mover;
+import engine.gameobject.MoverPath;
 import engine.gameobject.test.TestTower;
 import engine.goals.*;
+import engine.pathfinding.Path;
 import engine.pathfinding.PathFixed;
+import engine.pathfinding.PathFree;
 import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
+import gameworld.CoordinateTransformer;
 import gameworld.FixedWorld;
 import gameworld.FreeWorld;
 import gameworld.GameWorld;
@@ -28,7 +34,7 @@ import gameworld.GameWorld;
 
 public class GameWriterConcrete2 extends Application {
     static GameWriterConcrete2 myWriter;
-    private static final String FILE_DESTINATION = "src/xml/Game.xml";
+    private static final String FILE_DESTINATION = "src/xml/GameFreePath.xml";
 
     /**
      * @param world
@@ -36,8 +42,11 @@ public class GameWriterConcrete2 extends Application {
      */
     private StoryBoard makeStoryBoard (GameWorld world, Player player) {
         List<GameObject> waveObjects = new ArrayList<>();
+        Mover moverPath = new MoverPath(world.getPath(), .25);
         for (int i = 0; i < 10; i++) {
-            waveObjects.add(new GameObjectSimpleTest());
+        	GameObject toAdd = new GameObjectSimpleTest();
+        	toAdd.setMover(moverPath);
+            waveObjects.add(toAdd);
         }
         GameObjectQueue q = new ConcreteQueue(waveObjects);
         TimedEvent wave = new RandomSpanWave(2, 20, q, world);
@@ -108,6 +117,12 @@ public class GameWriterConcrete2 extends Application {
      */
     public GameWorld makeWorld () {
         FreeWorld world = new FreeWorld(10, 10);
+        try {
+			world.getPath().updatePath();
+		} catch (NoPathExistsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //        world.addObject(new TestTower(2, 330, 130));
 //        world.addObject(new TestTower(4, 270, 270));
 //        world.addObject(new TestTower(3, 355, 455));

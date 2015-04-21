@@ -34,7 +34,7 @@ public class MoverPath extends BasicMover {
 	public PointSimple move(PointSimple current) throws EndOfPathException{
 	        if (frozen != true)
 	            myDistance += currentSpeed();
-	        return myPath.getNextLocation(myDistance, current);
+	        return myPath.getNextLocation(myDistance, currentSpeed(), current);
 	}
 	
 	@Settable

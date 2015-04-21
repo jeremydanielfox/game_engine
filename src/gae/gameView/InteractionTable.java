@@ -44,7 +44,8 @@ public class InteractionTable extends Application {
     }
 
     /**
-     * implements the Singleton design pattern
+     * implements the Singleton design pattern in order to keep the InteractionTable consistent
+     * throughout the entire GAE
      * 
      * @return
      */

@@ -155,12 +155,6 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
 
     }
 
-    @Override
-    public void displayShop () {
-        // TODO Auto-generated method stub
-
-    }
-
     private void addInitialObjects () {//This is actually a rendering method now.
         Collection<GameObject> gameObjects = myGame.getLevelBoard().getGameWorld().getGameObjects();
         for (Node n: hack){

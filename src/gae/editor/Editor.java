@@ -25,7 +25,7 @@ public abstract class Editor implements Edits {
 
     public TreeNode getMethodsTree(Class<?> klass, Method m) {
         TreeNode root = new TreeNode(m, "null");
-        List<Method> methods = EditingParser.getMethodsWithSetterAnnotation(klass, Settable.class);
+        List<Method> methods = EditingParser.getMethodsWithAnnotation(klass, Settable.class);
         for (Method method : methods) {
             //System.out.println(method.toString());
             Type parameterClass = method.getGenericParameterTypes()[0];

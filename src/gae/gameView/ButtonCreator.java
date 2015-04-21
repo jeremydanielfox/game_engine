@@ -3,10 +3,13 @@ package gae.gameView;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import engine.fieldsetting.Settable;
 import engine.fieldsetting.Triggerable;
+import engine.game.StoryBoard;
 import View.ButtonWrapper;
 import gae.editor.EditingParser;
 import gae.editor.Editor;
@@ -26,60 +29,66 @@ import javafx.stage.Stage;
  *
  */
 
-public class ButtonCreator extends Application{
-    
+public class ButtonCreator extends Application {
+
     private static final String DROPDOWN_DEFAULT = "Select action here";
     private static final String DEFAULT_NAME_FIELD = "Enter Button name here";
-    
+
     private VBox container;
     private EditingParser parser;
-    private List<Method> settableList;
-    private List<Method> triggerableList;
-    private List<String> methodNames;
-    
-    public ButtonCreator() {
+    private Map<Method, String> settableMap;
+    private Map<Method, String> triggerableMap;
+
+    public ButtonCreator () {
         container = new VBox();
-        settableList = parser.getMethodsWithSetterAnnotation(ButtonWrapper.class, Settable.class);
-        triggerableList = parser.getMethodsWithSetterAnnotation(ButtonWrapper.class, Triggerable.class);
-        methodNames = new ArrayList<>();
-        getMethodNames();
-        createFields();
+        settableMap = new HashMap<>();
+        triggerableMap = new HashMap<>();
+        createMaps();
     }
 
-    private void getMethodNames () {
-        settableList.forEach(e -> {
-            String s = extractName(e.getName());
-            methodNames.add(s);
+    /**
+     * fills settableMap and triggerableMap with the keys as the methods and the values as the
+     * method property name
+     */
+    private void createMaps () {
+        /*
+         * settableMap
+         */
+        parser.getMethodsWithAnnotation(ButtonWrapper.class, Settable.class).forEach(e -> {
+            settableMap.put(e, extractName(e.getName()));
+        });
+
+        /*
+         * triggerableMap
+         */
+        parser.getMethodsWithAnnotation(StoryBoard.class, Triggerable.class).forEach(e -> {
+            triggerableMap.put(e, extractName(e.getName()));
         });
     }
-    
+
     /**
      * takes away the "set" from the method name
+     * 
      * @param method
      * @return
      */
-    private String extractName(String method) {
+    private String extractName (String method) {
         return method.substring(3);
     }
 
     /**
      * fills the creator with fields
      */
-    private void createFields() {
-        
+    private void createFields () {
+
     }
-    
-    private HBox createFieldContainer(String label) {
+
+    private HBox createFieldContainer (String label) {
         HBox field = new HBox(15);
-        
-        
+
         return field;
     }
-    
-    
-    
-    
-    
+
     public static void main (String[] args) {
         launch(args);
     }
@@ -90,5 +99,5 @@ public class ButtonCreator extends Application{
         Scene scene = new Scene(container);
         stage.setScene(scene);
         stage.show();
-    } 
+    }
 }

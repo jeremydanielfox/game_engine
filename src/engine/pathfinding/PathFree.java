@@ -28,8 +28,6 @@ import gameworld.CoordinateTransformer;
 public class PathFree implements Path {
 	private GridWrapper myAlgorithm;
 	private Map<GridCell, GridCell> myPath;
-	private List<PointSimple> myPathCoordinates;
-	private Path p;
 	private CoordinateTransformer myTrans;
 	private GameObject[][] objectMatrix;
 	private GridCell endPoint, spawnPoint, bounds; 
@@ -37,9 +35,6 @@ public class PathFree implements Path {
 	public PathFree(CoordinateTransformer cTrans, GameObject[][] matrix) {
 		myAlgorithm = new GridWrapper();
 		myTrans = cTrans;
-		myPath = new HashMap<>();
-		myPathCoordinates = new ArrayList<>();
-		p = new PathFixed();
 		objectMatrix = matrix;
 		endPoint = new GridCell(8, 8);
 		spawnPoint = new GridCell(0, 0);
@@ -51,10 +46,6 @@ public class PathFree implements Path {
 		myAlgorithm.initializeGraph(objectMatrix, go -> go != null);
 		int[] endNodes = {8,8};
 		myPath = myAlgorithm.allShortestPaths(endNodes);		
-		Map<GridCell,GridCell> myPath2 = new HashMap<>();
-		for(GridCell c : myPath.keySet()){
-			myPath2.put(myPath.get(c), c);
-		}
 		// myPathCoordinates = myPath.stream().map(cell ->
 		// myTrans.tranformGridToWorld(cell)).collect(Collectors.toList());
 		// p = new PathFixed();
@@ -80,9 +71,7 @@ public class PathFree implements Path {
 			}
 			else if(currentCell.withinBounds(bounds)){//TODO make better algorithmically
 				for(GridCell c : myPath.keySet()){
-					System.out.println("TRUTH");
 					if(c.distance(currentCell)==1){
-						System.out.println("DOUBLE TRUTH");
 						return myTrans.tranformGridToWorld(c);
 //						return PointSimple.pointOnLine(current,myTrans.tranformGridToWorld(c),speed);
 					}
@@ -93,8 +82,6 @@ public class PathFree implements Path {
 	}
 
 	@Override
-	public void addPathSegment(PathSegment ps) {
-		p.addPathSegment(ps);
-	}
+	public void addPathSegment(PathSegment ps) {}
 
 }

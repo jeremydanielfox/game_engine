@@ -23,7 +23,6 @@ public class StoryBoard extends Observable {
     public StoryBoard (Event ... events) {
         eventList = new ArrayList<Event>();
         addEvent(events);
-//        System.out.println(eventList.size());
     }
 
     public boolean addEvent (Event ... events) {
@@ -39,7 +38,6 @@ public class StoryBoard extends Observable {
      * @return false if the StoryBoard has no more events to update
      */
     public boolean update () {
-//        System.out.println(eventList.size());
         if (eventList.size() == 0) {
             return false;
         }

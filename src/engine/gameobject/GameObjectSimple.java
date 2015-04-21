@@ -147,6 +147,7 @@ public class GameObjectSimple implements GameObject{
     public void move () throws EndOfPathException {
         PointSimple point = myMover.move(myPoint);
         setPoint(new PointSimple(new Point2D(point.getX(), point.getY())));
+        myGraphic.rotate(point);
     }
     
     @Override

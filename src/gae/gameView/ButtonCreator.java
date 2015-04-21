@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import engine.fieldsetting.Settable;
+import engine.fieldsetting.Triggerable;
 import View.ButtonWrapper;
 import gae.editor.EditingParser;
 import gae.editor.Editor;
@@ -29,21 +31,23 @@ public class ButtonCreator extends Application{
     private static final String DROPDOWN_DEFAULT = "Select action here";
     private static final String DEFAULT_NAME_FIELD = "Enter Button name here";
     
-    VBox container;
-    EditingParser parser;
-    List<Method> methodList;
-    List<String> methodNames;
+    private VBox container;
+    private EditingParser parser;
+    private List<Method> settableList;
+    private List<Method> triggerableList;
+    private List<String> methodNames;
     
     public ButtonCreator() {
         container = new VBox();
-        methodList = parser.getMethodsWithSetterAnnotation(ButtonWrapper.class);
+        settableList = parser.getMethodsWithSetterAnnotation(ButtonWrapper.class, Settable.class);
+        triggerableList = parser.getMethodsWithSetterAnnotation(ButtonWrapper.class, Triggerable.class);
         methodNames = new ArrayList<>();
         getMethodNames();
         createFields();
     }
 
     private void getMethodNames () {
-        methodList.forEach(e -> {
+        settableList.forEach(e -> {
             String s = extractName(e.getName());
             methodNames.add(s);
         });
@@ -71,6 +75,10 @@ public class ButtonCreator extends Application{
         
         return field;
     }
+    
+    
+    
+    
     
     public static void main (String[] args) {
         launch(args);

@@ -138,7 +138,7 @@ public class InteractionInstance {
         private void createObjectContainer () {
             scroller.setContent(container);
             adder.setOnMouseClicked(e -> {
-
+                
             });
             container.getChildren().addAll(selected, addBox);
         }

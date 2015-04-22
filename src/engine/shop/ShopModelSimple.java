@@ -133,11 +133,11 @@ public class ShopModelSimple implements ShopModel {
     }
 
     @Override
-    public TransitionGameObject getTransitionGameObject (String name) {
-        Prototype<GameObject> prototype = prototypeMap.get(name);
-        return new TransitionGameObject(prototype.getTag().getName(),
-                                        ((GameObjectTag) prototype.getTag()).getGraphic(),
-                                        prototype.getRange());
+    public RangeDisplay getRangeDisplay (String name) {
+        return prototypeMap.get(name).getRangeDisplay();
+//        return new RangeDisplay(prototype.getTag().getName(),
+//                                        ((GameObjectTag) prototype.getTag()).getGraphic(),
+//                                        prototype.getRange());
     }
 
     @Override

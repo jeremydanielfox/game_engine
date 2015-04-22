@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Map;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
@@ -24,6 +27,7 @@ import View.ViewUtil;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.shop.ShopModelSimple.ItemInfo;
+import gameworld.GameWorld;
 
 
 /**
@@ -51,8 +55,10 @@ public class ShopView extends Parent {
     private StackPane infoBox;
 
     private BooleanProperty infoBoxActive;
+    private GameWorld world;
 
-    public ShopView (ShopModel model, Pane pane) {
+    public ShopView (GameWorld world, ShopModel model, Pane pane) {
+        this.world = world;
         this.model = model;
         this.pane = pane;
         infoBoxActive = new SimpleBooleanProperty(false);
@@ -89,10 +95,10 @@ public class ShopView extends Parent {
             gameObjectIcon.setOnMouseEntered(mouseEvent -> displayGameObjectInfo(gameObjectIcon));
             gameObjectIcon.setOnMouseExited(mouseEvent -> infoBox.getChildren().clear());
             gameObjectIcon.setOnMouseClicked(mouseEvent -> {
-                TransitionGameObject transition =
-                        model.getTransitionGameObject(gameObjectIcon.getName());
+                RangeDisplay transition =
+                        model.getRangeDisplay(gameObjectIcon.getName());
                 Point2D location = ViewUtil.getMouseSceneLoc(mouseEvent, transition.getNode());
-                initializeTransition(model.getTransitionGameObject(gameObjectIcon.getName()),
+                initializeTransition(model.getRangeDisplay(gameObjectIcon.getName()),
                                      location);
             });
 
@@ -171,7 +177,7 @@ public class ShopView extends Parent {
         pane.getChildren().add(result);
     }
 
-    private void initializeTransition (TransitionGameObject transition, Point2D initial) {
+    private void initializeTransition (RangeDisplay transition, Point2D initial) {
         Node transNode = transition.getNode();
         bindCursor(initial, transNode);
 
@@ -183,15 +189,23 @@ public class ShopView extends Parent {
 
         transNode.setOnMouseClicked(event -> {
             PointSimple current = new PointSimple(event.getSceneX(), event.getSceneY());
-            // EventHandler<MouseEvent> isClicked = new EventHandler(event ->
-            // this::displayUpgrades);
-                if (model.purchaseGameObject(transition.getName(), current)) {
-                    ViewUtil.unbindCursor(pane, transNode);
-                    // TODO:
-                    // new TestTower: onClicked - show radius, show available upgrades -- call
-                    // displayUpgrades
+            EventHandler<MouseEvent> selected = selection -> selectGameObject(selection);
+            if (model.purchaseGameObject(transition.getName(), current)) {
+                ViewUtil.unbindCursor(pane, transNode);
+                // TODO:
+                // new TestTower: onClicked - show radius, show available upgrades -- call
+                // displayUpgrades
 
-                }
-            });
+            }
+        });
+    }
+    
+    private void selectGameObject(MouseEvent event) {
+        GameObject selected = world.getObjectFromNode((Node) event.getSource());
+        //node.setOnMousePressed();
+        // get GameObject with node as key
+        // GameObject will be asked for range, can then place appropriate RangeDisplay
+        // OR... every GameObject has its own RangeDisplay. And graphic can change accordingly
+        // will then use GameObject to display next UpgradeBundle
     }
 }

@@ -53,7 +53,7 @@ public interface ShopModel {
      * @param name
      * @return a TransitionGameObject corresponding to the given item name
      */
-    public TransitionGameObject getTransitionGameObject (String name);
+    public RangeDisplay getRangeDisplay (String name);
 
     /**
      * Provides item information to the view for display

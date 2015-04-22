@@ -1,39 +1,40 @@
 package engine.shop;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.gameobject.Graphic;
-import engine.gameobject.Graphical;
 
 
 /**
- * A GameObject that has yet to neither be placed in the GameWorld nor purchased from the shop. It
- * contains the same graphic as the prototype GameObject it will instantiate if placed in the World.
+ * A GameObject's graphic overlaid on top of its current range.
  * 
  * @author Nathan Prabhu and Tom Puglisi
  *
  */
 
-public class TransitionGameObject {
+public class RangeDisplay {
 
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
-    private static final Color WHITE_COLOR = Color.rgb(255, 255, 255, 0.5); // half-transparent
+    private static final Color NORMAL_COLOR = Color.rgb(255, 255, 255, 0.5); // half-transparent
                                                                             // white
 
     private Graphic graphic;
-    private String name;
     private double range;
+    private String name;
+    private BooleanProperty isPlaceable;
     @XStreamOmitField
     private Circle rangeDetection;
     @XStreamOmitField
     private transient StackPane pane;
 
-    public TransitionGameObject (String name, Graphic myGraphic, double range) {
-        this.graphic = myGraphic;
+
+    public RangeDisplay (String name, Graphic myGraphic, double range) {
         this.name = name;
+        this.graphic = myGraphic;
         this.range = range;
         initialize();
     }
@@ -42,7 +43,7 @@ public class TransitionGameObject {
     private void initialize () {
         pane = new StackPane();
 
-        rangeDetection = new Circle(range, ERROR_COLOR);
+        rangeDetection = new Circle(range, NORMAL_COLOR);
         rangeDetection.setStroke(Color.BLACK);
 
         pane.getChildren().addAll(rangeDetection, graphic.getNode());
@@ -55,13 +56,13 @@ public class TransitionGameObject {
     public Graphic getGraphic () {
         return graphic;
     }
-
+    
     public String getName () {
         return name;
     }
 
     public void setRangeCircleColor (Boolean isPlacable) {
-        rangeDetection.setFill(isPlacable ? WHITE_COLOR : ERROR_COLOR);
+        rangeDetection.setFill(isPlacable ? NORMAL_COLOR : ERROR_COLOR);
     }
 
 }

@@ -48,7 +48,7 @@ public class ItemGraphic extends Parent {
         return shopGraphic.getNode();
     }
     
-    public TransitionGameObject onClicked () {
+    public RangeDisplay onClicked () {
         return myOnClicked.execute();
     }
 

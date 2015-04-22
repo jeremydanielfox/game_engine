@@ -11,7 +11,7 @@ public class BuyOnClicked implements OnClickedCommand {
     
     
     @Override
-    public TransitionGameObject execute () {
+    public RangeDisplay execute () {
         myShopModel.purchaseUpgrade(name);
         return null;
     }

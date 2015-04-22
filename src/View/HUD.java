@@ -14,7 +14,8 @@ import engine.shop.ItemGraphic;
 import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;
 import engine.shop.ShopView;
-import engine.shop.TransitionGameObject;
+import engine.shop.RangeDisplay;
+import gameworld.GameWorld;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -52,10 +53,12 @@ public class HUD implements Observer {
     private BorderPane myPane;
     private HBox myDefaultButtonDisplay;
     private ShopModel shop;
-
+    private GameWorld world;
+    
     private List<ButtonWrapper> myButtonWrapperList;
 
-    public HUD (BorderPane pane, ShopModel shop) {
+    public HUD (GameWorld world, BorderPane pane, ShopModel shop) {
+        this.world = world;
         this.shop = shop;
         initialize(pane);
     }
@@ -141,7 +144,7 @@ public class HUD implements Observer {
     private void makeShop () {
         //TESTING purposes:
         shop.addPrototype(new TestTower(0,0,0));
-        myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
+        myWholeDisplay.getChildren().add(new ShopView(world, shop, myPane));
     }
     /*
         FlowPane shopDisplay = new FlowPane();

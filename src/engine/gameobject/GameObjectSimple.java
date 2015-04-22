@@ -3,19 +3,16 @@ package engine.gameobject;
 import javafx.geometry.Point2D;
 import engine.fieldsetting.Settable;
 import engine.gameobject.labels.Label;
-import engine.gameobject.labels.LabelConcrete;
 import engine.gameobject.labels.SimpleLabel;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
 import engine.gameobject.units.Collider;
-import engine.gameobject.units.Colliding;
-import engine.gameobject.units.Firing;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
+import engine.shop.RangeDisplay;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.GameObjectTagSimple;
-import gae.listView.DeepCopy;
 import gameworld.ObjectCollection;
 
 
@@ -36,6 +33,7 @@ public class GameObjectSimple implements GameObject{
     private BuffTracker myBuffs;
     private Weapon myWeapon;
     private Collider myCollider;
+    private RangeDisplay rangeDisplay;
     
     public GameObjectSimple () {
         myLabel = new SimpleLabel();
@@ -47,6 +45,7 @@ public class GameObjectSimple implements GameObject{
         myBuffs = new BuffTracker();
         myWeapon = new NullWeapon();
         myCollider = new Collider();
+        rangeDisplay = new RangeDisplay(myTag.getName(), myGraphic, myWeapon.getRange());
     }
 
 /*
@@ -102,8 +101,8 @@ public class GameObjectSimple implements GameObject{
  * Prototype methods follow
  */
     @Override
-    public double getRange(){
-        return myWeapon.getRange();
+    public RangeDisplay getRangeDisplay(){
+        return rangeDisplay;
     }
     
     //TODO: Tag cloning not done, Weapon upgrade cloning not done

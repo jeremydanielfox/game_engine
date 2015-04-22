@@ -35,11 +35,11 @@ public class TestEngine extends Application {
     }
 
     private Game loadGame () {
-        GameWriter gw = new GameWriter();
-        GameWorld world = gw.makeWorld();
-        Player player = gw.makePlayer();
-        return gw.makeGame(player, world, gw.makeShop(player, world));
-        //return DataManager.readFromXML(Game.class, FILE_SOURCE);
+//        GameWriter gw = new GameWriter();
+//        GameWorld world = gw.makeWorld();
+//        Player player = gw.makePlayer();
+//        return gw.makeGame(player, world, gw.makeShop(player, world));
+        return DataManager.readFromXML(Game.class, FILE_SOURCE);
 //        return DataManager.readFromXML(Game.class, FILE_SOURCE);
 
 

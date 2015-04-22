@@ -1,8 +1,8 @@
 package engine.pathfinding;
 
+import voogasalad.util.pathsearch.pathalgorithms.NoPathExistsException;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import engine.grid.GridCell;
 import javafx.geometry.Point2D;
 
 /**
@@ -21,7 +21,7 @@ public interface Path {
 	 * @return point of the next destination
 	 * @throws EndOfPathException if no more points exist on the path
 	 */
-	public PointSimple getNextLocation(double distance)
+	public PointSimple getNextLocation(double distance, double speed, PointSimple current)
 			throws EndOfPathException;
 
 	/**
@@ -29,5 +29,7 @@ public interface Path {
 	 * @param ps path segment to be appended
 	 */
 	public void addPathSegment(PathSegment ps);
+	
+	public void updatePath() throws NoPathExistsException;
 
 }

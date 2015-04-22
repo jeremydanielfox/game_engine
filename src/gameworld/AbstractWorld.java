@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.scene.Node;
+import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.EnemyLabel;
@@ -18,6 +19,8 @@ import engine.interactions.CollisionEngine;
 import engine.interactions.InteractionEngine;
 import engine.interactions.RangeEngine;
 import engine.interactions.ShootAt;
+import engine.pathfinding.Path;
+import engine.pathfinding.PathFree;
 
 
 public class AbstractWorld implements GameWorld{
@@ -25,6 +28,8 @@ public class AbstractWorld implements GameWorld{
     private InteractionEngine myCollisionEngine;
     private InteractionEngine myRangeEngine;
     private Map<Node,GameObject> myNodeToGameObjectMap;
+	protected Path myPath;
+
     
     public AbstractWorld () {
         myObjects = new ArrayList<GameObject>();
@@ -120,5 +125,14 @@ public class AbstractWorld implements GameWorld{
 		return myNodeToGameObjectMap.get(n);
 	}
 
+	@Settable
+	public void setPath(Path p){
+		myPath = p;
+	}
+
+	@Override
+	public Path getPath() {
+		return myPath;
+	}
 }
 

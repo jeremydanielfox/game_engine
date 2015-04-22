@@ -30,7 +30,7 @@ public class FixedWorld extends AbstractWorld {
 	private double myPathWidth = 17;
 
 	@Override
-	public boolean isPlacable (Node n, PointSimple pixelCoords) {
+	public boolean isPlaceable (Node n, PointSimple pixelCoords) {
 		n.setLayoutX(pixelCoords.getX());
 		n.setLayoutY(pixelCoords.getY());
 		int i = 0;

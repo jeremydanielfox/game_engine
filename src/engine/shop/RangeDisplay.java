@@ -20,7 +20,7 @@ public class RangeDisplay {
 
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
     private static final Color NORMAL_COLOR = Color.rgb(255, 255, 255, 0.5); // half-transparent
-                                                                            // white
+                                                                             // white
 
     private Graphic graphic;
     private double range;
@@ -30,7 +30,6 @@ public class RangeDisplay {
     private Circle rangeDetection;
     @XStreamOmitField
     private transient StackPane pane;
-
 
     public RangeDisplay (String name, Graphic myGraphic, double range) {
         this.name = name;
@@ -53,16 +52,21 @@ public class RangeDisplay {
         return pane;
     }
 
-    public Graphic getGraphic () {
-        return graphic;
+    public void setGraphic (Graphic graphic) {
+        this.graphic = graphic;
+        initialize();
     }
-    
+
     public String getName () {
         return name;
     }
 
     public void setRangeCircleColor (Boolean isPlacable) {
         rangeDetection.setFill(isPlacable ? NORMAL_COLOR : ERROR_COLOR);
+    }
+
+    public void setName (String name) {
+        this.name = name;
     }
 
 }

@@ -134,10 +134,7 @@ public class ShopModelSimple implements ShopModel {
 
     @Override
     public RangeDisplay getRangeDisplay (String name) {
-        return prototypeMap.get(name).getRangeDisplay();
-//        return new RangeDisplay(prototype.getTag().getName(),
-//                                        ((GameObjectTag) prototype.getTag()).getGraphic(),
-//                                        prototype.getRange());
+        return prototypeMap.get(name).clone().getRangeDisplay();
     }
 
     @Override
@@ -164,7 +161,7 @@ public class ShopModelSimple implements ShopModel {
     }
 
     public boolean checkPlacement (String name, PointSimple location) {
-        return myGameWorld.isPlacable(prototypeMap.get(name).getTag().getGraphic().getNode(),
+        return myGameWorld.isPlaceable(prototypeMap.get(name).getTag().getGraphic().getNode(),
                                       location);
     }
 

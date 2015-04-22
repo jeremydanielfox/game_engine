@@ -45,7 +45,6 @@ public class GameObjectSimple implements GameObject{
         myBuffs = new BuffTracker();
         myWeapon = new NullWeapon();
         myCollider = new Collider();
-        rangeDisplay = new RangeDisplay(myTag.getName(), myGraphic, myWeapon.getRange());
     }
 
 /*
@@ -102,7 +101,7 @@ public class GameObjectSimple implements GameObject{
  */
     @Override
     public RangeDisplay getRangeDisplay(){
-        return rangeDisplay;
+        return new RangeDisplay(myTag.getName(), myGraphic, 30);
     }
     
     //TODO: Tag cloning not done, Weapon upgrade cloning not done
@@ -116,7 +115,6 @@ public class GameObjectSimple implements GameObject{
         clone.setGraphic(myGraphic.clone());
         clone.setWeapon(myWeapon.clone());
         clone.setCollider(myCollider.clone());
-        clone.setMover(myMover.clone());
         return clone;
     }
     
@@ -136,7 +134,8 @@ public class GameObjectSimple implements GameObject{
     
     @Override
     public double getValue () {
-        return myWeapon.getValue();
+        return 10;
+        //return myWeapon.getValue();
     }
     
 /*

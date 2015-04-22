@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import engine.fieldsetting.Settable;
 import engine.fieldsetting.Triggerable;
@@ -98,10 +99,10 @@ public class ButtonCreator extends Application {
         HBox fieldSetter = new HBox(15);
         Label label = new Label(methodName);
         fieldSetter.getChildren().add(label);
-        
+
         parameterTypes.forEach(e -> {
             Node field = null;
-            
+
             /*
              * if field requires a String, then create a text field
              */
@@ -112,23 +113,46 @@ public class ButtonCreator extends Application {
             /*
              * if field requires a Consumer, then create drop down of all options for them to use
              */
-            else if () {
-                
+            else if (e.isInstance(Consumer.class)) {
+                field = getPossibleActions();
             }
 
             /*
              * if field requires a Goal, then create a drop down of all goals created & give them
              * option to create new Goal
              */
-            else if () {
-
+            else if (e.isInstance(Goal.class)) {
+                field = getTriggerables();
             }
-            
+
             fieldSetter.getChildren().add(field);
         });
-        
-        
+
         container.getChildren().add(fieldSetter);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    @SuppressWarnings("rawtypes")
+    private ComboBox getPossibleActions () {
+        /*
+         * TODO: How to extract possible actions?
+         */
+        return null;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    @SuppressWarnings("rawtypes")
+    private ComboBox getTriggerables () {
+        /*
+         * TODO: Currently only one triggerable...?
+         */
+        return null;
     }
 
     public static void main (String[] args) {

@@ -30,6 +30,8 @@ import javafx.stage.Stage;
 /**
  * Main class used to construct a button for the game player to use
  * 
+ * TODO: implement Builder interface?
+ * 
  * @author Brandon Choi
  *
  */

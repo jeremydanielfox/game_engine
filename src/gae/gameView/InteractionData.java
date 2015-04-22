@@ -62,6 +62,7 @@ public class InteractionData {
      * 
      * @return
      */
+    @SuppressWarnings("rawtypes")
     public Map<String, Class> getInteractionMap () {
         return interactionMap;
     }

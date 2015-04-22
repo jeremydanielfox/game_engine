@@ -3953,10 +3953,6 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                       </myPath>
-                      <myPathCoordinates/>
-                      <p class="engine.pathfinding.PathFixed">
-                        <myPathSegments class="linked-list"/>
-                      </p>
                       <myTrans>
                         <h>50.0</h>
                         <w>50.0</w>
@@ -4684,16 +4680,16 @@
                   <myFrameDuration>1200</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>815</int>
-                    <int>470</int>
-                    <int>1084</int>
-                    <int>839</int>
-                    <int>1129</int>
-                    <int>25</int>
-                    <int>128</int>
-                    <int>625</int>
-                    <int>621</int>
-                    <int>18</int>
+                    <int>1049</int>
+                    <int>1126</int>
+                    <int>63</int>
+                    <int>306</int>
+                    <int>436</int>
+                    <int>935</int>
+                    <int>645</int>
+                    <int>476</int>
+                    <int>550</int>
+                    <int>609</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

@@ -11,7 +11,8 @@ import engine.fieldsetting.Settable;
 /**
  * This class encapsulates the node for each game object.
  * 
- * @author Sierra Smith and Cosette Goldstein
+ * @author Sierra Smith
+ * @author Cosette Goldstein
  *
  */
 @Settable
@@ -27,24 +28,32 @@ public class Graphic {
     private Point2D myPoint;
     @XStreamOmitField
     private transient ImageView myImageView;
+    private Rotator myRotator;
 
     public Graphic () {
         myImageName = DEFAULT_IMAGE_NAME;
         myPoint = new Point2D(0, 0);
         myImageView = new ImageView();
+        myRotator = new RotateToPoint();
+        //TODO don't call this here?  Check with Jeremy.  How is this initialized? 
+//        initializeImageView();
     }
 
     public Graphic (double height, double width, String name) {
         myHeight = height;
         myWidth = width;
         myImageName = name;
+        myRotator = new RotateToPoint();
+        myPoint = new Point2D(0,0);
+//        initializeImageView();
     }
 
-    public Graphic clone(){
+    public Graphic clone () {
         Graphic clone = new Graphic(myHeight, myWidth, myImageName);
         clone.initializeImageView();
         return clone;
     }
+
     private void initializeImageView () {
         myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
         // for TEST purpose:
@@ -74,9 +83,12 @@ public class Graphic {
      * @param point
      */
     public void setPoint (PointSimple point) {
-        myPoint =
-                new Point2D(point.getX()  + ViewUtil.getCenterOffsetX(myImageView),
+        Point2D temp =
+                new Point2D(point.getX() + ViewUtil.getCenterOffsetX(myImageView),
                             point.getY() + ViewUtil.getCenterOffsetY(myImageView));
+        rotate(new PointSimple(temp));
+        myPoint =
+                temp;
         getImageView().setX(myPoint.getX());
         getImageView().setY(myPoint.getY());
     }
@@ -100,10 +112,8 @@ public class Graphic {
     /**
      * This method will be called both before and after this object is written to xstream. Thus,
      * At some point, the ImageView will be null because this object will have been written out of
-     * xstream,
-     * and the imageview will have been omitted. At this point, the method re-initializes the
-     * imageview
-     * using the stored criteria.
+     * xstream, and the imageview will have been omitted. At this point, the method re-initializes
+     * the imageview using the stored criteria.
      * 
      * @return
      */
@@ -124,4 +134,14 @@ public class Graphic {
     public String getImagePath () {
         return DEFAULT_IMAGE_PATH_PREFIX + myImageName;
     }
+
+    /**
+     * Rotates the node for this graphic according to a point and its rotator.
+     * 
+     * @param point
+     */
+    public void rotate (PointSimple point) {
+        myRotator.rotate(myImageView, new PointSimple(myPoint), point);
+    }
+
 }

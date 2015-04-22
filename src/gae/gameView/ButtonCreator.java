@@ -1,23 +1,18 @@
 package gae.gameView;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
 import engine.fieldsetting.Settable;
 import engine.fieldsetting.Triggerable;
 import engine.game.StoryBoard;
 import engine.goals.Goal;
 import View.ButtonWrapper;
 import gae.editor.EditingParser;
-import gae.editor.Editor;
-import gae.openingView.OpeningView;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;

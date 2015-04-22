@@ -34,16 +34,18 @@ public class Graphic {
         myImageName = DEFAULT_IMAGE_NAME;
         myPoint = new Point2D(0, 0);
         myImageView = new ImageView();
-        myRotator = new RotatorNull();
-        System.out.println("made rotator");
+        myRotator = new RotateToPoint();
+        //TODO don't call this here?  Check with Jeremy.  How is this initialized? 
+//        initializeImageView();
     }
 
     public Graphic (double height, double width, String name) {
         myHeight = height;
         myWidth = width;
         myImageName = name;
-        myRotator = new RotatorNull();
-        System.out.println("made rotator");
+        myRotator = new RotateToPoint();
+        myPoint = new Point2D(0,0);
+//        initializeImageView();
     }
 
     public Graphic clone () {
@@ -81,9 +83,12 @@ public class Graphic {
      * @param point
      */
     public void setPoint (PointSimple point) {
-        myPoint =
+        Point2D temp =
                 new Point2D(point.getX() + ViewUtil.getCenterOffsetX(myImageView),
                             point.getY() + ViewUtil.getCenterOffsetY(myImageView));
+        rotate(new PointSimple(temp));
+        myPoint =
+                temp;
         getImageView().setX(myPoint.getX());
         getImageView().setY(myPoint.getY());
     }
@@ -136,7 +141,7 @@ public class Graphic {
      * @param point
      */
     public void rotate (PointSimple point) {
-        myRotator.rotate(myImageView, point);
+        myRotator.rotate(myImageView, new PointSimple(myPoint), point);
     }
 
 }

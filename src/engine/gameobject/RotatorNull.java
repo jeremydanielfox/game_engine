@@ -1,6 +1,7 @@
 package engine.gameobject;
 
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 
 
 /**
@@ -17,9 +18,8 @@ public class RotatorNull implements Rotator {
     }
     
     @Override
-    public void rotate (Node n, PointSimple point) {
+    public void rotate (ImageView image, PointSimple from, PointSimple to) {
         // Does nothing
-        System.out.println("here");
     }
 
 }

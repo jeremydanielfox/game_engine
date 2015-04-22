@@ -1,6 +1,7 @@
 package engine.gameobject;
 
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 
 
 /**
@@ -18,5 +19,5 @@ public interface Rotator {
      * 
      * @param point
      */
-    public void rotate (Node n, PointSimple point);
+    public void rotate (ImageView image, PointSimple from, PointSimple to);
 }

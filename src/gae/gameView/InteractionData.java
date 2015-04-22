@@ -25,13 +25,19 @@ import engine.interactions.ShootAt;
 
 public class InteractionData {
 
-    private static final List<String> MAP_KEYS = Arrays.asList("Collide", "Do not collide", "Shoot", "Do not shoot");
-    //private static final List<Interaction> MAP_VALUES = Arrays.asList();
-    
+    /*
+     * Values for the map of user options to interaction classes in the engine
+     */
+    private static final List<String> MAP_KEYS = Arrays.asList("Collide", "Shoot",
+                                                               "Do not collide", "Do not shoot");
+    private static final List<Class> MAP_VALUES = Arrays.asList(BuffImparter.class, ShootAt.class,
+                                                                NoInteraction.class,
+                                                                NoInteraction.class);
+
     private List<InteractionEngine> myInteractionEngines;
     private InteractionEngine myCollisions;
     private InteractionEngine myShoots;
-    private Map<String, Interaction> interactionMap;
+    private Map<String, Class> interactionMap;
 
     public InteractionData () {
         myInteractionEngines = new ArrayList<>();
@@ -56,7 +62,7 @@ public class InteractionData {
      * 
      * @return
      */
-    public Map<String, Interaction> getInteractionMap () {
+    public Map<String, Class> getInteractionMap () {
         return interactionMap;
     }
 
@@ -65,7 +71,7 @@ public class InteractionData {
      */
     private void fillMap () {
         MAP_KEYS.forEach(e -> {
-            interactionMap.put(e, null);
+            interactionMap.put(e, MAP_VALUES.get(MAP_KEYS.indexOf(e)));
         });
     }
 

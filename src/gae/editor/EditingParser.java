@@ -12,7 +12,7 @@ import engine.fieldsetting.Settable;
 
 public class EditingParser {
     
-    public static List<Method> getMethodsWithSetterAnnotation(final Class<?> type) {
+    public static List<Method> getMethodsWithAnnotation(final Class<?> type, Class annotation) {
         final List<Method> methods = new ArrayList<Method>();
         Class<?> klass = type;
         final List<Method> allMethods = new ArrayList<Method>(Arrays.asList(klass.getDeclaredMethods()));       

@@ -60,10 +60,10 @@ public interface Musician {
     /**
      * plays media file
      */
-    void play();
+    void playMusic();
     
     /**
      * pauses media file
      */
-    void pause();
+    void pauseMusic();
 }

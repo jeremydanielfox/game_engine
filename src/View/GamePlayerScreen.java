@@ -2,6 +2,8 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import player.gamePlayer.PauseScene;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -51,6 +53,7 @@ public class GamePlayerScreen {
     private Game myGame;
     private Stage myStage;
     private EngineView myGameView;
+    private PauseScene pauseScreen;
 
     public GamePlayerScreen (Stage s) {
         myStage = s;
@@ -59,6 +62,14 @@ public class GamePlayerScreen {
         // new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
         myVbox = new VBox(30);
         //makeSideBar();
+        pauseScreen = new PauseScene(e -> resumeGame());
+    }
+    
+    /**
+     * code to resume game after pause
+     */
+    private void resumeGame() {
+        
     }
 
     private void addDetails (String label, String text) {

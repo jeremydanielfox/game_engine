@@ -13,7 +13,7 @@ public class MoverNull implements Mover {
 
 	@Override
 	public Mover clone() {
-		return null;
+		return new MoverNull();
 		// TODO Auto-generated method stub
 	}
 

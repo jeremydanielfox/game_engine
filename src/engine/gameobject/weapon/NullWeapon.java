@@ -5,7 +5,6 @@ import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
-import engine.gameobject.weapon.firingstrategy.Projectile;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
 //TODO: There must be a better way to do this than just have empty methods everywhere.
@@ -71,5 +70,9 @@ public class NullWeapon implements Weapon{
     @Override
     public void setFiringStrategy (FiringStrategy newStrategy) {
         // Do nothing
+    }
+    
+    public Weapon clone(){
+        return new NullWeapon();
     }
 }

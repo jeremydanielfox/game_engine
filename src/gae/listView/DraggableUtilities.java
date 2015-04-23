@@ -4,6 +4,7 @@ import View.ViewUtil;
 import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
 import gae.backend.Editable;
+import gae.editorView.DragIntoRectangle;
 import gae.gridView.ContainerWrapper;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
@@ -27,19 +28,19 @@ public class DraggableUtilities {
      * @param root: where the Image will be placed
      */
     public static void makeEditablePlaceable (MouseEvent me,
-                                          Editable editable,
-                                          Node node,
-                                          ObservableList<Editable> instanceList,
-                                          ContainerWrapper wrapper,
-                                          Group root) {
+                                              Editable editable,
+                                              Node node,
+                                              ObservableList<Editable> instanceList,
+                                              ContainerWrapper wrapper,
+                                              Group root) {
         ImageView transitionImage = editable.getImageView();
         // TODO: implement popup error when overlapping - collision detection
         Node binder =
                 ViewUtil.bindCursor(transitionImage,
-                                         node,
-                                         ViewUtil
-                                                 .getMouseLocation(me, transitionImage),
-                                         KeyCode.ESCAPE, false);
+                                    node,
+                                    ViewUtil
+                                            .getMouseLocation(me, transitionImage),
+                                    KeyCode.ESCAPE, false);
         binder.setOnMouseClicked(ev -> {
             Point2D current =
                     binder.localToParent(new Point2D(binder.getTranslateX(), binder
@@ -58,6 +59,30 @@ public class DraggableUtilities {
             newEditable.setMovableImage(edimage);
             edimage.relocate(currentX, currentY);
             root.getChildren().add(edimage);
+        });
+        root.getChildren().add(binder);
+    }
+
+    public static void makeImagePlaceable (MouseEvent me,
+                                           ImageView image,
+                                           Node node, DragIntoRectangle correct,
+                                           Group root) {
+        ImageView clone = new ImageView(image.getImage());
+        ImageView imageView = (ImageView) ListViewUtilities.createCellContentWithIcon(clone);
+        Node binder =
+                ViewUtil.bindCursor(imageView,
+                                    node,
+                                    ViewUtil
+                                            .getMouseLocation(me, imageView),
+                                    KeyCode.ESCAPE, false);
+        binder.setOnMouseClicked(ev -> {
+            if (image.getBoundsInLocal().intersects(correct.getBoundsInLocal())) {
+//                root.getChildren().add(imageView);
+//                root.setTranslateX(correct.getTranslateX());
+//                root.setTranslateY(correct.getTranslateY() +  size/2);
+                correct.setCorrect(imageView);
+            }
+            
         });
         root.getChildren().add(binder);
     }

@@ -3,6 +3,7 @@ package gae.listView;
 import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
 import gae.gridView.PathView;
+import java.awt.Dimension;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,15 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -68,14 +75,14 @@ public class LibraryView {
     public Group getGroup (Node pane,
                            Scene scene,
                            ObservableList<PathView> pathList,
-                           ObjectProperty<Image> backgroundProperty, ContainerWrapper wrapper) {
+                           ContainerWrapper wrapper) {
         this.nodeScene = pane;
         this.pathObservableList = pathList;
         this.myScene = scene;
         this.wrapper = wrapper;
         root = new Group();
         objectGroup = new Group();
-        root.getChildren().addAll(view(), changeBackground(backgroundProperty),
+        root.getChildren().addAll(view(),
                                   objectGroup);
         root.setManaged(false);
         return root;
@@ -130,17 +137,5 @@ public class LibraryView {
             });
         }
     }
-
-    private Button changeBackground (ObjectProperty<Image> backgroundProperty) {
-        Button background = new Button("Change Background");
-        background.setTranslateX(0);
-        background.setTranslateY(550);
-        background.setOnAction(e -> {
-            Stage stage = new Stage();
-            FileChooser fc = new FileChooser();
-            File picked = fc.showOpenDialog(stage);
-            backgroundProperty.setValue(new Image(picked.toURI().toString()));
-        });
-        return background;
-    }
+    
 }

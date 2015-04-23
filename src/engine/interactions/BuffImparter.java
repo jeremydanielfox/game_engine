@@ -11,7 +11,7 @@ public class BuffImparter extends Interaction {
 
     @Override
     public void accept (GameObject buffer, GameObject buffable) {
-        if (buffer.getGraphic().getNode().getBoundsInParent()
+        if (!buffer.isDead() && buffer.getGraphic().getNode().getBoundsInParent()
                 .intersects(buffable.getGraphic().getNode().getBoundsInParent())){
             buffer.collide(buffable);
         }

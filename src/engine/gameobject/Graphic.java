@@ -40,6 +40,11 @@ public class Graphic {
         myImageName = name;
     }
 
+    public Graphic clone(){
+        Graphic clone = new Graphic(myHeight, myWidth, myImageName);
+        clone.initializeImageView();
+        return clone;
+    }
     private void initializeImageView () {
         myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
         // for TEST purpose:

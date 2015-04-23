@@ -3,7 +3,6 @@ package gae.gameView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -12,12 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 /**
  * Defines a single interaction between game objects
+ * 
  * 
  * @author Brandon Choi
  *
@@ -28,25 +27,41 @@ import javafx.scene.text.Text;
  * tree of hierarchy for labels
  */
 
-public class Interaction {
+public class InteractionInstance {
 
     private HBox container;
     private DropDown interactionType;
     private ObjectContainer box1, box2;
+    private Button create;
 
-    public Interaction () {
+    /*
+     * TODO: pull classes via reflection and then map the options in the interactionType to specific
+     * interaction classes in the engine
+     */
+
+    public InteractionInstance () {
         container = new HBox(80);
         interactionType = new DropDown("Interaction Type", Arrays.asList("Collide",
                                                                          "Do not collide", "Shoot",
                                                                          "Do not shoot"));
         box1 = new ObjectContainer();
         box2 = new ObjectContainer();
+        create = new Button("CREATE");
+        createButtonFunction();
         createInteraction();
+    }
+
+    private void createButtonFunction () {
+        create.setOnMousePressed(e -> {
+            /*
+             * TODO
+             */
+        });
     }
 
     private void createInteraction () {
         container.getChildren().addAll(box1.getContainer(), interactionType.getDropDown(),
-                                       box2.getContainer());
+                                       box2.getContainer(), create);
     }
 
     public Node getInteractionSetter () {
@@ -67,6 +82,7 @@ public class Interaction {
 
         public DropDown (String n, List<String> options) {
             container = new VBox();
+            container.setAlignment(Pos.CENTER);
             container.setId("interactionOptions");
             label = new Label(n);
             choices = new ComboBox();
@@ -115,6 +131,10 @@ public class Interaction {
             createObjectContainer();
         }
 
+        /**
+         * creates the object container by adding nodes to the VBox and setting up functionalities
+         * such as button pressing
+         */
         private void createObjectContainer () {
             scroller.setContent(container);
             adder.setOnMouseClicked(e -> {

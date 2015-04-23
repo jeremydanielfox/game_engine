@@ -48,7 +48,7 @@ public interface Musician {
      * 
      * @param s
      */
-    void clearMusic (Scene s);
+    void clearBackgroundMusic (Scene s);
 
     /**
      * Mutes the entire scene and all sounds within
@@ -60,10 +60,10 @@ public interface Musician {
     /**
      * plays media file
      */
-    void playMusic();
+    void playAudio();
     
     /**
      * pauses media file
      */
-    void pauseMusic();
+    void pauseAudio();
 }

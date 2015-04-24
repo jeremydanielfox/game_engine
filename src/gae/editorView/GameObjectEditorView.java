@@ -1,5 +1,6 @@
 package gae.editorView;
 
+import java.util.Map;
 import engine.gameobject.GameObjectSimple;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
@@ -19,12 +20,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import gae.backend.Placeable;
+import gae.backend.ResourceBundleUtil;
 import gae.backend.TempTower;
+import gae.editor.ObjectComponentEditor;
 import gae.editor.SimpleEditor;
 import gae.gridView.ContainerWrapper;
 import gae.listView.Authorable;
 import gae.listView.DraggableUtilities;
-import gae.listView.ImageContainer;
 import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
 import gae.openingView.UIObject;
@@ -32,8 +34,7 @@ import gae.openingView.UIObject;
 
 public class GameObjectEditorView implements UIObject {
     private ObservableList<Authorable> optionList = FXCollections.observableArrayList();
-    private String[] imagePaths = { "/images/WeaponImage.png", "/images/HealthImage.jpeg",
-                                   "/images/PathImage.png" };
+    private Map<String, String[]> imageLocationMap;
     private Group root;
     private Scene scene;
     private BorderPane border;
@@ -52,24 +53,26 @@ public class GameObjectEditorView implements UIObject {
         simpleEditor = new SimpleEditor(DEFAULT_CLASS);
         clazz = DEFAULT_CLASS;
     }
-    
+
     public GameObjectEditorView (Scene scene, Class<?> klass) {
         init(scene);
         simpleEditor = new SimpleEditor(klass);
         clazz = klass;
     }
-    
-    private void init(Scene scene) {
+
+    private void init (Scene scene) {
         root = new Group();
         root.setManaged(false);
         this.scene = scene;
+        imageLocationMap =
+                ResourceBundleUtil.useResourceBundle("gae/editorView/ObjectPathProperties");
     }
 
     private BorderPane setUpBorder () {
         border = new BorderPane();
 
-        border.setRight(setUpList());
         border.setCenter(setUpAnchor());
+        border.setRight(setUpAccordion());
         LibraryList library = new LibraryList(scene);
         border.setLeft(library.initialize());
         return border;
@@ -77,13 +80,18 @@ public class GameObjectEditorView implements UIObject {
 
     private AnchorPane setUpAnchor () {
         double vboxHeight = (Screen.getPrimary().getVisualBounds().getHeight() - TAB_HEIGHT) / 2;
-        double vboxWidth = (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH)*LIBRARY_EDITOR_PROPORTIONS;
+        double vboxWidth =
+                (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH) *
+                        LIBRARY_EDITOR_PROPORTIONS;
 
-        SimpleEditorView simpleEditorView = new SimpleEditorView(simpleEditor.getSimpleComponentEditors());
+        SimpleEditorView simpleEditorView =
+                new SimpleEditorView(simpleEditor.getSimpleComponentEditors());
         VBox top = (VBox) simpleEditorView.getObject();
         top.setPrefSize(vboxWidth, vboxHeight);
 
-        bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene, simpleEditor.getObjectComponentEditors());
+        bottom =
+                new GameObjectContainer(vboxWidth, vboxHeight, scene,
+                                        simpleEditor.getObjectComponentEditors());
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
 
@@ -98,32 +106,40 @@ public class GameObjectEditorView implements UIObject {
         return anchor;
     }
 
-    private ListView<Authorable> setUpList () {
-        ListView<Authorable> list = ListViewUtilities.createList(optionList, null, "Image");
-        for (String path : imagePaths) {
-            optionList.add(new ImageContainer(new ImageView(path)));
+    private Accordion setUpAccordion () {
+        Accordion accordion = new Accordion();
+        for (ObjectComponentEditor edit : simpleEditor.getObjectComponentEditors()) {
+            GenericObjectList list =
+                    new GenericObjectList(edit.getObjectClass(), bottom, root, scene, edit);
+            accordion.getPanes().add(list.getTitledPane());
         }
-        list.setOnMouseClicked(me -> {
-            ImageContainer selected = (ImageContainer) list.getSelectionModel().getSelectedItem();
-            ImageView image = selected.getImageView();
-//            ImageView changed = ImageUtilities.changeImageSize(selected, 50, 50);
-            for (int i = 0; i < bottom.getRectangles().size(); i++) {
-                if (i == list.getSelectionModel().getSelectedIndex()) {
-                    DraggableUtilities.makeImagePlaceable(me, image, bottom, bottom
-                            .getRectangles().get(i), root);
-                }
-            }
-        });
-        return list;
+        return accordion;
     }
+
+    // private ListView<Authorable> setUpList () {
+    // ListView<Authorable> list = ListViewUtilities.createList(optionList, null, "Image");
+    // for (String type: imageLocationMap.keySet()) {
+    // optionList.add(new DraggableFields(imageLocationMap.get(type)[0], type));
+    // }
+    // list.setOnMouseClicked(me -> {
+    // DraggableFields selected = (DraggableFields) list.getSelectionModel().getSelectedItem();
+    // for (int i = 0; i < bottom.getRectangles().size(); i++) {
+    // if (i == list.getSelectionModel().getSelectedIndex()) {
+    // DraggableUtilities.makeImagePlaceable(me, selected, bottom, bottom
+    // .getRectangles().get(i), root);
+    // }
+    // }
+    // });
+    // return list;
+    // }
 
     @Override
     public Node getObject () {
         // TODO Auto-generated method stub
         return setUpBorder();
     }
-    
-    public Object createObject() {
+
+    public Object createObject () {
         return simpleEditor.createObject(clazz);
     }
 

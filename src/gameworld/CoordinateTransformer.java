@@ -21,11 +21,11 @@ public class CoordinateTransformer {
     }
 
     public GridCell transformWorldToGrid (PointSimple point) {
-        return new GridCell((int) (point.getX() / w), (int) (point.getY() / h));
+      return new GridCell((int) (point.getY() / h), (int) (point.getX() / w));
     }
 
     public PointSimple tranformGridToWorld (GridCell cell) {
-        return new PointSimple(cell.getRow() * w + w / 2, cell.getCol() * h + h / 2);
+        return new PointSimple(cell.getCol() * h + h / 2, cell.getRow() * w + w / 2);
     }
 
 }

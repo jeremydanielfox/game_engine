@@ -2,9 +2,6 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import player.gamePlayer.PauseScene;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -15,36 +12,31 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import player.gamePlayer.PauseScene;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
 import engine.events.TimedEvent;
-import engine.game.ConcreteGame;
 import engine.game.ConcreteLevel;
 import engine.game.ConcreteLevelBoard;
 import engine.game.Game;
 import engine.game.Player;
 import engine.game.PlayerUnit;
 import engine.game.StoryBoard;
-import engine.game.Timer;
 import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
-import engine.goals.NullGoal;
 import engine.goals.ScoreGoal;
-import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
 import gae.gameView.Main;
 import gameworld.FixedWorld;
 import gameworld.GameWorld;
-import gameworld.StructurePlacementException;
 
 
 public class GamePlayerScreen {
@@ -61,15 +53,15 @@ public class GamePlayerScreen {
         // new ConcreteGame(new Player("myPlayer", null, null, null),
         // new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
         myVbox = new VBox(30);
-        //makeSideBar();
+        // makeSideBar();
         pauseScreen = new PauseScene(e -> resumeGame());
     }
-    
+
     /**
      * code to resume game after pause
      */
-    private void resumeGame() {
-        
+    private void resumeGame () {
+
     }
 
     private void addDetails (String label, String text) {
@@ -85,9 +77,9 @@ public class GamePlayerScreen {
     public void makeSideBar () {
         addDetails("Name", "this is an example of a name"); // this should be taken in from the GAE
         addDetails("Description", "this is an example of a description"); // this should be taken in
-                                                                          // from the GAE
+        // from the GAE
         addDetails("Instructions", "this is an example of instructions"); // this should be taken in
-                                                                          // from the GAE
+        // from the GAE
 
         Button scoreBtn = new Button("View high scores");
         Button playBtn = new Button("play");
@@ -118,14 +110,16 @@ public class GamePlayerScreen {
         PlayerUnit scoreUnit = new PlayerUnit(100, "Score");
         Wallet wallet = new ConcreteWallet(scoreUnit);
         Player myPlayer = new Player("PlayerName", health, scoreUnit, wallet);
-        
+
         // EDIT: temp change -- game won't have accurate shop - Nathan
-        
-        //myGame = new ConcreteGame(new ShopModelSimple(), myPlayer, board, new ArrayList<ButtonWrapper>());
-        
+
+        // myGame = new ConcreteGame(new ShopModelSimple(), myPlayer, board, new
+        // ArrayList<ButtonWrapper>());
+
         // ButtonWrapper wrap=new ButtonWrapper("wave",e->story.startNextEvent(),new NullGoal());
-//        ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new NullGoal());
-//        myGame.addButton(wrap);
+        // ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new
+        // NullGoal());
+        // myGame.addButton(wrap);
 
         HealthGoal healthy = new HealthGoal(myPlayer, 0);
         List<Goal> list = new ArrayList<Goal>();
@@ -137,12 +131,13 @@ public class GamePlayerScreen {
         ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
         list3.add(score2);
 
-        Timer t = new TimerConcrete(5,10,"time");
+        new TimerConcrete(5, 10, "time");
         board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),                                   story));
-        ShopModel shop = new ShopModelSimple(world, myPlayer, 0);
-        myGame=loadGame();
-        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
+                                         story));
+        new ShopModelSimple(world, myPlayer, 0);
+        myGame = loadGame();
+        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();
         return node;
     }
@@ -152,21 +147,19 @@ public class GamePlayerScreen {
         GameWorld world = gw.makeWorld();
         Player player = gw.makePlayer();
         return gw.makeGame(player, world, gw.makeShop(player, world));
-        //return DataManager.readFromXML(Game.class, FILE_SOURCE);
-//        return DataManager.readFromXML(Game.class, FILE_SOURCE);
-
+        // return DataManager.readFromXML(Game.class, FILE_SOURCE);
+        // return DataManager.readFromXML(Game.class, FILE_SOURCE);
 
     }
-    
-    public Scene makeScene() {
+
+    public Scene makeScene () {
         BorderPane pane = new BorderPane();
         pane.setPadding(new Insets(0, 40, 0, 0));
         Scene scene = new Scene(pane);
         makeSideBar();
         myVbox.setAlignment(Pos.CENTER);
         pane.setRight(myVbox);
-        
-        
+
         VBox gameTypeImageVBox = new VBox();
         ImageView image = new ImageView("images/Park_Path.png");
         image.setPreserveRatio(true);

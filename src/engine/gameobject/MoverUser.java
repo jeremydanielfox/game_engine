@@ -3,7 +3,6 @@ package engine.gameobject;
 import engine.pathfinding.EndOfPathException;
 
 
-
 public class MoverUser extends BasicMover {
 
     @Override

@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * This annotation marks methods that can be trigger by a button via the designer's request.
- * 
+ *
  * @author Sierra Smith
  *
  */

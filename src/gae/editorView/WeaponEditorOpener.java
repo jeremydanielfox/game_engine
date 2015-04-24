@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 
 public class WeaponEditorOpener extends EditorOpener {
     private static final String TITLE = "Weapon Editor";
+
     @Override
     public void initialize () {
         // TODO Auto-generated method stub

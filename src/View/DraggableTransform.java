@@ -4,8 +4,10 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
+
 /**
  * Utility that allows a node to be draggable
+ * 
  * @author Nathan Prabhu
  *
  */
@@ -52,11 +54,11 @@ public class DraggableTransform {
 
         return wrapGroup;
     }
-    
-    public static Node attachToCursor(final Node node){
+
+    public static Node attachToCursor (final Node node) {
         final DragContext dragContext = new DragContext();
         final Group wrapGroup = new Group(node);
-        
+
         // disable mouse events for all children
         wrapGroup.addEventHandler(MouseEvent.ANY, mouseEvent -> {
             if (dragModeActiveProperty) {
@@ -72,7 +74,7 @@ public class DraggableTransform {
                 dragContext.initialTranslateY = node.getTranslateY();
                 dragContext.mouseAnchorX = mouseEvent.getX();
                 dragContext.mouseAnchorY = mouseEvent.getY();
-                
+
                 node.setTranslateX(dragContext.initialTranslateX
                                    + mouseEvent.getX() -
                                    dragContext.mouseAnchorX);
@@ -80,8 +82,8 @@ public class DraggableTransform {
                                    + mouseEvent.getY() -
                                    dragContext.mouseAnchorY);
             }
-        });       
-        return wrapGroup;      
+        });
+        return wrapGroup;
     }
 
     private static final class DragContext {

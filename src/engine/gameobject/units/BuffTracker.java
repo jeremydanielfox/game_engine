@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import engine.gameobject.GameObject;
 
-public class BuffTracker{
+
+public class BuffTracker {
     private List<Buff> buffList;
 
     public BuffTracker () {

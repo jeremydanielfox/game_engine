@@ -1,15 +1,15 @@
 package engine.game;
 
-import engine.fieldsetting.Settable;
-import gameworld.GameWorld;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import engine.fieldsetting.Settable;
+import gameworld.GameWorld;
 
 
 /**
  * This class contains all levels that exist in a game.
- * 
+ *
  * @authors Sierra Smith, Cosette Goldstein
  *
  */
@@ -33,6 +33,7 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
      * ended.
      * If it has ended, notify the View.
      */
+    @Override
     public void update () {
         if (myLevels.get(curLevelIndex).isWon() || myLevels.get(curLevelIndex).isLost()) {
             System.out.println("level over");
@@ -46,16 +47,18 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
 
     /**
      * Returns true if the final level is won or if any level is lost.
-     * 
+     *
      * @return
      */
+    @Override
     public boolean gameOver () {
         boolean answer =
                 ((curLevelIndex == myLevels.size() - 1) && (myLevels.get(curLevelIndex).isWon())) ||
-                        myLevels.get(curLevelIndex).isLost();
+                myLevels.get(curLevelIndex).isLost();
         return answer;
     }
 
+    @Override
     public String getCurrentLevelMap () {
         return myLevels.get(curLevelIndex).getLevelBackground();
     }
@@ -80,7 +83,7 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
 
     @Override
     public Level getCurrentLevel () {
-        if(myLevels.size() > curLevelIndex){
+        if (myLevels.size() > curLevelIndex) {
             return myLevels.get(curLevelIndex);
         }
         return null;

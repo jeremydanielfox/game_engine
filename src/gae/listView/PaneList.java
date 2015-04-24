@@ -20,7 +20,7 @@ import javafx.scene.paint.Color;
 
 /**
  * Abstract class to be extended to all Editable object's lists
- * 
+ *
  * @author Kei & Nina
  *
  */
@@ -36,7 +36,7 @@ public class PaneList {
 
     /**
      * Initializes the specific pane class
-     * 
+     *
      * @param root
      * @param node
      * @param scene
@@ -51,8 +51,8 @@ public class PaneList {
                                   String type) {
         this.root = root;
         this.node = node;
-        this.stack = (StackPane) node;
-        this.observableList = editableObservableList;
+        stack = (StackPane) node;
+        observableList = editableObservableList;
         this.wrapper = wrapper;
         this.type = type;
         this.scene = scene;
@@ -82,7 +82,7 @@ public class PaneList {
 
     /**
      * method created to make a simple TitledPane with a text
-     * 
+     *
      * @param text
      * @return
      */
@@ -101,7 +101,7 @@ public class PaneList {
         observableList.addListener( (ListChangeListener.Change<? extends Editable> change) -> {
             while (change.next()) {
                 if (change.wasAdded()) { // if an editablenode was added
-                    Editable added = (Editable) change.getAddedSubList().get(0);
+                    Editable added = change.getAddedSubList().get(0);
                     setUpNewInstanceList(paneList, added);
                 }
             }
@@ -122,7 +122,7 @@ public class PaneList {
     /**
      * sets up the clicking of the TitledPane such that one can instantiate an object by right
      * clicking the object. Also deals with binding the image to the cursor
-     * 
+     *
      * @param node
      * @param root
      * @param pane
@@ -141,7 +141,7 @@ public class PaneList {
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
                     DraggableUtilities.makeEditablePlaceable(me, editable, node, instanceList,
-                                                         wrapper, root);
+                                                             wrapper, root);
                 });
                 contextmenu.getItems().add(item);
                 contextmenu.show(newPane, me.getSceneX(), me.getSceneY());

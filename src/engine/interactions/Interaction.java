@@ -4,9 +4,11 @@ import java.util.function.BiConsumer;
 import engine.gameobject.GameObject;
 import gameworld.GameWorld;
 
+
 /**
  * Represents the base of all the interactions that can be placed into the interaction engine.
  * Contains a copy of the current GameWorld.
+ * 
  * @author Jeremy
  *
  */

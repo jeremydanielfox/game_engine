@@ -5,51 +5,56 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import engine.fieldsetting.Settable;
 
+
 /**
- * 
+ *
  * @author Eric Saba
  *
  */
 public abstract class Editor implements Edits {
     private Map<String, ArrayList<String>> myPropertiesMap;
-    
-    public Editor() {
-        myPropertiesMap = EditingParser.getInterfaceClasses("engine.fieldsetting.implementing_classes");
+
+    public Editor () {
+        myPropertiesMap =
+                EditingParser.getInterfaceClasses("engine.fieldsetting.implementing_classes");
     }
 
-    abstract void setDefaults();
-    abstract void clearValues();
+    abstract void setDefaults ();
 
-    public TreeNode getMethodsTree(Class<?> klass, Method m) {
+    abstract void clearValues ();
+
+    public TreeNode getMethodsTree (Class<?> klass, Method m) {
         TreeNode root = new TreeNode(m, "null");
         List<Method> methods = EditingParser.getMethodsWithAnnotation(klass, Settable.class);
         for (Method method : methods) {
-            //System.out.println(method.toString());
+            // System.out.println(method.toString());
             Type parameterClass = method.getGenericParameterTypes()[0];
             if (parameterClass.equals(double.class)) {
                 System.out.println("double  " + getPropertyName(method.getName()));
                 root.addToNodes(new TreeNode(method, "SliderEditor"));
-            } else if (parameterClass.equals(String.class)) {
+            }
+            else if (parameterClass.equals(String.class)) {
                 if (getPropertyName(method.getName()).equals("Image Path")) {
                     System.out.println("FileChooser  " + getPropertyName(method.getName()));
                     root.addToNodes(new TreeNode(method, "FileChooserEditor"));
-                } else {
+                }
+                else {
                     System.out.println("String  " + getPropertyName(method.getName()));
                     root.addToNodes(new TreeNode(method, "TextEditor"));
                 }
-            } else {
+            }
+            else {
                 System.out.println(parameterClass.getTypeName() + ":");
-//                root.addToNodes(getMethodsTree((Class<?>) parameterClass, method));
+                // root.addToNodes(getMethodsTree((Class<?>) parameterClass, method));
                 root.addToNodes(new TreeNode(method, "ObjectComponentEditor"));
             }
         }
         return root;
     }
 
-    public static String getPropertyName(String methodName) {
+    public static String getPropertyName (String methodName) {
         String propertyName = methodName.substring(3, methodName.length());
         char[] chars = propertyName.toCharArray();
         int editCount = 0;
@@ -64,8 +69,8 @@ public abstract class Editor implements Edits {
 
         return propertyName;
     }
-    
-    protected Map<String, ArrayList<String>> getPropertiesMap() {
+
+    protected Map<String, ArrayList<String>> getPropertiesMap () {
         return myPropertiesMap;
     }
 }

@@ -1,26 +1,25 @@
 package gae.listView;
 
-import java.util.ArrayList;
-import java.util.List;
+import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
-import engine.gameobject.Health;
 import engine.gameobject.HealthSimple;
-import engine.gameobject.Mover;
 import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
-import gae.gridView.Path;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.backend.Editable;
+import gae.gridView.Path;
 import gae.gridView.PathView;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
 /**
  * Library Data class that stores the list of Editables
- * 
+ *
  * @author Kei
  *
  */
@@ -46,6 +45,11 @@ public class LibraryData {
     }
 
     public void addEditableToList (Editable editable) {
+        editableList.add(editable);
+    }
+    
+    public void addGameObjectToList (Object gameObject) {
+        GameObjectToEditable editable = new GameObjectToEditable((GameObject) gameObject);
         editableList.add(editable);
     }
 

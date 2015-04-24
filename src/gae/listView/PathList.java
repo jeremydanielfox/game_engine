@@ -1,16 +1,14 @@
 package gae.listView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import gae.backend.Editable;
-import gae.gridView.Path;
-import gae.gridView.PathView;
 import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.gridView.ContainerWrapper;
-import javafx.collections.ListChangeListener;
+import gae.gridView.Path;
+import gae.gridView.PathView;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,7 +27,7 @@ import xml.DataManager;
 /**
  * A list that keeps track of Path objects and previously created PathViews. Goal is to separate the
  * storing of back-end and front-end objects into separate classes
- * 
+ *
  * @author Kei
  *
  */
@@ -52,7 +50,7 @@ public class PathList {
     private List<Button> buttonList;
 
     public PathList (StackPane stack, Scene scene, ContainerWrapper container) {
-        this.pathView = new PathView(stack, scene);
+        pathView = new PathView(stack, scene);
         pathView.setContainerArea(container);
         this.stack = stack;
         this.scene = scene;
@@ -65,7 +63,7 @@ public class PathList {
         buttonStates = new ArrayList<>();
 
         buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
-                                                      updatePath }));
+                                                       updatePath }));
         // stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
         stack.getChildren().add(makeGridPane());
     }
@@ -84,7 +82,7 @@ public class PathList {
         listView.setPrefSize(200, 250);
 
         listView.setEditable(true);
-        
+
         listView.setOnMouseClicked(e -> {
             PathView selected = listView.getSelectionModel().getSelectedItem();
             setOldPath(selected);
@@ -145,7 +143,7 @@ public class PathList {
         catch (IndexOutOfBoundsException e) {
             // means Path Pane was clicked first
         }
-        pathView = new PathView(stack, this.scene);
+        pathView = new PathView(stack, scene);
     }
 
     private void setOldPath (PathView view) {
@@ -167,11 +165,11 @@ public class PathList {
                 if (newValue.intValue() == 0) {
                     makeCurve.setDisable(true);
                 }
-                                                   else {
-                                                       makeCurve.setDisable(false);
-                                                       label.setTextFill(Color.BLACK);
-                                                   }
-                                               });
+                else {
+                    makeCurve.setDisable(false);
+                    label.setTextFill(Color.BLACK);
+                }
+            });
         });
         return makeCurve;
     }
@@ -188,7 +186,7 @@ public class PathList {
             paths.add(pathView);
             pathView.setID(counter);
             counter++;
-            pathView = new PathView(stack, this.scene);
+            pathView = new PathView(stack, scene);
             completePath.setDisable(true);
         });
         return complete;
@@ -198,7 +196,7 @@ public class PathList {
         Button newPath = new Button("Make New Path");
         newPath.setOnMouseClicked(e -> {
             pathView.resetScreen(stack);
-            pathView = new PathView(stack, this.scene);
+            pathView = new PathView(stack, scene);
             completePath.setDisable(false);
         });
         return newPath;
@@ -258,7 +256,7 @@ public class PathList {
     private GridPane makeGridPane () {
         GridPane grid = new GridPane();
         grid.setHgap(0);
-        grid.setTranslateX(scene.getWidth()*2/3);
+        grid.setTranslateX(scene.getWidth() * 2 / 3);
         for (int i = 0; i < buttonList.size(); i++) {
             grid.add(buttonList.get(i), 0, i);
         }

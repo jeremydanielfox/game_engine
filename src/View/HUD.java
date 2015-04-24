@@ -6,36 +6,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import engine.gameobject.GameObject;
-import engine.gameobject.PointSimple;
-import engine.gameobject.test.TestTower;
-import engine.gameobject.units.BuffTracker;
-import engine.shop.ItemGraphic;
-import engine.shop.ShopModel;
-import engine.shop.ShopModelSimple;
-import engine.shop.ShopView;
-import engine.shop.TransitionGameObject;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import engine.gameobject.test.TestTower;
+import engine.shop.ShopModel;
+import engine.shop.ShopView;
 
 
 /**
  * This class acts as a heads up display, which contains player stats and the shop for the game.
  * It can display "displayable" objects as well as any other nodes.
- * 
- * @author Sierra Smith 
+ *
+ * @author Sierra Smith
  * @author Cosette Goldstein
  *
  */
@@ -121,11 +108,11 @@ public class HUD implements Observer {
             if (e.isEnabled()) {
                 e.getButton().setDisable(false);
             }
-                else {
-                    e.getButton().setDisable(true);
-                    
+            else {
+                e.getButton().setDisable(true);
+
                 }
-            });
+        });
     }
 
     @Override
@@ -139,57 +126,58 @@ public class HUD implements Observer {
     }
 
     private void makeShop () {
-        //TESTING purposes:
-        shop.addPrototype(new TestTower(0,0,0));
-        myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
+        // TESTING purposes:
+            shop.addPrototype(new TestTower(0, 0, 0));
+            myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
     }
     /*
-        FlowPane shopDisplay = new FlowPane();
-        shopDisplay.setHgap(5);
-        shopDisplay.setVgap(5);
-        shopDisplay.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
-        // shopDisplay.setMaxWidth(SHOP_WIDTH+200);
-        addIcons(shopDisplay);
-        myWholeDisplay.getChildren().add(shopDisplay);
-    }
-
-    private void addIcons (FlowPane shopDisplay) {
-        Map<String, String> shopImages = new HashMap<String, String>();
-        String[] iconImages = new String[] { "/images/Bloons_DartMonkeyIcon.jpg",
-                                            "/images/Bloons_TackShooterIcon.jpg" };
-        String[] towerImages = new String[] { "/images/Bloons_DartMonkey.png",
-                                             "/images/Bloons_TackShooter.png" };
-        for (int i = 0; i < iconImages.length; i++) {
-            shopImages.put(iconImages[i], towerImages[i]);
-        }
-
-        List<Node> items = new ArrayList<Node>();
-        for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
-            shopImages.forEach( (icon, tower) -> {
-                ItemGraphic item = new ItemGraphic(icon, tower);
-                TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
-                Node towerNode = transitionTower.getView();
-                item.setOnMouseClicked(mouseEvent -> {
-                    addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
-                                       towerNode);
-                });
-                towerNode.setOnMouseClicked(mouseEvent -> {
-                    ViewUtilities.unbindCursor(myPane.getScene().getRoot());
-                    Point2D location = ViewUtilities.getMouseLocation(mouseEvent, towerNode);
-                    towerNode.relocate(location.getX(), location.getY());
-                    transitionTower.changeColor();
-                });
-                items.add(item);
-            });
-        }
-        shopDisplay.getChildren().addAll(items);
-    }
-
-    private void addTransitionTower (Point2D initial, Node node) {
-        Node bindedTower =
-                ViewUtilities
-                        .bindCursor(node, myPane.getScene().getRoot(), initial, KeyCode.ESCAPE);
-        myPane.getChildren().add(bindedTower);
-    }*/
+     * FlowPane shopDisplay = new FlowPane();
+     * shopDisplay.setHgap(5);
+     * shopDisplay.setVgap(5);
+     * shopDisplay.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
+     * // shopDisplay.setMaxWidth(SHOP_WIDTH+200);
+     * addIcons(shopDisplay);
+     * myWholeDisplay.getChildren().add(shopDisplay);
+     * }
+     * 
+     * private void addIcons (FlowPane shopDisplay) {
+     * Map<String, String> shopImages = new HashMap<String, String>();
+     * String[] iconImages = new String[] { "/images/Bloons_DartMonkeyIcon.jpg",
+     * "/images/Bloons_TackShooterIcon.jpg" };
+     * String[] towerImages = new String[] { "/images/Bloons_DartMonkey.png",
+     * "/images/Bloons_TackShooter.png" };
+     * for (int i = 0; i < iconImages.length; i++) {
+     * shopImages.put(iconImages[i], towerImages[i]);
+     * }
+     * 
+     * List<Node> items = new ArrayList<Node>();
+     * for (int i = 0; i < ITEM_COUNT / iconImages.length; i++) {
+     * shopImages.forEach( (icon, tower) -> {
+     * ItemGraphic item = new ItemGraphic(icon, tower);
+     * TransitionGameObject transitionTower = new TransitionGameObject(item.getTower());
+     * Node towerNode = transitionTower.getView();
+     * item.setOnMouseClicked(mouseEvent -> {
+     * addTransitionTower(ViewUtilities.getMouseLocation(mouseEvent, towerNode),
+     * towerNode);
+     * });
+     * towerNode.setOnMouseClicked(mouseEvent -> {
+     * ViewUtilities.unbindCursor(myPane.getScene().getRoot());
+     * Point2D location = ViewUtilities.getMouseLocation(mouseEvent, towerNode);
+     * towerNode.relocate(location.getX(), location.getY());
+     * transitionTower.changeColor();
+     * });
+     * items.add(item);
+     * });
+     * }
+     * shopDisplay.getChildren().addAll(items);
+     * }
+     * 
+     * private void addTransitionTower (Point2D initial, Node node) {
+     * Node bindedTower =
+     * ViewUtilities
+     * .bindCursor(node, myPane.getScene().getRoot(), initial, KeyCode.ESCAPE);
+     * myPane.getChildren().add(bindedTower);
+     * }
+     */
 
 }

@@ -6,24 +6,23 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.animation.Animation;
+import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.Animation.Status;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import engine.game.Game;
-import engine.goals.*;
 import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
-import engine.gameobject.Graphic;
-import engine.shop.ShopModel;
+import engine.goals.CanDecSpeedGoal;
+import engine.goals.CanIncSpeedGoal;
+import engine.goals.IsPlayingGoal;
+import engine.goals.NotPlayingGoal;
 
 
 public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Playable {
@@ -31,7 +30,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     public static final double GAME_WIDTH_TO_HEIGHT = 1;
     public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
-    //TODO need to update this to be a function of min frame rate 
+    // TODO need to update this to be a function of min frame rate
     public static final int DEFAULT_FRAMES_SECOND = 60;
 
     private List<Node> hack = new ArrayList<Node>();
@@ -46,7 +45,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private double myDisplayWidth;
     private double myDisplayHeight;
     private HUD myHeadsUp;
-    
+
     public ViewConcrete2 (Game game, double width, double height) {
         myGame = game;
         myLevelBoard = myGame.getLevelBoard();
@@ -109,6 +108,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
                             e -> executeFrameActions());
     }
 
+    @Override
     public void toggleRate () {
         // TODO
         Animation.Status previousStatus = myAnimation.getStatus();
@@ -117,24 +117,28 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         if (myRate <= MAX_FRAME_RATE) {
             myRate = MIN_FRAME_RATE;
         }
-        else
+        else {
             myRate = MAX_FRAME_RATE;
+        }
         buildTimeline();
         restoreLastAnimationStatus(previousStatus);
     }
 
+    @Override
     public boolean canIncSpeed () {
         return myRate >= MIN_FRAME_RATE;
     }
 
+    @Override
     public boolean canDecSpeed () {
         return myRate <= MAX_FRAME_RATE;
     }
 
     private void restoreLastAnimationStatus (Animation.Status prevStatus) {
         myHeadsUp.update();
-        if (prevStatus.equals(Animation.Status.RUNNING))
+        if (prevStatus.equals(Animation.Status.RUNNING)) {
             play();
+        }
     }
 
     @Override
@@ -147,23 +151,23 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
             if (e.isEnabled()) {
                 e.getButton().setDisable(false);
             }
-                else {
-                    e.getButton().setDisable(true);
-                }
-            });
+            else {
+                e.getButton().setDisable(true);
+            }
+        });
         myHeadsUp.update();
 
     }
 
-    private void addInitialObjects () {//This is actually a rendering method now.
+    private void addInitialObjects () {// This is actually a rendering method now.
         Collection<GameObject> gameObjects = myGame.getLevelBoard().getGameWorld().getGameObjects();
-        for (Node n: hack){
+        for (Node n : hack) {
             myGameWorldPane.getChildren().remove(n);
         }
         hack.clear();
         for (GameObject o : gameObjects) {
-                    myGameWorldPane.getChildren().add(o.getGraphic().getNode());
-                    hack.add(o.getGraphic().getNode());
+            myGameWorldPane.getChildren().add(o.getGraphic().getNode());
+            hack.add(o.getGraphic().getNode());
         }
     }
 
@@ -223,9 +227,9 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myHeadsUp.addButton(new ButtonWrapper("Play", e -> play(), new NotPlayingGoal(this)));
         myHeadsUp.addButton(new ButtonWrapper("Pause", e -> pause(), new IsPlayingGoal(this)));
         myHeadsUp
-                .addButton(new ButtonWrapper("Slow", e -> toggleRate(), new CanDecSpeedGoal(this)));
+        .addButton(new ButtonWrapper("Slow", e -> toggleRate(), new CanDecSpeedGoal(this)));
         myHeadsUp
-                .addButton(new ButtonWrapper("Fast", e -> toggleRate(), new CanIncSpeedGoal(this)));
+        .addButton(new ButtonWrapper("Fast", e -> toggleRate(), new CanIncSpeedGoal(this)));
     }
 
     @Override
@@ -240,6 +244,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myHeadsUp.update();
     }
 
+    @Override
     public void addButton (Button b, int x, int y) {
         vbox.getChildren().add(b);
     }

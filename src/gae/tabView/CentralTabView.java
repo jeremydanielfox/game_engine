@@ -1,17 +1,15 @@
 package gae.tabView;
 
-import java.util.function.Consumer;
 import gae.backend.Editable;
 import gae.gridView.LevelView;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
-import javafx.event.EventHandler;
+import java.util.function.Consumer;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 
@@ -65,13 +63,7 @@ public class CentralTabView implements UIObject {
         return baseNode;
     }
 
-    public void getAddFunction (Editable editable) {
-        levelView.getAddFunction(editable);
-    }
-
     public Consumer<Object> getConsumer () {
-        // TODO Initially create a levelView so the consumer can be passed to the GameView
-        // return levelView.getConsumer();
-        return null;
+        return e -> libraryData.addGameObjectToList(e);
     }
 }

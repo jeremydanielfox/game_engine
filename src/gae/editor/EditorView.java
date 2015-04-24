@@ -1,13 +1,12 @@
 package gae.editor;
 
+import exception.NonNumberException;
+import gae.backend.Editable;
+import gae.backend.ResourceBundleUtil;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import exception.NonNumberException;
-import gae.backend.Editable;
-import gae.backend.ResourceBundleUtil;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -68,7 +67,7 @@ public class EditorView {
         Class<?> editableClass = editable.getClass();
         List<Field> list = new ArrayList<>();
         for (String fieldName : fieldMap.get(editable.getClass()
-                .getSimpleName())) {
+                                             .getSimpleName())) {
             try {
                 Field field = editableClass.getDeclaredField(fieldName);
                 field.setAccessible(true);
@@ -88,7 +87,7 @@ public class EditorView {
     private void printFields () {
         Class<?> editableClass = editable.getClass();
         for (String fieldName : fieldMap.get(editable.getClass()
-                .getSimpleName())) {
+                                             .getSimpleName())) {
             try {
                 Field field = editableClass.getDeclaredField(fieldName);
                 field.setAccessible(true);

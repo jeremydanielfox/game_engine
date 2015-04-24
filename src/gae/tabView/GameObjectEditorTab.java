@@ -15,12 +15,12 @@ public class GameObjectEditorTab {
     public GameObjectEditorTab (Scene scene) {
         baseNode = new Tab();
         baseNode.setText("Game Object Editor");
-        
+
         view = new GameObjectEditorView(scene);
         baseNode.setContent(view.getObject());
         baseNode.setClosable(false);
     }
-    
+
     public Tab getBaseTabNode () {
         return baseNode;
     }

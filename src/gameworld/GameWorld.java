@@ -10,12 +10,12 @@ public interface GameWorld extends ObjectCollection {
     public void updateGameObjects ();
 
     public void addObject (GameObject toSpawn, PointSimple pixelCoords)
-                                                                       throws StructurePlacementException;
+            throws StructurePlacementException;
 
     public boolean isPlacable (Node n, PointSimple pixelCoords);
-    
-    public GameObject getObjectFromNode(Node n);
-    
-    public Path getPath();
+
+    public GameObject getObjectFromNode (Node n);
+
+    public Path getPath ();
 
 }

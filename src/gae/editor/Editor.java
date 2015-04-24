@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import engine.fieldsetting.Settable;
+
 /**
  * 
  * @author Eric Saba
@@ -23,7 +25,7 @@ public abstract class Editor implements Edits {
 
     public TreeNode getMethodsTree(Class<?> klass, Method m) {
         TreeNode root = new TreeNode(m, "null");
-        List<Method> methods = EditingParser.getMethodsWithSetterAnnotation(klass);
+        List<Method> methods = EditingParser.getMethodsWithAnnotation(klass, Settable.class);
         for (Method method : methods) {
             //System.out.println(method.toString());
             Type parameterClass = method.getGenericParameterTypes()[0];

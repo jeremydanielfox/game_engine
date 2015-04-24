@@ -30,13 +30,16 @@ public class PathFree implements Path {
 	private Map<GridCell, GridCell> myPath;
 	private CoordinateTransformer myTrans;
 	private GameObject[][] objectMatrix;
-	private GridCell endPoint, spawnPoint, bounds; 
+	private GridCell spawnPoint, bounds;
+	private List<GridCell> endPoints;
 
 	public PathFree(CoordinateTransformer cTrans, GameObject[][] matrix) {
 		myAlgorithm = new GridWrapper();
 		myTrans = cTrans;
 		objectMatrix = matrix;
-		endPoint = new GridCell(8, 8);
+		endPoints = new ArrayList<>();
+		endPoints.add(new GridCell(8, 8));
+		endPoints.add(new GridCell(5,0));
 		spawnPoint = new GridCell(0, 0);
 		bounds = new GridCell(matrix.length,matrix[0].length);
 	}
@@ -44,8 +47,7 @@ public class PathFree implements Path {
 	@Override
 	public void updatePath() throws NoPathExistsException {
 		myAlgorithm.initializeGraph(objectMatrix, go -> go != null);
-		int[] endNodes = {8,8};
-		myPath = myAlgorithm.allShortestPaths(endNodes);		
+		myPath = myAlgorithm.allShortestPaths(GridCell.toArray(endPoints));		
 		// myPathCoordinates = myPath.stream().map(cell ->
 		// myTrans.tranformGridToWorld(cell)).collect(Collectors.toList());
 		// p = new PathFixed();
@@ -60,16 +62,19 @@ public class PathFree implements Path {
 			throws EndOfPathException {
 		GridCell currentCell = myTrans.transformWorldToGrid(current);
 		GridCell nextCell = myPath.get(currentCell);
-
+		
+//		GridWrapper.printGradient(myPath);
+		for(GridCell endpoint : endPoints){
+			if(currentCell.equals(endpoint)){
+				throw new EndOfPathException();
+			}
+		}
 		if (nextCell != null) {
 			return PointSimple.pointOnLine(
 					current,
 					myTrans.tranformGridToWorld(nextCell), speed);
 		} else {
-			if(currentCell.equals(endPoint)){
-				throw new EndOfPathException();
-			}
-			else if(currentCell.withinBounds(bounds)){//TODO make better algorithmically
+			if(currentCell.withinBounds(bounds)){//TODO make better algorithmically
 				for(GridCell c : myPath.keySet()){
 					if(c.distance(currentCell)==1){
 						return myTrans.tranformGridToWorld(c);

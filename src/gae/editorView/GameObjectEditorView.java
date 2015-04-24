@@ -1,5 +1,9 @@
 package gae.editorView;
 
+import gae.backend.Editable;
+import gae.listView.DraggableUtilities;
+import gae.listView.ListViewUtilities;
+import gae.openingView.UIObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -9,25 +13,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
-import gae.backend.Editable;
-import gae.backend.TempTower;
-import gae.gridView.ContainerWrapper;
-import gae.listView.DraggableUtilities;
-import gae.listView.LibraryData;
-import gae.listView.ListViewUtilities;
-import gae.openingView.UIObject;
 
 
 public class GameObjectEditorView implements UIObject {
     private ObservableList<Node> optionList = FXCollections.observableArrayList();
     private String[] imagePaths = { "/images/WeaponImage.png", "/images/HealthImage.jpeg",
-                                   "/images/PathImage.png" };
+    "/images/PathImage.png" };
     private Group root;
     private Scene scene;
     private BorderPane border;
@@ -58,7 +53,7 @@ public class GameObjectEditorView implements UIObject {
 
         VBox top = new VBox();
         top.setPrefSize(vboxWidth, vboxHeight);
-        
+
         Label temp = new Label("SimpleEditor should go here.");
         top.getChildren().add(temp);
 
@@ -88,7 +83,7 @@ public class GameObjectEditorView implements UIObject {
             for (int i = 0; i < bottom.getRectangles().size(); i++) {
                 if (i == list.getSelectionModel().getSelectedIndex()) {
                     DraggableUtilities.makeImagePlaceable(me, selected, bottom, bottom
-                            .getRectangles().get(i), root);
+                                                          .getRectangles().get(i), root);
                 }
             }
         });

@@ -1,6 +1,5 @@
 package gae.listView;
 
-import View.ViewUtil;
 import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
 import gae.backend.Editable;
@@ -13,13 +12,14 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import View.ViewUtil;
 
 
 public class DraggableUtilities {
     /**
      * places the node on the location clicked. When the location is clicked, a new instance of the
      * object is added to a list and a MovableImage is placed on the location.
-     * 
+     *
      * @param me: MouseEvent to bind the cursor to the EditableNode
      * @param editablenode: The EditableNode
      * @param node: Node that will be clicked on
@@ -39,16 +39,17 @@ public class DraggableUtilities {
                 ViewUtil.bindCursor(transitionImage,
                                     node,
                                     ViewUtil
-                                            .getMouseLocation(me, transitionImage),
+                                    .getMouseLocation(me, transitionImage),
                                     KeyCode.ESCAPE, false);
         binder.setOnMouseClicked(ev -> {
             Point2D current =
                     binder.localToParent(new Point2D(binder.getTranslateX(), binder
-                            .getTranslateY()));
+                                                     .getTranslateY()));
             Double currentX = current.getX();
             Double currentY = current.getY();
-            if (wrapper.checkBounds(currentX, currentY))
+            if (wrapper.checkBounds(currentX, currentY)) {
                 throw new ObjectOutOfBoundsException();
+            }
 
             Editable newEditable = editable.makeNewInstance();
             instanceList.add(newEditable);
@@ -73,16 +74,16 @@ public class DraggableUtilities {
                 ViewUtil.bindCursor(imageView,
                                     node,
                                     ViewUtil
-                                            .getMouseLocation(me, imageView),
+                                    .getMouseLocation(me, imageView),
                                     KeyCode.ESCAPE, false);
         binder.setOnMouseClicked(ev -> {
             if (image.getBoundsInLocal().intersects(correct.getBoundsInLocal())) {
-//                root.getChildren().add(imageView);
-//                root.setTranslateX(correct.getTranslateX());
-//                root.setTranslateY(correct.getTranslateY() +  size/2);
+                // root.getChildren().add(imageView);
+                // root.setTranslateX(correct.getTranslateX());
+                // root.setTranslateY(correct.getTranslateY() + size/2);
                 correct.setCorrect(imageView);
             }
-            
+
         });
         root.getChildren().add(binder);
     }

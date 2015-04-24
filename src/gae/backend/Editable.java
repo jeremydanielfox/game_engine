@@ -1,12 +1,12 @@
 package gae.backend;
 
 import java.io.Serializable;
+import java.util.List;
 import javafx.scene.image.ImageView;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
 import gae.gridView.Path;
 import gae.listView.MovableImage;
-import java.util.List;
 
 
 public interface Editable extends Serializable {

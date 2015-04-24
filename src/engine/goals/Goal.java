@@ -5,7 +5,7 @@ import java.util.Observer;
 
 /**
  * This class observes some GameObject and changes a field once a particular condition is met
- * 
+ *
  * @author Cosette Goldstein and Sierra Smith
  *
  */
@@ -22,7 +22,7 @@ public abstract class Goal implements Observer {
         isSatisfied = satisfied;
     }
 
-    public boolean getIsSatisfied() {
+    public boolean getIsSatisfied () {
         return isSatisfied;
     }
 }

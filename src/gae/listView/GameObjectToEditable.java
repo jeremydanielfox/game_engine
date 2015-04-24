@@ -1,26 +1,27 @@
 package gae.listView;
 
-import java.util.List;
-import javafx.scene.image.ImageView;
+import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
 import gae.backend.Editable;
 import gae.gridView.Path;
+import java.util.List;
+import javafx.scene.image.ImageView;
 
 
 /**
  * A temporary adaptor class that converts the engine's GameObjectSimple object to an Editable
  * object, as GAE has been working with Editables. Essentially takes in the engine's object and
  * takes out necessary information from it for GAE use.
- * 
+ *
  * @author Kei
  *
  */
 public class GameObjectToEditable implements Editable {
-    private GameObjectSimple gameObject;
+    private GameObject gameObject;
     private static final long serialVersionUID = 1L;
-    private static int ourID=0;
+    private static int ourID = 0;
     private int myID = 0;
     private int Size = 10;
     private Weapon weapon;
@@ -35,8 +36,8 @@ public class GameObjectToEditable implements Editable {
     private ImageView imageView;
     private double health;
 
-    public GameObjectToEditable (GameObjectSimple gameobject) {
-        this.gameObject = gameobject;
+    public GameObjectToEditable (GameObject gameObject2) {
+        gameObject = gameObject2;
         /*
          * doing the following instantiation because it doesn't copy GameObjectSimple (not
          * Serializable)
@@ -55,7 +56,7 @@ public class GameObjectToEditable implements Editable {
         // TODO Auto-generated method stub
     }
 
-    public GameObjectSimple getGameObject () {
+    public GameObject getGameObject () {
         return gameObject;
     }
 

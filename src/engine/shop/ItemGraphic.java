@@ -9,7 +9,7 @@ import engine.gameobject.Graphic;
 
 /**
  * Represents an item's icon in the shop.
- * 
+ *
  * @author Nathan Prabhu and Tom Puglisi
  *
  */
@@ -39,15 +39,15 @@ public class ItemGraphic extends Parent {
         itemNode.setCursor(Cursor.HAND);
         itemNode.setEffect(new Glow(GLOW_VALUE));
     }
-    
-    public String getName() {
+
+    public String getName () {
         return name;
     }
-    
+
     public Node getGraphic () {
         return shopGraphic.getNode();
     }
-    
+
     public TransitionGameObject onClicked () {
         return myOnClicked.execute();
     }

@@ -2,21 +2,22 @@ package gae.editor;
 
 import javafx.scene.control.TextField;
 
+
 /**
  * Represents an editor based on input text from the author. Could be used for features such as
  * object name.
- * 
+ *
  * @author Brandon Choi
  *
  */
 
 public class TextEditor extends ComponentEditor {
-    
+
     private TextField field;
-    
+
     public TextEditor () {
         super();
-        field = new TextField();      
+        field = new TextField();
         getEditBox().getChildren().addAll(getLabel(), field);
     }
 

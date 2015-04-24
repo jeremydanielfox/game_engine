@@ -1,32 +1,27 @@
 package engine.gameobject;
 
-import javafx.geometry.Point2D;
 import engine.fieldsetting.Settable;
 import engine.gameobject.labels.Label;
-import engine.gameobject.labels.LabelConcrete;
 import engine.gameobject.labels.SimpleLabel;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
 import engine.gameobject.units.Collider;
-import engine.gameobject.units.Colliding;
-import engine.gameobject.units.Firing;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.GameObjectTagSimple;
-import gae.listView.DeepCopy;
 import gameworld.ObjectCollection;
 
 
 /**
  * Simple (and possibly only) implementation of the gameobject.
- * 
+ *
  * @author Jeremy, Kaighn
  *
  */
 @Settable
-public class GameObjectSimple implements GameObject{
+public class GameObjectSimple implements GameObject {
     private Label myLabel;
     private PointSimple myPoint;
     private Health myHealth;
@@ -36,7 +31,7 @@ public class GameObjectSimple implements GameObject{
     private BuffTracker myBuffs;
     private Weapon myWeapon;
     private Collider myCollider;
-    
+
     public GameObjectSimple () {
         myLabel = new SimpleLabel();
         myPoint = new PointSimple();
@@ -49,65 +44,73 @@ public class GameObjectSimple implements GameObject{
         myCollider = new Collider();
     }
 
-/*
- * Buffable methods follow
- */
-    
+    /*
+     * Buffable methods follow
+     */
+
     /**
      * Give the object a buff e.g. burn this object
      */
-    public void receiveBuff(Buff buff){
+    @Override
+    public void receiveBuff (Buff buff) {
         myBuffs.receiveBuff(buff, this);
     }
-    
-/*
- * Firing methods follow
- */
-    
+
+    /*
+     * Firing methods follow
+     */
+
+    @Override
     @Settable
     public void setWeapon (Weapon weapon) {
         myWeapon = weapon;
     }
-    
-    public void fire(ObjectCollection world, GameObject target){
-//        myWeapon.fire(world, target, myPoint);
+
+    @Override
+    public void fire (ObjectCollection world, GameObject target) {
+        // myWeapon.fire(world, target, myPoint);
     }
-    
-    public Weapon getWeapon(){
+
+    @Override
+    public Weapon getWeapon () {
         return myWeapon;
     }
-    
-/*
- * Colliding methods follow
- */
-    
-    public Collider getCollider(){
+
+    /*
+     * Colliding methods follow
+     */
+
+    @Override
+    public Collider getCollider () {
         return myCollider;
     }
-    
+
+    @Override
     @Settable
-    public void setCollider(Collider collider){
+    public void setCollider (Collider collider) {
         myCollider = collider;
     }
 
-    public void explode(ObjectCollection world){
+    @Override
+    public void explode (ObjectCollection world) {
         myCollider.explode(world, myPoint);
     }
-    
-    public void collide(GameObject target){
-//        myCollider.collide(target);
-//        changeHealth(-1);
-    }
-    
-/*
- * Prototype methods follow
- */
+
     @Override
-    public double getRange(){
+    public void collide (GameObject target) {
+        // myCollider.collide(target);
+        // changeHealth(-1);
+    }
+
+    /*
+     * Prototype methods follow
+     */
+    @Override
+    public double getRange () {
         return myWeapon.getRange();
     }
-    
-    //TODO: Tag cloning not done, Weapon upgrade cloning not done
+
+    // TODO: Tag cloning not done, Weapon upgrade cloning not done
     @Override
     public GameObject clone () {
         GameObject clone = new GameObjectSimple();
@@ -121,70 +124,72 @@ public class GameObjectSimple implements GameObject{
         clone.setMover(myMover.clone());
         return clone;
     }
-    
+
     @Override
     public GameObjectTag getTag () {
         return myTag;
     }
- 
-/*
- * Purchasable methods follow
- */
-    
+
+    /*
+     * Purchasable methods follow
+     */
+
     @Override
     public Graphic getGraphic () {
         return myGraphic;
     }
-    
+
     @Override
     public double getValue () {
         return myWeapon.getValue();
     }
-    
-/*
- * Movable, Health methods follow
- */
+
+    /*
+     * Movable, Health methods follow
+     */
     @Override
     public void move () throws EndOfPathException {
         PointSimple point = myMover.move(myPoint);
-//        myGraphic.rotate(point);
+        // myGraphic.rotate(point);
         setPoint(new PointSimple(point.getX(), point.getY()));
     }
-    
+
     @Override
     public boolean isDead () {
         return myHealth.isDead();
     }
-    
+
     @Override
     public void changeHealth (double amount) {
         myHealth.changeHealth(amount);
     }
-    
+
     @Override
     public void setSpeed (double speed) {
         myMover.setSpeed(speed);
     }
-    
-/*
- * GameObject specific methods follow
- */
+
+    /*
+     * GameObject specific methods follow
+     */
 
     @Override
     public Label getLabel () {
         return myLabel;
     }
 
+    @Override
     @Settable
     public void setLabel (Label label) {
         myLabel = label;
     }
-    
+
     @Override
     public PointSimple getPoint () {
         return new PointSimple(myPoint);
     }
 
+    @Override
     @Settable
     public void setPoint (PointSimple point) {
         myPoint = point;
@@ -199,26 +204,31 @@ public class GameObjectSimple implements GameObject{
     /**
      * Note that this takes in a new health object.
      * Should only be used when setting to a new health, not for damage.
+     * 
      * @param health
      */
+    @Override
     @Settable
     public void setHealth (Health health) {
         myHealth = health;
     }
 
+    @Override
     @Settable
     public void setMover (Mover mover) {
         myMover = mover;
     }
 
-    @Settable @Override
+    @Settable
+    @Override
     public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }
 
+    @Override
     @Settable
     public void setTag (GameObjectTag tag) {
-        this.myTag = tag;
+        myTag = tag;
     }
 
     // // added because tag is broken and I can't test - Kei
@@ -239,10 +249,10 @@ public class GameObjectSimple implements GameObject{
             move();
         }
         catch (EndOfPathException e) {
-            //TODO: Encode end of path behaviors. For now, just die.
+            // TODO: Encode end of path behaviors. For now, just die.
             changeHealth(-10000);
         }
-        if(isDead()){
+        if (isDead()) {
             onDeath(world);
         }
     }
@@ -250,7 +260,7 @@ public class GameObjectSimple implements GameObject{
     @Override
     public void onDeath (ObjectCollection world) {
         explode(world);
-        //TODO: Birthing other units? Like blue bloon -> red bloon?
+        // TODO: Birthing other units? Like blue bloon -> red bloon?
     }
 
 }

@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import engine.gameobject.PointSimple;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -12,10 +11,9 @@ import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.stage.Screen;
+import engine.gameobject.PointSimple;
 
 
 /*
@@ -25,7 +23,7 @@ import javafx.stage.Screen;
 /**
  * Creates the tile objects and gives it the ability to see if other objects are on the grid. Also
  * able to select multiple tiles at once.
- * 
+ *
  * @author Kei & Nina
  *
  */
@@ -46,11 +44,11 @@ public class TileContainer extends Region implements ContainerWrapper {
             addTiles(newVal, maxHeight);
         });
         selectionRect = new SelectionRectangle(this, createContextMenu());
-        this.getChildren().add(selectionRect);
+        getChildren().add(selectionRect);
         scene.heightProperty().addListener( (p, o, n) -> {
             if (tileList != null) {
                 for (TileView view : tileList) {
-                    this.getChildren().remove(view);
+                    getChildren().remove(view);
                 }
             }
             gridHeightProperty.set(scene.getHeight() - TAB_HEIGHT);
@@ -61,36 +59,37 @@ public class TileContainer extends Region implements ContainerWrapper {
     /**
      * Adds the tiles and binds the height to the pane's height.
      * Currently hard-coded to a square but should be able to change.
-     * 
+     *
      * @param size
      */
     private void addTiles (Dimension size, double height) {
         double length =
                 size.getWidth() < size.getHeight() ? height / size.getHeight() : height /
-                                                                                 size.getWidth();
-        for (int i = 0; i < size.getHeight(); i++) {
-            for (int j = 0; j < size.getWidth(); j++) {
-                TileView tileView = new TileView(length, new TileData(i, j));
-                tileView.setLayoutX(i * length);
-                tileView.setLayoutY(j * length);
-                this.getChildren().add(tileView);
-                tileList.add(tileView);
-                gridWidthProperty.set(i * length + length);
-                gridHeightProperty.set(j * length + length);
-            }
+                                                   size.getWidth();
+                for (int i = 0; i < size.getHeight(); i++) {
+                    for (int j = 0; j < size.getWidth(); j++) {
+                        TileView tileView = new TileView(length, new TileData(i, j));
+                        tileView.setLayoutX(i * length);
+                        tileView.setLayoutY(j * length);
+                        getChildren().add(tileView);
+                        tileList.add(tileView);
+                        gridWidthProperty.set(i * length + length);
+                        gridHeightProperty.set(j * length + length);
+                    }
 
-        }
+                }
     }
 
     /**
      * Important method that checks if the object's coordinate is on the grid
      */
+    @Override
     public boolean checkBounds (double x, double y) {
         Point2D point = this.screenToLocal(x, y);
         System.out.println("X IS : " + point.getX());
         System.out.println("Y IS : " + y);
-        if (point.getX() < 0 || point.getX() > this.getWidth() || y < 0 ||
-            y > this.getHeight()) {
+        if (point.getX() < 0 || point.getX() > getWidth() || y < 0 ||
+                y > getHeight()) {
             return true;
         }
         return false;
@@ -99,6 +98,7 @@ public class TileContainer extends Region implements ContainerWrapper {
     /**
      * Important method that converts other coordinate systems to that relative to the grid
      */
+    @Override
     public PointSimple convertCoordinates (double x, double y) {
         Point2D point = this.screenToLocal(x, y);
         return new PointSimple(point.getX(), y);
@@ -116,7 +116,7 @@ public class TileContainer extends Region implements ContainerWrapper {
 
     /**
      * Creates context menu at the end of a drag selection to set walkable property
-     * 
+     *
      * @return context menu
      */
     private ContextMenu createContextMenu () {
@@ -128,7 +128,7 @@ public class TileContainer extends Region implements ContainerWrapper {
 
     /**
      * Creates menu items to set whether a tile is walkable
-     * 
+     *
      * @return menu item
      */
     private MenuItem createMenuItem (String name, boolean walkable) {
@@ -143,7 +143,7 @@ public class TileContainer extends Region implements ContainerWrapper {
     private void removeTiles () {
         if (tileList != null) {
             for (TileView view : tileList) {
-                this.getChildren().remove(view);
+                getChildren().remove(view);
             }
         }
     }

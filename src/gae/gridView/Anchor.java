@@ -10,7 +10,7 @@ import javafx.scene.shape.StrokeType;
 
 /**
  * A class specifically for the circles that are bound to the four points in a Bezier curve.
- * 
+ *
  * @author Kei
  *
  */
@@ -41,7 +41,7 @@ public class Anchor extends Circle {
 
     /**
      * initialize the properties of this JavaFX object
-     * 
+     *
      * @param color
      */
     private void init (Color color) {
@@ -110,11 +110,11 @@ public class Anchor extends Circle {
 
     /**
      * checks for collision - used for snapping in different anchors
-     * 
+     *
      * @param object
      * @return
      */
     public boolean checkIntersect (Node object) {
-        return this.getBoundsInParent().intersects(object.getBoundsInParent());
+        return getBoundsInParent().intersects(object.getBoundsInParent());
     }
 }

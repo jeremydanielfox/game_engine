@@ -49,10 +49,12 @@ public class ConcreteGame implements Game {
         myLevelBoard.update();
     }
 
+    @Override
     public LevelBoard getLevelBoard () {
         return myLevelBoard;
     }
 
+    @Override
     public void addButton (ButtonWrapper button) {
         myButtons.add(button);
     }

@@ -7,10 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 
+
 /**
  * PauseScene will be a drop down screen that holds options such as resume, restart, and return to
  * main menu
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -37,7 +38,7 @@ public class PauseScene {
     private void setUpFunctions () {
         myScene.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ESCAPE)) {
-                
+
             }
         });
     }

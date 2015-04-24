@@ -1,5 +1,7 @@
 package gae.editorView;
 
+import gae.gridView.PathView;
+import gae.listView.LibraryData;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Scene;
@@ -10,9 +12,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import gae.gridView.PathView;
-import gae.listView.LibraryData;
-import gae.gridView.Path;
 
 
 public class MoverEditorOpener extends EditorOpener {
@@ -51,10 +50,8 @@ public class MoverEditorOpener extends EditorOpener {
         createdDropDownList.forEach( (dropDown) -> {
             PathView pathView = dropDown.getSelectionModel().getSelectedItem();
             System.out.println("We have selected : " + pathView.getID());
-            List<Path> path = pathView.createPathObjects();
-            // we need to add it to an Editable, which will then be converted to GameObjectSimple
-            // later
-            });
+            pathView.createPathObjects();
+        });
     }
 
     private HBox createHBox () {

@@ -71,8 +71,8 @@ public class GameObjectEditorView implements UIObject {
     private BorderPane setUpBorder () {
         border = new BorderPane();
 
-        border.setRight(setUpAccordion());
         border.setCenter(setUpAnchor());
+        border.setRight(setUpAccordion());
         LibraryList library = new LibraryList(scene);
         border.setLeft(library.initialize());
         return border;

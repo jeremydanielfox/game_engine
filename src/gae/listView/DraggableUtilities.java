@@ -103,8 +103,8 @@ public class DraggableUtilities {
             }
             popNewEditor.handle(ev);
             PointSimple relativeLocation = wrapper.convertCoordinates(currentX, currentY);
-            placeable.setTranslateX(relativeLocation.getX());
-            placeable.setTranslateY(relativeLocation.getY());
+            placeable.setLayoutX(relativeLocation.getX());
+            placeable.setLayoutY(relativeLocation.getY());
             root.getChildren().add(placeable);
         });
         root.getChildren().add(binder);

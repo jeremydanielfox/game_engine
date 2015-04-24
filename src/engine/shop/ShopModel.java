@@ -34,10 +34,10 @@ public interface ShopModel {
      * Purchases the named GameObject and places it at the given position on the screen
      * 
      * @param name
-     * @param x
-     * @param y
+     * @param location
+     * @return whether GameObject was purchased or not
      */
-    public void purchaseGameObject (String name, PointSimple location);
+    public boolean purchaseGameObject (String name, PointSimple location);
     
     public void purchaseUpgrade (String name);
 

@@ -12,7 +12,7 @@ import xml.DataManager;
 
 
 public class TestEngine extends Application {
-    private static final String FILE_SOURCE = "src/xml/Game.xml";
+    private static final String FILE_SOURCE = "src/xml/GameFreePath.xml";
 
     @Override
     public void start (Stage primaryStage) throws Exception {
@@ -35,11 +35,11 @@ public class TestEngine extends Application {
     }
 
     private Game loadGame () {
-        GameWriter gw = new GameWriter();
-        GameWorld world = gw.makeWorld();
-        Player player = gw.makePlayer();
-        return gw.makeGame(player, world, gw.makeShop(player, world));
-        //return DataManager.readFromXML(Game.class, FILE_SOURCE);
+//        GameWriter gw = new GameWriter();
+//        GameWorld world = gw.makeWorld();
+//        Player player = gw.makePlayer();
+//        return gw.makeGame(player, world, gw.makeShop(player, world));
+        return DataManager.readFromXML(Game.class, FILE_SOURCE);
 //        return DataManager.readFromXML(Game.class, FILE_SOURCE);
 
 

@@ -5,11 +5,10 @@ import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
-import engine.gameobject.units.DirectDamage;
-import engine.gameobject.units.FreezeBuff;
-import engine.gameobject.units.PoisonBuff;
+import engine.gameobject.units.directdamage.DamageBuff;
+import engine.gameobject.units.freeze.FreezeBuff;
+import engine.gameobject.units.poison.PoisonBuff;
 import engine.gameobject.weapon.NullWeapon;
-import engine.gameobject.weapon.firingstrategy.Projectile;
 
 public class TestProjectile extends GameObjectSimple{
 
@@ -26,7 +25,7 @@ public class TestProjectile extends GameObjectSimple{
         setWeapon(new NullWeapon());
         setLabel(new ProjectileLabel());
         if (type == 1 || type == 4){
-            getCollider().addCollisionBehavior(new DirectDamage(4));
+            getCollider().addCollisionBehavior(new DamageBuff(4));
         }
         if (type == 2){
             getCollider().addCollisionBehavior(new FreezeBuff(30));
@@ -38,11 +37,12 @@ public class TestProjectile extends GameObjectSimple{
             setHealth(new HealthSimple(0));
         }
         if (type == 4){
-            setMover(new MoverDirection(getPoint(), 4, 90));
+            setMover(new MoverDirection(getPoint(), 1, 90));
+        }
+        if (type == 5){
+            setWeapon(new TestWeapon(4));
+            setLabel(new TowerLabel());
         }
     }
     
-    public GameObjectSimple clone(){
-        return new TestProjectile(myType);
-    }
 }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import engine.fieldsetting.Settable;
-import engine.gameobject.weapon.ClassSet;
 import engine.gameobject.weapon.Upgrade;
+import engine.gameobject.weapon.UpgradeSet;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.shop.tag.UpgradeTag;
 
@@ -36,16 +36,15 @@ public class UpgradeBundleSimple implements BuildableBundle {
     }
 
     @Override
-    public void applyUpgrades (ClassSet<Upgrade> upgradables) {
+    public void applyUpgrades (UpgradeSet<Upgrade> upgradables) {
         upgrades.forEach(upgrade -> addUpgrade(upgrade, upgradables));
     }
 
-    private void addUpgrade (Upgrade toAdd, ClassSet<Upgrade> upgradables) {
+    private void addUpgrade (Upgrade toAdd, UpgradeSet<Upgrade> upgradables) {
         if (upgradables.contains(toAdd)) {
             toAdd.upgrade(upgradables.get(toAdd));
         }
         upgradables.add(toAdd);
-        //TODO: add listeners to buffs?
     }
 
     @Override

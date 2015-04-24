@@ -1,5 +1,7 @@
 package gae.gameView;
 
+import gae.listView.LibraryData;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,17 +21,23 @@ import javafx.stage.Stage;
  *
  */
 
-public class InteractionTable extends Application{
+public class InteractionTable extends Application {
 
     private static final String ADD_TEXT = "Add New Interaction";
-    
+
+    private static InteractionTable instance;
+
+    private InteractionData myInteractionData;
+    private LibraryData myLibraryData;
     private BorderPane container;
     private ScrollPane scroller;
     private VBox content;
     private Button adder;
-    private List<Interaction> interactions;
+    private List<InteractionInstance> interactions;
 
     public InteractionTable () {
+        myInteractionData = new InteractionData();
+        myLibraryData = LibraryData.getInstance();
         container = new BorderPane();
         scroller = new ScrollPane();
         container.setCenter(scroller);
@@ -42,17 +50,28 @@ public class InteractionTable extends Application{
     }
 
     /**
+     * implements the Singleton design pattern in order to keep the InteractionTable consistent
+     * throughout the entire GAE
+     * 
+     * @return
+     */
+    public static synchronized InteractionTable getInstance () {
+        if (instance == null)
+            instance = new InteractionTable();
+        return instance;
+    }
+
+    /**
      * Sets up Buttons and their pressed functions
      */
     private void setUpButtons () {
         adder.setOnMouseClicked(e -> {
-            Interaction i = new Interaction();
+            InteractionInstance i = new InteractionInstance(myInteractionData, myLibraryData);
             interactions.add(i);
             content.getChildren().add(i.getInteractionSetter());
         });
     }
 
-    
     public static void main (String[] args) {
         launch(args);
     }

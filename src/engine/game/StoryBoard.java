@@ -23,7 +23,6 @@ public class StoryBoard extends Observable {
     public StoryBoard (Event ... events) {
         eventList = new ArrayList<Event>();
         addEvent(events);
-        System.out.println(eventList.size());
     }
 
     public boolean addEvent (Event ... events) {
@@ -54,6 +53,7 @@ public class StoryBoard extends Observable {
     private void updateEvent (Event event) {
         if (!event.update()) {
             eventList.remove(event);
+            event.onCompleteAction();
             setChanged();
             notifyObservers();
         }

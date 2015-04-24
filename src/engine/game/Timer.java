@@ -3,6 +3,13 @@ package engine.game;
 import View.Displayable;
 
 
+/**
+ * A class can extend the Timer class when it will be "Displayable," be able to update when called
+ * each frame, and hold a minute-second value.
+ * 
+ * @author Sierra
+ *
+ */
 public abstract class Timer extends Displayable {
 
     /**

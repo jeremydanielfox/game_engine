@@ -1,0 +1,18 @@
+
+// Instructions
+// If you have a RangeEngine called myRangeEngine, and
+// a label called first, a label called second, and  an Interaction called interaction,
+// call myRangeEngine.put(first, second, interaction) to add that interaction to the RangeEngine
+
+
+// Things to instantiate
+
+RangeEngine
+CollisionEngine
+
+// Possible Interactions
+// The below interaction is the collide with interaction
+
+BuffImparter
+ShootAt
+NoInteraction

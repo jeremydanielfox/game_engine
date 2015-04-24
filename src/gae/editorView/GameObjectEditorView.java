@@ -1,5 +1,6 @@
 package gae.editorView;
 
+import java.util.Map;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,11 +19,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import gae.backend.Placeable;
+import gae.backend.ResourceBundleUtil;
 import gae.backend.TempTower;
 import gae.gridView.ContainerWrapper;
 import gae.listView.Authorable;
 import gae.listView.DraggableUtilities;
-import gae.listView.ImageContainer;
 import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
 import gae.openingView.UIObject;
@@ -30,8 +31,7 @@ import gae.openingView.UIObject;
 
 public class GameObjectEditorView implements UIObject {
     private ObservableList<Authorable> optionList = FXCollections.observableArrayList();
-    private String[] imagePaths = { "/images/WeaponImage.png", "/images/HealthImage.jpeg",
-                                   "/images/PathImage.png" };
+    private Map<String, String[]> imageLocationMap;
     private Group root;
     private Scene scene;
     private BorderPane border;
@@ -46,6 +46,7 @@ public class GameObjectEditorView implements UIObject {
         root = new Group();
         root.setManaged(false);
         this.scene = scene;
+        imageLocationMap = ResourceBundleUtil.useResourceBundle("gae/editorView/ObjectPathProperties");
     }
 
     private BorderPane setUpBorder () {
@@ -80,25 +81,23 @@ public class GameObjectEditorView implements UIObject {
         AnchorPane.setTopAnchor(bottomHalf, vboxHeight);
         return anchor;
     }
-
-    private ListView<Authorable> setUpList () {
-        ListView<Authorable> list = ListViewUtilities.createList(optionList, null, "Image");
-        for (String path : imagePaths) {
-            optionList.add(new ImageContainer(new ImageView(path)));
-        }
-        list.setOnMouseClicked(me -> {
-            ImageContainer selected = (ImageContainer) list.getSelectionModel().getSelectedItem();
-            ImageView image = selected.getImageView();
-//            ImageView changed = ImageUtilities.changeImageSize(selected, 50, 50);
-            for (int i = 0; i < bottom.getRectangles().size(); i++) {
-                if (i == list.getSelectionModel().getSelectedIndex()) {
-                    DraggableUtilities.makeImagePlaceable(me, image, bottom, bottom
-                            .getRectangles().get(i), root);
-                }
-            }
-        });
-        return list;
-    }
+    
+//    private ListView<Authorable> setUpList () {
+//        ListView<Authorable> list = ListViewUtilities.createList(optionList, null, "Image");
+//        for (String type: imageLocationMap.keySet()) {
+//            optionList.add(new DraggableFields(imageLocationMap.get(type)[0], type));
+//        }
+//        list.setOnMouseClicked(me -> {
+//            DraggableFields selected = (DraggableFields) list.getSelectionModel().getSelectedItem();
+//            for (int i = 0; i < bottom.getRectangles().size(); i++) {
+//                if (i == list.getSelectionModel().getSelectedIndex()) {
+//                    DraggableUtilities.makeImagePlaceable(me, selected, bottom, bottom
+//                            .getRectangles().get(i), root);
+//                }
+//            }
+//        });
+//        return list;
+//    }
 
     @Override
     public Node getObject () {

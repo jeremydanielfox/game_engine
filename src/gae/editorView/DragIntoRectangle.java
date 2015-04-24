@@ -33,7 +33,7 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
     public DragIntoRectangle (double width, String label, Scene scene) {
         this.width = width;
         this.scene = scene;
-        type = label;
+//        type = label;
         rectSize = width / 5;
         rect = new Rectangle(rectSize, rectSize, Color.TRANSPARENT);
         rect.setStyle("    -fx-stroke: black;\n" +
@@ -41,8 +41,8 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
                 "    -fx-stroke-dash-array: 12 2 4 2;\n" +
                 "    -fx-stroke-dash-offset: 6;\n" +
                 "    -fx-stroke-line-cap: butt;");
-        Label name = createLabel(label);
-        nodesList = Arrays.asList(new Node[] { rect, name });
+//        Label name = createLabel(label);
+        nodesList = Arrays.asList(new Node[] { rect });
         getChildren().addAll(nodesList);
         setManaged(false);
         setOnMouseEntered(e -> {
@@ -69,11 +69,11 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
         return type;
     }
 
-    public void setCorrect (ImageView image) {
+    public void setCorrect (ImageView image, String type) {
         getChildren().add(image);
         image.setLayoutX(rectSize / 2 + ViewUtil.getCenterOffsetX(image));
         image.setLayoutY(rectSize / 2 + ViewUtil.getCenterOffsetY(image));
-        setUpEditorOpener();
+        setUpEditorOpener(type);
         image.setOnMouseClicked(e -> {
             image.setEffect(new Glow(1));
             scene.setOnKeyPressed(keyEvent -> {
@@ -83,14 +83,14 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
                 }
             });
             if (e.getClickCount()==2) {
-                setUpEditorOpener();
+                setUpEditorOpener(type);
                 image.setEffect(null);
             }
         });
         setInvisible();
     }
 
-    private void setUpEditorOpener () {
+    private void setUpEditorOpener (String type) {
         try {
             Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
             Object instance = className.getConstructor().newInstance();

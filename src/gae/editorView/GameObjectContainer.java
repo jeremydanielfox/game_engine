@@ -1,7 +1,10 @@
 package gae.editorView;
 
+import engine.gameobject.PointSimple;
+import gae.gridView.ContainerWrapper;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -10,7 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 
-public class GameObjectContainer extends VBox {
+public class GameObjectContainer extends VBox implements ContainerWrapper {
     private double width;
     private String[] settable = { "Weapon", "Health", "Mover" };
     private List<DragIntoRectangle> rectangleList;
@@ -48,5 +51,29 @@ public class GameObjectContainer extends VBox {
 
     public List<DragIntoRectangle> getRectangles () {
         return rectangleList;
+    }
+
+    /**
+     * Important method that checks if the object's coordinate is on the grid
+     */
+    @Override
+    public boolean checkBounds (double x, double y) {
+        Point2D point = this.screenToLocal(x, y);
+        System.out.println("X IS : " + point.getX());
+        System.out.println("Y IS : " + y);
+        if (point.getX() < 0 || point.getX() > getWidth() || y < 0 ||
+                y > getHeight()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Important method that converts other coordinate systems to that relative to the grid
+     */
+    @Override
+    public PointSimple convertCoordinates (double x, double y) {
+        Point2D point = this.screenToLocal(x, y);
+        return new PointSimple(point.getX(), y);
     }
 }

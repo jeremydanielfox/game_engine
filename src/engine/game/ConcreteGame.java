@@ -15,11 +15,21 @@ import engine.shop.ShopModel;
 @Settable
 public class ConcreteGame implements Game {
 
+    private static final String DEFAULT_NAME = "GameName";
+    private static final String DEFAULT_AUTHOR = "Sierra";
+    private static final String DEFAULT_TYPE = "Type";
+    private static final String DEFAULT_DESCRIPTION = "This is a fun game.";
+    private static final String DEFAULT_INSTRUCTIONS = "Have fun!";
+
     private Player myPlayer;
     private LevelBoard myLevelBoard;
     private ShopModel myShop;
     private List<ButtonWrapper> myButtons;
     private String myGameName;
+    private String myAuthor;
+    private String myType;
+    private String myDescription;
+    private String myInstructions;
 
     public ConcreteGame () {
         // initialize(new Player(), new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
@@ -40,10 +50,55 @@ public class ConcreteGame implements Game {
         myPlayer = player;
         myLevelBoard = level;
         myButtons = buttons;
-        // TODO make this part of constructor
-        myGameName = "GameName";
+        myGameName = DEFAULT_NAME;
+        myAuthor = DEFAULT_AUTHOR;
+        myType = DEFAULT_TYPE;
+        myDescription = DEFAULT_DESCRIPTION;
+        myInstructions = DEFAULT_INSTRUCTIONS;
     }
 
+    @Settable
+    public void setName(String name){
+        myGameName = name;
+    }
+    
+    @Settable
+    public void setAuthor(String author){
+        myAuthor = author;
+    }
+    
+    
+    public String getAuthor(){
+        return myAuthor;
+    }
+    
+    @Settable
+    public void setDescription(String description){
+        myDescription = description;
+    }
+    
+    public String getDescription(){
+        return myDescription;
+    }
+    
+    @Settable
+    public void setType(String type){
+        myType = type;
+    }
+    
+    public String getType(){
+        return myType;
+    }
+    
+    @Settable
+    public void setInstructions(String instruct){
+        myInstructions = instruct;
+    }
+    
+    public String getInstructions(){
+        return myInstructions;
+    }
+    
     @Override
     public void update () {
         myLevelBoard.update();

@@ -11,36 +11,19 @@ import javafx.scene.media.Media;
 
 public class MusicSimple implements Music {
 
-    public MusicSimple() {
-        
+    private Media music;
+    
+    public MusicSimple(Media m) {
+        music = m;
+    }
+    
+    @Override
+    public Media getMusic () {
+        return music;
     }
 
     @Override
     public void replace (Media m) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void mute () {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void restart () {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void play () {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void pause () {
         // TODO Auto-generated method stub
         
     }

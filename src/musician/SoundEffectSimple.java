@@ -1,5 +1,7 @@
 package musician;
 
+import engine.interactions.Interaction;
+import javafx.scene.Node;
 import javafx.scene.media.Media;
 
 /**
@@ -11,37 +13,26 @@ import javafx.scene.media.Media;
  */
 public class SoundEffectSimple implements Music {
 
-    public SoundEffectSimple () {
-
+    private Node actor, acted;
+    private Interaction action;
+    private Media sound;
+    
+    
+    public SoundEffectSimple (Node one, Interaction i, Node two, Media m) {
+        actor = one;
+        acted = two;
+        action = i;
+        sound = m;
     }
 
+    @Override
+    public Media getMusic () {
+        return sound;
+    }
+    
     @Override
     public void replace (Media m) {
         // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mute () {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void restart () {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void play () {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void pause () {
-        // TODO Auto-generated method stub
-
+        
     }
 }

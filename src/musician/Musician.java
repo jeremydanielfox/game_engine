@@ -34,36 +34,29 @@ public interface Musician {
     /**
      * Restarts the music or sounds from the beginning
      */
-    void restartMusic ();
+    void restartMusic (Object o);
 
     /**
      * Clears all sounds a certain node possesses
      * 
      * @param n
      */
-    void clearSounds (Node n);
+    void clearMusic (Object o);
 
     /**
-     * Clears the song in a scene
+     * Mutes the musician
      * 
      * @param s
      */
-    void clearBackgroundMusic (Scene s);
-
-    /**
-     * Mutes the entire scene and all sounds within
-     * 
-     * @param s
-     */
-    void mute (Scene s);
+    void mute ();
     
     /**
-     * plays media file
+     * plays media file associated with object
      */
-    void playAudio();
+    void playAudio(Object o);
     
     /**
-     * pauses media file
+     * pauses media file associated with object
      */
-    void pauseAudio();
+    void pauseAudio(Object o);
 }

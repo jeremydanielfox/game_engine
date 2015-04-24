@@ -30,10 +30,8 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
     private Rectangle rect;
     private List<Node> nodesList;
     private Scene scene;
-    private ObjectComponentEditor componentEditor;
 
-    public DragIntoRectangle (double width, String label, Scene scene, ObjectComponentEditor editor) {
-        componentEditor = editor;
+    public DragIntoRectangle (double width, String label, Scene scene) {
         this.width = width;
         this.scene = scene;
         type = label;
@@ -94,18 +92,17 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
     }
 
     private void setUpEditorOpener () {
-        new PopUpEditorView(componentEditor);
-//        try {
-//            Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
-//            Object instance = className.getConstructor().newInstance();
-//            Method setUpList = className.getMethod("initialize");
-//            setUpList.invoke(instance);
-//        }
-//        catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
-//                | IllegalAccessException | IllegalArgumentException
-//                | InvocationTargetException e) {
-//
-//        }
+        try {
+            Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
+            Object instance = className.getConstructor().newInstance();
+            Method setUpList = className.getMethod("initialize");
+            setUpList.invoke(instance);
+        }
+        catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
+                | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+
+        }
     }
 
     private void setInvisible () {

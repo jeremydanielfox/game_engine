@@ -41,7 +41,7 @@ public class GameObjectContainer extends VBox {
         setSpacing(width / 10);
         System.out.println("total width is : " + width);
         for (int i = 1; i <= 3; i++) {
-            DragIntoRectangle rect = new DragIntoRectangle(width, settable[i - 1], scene, componentEditors.get(i-1));
+            DragIntoRectangle rect = new DragIntoRectangle(width, settable[i - 1], scene);
             rect.setTranslateX((3 * i - 2) * width / 10);
             hbox.getChildren().add(rect);
             rectangleList.add(rect);

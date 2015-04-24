@@ -1,5 +1,6 @@
 package gae.editor;
 
+import gae.editorView.PopUpEditorView;
 import gae.gameView.GenericObjectsPane;
 import java.util.function.Consumer;
 import javafx.event.EventHandler;
@@ -48,7 +49,7 @@ public class ObjectComponentEditor extends ComponentEditor {
     public EventHandler<? super MouseEvent> popNewEditor() {
         return e -> {
             Consumer<Object> setObjectConsumer = o -> setObject(o);
-            GenericObjectsPane.newCustomObject(myObject.getClass(), myObject.getClass().getSimpleName(), setObjectConsumer);
+            new PopUpEditorView(setObjectConsumer, clazz);
         };
     }
 

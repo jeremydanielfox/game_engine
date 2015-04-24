@@ -30,6 +30,7 @@ public class MusicianSimple implements Musician {
 
     public MusicianSimple () {
         myMusic = new HashMap<>();
+        myMusician = new MediaPlayer(null);
     }
 
     /**
@@ -73,7 +74,7 @@ public class MusicianSimple implements Musician {
     @Override
     public void playAudio (Object o) {
         Media music = myMusic.get(o).getMusic();
-        myMusician = new MediaPlayer(music);
+        myMusician.getMedia() = music;
         myMusician.play();
     }
 

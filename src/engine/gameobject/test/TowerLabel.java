@@ -1,6 +1,5 @@
 package engine.gameobject.test;
 
-import engine.gameobject.labels.LabelConcrete;
 import engine.gameobject.labels.SimpleLabel;
 
 

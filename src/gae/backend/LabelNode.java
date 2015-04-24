@@ -3,9 +3,10 @@ package gae.backend;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * LabelNode represents a single node in the LabelTree
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -22,7 +23,7 @@ public class LabelNode {
 
     /**
      * allows user to reset the label
-     * 
+     *
      * @param change
      */
     public void setLabel (String change) {
@@ -31,7 +32,7 @@ public class LabelNode {
 
     /**
      * allows user to add a new child to TreeNode
-     * 
+     *
      * @param n
      */
     public void addChild (LabelNode n) {
@@ -41,7 +42,7 @@ public class LabelNode {
 
     /**
      * sets the parent node. This is called on the child node whenever addChild() is performed.
-     * 
+     *
      * @param n
      */
     public void setParent (LabelNode n) {
@@ -51,7 +52,7 @@ public class LabelNode {
     /**
      * The three methods below are standard get methods to pull information when traversing through
      * a LabelTree
-     * 
+     *
      * @return
      */
 

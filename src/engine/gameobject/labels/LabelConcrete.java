@@ -2,8 +2,6 @@ package engine.gameobject.labels;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import engine.fieldsetting.Settable;
 
 
@@ -22,25 +20,27 @@ public abstract class LabelConcrete implements Label {
         setSuperLabel(superLabel);
     }
 
-    public Label clone(){
+    @Override
+    public Label clone () {
         return null;
     }
+
     @Override
     public String getName () {
         return myName;
     }
 
-    //@Override
+    // @Override
     public boolean hasSubLabel () {
         return mySubLabels.size() > 0;
     }
 
-    //@Override
+    // @Override
     public Collection<Label> getSubLabels () {
         return Collections.unmodifiableCollection(mySubLabels);
     }
 
-    //@Override
+    // @Override
     public boolean hasSuperLabel () {
         return mySuperLabel != null;
     }
@@ -50,25 +50,27 @@ public abstract class LabelConcrete implements Label {
         return mySuperLabel;
     }
 
-    //@Override
+    // @Override
     public void addSubLabel (Label label) {
         mySubLabels.add(label);
 
     }
 
     /*
-    private void setSuperLabel (Label superLabel) {
-        if (mySuperLabel.getSubLabels().contains(this))
-           mySuperLabel.removeSubLabel(this);
-        mySuperLabel = superLabel;
-        superLabel.addSubLabel(this);
-    }*/
+     * private void setSuperLabel (Label superLabel) {
+     * if (mySuperLabel.getSubLabels().contains(this))
+     * mySuperLabel.removeSubLabel(this);
+     * mySuperLabel = superLabel;
+     * superLabel.addSubLabel(this);
+     * }
+     */
 
-    //@Override
+    // @Override
     public void removeSubLabel (Label label) {
         mySubLabels.remove(label);
     }
 
+    @Override
     @Settable(primary = true)
     public void setName (String name) {
         myName = name;
@@ -76,13 +78,15 @@ public abstract class LabelConcrete implements Label {
 
     /**
      * Recursively returns all sublabels for any given label
-     *//*
-    public Collection<Label> getAllSubLabels (Label label) {
-        if (label.hasSubLabel() == false)
-            return new HashSet<>();
-        Set<Label> returnSet = new HashSet<>();
-        label.getSubLabels().forEach(sl -> returnSet.addAll(getAllSubLabels(sl)));
-        return returnSet;
-    }*/
+     */
+    /*
+     * public Collection<Label> getAllSubLabels (Label label) {
+     * if (label.hasSubLabel() == false)
+     * return new HashSet<>();
+     * Set<Label> returnSet = new HashSet<>();
+     * label.getSubLabels().forEach(sl -> returnSet.addAll(getAllSubLabels(sl)));
+     * return returnSet;
+     * }
+     */
 
 }

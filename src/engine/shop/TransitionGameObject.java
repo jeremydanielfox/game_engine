@@ -6,13 +6,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.gameobject.Graphic;
-import engine.gameobject.Graphical;
 
 
 /**
  * A GameObject that has yet to neither be placed in the GameWorld nor purchased from the shop. It
  * contains the same graphic as the prototype GameObject it will instantiate if placed in the World.
- * 
+ *
  * @author Nathan Prabhu and Tom Puglisi
  *
  */
@@ -21,7 +20,7 @@ public class TransitionGameObject {
 
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
     private static final Color WHITE_COLOR = Color.rgb(255, 255, 255, 0.5); // half-transparent
-                                                                            // white
+    // white
 
     private Graphic graphic;
     private String name;
@@ -32,7 +31,7 @@ public class TransitionGameObject {
     private transient StackPane pane;
 
     public TransitionGameObject (String name, Graphic myGraphic, double range) {
-        this.graphic = myGraphic;
+        graphic = myGraphic;
         this.name = name;
         this.range = range;
         initialize();

@@ -2,7 +2,6 @@ package gae.editorView;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -19,12 +18,12 @@ public class GameObjectContainer extends VBox {
 
     public GameObjectContainer (double width, double height, Scene scene) {
         rectangleList = new ArrayList<>();
-        this.setPrefSize(width, height);
+        setPrefSize(width, height);
         this.width = width;
         this.scene = scene;
-        this.setSpacing(100);
-        this.getChildren().add(getLabel());
-        this.getChildren().add(addRectangles());
+        setSpacing(100);
+        getChildren().add(getLabel());
+        getChildren().add(addRectangles());
     }
 
     private Label getLabel () {
@@ -36,7 +35,7 @@ public class GameObjectContainer extends VBox {
 
     private HBox addRectangles () {
         HBox hbox = new HBox();
-        this.setSpacing(width / 10);
+        setSpacing(width / 10);
         System.out.println("total width is : " + width);
         for (int i = 1; i <= 3; i++) {
             DragIntoRectangle rect = new DragIntoRectangle(width, settable[i - 1], scene);

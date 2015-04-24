@@ -12,7 +12,7 @@ import engine.shop.wallet.Wallet;
 /**
  * This class represents a current player of the game, storing player specific information
  * such as lives left/health, score, and currency that can be used in the store.
- * 
+ *
  * @author Sierra Smith, Cosette Goldstein
  *
  */
@@ -47,7 +47,7 @@ public class Player extends Observable {
 
     /**
      * Adds the specifies amount to the player's score unit.
-     * 
+     *
      * @param toAdd
      */
     public void changeScore (int toAdd) {
@@ -58,7 +58,7 @@ public class Player extends Observable {
 
     /**
      * Adds the specified amount to the player's health unit.
-     * 
+     *
      * @param change
      */
     public void changeHealth (int change) {
@@ -85,7 +85,7 @@ public class Player extends Observable {
 
     /**
      * Returns a list of items from the player that implement the displayable interface.
-     * 
+     *
      * @return
      */
     public List<Displayable> getDisplayables () {

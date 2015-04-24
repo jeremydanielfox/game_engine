@@ -1,11 +1,6 @@
 package gae.openingView;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableStringValue;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -16,10 +11,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+
 /**
  * DataForm is the left-hand side of the opening view. It holds all the forms the author must fill
  * out as well as the title header and author button
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -86,7 +82,7 @@ public class DataForm implements UIObject {
     /**
      * the following get methods are all public methods for the OpeningView to receive and pull the
      * user inputed text
-     * 
+     *
      * @return
      */
     String getTitle () {
@@ -111,22 +107,27 @@ public class DataForm implements UIObject {
 
     /**
      * checks whether all the forms are empty or not, is a package friendly method
+     * 
      * @return
      */
     boolean filledFields () {
-        if (getTitle().isEmpty() || getAuthor().isEmpty() || getGameType().equals(OpeningView.DEFAULT_TYPE_MSG) ||
-               getDescription().isEmpty() || getInstructions().isEmpty())
+        if (getTitle().isEmpty() || getAuthor().isEmpty() ||
+            getGameType().equals(OpeningView.DEFAULT_TYPE_MSG) ||
+            getDescription().isEmpty() || getInstructions().isEmpty()) {
             return false;
-        else if (!getTitle().isEmpty() || !getAuthor().isEmpty() || !getGameType().equals(OpeningView.DEFAULT_TYPE_MSG) ||
-                !getDescription().isEmpty() || !getInstructions().isEmpty())
+        }
+        else if (!getTitle().isEmpty() || !getAuthor().isEmpty() ||
+                 !getGameType().equals(OpeningView.DEFAULT_TYPE_MSG) ||
+                 !getDescription().isEmpty() || !getInstructions().isEmpty()) {
             return true;
-        
+        }
+
         return false;
     }
 
     /**
      * creates one single input field
-     * 
+     *
      * @param input
      * @param fieldType
      * @return
@@ -143,7 +144,7 @@ public class DataForm implements UIObject {
     /**
      * creates button that will take the user from the opening view to the actual authoring
      * environment
-     * 
+     *
      * @return
      */
     private HBox createButtonBox () {

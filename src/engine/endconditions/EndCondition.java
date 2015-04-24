@@ -7,7 +7,7 @@ import engine.observable.Observer;
 
 
 /**
- * 
+ *
  * @author Jeremy
  *
  */
@@ -21,8 +21,9 @@ public class EndCondition implements Observable {
 
     @Override
     public void removeObserver (Observer observer) {
-        if (myObservers.contains(observer))
+        if (myObservers.contains(observer)) {
             myObservers.remove(observer);
+        }
     }
 
     @Override
@@ -32,7 +33,7 @@ public class EndCondition implements Observable {
     }
 
     public void satisfy () {
-        this.notifyObservers();
+        notifyObservers();
     }
 
 }

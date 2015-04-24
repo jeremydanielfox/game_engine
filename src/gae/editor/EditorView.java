@@ -1,13 +1,12 @@
 package gae.editor;
 
+import exception.NonNumberException;
+import gae.backend.Placeable;
+import gae.backend.ResourceBundleUtil;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import exception.NonNumberException;
-import gae.backend.Editable;
-import gae.backend.ResourceBundleUtil;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,11 +17,11 @@ import javafx.stage.Stage;
 
 public class EditorView {
     // This property and the Library's property would be bound
-    private Editable editable;
+    private Placeable editable;
     private HashMap<String, String[]> fieldMap;
     private Stage s;
 
-    public EditorView (Editable editable, Stage s) {
+    public EditorView (Placeable editable, Stage s) {
         this.editable = editable;
         fieldMap = ResourceBundleUtil.useResourceBundle();
         this.s = s;
@@ -68,7 +67,7 @@ public class EditorView {
         Class<?> editableClass = editable.getClass();
         List<Field> list = new ArrayList<>();
         for (String fieldName : fieldMap.get(editable.getClass()
-                .getSimpleName())) {
+                                             .getSimpleName())) {
             try {
                 Field field = editableClass.getDeclaredField(fieldName);
                 field.setAccessible(true);
@@ -88,7 +87,7 @@ public class EditorView {
     private void printFields () {
         Class<?> editableClass = editable.getClass();
         for (String fieldName : fieldMap.get(editable.getClass()
-                .getSimpleName())) {
+                                             .getSimpleName())) {
             try {
                 Field field = editableClass.getDeclaredField(fieldName);
                 field.setAccessible(true);

@@ -14,7 +14,7 @@ import gameworld.GameWorld;
  * This class is in charge of maintaining everything that occurs within one level, such as
  * the list of events/waves to occur (Storyboard object), as well as the background image
  * and the GameWorld for the level.
- * 
+ *
  * @author Sierra Smith and Cosette Goldstein
  *
  */
@@ -22,7 +22,7 @@ import gameworld.GameWorld;
 public class ConcreteLevel implements Level {
 
     private static final int EVENT_GOAL_INDEX = 0;
-    
+
     // note to self: we need to save all of the images out to one directory
     // we should identify images by name and have a constant image path that we pin on before
     // Retrieving image
@@ -59,11 +59,13 @@ public class ConcreteLevel implements Level {
         myWinningGoals.add(EVENT_GOAL_INDEX, new EventsCompleteGoal(myStoryBoard));
     }
 
+    @Override
     @Settable
     public void addTimer (Timer t) {
         myTimer = t;
     }
 
+    @Override
     public String getLevelBackground () {
         return myImagePath;
     }
@@ -127,7 +129,7 @@ public class ConcreteLevel implements Level {
     @Settable
     public void setStoryBoard (StoryBoard storyBoard) {
         myStoryBoard = storyBoard;
-        ((EventsCompleteGoal)myWinningGoals.get(EVENT_GOAL_INDEX)).setStoryBoard(storyBoard);
+        ((EventsCompleteGoal) myWinningGoals.get(EVENT_GOAL_INDEX)).setStoryBoard(storyBoard);
     }
 
     /**

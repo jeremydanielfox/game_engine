@@ -20,6 +20,7 @@ import engine.interactions.Interaction;
 public class MusicianSimple implements Musician {
 
     private static final int MUTED = 0;
+    
     /*
      * Map that keeps track of the music associated with a specific Object
      */
@@ -29,8 +30,6 @@ public class MusicianSimple implements Musician {
 
     public MusicianSimple () {
         myMusic = new HashMap<>();
-        myMusician = new MediaPlayer(null);
-        myMusician.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
     /**
@@ -47,7 +46,7 @@ public class MusicianSimple implements Musician {
     @Override
     public void addSoundEffect (Node one, Interaction i, Node two, Media m) {   
         SoundEffectSimple ses = new SoundEffectSimple(one, i, two, m);
-        
+        myMusic.put(i, ses);
     }
 
     @Override
@@ -74,6 +73,7 @@ public class MusicianSimple implements Musician {
     @Override
     public void playAudio (Object o) {
         Media music = myMusic.get(o).getMusic();
+        myMusician = new MediaPlayer(music);
         myMusician.play();
     }
 

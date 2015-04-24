@@ -24,7 +24,6 @@ public class MusicSimple implements Music {
 
     @Override
     public void replace (Media m) {
-        // TODO Auto-generated method stub
-        
+        music = m;
     }
 }

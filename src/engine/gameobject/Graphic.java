@@ -3,6 +3,8 @@ package engine.gameobject;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import View.ViewUtil;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.fieldsetting.Settable;
@@ -40,17 +42,22 @@ public class Graphic {
         myImageName = name;
     }
 
-    public Graphic clone(){
+    public Graphic clone () {
         Graphic clone = new Graphic(myHeight, myWidth, myImageName);
         clone.initializeImageView();
         return clone;
     }
+
     private void initializeImageView () {
         myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
         // for TEST purpose:
         if (myPoint == null) {
             myPoint = new Point2D(0, 0);
         }
+//        myImageView.setOnMouseEntered(o -> System.out.println("boom"));
+//        myImageView.setOnMouseClicked(e -> System.out.println("clicked"));
+//        myImageView.setFocusTraversable(true);
+        
         myImageView.setX(myPoint.getX());
         myImageView.setY(myPoint.getY());
         myImageView.setFitHeight(myHeight);
@@ -75,7 +82,7 @@ public class Graphic {
      */
     public void setPoint (PointSimple point) {
         myPoint =
-                new Point2D(point.getX()  + ViewUtil.getCenterOffsetX(myImageView),
+                new Point2D(point.getX() + ViewUtil.getCenterOffsetX(myImageView),
                             point.getY() + ViewUtil.getCenterOffsetY(myImageView));
         getImageView().setX(myPoint.getX());
         getImageView().setY(myPoint.getY());
@@ -124,4 +131,6 @@ public class Graphic {
     public String getImagePath () {
         return DEFAULT_IMAGE_PATH_PREFIX + myImageName;
     }
+
+   
 }

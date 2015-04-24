@@ -6,24 +6,25 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.animation.Animation;
+import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.Animation.Status;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import engine.game.Game;
-import engine.goals.*;
 import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
-import engine.gameobject.Graphic;
-import engine.shop.ShopModel;
+import engine.goals.CanDecSpeedGoal;
+import engine.goals.CanIncSpeedGoal;
+import engine.goals.IsPlayingGoal;
+import engine.goals.NotPlayingGoal;
 
 
 public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Playable {
@@ -62,6 +63,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myGameWorldPane.setMaxWidth(myDisplayHeight * GAME_WIDTH_TO_HEIGHT);
         myPane.setCenter(myGameWorldPane);
         initializeGameWorld();
+        vbox.setFocusTraversable(false);
         return myPane;
     }
 
@@ -247,6 +249,15 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     @Override
     public boolean isPlaying () {
         return myAnimation.getStatus().equals(Status.RUNNING);
+    }
+    private void handleKeyInput (KeyEvent e) {
+        KeyCode keyCode = e.getCode();
+        if (keyCode == KeyCode.A)
+            System.out.println("right");
+
+        else if (keyCode == KeyCode.LEFT)
+            System.out.println("left");
+
     }
 
 }

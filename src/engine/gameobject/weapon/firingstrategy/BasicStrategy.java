@@ -2,6 +2,7 @@ package engine.gameobject.weapon.firingstrategy;
 
 import engine.gameobject.GameObject;
 import engine.gameobject.Graphic;
+import engine.gameobject.MoverNull;
 import engine.gameobject.MoverPoint;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.BasicWeapon;

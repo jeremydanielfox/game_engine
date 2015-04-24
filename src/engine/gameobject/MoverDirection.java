@@ -33,6 +33,7 @@ public class MoverDirection extends MoverPoint{
         else {
             newPoint = PointSimple.pointOnLine(current, getPoint(), -currentSpeed());
         }
+        //Accounting for the exact movement that puts the mover past the reference point
         if (currentSpeed() > PointSimple.distance(current, getPoint()) && !pastPoint) {
             pastPoint = true;
         }

@@ -32,8 +32,7 @@ public class MoverPath extends BasicMover {
 	  */
 	@Override
 	public PointSimple move(PointSimple current) throws EndOfPathException{
-	        if (frozen != true)
-	            myDistance += currentSpeed();
+	        myDistance += currentSpeed();
 	        return myPath.getNextLocation(myDistance, currentSpeed(), current);
 	}
 	
@@ -47,8 +46,14 @@ public class MoverPath extends BasicMover {
 	    myDistance = distance;
 	}
 	
+	/**
+	 * This sets the mover such that it will pick up on the path the spawner spawned this at. 
+	 */
+	@Override
 	public Mover clone(){
-	    return new MoverPath(myPath, inherentSpeed);
+	    MoverPath clone = new MoverPath(myPath, inherentSpeed);
+	    clone.myDistance = myDistance;
+	    return clone;
 	}
 	
 }

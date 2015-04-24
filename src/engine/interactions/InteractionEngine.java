@@ -12,6 +12,12 @@ import gameworld.GameWorld;
  *
  */
 public interface InteractionEngine {
+    
+    /**
+     * Gets the first object to act upon the second object
+     * @param first The acting object
+     * @param second What the first object is acting upon 
+     */
     public void interact (GameObject first, GameObject second);
 
     public void put (Label first,

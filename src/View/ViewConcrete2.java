@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import voogasalad.util.highscore.HighScoreController;
+import voogasalad.util.highscore.HighScoreException;
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;

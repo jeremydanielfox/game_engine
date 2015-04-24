@@ -97,7 +97,7 @@ public class ShopModelSimple implements ShopModel {
             currentPlayer.getWallet().withdraw(getPrice(name));
             // myGameWorld.addObject(prototypeMap.get(name).clone());
             try {
-                GameObject tower = new TestTower(100, 100, 100);
+                GameObject tower = new TestTower(1, 100, 100);
                 //TODO: add listener of some sort to access ShopView?
                 myGameWorld.addObject(tower, location);
                 return true;

@@ -3,7 +3,7 @@ package engine.gameobject;
 import engine.fieldsetting.Settable;
 import engine.pathfinding.EndOfPathException;
 
-
+//TODO: These instance variables should be private(?)
 @Settable
 public abstract class BasicMover implements Mover {
     double inherentSpeed;

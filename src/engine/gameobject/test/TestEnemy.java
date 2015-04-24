@@ -13,7 +13,7 @@ public class TestEnemy extends GameObjectSimple {
 //        setPoint();
         setHealth(new HealthSimple(3));
         setMover(new MoverNull());
-        setWeapon(new TestWeapon(4));
+        //setWeapon(new TestWeapon(4));
         getTag().setName("TestTower");
         getTag().setDescription("Just a test tower; nothing special here...");
         getTag().setShopGraphic(new Graphic(40, 40, "Bloons_TackShooterIcon.png"));

@@ -65,7 +65,6 @@ public class AbstractWorld implements GameWorld{
 
     @Override
     public void updateGameObjects () {
-    	
          ArrayList<GameObject> currentObjects = new ArrayList<GameObject>(myObjects);
          for (GameObject object: currentObjects){
              object.update(this);

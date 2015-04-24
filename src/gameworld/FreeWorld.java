@@ -2,6 +2,7 @@ package gameworld;
 
 import java.util.List;
 
+import View.ViewConcrete2;
 import voogasalad.util.pathsearch.graph.GridCell;
 import voogasalad.util.pathsearch.pathalgorithms.NoPathExistsException;
 import javafx.scene.Node;
@@ -28,7 +29,7 @@ public class FreeWorld extends AbstractWorld {
 	public FreeWorld (int numRows, int numCols) {
 		// myGrid = (List<GameObject>[][]) new LinkedList<?>[numRows][numCols];
 		myGrid = new GameObject[numRows][numCols];
-		myTransform = new CoordinateTransformer(numRows, numCols, 600, 600); // TODO fix window 1000
+		myTransform = new CoordinateTransformer(numRows, numCols, ViewConcrete2.getWorldWidth(), ViewConcrete2.getWorldHeight()); // TODO fix window 1000
 		// 1000 measurements
 		myPath = new PathFree(myTransform, myGrid);
 	}

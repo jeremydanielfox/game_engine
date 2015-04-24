@@ -13,7 +13,8 @@ import engine.fieldsetting.Settable;
 /**
  * This class encapsulates the node for each game object.
  * 
- * @author Sierra Smith and Cosette Goldstein
+ * @author Sierra Smith
+ * @author Cosette Goldstein
  *
  */
 @Settable
@@ -29,17 +30,24 @@ public class Graphic {
     private Point2D myPoint;
     @XStreamOmitField
     private transient ImageView myImageView;
+    private Rotator myRotator;
 
     public Graphic () {
         myImageName = DEFAULT_IMAGE_NAME;
         myPoint = new Point2D(0, 0);
         myImageView = new ImageView();
+        myRotator = new RotateToPoint();
+        // TODO don't call this here? Check with Jeremy. How is this initialized?
+        // initializeImageView();
     }
 
     public Graphic (double height, double width, String name) {
         myHeight = height;
         myWidth = width;
         myImageName = name;
+        myRotator = new RotateToPoint();
+        myPoint = new Point2D(0, 0);
+        // initializeImageView();
     }
 
     public Graphic clone () {
@@ -54,10 +62,10 @@ public class Graphic {
         if (myPoint == null) {
             myPoint = new Point2D(0, 0);
         }
-//        myImageView.setOnMouseEntered(o -> System.out.println("boom"));
-//        myImageView.setOnMouseClicked(e -> System.out.println("clicked"));
-//        myImageView.setFocusTraversable(true);
-        
+        // myImageView.setOnMouseEntered(o -> System.out.println("boom"));
+        // myImageView.setOnMouseClicked(e -> System.out.println("clicked"));
+        // myImageView.setFocusTraversable(true);
+
         myImageView.setX(myPoint.getX());
         myImageView.setY(myPoint.getY());
         myImageView.setFitHeight(myHeight);
@@ -81,9 +89,11 @@ public class Graphic {
      * @param point
      */
     public void setPoint (PointSimple point) {
+        Point2D temp = new Point2D(point.getX() + ViewUtil.getCenterOffsetX(myImageView),
+                                   point.getY() + ViewUtil.getCenterOffsetY(myImageView));
+        rotate(new PointSimple(temp));
         myPoint =
-                new Point2D(point.getX() + ViewUtil.getCenterOffsetX(myImageView),
-                            point.getY() + ViewUtil.getCenterOffsetY(myImageView));
+                temp;
         getImageView().setX(myPoint.getX());
         getImageView().setY(myPoint.getY());
     }
@@ -107,10 +117,8 @@ public class Graphic {
     /**
      * This method will be called both before and after this object is written to xstream. Thus,
      * At some point, the ImageView will be null because this object will have been written out of
-     * xstream,
-     * and the imageview will have been omitted. At this point, the method re-initializes the
-     * imageview
-     * using the stored criteria.
+     * xstream, and the imageview will have been omitted. At this point, the method re-initializes
+     * the imageview using the stored criteria.
      * 
      * @return
      */
@@ -132,5 +140,13 @@ public class Graphic {
         return DEFAULT_IMAGE_PATH_PREFIX + myImageName;
     }
 
-   
+    /**
+     * Rotates the node for this graphic according to a point and its rotator.
+     * 
+     * @param point
+     */
+    public void rotate (PointSimple point) {
+        myRotator.rotate(myImageView, new PointSimple(myPoint), point);
+    }
+
 }

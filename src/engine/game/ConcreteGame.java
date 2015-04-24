@@ -19,6 +19,7 @@ public class ConcreteGame implements Game {
     private LevelBoard myLevelBoard;
     private ShopModel myShop;
     private List<ButtonWrapper> myButtons;
+    private String myGameName;
 
     public ConcreteGame () {
         // initialize(new Player(), new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
@@ -39,15 +40,13 @@ public class ConcreteGame implements Game {
         myPlayer = player;
         myLevelBoard = level;
         myButtons = buttons;
+        // TODO make this part of constructor
+        myGameName = "GameName";
     }
 
     @Override
     public void update () {
         myLevelBoard.update();
-    }
-
-    public void init () {
-
     }
 
     public LevelBoard getLevelBoard () {
@@ -86,6 +85,11 @@ public class ConcreteGame implements Game {
     @Override
     public List<ButtonWrapper> getButtons () {
         return myButtons;
+    }
+
+    @Override
+    public String getGameName () {
+        return myGameName;
     }
 
 }

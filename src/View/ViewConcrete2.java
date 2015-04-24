@@ -30,9 +30,9 @@ import engine.goals.NotPlayingGoal;
 public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Playable {
 
     public static final double GAME_WIDTH_TO_HEIGHT = 1;
-    public static final int MAX_FRAME_RATE = 200;
-    public static final int MIN_FRAME_RATE = 500;
-    //TODO need to update this to be a function of min frame rate 
+    public static final int MAX_FRAME_RATE = 500;
+    public static final int MIN_FRAME_RATE = 1000;
+    // TODO need to update this to be a function of min frame rate
     public static final int DEFAULT_FRAMES_SECOND = 60;
 
     private List<Node> hack = new ArrayList<Node>();
@@ -47,7 +47,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private double myDisplayWidth;
     private double myDisplayHeight;
     private HUD myHeadsUp;
-    
+
     public ViewConcrete2 (Game game, double width, double height) {
         myGame = game;
         myLevelBoard = myGame.getLevelBoard();
@@ -109,6 +109,8 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private KeyFrame makeKeyFrame (int frameRate) {
         return new KeyFrame(Duration.millis(myRate / frameRate),
                             e -> executeFrameActions());
+        // return new KeyFrame(Duration.millis(myRate / frameRate),
+        // e -> executeFrameActions());
     }
 
     public void toggleRate () {
@@ -157,15 +159,15 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
 
     }
 
-    private void addInitialObjects () {//This is actually a rendering method now.
+    private void addInitialObjects () {// This is actually a rendering method now.
         Collection<GameObject> gameObjects = myGame.getLevelBoard().getGameWorld().getGameObjects();
-        for (Node n: hack){
+        for (Node n : hack) {
             myGameWorldPane.getChildren().remove(n);
         }
         hack.clear();
         for (GameObject o : gameObjects) {
-                    myGameWorldPane.getChildren().add(o.getGraphic().getNode());
-                    hack.add(o.getGraphic().getNode());
+            myGameWorldPane.getChildren().add(o.getGraphic().getNode());
+            hack.add(o.getGraphic().getNode());
         }
     }
 
@@ -175,6 +177,18 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
             pause();
             if (myLevelBoard.gameOver()) {
                 // note: display game over screen
+                HighScoreController scores = HighScoreController.getController();
+                // TODO eliminate magic values
+                try {
+                    scores.setValue(myGame.getGameName(), 0, "Score", myGame.getPlayer().getScore());
+                    scores.saveInstanceScoreData(myGame.getGameName(), 0, myGame.getPlayer()
+                            .getName());
+                }
+                catch (HighScoreException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    System.out.println("Issue saving when game ends");
+                }
                 PopUpScreen gameOver = new PopUpScreen();
                 gameOver.makeScreen("GAME OVER", "Play Again");
                 // ideally gamePlayer/observers should be notified here
@@ -250,6 +264,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     public boolean isPlaying () {
         return myAnimation.getStatus().equals(Status.RUNNING);
     }
+
     private void handleKeyInput (KeyEvent e) {
         KeyCode keyCode = e.getCode();
         if (keyCode == KeyCode.A)

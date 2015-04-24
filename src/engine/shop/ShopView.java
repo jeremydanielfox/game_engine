@@ -28,10 +28,10 @@ import engine.shop.ShopModelSimple.ItemInfo;
 
 /**
  * View of the shop. Contains a node that can be directly added to the main View.
- * 
+ *
  * NOTE: layout of the shop is being hard-coded now, to resemble bloons. Future refactoring will
  * factor out the separate nodes in the container to allow for more customization.
- * 
+ *
  * @author Nathan Prabhu
  *
  */
@@ -131,7 +131,7 @@ public class ShopView extends Parent {
 
     /**
      * To be called by View when gameobject is selected during game.
-     * 
+     *
      * @param gameObject selected
      */
     public void displayUpgrades (GameObject gameObject) {
@@ -185,13 +185,13 @@ public class ShopView extends Parent {
             PointSimple current = new PointSimple(event.getSceneX(), event.getSceneY());
             // EventHandler<MouseEvent> isClicked = new EventHandler(event ->
             // this::displayUpgrades);
-                if (model.purchaseGameObject(transition.getName(), current)) {
-                    ViewUtil.unbindCursor(pane, transNode);
-                    // TODO:
-                    // new TestTower: onClicked - show radius, show available upgrades -- call
-                    // displayUpgrades
+            if (model.purchaseGameObject(transition.getName(), current)) {
+                ViewUtil.unbindCursor(pane, transNode);
+                // TODO:
+                // new TestTower: onClicked - show radius, show available upgrades -- call
+                // displayUpgrades
 
-                }
-            });
+            }
+        });
     }
 }

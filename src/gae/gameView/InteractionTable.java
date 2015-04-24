@@ -1,10 +1,8 @@
 package gae.gameView;
 
 import gae.listView.LibraryData;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,10 +11,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
 /**
  * table that will allow the user to define specific interactions between game objects such as what
  * happens when a tower and enemy collide, etc.
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -52,12 +51,13 @@ public class InteractionTable extends Application {
     /**
      * implements the Singleton design pattern in order to keep the InteractionTable consistent
      * throughout the entire GAE
-     * 
+     *
      * @return
      */
     public static synchronized InteractionTable getInstance () {
-        if (instance == null)
+        if (instance == null) {
             instance = new InteractionTable();
+        }
         return instance;
     }
 

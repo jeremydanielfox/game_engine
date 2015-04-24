@@ -41,7 +41,7 @@ public class ConcreteGame implements Game {
         myLevelBoard = level;
         myButtons = buttons;
         // TODO make this part of constructor
-        myGameName = "Game Name";
+        myGameName = "GameName";
     }
 
     @Override
@@ -49,10 +49,12 @@ public class ConcreteGame implements Game {
         myLevelBoard.update();
     }
 
+    @Override
     public LevelBoard getLevelBoard () {
         return myLevelBoard;
     }
 
+    @Override
     public void addButton (ButtonWrapper button) {
         myButtons.add(button);
     }

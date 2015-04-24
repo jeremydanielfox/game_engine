@@ -54,4 +54,10 @@ public interface Game {
      */
     public Player getPlayer ();
 
+    /**
+     * Returns the string name of the game.
+     * 
+     * @return
+     */
+    public String getGameName ();
 }

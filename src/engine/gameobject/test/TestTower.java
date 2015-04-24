@@ -3,23 +3,24 @@ package engine.gameobject.test;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
-import engine.gameobject.MoverNull;
+import engine.gameobject.MoverUser;
 import engine.gameobject.PointSimple;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.GameObjectTagSimple;
 
-
 public class TestTower extends GameObjectSimple {
-
     private int type;
 
     public TestTower (int type, int xcor, int ycor) {
         super();
         this.type = type;
-        setGraphic(new Graphic(40, 40, "Bloons_TackShooter.png"));
+        Graphic graphic = new Graphic(40, 40, "Bloons_TackShooter.png");
+        setGraphic(graphic);
         setPoint(new PointSimple(xcor, ycor));
         setHealth(new HealthSimple(3));
-        setMover(new MoverNull());
+        MoverUser moveruser = new MoverUser();
+        moveruser.setNode(graphic.getNode());
+        setMover(moveruser);
         setWeapon(new TestWeapon(type));
         GameObjectTag tag =
                 new GameObjectTagSimple("TestTower", "Just a test tower; nothing special here...",
@@ -29,3 +30,4 @@ public class TestTower extends GameObjectSimple {
     }
 
 }
+

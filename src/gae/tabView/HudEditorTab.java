@@ -19,16 +19,16 @@ public class HudEditorTab {
     private void initialize (Image backgroundImage) {
         baseNode = new Tab();
         baseNode.setText("HUD Editor");
-        
+
         hEditor = new HudEditor();
         baseNode.setContent(hEditor.getObject());
         baseNode.setClosable(false);
     }
-    
-    public void setBackgroundImage(Image backgroundImage) {
+
+    public void setBackgroundImage (Image backgroundImage) {
         hEditor.setBackgroundImage(backgroundImage);
     }
-    
+
     public Tab getBaseTabNode () {
         return baseNode;
     }

@@ -2,8 +2,8 @@ package engine.game;
 
 import engine.gameobject.GameObject;
 
+
 public interface Drawer {
 
-	public void draw(GameObject gameObject);
+    public void draw (GameObject gameObject);
 }
-

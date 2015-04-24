@@ -1,10 +1,12 @@
 package gae.editorView;
 
+import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -15,17 +17,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.backend.TempTower;
 import gae.gridView.ContainerWrapper;
+import gae.listView.Authorable;
 import gae.listView.DraggableUtilities;
+import gae.listView.ImageContainer;
 import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
 import gae.openingView.UIObject;
 
 
 public class GameObjectEditorView implements UIObject {
-    private ObservableList<Node> optionList = FXCollections.observableArrayList();
+    private ObservableList<Authorable> optionList = FXCollections.observableArrayList();
     private String[] imagePaths = { "/images/WeaponImage.png", "/images/HealthImage.jpeg",
                                    "/images/PathImage.png" };
     private Group root;
@@ -33,9 +37,10 @@ public class GameObjectEditorView implements UIObject {
     private BorderPane border;
     private static final int TAB_HEIGHT = 160;
     private static final int SIDE_WIDTH = 430;
+    private static final double LIBRARY_EDITOR_PROPORTIONS = 0.75;
     private GameObjectContainer bottom;
     private AnchorPane anchor;
-    private Editable editable;
+    private Placeable editable;
 
     public GameObjectEditorView (Scene scene) {
         root = new Group();
@@ -48,19 +53,18 @@ public class GameObjectEditorView implements UIObject {
 
         border.setRight(setUpList());
         border.setCenter(setUpAnchor());
-
+        LibraryList library = new LibraryList(scene);
+        border.setLeft(library.initialize());
         return border;
     }
 
     private AnchorPane setUpAnchor () {
         double vboxHeight = (Screen.getPrimary().getVisualBounds().getHeight() - TAB_HEIGHT) / 2;
-        double vboxWidth = Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH;
+        double vboxWidth = (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH)*LIBRARY_EDITOR_PROPORTIONS;
 
-        VBox top = new VBox();
+        SimpleEditorView simpleEditor = new SimpleEditorView();
+        VBox top = (VBox) simpleEditor.getObject();
         top.setPrefSize(vboxWidth, vboxHeight);
-        
-        Label temp = new Label("SimpleEditor should go here.");
-        top.getChildren().add(temp);
 
         bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
         bottom.setPrefSize(vboxWidth, vboxHeight);
@@ -77,17 +81,18 @@ public class GameObjectEditorView implements UIObject {
         return anchor;
     }
 
-    private ListView<Node> setUpList () {
-        ListView<Node> list = ListViewUtilities.createList(optionList);
+    private ListView<Authorable> setUpList () {
+        ListView<Authorable> list = ListViewUtilities.createList(optionList, null, "Image");
         for (String path : imagePaths) {
-            optionList.add(new ImageView(path));
+            optionList.add(new ImageContainer(new ImageView(path)));
         }
         list.setOnMouseClicked(me -> {
-            ImageView selected = (ImageView) list.getSelectionModel().getSelectedItem();
-
+            ImageContainer selected = (ImageContainer) list.getSelectionModel().getSelectedItem();
+            ImageView image = selected.getImageView();
+//            ImageView changed = ImageUtilities.changeImageSize(selected, 50, 50);
             for (int i = 0; i < bottom.getRectangles().size(); i++) {
                 if (i == list.getSelectionModel().getSelectedIndex()) {
-                    DraggableUtilities.makeImagePlaceable(me, selected, bottom, bottom
+                    DraggableUtilities.makeImagePlaceable(me, image, bottom, bottom
                             .getRectangles().get(i), root);
                 }
             }

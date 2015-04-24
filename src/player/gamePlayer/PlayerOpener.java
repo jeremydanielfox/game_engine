@@ -1,10 +1,7 @@
 package player.gamePlayer;
 
-import java.io.File;
-import java.util.Arrays;
-
-import View.GamePlayerScreen;
 import gae.gameView.Main;
+import java.util.Arrays;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,11 +11,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import View.GamePlayerScreen;
+
 
 /**
  * Opens the game player. It will ideally have a few pre-authored games for the user to play but
  * also allow the user to upload new games he or she created as well.
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -60,7 +59,7 @@ public class PlayerOpener extends Application {
         loadB.setOnMousePressed(e -> {
             openFileChooser();
         });
-        
+
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
             GamePlayerScreen screen = new GamePlayerScreen(myStage);
@@ -78,7 +77,7 @@ public class PlayerOpener extends Application {
     private void openFileChooser () {
         FileChooser fc = new FileChooser();
         Stage fileStage = new Stage();
-        File chosen = fc.showOpenDialog(fileStage);
+        fc.showOpenDialog(fileStage);
     }
 
     /**
@@ -102,7 +101,7 @@ public class PlayerOpener extends Application {
 
     /**
      * returns the Player scene
-     * 
+     *
      * @return
      */
     public Scene getPlayer () {

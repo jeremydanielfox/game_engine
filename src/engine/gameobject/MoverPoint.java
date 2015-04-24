@@ -5,7 +5,7 @@ import engine.fieldsetting.Settable;
 
 /**
  * Mover that moves to a point specified in the constructor.
- * 
+ *
  * @author Kaighn
  *
  */
@@ -22,17 +22,18 @@ public abstract class MoverPoint extends BasicMover {
         super(speed);
         myPoint = point;
     }
-    
+
     /**
      * Sets the mover's reference point to point
+     * 
      * @param point
      */
     @Settable
     public void setPoint (PointSimple point) {
         myPoint = point;
     }
-    
-    protected PointSimple getPoint(){
+
+    protected PointSimple getPoint () {
         return myPoint;
     }
 }

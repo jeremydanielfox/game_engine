@@ -5,21 +5,22 @@ import engine.fieldsetting.Settable;
 
 /**
  * Most traditional implementation of health. Can take damage and die appropriately.
- * 
+ *
  * @author Kaighn
  *
  */
 @Settable
 public class HealthSimple implements Health {
     private double myHealth;
-    
-    public HealthSimple(){
+
+    public HealthSimple () {
         myHealth = 0;
     }
-    public HealthSimple(double health){
+
+    public HealthSimple (double health) {
         myHealth = health;
     }
-    
+
     @Override
     public boolean isDead () {
         return myHealth <= 0;
@@ -35,7 +36,8 @@ public class HealthSimple implements Health {
         myHealth = health;
     }
 
-    public Health clone(){
+    @Override
+    public Health clone () {
         return new HealthSimple(myHealth);
     }
 }

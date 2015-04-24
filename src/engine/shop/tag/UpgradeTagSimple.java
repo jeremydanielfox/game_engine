@@ -4,6 +4,7 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.Graphic;
 import engine.shop.Purchasable;
 
+
 @Settable
 public class UpgradeTagSimple implements UpgradeTag {
     private String name;
@@ -38,16 +39,19 @@ public class UpgradeTagSimple implements UpgradeTag {
         return purchasable.getValue();
     }
 
+    @Override
     @Settable
     public void setName (String name) {
         this.name = name;
     }
 
+    @Override
     @Settable
     public void setShopGraphic (Graphic shopGraphic) {
         this.shopGraphic = shopGraphic;
     }
 
+    @Override
     @Settable
     public void setDescription (String description) {
         this.description = description;

@@ -9,7 +9,7 @@ import gameworld.GameWorld;
 
 /**
  * This class implements a wave that releases enemies randomly over a given period of time.
- * 
+ *
  * @author Cosette Goldstein
  * @author Sierra Smith
  *
@@ -83,7 +83,7 @@ public class RandomSpanWave extends Wave {
 
     /**
      * This method generates a frame count at which each enemy is released during the wave
-     * 
+     *
      * @param objects
      */
 
@@ -96,10 +96,10 @@ public class RandomSpanWave extends Wave {
         }
     }
 
-    //@Override
-//    public void onCompleteAction () {
-//        // TODO Auto-generated method stub
-//
-//    }
+    // @Override
+    // public void onCompleteAction () {
+    // // TODO Auto-generated method stub
+    //
+    // }
 
 }

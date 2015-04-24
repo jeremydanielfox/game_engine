@@ -6,10 +6,11 @@ import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverUser;
 import engine.gameobject.PointSimple;
 
-public class TestTower extends GameObjectSimple{
-    
+
+public class TestTower extends GameObjectSimple {
+
     private int type;
-    
+
     public TestTower (int type, int xcor, int ycor) {
         super();
         this.type = type;
@@ -26,7 +27,4 @@ public class TestTower extends GameObjectSimple{
         getTag().setShopGraphic(new Graphic(40, 40, "Bloons_TackShooterIcon.png"));
         setLabel(new TowerLabel());
     }
-    
-    
-    
 }

@@ -1,10 +1,12 @@
 package gae.editorView;
 
+import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -33,6 +35,7 @@ public class GameObjectEditorView implements UIObject {
     private BorderPane border;
     private static final int TAB_HEIGHT = 160;
     private static final int SIDE_WIDTH = 430;
+    private static final double LIBRARY_EDITOR_PROPORTIONS = 0.75;
     private GameObjectContainer bottom;
     private AnchorPane anchor;
     private Editable editable;
@@ -48,13 +51,14 @@ public class GameObjectEditorView implements UIObject {
 
         border.setRight(setUpList());
         border.setCenter(setUpAnchor());
-
+        LibraryList library = new LibraryList(scene);
+        border.setLeft(library.initialize());
         return border;
     }
 
     private AnchorPane setUpAnchor () {
         double vboxHeight = (Screen.getPrimary().getVisualBounds().getHeight() - TAB_HEIGHT) / 2;
-        double vboxWidth = Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH;
+        double vboxWidth = (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH)*LIBRARY_EDITOR_PROPORTIONS;
 
         VBox top = new VBox();
         top.setPrefSize(vboxWidth, vboxHeight);
@@ -84,7 +88,7 @@ public class GameObjectEditorView implements UIObject {
         }
         list.setOnMouseClicked(me -> {
             ImageView selected = (ImageView) list.getSelectionModel().getSelectedItem();
-
+//            ImageView changed = ImageUtilities.changeImageSize(selected, 50, 50);
             for (int i = 0; i < bottom.getRectangles().size(); i++) {
                 if (i == list.getSelectionModel().getSelectedIndex()) {
                     DraggableUtilities.makeImagePlaceable(me, selected, bottom, bottom

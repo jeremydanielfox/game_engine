@@ -48,7 +48,6 @@ public class ListViewUtilities {
         }
     }
 
-
     /**
      * creates a ListView given an observable list of Editables, with specific properties, such as
      * deleting objects and highlighting selected objects
@@ -61,29 +60,33 @@ public class ListViewUtilities {
         ListView<Editable> list = new ListView<>();
         list.setPrefWidth(200);
         list.setItems(editables);
-        list.setOnMousePressed(e -> {
-            if (e.getClickCount() == 1) {
-                Editable selected = list.getSelectionModel().getSelectedItem();
-                selected.getMovableImage().selectEditableImage();
-                scene.setOnKeyPressed(keyEvent -> {
-                    if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
-                        editables.remove(selected);
-                        selected.getMovableImage().deleteImage();
+        try {
+            list.setOnMousePressed(e -> {
+                if (e.getClickCount() == 1) {
+                    Editable selected = list.getSelectionModel().getSelectedItem();
+                    selected.getMovableImage().selectEditableImage();
+                    scene.setOnKeyPressed(keyEvent -> {
+                        if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
+                            editables.remove(selected);
+                            selected.getMovableImage().deleteImage();
+                        }
+                    });
+                    for (Editable editable : list.getItems()) {
+                        if (editable != selected)
+                            editable.getMovableImage().unselectEditableImage();
                     }
+                }
+                    else if (e.getClickCount() == 2) {
+                        list.getSelectionModel().getSelectedItem().getMovableImage()
+                                .unselectEditableImage();
+
+                        list.getSelectionModel().clearSelection();
+                    }
+
                 });
-                for (Editable editable : list.getItems()) {
-                    if (editable != selected)
-                        editable.getMovableImage().unselectEditableImage();
-                }
-            }
-                else if (e.getClickCount() == 2) {
-                    list.getSelectionModel().getSelectedItem().getMovableImage()
-                            .unselectEditableImage();
-
-                    list.getSelectionModel().clearSelection();
-                }
-
-            });
+        }
+        catch (NullPointerException e) {
+        }
         list.setCellFactory( (myList) -> {
             return new ListCell<Editable>() {
                 @Override

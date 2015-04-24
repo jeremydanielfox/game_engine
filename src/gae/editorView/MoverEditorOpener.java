@@ -10,11 +10,8 @@ import engine.pathfinding.PathSegmentBezier;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -110,6 +107,7 @@ public class MoverEditorOpener extends EditorOpener {
             plus.setOnAction(e -> addMoreOptions());
             Button view = new Button("View currently selected animation");
             view.setOnAction(e -> setEngineDemo(dropDown.getSelectionModel().getSelectedItem()));
+
             hbox.getChildren().addAll(dropDown, plus, view);
             first = false;
         }

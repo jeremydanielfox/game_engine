@@ -1,12 +1,12 @@
 package engine.game;
 
-import engine.fieldsetting.Settable;
 import View.ViewConcrete2;
+import engine.fieldsetting.Settable;
 
 
 /**
  * This class is a timer that counts down at the starting frames per second rate of the game.
- * 
+ *
  * @author Sierra Smith
  *
  */

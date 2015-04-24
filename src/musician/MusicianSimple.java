@@ -16,6 +16,7 @@ import engine.interactions.Interaction;
  *
  */
 
+
 public class MusicianSimple implements Musician {
 
     private static final int MUTED = 0;
@@ -81,5 +82,4 @@ public class MusicianSimple implements Musician {
         Media music = myMusic.get(o).getMusic();
         myMusician.pause();
     }
-
 }

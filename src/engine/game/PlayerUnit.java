@@ -9,8 +9,8 @@ public class PlayerUnit extends Displayable {
 
     private double myValue;
     private String myLabel;
-    
-    public PlayerUnit() {
+
+    public PlayerUnit () {
         myValue = 0;
         myLabel = "";
     }
@@ -37,9 +37,10 @@ public class PlayerUnit extends Displayable {
     public double getValue () {
         return myValue;
     }
-    
+
+    @Override
     public String getStringValue () {
-        return myValue+"";
+        return myValue + "";
     }
 
     @Override
@@ -51,9 +52,9 @@ public class PlayerUnit extends Displayable {
         setChanged();
         notifyObservers();
     }
-    
+
     @Settable
-    public void setStartingValue(double value) {
+    public void setStartingValue (double value) {
         myValue = value;
     }
 }

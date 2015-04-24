@@ -16,9 +16,9 @@ public class IsPlayingGoal extends PlayableGoal {
     public void update (Observable o, Object arg) {
         // doesn't observe anything
     }
-    
+
     @Override
-    public boolean isSatisfied(){
+    public boolean isSatisfied () {
         return getPlayable().isPlaying();
     }
 }

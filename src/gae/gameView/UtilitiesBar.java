@@ -12,8 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 
 public class UtilitiesBar {
@@ -57,13 +57,13 @@ public class UtilitiesBar {
         Arrays.asList(playButton, pauseButton, importButton, exportButton, helpButton,
                       fullscreenButton).forEach(e -> {
 
-        });
+                      });
 
         Arrays.asList(PLAY_IMAGE, PAUSE_IMAGE, IMPORT_IMAGE, EXPORT_IMAGE, HELP_IMAGE,
                       FULLSCREEN_IMAGE).forEach(e -> {
-            e.setFitWidth(25);
-            e.setFitHeight(25);
-        });
+                          e.setFitWidth(25);
+                          e.setFitHeight(25);
+                      });
     }
 
     private void setUpFunctions () {
@@ -88,7 +88,7 @@ public class UtilitiesBar {
         });
 
         fullscreenButton.setOnMousePressed(e -> {
-            
+
         });
     }
 
@@ -113,12 +113,12 @@ public class UtilitiesBar {
     }
 
     private void placeButtons () {
-        List<Button> buttons = (List) Arrays.asList(fullscreenButton, playButton, pauseButton,
-                                                    importButton, exportButton, helpButton);
+        List<Button> buttons = Arrays.asList(fullscreenButton, playButton, pauseButton,
+                                             importButton, exportButton, helpButton);
         utilitiesBar.getChildren().addAll(buttons);
         for (int i = 0; i < buttons.size(); i++) {
-            utilitiesBar.setRowIndex(buttons.get(i), 0);
-            utilitiesBar.setColumnIndex(buttons.get(i), i);
+            GridPane.setRowIndex(buttons.get(i), 0);
+            GridPane.setColumnIndex(buttons.get(i), i);
         }
     }
 }

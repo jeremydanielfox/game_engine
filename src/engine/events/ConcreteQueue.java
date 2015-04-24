@@ -14,10 +14,10 @@ public class ConcreteQueue implements GameObjectQueue {
     private Queue<GameObject> myOrderedObjects;
     private int curIndex = 0;
 
-    public ConcreteQueue(){
+    public ConcreteQueue () {
         populateQueue(new ArrayList<GameObject>());
     }
-    
+
     public ConcreteQueue (List<GameObject> objects) {
         populateQueue(objects);
     }
@@ -25,15 +25,15 @@ public class ConcreteQueue implements GameObjectQueue {
     /**
      * Takes in a total number of game objects and a map of game objects to integers. Populates
      * the list of game objects with the integer percentage of total for the corresponding
-     * game object, flooring all percentages of the total.  Then randomizes the order of the list.
-     * 
+     * game object, flooring all percentages of the total. Then randomizes the order of the list.
+     *
      * @param total
      * @param objectPopulation
      */
     public ConcreteQueue (int total, Map<GameObject, Integer> population) {
-        List<GameObject> objects = new ArrayList<GameObject> ();
-        for(GameObject o: population.keySet()){
-            for(int i = 0; i <= population.get(o); i++){
+        List<GameObject> objects = new ArrayList<GameObject>();
+        for (GameObject o : population.keySet()) {
+            for (int i = 0; i <= population.get(o); i++) {
                 objects.add(o.clone());
             }
         }
@@ -43,7 +43,7 @@ public class ConcreteQueue implements GameObjectQueue {
 
     /**
      * Takes a list of game objects and adds them to the queue in order
-     * 
+     *
      * @param ordered
      */
     private void populateQueue (List<GameObject> ordered) {

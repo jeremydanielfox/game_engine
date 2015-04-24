@@ -7,7 +7,7 @@ import java.util.Observer;
 /**
  * This is the interface for a level board. It is intended to be used by a level container
  * in a game and thus is designed to support multiple levels.
- * 
+ *
  * @author Sierra
  *
  */
@@ -22,14 +22,14 @@ public interface LevelBoard {
     /**
      * Returns a boolean that represents if the game is over or not as determined by the
      * winning and losing conditions defined by the game.
-     * 
+     *
      * @return
      */
     public boolean gameOver ();
 
     /**
      * Returns the string name of the image for the current level.
-     * 
+     *
      * @return
      */
     public String getCurrentLevelMap ();
@@ -43,21 +43,21 @@ public interface LevelBoard {
      * Adds an observer to this level board's collection of observers that will be
      * notified whenever a change occurs in the level board that has been defined to notify
      * observers.
-     * 
+     *
      * @param o
      */
     public void addObserver (Observer o);
 
     /**
      * Returns the game world that corresponds to the current level.
-     * 
+     *
      * @return
      */
     public GameWorld getGameWorld ();
 
     /**
      * Returns the level object that corresponds to the current level.
-     * 
+     *
      * @return
      */
     public Level getCurrentLevel ();

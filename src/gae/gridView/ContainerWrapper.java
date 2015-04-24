@@ -6,7 +6,7 @@ import engine.gameobject.PointSimple;
 /**
  * Interface written to wrap the TileContainer so that other classes can find coordinates relative
  * to the grid system.
- * 
+ *
  * @author Kei
  *
  */

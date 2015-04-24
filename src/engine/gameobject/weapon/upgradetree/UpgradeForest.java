@@ -8,7 +8,7 @@ import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 
 /**
  * A collection of SimpleUpgrade Trees. Essentially the composite pattern used for UpgradeTree.
- * 
+ *
  * @author Nathan Prabhu
  *
  */
@@ -30,10 +30,9 @@ public class UpgradeForest implements UpgradeTree {
     @Override
     public double getValue () {
         return trees.stream().map(UpgradeTree::getValue)
-                             .reduce( (sum, value) -> sum + value)
-                             .get();
+                .reduce( (sum, value) -> sum + value)
+                .get();
     }
-
 
     @Override
     public void updateCurrent (UpgradeTree ... toUpdate) {

@@ -1,8 +1,6 @@
 package gae.gameView;
 
 import java.util.List;
-
-import engine.gameobject.GameObject;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -10,10 +8,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import engine.gameobject.GameObject;
+
 
 /**
  * List of options that can be checked to indicate selection
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -34,11 +34,11 @@ public class CheckList {
     public Node getCheckList () {
         return checkList;
     }
-    
+
     /**
-     * Called by outside class to display the check list 
+     * Called by outside class to display the check list
      */
-    public void showCheckList() {
+    public void showCheckList () {
         Stage temp = new Stage();
         Scene scene = new Scene(checkList);
         temp.setScene(scene);
@@ -46,15 +46,13 @@ public class CheckList {
         temp.centerOnScreen();
     }
 
-    
     /*
      * TODO: differentiate between using a Label object in JavaFX or a label as a type?
      */
-    
-    
+
     /**
      * create one check option based on object given
-     * 
+     *
      * @param s
      */
     private void createCheckOption (GameObject o) {
@@ -62,6 +60,6 @@ public class CheckList {
         Label label = (Label) o.getLabel();
         CheckBox checker = new CheckBox();
         checkOption.getChildren().add(checker);
-        checkList.getChildren().addAll(label,checkOption);
+        checkList.getChildren().addAll(label, checkOption);
     }
 }

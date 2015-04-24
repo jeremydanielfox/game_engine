@@ -15,12 +15,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+
 public class EdittableHudLocation implements UIObject {
     private static final double RECTANGLE_SIZE = 200;
     private StackPane baseNode;
     private VBox textHolder;
     private List<String> myFields;
-    
+
     public EdittableHudLocation (Color color) {
         initialize(color);
     }
@@ -29,18 +30,18 @@ public class EdittableHudLocation implements UIObject {
         myFields = new ArrayList<String>();
         baseNode = new StackPane();
         textHolder = new VBox();
-        
-//        ResizableRectangle r = new ResizableRectangle();
+
+        // ResizableRectangle r = new ResizableRectangle();
         Rectangle r = new Rectangle();
-        
+
         r.setWidth(RECTANGLE_SIZE);
         r.setHeight(RECTANGLE_SIZE);
         r.setFill(color);
         r.setOnMousePressed(e -> showOptions(e));
         r.setOpacity(0.5);
-        
+
         textHolder.setOnMousePressed(e -> showOptions(e));
-        
+
         baseNode.getChildren().addAll(r, textHolder);
     }
 
@@ -58,14 +59,14 @@ public class EdittableHudLocation implements UIObject {
     public Node getObject () {
         return baseNode;
     }
-    
-    public List<String> getFields() {
+
+    public List<String> getFields () {
         return myFields;
     }
 
     public void setFields (List<String> onFields) {
         textHolder.getChildren().clear();
-        
+
         for (String s : onFields) {
             myFields.add(s);
             Text newText = new Text(s);

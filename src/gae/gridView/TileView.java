@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 
 /**
  * The view of the tile and its properties
- * 
+ *
  * @author Kei & Nina
  *
  */
@@ -25,12 +25,12 @@ public class TileView extends Group {
         rect = new Rectangle(size, size, Color.TRANSPARENT);
         rect.setStroke(Color.BLACK);
         rect.setStrokeWidth(1);
-        this.getChildren().addAll(rect);
+        getChildren().addAll(rect);
         setUp(rect);
     }
 
     private void setUp (Rectangle rect) {
-        this.setOnMouseClicked(e -> {
+        setOnMouseClicked(e -> {
             if (e.getClickCount() == 2) {
                 data.changeState();
             }
@@ -39,15 +39,15 @@ public class TileView extends Group {
             if (!newValue) {
                 rect.setFill(Color.web("red", .5));
             }
-                else {
-                    rect.setFill(Color.TRANSPARENT);
-                }
+            else {
+                rect.setFill(Color.TRANSPARENT);
+            }
 
-            });
+        });
     }
 
     public void handleSelected (Node node, boolean walkable) {
-        if (this.getBoundsInParent().intersects(node.getBoundsInParent())) {
+        if (getBoundsInParent().intersects(node.getBoundsInParent())) {
             data.setWalkable(walkable);
         }
     }

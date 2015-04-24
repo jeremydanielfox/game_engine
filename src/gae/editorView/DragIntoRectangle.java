@@ -1,10 +1,11 @@
 package gae.editorView;
 
+import engine.gameobject.PointSimple;
+import gae.gridView.ContainerWrapper;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
-import View.ViewUtil;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,9 +17,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import View.ViewUtil;
 
 
-public class DragIntoRectangle extends Group {
+public class DragIntoRectangle extends Group implements ContainerWrapper {
     private static final double LABEL_PROPORTIONS_Y = 0.4;
     // 11 ALPHABETS ACROSS
     private double width;
@@ -35,18 +37,18 @@ public class DragIntoRectangle extends Group {
         rectSize = width / 5;
         rect = new Rectangle(rectSize, rectSize, Color.TRANSPARENT);
         rect.setStyle("    -fx-stroke: black;\n" +
-                      "    -fx-stroke-width: 3;\n" +
-                      "    -fx-stroke-dash-array: 12 2 4 2;\n" +
-                      "    -fx-stroke-dash-offset: 6;\n" +
-                      "    -fx-stroke-line-cap: butt;");
+                "    -fx-stroke-width: 3;\n" +
+                "    -fx-stroke-dash-array: 12 2 4 2;\n" +
+                "    -fx-stroke-dash-offset: 6;\n" +
+                "    -fx-stroke-line-cap: butt;");
         Label name = createLabel(label);
         nodesList = Arrays.asList(new Node[] { rect, name });
-        this.getChildren().addAll(nodesList);
-        this.setManaged(false);
-        this.setOnMouseEntered(e -> {
+        getChildren().addAll(nodesList);
+        setManaged(false);
+        setOnMouseEntered(e -> {
             rect.setFill(Color.YELLOW);
         });
-        this.setOnMouseExited(e -> {
+        setOnMouseExited(e -> {
             rect.setFill(Color.TRANSPARENT);
         });
     }
@@ -68,7 +70,7 @@ public class DragIntoRectangle extends Group {
     }
 
     public void setCorrect (ImageView image) {
-        this.getChildren().add(image);
+        getChildren().add(image);
         image.setLayoutX(rectSize / 2 + ViewUtil.getCenterOffsetX(image));
         image.setLayoutY(rectSize / 2 + ViewUtil.getCenterOffsetY(image));
         setUpEditorOpener();
@@ -76,11 +78,14 @@ public class DragIntoRectangle extends Group {
             image.setEffect(new Glow(1));
             scene.setOnKeyPressed(keyEvent -> {
                 if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
-                    this.getChildren().remove(image);
+                    getChildren().remove(image);
                     setVisible();
                 }
             });
-
+            if (e.getClickCount()==2) {
+                setUpEditorOpener();
+                image.setEffect(null);
+            }
         });
         setInvisible();
     }
@@ -95,7 +100,7 @@ public class DragIntoRectangle extends Group {
         catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
                 | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) {
-            
+
         }
     }
 
@@ -105,5 +110,17 @@ public class DragIntoRectangle extends Group {
 
     private void setVisible () {
         nodesList.forEach(node -> node.setVisible(true));
+    }
+
+    @Override
+    public boolean checkBounds (double x, double y) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public PointSimple convertCoordinates (double x, double y) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

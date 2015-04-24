@@ -38,7 +38,7 @@ public abstract class VOOGAException extends RuntimeException {
     /**
      * A way for the program to display some error message
      * NOTE: WE CAN CHANGE THIS TO IMPROVE CODE - JUST TEMPORARY
-     * 
+     *
      * @param message
      */
     protected void popup (String message) {

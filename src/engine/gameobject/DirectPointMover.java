@@ -2,15 +2,17 @@ package engine.gameobject;
 
 import engine.pathfinding.EndOfPathException;
 
+
 public class DirectPointMover extends MoverPoint {
 
-    public DirectPointMover(){
+    public DirectPointMover () {
         super();
     }
-    
-    public DirectPointMover(PointSimple point, double speed){
+
+    public DirectPointMover (PointSimple point, double speed) {
         super(point, speed);
     }
+
     @Override
     public PointSimple move (PointSimple current) throws EndOfPathException {
         PointSimple newPoint = PointSimple.pointOnLine(current, getPoint(), currentSpeed());

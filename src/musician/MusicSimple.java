@@ -4,7 +4,7 @@ import javafx.scene.media.Media;
 
 /**
  * Concrete version of the Music interface
- * 
+ *
  * @author Brandon Choi
  *
  */

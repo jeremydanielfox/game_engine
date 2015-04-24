@@ -1,7 +1,7 @@
 package engine.observable;
 
 /**
- * 
+ *
  * @author Jeremy
  *
  */

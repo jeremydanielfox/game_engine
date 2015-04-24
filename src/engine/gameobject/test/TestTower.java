@@ -18,7 +18,7 @@ public class TestTower extends GameObjectSimple{
         setPoint(new PointSimple(xcor, ycor));
         setHealth(new HealthSimple(3));
         MoverUser moveruser = new MoverUser();
-        moveruser.setNode(graphic.getNode());
+        moveruser.setGraphic(graphic);
         setMover(moveruser);
         setWeapon(new TestWeapon(type));
         getTag().setName("TestTower");

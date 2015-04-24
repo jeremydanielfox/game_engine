@@ -38,8 +38,9 @@ public class PathFree implements Path {
 		myTrans = cTrans;
 		objectMatrix = matrix;
 		endPoints = new ArrayList<>();
-		endPoints.add(new GridCell(8, 8));
-		endPoints.add(new GridCell(5,0));
+		endPoints.add(new GridCell(9, 9));
+		endPoints.add(new GridCell(9,0));
+		endPoints.add(new GridCell(0,9));
 		spawnPoint = new GridCell(0, 0);
 		bounds = new GridCell(matrix.length,matrix[0].length);
 	}

@@ -49,7 +49,8 @@ public class ObjectComponentEditor extends ComponentEditor {
     public EventHandler<? super MouseEvent> popNewEditor() {
         return e -> {
             Consumer<Object> setObjectConsumer = o -> setObject(o);
-            new PopUpEditorView(setObjectConsumer, clazz);
+            GenericObjectsPane.newCustomObject(clazz, "yo", setObjectConsumer);
+//            new PopUpEditorView(setObjectConsumer, clazz);
         };
     }
 

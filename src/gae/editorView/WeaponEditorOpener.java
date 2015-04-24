@@ -1,17 +1,24 @@
 package gae.editorView;
 
-import javafx.stage.Stage;
+import javafx.scene.Parent;
 
 
 public class WeaponEditorOpener extends EditorOpener {
-    private static final String TITLE = "Weapon Editor";
-    @Override
+
     public void initialize () {
+        super.initialize();
+    }
+
+    @Override
+    public Parent setUpParent () {
         // TODO Auto-generated method stub
-        Stage stage = new Stage();
-        stage.show();
-        stage.setTitle(TITLE);
-        // implement Weapon Editor
+        return null;
+    }
+
+    @Override
+    public String getTitle () {
+        // TODO Auto-generated method stub
+        return "Weapon Editor";
     }
 
 }

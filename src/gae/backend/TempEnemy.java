@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
-import gae.gridView.Pair;
 import gae.gridView.Path;
 import gae.listView.DeepCopy;
 import gae.listView.MovableImage;

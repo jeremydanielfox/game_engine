@@ -60,11 +60,10 @@ public class GameObjectEditorView implements UIObject {
         double vboxHeight = (Screen.getPrimary().getVisualBounds().getHeight() - TAB_HEIGHT) / 2;
         double vboxWidth = (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH)*LIBRARY_EDITOR_PROPORTIONS;
 
-        VBox top = new VBox();
+        SimpleEditorView simpleEditor = new SimpleEditorView();
+        VBox top = (VBox) simpleEditor.getObject();
         top.setPrefSize(vboxWidth, vboxHeight);
         
-        Label temp = new Label("SimpleEditor should go here.");
-        top.getChildren().add(temp);
 
         bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
         bottom.setPrefSize(vboxWidth, vboxHeight);

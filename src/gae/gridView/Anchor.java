@@ -1,6 +1,8 @@
 package gae.gridView;
 
+import engine.gameobject.PointSimple;
 import javafx.beans.property.DoubleProperty;
+import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -61,7 +63,7 @@ public class Anchor extends Circle {
      * be able to drag the object and have the coordinates update
      */
     private void enableDrag () {
-        final Pair dragDelta = new Pair(0, 0);
+        final PointSimple dragDelta = new PointSimple(0, 0);
         // setOnMousePressed(e -> {
         // dragDelta.x = getCenterX() - e.getX();
         // dragDelta.y = getCenterY() - e.getY();

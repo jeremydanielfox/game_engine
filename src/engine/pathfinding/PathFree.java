@@ -6,6 +6,9 @@ import gameworld.CoordinateTransformer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import voogasalad.util.pathsearch.graph.GridCell;
+import voogasalad.util.pathsearch.pathalgorithms.NoPathExistsException;
+import voogasalad.util.pathsearch.wrappers.GridWrapper;
 
 
 /**

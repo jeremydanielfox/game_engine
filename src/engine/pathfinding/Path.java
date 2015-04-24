@@ -1,5 +1,6 @@
 package engine.pathfinding;
 
+import voogasalad.util.pathsearch.pathalgorithms.NoPathExistsException;
 import engine.gameobject.PointSimple;
 
 

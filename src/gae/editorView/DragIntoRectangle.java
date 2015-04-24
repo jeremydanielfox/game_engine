@@ -80,7 +80,10 @@ public class DragIntoRectangle extends Group {
                     setVisible();
                 }
             });
-
+            if (e.getClickCount()==2) {
+                setUpEditorOpener();
+                image.setEffect(null);
+            }
         });
         setInvisible();
     }

@@ -75,6 +75,23 @@ public class ListViewUtilities {
                         if (editable != selected)
                             editable.getMovableImage().unselectEditableImage();
                     }
+<<<<<<< HEAD
+                });
+                for (Editable editable : list.getItems()) {
+                    if (editable != selected) {
+                        editable.getMovableImage().unselectEditableImage();
+                    }
+                }
+            }
+            else if (e.getClickCount() == 2) {
+                list.getSelectionModel().getSelectedItem().getMovableImage()
+                .unselectEditableImage();
+
+                list.getSelectionModel().clearSelection();
+            }
+
+        });
+=======
                 }
                     else if (e.getClickCount() == 2) {
                         list.getSelectionModel().getSelectedItem().getMovableImage()
@@ -87,6 +104,7 @@ public class ListViewUtilities {
         }
         catch (NullPointerException e) {
         }
+>>>>>>> 8d3de1ebaafde5642732ac5b83f8c464a032a7ab
         list.setCellFactory( (myList) -> {
             return new ListCell<Editable>() {
                 @Override

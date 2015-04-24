@@ -2,8 +2,9 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import player.gamePlayer.PauseScene;
+import voogasalad.util.highscore.HighScoreController;
+import voogasalad.util.highscore.HighScoreException;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -63,6 +64,7 @@ public class GamePlayerScreen {
         myVbox = new VBox(30);
         //makeSideBar();
         pauseScreen = new PauseScene(e -> resumeGame());
+        myGame=loadGame();
     }
     
     /**
@@ -90,11 +92,23 @@ public class GamePlayerScreen {
                                                                           // from the GAE
 
         Button scoreBtn = new Button("View high scores");
+        scoreBtn.setOnAction(e -> displayScores());
         Button playBtn = new Button("play");
-
         playBtn.setOnAction(e -> startGame());
 
         myVbox.getChildren().addAll(scoreBtn, playBtn);
+    }
+    
+    private void displayScores(){
+        HighScoreController scores = HighScoreController.getController();
+        try {
+            scores.displayHighScores(myGame.getGameName(), "Score:", 500, 500);
+        }
+        catch (HighScoreException e) {
+            // TODO Auto-generated catch block
+            System.out.println("Issue with displaying high scores.");
+            e.printStackTrace();
+        }
     }
 
     private void startGame () {
@@ -106,18 +120,18 @@ public class GamePlayerScreen {
     }
 
     public Node makeDemoGame () {
-        ConcreteLevelBoard board = new ConcreteLevelBoard();
-
-        GameWorld world = new FixedWorld();
-        world.addObject(new GameObjectSimpleTest());
-        GameObjectQueue q = new ConcreteQueue(new ArrayList<GameObject>());
-        TimedEvent wave = new ConstantSpacingWave(2.0, q, world);
-        StoryBoard story = new StoryBoard(wave);
-
-        PlayerUnit health = new PlayerUnit(100, "Health");
-        PlayerUnit scoreUnit = new PlayerUnit(100, "Score");
-        Wallet wallet = new ConcreteWallet(scoreUnit);
-        Player myPlayer = new Player("PlayerName", health, scoreUnit, wallet);
+//        ConcreteLevelBoard board = new ConcreteLevelBoard();
+//
+//        GameWorld world = new FixedWorld();
+//        world.addObject(new GameObjectSimpleTest());
+//        GameObjectQueue q = new ConcreteQueue(new ArrayList<GameObject>());
+//        TimedEvent wave = new ConstantSpacingWave(2.0, q, world);
+//        StoryBoard story = new StoryBoard(wave);
+//
+//        PlayerUnit health = new PlayerUnit(100, "Health");
+//        PlayerUnit scoreUnit = new PlayerUnit(100, "Score");
+//        Wallet wallet = new ConcreteWallet(scoreUnit);
+//        Player myPlayer = new Player("PlayerName", health, scoreUnit, wallet);
         
         // EDIT: temp change -- game won't have accurate shop - Nathan
         
@@ -127,21 +141,21 @@ public class GamePlayerScreen {
 //        ButtonWrapper wrap = new ButtonWrapper("wave", e -> story.startNextEvent(), new NullGoal());
 //        myGame.addButton(wrap);
 
-        HealthGoal healthy = new HealthGoal(myPlayer, 0);
-        List<Goal> list = new ArrayList<Goal>();
-        list.add(healthy);
-        ScoreGoal score = new ScoreGoal(myPlayer, 200);
-        List<Goal> list2 = new ArrayList<Goal>();
-        list2.add(score);
-        List<Goal> list3 = new ArrayList<Goal>();
-        ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
-        list3.add(score2);
-
-        Timer t = new TimerConcrete(5,10,"time");
-        board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),                                   story));
-        ShopModel shop = new ShopModelSimple(world, myPlayer, 0);
-        myGame=loadGame();
+//        HealthGoal healthy = new HealthGoal(myPlayer, 0);
+//        List<Goal> list = new ArrayList<Goal>();
+//        list.add(healthy);
+//        ScoreGoal score = new ScoreGoal(myPlayer, 200);
+//        List<Goal> list2 = new ArrayList<Goal>();
+//        list2.add(score);
+//        List<Goal> list3 = new ArrayList<Goal>();
+//        ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
+//        list3.add(score2);
+//
+//        Timer t = new TimerConcrete(5,10,"time");
+//        board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
+//        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),                                   story));
+//        ShopModel shop = new ShopModelSimple(world, myPlayer, 0);
+//        myGame=loadGame();
         myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();
         return node;

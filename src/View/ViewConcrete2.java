@@ -5,16 +5,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import voogasalad.util.highscore.HighScoreController;
+import voogasalad.util.highscore.HighScoreException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.Animation.Status;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -22,15 +22,13 @@ import engine.game.Game;
 import engine.goals.*;
 import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
-import engine.gameobject.Graphic;
-import engine.shop.ShopModel;
 
 
 public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Playable {
 
     public static final double GAME_WIDTH_TO_HEIGHT = 1;
-    public static final int MAX_FRAME_RATE = 200;
-    public static final int MIN_FRAME_RATE = 500;
+    public static final int MAX_FRAME_RATE = 500;
+    public static final int MIN_FRAME_RATE = 1000;
     //TODO need to update this to be a function of min frame rate 
     public static final int DEFAULT_FRAMES_SECOND = 60;
 
@@ -107,6 +105,8 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private KeyFrame makeKeyFrame (int frameRate) {
         return new KeyFrame(Duration.millis(myRate / frameRate),
                             e -> executeFrameActions());
+//        return new KeyFrame(Duration.millis(myRate / frameRate),
+//                            e -> executeFrameActions());
     }
 
     public void toggleRate () {
@@ -173,6 +173,17 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
             pause();
             if (myLevelBoard.gameOver()) {
                 // note: display game over screen
+                HighScoreController scores = HighScoreController.getController();
+                //TODO eliminate magic values
+                try {
+                    scores.setValue(myGame.getGameName(), 0, "Score", myGame.getPlayer().getScore());
+                    scores.saveInstanceScoreData(myGame.getGameName(), 0, myGame.getPlayer().getName());
+                }
+                catch (HighScoreException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    System.out.println("Issue saving when game ends");
+                }
                 PopUpScreen gameOver = new PopUpScreen();
                 gameOver.makeScreen("GAME OVER", "Play Again");
                 // ideally gamePlayer/observers should be notified here

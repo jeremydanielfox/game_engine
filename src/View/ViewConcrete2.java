@@ -31,16 +31,15 @@ import engine.goals.NotPlayingGoal;
 
 public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Playable {
 
-    public static final double GAME_WIDTH_TO_HEIGHT = 1;
-
+    private static final int DEFAULT_FRAME_RATE = 60;
     public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
     public static final double WORLD_WIDTH = 600;
     public static final double WORLD_HEIGHT = 600;
     // public static final int MAX_FRAME_RATE = 500;
     // public static final int MIN_FRAME_RATE = 1000;
-    // TODO need to update this to be a function of min frame rate
-    public static final int DEFAULT_FRAMES_SECOND = 60;
+    public static final int DEFAULT_FRAMES_SECOND =
+            (int) ((double) 1 / ((double) ((double) MIN_FRAME_RATE / (double) DEFAULT_FRAME_RATE) / 1000));
 
     private List<Node> hack = new ArrayList<Node>();
     private Game myGame;
@@ -69,7 +68,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     public Node initializeView () {
         myPane = new BorderPane();
         myGameWorldPane = new Pane();
-        myGameWorldPane.setMaxWidth(myDisplayHeight * GAME_WIDTH_TO_HEIGHT);
+        myGameWorldPane.setMaxWidth(myDisplayHeight);
         myPane.setCenter(myGameWorldPane);
         initializeGameWorld();
         vbox.setFocusTraversable(false);
@@ -109,7 +108,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
 
     @Override
     public void buildTimeline () {
-        KeyFrame frame = makeKeyFrame(60);
+        KeyFrame frame = makeKeyFrame(DEFAULT_FRAME_RATE);
         myAnimation = new Timeline();
         myAnimation.setCycleCount(Animation.INDEFINITE);
         myAnimation.getKeyFrames().add(frame);
@@ -258,14 +257,14 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
                 .addButton(new ButtonWrapper("Fast", e -> toggleRate(), new CanIncSpeedGoal(this)));
     }
 
-    public static double getWorldHeight(){
+    public static double getWorldHeight () {
         return WORLD_HEIGHT;
     }
-    
-    public static double getWorldWidth(){
+
+    public static double getWorldWidth () {
         return WORLD_WIDTH;
     }
-    
+
     @Override
     public void pause () {
         myAnimation.pause();

@@ -84,7 +84,7 @@ public class View extends Application {
         test.add(freeze3);
 
         test.add(new RangeUpgrade(1));
-        System.out.println(test);
+//        System.out.println(test);
     }
 
     private void addIcons (FlowPane shopDisplay) {

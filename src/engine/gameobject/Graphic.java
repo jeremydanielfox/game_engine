@@ -3,6 +3,8 @@ package engine.gameobject;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import View.ViewUtil;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.fieldsetting.Settable;
@@ -61,6 +63,10 @@ public class Graphic {
         if (myPoint == null) {
             myPoint = new Point2D(0, 0);
         }
+        // myImageView.setOnMouseEntered(o -> System.out.println("boom"));
+        // myImageView.setOnMouseClicked(e -> System.out.println("clicked"));
+        // myImageView.setFocusTraversable(true);
+
         myImageView.setX(myPoint.getX());
         myImageView.setY(myPoint.getY());
         myImageView.setFitHeight(myHeight);
@@ -84,9 +90,8 @@ public class Graphic {
      * @param point
      */
     public void setPoint (PointSimple point) {
-        Point2D temp =
-                new Point2D(point.getX() + ViewUtil.getCenterOffsetX(myImageView),
-                            point.getY() + ViewUtil.getCenterOffsetY(myImageView));
+        Point2D temp = new Point2D(point.getX() + ViewUtil.getCenterOffsetX(myImageView),
+                                   point.getY() + ViewUtil.getCenterOffsetY(myImageView));
         rotate(new PointSimple(temp));
         myPoint =
                 temp;

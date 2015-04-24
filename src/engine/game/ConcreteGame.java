@@ -41,7 +41,7 @@ public class ConcreteGame implements Game {
         myLevelBoard = level;
         myButtons = buttons;
         // TODO make this part of constructor
-        myGameName = "Game Name";
+        myGameName = "GameName";
     }
 
     @Override

@@ -30,10 +30,8 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
     private Rectangle rect;
     private List<Node> nodesList;
     private Scene scene;
-    private ObjectComponentEditor componentEditor;
 
-    public DragIntoRectangle (double width, String label, Scene scene, ObjectComponentEditor editor) {
-        componentEditor = editor;
+    public DragIntoRectangle (double width, String label, Scene scene) {
         this.width = width;
         this.scene = scene;
         // type = label;
@@ -76,7 +74,7 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
         getChildren().add(image);
         image.setLayoutX(rectSize / 2 + ViewUtil.getCenterOffsetX(image));
         image.setLayoutY(rectSize / 2 + ViewUtil.getCenterOffsetY(image));
-        setUpEditorOpener();
+//        setUpEditorOpener();
         image.setOnMouseClicked(e -> {
             image.setEffect(new Glow(1));
             scene.setOnKeyPressed(keyEvent -> {
@@ -86,13 +84,14 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
                 }
             });
             if (e.getClickCount() == 2) {
-                setUpEditorOpener();
+//                setUpEditorOpener();
                 image.setEffect(null);
             }
         });
         setInvisible();
     }
 
+//<<<<<<< HEAD
 //    private void setUpEditorOpener (String type) {
 //        try {
 //            Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
@@ -107,8 +106,8 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
 //        }
 //    }
 
-    private void setUpEditorOpener () {
-        new PopUpEditorView(componentEditor);
+//    private void setUpEditorOpener () {
+//        new PopUpEditorView(componentEditor);
         // try {
         // Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
         // Object instance = className.getConstructor().newInstance();
@@ -120,7 +119,19 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
         // | InvocationTargetException e) {
         //
         // }
-    }
+//    private void setUpEditorOpener () {
+//        try {
+//            Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
+//            Object instance = className.getConstructor().newInstance();
+//            Method setUpList = className.getMethod("initialize");
+//            setUpList.invoke(instance);
+//        }
+//        catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
+//                | IllegalAccessException | IllegalArgumentException
+//                | InvocationTargetException e) {
+//
+//        }
+//    }
 
     private void setInvisible () {
         nodesList.forEach(node -> node.setVisible(false));

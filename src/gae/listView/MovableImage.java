@@ -1,9 +1,8 @@
 package gae.listView;
 
-import gae.backend.Editable;
-import View.ViewUtil;
 import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
+import gae.backend.Editable;
 import gae.gridView.ContainerWrapper;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -11,11 +10,12 @@ import javafx.scene.Node;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
+import View.ViewUtil;
 
 
 /**
  * Any placed instances of an object is a MovableImage (stored in EditableNode)
- * 
+ *
  * @author Kei
  *
  */
@@ -31,7 +31,7 @@ public class MovableImage extends Region {
         this.editable = editable;
         this.wrapper = wrapper;
         wrapGroup = new Group(placedEditableImage);
-        this.getChildren().add(wrapGroup);
+        getChildren().add(wrapGroup);
         enableDrag();
     }
 
@@ -72,7 +72,7 @@ public class MovableImage extends Region {
     }
 
     public boolean checkIntersect (Node object) {
-        return this.getBoundsInParent().intersects(object.getBoundsInParent());
+        return getBoundsInParent().intersects(object.getBoundsInParent());
     }
 
     public void selectEditableImage () {
@@ -86,6 +86,6 @@ public class MovableImage extends Region {
     }
 
     public void deleteImage () {
-        this.getChildren().remove(wrapGroup);
+        getChildren().remove(wrapGroup);
     }
 }

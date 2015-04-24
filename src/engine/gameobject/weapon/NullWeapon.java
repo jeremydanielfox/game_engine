@@ -1,24 +1,25 @@
 package engine.gameobject.weapon;
 
-import java.util.List;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
-//TODO: There must be a better way to do this than just have empty methods everywhere.
-public class NullWeapon implements Weapon{
-    
-    
+import java.util.List;
+
+
+// TODO: There must be a better way to do this than just have empty methods everywhere.
+public class NullWeapon implements Weapon {
+
     @Override
     public void fire (ObjectCollection world, GameObject target, PointSimple location) {
-        //Do nothing
+        // Do nothing
     }
 
     @Override
     public void addBuff (Buff newBuff) {
-        //Do nothing
+        // Do nothing
     }
 
     @Override
@@ -28,7 +29,7 @@ public class NullWeapon implements Weapon{
 
     @Override
     public void setProjectile (GameObject projectile) {
-        //Do Nothing
+        // Do Nothing
     }
 
     @Override
@@ -46,33 +47,34 @@ public class NullWeapon implements Weapon{
         // TODO Auto-generated method stub
         return null;
     }
-    
+
     @Override
-    public void applyUpgrades (UpgradeBundle bundle){
-        
+    public void applyUpgrades (UpgradeBundle bundle) {
+
     }
 
     @Override
     public void setRange (double range) {
-        //Do Nothing
+        // Do Nothing
     }
 
     @Override
     public void setFiringRate (double firingRate) {
-        //Do Nothing
+        // Do Nothing
     }
 
     @Override
     public void advanceTime () {
-        //Do nothing
+        // Do nothing
     }
 
     @Override
     public void setFiringStrategy (FiringStrategy newStrategy) {
         // Do nothing
     }
-    
-    public Weapon clone(){
+
+    @Override
+    public Weapon clone () {
         return new NullWeapon();
     }
 }

@@ -1,17 +1,16 @@
 package gae.gameView;
 
+import engine.fieldsetting.Settable;
+import engine.fieldsetting.Triggerable;
+import engine.game.StoryBoard;
+import engine.goals.Goal;
+import gae.editor.EditingParser;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import engine.fieldsetting.Settable;
-import engine.fieldsetting.Triggerable;
-import engine.game.StoryBoard;
-import engine.goals.Goal;
-import View.ButtonWrapper;
-import gae.editor.EditingParser;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -21,12 +20,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import View.ButtonWrapper;
+
 
 /**
  * Main class used to construct a button for the game player to use
- * 
+ *
  * TODO: implement Builder interface?
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -60,14 +61,14 @@ public class ButtonCreator extends Application {
      */
     @SuppressWarnings({ "rawtypes", "static-access", "unchecked" })
     private void createMap (Map m, Class klass, Class annotation) {
-        parser.getMethodsWithAnnotation(klass, annotation).forEach(e -> {
+        EditingParser.getMethodsWithAnnotation(klass, annotation).forEach(e -> {
             m.put(e, extractName(e.getName()));
         });
     }
 
     /**
      * takes away the "set" from the method name
-     * 
+     *
      * @param method
      * @return
      */
@@ -103,33 +104,35 @@ public class ButtonCreator extends Application {
             /*
              * if field requires a String, then create a text field
              */
-            if (e.isInstance(String.class)) {
-                field = new TextField();
-            }
+                if (e.isInstance(String.class)) {
+                    field = new TextField();
+                }
 
-            /*
-             * if field requires a Consumer, then create drop down of all options for them to use
-             */
-            else if (e.isInstance(Consumer.class)) {
-                field = getPossibleActions();
-            }
+                /*
+                 * if field requires a Consumer, then create drop down of all options for them to
+                 * use
+                 */
+                else if (e.isInstance(Consumer.class)) {
+                    field = getPossibleActions();
+                }
 
-            /*
-             * if field requires a Goal, then create a drop down of all goals created & give them
-             * option to create new Goal
-             */
-            else if (e.isInstance(Goal.class)) {
-                field = getTriggerables();
-            }
+                /*
+                 * if field requires a Goal, then create a drop down of all goals created & give
+                 * them
+                 * option to create new Goal
+                 */
+                else if (e.isInstance(Goal.class)) {
+                    field = getTriggerables();
+                }
 
-            fieldSetter.getChildren().add(field);
-        });
+                fieldSetter.getChildren().add(field);
+            });
 
         container.getChildren().add(fieldSetter);
     }
 
     /**
-     * 
+     *
      * @return
      */
     @SuppressWarnings("rawtypes")
@@ -141,7 +144,7 @@ public class ButtonCreator extends Application {
     }
 
     /**
-     * 
+     *
      * @return
      */
     @SuppressWarnings("rawtypes")

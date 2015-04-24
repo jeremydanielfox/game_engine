@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 /**
  * A class that holds lists of previously created PathSets as well as Anchors. The other classes
  * interact with this class to cause changes in the path segments visualized on the screen.
- * 
+ *
  * @author Kei
  *
  */
@@ -31,7 +31,7 @@ public class PathView {
     private ObjectProperty<String> addPathInstructions;
 
     public PathView (StackPane stack, Scene scene) {
-        this.myScene = scene;
+        myScene = scene;
         myStack = stack;
         anchorList = new ArrayList<>();
         pathSetList = new ArrayList<>();
@@ -43,7 +43,7 @@ public class PathView {
 
     /**
      * Done to have the path coordinates be relative to the grid
-     * 
+     *
      * @param container
      */
     public void setContainerArea (ContainerWrapper container) {
@@ -112,7 +112,7 @@ public class PathView {
     /**
      * Creates a list of Path objects (a Path object represents a path segment). Essentially
      * represents one pathway.
-     * 
+     *
      * @return
      */
     public List<Path> createPathObjects () {

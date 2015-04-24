@@ -3,7 +3,6 @@ package player.gamePlayer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,10 +14,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+
 /**
  * The middle section of the PlayerOpener with the images of the game and the arrows that allow the
  * user to navigate around the player
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -54,8 +54,9 @@ public class GameSelector {
          */
         SelectOption s1 = new SelectOption(new ImageView("/images/bloonsdefense.jpg"), "Bloons");
         SelectOption s2 = new SelectOption(new ImageView("/images/desktopdefense.jpg"),
-                                           "Desktop Tower Defense");
-        SelectOption s3 = new SelectOption(new ImageView("/images/cartoonwars.jpg"), "Cartoon Wars");
+                "Desktop Tower Defense");
+        SelectOption s3 =
+                new SelectOption(new ImageView("/images/cartoonwars.jpg"), "Cartoon Wars");
         options.addAll(Arrays.asList(s1, s2, s3));
 
         index = 0;
@@ -63,16 +64,16 @@ public class GameSelector {
         setUpGrid();
         setUpFunctions();
     }
-    
+
     public Node getChooser () {
         return chooser;
     }
-    
+
     /**
      * for adding an option to the game selector once the user loads in a new game
      */
     public void addOption () {
-        
+
     }
 
     /**
@@ -82,8 +83,8 @@ public class GameSelector {
     private void setUpGrid () {
         List<Node> optionNodes = Arrays.asList(left, currentView, right);
         optionNodes.forEach(e -> {
-            chooser.setRowIndex(e, 0);
-            chooser.setColumnIndex(e, optionNodes.indexOf(e));
+            GridPane.setRowIndex(e, 0);
+            GridPane.setColumnIndex(e, optionNodes.indexOf(e));
         });
         chooser.getChildren().addAll(left, currentView, right);
     }
@@ -98,28 +99,33 @@ public class GameSelector {
         left.setOnMouseClicked(e -> {
             swipe(LEFT);
         });
-        
+
         myScene.setOnKeyPressed(e -> {
-            if (e.getCode().equals(KeyCode.RIGHT))
+            if (e.getCode().equals(KeyCode.RIGHT)) {
                 swipe(RIGHT);
-            else if (e.getCode().equals(KeyCode.LEFT))
-                swipe(LEFT);
-        });
+            }
+                else if (e.getCode().equals(KeyCode.LEFT)) {
+                    swipe(LEFT);
+                }
+            });
     }
 
     /**
      * swipes the images to the next option in the respective direction (left or right). loops
      * around if it reaches an end
-     * 
+     *
      * @param s
      */
     private void swipe (int i) {
-        if (index == options.size() - 1 && i == RIGHT)
+        if (index == options.size() - 1 && i == RIGHT) {
             index = 0;
-        else if (index == 0 && i == LEFT)
+        }
+        else if (index == 0 && i == LEFT) {
             index = options.size() - 1;
-        else
+        }
+        else {
             index += i;
+        }
         currentView.getChildren().clear();
         currentView.getChildren().add(options.get(index).getOption());
     }
@@ -127,7 +133,7 @@ public class GameSelector {
     /**
      * Represents one option the user can select from. Comprised of an image of the game and its
      * label.
-     * 
+     *
      * @author Brandon Choi
      *
      */
@@ -141,18 +147,18 @@ public class GameSelector {
         public SelectOption (ImageView picture, String name) {
             display = new VBox(10);
             gamePicture = picture;
-            
+
             /*
              * set width and height to ratio of the screen
              */
             gamePicture.setFitWidth(400);
             gamePicture.setFitHeight(300);
-            
+
             textBox = new HBox();
             gameName = new Text(name);
             textBox.getChildren().add(gameName);
             textBox.setAlignment(Pos.CENTER);
-            
+
             display.setId("selectOption");
             gamePicture.setId("gameIcon");
             gameName.setId("gameName");

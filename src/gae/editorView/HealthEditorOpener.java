@@ -26,7 +26,7 @@ public class HealthEditorOpener extends EditorOpener {
                 int value = Integer.parseInt(setHeight.getText());
             }
             catch (NumberFormatException exception) {
-                
+
             }
         });
         vbox.getChildren().addAll(label, setHeight, add);
@@ -37,5 +37,4 @@ public class HealthEditorOpener extends EditorOpener {
     public String getTitle () {
         return "Health Editor";
     }
-
 }

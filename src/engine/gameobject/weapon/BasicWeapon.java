@@ -22,7 +22,7 @@ import gameworld.ObjectCollection;
 /**
  * Tool of attack for a GameObject. It has inherent range and a firing rate.
  * The weapon contains all behaviors that will be applied to a GameObject target.
- * 
+ *
  * @author Nathan Prabhu and Danny Oh
  *
  */
@@ -44,7 +44,7 @@ public class BasicWeapon implements Weapon {
     }
 
     @Override
-    public Weapon clone(){
+    public Weapon clone () {
         BasicWeapon clone = new BasicWeapon();
         clone.setFiringRate(myFiringRate.getRate());
         clone.setRange(myRange.getRange());
@@ -52,7 +52,7 @@ public class BasicWeapon implements Weapon {
         clone.setProjectile(myProjectile);
         return clone;
     }
-    
+
     private UpgradeSet<Upgrade> initializeUpgrades () {
         UpgradeSet<Upgrade> result =
                 new UpgradeSet<Upgrade>(new Upgrade[] { myRange, myFiringRate });
@@ -69,7 +69,7 @@ public class BasicWeapon implements Weapon {
                             Set<Buff> explosBuffs) {
 
         Buff buff = (change.wasAdded()) ? (Buff) change.getElementAdded() :
-                                       (Buff) change.getElementRemoved();
+            (Buff) change.getElementRemoved();
         switch (buff.getBuffType()) {
             case COLLISION:
                 if (change.wasAdded()) {
@@ -124,7 +124,7 @@ public class BasicWeapon implements Weapon {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see engine.gameobject.weapon.Weaopn#fire(gameworld.GameWorld, engine.gameobject.PointSimple)
      */
     @Override
@@ -137,7 +137,7 @@ public class BasicWeapon implements Weapon {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see engine.gameobject.weapon.Weaopn#addBuff(engine.gameobject.units.Buff)
      */
     @Override
@@ -147,7 +147,7 @@ public class BasicWeapon implements Weapon {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see engine.gameobject.weapon.Weaopn#getValue()
      */
     @Override
@@ -162,7 +162,7 @@ public class BasicWeapon implements Weapon {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see engine.gameobject.weapon.Weaopn#getFiringRate()
      */
     @Override
@@ -198,10 +198,12 @@ public class BasicWeapon implements Weapon {
         return timeSinceFire > firingRateToSeconds();
     }
 
+    @Override
     public List<UpgradeBundle> getNextUpgrades () {
         return tree.getNextUpgrades();
     }
 
+    @Override
     public void applyUpgrades (UpgradeBundle bundle) {
         bundle.applyUpgrades(upgradables);
         bundle.getParent().updateCurrent(bundle.getParent());

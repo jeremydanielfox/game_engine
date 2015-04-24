@@ -6,7 +6,7 @@ import View.Displayable;
 /**
  * A class can extend the Timer class when it will be "Displayable," be able to update when called
  * each frame, and hold a minute-second value.
- * 
+ *
  * @author Sierra
  *
  */
@@ -20,7 +20,7 @@ public abstract class Timer extends Displayable {
 
     /**
      * This method returns the total time left on the timer, in seconds.
-     * 
+     *
      * @return time left in seconds
      */
     public abstract int getSecondsLeft ();

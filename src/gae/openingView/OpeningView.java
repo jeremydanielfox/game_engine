@@ -8,18 +8,19 @@ import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import animations.Animator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import animations.Animator;
+
 
 /**
  * OpeningView is the overarching class for the first scene the author sees. Allows the author to
  * provide basic information about the game and select game type.
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -100,10 +101,9 @@ public class OpeningView implements UIMediator {
         }
     }
 
-
     /**
      * indicates whether data form has any empty fields or not
-     * 
+     *
      * @return
      */
     private boolean fieldsCompleted () {
@@ -111,13 +111,13 @@ public class OpeningView implements UIMediator {
         extractFields(dt);
         return dt.filledFields();
     }
-    
+
     /**
      * extracts text from data form into map via reflection on the method name
-     * 
+     *
      * @param data
      */
-    private void extractFields(DataForm data) {
+    private void extractFields (DataForm data) {
         Arrays.asList("Author", "Description", "Game Type", "Instructions", "Title").forEach(e -> {
             String methodName = "get" + e.replaceAll(" ", "");
             try {

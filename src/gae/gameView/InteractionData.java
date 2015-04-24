@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import engine.gameobject.GameObject;
 import engine.interactions.BuffImparter;
 import engine.interactions.CollisionEngine;
@@ -15,10 +14,11 @@ import engine.interactions.NoInteraction;
 import engine.interactions.RangeEngine;
 import engine.interactions.ShootAt;
 
+
 /**
  * Class that acts as the data holder of all interactions authored. This will hold the interactions
  * that will be exported out to the engine.
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -50,7 +50,7 @@ public class InteractionData {
 
     /**
      * returns both interaction engines with respective interactions set in each of them
-     * 
+     *
      * @return
      */
     public List<InteractionEngine> getEngines () {
@@ -59,7 +59,7 @@ public class InteractionData {
 
     /**
      * returns map of strings that are mapped to the type of interaction in the engine
-     * 
+     *
      * @return
      */
     @SuppressWarnings("rawtypes")
@@ -79,7 +79,7 @@ public class InteractionData {
     /**
      * adds interactions based on one list of objects that interact in a certain way with another
      * list of objects
-     * 
+     *
      * @param one
      * @param i
      * @param two
@@ -100,7 +100,7 @@ public class InteractionData {
     /**
      * places all the interactions between list one and two by iterating through each of them and
      * setting all iterations
-     * 
+     *
      * @param one
      * @param i
      * @param two

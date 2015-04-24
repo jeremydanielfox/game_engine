@@ -1,6 +1,6 @@
 package usecases.usecase_GAE1;
 
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import java.util.ArrayList;
 import java.util.Observable;
 import javafx.beans.property.ObjectProperty;
@@ -15,14 +15,14 @@ public class Library extends Observable {
     // We would need this Editable ObservableList to be held by the Library
     // class and LibraryView class
 
-    ObservableList<Editable> tower = FXCollections
+    ObservableList<Placeable> tower = FXCollections
             .observableList(new ArrayList<>());
 
     // This ObjectProperty is bound to the ObjectProperty in the EditorView
     // class. Therefore, when the Library class's property is changed, it
     // automatically reflects in the EditorView's property.
 
-    ObjectProperty<Editable> property = new SimpleObjectProperty<>();
+    ObjectProperty<Placeable> property = new SimpleObjectProperty<>();
 
     /**
      * The library will contain certain data and the observer (LibraryView) will
@@ -31,7 +31,7 @@ public class Library extends Observable {
      */
 
     public Library () {
-        tower.addListener( (ListChangeListener.Change<? extends Editable> e) -> onChanged(e));
+        tower.addListener( (ListChangeListener.Change<? extends Placeable> e) -> onChanged(e));
     }
 
     public void updateObservers () {
@@ -39,12 +39,12 @@ public class Library extends Observable {
         notifyObservers();
     }
 
-    public void addToList (Editable editable) {
+    public void addToList (Placeable editable) {
         tower.add(editable);
 
     }
 
-    private void onChanged (ListChangeListener.Change<? extends Editable> e) {
+    private void onChanged (ListChangeListener.Change<? extends Placeable> e) {
         // while(e.next()) {
         //
         // }

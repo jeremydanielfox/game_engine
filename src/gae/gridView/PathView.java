@@ -1,5 +1,6 @@
 package gae.gridView;
 
+import gae.listView.Authorable;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.ObjectProperty;
@@ -18,7 +19,7 @@ import javafx.scene.paint.Color;
  * @author Kei
  *
  */
-public class PathView {
+public class PathView implements Authorable {
     private Group root;
     private Scene myScene;
     private ArrayList<Anchor> anchorList;
@@ -29,6 +30,7 @@ public class PathView {
     private int myID;
     private ObjectProperty<Integer> addPath;
     private ObjectProperty<String> addPathInstructions;
+    private static final String DEFAULT_PATH = "/images/Park_Path.png";
 
     public PathView (StackPane stack, Scene scene) {
         myScene = scene;
@@ -131,5 +133,22 @@ public class PathView {
 
     public int getID () {
         return myID;
+    }
+
+    public String getType () {
+        // TODO Auto-generated method stub
+        return "Path";
+    }
+
+    @Override
+    public String getName () {
+        // TODO Auto-generated method stub
+        return "Path";
+    }
+
+    @Override
+    public String getImagePath () {
+        // TODO Auto-generated method stub
+        return DEFAULT_PATH;
     }
 }

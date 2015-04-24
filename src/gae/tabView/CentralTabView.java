@@ -1,6 +1,6 @@
 package gae.tabView;
 
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.gridView.LevelView;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
@@ -50,7 +50,7 @@ public class CentralTabView implements UIObject {
         levelView = new LevelView();
         LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
         LevelTabSet newLevel =
-                new LevelTabSet(levelView.getBorder(scene, libraryData), levelPrefs.getStack());
+                new LevelTabSet(levelView.getBorder(scene), levelPrefs.getStack());
         Tab newTab = new Tab("Level:" + levelCount++);
         newTab.setContent(newLevel.getBaseNode());
         newTab.setClosable(false);

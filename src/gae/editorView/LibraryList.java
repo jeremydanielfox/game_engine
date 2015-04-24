@@ -1,7 +1,8 @@
 package gae.editorView;
 
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.gridView.ContainerWrapper;
+import gae.listView.Authorable;
 import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
 import java.util.Arrays;
@@ -31,7 +32,7 @@ import javafx.scene.paint.Color;
  */
 public class LibraryList {
 
-    private Map<String, ObservableList<Editable>> editableMap;
+    private Map<String, ObservableList<Authorable>> editableMap;
     private LibraryData data = LibraryData.getInstance();
     private String[] hardCodeForNow = { "Tower", "Enemy" }; // types of GameObjects
     private Scene scene;
@@ -53,7 +54,7 @@ public class LibraryList {
     public Accordion initialize () {
         Accordion accordion = new Accordion();
         for (String type : hardCodeForNow) {
-            ObservableList<Editable> list = FXCollections.observableArrayList();
+            ObservableList<Authorable> list = FXCollections.observableArrayList();
             editableMap.put(type, list);
             TitledPane titledPane = getTitledPane(type);
             accordion.getPanes().add(titledPane);
@@ -62,24 +63,21 @@ public class LibraryList {
         return accordion;
     }
 
-    private void setUpLists (ObservableList<Editable> observableList) {
-        observableList.addListener( (ListChangeListener.Change<? extends Editable> change) -> {
+    private void setUpLists (ObservableList<Authorable> observableList) {
+        observableList.addListener( (ListChangeListener.Change<? extends Authorable> change) -> {
             while (change.next()) {
                 if (change.wasAdded()) { // if an editablenode was added
-                    System.out.println("CHANGE WAS MADE");
-                    Editable added = (Editable) change.getAddedSubList().get(0);
+                    Placeable added = (Placeable) change.getAddedSubList().get(0);
                     editableMap.get(added.getType()).add(added);
                 }
             }
         });
-        for (Editable editable : observableList) {
-            addToList(editable);
+        for (Authorable authorable : observableList) {
+            Placeable editable = (Placeable) authorable;
+            editableMap.get(editable.getType()).add(editable);
         }
     }
 
-    private void addToList (Editable editable) {
-        editableMap.get(editable.getType()).add(editable);
-    }
 
     /**
      * method created to make a simple TitledPane with a text
@@ -91,7 +89,7 @@ public class LibraryList {
         TitledPane pane = new TitledPane();
         pane.setText(text);
         pane.setTextFill(Color.RED);
-        pane.setContent(ListViewUtilities.createList(editableMap.get(text), scene));
+        pane.setContent(ListViewUtilities.createList(editableMap.get(text), scene, "Editable"));
         return pane;
     }
 

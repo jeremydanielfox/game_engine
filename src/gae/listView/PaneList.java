@@ -1,6 +1,6 @@
 package gae.listView;
 
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.gridView.ContainerWrapper;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,10 +25,10 @@ import javafx.scene.paint.Color;
  *
  */
 public class PaneList {
-    private Map<Editable, ObservableList<Editable>> instancesEditableMap;
+    private Map<Authorable, ObservableList<Authorable>> instancesEditableMap;
     private Group root;
     private StackPane stack;
-    private ObservableList<Editable> observableList;
+    private ObservableList<Authorable> observableList;
     private ContainerWrapper wrapper;
     private String type;
     private Scene scene;
@@ -47,7 +47,7 @@ public class PaneList {
                                   Node node,
                                   Scene scene,
                                   ContainerWrapper wrapper,
-                                  ObservableList<Editable> editableObservableList,
+                                  ObservableList<Authorable> editableObservableList,
                                   String type) {
         this.root = root;
         this.node = node;
@@ -76,7 +76,7 @@ public class PaneList {
         }
     }
 
-    public Map<Editable, ObservableList<Editable>> getMap () {
+    public Map<Authorable, ObservableList<Authorable>> getMap () {
         return instancesEditableMap;
     }
 
@@ -95,13 +95,13 @@ public class PaneList {
 
     private void setUpObservableList (ObservableList<TitledPane> paneList) {
 
-        for (Editable previous : observableList) {
+        for (Authorable previous : observableList) {
             setUpNewInstanceList(paneList, previous);
         }
-        observableList.addListener( (ListChangeListener.Change<? extends Editable> change) -> {
+        observableList.addListener( (ListChangeListener.Change<? extends Authorable> change) -> {
             while (change.next()) {
                 if (change.wasAdded()) { // if an editablenode was added
-                    Editable added = change.getAddedSubList().get(0);
+                    Authorable added = change.getAddedSubList().get(0);
                     setUpNewInstanceList(paneList, added);
                 }
             }
@@ -109,12 +109,12 @@ public class PaneList {
     }
 
     private void setUpNewInstanceList (ObservableList<TitledPane> paneList,
-                                       Editable editable) {
-        if (editable.getType().equals(type)) {
-            ObservableList<Editable> instanceList =
+                                       Authorable authorable) {
+        if (authorable.getType().equals(type)) {
+            ObservableList<Authorable> instanceList =
                     FXCollections.observableArrayList();
-            instancesEditableMap.put(editable, instanceList);
-            TitledPane newPane = setTitledPaneClick(editable, instanceList);
+            instancesEditableMap.put(authorable, instanceList);
+            TitledPane newPane = setTitledPaneClick(authorable, instanceList);
             paneList.add(newPane);
         }
     }
@@ -130,11 +130,12 @@ public class PaneList {
      * @param wrapper
      * @return
      */
-    private TitledPane setTitledPaneClick (Editable editable,
-                                           ObservableList<Editable> instanceList) {
+    private TitledPane setTitledPaneClick (Authorable authorable,
+                                           ObservableList<Authorable> instanceList) {
         TitledPane newPane = new TitledPane();
+        Placeable editable = (Placeable) authorable;
         newPane.setText(editable.getName());
-        newPane.setContent(ListViewUtilities.createList(instanceList, scene));
+        newPane.setContent(ListViewUtilities.createList(instanceList, scene, "Editable"));
         newPane.setOnMousePressed(me -> {
             if (me.isSecondaryButtonDown()) {
                 ContextMenu contextmenu = new ContextMenu();

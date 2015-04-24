@@ -1,5 +1,7 @@
 package gae.editorView;
 
+import engine.gameobject.PointSimple;
+import gae.gridView.ContainerWrapper;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -18,7 +20,7 @@ import javafx.scene.text.FontWeight;
 import View.ViewUtil;
 
 
-public class DragIntoRectangle extends Group {
+public class DragIntoRectangle extends Group implements ContainerWrapper {
     private static final double LABEL_PROPORTIONS_Y = 0.4;
     // 11 ALPHABETS ACROSS
     private double width;
@@ -108,5 +110,17 @@ public class DragIntoRectangle extends Group {
 
     private void setVisible () {
         nodesList.forEach(node -> node.setVisible(true));
+    }
+
+    @Override
+    public boolean checkBounds (double x, double y) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public PointSimple convertCoordinates (double x, double y) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

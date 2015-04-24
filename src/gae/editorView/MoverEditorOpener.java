@@ -16,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import gae.gridView.PathView;
+import gae.listView.Authorable;
 import gae.listView.LibraryData;
 import gae.gridView.Path;
 
@@ -24,7 +25,7 @@ public class MoverEditorOpener extends EditorOpener {
     private LibraryData libraryData;
     private VBox optionBox;
     private boolean first = true;
-    private List<ComboBox<PathView>> createdDropDownList;
+    private List<ComboBox<Authorable>> createdDropDownList;
 
     public void initialize () {
         // TODO Auto-generated method stub
@@ -35,7 +36,7 @@ public class MoverEditorOpener extends EditorOpener {
 
     private void save () {
         createdDropDownList.forEach( (dropDown) -> {
-            PathView pathView = dropDown.getSelectionModel().getSelectedItem();
+            PathView pathView = (PathView) dropDown.getSelectionModel().getSelectedItem();
             System.out.println("We have selected : " + pathView.getID());
             List<Path> path = pathView.createPathObjects();
             // we need to add it to an Editable, which will then be converted to GameObjectSimple
@@ -46,12 +47,12 @@ public class MoverEditorOpener extends EditorOpener {
 
     private HBox createHBox () {
         HBox hbox = new HBox();
-        ComboBox<PathView> dropDown = new ComboBox<>(libraryData.getPathObservableList());
+        ComboBox<Authorable> dropDown = new ComboBox<>(libraryData.getPathObservableList());
         createdDropDownList.add(dropDown);
-
-        dropDown.setButtonCell(new ListCell<PathView>() {
+        
+        dropDown.setButtonCell(new ListCell<Authorable>() {
             @Override
-            protected void updateItem (PathView pathView, boolean bln) {
+            protected void updateItem (Authorable pathView, boolean bln) {
                 super.updateItem(pathView, bln);
                 if (bln) {
                     setText(null);
@@ -66,9 +67,9 @@ public class MoverEditorOpener extends EditorOpener {
 
         });
         dropDown.setCellFactory( (myList) -> {
-            return new ListCell<PathView>() {
+            return new ListCell<Authorable>() {
                 @Override
-                protected void updateItem (PathView pathView, boolean bln) {
+                protected void updateItem (Authorable pathView, boolean bln) {
                     super.updateItem(pathView, bln);
                     if (bln) {
                         setText(null);
@@ -87,7 +88,7 @@ public class MoverEditorOpener extends EditorOpener {
             Button plus = new Button("+");
             plus.setOnAction(e -> addMoreOptions());
             Button view = new Button("View currently selected animation");
-            view.setOnAction(e -> setEngineDemo(dropDown.getSelectionModel().getSelectedItem()));
+            view.setOnAction(e -> setEngineDemo((PathView) dropDown.getSelectionModel().getSelectedItem()));
 
             hbox.getChildren().addAll(dropDown, plus, view);
             first = false;

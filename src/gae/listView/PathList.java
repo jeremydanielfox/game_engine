@@ -36,7 +36,7 @@ public class PathList {
     private List<List<Path>> allPaths;
     private List<PathView> previousPaths;
     private static int counter;
-    private ObservableList<PathView> paths;
+    private ObservableList<Authorable> paths;
     private StackPane stack;
     private Scene scene;
     private int listIndex;
@@ -72,19 +72,15 @@ public class PathList {
      * Creates the TitledPane for path and sets it such that objects can be removed. Looking to
      * refactor this code soon.
      */
-    public TitledPane getTitledPane (ObservableList<PathView> paths, String text) {
-        this.paths = paths;
+    public TitledPane getTitledPane (String text) {
+        paths = LibraryData.getInstance().getPathObservableList();
         TitledPane pane = new TitledPane();
         pane.setText(text);
         pane.setTextFill(Color.RED);
 
-        final ListView<PathView> listView = new ListView<>(paths);
-        listView.setPrefSize(200, 250);
-
-        listView.setEditable(true);
-
+        final ListView<Authorable> listView = ListViewUtilities.createList(paths, scene, "Path");
         listView.setOnMouseClicked(e -> {
-            PathView selected = listView.getSelectionModel().getSelectedItem();
+            PathView selected = (PathView) listView.getSelectionModel().getSelectedItem();
             setOldPath(selected);
             listIndex = listView.getSelectionModel().getSelectedIndex();
             scene.setOnKeyPressed(keyEvent -> {
@@ -96,24 +92,7 @@ public class PathList {
                 }
             });
         });
-        listView.setCellFactory( (myList) -> {
-            return new ListCell<PathView>() {
-                @Override
-                protected void updateItem (PathView pathView, boolean bln) {
-                    super.updateItem(pathView, bln);
-                    if (bln) {
-                        setText(null);
-                        setGraphic(null);
-                    }
-                    else if (pathView != null) {
-                        HBox content = new HBox();
-                        content.getChildren().add(new Label("Path " + pathView.getID()));
-                        setGraphic(content);
-                    }
-                }
-            };
-        });
-        listView.setMaxWidth(300);
+   
         pane.setContent(listView);
         return pane;
     }

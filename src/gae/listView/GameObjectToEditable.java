@@ -4,7 +4,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.gridView.Path;
 import java.util.List;
 import javafx.scene.image.ImageView;
@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
  * @author Kei
  *
  */
-public class GameObjectToEditable implements Editable {
+public class GameObjectToEditable implements Placeable {
     private GameObject gameObject;
     private static final long serialVersionUID = 1L;
     private static int ourID = 0;
@@ -167,8 +167,8 @@ public class GameObjectToEditable implements Editable {
     }
 
     @Override
-    public Editable makeNewInstance () {
-        Editable copy = (Editable) DeepCopy.copy(this);
+    public Placeable makeNewInstance () {
+        Placeable copy = (Placeable) DeepCopy.copy(this);
         copy.setID(ourID);
         ourID++;
         return copy;

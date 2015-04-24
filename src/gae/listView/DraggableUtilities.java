@@ -2,7 +2,7 @@ package gae.listView;
 
 import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.editorView.DragIntoRectangle;
 import gae.gridView.ContainerWrapper;
 import javafx.collections.ObservableList;
@@ -28,11 +28,12 @@ public class DraggableUtilities {
      * @param root: where the Image will be placed
      */
     public static void makeEditablePlaceable (MouseEvent me,
-                                              Editable editable,
+                                              Authorable authorable,
                                               Node node,
-                                              ObservableList<Editable> instanceList,
+                                              ObservableList<Authorable> instanceList,
                                               ContainerWrapper wrapper,
                                               Group root) {
+        Placeable editable = (Placeable) authorable;
         ImageView transitionImage = editable.getImageView();
         // TODO: implement popup error when overlapping - collision detection
         Node binder =
@@ -51,7 +52,7 @@ public class DraggableUtilities {
                 throw new ObjectOutOfBoundsException();
             }
 
-            Editable newEditable = editable.makeNewInstance();
+            Placeable newEditable = editable.makeNewInstance();
             instanceList.add(newEditable);
             PointSimple relativeLocation = wrapper.convertCoordinates(currentX, currentY);
             newEditable.setLocation(relativeLocation);
@@ -68,7 +69,7 @@ public class DraggableUtilities {
                                            ImageView image,
                                            Node node, DragIntoRectangle correct,
                                            Group root) {
-        ImageView clone = new ImageView(image.getImage());
+        ImageContainer clone = new ImageContainer(new ImageView(image.getImage()));
         ImageView imageView = (ImageView) ListViewUtilities.createCellContentWithIcon(clone);
         Node binder =
                 ViewUtil.bindCursor(imageView,
@@ -78,9 +79,6 @@ public class DraggableUtilities {
                                     KeyCode.ESCAPE, false);
         binder.setOnMouseClicked(ev -> {
             if (image.getBoundsInLocal().intersects(correct.getBoundsInLocal())) {
-                // root.getChildren().add(imageView);
-                // root.setTranslateX(correct.getTranslateX());
-                // root.setTranslateY(correct.getTranslateY() + size/2);
                 correct.setCorrect(imageView);
             }
 

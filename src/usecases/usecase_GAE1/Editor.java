@@ -1,6 +1,6 @@
 package usecases.usecase_GAE1;
 
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import java.lang.reflect.Field;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -14,9 +14,9 @@ import java.util.ResourceBundle;
  */
 public class Editor {
     private HashMap<String, String[]> fieldMap;
-    private Editable editable;
+    private Placeable editable;
 
-    public Editor (Editable editable) {
+    public Editor (Placeable editable) {
         this.editable = editable;
         fieldMap = useResourceBundle();
     }

@@ -1,13 +1,13 @@
 package usecases.usecase_GAE1;
 
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 
 public class EditorView {
     // This property and the Library's property would be bound
-    ObjectProperty<Editable> property = new SimpleObjectProperty<>();
+    ObjectProperty<Placeable> property = new SimpleObjectProperty<>();
 
     // The EditorView had already been instantiated by when the program was
     // started. The setEditor() class will be called every time the property

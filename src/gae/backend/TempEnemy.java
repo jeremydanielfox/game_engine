@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import View.ImageUtilities;
 
 
-public class TempEnemy implements Editable, UIObject {
+public class TempEnemy implements Placeable, UIObject {
     /**
      *
      */
@@ -146,9 +146,9 @@ public class TempEnemy implements Editable, UIObject {
     }
 
     @Override
-    public Editable makeNewInstance () {
+    public Placeable makeNewInstance () {
         // need to keep track of ID some other way because no more EditableNode
-        Editable copy = (Editable) DeepCopy.copy(this);
+        Placeable copy = (Placeable) DeepCopy.copy(this);
         copy.setID(ourID);
         ourID++;
         return copy;

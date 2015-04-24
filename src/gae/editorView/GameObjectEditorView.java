@@ -17,17 +17,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.backend.TempTower;
 import gae.gridView.ContainerWrapper;
+import gae.listView.Authorable;
 import gae.listView.DraggableUtilities;
+import gae.listView.ImageContainer;
 import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
 import gae.openingView.UIObject;
 
 
 public class GameObjectEditorView implements UIObject {
-    private ObservableList<Node> optionList = FXCollections.observableArrayList();
+    private ObservableList<Authorable> optionList = FXCollections.observableArrayList();
     private String[] imagePaths = { "/images/WeaponImage.png", "/images/HealthImage.jpeg",
                                    "/images/PathImage.png" };
     private Group root;
@@ -38,7 +40,7 @@ public class GameObjectEditorView implements UIObject {
     private static final double LIBRARY_EDITOR_PROPORTIONS = 0.75;
     private GameObjectContainer bottom;
     private AnchorPane anchor;
-    private Editable editable;
+    private Placeable editable;
 
     public GameObjectEditorView (Scene scene) {
         root = new Group();
@@ -79,17 +81,18 @@ public class GameObjectEditorView implements UIObject {
         return anchor;
     }
 
-    private ListView<Node> setUpList () {
-        ListView<Node> list = ListViewUtilities.createList(optionList);
+    private ListView<Authorable> setUpList () {
+        ListView<Authorable> list = ListViewUtilities.createList(optionList, null, "Image");
         for (String path : imagePaths) {
-            optionList.add(new ImageView(path));
+            optionList.add(new ImageContainer(new ImageView(path)));
         }
         list.setOnMouseClicked(me -> {
-            ImageView selected = (ImageView) list.getSelectionModel().getSelectedItem();
+            ImageContainer selected = (ImageContainer) list.getSelectionModel().getSelectedItem();
+            ImageView image = selected.getImageView();
 //            ImageView changed = ImageUtilities.changeImageSize(selected, 50, 50);
             for (int i = 0; i < bottom.getRectangles().size(); i++) {
                 if (i == list.getSelectionModel().getSelectedIndex()) {
-                    DraggableUtilities.makeImagePlaceable(me, selected, bottom, bottom
+                    DraggableUtilities.makeImagePlaceable(me, image, bottom, bottom
                             .getRectangles().get(i), root);
                 }
             }

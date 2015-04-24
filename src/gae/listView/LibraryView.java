@@ -1,6 +1,6 @@
 package gae.listView;
 
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.gridView.ContainerWrapper;
 import gae.gridView.PathView;
 import java.util.ArrayList;
@@ -31,15 +31,14 @@ public class LibraryView {
     private Group root;
     private Group objectGroup;
     private Node nodeScene;
-    private ObservableList<PathView> pathObservableList;
-    private ObservableList<Editable> editableObservableList;
+    private ObservableList<Authorable> editableObservableList;
     private Scene myScene;
     private Accordion accordion;
     private TitledPane pathTitledPane;
     private PathList pathList;
     private ContainerWrapper wrapper;
 
-    public LibraryView (ObservableList<Editable> editableObservableList) {
+    public LibraryView (ObservableList<Authorable> editableObservableList) {
         this.editableObservableList = editableObservableList;
     }
 
@@ -61,10 +60,8 @@ public class LibraryView {
      */
     public Group getGroup (Node pane,
                            Scene scene,
-                           ObservableList<PathView> pathList,
                            ContainerWrapper wrapper) {
         nodeScene = pane;
-        pathObservableList = pathList;
         myScene = scene;
         this.wrapper = wrapper;
         root = new Group();
@@ -94,7 +91,7 @@ public class LibraryView {
         }
         pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
         pathTitledPane =
-                pathList.getTitledPane(pathObservableList, "Path");
+                pathList.getTitledPane("Path");
         accordion.getPanes().add(pathTitledPane);
         setUpToggle();
         return accordion;

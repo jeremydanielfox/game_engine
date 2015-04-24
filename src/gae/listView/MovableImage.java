@@ -2,7 +2,7 @@ package gae.listView;
 
 import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.gridView.ContainerWrapper;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -21,13 +21,13 @@ import View.ViewUtil;
  */
 public class MovableImage extends Region {
     private final Group wrapGroup;
-    private Editable editable;
+    private Placeable editable;
     private ContainerWrapper wrapper;
     private double startX;
     private double startY;
     private boolean selected;
 
-    public MovableImage (ImageView placedEditableImage, Editable editable, ContainerWrapper wrapper) {
+    public MovableImage (ImageView placedEditableImage, Placeable editable, ContainerWrapper wrapper) {
         this.editable = editable;
         this.wrapper = wrapper;
         wrapGroup = new Group(placedEditableImage);

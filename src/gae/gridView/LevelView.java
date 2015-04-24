@@ -1,6 +1,6 @@
 package gae.gridView;
 
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.backend.TempEnemy;
 import gae.backend.TempTower;
 import gae.listView.LibraryData;
@@ -31,7 +31,7 @@ import javafx.stage.Stage;
  * A class that instantiates the necessary components of the level. Contains the Library on the left
  * and grid/background in the center.
  *
- * @author Kei
+ * @author Kei & Nina
  *
  */
 public class LevelView {
@@ -44,11 +44,9 @@ public class LevelView {
     private ObjectProperty<Image> backgroundProperty;
     private ObjectProperty<Dimension> gridSizeProperty;
     private ContainerWrapper wrapper;
-    private LibraryView libraryview;
     private LibraryData libraryData;
 
-    public Pane getBorder (Scene scene, LibraryData libraryData) {
-        this.libraryData = libraryData;
+    public Pane getBorder (Scene scene) {
         border = new Pane();
         border.getChildren().add(getStack(scene));
         border.getChildren().add(getLibraryView());
@@ -59,15 +57,6 @@ public class LevelView {
 
     public Image getBackgroundImage () {
         return backgroundProperty.get();
-    }
-
-    /**
-     * Temporary method to pass in the EditableNode all the way to the LibraryView
-     *
-     * @param node
-     */
-    public void getAddFunction (Editable editable) {
-        libraryData.addEditableToList(editable);
     }
 
     /**
@@ -104,10 +93,11 @@ public class LevelView {
      * @return
      */
     private Group getLibraryView () {
-        libraryview =
+        libraryData = LibraryData.getInstance();
+        LibraryView libraryview =
                 new LibraryView(libraryData.getEditableObservableList());
         Group leftview =
-                libraryview.getGroup(stack, scene, libraryData.getPathObservableList(), wrapper);
+                libraryview.getGroup(stack, scene, wrapper);
         // TODO: can't do the above since it messes up the coordinates - got to fix
         leftview.getChildren().add(gridOptions());
         return leftview;
@@ -143,7 +133,7 @@ public class LevelView {
         Button setDimensions = new Button("Change Grid Dimensions");
         setDimensions.setOnAction(e -> {
             gridSizeProperty.setValue(new Dimension(Integer.parseInt(setWidth.getText()), Integer
-                                                    .parseInt(setHeight.getText())));
+                    .parseInt(setHeight.getText())));
         });
         vbox.getChildren().addAll(title, changeBackground(backgroundProperty), grid,
                                   setDimensions);
@@ -161,20 +151,20 @@ public class LevelView {
 
     private Button tempButtonTower () {
         Button temp = new Button("add Tower");
-        Editable editable = new TempTower();
+        Placeable editable = new TempTower();
         temp.setOnAction(e -> libraryData.addEditableToList(editable));
         return temp;
     }
 
     private Button tempButtonEnemy () {
         Button temp = new Button("add Enemy");
-        Editable editable = new TempEnemy();
+        Placeable editable = new TempEnemy();
         temp.setOnAction(e -> libraryData.addEditableToList(editable));
         return temp;
     }
 
-    public Consumer<Editable> getConsumer () {
-        Consumer<Editable> consumer = e -> libraryData.addEditableToList(e);
-        return consumer;
-    }
+    // public Consumer<Editable> getConsumer () {
+    // Consumer<Editable> consumer = e -> libraryData.addEditableToList(e);
+    // return consumer;
+    // }
 }

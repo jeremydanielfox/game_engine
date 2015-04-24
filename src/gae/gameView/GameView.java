@@ -1,6 +1,6 @@
 package gae.gameView;
 
-import gae.backend.Editable;
+import gae.backend.Placeable;
 // import gae.backend.GameManager;
 import gae.openingView.UIMediator;
 import gae.openingView.UIObject;

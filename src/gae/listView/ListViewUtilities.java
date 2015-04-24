@@ -1,6 +1,6 @@
 package gae.listView;
 
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -29,81 +29,54 @@ public class ListViewUtilities {
      * @param edit
      * @return
      */
-    public static Node createCellContentWithIcon (Object object) {
-        if (object instanceof gae.backend.Editable) { // horizontal
-            HBox content = new HBox();
-            Editable edit = (Editable) object;
-            ImageView image = new ImageView(edit.getImagePath());
-
-            image.setFitHeight(THUMBNAIL_SIZE_HORIZONTAL);
-            image.setPreserveRatio(true);
-            content.getChildren().addAll(image, new Label(edit.getName() + edit.getID()));
-            return content;
-        }
-        else { // vertical
-            ImageView image = (ImageView) object;
+    public static Node createCellContentWithIcon (Authorable authorable) {
+        if (authorable.getType().equals("Image")) { // image Case
+            ImageContainer container = (ImageContainer) authorable;
+            ImageView image = container.getImageView();
             image.setFitHeight(THUMBNAIL_SIZE_VERTICAL);
             image.setPreserveRatio(true);
             return image;
         }
+        else { // otherwise
+            HBox content = new HBox();
+            ImageView image = new ImageView(authorable.getImagePath());
+            image.setFitHeight(THUMBNAIL_SIZE_HORIZONTAL);
+            image.setPreserveRatio(true);
+            content.getChildren().addAll(image,
+                                         new Label(authorable.getName() + authorable.getID()));
+            return content;
+        }
     }
 
-    /**
-     * creates a ListView given an observable list of Editables, with specific properties, such as
-     * deleting objects and highlighting selected objects
-     *
-     * @param editables
-     * @param scene
-     * @return
-     */
-    public static Node createList (ObservableList<Editable> editables, Scene scene) {
-        ListView<Editable> list = new ListView<>();
-        list.setPrefWidth(200);
-        list.setItems(editables);
+    public static void setEditableSelection (ListView<Authorable> list,
+                                             ObservableList<Authorable> authorables,
+                                             Scene scene) {
         try {
             list.setOnMousePressed(e -> {
                 if (e.getClickCount() == 1) {
-                    Editable selected = list.getSelectionModel().getSelectedItem();
+                    Placeable selected = (Placeable) list.getSelectionModel().getSelectedItem();
                     selected.getMovableImage().selectEditableImage();
                     scene.setOnKeyPressed(keyEvent -> {
                         if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
-                            editables.remove(selected);
+                            authorables.remove(selected);
                             selected.getMovableImage().deleteImage();
                         }
                     });
-                    for (Editable editable : list.getItems()) {
+                    for (Authorable authorable : list.getItems()) {
+                        Placeable editable = (Placeable) authorable;
                         if (editable != selected)
                             editable.getMovableImage().unselectEditableImage();
                     }
                 }
                     else if (e.getClickCount() == 2) {
-                        list.getSelectionModel().getSelectedItem().getMovableImage()
-                                .unselectEditableImage();
-
+                        Placeable selected = (Placeable) list.getSelectionModel().getSelectedItem();
+                        selected.getMovableImage().unselectEditableImage();
                         list.getSelectionModel().clearSelection();
                     }
-
                 });
         }
         catch (NullPointerException e) {
         }
-        list.setCellFactory( (myList) -> {
-            return new ListCell<Editable>() {
-                @Override
-                protected void updateItem (Editable edit, boolean bln) {
-                    super.updateItem(edit, bln);
-                    if (bln) {
-                        setText(null);
-                        setGraphic(null);
-                    }
-                    else if (edit != null) {
-                        setGraphic(ListViewUtilities.createCellContentWithIcon(edit));
-                    }
-                }
-            };
-        });
-
-        return list;
     }
 
     /**
@@ -114,15 +87,33 @@ public class ListViewUtilities {
      * @param scene
      * @return
      */
-    public static ListView<Node> createList (ObservableList<Node> editables) {
-        ListView<Node> list = new ListView<>();
+    public static ListView<Authorable> createList (ObservableList<Authorable> authorables,
+                                                   Scene scene,
+                                                   String type) {
+        ListView<Authorable> list = listCreatingHelper(authorables);
+        if (type.equals("Editable")) {
+            setEditableSelection(list, authorables, scene);
+        }
+        return list;
+    }
+
+    /**
+     * creates a ListView given an observable list of Authorables
+     *
+     * @param editables
+     * @param scene
+     * @return
+     */
+    public static ListView<Authorable> listCreatingHelper (ObservableList<Authorable> authorables) {
+
+        ListView<Authorable> list = new ListView<>();
         list.setPrefWidth(200);
-        list.setItems(editables);
+        list.setItems(authorables);
 
         list.setCellFactory( (myList) -> {
-            return new ListCell<Node>() {
+            return new ListCell<Authorable>() {
                 @Override
-                protected void updateItem (Node object, boolean bln) {
+                protected void updateItem (Authorable object, boolean bln) {
                     super.updateItem(object, bln);
                     if (bln) {
                         setText(null);

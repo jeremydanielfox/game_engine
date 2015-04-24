@@ -8,7 +8,7 @@ import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.gridView.Path;
 import gae.gridView.PathView;
 import java.util.ArrayList;
@@ -33,18 +33,18 @@ public class LibraryData {
         return instance;
     }
 
-    private ObservableList<Editable> editableList = FXCollections.observableArrayList();
-    private ObservableList<PathView> pathList = FXCollections.observableArrayList();
+    private ObservableList<Authorable> editableList = FXCollections.observableArrayList();
+    private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
 
-    public ObservableList<Editable> getEditableObservableList () {
+    public ObservableList<Authorable> getEditableObservableList () {
         return editableList;
     }
 
-    public ObservableList<PathView> getPathObservableList () {
+    public ObservableList<Authorable> getPathObservableList () {
         return pathList;
     }
 
-    public void addEditableToList (Editable editable) {
+    public void addEditableToList (Placeable editable) {
         editableList.add(editable);
     }
     
@@ -59,7 +59,8 @@ public class LibraryData {
 
     public List<GameObjectSimple> getGameObjectList () {
         List<GameObjectSimple> gameObjectList = new ArrayList<>();
-        for (Editable editable : editableList) {
+        for (Authorable authorable : editableList) {
+            Placeable editable = (Placeable) authorable;
             GameObjectSimple object = new GameObjectSimple();
             object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
                                           editable.getImagePath()));
@@ -74,7 +75,7 @@ public class LibraryData {
         return gameObjectList;
     }
 
-    private MoverPath getMover (Editable editable) {
+    private MoverPath getMover (Placeable editable) {
         List<List<Path>> allPaths = editable.getPath();
         MoverPath mover = new MoverPath();
         PathFixed myPath = new PathFixed();

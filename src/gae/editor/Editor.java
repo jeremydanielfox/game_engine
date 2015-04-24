@@ -66,7 +66,6 @@ public abstract class Editor implements Edits {
                 editCount++;
             }
         }
-
         return propertyName;
     }
 

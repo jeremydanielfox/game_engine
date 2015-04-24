@@ -21,7 +21,7 @@ public class SimpleEditorView implements UIObject {
 
     public SimpleEditorView () {
         vbox = new VBox();
-        vbox.getChildren().addAll(getNameBox(), getTypeBox(), getImageBox());
+        vbox.getChildren().addAll(getNameBox(), getTypeBox(), getImageBox(), getButtonBox());
     }
 
     private HBox getNameBox () {
@@ -63,7 +63,10 @@ public class SimpleEditorView implements UIObject {
 
     private HBox getButtonBox () {
         HBox hbox = new HBox();
-        
+        Button save = new Button("Save");
+        save.setOnAction(e -> {
+
+        });
         return hbox;
     }
 

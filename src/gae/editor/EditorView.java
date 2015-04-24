@@ -1,7 +1,7 @@
 package gae.editor;
 
 import exception.NonNumberException;
-import gae.backend.Editable;
+import gae.backend.Placeable;
 import gae.backend.ResourceBundleUtil;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -17,11 +17,11 @@ import javafx.stage.Stage;
 
 public class EditorView {
     // This property and the Library's property would be bound
-    private Editable editable;
+    private Placeable editable;
     private HashMap<String, String[]> fieldMap;
     private Stage s;
 
-    public EditorView (Editable editable, Stage s) {
+    public EditorView (Placeable editable, Stage s) {
         this.editable = editable;
         fieldMap = ResourceBundleUtil.useResourceBundle();
         this.s = s;

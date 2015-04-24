@@ -4146,6 +4146,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -4159,6 +4160,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -4201,6 +4203,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -4214,6 +4217,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -4256,6 +4260,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -4269,6 +4274,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -4311,6 +4317,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -4324,6 +4331,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -4366,6 +4374,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -4379,6 +4388,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -4421,6 +4431,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -4434,6 +4445,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -4476,6 +4488,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -4489,6 +4502,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -4531,6 +4545,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -4544,6 +4559,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -4586,6 +4602,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -4599,6 +4616,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -4641,6 +4659,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -4654,6 +4673,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -4676,16 +4696,16 @@
                   <myFrameDuration>1200</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1114</int>
-                    <int>354</int>
-                    <int>462</int>
-                    <int>612</int>
-                    <int>550</int>
-                    <int>217</int>
-                    <int>1077</int>
-                    <int>805</int>
-                    <int>636</int>
-                    <int>1131</int>
+                    <int>758</int>
+                    <int>177</int>
+                    <int>1177</int>
+                    <int>1158</int>
+                    <int>365</int>
+                    <int>551</int>
+                    <int>1108</int>
+                    <int>122</int>
+                    <int>73</int>
+                    <int>837</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -5093,6 +5113,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -5106,6 +5127,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -5520,6 +5542,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -5533,6 +5556,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -5947,6 +5971,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -5960,6 +5985,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -6374,6 +6400,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -6387,6 +6414,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -6801,6 +6829,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -6814,6 +6843,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -7228,6 +7258,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -7241,6 +7272,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -7655,6 +7687,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -7668,6 +7701,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -8082,6 +8116,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -8095,6 +8130,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -8509,6 +8545,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -8522,6 +8559,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -8936,6 +8974,7 @@
                             <y>10000.0</y>
                             <hash>0</hash>
                           </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
                         </myGraphic>
                         <myTag class="engine.shop.tag.GameObjectTagSimple">
                           <name></name>
@@ -8949,6 +8988,7 @@
                               <y>0.0</y>
                               <hash>0</hash>
                             </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
                           </shopGraphic>
                         </myTag>
                         <myBuffs>
@@ -9085,4 +9125,5 @@
       <myGoal class="engine.goals.NoCurrentEventGoal" reference="../../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/obs/engine.goals.NoCurrentEventGoal"/>
     </View.ButtonWrapper>
   </myButtons>
+  <myGameName>Game Name</myGameName>
 </engine.game.ConcreteGame>

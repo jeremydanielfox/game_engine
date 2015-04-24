@@ -1,5 +1,7 @@
 package gae.gameView;
 
+import gae.listView.LibraryData;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class InteractionTable extends Application {
 
     private static InteractionTable instance;
 
+    private InteractionData myInteractionData;
+    private LibraryData myLibraryData;
     private BorderPane container;
     private ScrollPane scroller;
     private VBox content;
@@ -32,6 +36,8 @@ public class InteractionTable extends Application {
     private List<InteractionInstance> interactions;
 
     public InteractionTable () {
+        myInteractionData = new InteractionData();
+        myLibraryData = LibraryData.getInstance();
         container = new BorderPane();
         scroller = new ScrollPane();
         container.setCenter(scroller);
@@ -52,7 +58,6 @@ public class InteractionTable extends Application {
     public static synchronized InteractionTable getInstance () {
         if (instance == null)
             instance = new InteractionTable();
-
         return instance;
     }
 
@@ -61,7 +66,7 @@ public class InteractionTable extends Application {
      */
     private void setUpButtons () {
         adder.setOnMouseClicked(e -> {
-            InteractionInstance i = new InteractionInstance();
+            InteractionInstance i = new InteractionInstance(myInteractionData, myLibraryData);
             interactions.add(i);
             content.getChildren().add(i.getInteractionSetter());
         });

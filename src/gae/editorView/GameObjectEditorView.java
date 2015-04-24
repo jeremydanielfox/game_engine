@@ -1,5 +1,6 @@
 package gae.editorView;
 
+import engine.gameobject.GameObjectSimple;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import gae.backend.Placeable;
 import gae.backend.TempTower;
+import gae.editor.SimpleEditor;
 import gae.gridView.ContainerWrapper;
 import gae.listView.Authorable;
 import gae.listView.DraggableUtilities;
@@ -38,11 +40,26 @@ public class GameObjectEditorView implements UIObject {
     private static final int TAB_HEIGHT = 160;
     private static final int SIDE_WIDTH = 430;
     private static final double LIBRARY_EDITOR_PROPORTIONS = 0.75;
+    private static final Class<?> DEFAULT_CLASS = GameObjectSimple.class;
     private GameObjectContainer bottom;
     private AnchorPane anchor;
+    private SimpleEditor simpleEditor;
     private Placeable editable;
+    private Class<?> clazz;
 
     public GameObjectEditorView (Scene scene) {
+        init(scene);
+        simpleEditor = new SimpleEditor(DEFAULT_CLASS);
+        clazz = DEFAULT_CLASS;
+    }
+    
+    public GameObjectEditorView (Scene scene, Class<?> klass) {
+        init(scene);
+        simpleEditor = new SimpleEditor(klass);
+        clazz = klass;
+    }
+    
+    private void init(Scene scene) {
         root = new Group();
         root.setManaged(false);
         this.scene = scene;
@@ -62,11 +79,11 @@ public class GameObjectEditorView implements UIObject {
         double vboxHeight = (Screen.getPrimary().getVisualBounds().getHeight() - TAB_HEIGHT) / 2;
         double vboxWidth = (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH)*LIBRARY_EDITOR_PROPORTIONS;
 
-        SimpleEditorView simpleEditor = new SimpleEditorView();
-        VBox top = (VBox) simpleEditor.getObject();
+        SimpleEditorView simpleEditorView = new SimpleEditorView(simpleEditor.getSimpleComponentEditors());
+        VBox top = (VBox) simpleEditorView.getObject();
         top.setPrefSize(vboxWidth, vboxHeight);
 
-        bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
+        bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene, simpleEditor.getObjectComponentEditors());
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
 
@@ -104,6 +121,10 @@ public class GameObjectEditorView implements UIObject {
     public Node getObject () {
         // TODO Auto-generated method stub
         return setUpBorder();
+    }
+    
+    public Object createObject() {
+        return simpleEditor.createObject(clazz);
     }
 
 }

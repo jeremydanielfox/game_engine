@@ -1,5 +1,6 @@
 package gae.editorView;
 
+import gae.editor.ObjectComponentEditor;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Scene;
@@ -15,8 +16,10 @@ public class GameObjectContainer extends VBox {
     private String[] settable = { "Weapon", "Health", "Mover" };
     private List<DragIntoRectangle> rectangleList;
     private Scene scene;
+    private ArrayList<ObjectComponentEditor> componentEditors;
 
-    public GameObjectContainer (double width, double height, Scene scene) {
+    public GameObjectContainer (double width, double height, Scene scene, ArrayList<ObjectComponentEditor> components) {
+        componentEditors = components;
         rectangleList = new ArrayList<>();
         setPrefSize(width, height);
         this.width = width;
@@ -38,7 +41,7 @@ public class GameObjectContainer extends VBox {
         setSpacing(width / 10);
         System.out.println("total width is : " + width);
         for (int i = 1; i <= 3; i++) {
-            DragIntoRectangle rect = new DragIntoRectangle(width, settable[i - 1], scene);
+            DragIntoRectangle rect = new DragIntoRectangle(width, settable[i - 1], scene, componentEditors.get(i-1));
             rect.setTranslateX((3 * i - 2) * width / 10);
             hbox.getChildren().add(rect);
             rectangleList.add(rect);

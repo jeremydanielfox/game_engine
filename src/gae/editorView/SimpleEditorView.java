@@ -1,5 +1,8 @@
 package gae.editorView;
 
+import java.util.ArrayList;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+import gae.editor.ComponentEditor;
 import gae.openingView.UIObject;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -22,6 +25,11 @@ public class SimpleEditorView implements UIObject {
     public SimpleEditorView () {
         vbox = new VBox();
         vbox.getChildren().addAll(getNameBox(), getTypeBox(), getImageBox(), getButtonBox());
+    }
+    
+    public SimpleEditorView(ArrayList<ComponentEditor> list) {
+        vbox = new VBox();
+        for (ComponentEditor component : list) vbox.getChildren().add(component.getObject());
     }
 
     private HBox getNameBox () {

@@ -2,11 +2,7 @@ package gae.editor;
 
 import gae.gameView.GenericObjectsPane;
 import java.util.function.Consumer;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.stage.Stage;
-
 
 /**
  *
@@ -20,8 +16,10 @@ public class ObjectComponentEditor extends ComponentEditor {
     private Button myAddExistingButton;
     private Button myCreateNewButton;
     private Object myObject;
+    private Class<?> clazz;
 
     public ObjectComponentEditor (Class<?> klass) {
+        clazz = klass;
         try {
             myObject = Class.forName(klass.getName()).newInstance();
         }
@@ -42,6 +40,10 @@ public class ObjectComponentEditor extends ComponentEditor {
 
     private void setObject (Object obj) {
         myObject = obj;
+    }
+    
+    public Class<?> getObjectClass() {
+        return clazz;
     }
 
     @Override

@@ -21,7 +21,7 @@ public interface Musician {
      * @param two
      * @param m
      */
-    void addSoundEffect (Node one, Interaction i, Node two, Media m);
+    void addSoundEffect (Node one, Interaction i, Node two, Music m);
 
     /**
      * Adds a background song to scene
@@ -29,7 +29,7 @@ public interface Musician {
      * @param scene
      * @param m
      */
-    void addBackgroundMusic (Scene scene, Media m);
+    void addBackgroundMusic (Scene scene, Music m);
 
     /**
      * Restarts the music or sounds from the beginning
@@ -56,7 +56,7 @@ public interface Musician {
     void playAudio(Object o);
     
     /**
-     * pauses media file associated with object
+     * pauses media file currently being played
      */
-    void pauseAudio(Object o);
+    void pauseAudio();
 }

@@ -3,19 +3,26 @@ package gae.gameView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Map;
 import engine.gameobject.GameObject;
 import engine.gameobject.Graphic;
+=======
+>>>>>>> d7e5488c3a9d55c05610a2d255bb60d993598bff
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import engine.gameobject.GameObject;
+
 
 /**
  * List of options that can be checked to indicate selection
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -23,10 +30,10 @@ import javafx.scene.layout.VBox;
 public class CheckList {
 
     private VBox checkList;
-    private List<GameObject> myObjects;
+    private List<? extends GameObject> myObjects;
     private Map<GameObject, Boolean> myMap;
 
-    public CheckList (List<GameObject> objects) {
+    public CheckList (List<? extends GameObject> objects) {
         checkList = new VBox(15);
         myObjects = objects;
         myMap=new HashMap<>();
@@ -40,8 +47,23 @@ public class CheckList {
     }
 
     /**
+     * Called by outside class to display the check list
+     */
+    public void showCheckList () {
+        Stage temp = new Stage();
+        Scene scene = new Scene(checkList);
+        temp.setScene(scene);
+        temp.show();
+        temp.centerOnScreen();
+    }
+
+    /*
+     * TODO: differentiate between using a Label object in JavaFX or a label as a type?
+     */
+
+    /**
      * create one check option based on object given
-     * 
+     *
      * @param s
      */
     private void createCheckOption (GameObject o) {

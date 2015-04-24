@@ -11,17 +11,18 @@ import gameworld.ObjectCollection;
 
 
 /**
- * 
+ *
  * @author Jeremy, Kaighn
  *
  */
 
-public interface GameObject extends Firing, Colliding, Buffable, Movable, Health, PurchasableGameObject, Prototype<GameObject> {
+public interface GameObject extends Firing, Colliding, Buffable, Movable, Health,
+        PurchasableGameObject, Prototype<GameObject> {
     // public void updateGraphics ();//cannot implement yet
 
     /**
      * Updates the object accordingly within the objectcollection (usually gameworld) given
-     * 
+     *
      * @param world
      */
     public void update (ObjectCollection world);
@@ -38,13 +39,15 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
     public Label getLabel ();
 
     public void setGraphic (Graphic graphic);
-    
+
     public void setLabel (Label label);
+
     /**
      * Tags contain important GameObject info (e.g. name, description, image)
-     * 
+     *
      * @return
      */
+    @Override
     public GameObjectTag getTag ();
 
     /**
@@ -54,7 +57,7 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
 
     /**
      * Sets the object's location to point
-     * 
+     *
      * @param point
      */
     public void setPoint (PointSimple point);

@@ -1,14 +1,13 @@
 package engine.events;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import gameworld.FixedWorld;
 import gameworld.GameWorld;
-import gameworld.StructurePlacementException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 public abstract class Wave extends TimedEvent {
@@ -29,15 +28,15 @@ public abstract class Wave extends TimedEvent {
     }
 
     @Settable
-    public void setObjectQueue(GameObjectQueue objects){
+    public void setObjectQueue (GameObjectQueue objects) {
         myQueue = objects;
     }
-    
+
     @Settable
-    public void setGameWorld(GameWorld world){
+    public void setGameWorld (GameWorld world) {
         myWorld = world;
     }
-    
+
     public Wave (double startTime, GameObjectQueue objects, GameWorld world) {
         super(startTime);
         initializeVars(objects, world);
@@ -52,7 +51,7 @@ public abstract class Wave extends TimedEvent {
     /**
      * This method is to be called during each iteration of the game loop. In concrete wave
      * classes it is responsible for releasing enemies.
-     * 
+     *
      * @return false if the wave has finished
      */
     @Override
@@ -71,7 +70,7 @@ public abstract class Wave extends TimedEvent {
     /**
      * Returns true if all enemies of the wave have been release and have also
      * exited the game world.
-     * 
+     *
      * @return
      */
     public boolean isComplete () {
@@ -80,7 +79,7 @@ public abstract class Wave extends TimedEvent {
 
     /**
      * Adds an object to the game world if there are any objects left in the queue.
-     * 
+     *
      * @return true if an object was released, false if no objects remain
      */
     public boolean releaseObject () {

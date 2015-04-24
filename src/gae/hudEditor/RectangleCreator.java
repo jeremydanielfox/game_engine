@@ -1,4 +1,5 @@
 package gae.hudEditor;
+
 import java.util.Arrays;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
@@ -11,9 +12,9 @@ import javafx.scene.shape.Rectangle;
 
 /**
  * Class taken from http://stackoverflow.com/questions/26298873/resizable-and-movable-rectangle
- * 
+ *
  * Need to improve design
- * 
+ *
  * @author !JohnGilhuly
  *
  */
@@ -46,11 +47,11 @@ public class RectangleCreator {
         setUpDragging(moveHandle, mouseLocation);
 
         resizeHandleSE.setOnMouseDragged(e ->
-                resizeRectangle(handleRadius, rect, mouseLocation, e));
+        resizeRectangle(handleRadius, rect, mouseLocation, e));
 
         moveHandle.setOnMouseDragged(e ->
-                moveRectangle(handleRadius, rect, mouseLocation, e));
-        
+        moveRectangle(handleRadius, rect, mouseLocation, e));
+
         return rect;
     }
 
@@ -64,13 +65,13 @@ public class RectangleCreator {
             double newX = rect.getX() + deltaX;
             double newMaxX = newX + rect.getWidth();
             if (newX >= handleRadius
-                && newMaxX <= rect.getParent().getBoundsInLocal().getWidth() - handleRadius) {
+                    && newMaxX <= rect.getParent().getBoundsInLocal().getWidth() - handleRadius) {
                 rect.setX(newX);
             }
             double newY = rect.getY() + deltaY;
             double newMaxY = newY + rect.getHeight();
             if (newY >= handleRadius
-                && newMaxY <= rect.getParent().getBoundsInLocal().getHeight() - handleRadius) {
+                    && newMaxY <= rect.getParent().getBoundsInLocal().getHeight() - handleRadius) {
                 rect.setY(newY);
             }
             mouseLocation.value = new Point2D(event.getSceneX(), event.getSceneY());
@@ -86,12 +87,12 @@ public class RectangleCreator {
             double deltaY = event.getSceneY() - mouseLocation.value.getY();
             double newMaxX = rect.getX() + rect.getWidth() + deltaX;
             if (newMaxX >= rect.getX()
-                && newMaxX <= rect.getParent().getBoundsInLocal().getWidth() - handleRadius) {
+                    && newMaxX <= rect.getParent().getBoundsInLocal().getWidth() - handleRadius) {
                 rect.setWidth(rect.getWidth() + deltaX);
             }
             double newMaxY = rect.getY() + rect.getHeight() + deltaY;
             if (newMaxY >= rect.getY()
-                && newMaxY <= rect.getParent().getBoundsInLocal().getHeight() - handleRadius) {
+                    && newMaxY <= rect.getParent().getBoundsInLocal().getHeight() - handleRadius) {
                 rect.setHeight(rect.getHeight() + deltaY);
             }
             mouseLocation.value = new Point2D(event.getSceneX(), event.getSceneY());

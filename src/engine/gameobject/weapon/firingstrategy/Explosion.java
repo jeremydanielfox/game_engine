@@ -20,14 +20,15 @@ public class Explosion {
         radius = 0;
         explosBuffs = new HashSet<Buff>();
     }
-    
+
     public Explosion (double radius, Collection<Buff> buffSet) {
-        this.explosBuffs = new HashSet<Buff>(buffSet);
+        explosBuffs = new HashSet<Buff>(buffSet);
         this.radius = radius;
     }
 
     /**
      * Creates explosion in world at the specified location
+     * 
      * @param world
      * @param location
      */
@@ -39,23 +40,25 @@ public class Explosion {
             }
         }
     }
-    
+
     /**
      * Adds newBuff as an explosion behavior
+     * 
      * @param newBuff
      */
-    public void addBuff(Buff newBuff){
+    public void addBuff (Buff newBuff) {
         explosBuffs.add(newBuff);
     }
 
     /**
      * Sets the explosion radius
+     * 
      * @param radius
      */
-    public void setRadius(double radius){
+    public void setRadius (double radius) {
         this.radius = radius;
     }
-    
+
     private void applyBuffs (GameObject target) {
         for (Buff b : explosBuffs) {
             target.receiveBuff(b.clone());
@@ -64,12 +67,14 @@ public class Explosion {
 
     private boolean checkTeam (GameObject target) {
         // TODO: Check if target is on the other team...
-        if (target instanceof GameObjectSimpleTest)
+        if (target instanceof GameObjectSimpleTest) {
             return true;
+        }
         return false;
     }
-    
-    public Explosion clone(){
+
+    @Override
+    public Explosion clone () {
         return new Explosion(radius, explosBuffs);
     }
 

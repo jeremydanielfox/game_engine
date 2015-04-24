@@ -3,7 +3,7 @@ package engine.prototype;
 /**
  * Follows the service locator pattern. Keeps a reference to the PrototypeService and returns it to
  * whoever asks for it.
- * 
+ *
  * @author Tom Puglisi
  *
  */

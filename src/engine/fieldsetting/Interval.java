@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  * radius to be negative, you could set the lowerBound to zero. The game authoring environment will
  * then be able
  * to grab the interval at runtime and restrict the user to setting a value in that interval.
- * 
+ *
  * @author Jeremy
  *
  */

@@ -1,14 +1,13 @@
 package gae.gridView;
 
 import java.awt.Point;
-import java.awt.geom.Point2D;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 
 /**
  * Holds data about the tile
- * 
+ *
  * @author Kei & Nina
  *
  */
@@ -36,8 +35,8 @@ public class TileData {
     protected BooleanProperty getWalkableProperty () {
         return walkableProperty;
     }
-    
+
     protected Point getGridLocation () {
-        return new Point(row,col);
+        return new Point(row, col);
     }
 }

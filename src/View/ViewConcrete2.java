@@ -5,33 +5,41 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import voogasalad.util.highscore.HighScoreController;
+import voogasalad.util.highscore.HighScoreException;
 import javafx.animation.Animation;
+import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.Animation.Status;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import engine.game.Game;
-import engine.goals.*;
 import engine.game.LevelBoard;
 import engine.gameobject.GameObject;
-import engine.gameobject.Graphic;
-import engine.shop.ShopModel;
+import engine.goals.CanDecSpeedGoal;
+import engine.goals.CanIncSpeedGoal;
+import engine.goals.IsPlayingGoal;
+import engine.goals.NotPlayingGoal;
 
 
 public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Playable {
 
     public static final double GAME_WIDTH_TO_HEIGHT = 1;
+
     public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
-    //TODO need to update this to be a function of min frame rate 
+    public static final double WORLD_WIDTH = 600;
+    public static final double WORLD_HEIGHT = 600;
+    // public static final int MAX_FRAME_RATE = 500;
+    // public static final int MIN_FRAME_RATE = 1000;
+    // TODO need to update this to be a function of min frame rate
     public static final int DEFAULT_FRAMES_SECOND = 60;
 
     private List<Node> hack = new ArrayList<Node>();
@@ -46,13 +54,15 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private double myDisplayWidth;
     private double myDisplayHeight;
     private HUD myHeadsUp;
-    
-    public ViewConcrete2 (Game game, double width, double height) {
+
+    public ViewConcrete2 (Game game,
+                          double stageWidth,
+                          double stageHeight) {
         myGame = game;
         myLevelBoard = myGame.getLevelBoard();
         myLevelBoard.addObserver(this);
-        myDisplayWidth = width;
-        myDisplayHeight = height;
+        myDisplayWidth = stageWidth;
+        myDisplayHeight = stageHeight;
     }
 
     @Override
@@ -62,6 +72,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myGameWorldPane.setMaxWidth(myDisplayHeight * GAME_WIDTH_TO_HEIGHT);
         myPane.setCenter(myGameWorldPane);
         initializeGameWorld();
+        vbox.setFocusTraversable(false);
         return myPane;
     }
 
@@ -107,8 +118,11 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private KeyFrame makeKeyFrame (int frameRate) {
         return new KeyFrame(Duration.millis(myRate / frameRate),
                             e -> executeFrameActions());
+        // return new KeyFrame(Duration.millis(myRate / frameRate),
+        // e -> executeFrameActions());
     }
 
+    @Override
     public void toggleRate () {
         // TODO
         Animation.Status previousStatus = myAnimation.getStatus();
@@ -117,24 +131,28 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         if (myRate <= MAX_FRAME_RATE) {
             myRate = MIN_FRAME_RATE;
         }
-        else
+        else {
             myRate = MAX_FRAME_RATE;
+        }
         buildTimeline();
         restoreLastAnimationStatus(previousStatus);
     }
 
+    @Override
     public boolean canIncSpeed () {
         return myRate >= MIN_FRAME_RATE;
     }
 
+    @Override
     public boolean canDecSpeed () {
         return myRate <= MAX_FRAME_RATE;
     }
 
     private void restoreLastAnimationStatus (Animation.Status prevStatus) {
         myHeadsUp.update();
-        if (prevStatus.equals(Animation.Status.RUNNING))
+        if (prevStatus.equals(Animation.Status.RUNNING)) {
             play();
+        }
     }
 
     @Override
@@ -155,21 +173,15 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
 
     }
 
-    @Override
-    public void displayShop () {
-        // TODO Auto-generated method stub
-
-    }
-
-    private void addInitialObjects () {//This is actually a rendering method now.
+    private void addInitialObjects () {// This is actually a rendering method now.
         Collection<GameObject> gameObjects = myGame.getLevelBoard().getGameWorld().getGameObjects();
-        for (Node n: hack){
+        for (Node n : hack) {
             myGameWorldPane.getChildren().remove(n);
         }
         hack.clear();
         for (GameObject o : gameObjects) {
-                    myGameWorldPane.getChildren().add(o.getGraphic().getNode());
-                    hack.add(o.getGraphic().getNode());
+            myGameWorldPane.getChildren().add(o.getGraphic().getNode());
+            hack.add(o.getGraphic().getNode());
         }
     }
 
@@ -179,6 +191,18 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
             pause();
             if (myLevelBoard.gameOver()) {
                 // note: display game over screen
+                HighScoreController scores = HighScoreController.getController();
+                // TODO eliminate magic values
+                try {
+                    scores.setValue(myGame.getGameName(), 0, "Score", myGame.getPlayer().getScore());
+                    scores.saveInstanceScoreData(myGame.getGameName(), 0, myGame.getPlayer()
+                            .getName());
+                }
+                catch (HighScoreException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    System.out.println("Issue saving when game ends");
+                }
                 PopUpScreen gameOver = new PopUpScreen();
                 gameOver.makeScreen("GAME OVER", "Play Again");
                 // ideally gamePlayer/observers should be notified here
@@ -219,8 +243,8 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
          * I changed this to 600 because that's the size of the container - the relative thing works
          * I think - Kei
          */
-        image.setFitHeight(600);
-        image.setFitWidth(600);
+        image.setFitHeight(WORLD_HEIGHT);
+        image.setFitWidth(WORLD_WIDTH);
         myGameWorldPane.getChildren().clear();
         myGameWorldPane.getChildren().add(image);
     }
@@ -234,6 +258,14 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
                 .addButton(new ButtonWrapper("Fast", e -> toggleRate(), new CanIncSpeedGoal(this)));
     }
 
+    public static double getWorldHeight(){
+        return WORLD_HEIGHT;
+    }
+    
+    public static double getWorldWidth(){
+        return WORLD_WIDTH;
+    }
+    
     @Override
     public void pause () {
         myAnimation.pause();
@@ -246,6 +278,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myHeadsUp.update();
     }
 
+    @Override
     public void addButton (Button b, int x, int y) {
         vbox.getChildren().add(b);
     }
@@ -253,6 +286,16 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     @Override
     public boolean isPlaying () {
         return myAnimation.getStatus().equals(Status.RUNNING);
+    }
+
+    private void handleKeyInput (KeyEvent e) {
+        KeyCode keyCode = e.getCode();
+        if (keyCode == KeyCode.A)
+            System.out.println("right");
+
+        else if (keyCode == KeyCode.LEFT)
+            System.out.println("left");
+
     }
 
 }

@@ -1,6 +1,7 @@
 package gae.editorView;
 
 import java.util.Map;
+import engine.gameobject.GameObjectSimple;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,8 @@ import javafx.stage.Screen;
 import gae.backend.Placeable;
 import gae.backend.ResourceBundleUtil;
 import gae.backend.TempTower;
+import gae.editor.ObjectComponentEditor;
+import gae.editor.SimpleEditor;
 import gae.gridView.ContainerWrapper;
 import gae.listView.Authorable;
 import gae.listView.DraggableUtilities;
@@ -38,21 +41,37 @@ public class GameObjectEditorView implements UIObject {
     private static final int TAB_HEIGHT = 160;
     private static final int SIDE_WIDTH = 430;
     private static final double LIBRARY_EDITOR_PROPORTIONS = 0.75;
+    private static final Class<?> DEFAULT_CLASS = GameObjectSimple.class;
     private GameObjectContainer bottom;
     private AnchorPane anchor;
+    private SimpleEditor simpleEditor;
     private Placeable editable;
+    private Class<?> clazz;
 
     public GameObjectEditorView (Scene scene) {
+        init(scene);
+        simpleEditor = new SimpleEditor(DEFAULT_CLASS);
+        clazz = DEFAULT_CLASS;
+    }
+
+    public GameObjectEditorView (Scene scene, Class<?> klass) {
+        init(scene);
+        simpleEditor = new SimpleEditor(klass);
+        clazz = klass;
+    }
+
+    private void init (Scene scene) {
         root = new Group();
         root.setManaged(false);
         this.scene = scene;
-        imageLocationMap = ResourceBundleUtil.useResourceBundle("gae/editorView/ObjectPathProperties");
+        imageLocationMap =
+                ResourceBundleUtil.useResourceBundle("gae/editorView/ObjectPathProperties");
     }
 
     private BorderPane setUpBorder () {
         border = new BorderPane();
 
-        border.setRight(setUpList());
+        border.setRight(setUpAccordion());
         border.setCenter(setUpAnchor());
         LibraryList library = new LibraryList(scene);
         border.setLeft(library.initialize());
@@ -61,13 +80,18 @@ public class GameObjectEditorView implements UIObject {
 
     private AnchorPane setUpAnchor () {
         double vboxHeight = (Screen.getPrimary().getVisualBounds().getHeight() - TAB_HEIGHT) / 2;
-        double vboxWidth = (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH)*LIBRARY_EDITOR_PROPORTIONS;
+        double vboxWidth =
+                (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH) *
+                        LIBRARY_EDITOR_PROPORTIONS;
 
-        SimpleEditorView simpleEditor = new SimpleEditorView();
-        VBox top = (VBox) simpleEditor.getObject();
+        SimpleEditorView simpleEditorView =
+                new SimpleEditorView(simpleEditor.getSimpleComponentEditors());
+        VBox top = (VBox) simpleEditorView.getObject();
         top.setPrefSize(vboxWidth, vboxHeight);
 
-        bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
+        bottom =
+                new GameObjectContainer(vboxWidth, vboxHeight, scene,
+                                        simpleEditor.getObjectComponentEditors());
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
 
@@ -81,28 +105,42 @@ public class GameObjectEditorView implements UIObject {
         AnchorPane.setTopAnchor(bottomHalf, vboxHeight);
         return anchor;
     }
-    
-//    private ListView<Authorable> setUpList () {
-//        ListView<Authorable> list = ListViewUtilities.createList(optionList, null, "Image");
-//        for (String type: imageLocationMap.keySet()) {
-//            optionList.add(new DraggableFields(imageLocationMap.get(type)[0], type));
-//        }
-//        list.setOnMouseClicked(me -> {
-//            DraggableFields selected = (DraggableFields) list.getSelectionModel().getSelectedItem();
-//            for (int i = 0; i < bottom.getRectangles().size(); i++) {
-//                if (i == list.getSelectionModel().getSelectedIndex()) {
-//                    DraggableUtilities.makeImagePlaceable(me, selected, bottom, bottom
-//                            .getRectangles().get(i), root);
-//                }
-//            }
-//        });
-//        return list;
-//    }
+
+    private Accordion setUpAccordion () {
+        Accordion accordion = new Accordion();
+        for (ObjectComponentEditor edit : simpleEditor.getObjectComponentEditors()) {
+            GenericObjectList list =
+                    new GenericObjectList(edit.getObjectClass(), bottom, root, scene, edit);
+            accordion.getPanes().add(list.getTitledPane());
+        }
+        return accordion;
+    }
+
+    // private ListView<Authorable> setUpList () {
+    // ListView<Authorable> list = ListViewUtilities.createList(optionList, null, "Image");
+    // for (String type: imageLocationMap.keySet()) {
+    // optionList.add(new DraggableFields(imageLocationMap.get(type)[0], type));
+    // }
+    // list.setOnMouseClicked(me -> {
+    // DraggableFields selected = (DraggableFields) list.getSelectionModel().getSelectedItem();
+    // for (int i = 0; i < bottom.getRectangles().size(); i++) {
+    // if (i == list.getSelectionModel().getSelectedIndex()) {
+    // DraggableUtilities.makeImagePlaceable(me, selected, bottom, bottom
+    // .getRectangles().get(i), root);
+    // }
+    // }
+    // });
+    // return list;
+    // }
 
     @Override
     public Node getObject () {
         // TODO Auto-generated method stub
         return setUpBorder();
+    }
+
+    public Object createObject () {
+        return simpleEditor.createObject(clazz);
     }
 
 }

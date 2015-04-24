@@ -1,6 +1,7 @@
 package gae.editorView;
 
 import engine.gameobject.PointSimple;
+import gae.editor.ObjectComponentEditor;
 import gae.gridView.ContainerWrapper;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -29,19 +30,21 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
     private Rectangle rect;
     private List<Node> nodesList;
     private Scene scene;
+    private ObjectComponentEditor componentEditor;
 
-    public DragIntoRectangle (double width, String label, Scene scene) {
+    public DragIntoRectangle (double width, String label, Scene scene, ObjectComponentEditor editor) {
+        componentEditor = editor;
         this.width = width;
         this.scene = scene;
-//        type = label;
+        // type = label;
         rectSize = width / 5;
         rect = new Rectangle(rectSize, rectSize, Color.TRANSPARENT);
         rect.setStyle("    -fx-stroke: black;\n" +
-                "    -fx-stroke-width: 3;\n" +
-                "    -fx-stroke-dash-array: 12 2 4 2;\n" +
-                "    -fx-stroke-dash-offset: 6;\n" +
-                "    -fx-stroke-line-cap: butt;");
-//        Label name = createLabel(label);
+                      "    -fx-stroke-width: 3;\n" +
+                      "    -fx-stroke-dash-array: 12 2 4 2;\n" +
+                      "    -fx-stroke-dash-offset: 6;\n" +
+                      "    -fx-stroke-line-cap: butt;");
+        // Label name = createLabel(label);
         nodesList = Arrays.asList(new Node[] { rect });
         getChildren().addAll(nodesList);
         setManaged(false);
@@ -73,7 +76,7 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
         getChildren().add(image);
         image.setLayoutX(rectSize / 2 + ViewUtil.getCenterOffsetX(image));
         image.setLayoutY(rectSize / 2 + ViewUtil.getCenterOffsetY(image));
-        setUpEditorOpener(type);
+        setUpEditorOpener();
         image.setOnMouseClicked(e -> {
             image.setEffect(new Glow(1));
             scene.setOnKeyPressed(keyEvent -> {
@@ -82,26 +85,41 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
                     setVisible();
                 }
             });
-            if (e.getClickCount()==2) {
-                setUpEditorOpener(type);
+            if (e.getClickCount() == 2) {
+                setUpEditorOpener();
                 image.setEffect(null);
             }
         });
         setInvisible();
     }
 
-    private void setUpEditorOpener (String type) {
-        try {
-            Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
-            Object instance = className.getConstructor().newInstance();
-            Method setUpList = className.getMethod("initialize");
-            setUpList.invoke(instance);
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException
-                | InvocationTargetException e) {
+//    private void setUpEditorOpener (String type) {
+//        try {
+//            Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
+//            Object instance = className.getConstructor().newInstance();
+//            Method setUpList = className.getMethod("initialize");
+//            setUpList.invoke(instance);
+//        }
+//        catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
+//                | IllegalAccessException | IllegalArgumentException
+//                | InvocationTargetException e) {
+//
+//        }
+//    }
 
-        }
+    private void setUpEditorOpener () {
+        new PopUpEditorView(componentEditor);
+        // try {
+        // Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
+        // Object instance = className.getConstructor().newInstance();
+        // Method setUpList = className.getMethod("initialize");
+        // setUpList.invoke(instance);
+        // }
+        // catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
+        // | IllegalAccessException | IllegalArgumentException
+        // | InvocationTargetException e) {
+        //
+        // }
     }
 
     private void setInvisible () {

@@ -7,9 +7,11 @@ import gae.editorView.DragIntoRectangle;
 import gae.editorView.DraggableFields;
 import gae.gridView.ContainerWrapper;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -78,12 +80,12 @@ public class DraggableUtilities {
      * @param root: where the Image will be placed
      */
     public static void makeObjectPlaceable (MouseEvent me,
-                                              Node placeable,
-                                              Node node,
-                                              ObservableList<Object> instanceList,
-                                              ContainerWrapper wrapper,
-                                              Group root) {
-        // TODO: implement popup error when overlapping - collision detection
+                                            Node placeable,
+                                            Node node,
+                                            ObservableList<Object> instanceList,
+                                            ContainerWrapper wrapper,
+                                            Group root,
+                                            EventHandler<? super MouseEvent> popNewEditor) {
         Node binder =
                 ViewUtil.bindCursor(placeable,
                                     node,
@@ -99,16 +101,11 @@ public class DraggableUtilities {
             if (wrapper.checkBounds(currentX, currentY)) {
                 throw new ObjectOutOfBoundsException();
             }
-
-            Placeable newEditable = editable.makeNewInstance();
-            instanceList.add(newEditable);
+            popNewEditor.handle(ev);
             PointSimple relativeLocation = wrapper.convertCoordinates(currentX, currentY);
-            newEditable.setLocation(relativeLocation);
-            MovableImage edimage =
-                    new MovableImage(editable.getImageView(), newEditable, wrapper);
-            newEditable.setMovableImage(edimage);
-            edimage.relocate(currentX, currentY);
-            root.getChildren().add(edimage);
+            placeable.setTranslateX(relativeLocation.getX());
+            placeable.setTranslateY(relativeLocation.getY());
+            root.getChildren().add(placeable);
         });
         root.getChildren().add(binder);
     }

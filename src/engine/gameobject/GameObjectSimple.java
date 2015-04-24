@@ -85,6 +85,7 @@ public class GameObjectSimple implements GameObject{
         return myCollider;
     }
     
+    @Settable
     public void setCollider(Collider collider){
         myCollider = collider;
     }
@@ -194,7 +195,7 @@ public class GameObjectSimple implements GameObject{
         myHealth = health;
     }
 
-    // @Settable
+    @Settable
     public void setMover (Mover mover) {
         myMover = mover;
     }

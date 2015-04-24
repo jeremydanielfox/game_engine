@@ -2,6 +2,7 @@ package engine.gameobject.units;
 
 import java.util.HashSet;
 import java.util.Set;
+import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.firingstrategy.Explosion;
@@ -24,6 +25,7 @@ public class Collider {
         onCollision.add(newBuff);
     }
  
+    @Settable
     public void setExplosionRadius(double radius){
         onDeath.setRadius(radius);
     }

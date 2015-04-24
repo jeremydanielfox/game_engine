@@ -19,6 +19,14 @@ public class ObjectComponentEditor extends ComponentEditor {
     private Object myObject;
     
     public ObjectComponentEditor(Class<?> klass) {
+        try {
+            myObject = Class.forName(klass.getName()).newInstance();
+        }
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e1) {
+            System.out.println("error: " + klass.getName());
+            myObject = null;
+            e1.printStackTrace();
+        }
         myAddExistingButton = new Button("Add Existing");
         myCreateNewButton = new Button("Create New");
         myCreateNewButton.setOnMouseClicked(e -> {

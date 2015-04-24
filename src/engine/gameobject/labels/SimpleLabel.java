@@ -1,6 +1,7 @@
 package engine.gameobject.labels;
 
 import java.util.Collection;
+import engine.fieldsetting.Settable;
 
 public class SimpleLabel implements Label{
 
@@ -21,10 +22,12 @@ public class SimpleLabel implements Label{
         superLabel = parent;
     }
     
+    @Settable
     public void setName(String name){
         myName = name;
     }
     
+    @Settable
     public void setSuperLabel(Label parent){
         superLabel = parent;
     }

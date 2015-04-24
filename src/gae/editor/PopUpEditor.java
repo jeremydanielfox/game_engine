@@ -21,7 +21,7 @@ public class PopUpEditor extends SimpleEditor{
         Button addButton = new Button("Add");
         addButton.setOnAction(e -> {
             Object obj = createObject(c);
-            function.accept(obj);
+//            function.accept(obj);
         });
         editor.getChildren().add(addButton);
     }

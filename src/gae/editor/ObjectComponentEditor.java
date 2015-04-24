@@ -2,7 +2,9 @@ package gae.editor;
 
 import gae.gameView.GenericObjectsPane;
 import java.util.function.Consumer;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -30,10 +32,7 @@ public class ObjectComponentEditor extends ComponentEditor {
         }
         myAddExistingButton = new Button("Add Existing");
         myCreateNewButton = new Button("Create New");
-        myCreateNewButton.setOnMouseClicked(e -> {
-            Consumer<Object> setObjectConsumer = o -> setObject(o);
-            GenericObjectsPane.newCustomObject(myObject.getClass(), myObject.getClass().getSimpleName(), setObjectConsumer);
-        });
+        myCreateNewButton.setOnMouseClicked(popNewEditor());
         // TODO: setup lambda's for these buttons
         getEditBox().getChildren().addAll(getLabel(), myAddExistingButton, myCreateNewButton);
     }
@@ -44,6 +43,13 @@ public class ObjectComponentEditor extends ComponentEditor {
     
     public Class<?> getObjectClass() {
         return clazz;
+    }
+    
+    public EventHandler<? super MouseEvent> popNewEditor() {
+        return e -> {
+            Consumer<Object> setObjectConsumer = o -> setObject(o);
+            GenericObjectsPane.newCustomObject(myObject.getClass(), myObject.getClass().getSimpleName(), setObjectConsumer);
+        };
     }
 
     @Override

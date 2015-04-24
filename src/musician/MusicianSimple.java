@@ -16,21 +16,23 @@ import engine.interactions.Interaction;
  *
  */
 
-
 public class MusicianSimple implements Musician {
 
     private static final int MUTED = 0;
-    
+
     /*
      * Map that keeps track of the music associated with a specific Object
      */
     private static MusicianSimple instance;
     private Map<Object, Music> myMusic;
+
+    /*
+     * try & catch blocks implemented for methods with MediaPlayer in case it isn't instantiated yet
+     */
     MediaPlayer myMusician;
 
     public MusicianSimple () {
         myMusic = new HashMap<>();
-        myMusician = new MediaPlayer(null);
     }
 
     /**
@@ -45,42 +47,55 @@ public class MusicianSimple implements Musician {
     }
 
     @Override
-    public void addSoundEffect (Node one, Interaction i, Node two, Media m) {   
-        SoundEffectSimple ses = new SoundEffectSimple(one, i, two, m);
-        myMusic.put(i, ses);
+    public void addSoundEffect (Node one, Interaction i, Node two, Music m) {
+        myMusic.put(i, m);
     }
 
     @Override
-    public void addBackgroundMusic (Scene scene, Media m) {
-        myMusic.put(scene, new MusicSimple(m));
+    public void addBackgroundMusic (Scene scene, Music m) {
+        myMusic.put(scene, m);
     }
 
     @Override
     public void restartMusic (Object o) {
-        myMusician.pause();
-        playAudio(o);
+        try {
+            pauseAudio();
+            playAudio(o);
+        }
+        catch (Exception e) {
+            /* does nothing if myMusician is not initialized*/
+        }
     }
 
     @Override
-    public void clearMusic(Object o) {
+    public void clearMusic (Object o) {
         myMusic.replace(o, myMusic.get(o), null);
     }
 
     @Override
     public void mute () {
-        myMusician.setVolume(MUTED);
+        try {
+            myMusician.setVolume(MUTED);
+        }
+        catch (Exception e) {
+            /* does nothing if myMusician is not initialized*/
+        }
     }
 
     @Override
     public void playAudio (Object o) {
         Media music = myMusic.get(o).getMusic();
-        myMusician.getMedia() = music;
+        myMusician = new MediaPlayer(music);
         myMusician.play();
     }
 
     @Override
-    public void pauseAudio (Object o) {
-        Media music = myMusic.get(o).getMusic();
-        myMusician.pause();
+    public void pauseAudio () {
+        try {
+            myMusician.pause();
+        }
+        catch (Exception e) {
+            /* does nothing if myMusician is not initialized*/
+        }
     }
 }

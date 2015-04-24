@@ -2968,8 +2968,8 @@
                             <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>0</myRow>
-                            <myCol>1</myCol>
+                            <myRow>1</myRow>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -2979,7 +2979,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>0</myRow>
-                            <myCol>2</myCol>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -2989,7 +2989,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>0</myRow>
-                            <myCol>3</myCol>
+                            <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -2999,7 +2999,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>0</myRow>
-                            <myCol>4</myCol>
+                            <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3009,7 +3009,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>0</myRow>
-                            <myCol>5</myCol>
+                            <myCol>3</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3019,7 +3019,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>0</myRow>
-                            <myCol>6</myCol>
+                            <myCol>4</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3068,8 +3068,8 @@
                             <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>1</myRow>
-                            <myCol>1</myCol>
+                            <myRow>2</myRow>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3079,7 +3079,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>1</myRow>
-                            <myCol>2</myCol>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3089,7 +3089,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>1</myRow>
-                            <myCol>3</myCol>
+                            <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3099,7 +3099,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>1</myRow>
-                            <myCol>4</myCol>
+                            <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3109,7 +3109,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>1</myRow>
-                            <myCol>5</myCol>
+                            <myCol>3</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3119,7 +3119,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>1</myRow>
-                            <myCol>6</myCol>
+                            <myCol>4</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3168,8 +3168,8 @@
                             <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>2</myRow>
-                            <myCol>1</myCol>
+                            <myRow>3</myRow>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3179,7 +3179,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>2</myRow>
-                            <myCol>2</myCol>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3189,7 +3189,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>2</myRow>
-                            <myCol>3</myCol>
+                            <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3199,7 +3199,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>2</myRow>
-                            <myCol>4</myCol>
+                            <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3209,7 +3209,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>2</myRow>
-                            <myCol>5</myCol>
+                            <myCol>3</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3219,7 +3219,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>2</myRow>
-                            <myCol>6</myCol>
+                            <myCol>4</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3268,8 +3268,8 @@
                             <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>3</myRow>
-                            <myCol>1</myCol>
+                            <myRow>4</myRow>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3279,7 +3279,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>3</myRow>
-                            <myCol>2</myCol>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3289,7 +3289,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>3</myRow>
-                            <myCol>3</myCol>
+                            <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3299,7 +3299,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>3</myRow>
-                            <myCol>4</myCol>
+                            <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3309,7 +3309,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>3</myRow>
-                            <myCol>5</myCol>
+                            <myCol>3</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3319,7 +3319,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>3</myRow>
-                            <myCol>6</myCol>
+                            <myCol>4</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3368,8 +3368,8 @@
                             <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>4</myRow>
-                            <myCol>1</myCol>
+                            <myRow>5</myRow>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3379,7 +3379,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>4</myRow>
-                            <myCol>2</myCol>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3389,7 +3389,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>4</myRow>
-                            <myCol>3</myCol>
+                            <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3399,7 +3399,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>4</myRow>
-                            <myCol>4</myCol>
+                            <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3409,7 +3409,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>4</myRow>
-                            <myCol>5</myCol>
+                            <myCol>3</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3419,7 +3419,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>4</myRow>
-                            <myCol>6</myCol>
+                            <myCol>4</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3479,7 +3479,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>5</myRow>
-                            <myCol>2</myCol>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3489,7 +3489,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>5</myRow>
-                            <myCol>3</myCol>
+                            <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3499,7 +3499,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>5</myRow>
-                            <myCol>4</myCol>
+                            <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3509,7 +3509,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>5</myRow>
-                            <myCol>5</myCol>
+                            <myCol>3</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3519,7 +3519,7 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>5</myRow>
-                            <myCol>6</myCol>
+                            <myCol>4</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3568,8 +3568,8 @@
                             <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>6</myRow>
-                            <myCol>1</myCol>
+                            <myRow>5</myRow>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3578,8 +3578,8 @@
                             <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>6</myRow>
-                            <myCol>2</myCol>
+                            <myRow>5</myRow>
+                            <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3588,8 +3588,8 @@
                             <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>6</myRow>
-                            <myCol>3</myCol>
+                            <myRow>5</myRow>
+                            <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3598,8 +3598,8 @@
                             <myCol>3</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>6</myRow>
-                            <myCol>4</myCol>
+                            <myRow>5</myRow>
+                            <myCol>3</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3608,8 +3608,8 @@
                             <myCol>4</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>6</myRow>
-                            <myCol>5</myCol>
+                            <myRow>5</myRow>
+                            <myCol>4</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3668,8 +3668,8 @@
                             <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>7</myRow>
-                            <myCol>1</myCol>
+                            <myRow>6</myRow>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3678,8 +3678,8 @@
                             <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>7</myRow>
-                            <myCol>2</myCol>
+                            <myRow>6</myRow>
+                            <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3688,8 +3688,8 @@
                             <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>7</myRow>
-                            <myCol>3</myCol>
+                            <myRow>6</myRow>
+                            <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3698,8 +3698,8 @@
                             <myCol>3</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>7</myRow>
-                            <myCol>4</myCol>
+                            <myRow>6</myRow>
+                            <myCol>3</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3768,8 +3768,8 @@
                             <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>8</myRow>
-                            <myCol>1</myCol>
+                            <myRow>7</myRow>
+                            <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3778,8 +3778,8 @@
                             <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>8</myRow>
-                            <myCol>2</myCol>
+                            <myRow>7</myRow>
+                            <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3788,8 +3788,8 @@
                             <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>8</myRow>
-                            <myCol>3</myCol>
+                            <myRow>7</myRow>
+                            <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -3839,6 +3839,16 @@
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>8</myRow>
+                            <myCol>8</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                        </entry>
+                        <entry>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>8</myRow>
+                            <myCol>8</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>7</myRow>
                             <myCol>8</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
@@ -4079,10 +4089,6 @@
                           <null/>
                         </engine.gameobject.GameObject-array>
                       </objectMatrix>
-                      <endPoint>
-                        <myRow>8</myRow>
-                        <myCol>8</myCol>
-                      </endPoint>
                       <spawnPoint>
                         <myRow>0</myRow>
                         <myCol>0</myCol>
@@ -4091,6 +4097,16 @@
                         <myRow>10</myRow>
                         <myCol>10</myCol>
                       </bounds>
+                      <endPoints>
+                        <voogasalad.util.pathsearch.graph.GridCell>
+                          <myRow>8</myRow>
+                          <myCol>8</myCol>
+                        </voogasalad.util.pathsearch.graph.GridCell>
+                        <voogasalad.util.pathsearch.graph.GridCell>
+                          <myRow>5</myRow>
+                          <myCol>0</myCol>
+                        </voogasalad.util.pathsearch.graph.GridCell>
+                      </endPoints>
                     </myPath>
                     <myGrid reference="../myPath/objectMatrix"/>
                     <myTransform reference="../myPath/myTrans"/>
@@ -4680,16 +4696,16 @@
                   <myFrameDuration>1200</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1049</int>
-                    <int>1126</int>
-                    <int>63</int>
-                    <int>306</int>
-                    <int>436</int>
-                    <int>935</int>
-                    <int>645</int>
-                    <int>476</int>
-                    <int>550</int>
-                    <int>609</int>
+                    <int>758</int>
+                    <int>177</int>
+                    <int>1177</int>
+                    <int>1158</int>
+                    <int>365</int>
+                    <int>551</int>
+                    <int>1108</int>
+                    <int>122</int>
+                    <int>73</int>
+                    <int>837</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

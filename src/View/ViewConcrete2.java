@@ -35,8 +35,10 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
 
     public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
-//    public static final int MAX_FRAME_RATE = 500;
-//    public static final int MIN_FRAME_RATE = 1000;
+    public static final double WORLD_WIDTH = 600;
+    public static final double WORLD_HEIGHT = 600;
+    // public static final int MAX_FRAME_RATE = 500;
+    // public static final int MIN_FRAME_RATE = 1000;
     // TODO need to update this to be a function of min frame rate
     public static final int DEFAULT_FRAMES_SECOND = 60;
 
@@ -53,12 +55,14 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private double myDisplayHeight;
     private HUD myHeadsUp;
 
-    public ViewConcrete2 (Game game, double width, double height) {
+    public ViewConcrete2 (Game game,
+                          double stageWidth,
+                          double stageHeight) {
         myGame = game;
         myLevelBoard = myGame.getLevelBoard();
         myLevelBoard.addObserver(this);
-        myDisplayWidth = width;
-        myDisplayHeight = height;
+        myDisplayWidth = stageWidth;
+        myDisplayHeight = stageHeight;
     }
 
     @Override
@@ -161,10 +165,10 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
             if (e.isEnabled()) {
                 e.getButton().setDisable(false);
             }
-            else {
-                e.getButton().setDisable(true);
-            }
-        });
+                else {
+                    e.getButton().setDisable(true);
+                }
+            });
         myHeadsUp.update();
 
     }
@@ -239,8 +243,8 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
          * I changed this to 600 because that's the size of the container - the relative thing works
          * I think - Kei
          */
-        image.setFitHeight(600);
-        image.setFitWidth(600);
+        image.setFitHeight(WORLD_HEIGHT);
+        image.setFitWidth(WORLD_WIDTH);
         myGameWorldPane.getChildren().clear();
         myGameWorldPane.getChildren().add(image);
     }
@@ -249,11 +253,19 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myHeadsUp.addButton(new ButtonWrapper("Play", e -> play(), new NotPlayingGoal(this)));
         myHeadsUp.addButton(new ButtonWrapper("Pause", e -> pause(), new IsPlayingGoal(this)));
         myHeadsUp
-        .addButton(new ButtonWrapper("Slow", e -> toggleRate(), new CanDecSpeedGoal(this)));
+                .addButton(new ButtonWrapper("Slow", e -> toggleRate(), new CanDecSpeedGoal(this)));
         myHeadsUp
-        .addButton(new ButtonWrapper("Fast", e -> toggleRate(), new CanIncSpeedGoal(this)));
+                .addButton(new ButtonWrapper("Fast", e -> toggleRate(), new CanIncSpeedGoal(this)));
     }
 
+    public static double getWorldHeight(){
+        return WORLD_HEIGHT;
+    }
+    
+    public static double getWorldWidth(){
+        return WORLD_WIDTH;
+    }
+    
     @Override
     public void pause () {
         myAnimation.pause();

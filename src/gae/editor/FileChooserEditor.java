@@ -47,6 +47,6 @@ public class FileChooserEditor extends ComponentEditor {
 
     @Override
     public Object createObject (Class<?> c) {
-        return file.toURI().toString();
+        return file.getAbsolutePath();
     }
 }

@@ -11,7 +11,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import engine.gameobject.PointSimple;
 
@@ -29,14 +28,14 @@ import engine.gameobject.PointSimple;
  */
 public class TileContainer extends Region implements ContainerWrapper {
     private static final int TAB_HEIGHT = 128;
-    private Pane border;
     private List<TileView> tileList = new ArrayList<>();
     private SelectionRectangle selectionRect;
     private DoubleProperty gridWidthProperty = new SimpleDoubleProperty(623);
     private DoubleProperty gridHeightProperty = new SimpleDoubleProperty(623);
+    private String selectionColor;
 
-    public TileContainer (ObjectProperty<Dimension> sizeProp, Scene scene, Pane border) {
-        this.border = border;
+    public TileContainer (ObjectProperty<Dimension> sizeProp, Scene scene, String color) {
+        selectionColor = color;
         double maxHeight = scene.getHeight() - TAB_HEIGHT;
         addTiles(sizeProp.get(), maxHeight);
         sizeProp.addListener( (observable, oldVal, newVal) -> {
@@ -65,19 +64,19 @@ public class TileContainer extends Region implements ContainerWrapper {
     private void addTiles (Dimension size, double height) {
         double length =
                 size.getWidth() < size.getHeight() ? height / size.getHeight() : height /
-                                                   size.getWidth();
-                for (int i = 0; i < size.getHeight(); i++) {
-                    for (int j = 0; j < size.getWidth(); j++) {
-                        TileView tileView = new TileView(length, new TileData(i, j));
-                        tileView.setLayoutX(i * length);
-                        tileView.setLayoutY(j * length);
-                        getChildren().add(tileView);
-                        tileList.add(tileView);
-                        gridWidthProperty.set(i * length + length);
-                        gridHeightProperty.set(j * length + length);
-                    }
+                                                                                 size.getWidth();
+        for (int i = 0; i < size.getHeight(); i++) {
+            for (int j = 0; j < size.getWidth(); j++) {
+                TileView tileView = new TileView(length, new TileData(i, j), selectionColor);
+                tileView.setLayoutX(i * length);
+                tileView.setLayoutY(j * length);
+                getChildren().add(tileView);
+                tileList.add(tileView);
+                gridWidthProperty.set(i * length + length);
+                gridHeightProperty.set(j * length + length);
+            }
 
-                }
+        }
     }
 
     /**
@@ -89,7 +88,7 @@ public class TileContainer extends Region implements ContainerWrapper {
         System.out.println("X IS : " + point.getX());
         System.out.println("Y IS : " + y);
         if (point.getX() < 0 || point.getX() > getWidth() || y < 0 ||
-                y > getHeight()) {
+            y > getHeight()) {
             return true;
         }
         return false;

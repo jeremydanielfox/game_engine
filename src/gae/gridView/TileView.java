@@ -18,9 +18,11 @@ public class TileView extends Group {
     private TileData data;
     private Rectangle rect;
     private BooleanProperty walkableProperty = new SimpleBooleanProperty();
+    private String color;
 
-    public TileView (double size, TileData data) {
+    public TileView (double size, TileData data, String color) {
         this.data = data;
+        this.color = color;
         walkableProperty.bind(data.getWalkableProperty());
         rect = new Rectangle(size, size, Color.TRANSPARENT);
         rect.setStroke(Color.BLACK);
@@ -37,13 +39,13 @@ public class TileView extends Group {
         });
         walkableProperty.addListener( (observable, oldValue, newValue) -> {
             if (!newValue) {
-                rect.setFill(Color.web("red", .5));
+                rect.setFill(Color.web(color, .5));
             }
-            else {
-                rect.setFill(Color.TRANSPARENT);
-            }
+                else {
+                    rect.setFill(Color.TRANSPARENT);
+                }
 
-        });
+            });
     }
 
     public void handleSelected (Node node, boolean walkable) {

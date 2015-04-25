@@ -4,8 +4,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * 
+ *
  * @author Eric
  *
  */
@@ -35,13 +36,14 @@ public class TreeNode {
     /**
      * added to provide outside class to access children nodes to iterate through
      * @ author Brandon
+     * 
      * @return
      */
     public List<TreeNode> getChildren () {
         return myTreeNodes;
     }
-    
-    public int getNumChildren() {
+
+    public int getNumChildren () {
         return myTreeNodes.size();
     }
 }

@@ -1,10 +1,12 @@
 package gae.gameView;
 
+import gae.backend.Placeable;
 import java.util.Collection;
-import gae.backend.Editable;
+
 
 public interface EditablesPanel {
 
-    public void initializeEditables(Collection<Editable> c);
-    public void createObject(Editable e);   
+    public void initializeEditables (Collection<Placeable> c);
+
+    public void createObject (Placeable e);
 }

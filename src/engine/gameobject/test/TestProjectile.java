@@ -10,39 +10,40 @@ import engine.gameobject.units.freeze.FreezeBuff;
 import engine.gameobject.units.poison.PoisonBuff;
 import engine.gameobject.weapon.NullWeapon;
 
-public class TestProjectile extends GameObjectSimple{
+
+public class TestProjectile extends GameObjectSimple {
 
     private int myType;
-    
-    public TestProjectile(int type){
+
+    public TestProjectile (int type) {
         super();
         myType = type;
 
         setGraphic(new Graphic(20, 20, "robertDuvall.jpg"));
-        setPoint(new PointSimple(300,300));
+        setPoint(new PointSimple(300, 300));
         setHealth(new HealthSimple(1));
         setMover(new MoverDirection(getPoint(), 3.3, 250));
         setWeapon(new NullWeapon());
         setLabel(new ProjectileLabel());
-        if (type == 1 || type == 4){
+        if (type == 1 || type == 4) {
             getCollider().addCollisionBehavior(new DamageBuff(4));
         }
-        if (type == 2){
+        if (type == 2) {
             getCollider().addCollisionBehavior(new FreezeBuff(30));
         }
-        if (type == 3){
+        if (type == 3) {
             getCollider().addExplosionBuff(new PoisonBuff(1000, 4));
             getCollider().addExplosionBuff(new FreezeBuff(30));
             getCollider().setExplosionRadius(100);
             setHealth(new HealthSimple(0));
         }
-        if (type == 4){
+        if (type == 4) {
             setMover(new MoverDirection(getPoint(), 1, 90));
         }
         if (type == 5){
-            setWeapon(new TestWeapon(4));
+            setWeapon(new TestWeapon(4, null));
             setLabel(new TowerLabel());
         }
     }
-    
+
 }

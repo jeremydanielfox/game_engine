@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import engine.gameobject.GameObject;
 
-public class BuffTracker{
+
+public class BuffTracker {
     private List<Buff> buffList;
 
     public BuffTracker () {
@@ -23,6 +24,10 @@ public class BuffTracker{
         }
     }
 
+    /**
+     * Advances time of buffs in myObject by increment 1
+     * @param myObject
+     */
     public void update (GameObject myObject) {
         ArrayList<Buff> removeBuffer = new ArrayList<Buff>();
         for (Buff buff : buffList) {

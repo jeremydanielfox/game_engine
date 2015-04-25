@@ -6,7 +6,7 @@ import engine.gameobject.PointSimple;
 
 /**
  * A path segment for a simple line segment.
- * 
+ *
  * @author Kaighn
  */
 @Settable

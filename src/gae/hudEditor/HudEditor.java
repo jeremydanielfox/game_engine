@@ -30,7 +30,7 @@ public class HudEditor implements UIObject {
     private void initialize () {
         rootNode = new AnchorPane();
         rootNode.setMinHeight(SCREEN_HEIGHT);
-        
+
         bImage = new ImageView();
         bImage.fitWidthProperty().bind(rootNode.widthProperty());
         bImage.fitHeightProperty().bind(rootNode.heightProperty());

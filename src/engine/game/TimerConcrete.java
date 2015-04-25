@@ -1,22 +1,28 @@
 package engine.game;
 
-import engine.fieldsetting.Settable;
-import View.Displayable;
 import View.ViewConcrete2;
+import engine.fieldsetting.Settable;
 
 
 /**
  * This class is a timer that counts down at the starting frames per second rate of the game.
- * 
- * @author Sierra
+ *
+ * @author Sierra Smith
  *
  */
 @Settable
 public class TimerConcrete extends Timer {
 
     public static final String DEFAULT_LABEL = "Time left";
+    private static final String ZERO_SEC_PREFIX = "0";
+    private static final String COLON = ":";
+
     public static final int MINUTE_DEFAULT = 0;
     public static final int SECOND_DEFAULT = 0;
+    private static final int STARTING_SECS = 59;
+    private static final int MIN_TWO_DIGIT_SECS = 10;
+    private static final int SECONDS_PER_MIN = 60;
+    private static final int MIN_VALUE = 0;
 
     private int myMinutes;
     private int mySeconds;
@@ -54,10 +60,10 @@ public class TimerConcrete extends Timer {
 
     @Override
     public String getStringValue () {
-        if(mySeconds < 10){
-            return myMinutes + ":0" + mySeconds;
+        if (mySeconds < MIN_TWO_DIGIT_SECS) {
+            return myMinutes + COLON + ZERO_SEC_PREFIX + mySeconds;
         }
-        return myMinutes + ":" + mySeconds;
+        return myMinutes + COLON + mySeconds;
     }
 
     @Override
@@ -65,27 +71,31 @@ public class TimerConcrete extends Timer {
         return myLabel;
     }
 
+    /**
+     * Updates the time left on the clock based on the default frames per second in the
+     * game loop.
+     */
     @Override
     public void update () {
         myFramesSinceUpdate++;
         if (myFramesSinceUpdate == ViewConcrete2.DEFAULT_FRAMES_SECOND) {
-            if (mySeconds > 0) {
+            if (mySeconds > MIN_VALUE) {
                 mySeconds--;
             }
-            else if (myMinutes > 0) {
-                mySeconds = 60;
+            else if (myMinutes > MIN_VALUE) {
+                mySeconds = STARTING_SECS;
                 myMinutes--;
             }
-            myFramesSinceUpdate =0;
+            myFramesSinceUpdate = MIN_VALUE;
         }
         updateObservers();
     }
 
     @Override
     public int getSecondsLeft () {
-        return mySeconds + (myMinutes * 60);
+        return mySeconds + (myMinutes * SECONDS_PER_MIN);
     }
-    
+
     private void updateObservers () {
         setChanged();
         notifyObservers();

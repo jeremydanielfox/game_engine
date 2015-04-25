@@ -2,7 +2,7 @@ package exception;
 
 /**
  * An exception for input is not a number is found
- * 
+ *
  *
  */
 public class NonNumberException extends VOOGAException {

@@ -19,7 +19,7 @@ import engine.gameobject.units.BuffType;
  * <T>. The motivation behind this class was that Java's Sets can only check for duplication based
  * on
  * hash value; we want to check uniqueness based on UpgradeType.
- * 
+ *
  * @author Nathan Prabhu
  *
  * @param <T> the type of elements maintained by this set
@@ -41,7 +41,7 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
 
     /**
      * Obtains object of the same UpgradeType in this set if it exists
-     * 
+     *
      * @param obj object's class-type counterpart to be retrieved from this set, if present
      * @return object if it exists, otherwise null
      */
@@ -52,7 +52,7 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
     public void addListener (SetChangeListener<T> listener) {
         ObservableSet<T> obs =
                 FXCollections.observableSet(upgradeMap.values().stream()
-                        .collect(Collectors.toSet()));
+                                            .collect(Collectors.toSet()));
         obs.addListener(listener);
     }
 
@@ -92,7 +92,7 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
 
     /**
      * Adds object to set. If object's UpgradeType already exists, the entry will be replaced.
-     * 
+     *
      * @param T element to be added to this set
      * @return <tt>true</tt> if this set did not already contain the specified
      *         element
@@ -160,7 +160,7 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
     /**
      * Defines upgrade uniqueness. For non-buffs, uniqueness is defined by class name. For buffs,
      * they must additionally be unique according to BuffType.
-     * 
+     *
      * @author Nathan Prabhu
      *
      */
@@ -175,7 +175,9 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
 
         @Override
         public boolean equals (Object obj) {
-            if (!(obj instanceof UpgradeSet.UpgradeType)) { return false; }
+            if (!(obj instanceof UpgradeSet.UpgradeType)) {
+                return false;
+            }
             UpgradeType type = (UpgradeSet.UpgradeType) obj;
             boolean bool1 = getUpgClass(upgrade).equals(getUpgClass(type.getUpgrade()));
             boolean bool2 = buffType.equals(type.getBuffType());

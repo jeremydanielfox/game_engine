@@ -6,7 +6,7 @@ import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 public interface SingleTree extends UpgradeTree {
 
     /**
-     * 
+     *
      * @return next available Upgrade to be purchased (if not final). Will be called by the shop to
      *         display what can be bought.
      */

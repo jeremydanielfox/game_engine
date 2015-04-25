@@ -1,9 +1,8 @@
 package gae.gameView;
 
+import gae.listView.LibraryData;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -12,13 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+
 /**
  * Defines a single interaction between game objects
- * 
+ *
+ *
  * @author Brandon Choi
  *
  */
@@ -30,6 +30,8 @@ import javafx.scene.text.Text;
 
 public class InteractionInstance {
 
+    private InteractionData myInteractionData;
+    private LibraryData myLibraryData;
     private HBox container;
     private DropDown interactionType;
     private ObjectContainer box1, box2;
@@ -40,16 +42,30 @@ public class InteractionInstance {
      * interaction classes in the engine
      */
 
-    public InteractionInstance () {
+    public InteractionInstance (InteractionData data, LibraryData library) {
+        myInteractionData = data;
+        myLibraryData = library;
         container = new HBox(80);
-        interactionType = new DropDown("Interaction Type", Arrays.asList("Collide",
-                                                                         "Do not collide", "Shoot",
-                                                                         "Do not shoot"));
+        interactionType = new DropDown("CHOOSE INTERACTION", getInteractions());
         box1 = new ObjectContainer();
         box2 = new ObjectContainer();
         create = new Button("CREATE");
         createButtonFunction();
         createInteraction();
+    }
+
+    /**
+     * Takes the interaction map from myInteractionData and uses the keyset to pull all of the
+     * interaction labels
+     *
+     * @return
+     */
+    private List<String> getInteractions () {
+        List<String> interactions = new ArrayList<>();
+        myInteractionData.getInteractionMap().keySet().forEach(e -> {
+            interactions.add(e);
+        });
+        return interactions;
     }
 
     private void createButtonFunction () {
@@ -71,7 +87,7 @@ public class InteractionInstance {
 
     /**
      * Comprised of a label and a combobox with options for the user to select from
-     * 
+     *
      * @author Brandon Choi
      *
      */
@@ -102,7 +118,7 @@ public class InteractionInstance {
 
     /**
      * Holds objects that are selected between interactions
-     * 
+     *
      * @author Brandon Choi
      *
      */
@@ -111,19 +127,21 @@ public class InteractionInstance {
         private VBox container;
         private VBox selected;
         private ScrollPane scroller;
-        private List<String> options;
         private Button adder;
         private HBox addBox;
+        private CheckList myChecker;
 
         public ObjectContainer () {
             container = new VBox();
             selected = new VBox();
-            container.setId("interactionBox");
             scroller = new ScrollPane();
-            options = new ArrayList<>();
             adder = new Button();
             addBox = new HBox(15);
             Text addText = new Text("Add Labels");
+            myChecker = new CheckList(myLibraryData.getEditableObservableList());
+
+            container.setId("interactionBox");
+
             addBox.getChildren().addAll(addText, adder);
             ImageView buttonGraphic = new ImageView("/images/plus_sign.jpg");
             adder.setGraphic(buttonGraphic);
@@ -132,10 +150,14 @@ public class InteractionInstance {
             createObjectContainer();
         }
 
+        /**
+         * creates the object container by adding nodes to the VBox and setting up functionalities
+         * such as button pressing
+         */
         private void createObjectContainer () {
             scroller.setContent(container);
             adder.setOnMouseClicked(e -> {
-
+                myChecker.showCheckList();
             });
             container.getChildren().addAll(selected, addBox);
         }

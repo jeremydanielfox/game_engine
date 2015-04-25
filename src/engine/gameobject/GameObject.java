@@ -1,5 +1,7 @@
 package engine.gameobject;
 
+import engine.gameobject.behaviors.Behavior;
+import engine.gameobject.behaviors.EndBehaviorful;
 import engine.gameobject.labels.Label;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.units.Colliding;
@@ -11,40 +13,42 @@ import gameworld.ObjectCollection;
 
 
 /**
- * 
+ *
  * @author Jeremy, Kaighn
  *
  */
 
-public interface GameObject extends Firing, Colliding, Buffable, Movable, Health, PurchasableGameObject, Prototype<GameObject> {
+public interface GameObject extends Firing, Colliding, Buffable, Movable, Health, PurchasableGameObject, Prototype<GameObject>, EndBehaviorful {
+
     // public void updateGraphics ();//cannot implement yet
 
     /**
      * Updates the object accordingly within the objectcollection (usually gameworld) given
-     * 
+     *
      * @param world
      */
     public void update (ObjectCollection world);
-
+    
     /**
-     * Executes the defined ondeath behavior when the object is removed from the world.
-     * TODO: THINK ABOUT THIS EXTREMELY CAREFULLY. It's possible it shouldn't be the gameworld, but
-     * the gameobject itself that executes the ondeath behavior.
+     * Performs the ondeath behavior of the object upon the world
+     * @param world
      */
     public void onDeath (ObjectCollection world);
-
+    
     public Mover getMover ();
 
     public Label getLabel ();
 
     public void setGraphic (Graphic graphic);
-    
+
     public void setLabel (Label label);
+
     /**
      * Tags contain important GameObject info (e.g. name, description, image)
-     * 
+     *
      * @return
      */
+    @Override
     public GameObjectTag getTag ();
 
     /**
@@ -54,7 +58,7 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
 
     /**
      * Sets the object's location to point
-     * 
+     *
      * @param point
      */
     public void setPoint (PointSimple point);

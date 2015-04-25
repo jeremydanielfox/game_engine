@@ -6,9 +6,9 @@ import java.util.ResourceBundle;
 
 
 public class ResourceBundleUtil {
-    public static HashMap<String, String[]> useResourceBundle () {
+    public static HashMap<String, String[]> useResourceBundle (String path) {
         ResourceBundle resources = ResourceBundle
-                .getBundle("Example_Data/Reflection_Data");
+                .getBundle(path);
         Enumeration<String> paramKeys = resources.getKeys();
         HashMap<String, String[]> newMap = new HashMap<>();
 

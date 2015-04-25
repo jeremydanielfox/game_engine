@@ -12,6 +12,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -159,6 +160,9 @@ public class ShopView extends Parent {
 
     private StackPane makeUpgradePanel (ItemGraphic upgrade) {
         StackPane upgradePanel = new StackPane();
+        upgradePanel.setOnMouseEntered(event -> upgradePanel.setCursor(Cursor.HAND));
+        upgradePanel.setOnMouseClicked(event-> model.purchaseUpgrade(upgrade.getName()));
+        
         upgradePanel.setBackground(new Background(new BackgroundFill(Color.LAWNGREEN, null, null)));
 
         VBox entries = new VBox();
@@ -195,16 +199,12 @@ public class ShopView extends Parent {
             EventHandler<MouseEvent> selected = selection -> selectGameObject(selection);
             if (model.purchaseGameObject(transition.getName(), current, selected)) {
                 ViewUtil.unbindCursor(pane, transNode);
-                // TODO:
-                // new TestTower: onClicked - show radius, show available upgrades -- call
-                // displayUpgrades
-
             }
         });
     }
 
     private void selectGameObject(MouseEvent event) {
         GameObject selected = world.getObjectFromNode((Node) event.getSource());
-        selector.setCurrent(selected);
+        selector.select(selected);
     }
 }

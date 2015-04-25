@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.UpgradeSet;
+import engine.gameobject.weapon.range.Range;
+import engine.gameobject.weapon.range.RangeUpgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.shop.tag.UpgradeTag;
 

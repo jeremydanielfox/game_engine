@@ -1,5 +1,6 @@
 package engine.shop;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -24,6 +25,7 @@ public class RangeDisplay {
                                                                              // white
 
     private Graphic graphic;
+    //private DoubleProperty range;
     private double range;
     private String name;
     @XStreamOmitField
@@ -36,6 +38,10 @@ public class RangeDisplay {
         this.name = name;
         this.graphic = myGraphic;
         this.range = range;
+//        range.addListener((obs, ov, nv) ->{
+//            System.out.println("worked");
+//            initialize();
+//        });
         initialize();
     }
 

@@ -1,7 +1,13 @@
 package engine.gameobject.weapon;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.SetChangeListener;
 import javafx.collections.SetChangeListener.Change;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
@@ -12,10 +18,12 @@ import engine.gameobject.weapon.firingrate.FiringRateUpgrade;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.range.Range;
+import engine.gameobject.weapon.range.RangeObserver;
 import engine.gameobject.weapon.range.RangeUpgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeForest;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
+import engine.observable.Observer;
 import gameworld.ObjectCollection;
 
 
@@ -28,18 +36,23 @@ import gameworld.ObjectCollection;
  */
 public class BasicWeapon implements Weapon {
     private int timeSinceFire;
-    private Range myRange;
+    private RangeUpgrade myRange;
+    private DoubleProperty rangeProp = new SimpleDoubleProperty();
     private FiringRate myFiringRate;
     private GameObject myProjectile;
     private FiringStrategy myFiringStrategy;
     private UpgradeSet<Upgrade> upgradables;
     private UpgradeTree tree;
+    
 
     public BasicWeapon () {
+        upgradables = new UpgradeSet<>();
         timeSinceFire = 0;
-        myRange = new RangeUpgrade(250);
+        myRange = new RangeUpgrade();
+        setRange(30);
         myFiringRate = new FiringRateUpgrade(.5);
         myFiringStrategy = new SingleProjectile();
+        upgradables.addAll(Arrays.asList(myRange, myFiringRate));
     }
 
     @Override
@@ -60,7 +73,8 @@ public class BasicWeapon implements Weapon {
         Set<Buff> explosBuffs = myProjectile.getCollider().getCollisionBuffs();
         result.addAll(collisionBuffs);
         result.addAll(explosBuffs);
-        result.addListener(change -> syncBuffs(change, collisionBuffs, explosBuffs));
+        result.addListener((SetChangeListener<Upgrade>) change ->
+                syncBuffs(change, collisionBuffs, explosBuffs));
         return result;
     }
 
@@ -69,7 +83,7 @@ public class BasicWeapon implements Weapon {
                             Set<Buff> explosBuffs) {
 
         Buff buff = (change.wasAdded()) ? (Buff) change.getElementAdded() :
-            (Buff) change.getElementRemoved();
+                                       (Buff) change.getElementRemoved();
         switch (buff.getBuffType()) {
             case COLLISION:
                 if (change.wasAdded()) {
@@ -95,7 +109,9 @@ public class BasicWeapon implements Weapon {
     @Override
     @Settable
     public void setRange (double range) {
-        myRange = new RangeUpgrade(range);
+        myRange.setIncrement(30);
+        rangeProp.set(myRange.getRange());
+        myRange.addObserver(new RangeObserver(rangeProp, upgradables, myRange));        
     }
 
     @Override
@@ -124,7 +140,7 @@ public class BasicWeapon implements Weapon {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see engine.gameobject.weapon.Weaopn#fire(gameworld.GameWorld, engine.gameobject.PointSimple)
      */
     @Override
@@ -137,7 +153,7 @@ public class BasicWeapon implements Weapon {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see engine.gameobject.weapon.Weaopn#addBuff(engine.gameobject.units.Buff)
      */
     @Override
@@ -147,27 +163,33 @@ public class BasicWeapon implements Weapon {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see engine.gameobject.weapon.Weaopn#getValue()
      */
     @Override
     public double getValue () {
         return tree.getValue();
-    };
+    }
 
     @Override
     public double getRange () {
+        //return ((Range) upgradables.get(myRange)).getRange();
         return myRange.getRange();
     }
+    
+    public DoubleProperty getRangeProperty(){
+        return rangeProp;
+    }
+    
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see engine.gameobject.weapon.Weaopn#getFiringRate()
      */
     @Override
     public double getFiringRate () {
-        return myFiringRate.getRate();
+        return ((FiringRate) upgradables.get(myFiringRate)).getRate();
     }
 
     @Override
@@ -206,6 +228,7 @@ public class BasicWeapon implements Weapon {
     @Override
     public void applyUpgrades (UpgradeBundle bundle) {
         bundle.applyUpgrades(upgradables);
+        myRange = ((RangeUpgrade) upgradables.get(new RangeUpgrade()));
         bundle.getParent().updateCurrent(bundle.getParent());
     }
 }

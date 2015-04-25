@@ -3,6 +3,7 @@ package engine.gameobject.weapon.firingrate;
 import java.util.Optional;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
+import engine.gameobject.weapon.range.RangeUpgrade;
 
 
 /**
@@ -45,5 +46,10 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
     @Override
     public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((FiringRate) decorated);
+    }
+    
+    @Override
+    public Upgrade clone () {
+        return new FiringRateUpgrade(increment);
     }
 }

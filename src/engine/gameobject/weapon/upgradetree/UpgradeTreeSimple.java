@@ -64,8 +64,7 @@ public class UpgradeTreeSimple implements UpgradeTree {
 
     @Override
     public void updateCurrent (UpgradeTree ... toUpdate) {
-        // ignores parameter
-        current = current.getNext();
+        current = (current.isFinalUpgrade()) ? current : current.getNext();
     }
 
     public UpgradeTree clone () {

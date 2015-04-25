@@ -3,8 +3,11 @@ package engine.shop;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -36,8 +39,7 @@ public class GameObjectSelector {
     private void initialize () {
         current.addListener( (obs, old, cur) -> {
             clearInfoBox();
-            worldPane.setOnKeyPressed(null);
-            
+            select(null);
             if (prev !=null){
                 worldPane.getChildren().remove(prev);
             }
@@ -51,6 +53,7 @@ public class GameObjectSelector {
                     if (event.getCode() == KeyCode.ESCAPE) {
                         clearInfoBox();
                         worldPane.getChildren().remove(rangeDisp);
+                        worldPane.setOnKeyPressed(null);
                     }
                 });
             }
@@ -70,7 +73,7 @@ public class GameObjectSelector {
         infoBox.getChildren().clear();
     }
 
-    public void setCurrent (GameObject obj) {
+    public void select (GameObject obj) {
         current.set(obj);
     }
 

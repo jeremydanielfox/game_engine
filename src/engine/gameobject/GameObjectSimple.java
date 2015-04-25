@@ -1,5 +1,7 @@
 package engine.gameobject;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import engine.fieldsetting.Settable;
 import engine.gameobject.labels.Label;
 import engine.gameobject.labels.SimpleLabel;
@@ -109,7 +111,7 @@ public class GameObjectSimple implements GameObject {
      */
     @Override
     public RangeDisplay getRangeDisplay(){
-        return new RangeDisplay(myTag.getName(), myGraphic.clone(), 30);
+        return new RangeDisplay(myTag.getName(), myGraphic.clone(), myWeapon.getRange());
     }
 
     // TODO: Tag cloning not done, Weapon upgrade cloning not done

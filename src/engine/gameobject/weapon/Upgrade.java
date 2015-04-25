@@ -26,6 +26,8 @@ public interface Upgrade {
      * @param decorated Upgrade to be decorated
      */
     public void upgrade (Upgrade decorated);
+    
+    public Upgrade clone ();
 
 
 }

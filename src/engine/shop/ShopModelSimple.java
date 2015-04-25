@@ -98,6 +98,7 @@ public class ShopModelSimple implements ShopModel {
             currentPlayer.getWallet().withdraw(getPrice(name));
             // myGameWorld.addObject(prototypeMap.get(name).clone());
             try {
+                //GameObject tower = prototypeMap.get(name).clone();
                 GameObject tower = new TestTower(100, 100, 100);
                 tower.getGraphic().getNode().setOnMousePressed(selected);
                 myGameWorld.addObject(tower, location);
@@ -120,9 +121,11 @@ public class ShopModelSimple implements ShopModel {
      */
     @Override
     public void purchaseUpgrade (String name) {
-        currentPlayer.getWallet().withdraw(getPrice(name));
-        currentGameObject.getWeapon().applyUpgrades(upgradeMap.get(name));
-        getUpgradeGraphics(currentGameObject);
+        if (canPurchase(name)){
+            currentPlayer.getWallet().withdraw(getPrice(name));
+            currentGameObject.getWeapon().applyUpgrades(upgradeMap.get(name));
+            getUpgradeGraphics(currentGameObject);
+        }
     }
 
     @Override
@@ -136,7 +139,7 @@ public class ShopModelSimple implements ShopModel {
 
     @Override
     public RangeDisplay getRangeDisplay (String name) {
-        return prototypeMap.get(name).clone().getRangeDisplay();
+        return prototypeMap.get(name).getRangeDisplay();
     }
 
     @Override

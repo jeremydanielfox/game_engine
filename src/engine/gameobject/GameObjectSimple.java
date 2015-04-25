@@ -134,6 +134,7 @@ public class GameObjectSimple implements GameObject {
         clone.setGraphic(myGraphic.clone());
         clone.setWeapon(myWeapon.clone());
         clone.setCollider(myCollider.clone());
+        clone.setMover(myMover.clone());
         return clone;
     }
 

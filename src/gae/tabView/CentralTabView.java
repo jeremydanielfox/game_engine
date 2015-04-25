@@ -1,6 +1,7 @@
 package gae.tabView;
 
 import engine.fieldsetting.Settable;
+import engine.game.Game;
 import engine.game.Level;
 import engine.game.StoryBoard;
 import gae.editor.EditingParser;
@@ -31,9 +32,11 @@ public class CentralTabView implements UIObject {
     private HudEditorTab hudTab;
     private LevelView levelView;
     private LibraryData libraryData;
+    private Game game;
 
-    public CentralTabView (Scene sceneIn) {
+    public CentralTabView (Scene sceneIn, Game gameIn) {
         scene = sceneIn;
+        game = gameIn;
         initialize();
     }
 
@@ -73,26 +76,13 @@ public class CentralTabView implements UIObject {
                 if (m.getName().equals("setStoryBoard")) {
                     m.invoke(levelData, sb);
                 }
-            }            
+            }   
         }
-        catch (InstantiationException e) {
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException e) {
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         
-        
-
+        game.getLevelBoard().addLevel(levelData);
         levelView = new LevelView();
         LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
         WaveEditor waves = new WaveEditor(sb);

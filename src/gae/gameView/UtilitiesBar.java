@@ -1,5 +1,6 @@
 package gae.gameView;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import javafx.geometry.Pos;
@@ -14,6 +15,8 @@ import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import xml.DataManager;
+import engine.game.Game;
 
 
 public class UtilitiesBar {
@@ -32,8 +35,11 @@ public class UtilitiesBar {
     private Button exportButton;
     private Button helpButton;
     private Button fullscreenButton;
+    
+    private Game game;
 
-    public UtilitiesBar () {
+    public UtilitiesBar (Game gameIn) {
+        game = gameIn;
         utilitiesBar = new GridPane();
         utilitiesBar.setId("utilitiesBar");
         utilitiesBar.setAlignment(Pos.CENTER);
@@ -80,7 +86,7 @@ public class UtilitiesBar {
         });
 
         exportButton.setOnMousePressed(e -> {
-
+            export();
         });
 
         helpButton.setOnMousePressed(e -> {
@@ -90,6 +96,13 @@ public class UtilitiesBar {
         fullscreenButton.setOnMousePressed(e -> {
 
         });
+    }
+
+    private void export () {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Game File");
+        File chosen = fileChooser.showSaveDialog(utilitiesBar.getScene().getWindow());
+        DataManager.writeToXML(game, chosen.getAbsolutePath());
     }
 
     private void chooseFile () {

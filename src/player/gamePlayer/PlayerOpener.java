@@ -1,7 +1,6 @@
 package player.gamePlayer;
 
 import gae.gameView.Main;
-import View.GamePlayerScreen;
 import java.util.Arrays;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -21,7 +20,7 @@ import javafx.stage.Stage;
  * @author Brandon Choi
  *
  */
-public class PlayerOpener implements GameScreen{
+public class PlayerOpener implements GameScene{
 
     private static final String headerText = "Select a Game";
 
@@ -54,7 +53,7 @@ public class PlayerOpener implements GameScreen{
     }
     
     @Override
-    public Scene getScreen () {
+    public Scene getScene () {
         return playerScene;
     }
 
@@ -73,7 +72,7 @@ public class PlayerOpener implements GameScreen{
 //            myStage.setScene(screen.makeScene());
             
               PauseScene pause = new PauseScene(null, myStage, playerScene);
-              myStage.setScene(pause.getScreen());
+              myStage.setScene(pause.getScene());
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {

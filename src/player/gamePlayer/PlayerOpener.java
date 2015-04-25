@@ -1,14 +1,12 @@
 package player.gamePlayer;
 
-import java.io.File;
-import java.util.Arrays;
-
-import View.GamePlayerScreen;
 import gae.gameView.Main;
+import java.util.Arrays;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -18,11 +16,11 @@ import javafx.stage.Stage;
 /**
  * Opens the game player. It will ideally have a few pre-authored games for the user to play but
  * also allow the user to upload new games he or she created as well.
- * 
+ *
  * @author Brandon Choi
  *
  */
-public class PlayerOpener extends Application {
+public class PlayerOpener implements GameScene{
 
     private static final String headerText = "Select a Game";
 
@@ -35,7 +33,8 @@ public class PlayerOpener extends Application {
     private Button loadB, playB;
     private GameSelector gameSelector;
 
-    public PlayerOpener () {
+    public PlayerOpener (Stage s) {
+        myStage = s;
         view = new BorderPane();
         playerScene = new Scene(view);
         options = new HBox(50);
@@ -44,12 +43,18 @@ public class PlayerOpener extends Application {
         headerBox.getChildren().add(header);
         gameSelector = new GameSelector(playerScene);
 
+        /* CSS */
         playerScene.getStylesheets().add("/css/GamePlayerCSS.css");
         options.setId("optionBox");
         header.setId("playerHeader");
         headerBox.setId("headerBox");
 
         setUpBorderPane();
+    }
+    
+    @Override
+    public Scene getScene () {
+        return playerScene;
     }
 
     /**
@@ -60,11 +65,16 @@ public class PlayerOpener extends Application {
         loadB.setOnMousePressed(e -> {
             openFileChooser();
         });
-        
+
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
-            GamePlayerScreen screen = new GamePlayerScreen(myStage);
+            GamePlayerScreen screen = new GamePlayerScreen(myStage,playerScene);
             myStage.setScene(screen.makeScene());
+            
+
+//              PauseScene pause = new PauseScene(null, myStage, playerScene);
+//              myStage.setScene(pause.getScene());
+
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {
@@ -78,7 +88,7 @@ public class PlayerOpener extends Application {
     private void openFileChooser () {
         FileChooser fc = new FileChooser();
         Stage fileStage = new Stage();
-        File chosen = fc.showOpenDialog(fileStage);
+        fc.showOpenDialog(fileStage);
     }
 
     /**
@@ -98,31 +108,5 @@ public class PlayerOpener extends Application {
         setUpButtons();
         view.setBottom(options);
         options.setAlignment(Pos.CENTER);
-    }
-
-    /**
-     * returns the Player scene
-     * 
-     * @return
-     */
-    public Scene getPlayer () {
-        return playerScene;
-    }
-
-    /*
-     * Main to start the Player
-     */
-
-    public static void main (String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start (Stage arg0) throws Exception {
-        myStage = new Stage();
-        myStage.setWidth(Main.SCREEN_WIDTH);
-        myStage.setHeight(Main.SCREEN_HEIGHT);
-        myStage.setScene(playerScene);
-        myStage.show();
     }
 }

@@ -2,15 +2,15 @@ package engine.gameobject.weapon.firingrate;
 
 import java.util.Optional;
 import engine.fieldsetting.Settable;
-import engine.gameobject.units.BuffType;
 import engine.gameobject.weapon.Upgrade;
+import engine.gameobject.weapon.range.RangeUpgrade;
 
 
 /**
  * Manages a weapon's firing rate. It is both an upgrade and an upgradable via the decorator
  * pattern.
- * 
- * 
+ *
+ *
  * @author Nathan Prabhu
  *
  */
@@ -28,7 +28,7 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
         this.increment = increment;
         decorated = Optional.empty();
     }
-    
+
     @Settable
     public void setIncrement (double increment) {
         this.increment = increment;
@@ -43,9 +43,13 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
         return sublayer.getRate() + increment;
     }
 
-
     @Override
     public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((FiringRate) decorated);
+    }
+    
+    @Override
+    public Upgrade clone () {
+        return new FiringRateUpgrade(increment);
     }
 }

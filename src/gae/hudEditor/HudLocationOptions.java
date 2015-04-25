@@ -29,7 +29,7 @@ public class HudLocationOptions implements UIObject {
         // TODO: make these pull the available options from the engine (like other editor)
 
         fields = new ArrayList<CheckBox>();
-        
+
         makeCheckBox("Score", startingFields);
         makeCheckBox("Wave", startingFields);
         makeCheckBox("Time", startingFields);
@@ -45,14 +45,16 @@ public class HudLocationOptions implements UIObject {
 
     private void makeCheckBox (String name, List<String> startingFields) {
         CheckBox cBox = new CheckBox(name);
-        this.fields.add(cBox);
-        
-        if (!startingFields.contains(name))
+        fields.add(cBox);
+
+        if (!startingFields.contains(name)) {
             cBox.setSelected(false);
-        else 
+        }
+        else {
             cBox.setSelected(true);
-        
-        this.baseNode.getChildren().add(cBox);
+        }
+
+        baseNode.getChildren().add(cBox);
     }
 
     private void setFields () {
@@ -66,7 +68,7 @@ public class HudLocationOptions implements UIObject {
         }
 
         myLocation.setFields(onFields);
-        
+
         myStage.close();
     }
 

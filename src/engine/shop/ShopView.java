@@ -1,17 +1,24 @@
 package engine.shop;
 
+import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
+import engine.shop.ShopModelSimple.ItemInfo;
+import gameworld.GameWorld;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
@@ -21,17 +28,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import View.ViewUtil;
-import engine.gameobject.GameObject;
-import engine.gameobject.PointSimple;
-import engine.shop.ShopModelSimple.ItemInfo;
 
 
 /**
  * View of the shop. Contains a node that can be directly added to the main View.
- * 
+ *
  * NOTE: layout of the shop is being hard-coded now, to resemble bloons. Future refactoring will
  * factor out the separate nodes in the container to allow for more customization.
- * 
+ *
  * @author Nathan Prabhu
  *
  */
@@ -45,17 +49,17 @@ public class ShopView extends Parent {
 
     private ShopModel model;
     private Scene scene;
-    private Pane pane; // TODO: use View to call method instead
-
+    private Pane pane;
+   
     private FlowPane shopIcons;
     private StackPane infoBox;
+    private GameObjectSelector selector;
+    private GameWorld world;
 
-    private BooleanProperty infoBoxActive;
-
-    public ShopView (ShopModel model, Pane pane) {
+    public ShopView (GameWorld world, ShopModel model, Pane pane) {
+        this.world = world;
         this.model = model;
         this.pane = pane;
-        infoBoxActive = new SimpleBooleanProperty(false);
         initialize();
     }
 
@@ -65,7 +69,7 @@ public class ShopView extends Parent {
         shopContainer.setMaxWidth(SHOP_WIDTH);
         shopIcons = new FlowPane();
         infoBox = new StackPane();
-
+        selector = new GameObjectSelector(this::displayUpgrades, infoBox, pane);
         shopContainer.getChildren().addAll(shopIcons, infoBox);
 
         // add Icons
@@ -78,6 +82,11 @@ public class ShopView extends Parent {
 
         getChildren().add(shopContainer);
     }
+    
+    
+    private void clearInfoBox(Pane infoBox){
+        infoBox.getChildren().clear();
+    }
 
     // TODO this should only be for GameObject ItemGraphics
     // TODO probably shouldn't hard-code MouseClick as command type
@@ -89,10 +98,10 @@ public class ShopView extends Parent {
             gameObjectIcon.setOnMouseEntered(mouseEvent -> displayGameObjectInfo(gameObjectIcon));
             gameObjectIcon.setOnMouseExited(mouseEvent -> infoBox.getChildren().clear());
             gameObjectIcon.setOnMouseClicked(mouseEvent -> {
-                TransitionGameObject transition =
-                        model.getTransitionGameObject(gameObjectIcon.getName());
+                RangeDisplay transition =
+                        model.getRangeDisplay(gameObjectIcon.getName());
                 Point2D location = ViewUtil.getMouseSceneLoc(mouseEvent, transition.getNode());
-                initializeTransition(model.getTransitionGameObject(gameObjectIcon.getName()),
+                initializeTransition(model.getRangeDisplay(gameObjectIcon.getName()),
                                      location);
             });
 
@@ -111,6 +120,7 @@ public class ShopView extends Parent {
         base.getChildren().addAll(labels.values());
         Label name = labels.get(ItemInfo.NAME);
         name.setStyle("-fx-font-weight: bold");
+        clearInfoBox(infoBox);
         infoBox.getChildren().add(base);
     }
 
@@ -131,7 +141,7 @@ public class ShopView extends Parent {
 
     /**
      * To be called by View when gameobject is selected during game.
-     * 
+     *
      * @param gameObject selected
      */
     public void displayUpgrades (GameObject gameObject) {
@@ -150,6 +160,9 @@ public class ShopView extends Parent {
 
     private StackPane makeUpgradePanel (ItemGraphic upgrade) {
         StackPane upgradePanel = new StackPane();
+        upgradePanel.setOnMouseEntered(event -> upgradePanel.setCursor(Cursor.HAND));
+        upgradePanel.setOnMouseClicked(event-> model.purchaseUpgrade(upgrade.getName()));
+        
         upgradePanel.setBackground(new Background(new BackgroundFill(Color.LAWNGREEN, null, null)));
 
         VBox entries = new VBox();
@@ -171,7 +184,7 @@ public class ShopView extends Parent {
         pane.getChildren().add(result);
     }
 
-    private void initializeTransition (TransitionGameObject transition, Point2D initial) {
+    private void initializeTransition (RangeDisplay transition, Point2D initial) {
         Node transNode = transition.getNode();
         bindCursor(initial, transNode);
 
@@ -183,15 +196,15 @@ public class ShopView extends Parent {
 
         transNode.setOnMouseClicked(event -> {
             PointSimple current = new PointSimple(event.getSceneX(), event.getSceneY());
-            // EventHandler<MouseEvent> isClicked = new EventHandler(event ->
-            // this::displayUpgrades);
-                if (model.purchaseGameObject(transition.getName(), current)) {
-                    ViewUtil.unbindCursor(pane, transNode);
-                    // TODO:
-                    // new TestTower: onClicked - show radius, show available upgrades -- call
-                    // displayUpgrades
+            EventHandler<MouseEvent> selected = selection -> selectGameObject(selection);
+            if (model.purchaseGameObject(transition.getName(), current, selected)) {
+                ViewUtil.unbindCursor(pane, transNode);
+            }
+        });
+    }
 
-                }
-            });
+    private void selectGameObject(MouseEvent event) {
+        GameObject selected = world.getObjectFromNode((Node) event.getSource());
+        selector.select(selected);
     }
 }

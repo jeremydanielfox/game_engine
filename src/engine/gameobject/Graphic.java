@@ -3,8 +3,6 @@ package engine.gameobject;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import View.ViewUtil;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.fieldsetting.Settable;
@@ -12,7 +10,7 @@ import engine.fieldsetting.Settable;
 
 /**
  * This class encapsulates the node for each game object.
- * 
+ *
  * @author Sierra Smith
  * @author Cosette Goldstein
  *
@@ -21,7 +19,7 @@ import engine.fieldsetting.Settable;
 public class Graphic {
 
     // note to self: need to change this image path default when using data files
-    private static final String DEFAULT_IMAGE_PATH_PREFIX = "images/";
+    private static final String DEFAULT_IMAGE_PATH_PREFIX = "/images/";
     private static final String DEFAULT_IMAGE_NAME = "robertDuvall.jpg";
 
     private double myHeight;
@@ -50,6 +48,7 @@ public class Graphic {
         // initializeImageView();
     }
 
+    @Override
     public Graphic clone () {
         Graphic clone = new Graphic(myHeight, myWidth, myImageName);
         clone.initializeImageView();
@@ -57,6 +56,7 @@ public class Graphic {
     }
 
     private void initializeImageView () {
+        System.out.println(myImageName);
         myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
         // for TEST purpose:
         if (myPoint == null) {
@@ -85,17 +85,15 @@ public class Graphic {
 
     /**
      * Assign the given point to both the ImageView and a copy of the point in this class.
-     * 
+     *
      * @param point
      */
     public void setPoint (PointSimple point) {
         Point2D temp = new Point2D(point.getX() + ViewUtil.getCenterOffsetX(myImageView),
                                    point.getY() + ViewUtil.getCenterOffsetY(myImageView));
         rotate(new PointSimple(temp));
-        myPoint =
-                temp;
-        getImageView().setX(myPoint.getX());
-        getImageView().setY(myPoint.getY());
+        myPoint = temp;
+        getImageView().relocate(myPoint.getX(), myPoint.getY());
     }
 
     @Settable
@@ -119,12 +117,13 @@ public class Graphic {
      * At some point, the ImageView will be null because this object will have been written out of
      * xstream, and the imageview will have been omitted. At this point, the method re-initializes
      * the imageview using the stored criteria.
-     * 
+     *
      * @return
      */
     private ImageView getImageView () {
-        if (myImageView == null)
+        if (myImageView == null) {
             initializeImageView();
+        }
         return myImageView;
     }
 
@@ -142,7 +141,7 @@ public class Graphic {
 
     /**
      * Rotates the node for this graphic according to a point and its rotator.
-     * 
+     *
      * @param point
      */
     public void rotate (PointSimple point) {

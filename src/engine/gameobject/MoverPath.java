@@ -5,8 +5,10 @@ import engine.pathfinding.EndOfPathException;
 import engine.pathfinding.Path;
 import engine.pathfinding.PathFixed;
 
+
 /**
  * A mover that moves according to a pathfinder.
+ * 
  * @author Kaighn
  *
  */
@@ -24,16 +26,12 @@ public class MoverPath extends BasicMover {
 		myPath = pf;
 	}
 	
-	 
-	 //This switch statement is not worth having polymorphism/using a state pattern.
-	 //No incompatible extensions will be made.
 	 /**
 	  * Moves according to path i.e. returns correct point on the path
 	  */
 	@Override
 	public PointSimple move(PointSimple current) throws EndOfPathException{
-	        if (frozen != true)
-	            myDistance += currentSpeed();
+	        myDistance += currentSpeed();
 	        return myPath.getNextLocation(myDistance, currentSpeed(), current);
 	}
 	
@@ -47,8 +45,14 @@ public class MoverPath extends BasicMover {
 	    myDistance = distance;
 	}
 	
+	/**
+	 * This sets the mover such that it will pick up on the path the spawner spawned this at. 
+	 */
+	@Override
 	public Mover clone(){
-	    return new MoverPath(myPath, inherentSpeed);
+	    MoverPath clone = new MoverPath(myPath, inherentSpeed);
+	    clone.myDistance = myDistance;
+	    return clone;
 	}
 	
 }

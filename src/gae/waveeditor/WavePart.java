@@ -1,8 +1,10 @@
 package gae.waveeditor;
 
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimple;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -17,7 +19,7 @@ public class WavePart implements UIObject {
     private HBox rootNode;
     private WaveEnemyTable parent;
     private TextField quantityField;
-    private ComboBox<String> gameObjectSelector;
+    private ComboBox<GameObjectSimple> gameObjectSelector;
 
     public WavePart(WaveEnemyTable parent) {
         this.parent = parent;
@@ -29,14 +31,16 @@ public class WavePart implements UIObject {
 
         //TODO: make pull from created game objects
         
-        LibraryData gameObjects = LibraryData.getInstance();
+        LibraryData libData = LibraryData.getInstance();
+        ObservableList<GameObjectSimple> enemyList = libData.getEditableObservableList();
+        
         ObservableList<String> options = 
                 FXCollections.observableArrayList(
                                                   "Enemy 1",
                                                   "Enemy 2",
                                                   "Enemy 3"
                         );
-        gameObjectSelector = new ComboBox<String>(options);
+        gameObjectSelector = new ComboBox<GameObjectSimple>(enemyList);
         
         quantityField = new TextField("Enter Quantity");
         quantityField.setEditable(true);

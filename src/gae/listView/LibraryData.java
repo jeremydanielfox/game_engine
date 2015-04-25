@@ -12,7 +12,9 @@ import gae.backend.Placeable;
 import gae.gridView.Path;
 import gae.gridView.PathView;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -35,6 +37,7 @@ public class LibraryData {
 
     private ObservableList<Authorable> editableList = FXCollections.observableArrayList();
     private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
+    private Map<Class<?>, ObservableList<Object>> createdObjectMap = new HashMap<>();
 
     public ObservableList<Authorable> getEditableObservableList () {
         return editableList;
@@ -44,10 +47,22 @@ public class LibraryData {
         return pathList;
     }
 
+    public void addCreatedObjectToList (Class<?> klass, Object o) {
+        if (!createdObjectMap.containsKey(klass)) {
+            ObservableList<Object> list = FXCollections.observableArrayList();
+            createdObjectMap.put(klass, list);
+        }
+        createdObjectMap.get(klass).add(o);
+    }
+
+    public ObservableList<Object> getObservableList (Class<?> klass) {
+        return createdObjectMap.get(klass);
+    }
+
     public void addEditableToList (Placeable editable) {
         editableList.add(editable);
     }
-    
+
     public void addGameObjectToList (Object gameObject) {
         GameObjectToEditable editable = new GameObjectToEditable((GameObject) gameObject);
         editableList.add(editable);

@@ -1,6 +1,7 @@
 package gae.editorView;
 
 import engine.gameobject.PointSimple;
+import gae.editor.ObjectComponentEditor;
 import gae.gridView.ContainerWrapper;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -33,16 +34,16 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
     public DragIntoRectangle (double width, String label, Scene scene) {
         this.width = width;
         this.scene = scene;
-        type = label;
+        // type = label;
         rectSize = width / 5;
         rect = new Rectangle(rectSize, rectSize, Color.TRANSPARENT);
         rect.setStyle("    -fx-stroke: black;\n" +
-                "    -fx-stroke-width: 3;\n" +
-                "    -fx-stroke-dash-array: 12 2 4 2;\n" +
-                "    -fx-stroke-dash-offset: 6;\n" +
-                "    -fx-stroke-line-cap: butt;");
-        Label name = createLabel(label);
-        nodesList = Arrays.asList(new Node[] { rect, name });
+                      "    -fx-stroke-width: 3;\n" +
+                      "    -fx-stroke-dash-array: 12 2 4 2;\n" +
+                      "    -fx-stroke-dash-offset: 6;\n" +
+                      "    -fx-stroke-line-cap: butt;");
+        // Label name = createLabel(label);
+        nodesList = Arrays.asList(new Node[] { rect });
         getChildren().addAll(nodesList);
         setManaged(false);
         setOnMouseEntered(e -> {
@@ -69,11 +70,11 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
         return type;
     }
 
-    public void setCorrect (ImageView image) {
+    public void setCorrect (ImageView image, String type) {
         getChildren().add(image);
         image.setLayoutX(rectSize / 2 + ViewUtil.getCenterOffsetX(image));
         image.setLayoutY(rectSize / 2 + ViewUtil.getCenterOffsetY(image));
-        setUpEditorOpener();
+//        setUpEditorOpener();
         image.setOnMouseClicked(e -> {
             image.setEffect(new Glow(1));
             scene.setOnKeyPressed(keyEvent -> {
@@ -82,27 +83,55 @@ public class DragIntoRectangle extends Group implements ContainerWrapper {
                     setVisible();
                 }
             });
-            if (e.getClickCount()==2) {
-                setUpEditorOpener();
+            if (e.getClickCount() == 2) {
+//                setUpEditorOpener();
                 image.setEffect(null);
             }
         });
         setInvisible();
     }
 
-    private void setUpEditorOpener () {
-        try {
-            Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
-            Object instance = className.getConstructor().newInstance();
-            Method setUpList = className.getMethod("initialize");
-            setUpList.invoke(instance);
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException
-                | InvocationTargetException e) {
+//<<<<<<< HEAD
+//    private void setUpEditorOpener (String type) {
+//        try {
+//            Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
+//            Object instance = className.getConstructor().newInstance();
+//            Method setUpList = className.getMethod("initialize");
+//            setUpList.invoke(instance);
+//        }
+//        catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
+//                | IllegalAccessException | IllegalArgumentException
+//                | InvocationTargetException e) {
+//
+//        }
+//    }
 
-        }
-    }
+//    private void setUpEditorOpener () {
+//        new PopUpEditorView(componentEditor);
+        // try {
+        // Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
+        // Object instance = className.getConstructor().newInstance();
+        // Method setUpList = className.getMethod("initialize");
+        // setUpList.invoke(instance);
+        // }
+        // catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
+        // | IllegalAccessException | IllegalArgumentException
+        // | InvocationTargetException e) {
+        //
+        // }
+//    private void setUpEditorOpener () {
+//        try {
+//            Class<?> className = Class.forName("gae.editorView." + type + "EditorOpener");
+//            Object instance = className.getConstructor().newInstance();
+//            Method setUpList = className.getMethod("initialize");
+//            setUpList.invoke(instance);
+//        }
+//        catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
+//                | IllegalAccessException | IllegalArgumentException
+//                | InvocationTargetException e) {
+//
+//        }
+//    }
 
     private void setInvisible () {
         nodesList.forEach(node -> node.setVisible(false));

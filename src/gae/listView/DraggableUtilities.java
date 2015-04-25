@@ -4,14 +4,20 @@ import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
 import gae.backend.Placeable;
 import gae.editorView.DragIntoRectangle;
+import gae.editorView.DraggableFields;
+import gae.editorView.DraggableItem;
 import gae.gridView.ContainerWrapper;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.HBoxBuilder;
 import View.ViewUtil;
 
 
@@ -40,12 +46,12 @@ public class DraggableUtilities {
                 ViewUtil.bindCursor(transitionImage,
                                     node,
                                     ViewUtil
-                                    .getMouseLocation(me, transitionImage),
+                                            .getMouseLocation(me, transitionImage),
                                     KeyCode.ESCAPE, false);
         binder.setOnMouseClicked(ev -> {
             Point2D current =
                     binder.localToParent(new Point2D(binder.getTranslateX(), binder
-                                                     .getTranslateY()));
+                            .getTranslateY()));
             Double currentX = current.getX();
             Double currentY = current.getY();
             if (wrapper.checkBounds(currentX, currentY)) {
@@ -65,21 +71,64 @@ public class DraggableUtilities {
         root.getChildren().add(binder);
     }
 
+    /**
+     * places the node on the location clicked. When the location is clicked, a new instance of the
+     * object is added to a list and a MovableImage is placed on the location.
+     *
+     * @param me: MouseEvent to bind the cursor to the EditableNode
+     * @param editablenode: The EditableNode
+     * @param node: Node that will be clicked on
+     * @param instanceList: List of Editables
+     * @param wrapper: The object which determines the bounds of where the object can be placed
+     * @param root: where the Image will be placed
+     */
+    public static void makeObjectPlaceable (MouseEvent me,
+                                            DraggableItem placeable,
+                                            Node node,
+                                            ObservableList<Object> instanceList,
+                                            ContainerWrapper wrapper,
+                                            Group root) {
+        //TODO: figure out how to clone
+        Node binder =
+                ViewUtil.bindCursor(placeable,
+                                    node,
+                                    ViewUtil
+                                            .getMouseLocation(me, placeable),
+                                    KeyCode.ESCAPE, false);
+        binder.setOnMouseClicked(ev -> {
+            Point2D current =
+                    binder.localToParent(new Point2D(binder.getTranslateX(), binder
+                            .getTranslateY()));
+            Double currentX = current.getX();
+            Double currentY = current.getY();
+            System.out.println("Current X is : " + currentX);
+            System.out.println("Current Y is : " + currentY);
+            if (wrapper.checkBounds(currentX, currentY)) {
+                throw new ObjectOutOfBoundsException();
+            }
+            placeable.openEditor(ev);
+            placeable.setTranslateX(currentX);
+            placeable.setTranslateY(currentY);
+            root.getChildren().add(placeable);
+        });
+        root.getChildren().add(binder);
+    }
+
     public static void makeImagePlaceable (MouseEvent me,
-                                           ImageView image,
+                                           DraggableFields image,
                                            Node node, DragIntoRectangle correct,
                                            Group root) {
-        ImageContainer clone = new ImageContainer(new ImageView(image.getImage()));
+        DraggableFields clone = new DraggableFields(image.getCloneImage());
         ImageView imageView = (ImageView) ListViewUtilities.createCellContentWithIcon(clone);
         Node binder =
                 ViewUtil.bindCursor(imageView,
                                     node,
                                     ViewUtil
-                                    .getMouseLocation(me, imageView),
+                                            .getMouseLocation(me, imageView),
                                     KeyCode.ESCAPE, false);
         binder.setOnMouseClicked(ev -> {
-            if (image.getBoundsInLocal().intersects(correct.getBoundsInLocal())) {
-                correct.setCorrect(imageView);
+            if (image.getImageView().getBoundsInLocal().intersects(correct.getBoundsInLocal())) {
+                correct.setCorrect(imageView, image.getName());
             }
 
         });

@@ -2,6 +2,7 @@ package gae.backend;
 
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
+import engine.shop.tag.GameObjectTag;
 import gae.gridView.Path;
 import gae.listView.DeepCopy;
 import gae.listView.MovableImage;
@@ -188,5 +189,17 @@ public class TempEnemy implements Placeable, UIObject {
     public void setWeapon (Weapon weapon) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public GameObjectTag getTag () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setTag (GameObjectTag tag) {
+        // TODO Auto-generated method stub
+        
     }
 }

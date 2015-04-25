@@ -1,9 +1,8 @@
 package player.gamePlayer;
 
 import gae.gameView.Main;
-
+import View.GamePlayerScreen;
 import java.util.Arrays;
-
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import View.GamePlayerScreen;
 
 /**
  * Opens the game player. It will ideally have a few pre-authored games for the user to play but
@@ -46,6 +44,7 @@ public class PlayerOpener implements GameScreen{
         headerBox.getChildren().add(header);
         gameSelector = new GameSelector(playerScene);
 
+        /* CSS */
         playerScene.getStylesheets().add("/css/GamePlayerCSS.css");
         options.setId("optionBox");
         header.setId("playerHeader");
@@ -70,8 +69,11 @@ public class PlayerOpener implements GameScreen{
 
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
-            GamePlayerScreen screen = new GamePlayerScreen(myStage);
-            myStage.setScene(screen.makeScene());
+//            GamePlayerScreen screen = new GamePlayerScreen(myStage);
+//            myStage.setScene(screen.makeScene());
+            
+              PauseScene pause = new PauseScene(null, myStage, playerScene);
+              myStage.setScene(pause.getScreen());
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {

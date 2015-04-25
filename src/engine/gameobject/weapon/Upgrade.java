@@ -1,5 +1,7 @@
 package engine.gameobject.weapon;
 
+import engine.gameobject.units.Buff;
+
 // TODO: experiment with generics here
 /**
  * **
@@ -24,5 +26,8 @@ public interface Upgrade {
      * @param decorated Upgrade to be decorated
      */
     public void upgrade (Upgrade decorated);
+    
+    public Upgrade clone ();
+
 
 }

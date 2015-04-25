@@ -63,18 +63,17 @@ public class AbstractWorld implements GameWorld {
 
     @Override
     public void updateGameObjects () {
-
-        ArrayList<GameObject> currentObjects = new ArrayList<GameObject>(myObjects);
-        for (GameObject object : currentObjects) {
-            object.update(this);
-            for (GameObject interactObject : currentObjects) {
-                if (interactObject != object) {
-                    myCollisionEngine.interact(object, interactObject);
-                    myRangeEngine.interact(object, interactObject);
-                }
-            }
-        }
-        removeDeadObjects();
+         ArrayList<GameObject> currentObjects = new ArrayList<GameObject>(myObjects);
+         for (GameObject object: currentObjects){
+             object.update(this);
+             for (GameObject interactObject: currentObjects){
+                 if (interactObject != object && !object.isDead() && !interactObject.isDead()){
+                     myCollisionEngine.interact(object, interactObject);
+                     myRangeEngine.interact(object, interactObject);
+                 }
+             }
+         }
+         removeDeadObjects();
     }
 
     private void removeDeadObjects () {
@@ -88,7 +87,6 @@ public class AbstractWorld implements GameWorld {
             myObjects.remove(toRemove);
             toRemove.onDeath(this);
         }
-
     }
 
     @Override
@@ -114,7 +112,7 @@ public class AbstractWorld implements GameWorld {
     }
 
     @Override
-    public boolean isPlacable (Node n, PointSimple pixelCoords) {
+    public boolean isPlaceable (Node n, PointSimple pixelCoords) {
         return true; // TODO plz replace with logic. Ex: towers cannot be placed on towers
     }
 

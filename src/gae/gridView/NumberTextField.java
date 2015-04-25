@@ -2,6 +2,12 @@ package gae.gridView;
 
 import javafx.scene.control.TextField;
 
+/**
+ * TextField that only allows the entry of numbers
+ * 
+ * @author Nina
+ *
+ */
 
 public class NumberTextField extends TextField {
 

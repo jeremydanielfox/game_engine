@@ -101,8 +101,8 @@ public abstract class Buff implements Upgrade {
     /**
      * Reproduces buff. Must be defined in each buff made
      */
-    @Override
-    public abstract Buff clone ();
 
     public abstract BuffType getBuffType ();
+    
+    public abstract Buff clone ();
 }

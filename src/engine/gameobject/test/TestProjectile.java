@@ -25,11 +25,8 @@ public class TestProjectile extends GameObjectSimple {
         setMover(new MoverDirection(getPoint(), 3.3, 250));
         setWeapon(new NullWeapon());
         setLabel(new ProjectileLabel());
-        if (type == 1 || type == 4) {
+        if (type == 1 || type == 2 || type == 4) {
             getCollider().addCollisionBehavior(new DamageBuff(4));
-        }
-        if (type == 2) {
-            getCollider().addCollisionBehavior(new FreezeBuff(30));
         }
         if (type == 3) {
             getCollider().addExplosionBuff(new PoisonBuff(1000, 4));
@@ -40,8 +37,8 @@ public class TestProjectile extends GameObjectSimple {
         if (type == 4) {
             setMover(new MoverDirection(getPoint(), 1, 90));
         }
-        if (type == 5) {
-            setWeapon(new TestWeapon(4));
+        if (type == 5){
+            setWeapon(new TestWeapon(4, null));
             setLabel(new TowerLabel());
         }
     }

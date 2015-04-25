@@ -12,13 +12,15 @@ import engine.fieldsetting.Settable;
 @Settable
 public class HealthSimple implements Health {
     private double myHealth;
-
-    public HealthSimple () {
-        myHealth = 0;
+    private double maxHealth;
+    
+    public HealthSimple(){
+        this(0);
     }
-
-    public HealthSimple (double health) {
-        myHealth = health;
+    
+    public HealthSimple(double health){
+        maxHealth = health;
+        myHealth = maxHealth;
     }
 
     @Override
@@ -28,16 +30,21 @@ public class HealthSimple implements Health {
 
     @Override
     public void changeHealth (double amount) {
-        myHealth += amount;
+        if (myHealth + amount > maxHealth) {
+            myHealth = maxHealth;
+        }
+        else {
+            myHealth += amount;
+        }
     }
 
     @Settable
     public void setHealth (double health) {
-        myHealth = health;
+        maxHealth = health;
+        myHealth = maxHealth;
     }
 
-    @Override
-    public Health clone () {
-        return new HealthSimple(myHealth);
+    public Health clone(){
+        return new HealthSimple(maxHealth);
     }
 }

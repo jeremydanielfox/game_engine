@@ -88,7 +88,7 @@ public class PoisonBuff extends Buff implements Poison{
     }
     
     public Buff clone(){
-        return new PoisonBuff(getDuration(), (int) getDamage());
+        return new PoisonBuff(getDuration(), getDamage());
     }
 
     @Override

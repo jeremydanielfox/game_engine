@@ -60,6 +60,9 @@ public class GameObjectSimple implements GameObject{
         myBuffs.receiveBuff(buff, this);
     }
     
+    public void addImmunity(Buff buff){
+        //TODO: Implement this
+    }
 /*
  * Firing methods follow
  */

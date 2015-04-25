@@ -1,21 +1,38 @@
 package View;
 
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 
 
+/**
+ * This interface is meant to be implemented by any basic front end class for a game which enables
+ * pause and play abilities.
+ * 
+ * @author Sierra
+ * @author Cosette
+ *
+ */
 public interface EngineView {
-    abstract void initializeGameWorld ();
 
-    abstract void buildTimeline ();
+    /**
+     * Prepares the game for game play.
+     */
+    public abstract void initializeGameWorld ();
 
-    abstract void executeFrameActions ();
+    /**
+     * The game will be in a paused state after this method call, no matter what the previous state
+     * was.
+     */
+    public abstract void pause ();
 
-    abstract void pause ();
+    /**
+     * Plays the game if it is currently paused, otherwise game remains in playing state.
+     */
+    public abstract void play ();
 
-    abstract void play ();
-
-    abstract void addButton (Button b, int x, int y);
-
-    abstract Node initializeView ();
+    /**
+     * Sets up the graphics to display the game and returns a root node that can then be displayed.
+     * 
+     * @return
+     */
+    public abstract Node initializeView ();
 }

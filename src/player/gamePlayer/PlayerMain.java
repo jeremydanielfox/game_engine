@@ -22,7 +22,7 @@ public class PlayerMain extends Application {
         myStage.setWidth(Main.SCREEN_WIDTH);
         myStage.setHeight(Main.SCREEN_HEIGHT);
         PlayerOpener opener = new PlayerOpener(myStage);
-        myStage.setScene(opener.getScreen());
+        myStage.setScene(opener.getScene());
         myStage.show();
 
     } 

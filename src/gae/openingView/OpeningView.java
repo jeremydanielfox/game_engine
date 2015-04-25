@@ -69,6 +69,7 @@ public class OpeningView implements UIMediator {
          */
         myScene.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ESCAPE)) {
+                myMusician.clearMusic(myScene);
                 UIMediator author = new GameView();
                 myScene = author.getScene();
                 myStage.setScene(myScene);
@@ -83,7 +84,7 @@ public class OpeningView implements UIMediator {
      */
     private void setMusic (String s) {
         Music backgroundMusic = new MusicSimple(new Media(Paths.get(MUSIC_PATH + s).toUri().toString()));
-        myMusician.addBackgroundMusic(myScene, backgroundMusic);
+        myMusician.addBackgroundMusic(myStage, myScene, backgroundMusic);
         myMusician.playAudio(myScene);
     }
 
@@ -113,10 +114,10 @@ public class OpeningView implements UIMediator {
          */
         if (fieldsCompleted()) {
             if (usedObject.equals(dataForm) && action instanceof MouseEvent) {
+                myMusician.clearMusic(myScene);
                 UIMediator author = new GameView();
                 myScene = author.getScene();
                 myStage.setScene(myScene);
-                myStage.setFullScreen(true);
             }
         }
         else {

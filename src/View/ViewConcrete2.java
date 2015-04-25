@@ -12,6 +12,7 @@ import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -93,8 +94,11 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myPane.setRight(vbox);
         buildTimeline();
         // for testing purposes:
-        PopUpScreen popup = new PopUpScreen();
-        popup.makeScreen("Begin Level 1", "Start"); // these should be from resource files
+//        PopUpScreen popup = new PopUpScreen();
+//        popup.makeScreen("Begin Level 1", "Start"); // these should be from resource files
+//        MainMenuScreen menu=new MainMenuScreen("Hi","hi","hi");
+//        Scene scene=menu.makeMenu();
+        
         Button btn = new Button("Dec");
         btn.setOnAction(e -> myGame.getPlayer().changeHealth(-100));
         Button btn2 = new Button("Inc");
@@ -106,8 +110,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         play();
     }
 
-    @Override
-    public void buildTimeline () {
+    private void buildTimeline () {
         KeyFrame frame = makeKeyFrame(DEFAULT_FRAME_RATE);
         myAnimation = new Timeline();
         myAnimation.setCycleCount(Animation.INDEFINITE);
@@ -154,8 +157,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         }
     }
 
-    @Override
-    public void executeFrameActions () {
+    private void executeFrameActions () {
         // after updating game, how to update after level ends? need to look into checking something
         // like gameEnded()
         myGame.update();
@@ -169,7 +171,6 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
                 }
             });
         myHeadsUp.update();
-
     }
 
     private void addInitialObjects () {// This is actually a rendering method now.
@@ -275,11 +276,6 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     public void play () {
         myAnimation.play();
         myHeadsUp.update();
-    }
-
-    @Override
-    public void addButton (Button b, int x, int y) {
-        vbox.getChildren().add(b);
     }
 
     @Override

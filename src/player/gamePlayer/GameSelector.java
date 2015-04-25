@@ -14,7 +14,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-
 /**
  * The middle section of the PlayerOpener with the images of the game and the arrows that allow the
  * user to navigate around the player
@@ -54,9 +53,8 @@ public class GameSelector {
          */
         SelectOption s1 = new SelectOption(new ImageView("/images/bloonsdefense.jpg"), "Bloons");
         SelectOption s2 = new SelectOption(new ImageView("/images/desktopdefense.jpg"),
-                "Desktop Tower Defense");
-        SelectOption s3 =
-                new SelectOption(new ImageView("/images/cartoonwars.jpg"), "Cartoon Wars");
+                                           "Desktop Tower Defense");
+        SelectOption s3 = new SelectOption(new ImageView("/images/cartoonwars.jpg"), "Cartoon Wars");
         options.addAll(Arrays.asList(s1, s2, s3));
 
         index = 0;
@@ -104,10 +102,10 @@ public class GameSelector {
             if (e.getCode().equals(KeyCode.RIGHT)) {
                 swipe(RIGHT);
             }
-                else if (e.getCode().equals(KeyCode.LEFT)) {
-                    swipe(LEFT);
-                }
-            });
+            else if (e.getCode().equals(KeyCode.LEFT)) {
+                swipe(LEFT);
+            }
+        });
     }
 
     /**

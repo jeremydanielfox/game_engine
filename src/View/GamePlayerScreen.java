@@ -2,10 +2,10 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import player.gamePlayer.PauseScene;
 import voogasalad.util.highscore.HighScoreController;
 import voogasalad.util.highscore.HighScoreException;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -58,7 +59,7 @@ public class GamePlayerScreen {
         // new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
         myVbox = new VBox(30);
         // makeSideBar();
-        pauseScreen = new PauseScene(e -> resumeGame());
+        pauseScreen = new PauseScene(e -> resumeGame(), myStage);
         myGame=loadGame();
     }
 
@@ -107,11 +108,10 @@ public class GamePlayerScreen {
     }
 
     private void startGame () {
-
         Group root = new Group();
         root.getChildren().add(makeDemoGame());
-        Scene scene = new Scene(root);
-        myStage.setScene(scene);
+        Scene myScene = new Scene(root);
+        myStage.setScene(myScene);
     }
 
     public Node makeDemoGame () {

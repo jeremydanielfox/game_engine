@@ -69,7 +69,8 @@ public class PauseScene implements GameScreen {
         });
 
         mainMenu.setOnMouseClicked(e -> {
-
+            PlayerOpener opener = new PlayerOpener(myStage);
+            
         });
     }
 }

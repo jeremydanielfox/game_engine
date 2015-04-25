@@ -23,7 +23,7 @@ import View.GamePlayerScreen;
  * @author Brandon Choi
  *
  */
-public class PlayerOpener extends Application {
+public class PlayerOpener implements GameScreen{
 
     private static final String headerText = "Select a Game";
 
@@ -36,7 +36,8 @@ public class PlayerOpener extends Application {
     private Button loadB, playB;
     private GameSelector gameSelector;
 
-    public PlayerOpener () {
+    public PlayerOpener (Stage s) {
+        myStage = s;
         view = new BorderPane();
         playerScene = new Scene(view);
         options = new HBox(50);
@@ -51,6 +52,11 @@ public class PlayerOpener extends Application {
         headerBox.setId("headerBox");
 
         setUpBorderPane();
+    }
+    
+    @Override
+    public Scene getScreen () {
+        return playerScene;
     }
 
     /**
@@ -99,30 +105,5 @@ public class PlayerOpener extends Application {
         setUpButtons();
         view.setBottom(options);
         options.setAlignment(Pos.CENTER);
-    }
-
-    /**
-     * returns the Player scene
-     *
-     * @return
-     */
-    public Scene getPlayer () {
-        return playerScene;
-    }
-
-    /*
-     * Main to start the Player
-     */
-    public static void main (String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start (Stage arg0) throws Exception {
-        myStage = new Stage();
-        myStage.setWidth(Main.SCREEN_WIDTH);
-        myStage.setHeight(Main.SCREEN_HEIGHT);
-        myStage.setScene(playerScene);
-        myStage.show();
     }
 }

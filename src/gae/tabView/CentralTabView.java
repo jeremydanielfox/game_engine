@@ -60,7 +60,7 @@ public class CentralTabView implements UIObject {
     }
 
     private void createNewLevel () {
-        Level levelData;
+        Level levelData = null;
         StoryBoard sb = new StoryBoard();
         List<Method> levelMethods;
 

@@ -134,8 +134,12 @@ public class GameWriterConcrete2 extends Application {
 		GridCell[] ePoints = { new GridCell(12, 12), new GridCell(0, 12),
 				new GridCell(6, 12) };
 		List<GridCell> endPoints = Arrays.asList(ePoints);
+		GridCell[] oPoints = { new GridCell(0, 3), new GridCell(1, 3),
+				new GridCell(2, 3) };
+		List<GridCell> obstaclePoints = Arrays.asList(oPoints);
 		world.setEndPoints(endPoints);
 		world.setSpawnPoints(startPoints);
+		world.setObstacles(obstaclePoints);
 
 		try {
 			world.getPath().updatePath();

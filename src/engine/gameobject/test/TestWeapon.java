@@ -6,11 +6,11 @@ import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.firingstrategy.MultipleProjectile;
 import engine.gameobject.weapon.upgradetree.TestTree;
 
-
-public class TestWeapon extends BasicWeapon {
-
-    public TestWeapon (int type) {
+public class TestWeapon extends BasicWeapon{
+    
+    public TestWeapon(int type, TestTower tower){
         super();
+        //setProjectile(tower);
         setProjectile(new TestProjectile(type));
         setTree(new TestTree());
 
@@ -21,7 +21,7 @@ public class TestWeapon extends BasicWeapon {
         if (type == 5) {
             GameObject projectile = new TestTower(4, 270, 270);
             projectile.setMover(new MoverDirection(projectile.getPoint(), .2, 90));
-            projectile.setWeapon(new TestWeapon(4));
+            projectile.setWeapon(new TestWeapon(4, tower));
             setProjectile(projectile);
         }
     }

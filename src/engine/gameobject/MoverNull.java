@@ -19,4 +19,9 @@ public class MoverNull implements Mover {
         // TODO Auto-generated method stub
     }
 
+    @Override
+    public double getSpeed () {
+        return 0;
+    }
+
 }

@@ -1,21 +1,28 @@
 package gae.openingView;
 
 import gae.gameView.GameView;
+import java.io.File;
 import java.lang.reflect.Method;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import musician.Music;
+import musician.MusicSimple;
+import musician.Musician;
+import musician.MusicianSimple;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import animations.Animator;
-
 
 /**
  * OpeningView is the overarching class for the first scene the author sees. Allows the author to
@@ -27,7 +34,9 @@ import animations.Animator;
 
 public class OpeningView implements UIMediator {
 
-    static final Animator myAnimator = new Animator();
+    private static final String HAWIIAN_SONG = "hula.mp3";
+    private static final String MUSIC_PATH = "src/musician/";
+    static final Animator myAnimator = Animator.getInstance();
     static final String DEFAULT_TYPE_MSG = "Choose from right ->";
     private static final String OPENINGVIEW_CSS = "css/OpeningViewCSS.css";
     private Stage myStage;
@@ -36,6 +45,7 @@ public class OpeningView implements UIMediator {
     private List<UIObject> myUIObjects;
     private UIObject dataForm, imagePanel;
     private Map<String, String> dataResults;
+    private Musician myMusician;
 
     private SimpleStringProperty gameSelected;
 
@@ -50,6 +60,8 @@ public class OpeningView implements UIMediator {
         imagePanel = new ImagePanel(this, gameSelected);
         dataForm = new DataForm(this, gameSelected);
         dataResults = new HashMap<>();
+        myMusician = MusicianSimple.getInstance();
+        setMusic(HAWIIAN_SONG);
         insertBorders();
 
         /*
@@ -62,6 +74,17 @@ public class OpeningView implements UIMediator {
                 myStage.setScene(myScene);
             }
         });
+    }
+
+    /**
+     * sets the song depending on the path put in as a String s
+     * 
+     * @param s
+     */
+    private void setMusic (String s) {
+        Music backgroundMusic = new MusicSimple(new Media(Paths.get(MUSIC_PATH + s).toUri().toString()));
+        myMusician.addBackgroundMusic(myScene, backgroundMusic);
+        myMusician.playAudio(myScene);
     }
 
     /**

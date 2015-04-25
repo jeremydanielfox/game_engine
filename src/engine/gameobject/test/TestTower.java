@@ -4,8 +4,6 @@ import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverNull;
-import engine.gameobject.MoverPath;
-import engine.gameobject.MoverUser;
 import engine.gameobject.PointSimple;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.GameObjectTagSimple;
@@ -24,12 +22,12 @@ public class TestTower extends GameObjectSimple {
 //        MoverUser moveruser = new MoverUser();
 //        moveruser.setNode(graphic.getNode());
         setMover(new MoverNull());
-        setWeapon(new TestWeapon(type));
+        setWeapon(new TestWeapon(type, this));
         GameObjectTag tag =
                 new GameObjectTagSimple("TestTower", "Just a test tower; nothing special here...",
                                         new Graphic(40, 40, "Bloons_TackShooterIcon.png"), this);
         setTag(tag);
         setLabel(new TowerLabel());
     }
-
+    
 }

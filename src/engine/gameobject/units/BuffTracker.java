@@ -24,6 +24,10 @@ public class BuffTracker {
         }
     }
 
+    /**
+     * Advances time of buffs in myObject by increment 1
+     * @param myObject
+     */
     public void update (GameObject myObject) {
         ArrayList<Buff> removeBuffer = new ArrayList<Buff>();
         for (Buff buff : buffList) {

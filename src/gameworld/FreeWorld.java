@@ -23,7 +23,7 @@ public class FreeWorld extends AbstractWorld {
 	// private List<GameObject>[][] myGrid;
 	private GameObject[][] myGrid;
 	private CoordinateTransformer myTransform;
-	private List<GridCell> mySpawnPoints, myEndPoints;
+	private List<GridCell> mySpawnPoints, myEndPoints, myObstacles;
 
 	// @SuppressWarnings("unchecked")
 	public FreeWorld (int numRows, int numCols) {
@@ -49,8 +49,9 @@ public class FreeWorld extends AbstractWorld {
 			myGrid[c.getRow()][c.getCol()] = null;
 			try {
 				myPath.updatePath();
-			} catch (NoPathExistsException e1) { System.out.println("what");}
+			} catch (NoPathExistsException e1) { } //impossible
 			throw new StructurePlacementException();
+			
 		}
 		super.addObject(toSpawn);
 	}
@@ -72,6 +73,11 @@ public class FreeWorld extends AbstractWorld {
 				return false;
 			}
 		}
+		for(GridCell obstacleCell : myObstacles){
+			if(obstacleCell.equals(c)){
+				return false;
+			}
+		}
 		return myGrid[c.getRow()][c.getCol()] == null;
 	}
 
@@ -87,6 +93,34 @@ public class FreeWorld extends AbstractWorld {
 		mySpawnPoints = spawnpoints;
 		PathFree path = (PathFree) myPath;
 		path.setSpawnPoints(spawnpoints);
+	}
+	
+	@Settable
+	public void setObstacles(List<GridCell> obstacles){
+		myObstacles = obstacles;
+		PathFree path = (PathFree) myPath;
+		path.setObstacles(obstacles);
+	}
+	
+	@Override
+	public void updateGameObjects(){
+		super.updateGameObjects();		
+		for(int r = 0; r < myGrid.length; r++){
+			for(int c = 0; c < myGrid[0].length; c++){
+				GameObject g = myGrid[r][c];
+				if(g != null){
+					GridCell cell = myTransform.transformWorldToGrid(g.getPoint());
+					if(myGrid[cell.getRow()][cell.getCol()] != g){
+						myGrid[cell.getRow()][cell.getCol()] = g;
+						myGrid[r][c] = null;
+						try {
+							myPath.updatePath();
+						} catch (NoPathExistsException e) {
+						}
+					}
+				}
+			}
+		}
 	}
 
 }

@@ -9,15 +9,12 @@ import gae.listView.DraggableUtilities;
 import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
-import javafx.scene.input.MouseEvent;
 
 
 public class GenericObjectList {
@@ -69,7 +66,8 @@ public class GenericObjectList {
             DraggableItem draggable =
                     new DraggableItem(list.getSelectionModel().getSelectedItem(), klass, classType);
             DraggableUtilities.makeObjectPlaceable(me, draggable, node,
-                                                   createdSpecificObjects, wrapper, root, objectEditor);
+                                                   createdSpecificObjects, wrapper, root,
+                                                   objectEditor);
         });
         return list;
     }

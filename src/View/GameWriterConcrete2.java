@@ -128,10 +128,6 @@ public class GameWriterConcrete2 extends Application {
 	 */
 	public GameWorld makeWorld() {
 		FreeWorld world = new FreeWorld(13,13);
-		try {
-			world.getPath().updatePath();
-		} catch (NoPathExistsException e) {
-		}
 
 		GridCell[] sPoints = { new GridCell(0, 0), new GridCell(12, 0) };
 		List<GridCell> startPoints = Arrays.asList(sPoints);
@@ -141,6 +137,11 @@ public class GameWriterConcrete2 extends Application {
 		world.setEndPoints(endPoints);
 		world.setSpawnPoints(startPoints);
 
+		try {
+			world.getPath().updatePath();
+		} catch (NoPathExistsException e) {
+		}
+		
 		return world;
 	}
 

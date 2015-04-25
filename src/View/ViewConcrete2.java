@@ -171,7 +171,6 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
                 }
             });
         myHeadsUp.update();
-
     }
 
     private void addInitialObjects () {// This is actually a rendering method now.

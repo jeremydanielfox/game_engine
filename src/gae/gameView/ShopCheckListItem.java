@@ -8,6 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 
+/**
+ * Creates a checklist item that holds a placeable to be added to a ShopCheckList
+ * 
+ * @author Nina Sun
+ */
 public class ShopCheckListItem implements CheckListItem {
     private Placeable placeable;
     private CheckBox checkbox;
@@ -17,6 +22,11 @@ public class ShopCheckListItem implements CheckListItem {
         checkbox = new CheckBox();
     }
 
+    /**
+     * Returns the node to be added to the checklist, showing a thumbnail, name and checkbox
+     * 
+     * @author Nina Sun
+     */
     public Node getNode () {
         HBox node = new HBox(10);
         Graphic graphic = placeable.getTag().getGraphic().clone();
@@ -27,12 +37,17 @@ public class ShopCheckListItem implements CheckListItem {
         return node;
     }
 
-    public Placeable getPlaceable () {
-        return placeable;
-    }
-
     public CheckBox getCheckBox () {
         return checkbox;
+    }
+
+    /**
+     * Returns placeable that the item holds
+     * 
+     * @return list
+     */
+    public Placeable getPlaceable () {
+        return placeable;
     }
 
 }

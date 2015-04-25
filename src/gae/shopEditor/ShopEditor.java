@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import gae.backend.Placeable;
 import gae.gameView.CheckList;
+import gae.gameView.ShopCheckList;
 import gae.listView.Authorable;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
@@ -35,7 +36,7 @@ public class ShopEditor implements UIObject{
         
         //System.out.println(test.getTag().getName());
         LibraryData.getInstance().getEditableObservableList();
-//        vbox.getChildren().add(makeObjectChecklist( LibraryData.getInstance().getEditableObservableList()));
+        vbox.getChildren().add(makeObjectChecklist( LibraryData.getInstance().getEditableObservableList()));
         pane.getChildren().addAll(vbox, tempbutton());
     }
     @Override
@@ -46,7 +47,7 @@ public class ShopEditor implements UIObject{
     
     private ScrollPane makeObjectChecklist(ObservableList<Authorable> list){
         ScrollPane pane=new ScrollPane();
-        checklist=new CheckList(list);
+        checklist=new ShopCheckList(list);
         pane.setContent(checklist.getCheckList());
         return pane;
     }
@@ -59,7 +60,7 @@ public class ShopEditor implements UIObject{
             for(Authorable aut: LibraryData.getInstance().getEditableObservableList()){
                 System.out.println(aut.getName());
             }
-            for(Placeable obj: checklist.getSelectedPlaceables()){
+            for(Placeable obj: ((ShopCheckList) checklist).getSelectedPlaceables()){
                 System.out.println(obj.getTag().getName());
             }
         });

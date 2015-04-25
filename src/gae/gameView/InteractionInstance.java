@@ -129,7 +129,7 @@ public class InteractionInstance {
         private ScrollPane scroller;
         private Button adder;
         private HBox addBox;
-        private CheckList myChecker;
+        private LabelCheckList myChecker;
 
         public ObjectContainer () {
             container = new VBox();
@@ -138,7 +138,7 @@ public class InteractionInstance {
             adder = new Button();
             addBox = new HBox(15);
             Text addText = new Text("Add Labels");
-            myChecker = new LabelCheckList(myLibraryData.getEditableObservableList());
+            myChecker = new LabelCheckList(myLibraryData.getLabelList());
 
             container.setId("interactionBox");
 

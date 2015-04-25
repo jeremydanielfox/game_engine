@@ -1,12 +1,11 @@
 package View;
 
-import java.util.ArrayList;
-import java.util.List;
 import player.gamePlayer.PauseScene;
-import player.gamePlayer.PlayerOpener;
+import View.EngineView;
+import View.GameWriter;
+import View.ViewConcrete2;
 import voogasalad.util.highscore.HighScoreController;
 import voogasalad.util.highscore.HighScoreException;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -14,7 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -22,29 +20,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import player.gamePlayer.PauseScene;
-import engine.events.ConcreteQueue;
-import engine.events.ConstantSpacingWave;
-import engine.events.GameObjectQueue;
-import engine.events.TimedEvent;
-import engine.game.ConcreteLevel;
-import engine.game.ConcreteLevelBoard;
 import engine.game.Game;
 import engine.game.Player;
-import engine.game.PlayerUnit;
-import engine.game.StoryBoard;
-import engine.game.TimerConcrete;
-import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimpleTest;
-import engine.goals.Goal;
-import engine.goals.HealthGoal;
-import engine.goals.ScoreGoal;
-import engine.shop.ShopModelSimple;
-import engine.shop.wallet.ConcreteWallet;
-import engine.shop.wallet.Wallet;
 import gae.gameView.Main;
-import gae.openingView.OpeningView;
-import gameworld.FixedWorld;
 import gameworld.GameWorld;
 
 
@@ -57,14 +35,17 @@ public class GamePlayerScreen {
     private Stage myStage;
     private EngineView myGameView;
     private PauseScene pauseScreen;
+    private BorderPane myPane;
     private String myPlayerName; // myPlayerName holds the name of the user to later be put into
                                  // high scores.
     private Scene myPreviousScene;
 
     public GamePlayerScreen (Stage s, Scene previousScene) {
         myStage = s;
+        myStage.setResizable(false);
+        
         myVbox = new VBox(30);
-        pauseScreen = new PauseScene(e -> resumeGame());
+        pauseScreen = new PauseScene(e -> resumeGame(), myStage);
         myGame = loadGame();
         myPlayerName = "";
         myPreviousScene = previousScene;
@@ -76,22 +57,22 @@ public class GamePlayerScreen {
      * @return scene with borderpane
      */
     public Scene makeScene () {
-        BorderPane pane = new BorderPane();
-        pane.setPadding(new Insets(0, 40, 0, 0));
-        Scene scene = new Scene(pane);
+        myPane = new BorderPane();
+        myPane.setPadding(new Insets(0, 40, 0, 0));
+        Scene scene = new Scene(myPane);
         makeSideBar();
         myVbox.setAlignment(Pos.CENTER);
-        pane.setRight(myVbox);
+        myPane.setRight(myVbox);
 
         VBox gameTypeImageVBox = new VBox();
         // this image below needs to be the image that was selected when the play button was pushed
         // from the previous scene
         ImageView image = new ImageView("images/Park_Path.png");
         image.setPreserveRatio(true);
-        image.setFitHeight(Main.SCREEN_HEIGHT);
+        image.setFitHeight(Main.SCREEN_HEIGHT-100);
         gameTypeImageVBox.getChildren().addAll(image);
         gameTypeImageVBox.setAlignment(Pos.CENTER);
-        pane.setLeft(gameTypeImageVBox);
+        myPane.setLeft(gameTypeImageVBox);
         return scene;
     }
 
@@ -121,8 +102,8 @@ public class GamePlayerScreen {
     public void makeSideBar () {
 
         addDetails("Name", myGame.getGameName());
-        // addDetails("Description", myGame.getDescription());
-        // addDetails("Instructions", myGame.getInstructions());
+        addDetails("Description", myGame.getDescription()+" the quick brown fox jumps over the lazy dog iknsdf oafhsosf oasdf bosb ujagbfuajsf ofb faojsbjh  anjfnj sf");
+        addDetails("Instructions", myGame.getInstructions());
 
         Button scoreBtn = new Button("View high scores");
         scoreBtn.setOnAction(e -> displayScores());
@@ -134,6 +115,7 @@ public class GamePlayerScreen {
         backBtn.setOnAction(e -> changeScene(myPreviousScene));
 
         myVbox.getChildren().addAll(scoreBtn, playBtn, backBtn);
+        myVbox.setAlignment(Pos.CENTER);
     }
 
     /**
@@ -151,8 +133,16 @@ public class GamePlayerScreen {
      */
     private void addDetails (String label, String text) {
         VBox insideBox = new VBox(10);
+        insideBox.setMaxWidth(400);
         Label labelText = new Label(label);
-        Text description = new Text(text);
+        Label description = new Label(text);
+        //labelText.setWidth(myPane.getRight().);
+        myPane.prefWidth(Main.SCREEN_HEIGHT);
+        labelText.setWrapText(true);
+        description.setWrapText(true);
+        //description.
+        
+        description.setAlignment(Pos.CENTER);
         insideBox.getChildren().addAll(labelText, description);
         insideBox.setAlignment(Pos.CENTER);
         myVbox.getChildren().addAll(insideBox);
@@ -229,8 +219,8 @@ public class GamePlayerScreen {
     private void startGame () {
         Group root = new Group();
         root.getChildren().add(makeDemoGame());
-        Scene scene = new Scene(root);
-        myStage.setScene(scene);
+        Scene myScene = new Scene(root);
+        myStage.setScene(myScene);
     }
 
     /**

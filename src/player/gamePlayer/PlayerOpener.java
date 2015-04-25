@@ -1,18 +1,18 @@
 package player.gamePlayer;
 
 import gae.gameView.Main;
+import View.GamePlayerScreen;
 import java.util.Arrays;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import View.GamePlayerScreen;
-
 
 /**
  * Opens the game player. It will ideally have a few pre-authored games for the user to play but
@@ -21,7 +21,7 @@ import View.GamePlayerScreen;
  * @author Brandon Choi
  *
  */
-public class PlayerOpener extends Application {
+public class PlayerOpener implements GameScreen{
 
     private static final String headerText = "Select a Game";
 
@@ -34,7 +34,8 @@ public class PlayerOpener extends Application {
     private Button loadB, playB;
     private GameSelector gameSelector;
 
-    public PlayerOpener () {
+    public PlayerOpener (Stage s) {
+        myStage = s;
         view = new BorderPane();
         playerScene = new Scene(view);
         options = new HBox(50);
@@ -49,6 +50,11 @@ public class PlayerOpener extends Application {
         headerBox.setId("headerBox");
 
         setUpBorderPane();
+    }
+    
+    @Override
+    public Scene getScreen () {
+        return playerScene;
     }
 
     /**
@@ -97,31 +103,5 @@ public class PlayerOpener extends Application {
         setUpButtons();
         view.setBottom(options);
         options.setAlignment(Pos.CENTER);
-    }
-
-    /**
-     * returns the Player scene
-     *
-     * @return
-     */
-    public Scene getPlayer () {
-        return playerScene;
-    }
-
-    /*
-     * Main to start the Player
-     */
-
-    public static void main (String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start (Stage arg0) throws Exception {
-        myStage = new Stage();
-        myStage.setWidth(Main.SCREEN_WIDTH);
-        myStage.setHeight(Main.SCREEN_HEIGHT);
-        myStage.setScene(playerScene);
-        myStage.show();
     }
 }

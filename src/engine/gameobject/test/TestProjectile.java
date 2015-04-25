@@ -40,8 +40,8 @@ public class TestProjectile extends GameObjectSimple {
         if (type == 4) {
             setMover(new MoverDirection(getPoint(), 1, 90));
         }
-        if (type == 5) {
-            setWeapon(new TestWeapon(4));
+        if (type == 5){
+            setWeapon(new TestWeapon(4, null));
             setLabel(new TowerLabel());
         }
     }

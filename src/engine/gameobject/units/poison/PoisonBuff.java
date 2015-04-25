@@ -93,9 +93,8 @@ public class PoisonBuff extends Buff implements Poison {
         return otherBuff.timeLeft() <= timeLeft();
     }
 
-    @Override
-    public Buff clone () {
-        return new PoisonBuff(getDuration(), (int) getDamage());
+    public Buff clone(){
+        return new PoisonBuff(getDuration(), getDamage());
     }
 
     @Override

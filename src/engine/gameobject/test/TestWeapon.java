@@ -5,20 +5,20 @@ import engine.gameobject.MoverDirection;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.firingstrategy.MultipleProjectile;
 
-
-public class TestWeapon extends BasicWeapon {
-
-    public TestWeapon (int type) {
+public class TestWeapon extends BasicWeapon{
+    
+    public TestWeapon(int type, TestTower tower){
         super();
-        setProjectile(new TestProjectile(type));
-        if (type == 4) {
+        setProjectile(tower);
+        //setProjectile(new TestProjectile(type));
+        if(type == 4){
             setFiringStrategy(new MultipleProjectile(8));
             setRange(90);
         }
         if (type == 5) {
             GameObject projectile = new TestTower(4, 270, 270);
             projectile.setMover(new MoverDirection(projectile.getPoint(), .2, 90));
-            projectile.setWeapon(new TestWeapon(4));
+            projectile.setWeapon(new TestWeapon(4, tower));
             setProjectile(projectile);
         }
     }

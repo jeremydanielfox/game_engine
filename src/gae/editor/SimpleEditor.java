@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -29,6 +31,8 @@ public class SimpleEditor extends Editor implements UIObject {
     private List<ComponentEditor> editFields;
     private TreeNode root;
     private HashMap<Edits, TreeNode> nodeMap;
+    private ArrayList<ComponentEditor> simpleFields;
+    private ArrayList<ObjectComponentEditor> objectFields;
 
     public SimpleEditor (Class<?> c) {
         Label title = new Label(c.getSimpleName());
@@ -76,6 +80,8 @@ public class SimpleEditor extends Editor implements UIObject {
      * @param c
      */
     private void createEditor (Class<?> c, Label title) {
+        objectFields = new ArrayList<ObjectComponentEditor>();
+        simpleFields = new ArrayList<ComponentEditor>();
         nodeMap = new HashMap<Edits, TreeNode>();
         simpleEditor = new VBox(30);
         simpleEditor.getChildren().add(title);
@@ -93,14 +99,16 @@ public class SimpleEditor extends Editor implements UIObject {
             Class<?> klass = (Class<?>) root.getMethod().getGenericParameterTypes()[0];
             klass = getConcreteClassFromMap(klass);
             component = new ObjectComponentEditor(klass);
+            objectFields.add((ObjectComponentEditor) component);
         }
         else {
             component =
                     (ComponentEditor) getInstanceFromName(String.format("%s%s", CLASS_PATH,
                                                                         root.getInputType()));
+            simpleFields.add(component);
         }
-        component.setName(root.getMethod().getName());
         editors.add(component.getObject());
+        component.setName(root.getMethod().getName());
         nodeMap.put(component, root);
     }
 
@@ -155,5 +163,13 @@ public class SimpleEditor extends Editor implements UIObject {
 
     protected TreeNode getTreeNode () {
         return root;
+    }
+
+    public ArrayList<ComponentEditor> getSimpleComponentEditors () {
+        return simpleFields;
+    }
+
+    public ArrayList<ObjectComponentEditor> getObjectComponentEditors () {
+        return objectFields;
     }
 }

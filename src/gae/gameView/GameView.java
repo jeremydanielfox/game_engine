@@ -44,7 +44,7 @@ public class GameView implements UIMediator {
         myScene.getStylesheets().add(GAMEVIEW_CSS);
         // myLibrary = new LibraryView();
         utilities = new UtilitiesBar();
-        myGenericObjects = new GenericObjectsPane(myTabs.getConsumer());
+        myGenericObjects = new GenericObjectsPane(myTabs.getConsumer(), myTabs.getBiconsumer());
         // myLibrary = new LibraryView();
         insertBorders();
         // changeCursor(CURSOR_GRAPHIC);
@@ -86,6 +86,6 @@ public class GameView implements UIMediator {
     private void insertBorders () {
         myUI.setTop(utilities.getUtilitiesBar());
         myUI.setCenter(myTabs.getObject());
-        myUI.setRight(myGenericObjects.getObject());
+//        myUI.setRight(myGenericObjects.getObject());
     }
 }

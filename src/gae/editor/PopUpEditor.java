@@ -1,32 +1,35 @@
 package gae.editor;
 
-import engine.gameobject.GameObjectSimple;
-import gae.gameView.GameView;
-import gae.listView.GameObjectToEditable;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class PopUpEditor extends SimpleEditor{
 
-    public PopUpEditor (Class<?> c, GameView gameView) {
-        super(c);
-        init(c, gameView);
+public class PopUpEditor extends SimpleEditor {
+
+    public PopUpEditor (Class<?> c, Consumer<Object> function, BiConsumer<Class<?>, Object> biConsumer) {
+        super(c, biConsumer);
+        init(c, function);
     }
-    
-    public PopUpEditor (Class<?> c, String title, GameView gameView) {
-        super(c, title);
-        init(c, gameView);
+
+    public PopUpEditor (Class<?> c, String title, Consumer<Object> function, BiConsumer<Class<?>, Object> biConsumer) {
+        super(c, biConsumer, title);
+        init(c, function);
     }
-    
-    private void init(Class<?> c, GameView gameView) {
-        VBox editor = (VBox)getObject();
+
+    private void init (Class<?> c, Consumer<Object> function) {
+        VBox editor = (VBox) getObject();
+        for (Node node: editor.getChildren()) {
+            System.out.println("ADDED TO VBOX : " + node);
+        }
         Button addButton = new Button("Add");
         addButton.setOnAction(e -> {
             Object obj = createObject(c);
-            gameView.getAddFunction(new GameObjectToEditable((GameObjectSimple)obj));
+            function.accept(obj);
         });
         editor.getChildren().add(addButton);
     }
-    
-    
+
 }

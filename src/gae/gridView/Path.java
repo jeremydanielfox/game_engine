@@ -1,12 +1,11 @@
 package gae.gridView;
 
 import engine.gameobject.PointSimple;
-import javafx.geometry.Point2D;
 
 
 /**
  * Path object is used to store the four points (start, end, control1, control2) per path segment
- * 
+ *
  * @author Kei
  *
  */
@@ -27,9 +26,9 @@ public class Path {
         System.out.println("Start coordinates: (" + start.getX() + " , " + start.getY() + ")");
         System.out.println("End coordinates: (" + end.getX() + " , " + end.getY() + ")");
         System.out.println("Control 1 coordinates: (" + control1.getX() + " , " + control1.getY() +
-                           ")");
+                ")");
         System.out.println("Control 2 coordinates: (" + control2.getX() + " , " + control2.getY() +
-                           ")");
+                ")");
     }
 
     public PointSimple getStart () {

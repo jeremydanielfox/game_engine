@@ -5,20 +5,18 @@ package gae.gridView;
  */
 import java.util.ArrayList;
 import java.util.Arrays;
-import engine.gameobject.PointSimple;
-import exception.ObjectOutOfBoundsException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
+import engine.gameobject.PointSimple;
+import exception.ObjectOutOfBoundsException;
 
 
 public class PathSet extends Region {
@@ -45,9 +43,9 @@ public class PathSet extends Region {
         root = new Group();
         root.setManaged(false);
         this.container = container;
-        this.getChildren().add(root);
+        getChildren().add(root);
         this.anchorList = anchorList;
-        this.stack = scene;
+        stack = scene;
         this.index = index;
         curve = new CubicCurve();
         curve.setFill(Color.TRANSPARENT);
@@ -78,7 +76,7 @@ public class PathSet extends Region {
     }
 
     public void makeVisible (boolean visible) {
-        for(Node node: visibleList) {
+        for (Node node : visibleList) {
             node.setVisible(visible);
         }
     }
@@ -96,8 +94,9 @@ public class PathSet extends Region {
     }
 
     private void checkBounds (double x, double y) {
-        if (container.checkBounds(x, y))
+        if (container.checkBounds(x, y)) {
             throw new ObjectOutOfBoundsException();
+        }
     }
 
     private void choosePoint (CubicCurve curve) {
@@ -115,46 +114,46 @@ public class PathSet extends Region {
                 increment++;
 
             }
-                else if (increment == 1 && makePath) {
-                    addPath.setValue(increment);
-                    addPathInstructions.setValue("Make Path");
-                    Anchor end = new Anchor(Color.TOMATO, e.getX(), e.getY());
-                    curve.setStartX(startX);
-                    curve.setStartY(startY);
-                    double endX = e.getX();
-                    double endY = e.getY();
-                    checkBounds(endX, endY);
+            else if (increment == 1 && makePath) {
+                addPath.setValue(increment);
+                addPathInstructions.setValue("Make Path");
+                Anchor end = new Anchor(Color.TOMATO, e.getX(), e.getY());
+                curve.setStartX(startX);
+                curve.setStartY(startY);
+                double endX = e.getX();
+                double endY = e.getY();
+                checkBounds(endX, endY);
 
-                    curve.setEndX(e.getX());
-                    curve.setEndY(e.getY());
-                    addAnchor(end);
-                    Anchor control1 =
-                            new Anchor(Color.GOLD, (startX + e.getX()) / 2, (startY + e.getY()) / 2);
-                    Anchor control2 =
-                            new Anchor(Color.GOLDENROD, (startX + e.getX()) / 2,
-                                       (startY + e.getY()) / 2);
+                curve.setEndX(e.getX());
+                curve.setEndY(e.getY());
+                addAnchor(end);
+                Anchor control1 =
+                        new Anchor(Color.GOLD, (startX + e.getX()) / 2, (startY + e.getY()) / 2);
+                Anchor control2 =
+                        new Anchor(Color.GOLDENROD, (startX + e.getX()) / 2,
+                                   (startY + e.getY()) / 2);
 
-                    bindProperties(curve, start, end, control1, control2);
+                bindProperties(curve, start, end, control1, control2);
 
-                    curve.setStroke(Color.FORESTGREEN);
-                    curve.setStrokeWidth(4);
-                    curve.setStrokeLineCap(StrokeLineCap.ROUND);
+                curve.setStroke(Color.FORESTGREEN);
+                curve.setStrokeWidth(4);
+                curve.setStrokeLineCap(StrokeLineCap.ROUND);
 
-                    increment = 0;
-                    makePath = false;
+                increment = 0;
+                makePath = false;
 
-                    Line controlLine1 =
-                            new BoundLine(curve.controlX1Property(), curve.controlY1Property(),
-                                          curve.startXProperty(), curve.startYProperty());
-                    Line controlLine2 =
-                            new BoundLine(curve.controlX2Property(), curve.controlY2Property(),
-                                          curve.endXProperty(), curve.endYProperty());
-                    visibleList.addAll(Arrays.asList(new Node[] { control1, control2, controlLine1,
-                                                                 controlLine2 }));
-                    root.getChildren()
-                            .addAll(curve, control1, control2, controlLine1, controlLine2);
-                }
-            });
+                Line controlLine1 =
+                        new BoundLine(curve.controlX1Property(), curve.controlY1Property(),
+                                      curve.startXProperty(), curve.startYProperty());
+                Line controlLine2 =
+                        new BoundLine(curve.controlX2Property(), curve.controlY2Property(),
+                                      curve.endXProperty(), curve.endYProperty());
+                visibleList.addAll(Arrays.asList(new Node[] { control1, control2, controlLine1,
+                                                              controlLine2 }));
+                root.getChildren()
+                .addAll(curve, control1, control2, controlLine1, controlLine2);
+            }
+        });
     }
 
     private void addAnchor (Anchor anchor) {

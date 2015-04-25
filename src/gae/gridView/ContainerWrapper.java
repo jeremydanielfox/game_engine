@@ -1,13 +1,12 @@
 package gae.gridView;
 
 import engine.gameobject.PointSimple;
-import javafx.geometry.Point2D;
 
 
 /**
  * Interface written to wrap the TileContainer so that other classes can find coordinates relative
  * to the grid system.
- * 
+ *
  * @author Kei
  *
  */

@@ -1,7 +1,8 @@
 package engine.gameobject.units;
 
-import engine.gameobject.weapon.Upgrade;
 import javafx.scene.effect.ColorAdjust;
+import engine.gameobject.GameObject;
+import engine.gameobject.weapon.Upgrade;
 
 
 /**
@@ -9,7 +10,7 @@ import javafx.scene.effect.ColorAdjust;
  * unapply. For example,
  * a burning unbuff will (not do anything) -> (take away health every (advanceTime) time) -> (not do
  * anything)
- * 
+ *
  * @author Danny
  *
  */
@@ -24,30 +25,30 @@ public abstract class Buff implements Upgrade {
 
     /**
      * Applies initial effect to myUnit
-     * 
+     *
      * @param myUnit
      */
-    public abstract void apply (BuffableUnit myUnit);
+    public abstract void apply (GameObject myUnit);
 
     /**
      * Unapplies the initial effect
-     * 
+     *
      * @param myUnit
      */
-    public abstract void unapply (BuffableUnit myUnit);
+    public abstract void unapply (GameObject myUnit);
 
     /**
      * What the buff does each timeunit
-     * 
+     *
      * @param timePassed
      * @param myUnit
      */
-    public void advanceTime (int timePassed, BuffableUnit myUnit) {
+    public void advanceTime (int timePassed, GameObject myUnit) {
         timeSinceStart = timeSinceStart + timePassed;
         changeOverTime(myUnit);
     }
 
-    protected void changeOverTime (BuffableUnit myUnit) {
+    protected void changeOverTime (GameObject myUnit) {
 
     }
 
@@ -57,32 +58,41 @@ public abstract class Buff implements Upgrade {
 
     /**
      * Returns time left before buff expires
-     * 
+     *
      * @return
      */
     public int timeLeft () {
         return getDuration() - timeSinceStart;
     }
 
-    protected void adjustEffect (BuffableUnit myUnit,
+    /**
+     * Simple implementation of a graphic effect.
+     * 
+     * @param myUnit
+     * @param hue
+     * @param saturation
+     * @param brightness
+     * @param contrast
+     */
+    protected void adjustEffect (GameObject myObject,
                                  double hue,
                                  double saturation,
                                  double brightness,
                                  double contrast) {
         ColorAdjust initialEffect = new ColorAdjust(0, 0, 0, 0);
-        if (myUnit.getGraphic().getNode().getEffect() != null) {
-            initialEffect = (ColorAdjust) myUnit.getGraphic().getNode().getEffect();
+        if (myObject.getGraphic().getNode().getEffect() != null) {
+            initialEffect = (ColorAdjust) myObject.getGraphic().getNode().getEffect();
         }
-        myUnit.getGraphic().getNode()
-                .setEffect(new ColorAdjust(initialEffect.getHue() + brightness,
-                                           initialEffect.getSaturation() + saturation,
-                                           initialEffect.getBrightness() + brightness,
-                                           initialEffect.getContrast() + contrast));
+        myObject.getGraphic().getNode()
+        .setEffect(new ColorAdjust(initialEffect.getHue() + brightness,
+                                   initialEffect.getSaturation() + saturation,
+                                   initialEffect.getBrightness() + brightness,
+                                   initialEffect.getContrast() + contrast));
     }
 
     /**
      * Comparator of buffs
-     * 
+     *
      * @param otherBuff
      * @return whether it is stronger than otherBuff
      */
@@ -91,6 +101,8 @@ public abstract class Buff implements Upgrade {
     /**
      * Reproduces buff. Must be defined in each buff made
      */
-    public abstract Buff clone ();
 
+    public abstract BuffType getBuffType ();
+    
+    public abstract Buff clone ();
 }

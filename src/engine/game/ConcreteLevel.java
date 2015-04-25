@@ -2,8 +2,11 @@ package engine.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import View.Displayable;
 import engine.fieldsetting.Settable;
+import engine.goals.EventsCompleteGoal;
 import engine.goals.Goal;
+import gameworld.FixedWorld;
 import gameworld.GameWorld;
 
 
@@ -11,12 +14,14 @@ import gameworld.GameWorld;
  * This class is in charge of maintaining everything that occurs within one level, such as
  * the list of events/waves to occur (Storyboard object), as well as the background image
  * and the GameWorld for the level.
- * 
+ *
  * @author Sierra Smith and Cosette Goldstein
  *
  */
 @Settable
 public class ConcreteLevel implements Level {
+
+    private static final int EVENT_GOAL_INDEX = 0;
 
     // note to self: we need to save all of the images out to one directory
     // we should identify images by name and have a constant image path that we pin on before
@@ -26,13 +31,11 @@ public class ConcreteLevel implements Level {
     private List<Goal> myLosingGoals;
     private GameWorld myGameWorld;
     private StoryBoard myStoryBoard;
+    private Timer myTimer;
 
-    public ConcreteLevel() {
-        myImagePath = "";
-        myWinningGoals = new ArrayList<Goal>();
-        myLosingGoals = new ArrayList<Goal>();
-        //TODO:intialize GameWorld
-        myStoryBoard = new StoryBoard();
+    public ConcreteLevel () {
+        initialize("", new ArrayList<Goal>(), new ArrayList<Goal>(), new FixedWorld(),
+                   new StoryBoard());
     }
 
     public ConcreteLevel (String image,
@@ -40,13 +43,29 @@ public class ConcreteLevel implements Level {
                           List<Goal> losingGoals,
                           GameWorld gameWorld,
                           StoryBoard storyBoard) {
+        initialize(image, winningGoals, losingGoals, gameWorld, storyBoard);
+    }
+
+    private void initialize (String image,
+                             List<Goal> winningGoals,
+                             List<Goal> losingGoals,
+                             GameWorld gameWorld,
+                             StoryBoard storyBoard) {
         myImagePath = image;
         myWinningGoals = winningGoals;
         myLosingGoals = losingGoals;
         myGameWorld = gameWorld;
         myStoryBoard = storyBoard;
+        myWinningGoals.add(EVENT_GOAL_INDEX, new EventsCompleteGoal(myStoryBoard));
     }
 
+    @Override
+    @Settable
+    public void addTimer (Timer t) {
+        myTimer = t;
+    }
+
+    @Override
     public String getLevelBackground () {
         return myImagePath;
     }
@@ -72,11 +91,13 @@ public class ConcreteLevel implements Level {
 
     @Override
     public void update () {
-        // TODO Auto-generated method stub
         myGameWorld.updateGameObjects();
         myStoryBoard.update();
-//        myGameWorld.checkCollisions();
-//        myGameWorld.removeDeadObjects();
+        if (myTimer != null) {
+            myTimer.update();
+        }
+        // myGameWorld.checkCollisions();
+        // myGameWorld.removeDeadObjects();
         // move GameObjects, needs to communicate with StoryBoard
     }
 
@@ -108,6 +129,19 @@ public class ConcreteLevel implements Level {
     @Settable
     public void setStoryBoard (StoryBoard storyBoard) {
         myStoryBoard = storyBoard;
+        ((EventsCompleteGoal) myWinningGoals.get(EVENT_GOAL_INDEX)).setStoryBoard(storyBoard);
+    }
+
+    /**
+     * Returns a list of displayable things.
+     */
+    @Override
+    public List<Displayable> getDisplayables () {
+        List<Displayable> displays = new ArrayList<>();
+        if (myTimer != null) {
+            displays.add(myTimer);
+        }
+        return displays;
     }
 
 }

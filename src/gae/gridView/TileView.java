@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 
 /**
  * The view of the tile and its properties
- * 
+ *
  * @author Kei & Nina
  *
  */
@@ -18,26 +18,28 @@ public class TileView extends Group {
     private TileData data;
     private Rectangle rect;
     private BooleanProperty walkableProperty = new SimpleBooleanProperty();
+    private String color;
 
-    public TileView (double size, TileData data) {
+    public TileView (double size, TileData data, String color) {
         this.data = data;
+        this.color = color;
         walkableProperty.bind(data.getWalkableProperty());
         rect = new Rectangle(size, size, Color.TRANSPARENT);
         rect.setStroke(Color.BLACK);
         rect.setStrokeWidth(1);
-        this.getChildren().addAll(rect);
+        getChildren().addAll(rect);
         setUp(rect);
     }
 
     private void setUp (Rectangle rect) {
-        this.setOnMouseClicked(e -> {
+        setOnMouseClicked(e -> {
             if (e.getClickCount() == 2) {
                 data.changeState();
             }
         });
         walkableProperty.addListener( (observable, oldValue, newValue) -> {
             if (!newValue) {
-                rect.setFill(Color.web("red", .5));
+                rect.setFill(Color.web(color, .5));
             }
                 else {
                     rect.setFill(Color.TRANSPARENT);
@@ -47,8 +49,12 @@ public class TileView extends Group {
     }
 
     public void handleSelected (Node node, boolean walkable) {
-        if (this.getBoundsInParent().intersects(node.getBoundsInParent())) {
+        if (getBoundsInParent().intersects(node.getBoundsInParent())) {
             data.setWalkable(walkable);
         }
+    }
+
+    public TileData getData () {
+        return data;
     }
 }

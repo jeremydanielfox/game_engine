@@ -1,25 +1,33 @@
 package engine.gameobject.test;
 
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverNull;
 import engine.gameobject.PointSimple;
-import engine.gameobject.units.BuffableUnit;
+import engine.shop.tag.GameObjectTag;
+import engine.shop.tag.GameObjectTagSimple;
 
-public class TestTower extends BuffableUnit{
-    
+public class TestTower extends GameObjectSimple {
+
+    private int type;
+
     public TestTower (int type, int xcor, int ycor) {
         super();
-        setGraphic(new Graphic(40, 40, "Bloons_TackShooter.png"));
+        this.type = type;
+        Graphic graphic = new Graphic(40, 40, "Bloons_TackShooter.png");
+        setGraphic(graphic);
         setPoint(new PointSimple(xcor, ycor));
         setHealth(new HealthSimple(3));
+//        MoverUser moveruser = new MoverUser();
+//        moveruser.setNode(graphic.getNode());
         setMover(new MoverNull());
-        setWeapon(new TestWeapon(4));
-        getTag().setName("TestTower");
-        getTag().setDescription("Just a test tower; nothing special here...");
-        getTag().setShopGraphic(new Graphic(40, 40, "Bloons_TackShooterIcon.png"));
-        super.setLabel(new TowerLabel());
+        setWeapon(new TestWeapon(type, this));
+        GameObjectTag tag =
+                new GameObjectTagSimple("TestTower", "Just a test tower; nothing special here...",
+                                        new Graphic(40, 40, "Bloons_TackShooterIcon.png"), this);
+        setTag(tag);
+        setLabel(new TowerLabel());
     }
-    
     
 }

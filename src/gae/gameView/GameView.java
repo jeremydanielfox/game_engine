@@ -1,21 +1,21 @@
 package gae.gameView;
 
-import java.util.EventObject;
-import gae.backend.Editable;
-import gae.backend.GameManager;
+import gae.backend.Placeable;
+// import gae.backend.GameManager;
 import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
-import javafx.event.EventHandler;
-import javafx.scene.ImageCursor;
 import gae.tabView.CentralTabView;
+import java.util.EventObject;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
+
 /**
  * GameView is the main authoring environment scene in which the author can create new game objects,
  * levels, etc. and eventually export an XML file of the game he or she created
- * 
+ *
  * @author Brandon Choi, John Gilhuly
  *
  */
@@ -31,29 +31,30 @@ public class GameView implements UIMediator {
     private BorderPane myUI;
     private CentralTabView myTabs; // replace with main editor
     private Scene myScene;
-    //private LibraryView myLibrary;
+    // private LibraryView myLibrary;
     private UtilitiesBar utilities;
     private GenericObjectsPane myGenericObjects;
-    private GameManager myGameManager;
+
+    // private GameManager myGameManager;
 
     public GameView () {
         myUI = new BorderPane();
         myScene = new Scene(myUI);
         myTabs = new CentralTabView(myScene);
         myScene.getStylesheets().add(GAMEVIEW_CSS);
-//        myLibrary = new LibraryView();
+        // myLibrary = new LibraryView();
         utilities = new UtilitiesBar();
-        myGenericObjects = new GenericObjectsPane(this);
-//        myLibrary = new LibraryView();
+        myGenericObjects = new GenericObjectsPane(myTabs.getConsumer(), myTabs.getBiconsumer());
+        // myLibrary = new LibraryView();
         insertBorders();
-//        changeCursor(CURSOR_GRAPHIC);
+        // changeCursor(CURSOR_GRAPHIC);
     }
 
     @Override
     public Scene getScene () {
         return myScene;
     }
-    
+
     @Override
     public void addUIObject (UIObject object) {
         // TODO Auto-generated method stub
@@ -65,13 +66,14 @@ public class GameView implements UIMediator {
 
         myScene.setCursor(new ImageCursor(new Image("/images/swordCursor.jpg")));
         myScene.getStylesheets().add(GAMEVIEW_CSS);
-     //   myLibrary = new LibraryView();
+        // myLibrary = new LibraryView();
         utilities = new UtilitiesBar();
         myUI.setTop(utilities.getUtilitiesBar());
     }
 
     /**
      * changes the cursor image
+     * 
      * @param i
      */
     private void changeCursor (Image i) {
@@ -84,11 +86,6 @@ public class GameView implements UIMediator {
     private void insertBorders () {
         myUI.setTop(utilities.getUtilitiesBar());
         myUI.setCenter(myTabs.getObject());
-        myUI.setRight(myGenericObjects.getObject());
-        myUI.setRight(myGenericObjects.getObject());
-    }
-    
-    public void getAddFunction(Editable editable) {
-        myTabs.getAddFunction(editable);
+//        myUI.setRight(myGenericObjects.getObject());
     }
 }

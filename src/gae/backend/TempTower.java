@@ -1,27 +1,29 @@
 package gae.backend;
 
-import View.ImageUtilities;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
-import gae.gridView.Pair;
+import engine.shop.tag.GameObjectTag;
 import gae.gridView.Path;
 import gae.listView.DeepCopy;
 import gae.listView.MovableImage;
 import gae.openingView.UIObject;
+import java.util.List;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import View.ImageUtilities;
 
 
-public class TempTower implements Editable, UIObject {
+public class TempTower implements Placeable, UIObject {
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
     /**
-     * 
+     *
      */
     private int myID = 0;
+    private static int ourID = 0;
     private int Size = 10;
     private int Health = 100;
     private Weapon weapon;
@@ -90,17 +92,17 @@ public class TempTower implements Editable, UIObject {
         return myID;
     }
 
-    @Override
-    public Path getPath () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setPath (Path path) {
-        // TODO Auto-generated method stub
-
-    }
+    // @Override
+    // public Path getPath () {
+    // // TODO Auto-generated method stub
+    // return null;
+    // }
+    //
+    // @Override
+    // public void setPath (Path path) {
+    // // TODO Auto-generated method stub
+    //
+    // }
 
     @Override
     public void setWidth (int width) {
@@ -145,9 +147,71 @@ public class TempTower implements Editable, UIObject {
     }
 
     @Override
-    public Editable makeNewInstance () {
+    public Placeable makeNewInstance () {
         // need to keep track of ID some other way because no more EditableNode
-        Editable copy = (Editable) DeepCopy.copy(this);
+        Placeable copy = (Placeable) DeepCopy.copy(this);
+        copy.setID(ourID);
+        ourID++;
         return copy;
+    }
+
+    @Override
+    public List<List<Path>> getPath () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setPath (List<List<Path>> path) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public double getHealth () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public double setHealth (double health) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public Weapon getWeapon () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setWeapon (Weapon weapon) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public GameObjectTag getTag () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setTag (GameObjectTag tag) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setType (String type) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setImagePath (String path) {
+        // TODO Auto-generated method stub
+        
     }
 }

@@ -1,47 +1,49 @@
 package engine.gameobject.weapon;
 
-import java.util.List;
+import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
-import engine.gameobject.weapon.firingstrategy.Projectile;
+import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
+import java.util.List;
+import javafx.beans.property.DoubleProperty;
 
-public class NullWeapon implements Weapon{
-    
-    
+
+// TODO: There must be a better way to do this than just have empty methods everywhere.
+public class NullWeapon implements Weapon {
+
     @Override
-    public void fire (ObjectCollection world, PointSimple location) {
-        //Do nothing
+    public void fire (ObjectCollection world, GameObject target, PointSimple location) {
+        // Do nothing
     }
 
     @Override
     public void addBuff (Buff newBuff) {
-        // TODO Auto-generated method stub
-        
+        // Do nothing
     }
 
     @Override
     public double getValue () {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public void setProjectile (Projectile projectile) {
-        // TODO Auto-generated method stub
-        
+    public void setProjectile (GameObject projectile) {
+        // Do Nothing
     }
 
     @Override
     public double getRange () {
-        // TODO Auto-generated method stub
         return 0;
+    }
+    
+    public DoubleProperty getRangeProperty(){
+        return null;
     }
 
     @Override
     public double getFiringRate () {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -50,9 +52,34 @@ public class NullWeapon implements Weapon{
         // TODO Auto-generated method stub
         return null;
     }
-    
+
     @Override
-    public void applyUpgrades (UpgradeBundle bundle){
-        
+    public void applyUpgrades (UpgradeBundle bundle) {
+
+    }
+
+    @Override
+    public void setRange (double range) {
+        // Do Nothing
+    }
+
+    @Override
+    public void setFiringRate (double firingRate) {
+        // Do Nothing
+    }
+
+    @Override
+    public void advanceTime () {
+        // Do nothing
+    }
+
+    @Override
+    public void setFiringStrategy (FiringStrategy newStrategy) {
+        // Do nothing
+    }
+
+    @Override
+    public Weapon clone () {
+        return new NullWeapon();
     }
 }

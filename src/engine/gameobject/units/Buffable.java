@@ -1,23 +1,20 @@
 package engine.gameobject.units;
 
-import engine.gameobject.GameObject;
-import engine.gameobject.weapon.Weapon;
+public interface Buffable {
 
-public interface Buffable extends GameObject{
     /**
      * Buff this unit with buff
+     * 
      * @param buff
      */
-    public void addBuff(Buff buff);
-    
-    /**
-     * Sets the GameObject's Weapon
-     */
-    public void setWeapon (Weapon weapon);
 
-    /**
-     * Returns the GameObject's Weapon
-     */
-    public Weapon getWeapon();
+    public void receiveBuff(Buff buff);
+    
+   /**
+    * Make immune to certain type of buff
+    * @param immunity class of added immunity
+    * @param buffType specific bufftype (BuffType.NULL if regardless of bufftype)
+    */
+    public void addImmunity(Class<? extends Buff> immunity, BuffType buffType);
 
 }

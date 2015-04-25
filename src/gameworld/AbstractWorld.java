@@ -3,88 +3,90 @@ package gameworld;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
+import java.util.Map;
 import javafx.scene.Node;
+import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
-import engine.gameobject.test.TestTower;
-import engine.gameobject.units.Buffable;
-import engine.gameobject.weapon.firingstrategy.Buffer;
-import engine.grid.Grid;
-import engine.grid.GridFree;
+import engine.gameobject.test.EnemyLabel;
+import engine.gameobject.test.ProjectileLabel;
+import engine.gameobject.test.TowerLabel;
+import engine.interactions.BuffImparter;
+import engine.interactions.CollisionEngine;
 import engine.interactions.InteractionEngine;
-import engine.pathfinding.EndOfPathException;
+import engine.interactions.RangeEngine;
+import engine.interactions.ShootAt;
 import engine.pathfinding.Path;
 
 
-public class AbstractWorld implements GameWorld{
+public class AbstractWorld implements GameWorld {
     private List<GameObject> myObjects;
-//    private InteractionEngine myCollisionEngine;
+    private InteractionEngine myCollisionEngine;
+    private InteractionEngine myRangeEngine;
+    private Map<Node, GameObject> myNodeToGameObjectMap;
+    protected Path myPath;
 
     public AbstractWorld () {
         myObjects = new ArrayList<GameObject>();
+        initiateCollisionEngine();
+        initiateRangeEngine();
+        myNodeToGameObjectMap = new HashMap<>();
+    }
+
+    /*
+     * The private methods that follow is unofficial code:
+     * sets up the interaction engines to defaults. Set interaction engine methods may be needed.
+     */
+
+    private void initiateCollisionEngine () {
+        myCollisionEngine = new CollisionEngine();
+        myCollisionEngine.setWorld(this);
+        myCollisionEngine.put(new ProjectileLabel(), new EnemyLabel(), new BuffImparter());
+    }
+
+    private void initiateRangeEngine () {
+        myRangeEngine = new RangeEngine();
+        myRangeEngine.setWorld(this);
+        myRangeEngine.put(new TowerLabel(), new EnemyLabel(), new ShootAt());
     }
 
     @Override
-    public void addObject (GameObject toSpawn, PointSimple pixelCoords) throws StructurePlacementException {
+    public void addObject (GameObject toSpawn, PointSimple pixelCoords)
+                                                                       throws StructurePlacementException {
         myObjects.add(toSpawn);
-        toSpawn.setPoint(pixelCoords);// TODO change from pixel coords
+        toSpawn.setPoint(pixelCoords);
+        myNodeToGameObjectMap.put(toSpawn.getGraphic().getNode(), toSpawn);
         // myGrid.addObject(toSpawn);
-        }
+    }
 
     @Override
     public void updateGameObjects () {
-    	
          ArrayList<GameObject> currentObjects = new ArrayList<GameObject>(myObjects);
-         for (GameObject o: currentObjects){
-             o.update(this);
+         for (GameObject object: currentObjects){
+             object.update(this);
+             for (GameObject interactObject: currentObjects){
+                 if (interactObject != object && !object.isDead() && !interactObject.isDead()){
+                     myCollisionEngine.interact(object, interactObject);
+                     myRangeEngine.interact(object, interactObject);
+                 }
+             }
          }
-         checkCollisions();
          removeDeadObjects();
     }
 
-    private void checkCollisions () {
-        List<Buffable> buffables =
-                myObjects.stream().filter(p -> p instanceof Buffable)
-                .map(p -> (Buffable) p)
-                .collect(Collectors.toList());
-        List<Buffer> buffers =
-                myObjects.stream().filter(p -> p instanceof Buffer)
-                .map(p -> (Buffer) p)
-                .collect(Collectors.toList());
-        buffers.forEach(buffer -> {
-            buffables.forEach(buffable -> {
-                if (buffer.getGraphic().getNode().getBoundsInParent()
-                        .intersects(buffable.getGraphic().getNode().getBoundsInParent())){
-                    //myCollisionEngine.interact(go1, go2);
-                    //buffer.collide(buffable);
-                    //TODO: Actually make teams and collide correctly
-                    if((buffable instanceof GameObjectSimpleTest)){
-                        buffer.impartBuffs(buffable);
-                    }
-                }
-            });
-        });
-
-    }
-
     private void removeDeadObjects () {
-        // TODO Auto-generated method stub
         ArrayList<GameObject> buffer = new ArrayList<GameObject>();
         myObjects.forEach(go -> {
             if (go.isDead()) {
                 buffer.add(go);
             }
         });
-        for (GameObject toRemove: buffer){
+        for (GameObject toRemove : buffer) {
             myObjects.remove(toRemove);
             toRemove.onDeath(this);
         }
-
     }
 
     @Override
@@ -106,12 +108,26 @@ public class AbstractWorld implements GameWorld{
     @Override
     public void addObject (GameObject toSpawn) {
         myObjects.add(toSpawn);
+        myNodeToGameObjectMap.put(toSpawn.getGraphic().getNode(), toSpawn);
     }
 
     @Override
-    public boolean isPlacable (Node n, PointSimple pixelCoords) {
+    public boolean isPlaceable (Node n, PointSimple pixelCoords) {
         return true; // TODO plz replace with logic. Ex: towers cannot be placed on towers
     }
 
-}
+    @Override
+    public GameObject getObjectFromNode (Node n) {
+        return myNodeToGameObjectMap.get(n);
+    }
 
+    @Settable
+    public void setPath (Path p) {
+        myPath = p;
+    }
+
+    @Override
+    public Path getPath () {
+        return myPath;
+    }
+}

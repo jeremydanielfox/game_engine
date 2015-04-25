@@ -4,128 +4,29 @@
       <myPoints>
         <engine.gameobject.PointSimple>
           <myPoint>
-            <x>567.5</x>
-            <y>306.0</y>
+            <x>552.6666870117188</x>
+            <y>304.0</y>
             <hash>0</hash>
           </myPoint>
         </engine.gameobject.PointSimple>
         <engine.gameobject.PointSimple>
           <myPoint>
-            <x>472.5</x>
-            <y>310.0</y>
+            <x>453.1666564941406</x>
+            <y>305.5</y>
             <hash>0</hash>
           </myPoint>
         </engine.gameobject.PointSimple>
         <engine.gameobject.PointSimple>
           <myPoint>
-            <x>472.5</x>
-            <y>310.0</y>
+            <x>453.1666564941406</x>
+            <y>305.5</y>
             <hash>0</hash>
           </myPoint>
         </engine.gameobject.PointSimple>
         <engine.gameobject.PointSimple>
           <myPoint>
-            <x>377.5</x>
-            <y>314.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-      </myPoints>
-      <myLength>0.0</myLength>
-    </engine.pathfinding.PathSegmentBezier>
-    <engine.pathfinding.PathSegmentBezier>
-      <myPoints>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>377.5</x>
-            <y>314.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>285.5</x>
-            <y>396.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>248.5</x>
-            <y>433.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>210.5</x>
-            <y>301.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-      </myPoints>
-      <myLength>0.0</myLength>
-    </engine.pathfinding.PathSegmentBezier>
-    <engine.pathfinding.PathSegmentBezier>
-      <myPoints>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>210.5</x>
-            <y>301.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>200.5</x>
-            <y>269.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>237.5</x>
-            <y>220.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>288.5</x>
-            <y>199.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-      </myPoints>
-      <myLength>0.0</myLength>
-    </engine.pathfinding.PathSegmentBezier>
-    <engine.pathfinding.PathSegmentBezier>
-      <myPoints>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>288.5</x>
-            <y>199.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>299.5</x>
-            <y>216.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>329.5</x>
-            <y>109.0</y>
-            <hash>0</hash>
-          </myPoint>
-        </engine.gameobject.PointSimple>
-        <engine.gameobject.PointSimple>
-          <myPoint>
-            <x>240.5</x>
-            <y>137.0</y>
+            <x>353.6666564941406</x>
+            <y>307.0</y>
             <hash>0</hash>
           </myPoint>
         </engine.gameobject.PointSimple>

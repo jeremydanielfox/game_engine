@@ -9,14 +9,15 @@ import javafx.util.Duration;
 
 /**
  * Animator holds all possible animations used within the authoring environment (and beyond, if
- * needed) such as a node shaking
- * 
+ * needed) such as a node shaking. Implements Singleton model so only one animator exists.
+ *
  * @author Brandon Choi
  *
  */
 public class Animator {
 
-    Timeline animator;
+    private static Animator instance;
+    private Timeline animator;
 
     public Animator () {
         animator = new Timeline();
@@ -28,10 +29,21 @@ public class Animator {
     }
 
     /**
+     * implements Singleton
+     * 
+     * @return
+     */
+    public static synchronized Animator getInstance () {
+        if (instance == null)
+            instance = new Animator();
+        return instance;
+    }
+
+    /**
      * shakes whatever node is fed into the method as a parameter
-     * 
+     *
      * TODO: repeat function?
-     * 
+     *
      * @param node
      */
     public void shake (Node node) {
@@ -46,7 +58,7 @@ public class Animator {
 
     /**
      * slowly brings a node into its full size
-     * 
+     *
      * @param node
      */
     public void zoomIn (Node node) {
@@ -54,8 +66,20 @@ public class Animator {
     }
 
     /**
-     * makes a node blink
+     * drops the new screen down from above
      * 
+     * @param o
+     */
+    public void dropDown (Node node) {
+        animator.setCycleCount(2);
+        animator.getKeyFrames().addAll(new KeyFrame(Duration.millis(200), new KeyValue(node
+                                               .translateYProperty(), 500, Interpolator.EASE_IN)));
+        animator.play();
+    }
+
+    /**
+     * makes a node blink
+     *
      * @param node
      */
     public void blink (Node node) {

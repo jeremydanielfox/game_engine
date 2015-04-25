@@ -1,6 +1,5 @@
 package gae.backend;
 
-import engine.game.Level;
 
 
 public class LevelManager {

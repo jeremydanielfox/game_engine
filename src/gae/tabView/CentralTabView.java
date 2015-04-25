@@ -1,21 +1,26 @@
 package gae.tabView;
 
+import engine.fieldsetting.Settable;
 import engine.game.Level;
 import engine.game.StoryBoard;
-import gae.backend.Editable;
 import gae.editor.EditingParser;
 import gae.gridView.LevelView;
+import gae.listView.LibraryData;
 import gae.openingView.UIObject;
 import gae.waveeditor.WaveEditor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
+
+
 
 
 public class CentralTabView implements UIObject {
@@ -25,6 +30,7 @@ public class CentralTabView implements UIObject {
     private Scene scene;
     private HudEditorTab hudTab;
     private LevelView levelView;
+    private LibraryData libraryData;
 
     public CentralTabView (Scene sceneIn) {
         scene = sceneIn;
@@ -32,17 +38,21 @@ public class CentralTabView implements UIObject {
     }
 
     private void initialize () {
+        libraryData = LibraryData.getInstance();
         levelCount = 1;
 
         baseNode = new VBox();
         tabView = new TabPane();
+        // refactor this code
         ShopTab shopTab = new ShopTab();
         hudTab = new HudEditorTab(null);
-        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode());
+        GameObjectEditorTab gameObjectTab = new GameObjectEditorTab(scene, getConsumer(), getBiconsumer());
+
+        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode(),
+                                 gameObjectTab.getBaseTabNode());
 
         Button newLevel = new Button("Add Level");
         newLevel.setOnAction(e -> createNewLevel());
-
         baseNode.getChildren().addAll(newLevel, tabView);
     }
 
@@ -57,7 +67,7 @@ public class CentralTabView implements UIObject {
                                   .getInterfaceClasses("engine.fieldsetting.implementing_classes")
                                   .get("Level").get(0)).newInstance();
             
-            levelMethods = EditingParser.getMethodsWithSetterAnnotation(Class.forName(levelData.getClass().getName()));
+            levelMethods = EditingParser.getMethodsWithAnnotation(Class.forName(levelData.getClass().getName()), Settable.class);
             
             for (Method m : levelMethods) {
                 if (m.getName().equals("setStoryBoard")) {
@@ -101,7 +111,14 @@ public class CentralTabView implements UIObject {
         return baseNode;
     }
 
-    public void getAddFunction (Editable editable) {
-        levelView.getAddFunction(editable);
+    public Consumer<Object> getConsumer () {
+        return e -> libraryData.addGameObjectToList(e);
+    }
+
+    public BiConsumer<Class<?>, Object> getBiconsumer () {
+        BiConsumer<Class<?>, Object> biConsumer = (klass, o) -> {
+            libraryData.addCreatedObjectToList(klass, o);
+        };
+        return biConsumer;
     }
 }

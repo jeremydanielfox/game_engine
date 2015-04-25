@@ -1,19 +1,17 @@
 package gae.listView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import gae.gridView.Path;
-import gae.gridView.PathView;
 import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.gridView.ContainerWrapper;
-import javafx.beans.property.BooleanProperty;
+import gae.gridView.Path;
+import gae.gridView.PathView;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -23,16 +21,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.util.Callback;
 import xml.DataManager;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
 /**
  * A list that keeps track of Path objects and previously created PathViews. Goal is to separate the
  * storing of back-end and front-end objects into separate classes
- * 
+ *
  * @author Kei
  *
  */
@@ -40,8 +35,8 @@ public class PathList {
     private PathView pathView;
     private List<List<Path>> allPaths;
     private List<PathView> previousPaths;
-    private int counter;
-    private ObservableList<PathView> paths;
+    private static int counter;
+    private ObservableList<Authorable> paths;
     private StackPane stack;
     private Scene scene;
     private int listIndex;
@@ -55,7 +50,7 @@ public class PathList {
     private List<Button> buttonList;
 
     public PathList (StackPane stack, Scene scene, ContainerWrapper container) {
-        this.pathView = new PathView(stack, scene);
+        pathView = new PathView(stack, scene);
         pathView.setContainerArea(container);
         this.stack = stack;
         this.scene = scene;
@@ -68,7 +63,7 @@ public class PathList {
         buttonStates = new ArrayList<>();
 
         buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
-                                                      updatePath }));
+                                                       updatePath }));
         // stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
         stack.getChildren().add(makeGridPane());
     }
@@ -77,20 +72,15 @@ public class PathList {
      * Creates the TitledPane for path and sets it such that objects can be removed. Looking to
      * refactor this code soon.
      */
-    public TitledPane getTitledPane (ObservableList<PathView> paths, String text) {
-        this.paths = paths;
+    public TitledPane getTitledPane (String text) {
+        paths = LibraryData.getInstance().getPathObservableList();
         TitledPane pane = new TitledPane();
         pane.setText(text);
         pane.setTextFill(Color.RED);
 
-        final ListView<PathView> listView = new ListView<>(paths);
-        listView.setPrefSize(200, 250);
-
-        listView.setEditable(true);
-
-        listView.setItems(paths);
+        final ListView<Authorable> listView = ListViewUtilities.createList(paths, scene, "Path");
         listView.setOnMouseClicked(e -> {
-            PathView selected = listView.getSelectionModel().getSelectedItem();
+            PathView selected = (PathView) listView.getSelectionModel().getSelectedItem();
             setOldPath(selected);
             listIndex = listView.getSelectionModel().getSelectedIndex();
             scene.setOnKeyPressed(keyEvent -> {
@@ -98,28 +88,11 @@ public class PathList {
                     paths.remove(selected);
 
                     allPaths.remove(listIndex);
-                    selected.resetScreen();
+                    selected.resetScreen(stack);
                 }
             });
         });
-        listView.setCellFactory( (myList) -> {
-            return new ListCell<PathView>() {
-                @Override
-                protected void updateItem (PathView pathView, boolean bln) {
-                    super.updateItem(pathView, bln);
-                    if (bln) {
-                        setText(null);
-                        setGraphic(null);
-                    }
-                    else if (pathView != null) {
-                        HBox content = new HBox();
-                        content.getChildren().add(new Label("Path " + pathView.getID()));
-                        setGraphic(content);
-                    }
-                }
-            };
-        });
-        listView.setMaxWidth(300);
+   
         pane.setContent(listView);
         return pane;
     }
@@ -128,8 +101,7 @@ public class PathList {
      * disables the screen by removing the root and disabling the path buttons
      */
     public void disableScreen () {
-        pathView.resetScreen();
-        System.out.println("disabling screen");
+        pathView.resetScreen(stack);
         for (Button button : buttonList) {
             buttonStates.add(button.disableProperty().get());
             button.setDisable(true);
@@ -141,7 +113,7 @@ public class PathList {
      * object
      */
     public void setScreen () {
-        pathView.resetScreen();
+        pathView.resetScreen(stack);
         try {
             for (int i = 0; i < buttonList.size(); i++) {
                 buttonList.get(i).setDisable(buttonStates.get(i));
@@ -150,13 +122,13 @@ public class PathList {
         catch (IndexOutOfBoundsException e) {
             // means Path Pane was clicked first
         }
-        pathView = new PathView(stack, this.scene);
+        pathView = new PathView(stack, scene);
     }
 
     private void setOldPath (PathView view) {
-        pathView.resetScreen();
+        pathView.resetScreen(stack);
         pathView = view;
-        pathView.remakePath();
+        pathView.remakePath(stack);
     }
 
     private Button makeBezierCurve () {
@@ -193,7 +165,7 @@ public class PathList {
             paths.add(pathView);
             pathView.setID(counter);
             counter++;
-            pathView = new PathView(stack, this.scene);
+            pathView = new PathView(stack, scene);
             completePath.setDisable(true);
         });
         return complete;
@@ -202,8 +174,8 @@ public class PathList {
     private Button newPath () {
         Button newPath = new Button("Make New Path");
         newPath.setOnMouseClicked(e -> {
-            pathView.resetScreen();
-            pathView = new PathView(stack, this.scene);
+            pathView.resetScreen(stack);
+            pathView = new PathView(stack, scene);
             completePath.setDisable(false);
         });
         return newPath;
@@ -215,7 +187,7 @@ public class PathList {
      */
     private Button displayPaths () {
         Button display = new Button("make XML");
-        XStream xst = new XStream(new DomDriver());
+        // XStream xst = new XStream(new DomDriver());
         display.setOnMouseClicked(e -> {
             // this is the information that'll be passed into XML (allPaths)
             // *****************************************//
@@ -230,16 +202,16 @@ public class PathList {
                     // System.out.println();
                     PathSegmentBezier tempBez = new PathSegmentBezier();
                     List<PointSimple> points = new ArrayList<>();
-                    points.add(new PointSimple(temp.getStart()));
-                    points.add(new PointSimple(temp.getControlOne()));
-                    points.add(new PointSimple(temp.getControlTwo()));
-                    points.add(new PointSimple(temp.getEnd()));
+                    points.add(temp.getStart());
+                    points.add(temp.getControlOne());
+                    points.add(temp.getControlTwo());
+                    points.add(temp.getEnd());
                     tempBez.setPoints(points);
                     myPath.addPathSegment(tempBez);
                 }
             }
             // *****************************************//
-            DataManager.writeToXML(myPath, "src/gae/listView/TestDemo2.xml");
+            DataManager.writeToXML(myPath, "src/gae/listView/Test.xml");
         });
 
         return display;
@@ -263,7 +235,7 @@ public class PathList {
     private GridPane makeGridPane () {
         GridPane grid = new GridPane();
         grid.setHgap(0);
-        grid.setTranslateX(900);
+        grid.setTranslateX(scene.getWidth() * 2 / 3);
         for (int i = 0; i < buttonList.size(); i++) {
             grid.add(buttonList.get(i), 0, i);
         }

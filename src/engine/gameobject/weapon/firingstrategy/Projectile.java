@@ -14,70 +14,81 @@ import engine.pathfinding.EndOfPathException;
 import gameworld.ObjectCollection;
 
 
+/**
+ *
+ * @author Danny
+ * @deprecated Only use GameObjectSimple now.
+ */
+@Deprecated
 public class Projectile extends GameObjectSimple implements Buffer {
     protected Set<String> collidedID;
     protected Set<Buff> onCollision;
     protected Explosion onDeath;
-    
+
     public Projectile () {
         collidedID = new HashSet<String>();
         onCollision = new HashSet<Buff>();
         onDeath = new Explosion();
         super.setLabel(new ProjectileLabel());
     }
-    
+
     @Settable
-    public void setCollisionBuffs(Buff... buffs){
+    public void setCollisionBuffs (Buff ... buffs) {
         onCollision.clear();
         onCollision.addAll(Arrays.asList(buffs));
     }
 
-    public void addCollisionBehavior(Buff newBuff){
+    @Override
+    public void addCollisionBehavior (Buff newBuff) {
         removeDuplicateBuff(newBuff);
         onCollision.add(newBuff);
     }
-    
-    public void setOnDeathRadius(double radius){
+
+    public void setOnDeathRadius (double radius) {
         onDeath.setRadius(radius);
     }
-    
-    public void addOnDeath(Buff newBuff){
-        onDeath.addBuff(newBuff);;
+
+    public void addOnDeath (Buff newBuff) {
+        onDeath.addBuff(newBuff);
+        ;
     }
-    
+
     @Override
     public void impartBuffs (Buffable obstacle) {
         onCollision(obstacle);
     }
-    
-    private void removeDuplicateBuff(Buff newBuff){
-        for (Buff b: onCollision){
-            if (b.getClass().equals(newBuff.getClass())){
+
+    private void removeDuplicateBuff (Buff newBuff) {
+        for (Buff b : onCollision) {
+            if (b.getClass().equals(newBuff.getClass())) {
                 onCollision.remove(b);
             }
         }
     }
-    
-    public Projectile clone(){
+
+    @Override
+    public Projectile clone () {
         Projectile clone = (Projectile) super.clone();
         return clone;
     }
-    
+
     // Many conditions have to be met for an projectile to impart its effects.
     // For example, it must be on the "other side", it must not be another projectile, etc.
     private boolean effectiveCollision (GameObject obstacle) {
-        //TODO: Enable the following code by adding "object identification" and "teams"
-        /*if (!collidedID.contains(obstacle.getID())){
-            if(obstacle.getTeam()!= getTeam())
-                return true;
-        }*/
+        // TODO: Enable the following code by adding "object identification" and "teams"
+        /*
+         * if (!collidedID.contains(obstacle.getID())){
+         * if(obstacle.getTeam()!= getTeam())
+         * return true;
+         * }
+         */
         return true;
     }
 
-    private void onCollision (Buffable obstacle) {
-        if (effectiveCollision(obstacle)) {
-            for (Buff b: onCollision){
-                obstacle.addBuff(b);
+    private void onCollision (Buffable target) {
+        if (effectiveCollision((GameObject) target)) {
+            for (Buff b : onCollision) {
+                target.receiveBuff(b);
             }
             changeHealth(-1);
         }
@@ -89,12 +100,13 @@ public class Projectile extends GameObjectSimple implements Buffer {
             move();
         }
         catch (EndOfPathException e) {
-            //TODO: Implement end of path behavior
+            // TODO: Implement end of path behavior
             changeHealth(-100);
         }
     }
 
-    public void onDeath(ObjectCollection world){
+    @Override
+    public void onDeath (ObjectCollection world) {
         onDeath.explode(world, getPoint().add(new PointSimple(20, 20)));
     }
 

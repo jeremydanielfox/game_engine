@@ -1,9 +1,8 @@
 package gae.listView;
 
-import gae.backend.Editable;
-import View.ViewUtilities;
 import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
+import gae.backend.Placeable;
 import gae.gridView.ContainerWrapper;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -11,27 +10,28 @@ import javafx.scene.Node;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
+import View.ViewUtil;
 
 
 /**
  * Any placed instances of an object is a MovableImage (stored in EditableNode)
- * 
+ *
  * @author Kei
  *
  */
 public class MovableImage extends Region {
     private final Group wrapGroup;
-    private Editable editable;
+    private Placeable editable;
     private ContainerWrapper wrapper;
     private double startX;
     private double startY;
     private boolean selected;
 
-    public MovableImage (ImageView placedEditableImage, Editable editable, ContainerWrapper wrapper) {
+    public MovableImage (ImageView placedEditableImage, Placeable editable, ContainerWrapper wrapper) {
         this.editable = editable;
         this.wrapper = wrapper;
         wrapGroup = new Group(placedEditableImage);
-        this.getChildren().add(wrapGroup);
+        getChildren().add(wrapGroup);
         enableDrag();
     }
 
@@ -41,14 +41,14 @@ public class MovableImage extends Region {
      */
     private void enableDrag () {
         setOnMousePressed(e -> {
-            Point2D current = ViewUtilities.getMouseLocation(e, wrapGroup);
+            Point2D current = ViewUtil.getMouseLocation(e, wrapGroup);
             startX = current.getX();
             startY = current.getY();
         });
         setOnMouseDragged(e -> {
             // TODO: fix glitch where I drag select other towers not selected
             if (selected) {
-                Point2D current = ViewUtilities.getMouseLocation(e, wrapGroup);
+                Point2D current = ViewUtil.getMouseLocation(e, wrapGroup);
                 double newX = current.getX();
                 double newY = current.getY();
                 Point2D abs = localToParent(new Point2D(newX, newY));
@@ -72,7 +72,7 @@ public class MovableImage extends Region {
     }
 
     public boolean checkIntersect (Node object) {
-        return this.getBoundsInParent().intersects(object.getBoundsInParent());
+        return getBoundsInParent().intersects(object.getBoundsInParent());
     }
 
     public void selectEditableImage () {
@@ -86,6 +86,7 @@ public class MovableImage extends Region {
     }
 
     public void deleteImage () {
-        this.getChildren().remove(wrapGroup);
+        getChildren().remove(wrapGroup);
     }
+
 }

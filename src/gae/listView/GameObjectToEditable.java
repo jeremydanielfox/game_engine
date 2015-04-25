@@ -1,54 +1,66 @@
 package gae.listView;
 
-import View.ImageUtilities;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
+import engine.gameobject.labels.Label;
 import engine.gameobject.weapon.Weapon;
-import gae.backend.Editable;
-import gae.gridView.Pair;
+import engine.shop.tag.GameObjectTag;
+import gae.backend.Placeable;
 import gae.gridView.Path;
+import java.util.List;
+import View.ImageUtilities;
+import javafx.scene.image.ImageView;
 
 
 /**
  * A temporary adaptor class that converts the engine's GameObjectSimple object to an Editable
  * object, as GAE has been working with Editables. Essentially takes in the engine's object and
  * takes out necessary information from it for GAE use.
- * 
+ *
  * @author Kei
  *
  */
-public class GameObjectToEditable implements Editable {
-    private GameObjectSimple gameObject;
+public class GameObjectToEditable implements Placeable {
+    private GameObject gameObject;
     private static final long serialVersionUID = 1L;
+    private static int ourID = 0;
     private int myID = 0;
     private int Size = 10;
-    private int Health = 100;
     private Weapon weapon;
     private PointSimple location;
     private String imagePath;
     private MovableImage movableImage;
     private String name;
     private String type;
-    private Path myPath;
+    private List<List<Path>> myPath;
     private int width;
     private int height;
     private ImageView imageView;
+    private double health;
+    private GameObjectTag tag;
+    private Label label;
 
-    public GameObjectToEditable (GameObjectSimple gameobject) {
-        this.gameObject = gameobject;
+    public GameObjectToEditable () {
+
+    }
+
+    public GameObjectToEditable (GameObject gameObject) {
+        this.gameObject = gameObject;
         /*
          * doing the following instantiation because it doesn't copy GameObjectSimple (not
          * Serializable)
          * TODO: find out how to copy the object
          */
         name = gameObject.getTag().getName();
-        imagePath = gameObject.getTag().getGraphic().getImagePath();
-        type = gameObject.getLabel().getLabel();
-        imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
+        imagePath = gameObject.getGraphic().getImagePath();
+        type = gameObject.getLabel().getName();
+//        imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
+        System.out.println(imagePath);
+        imageView = new ImageView(gameObject.getGraphic().getImagePath());
+        tag = gameObject.getTag();
         // gameobject is not serializable and gives an error so must set to null
-        gameObject = null;
+        // gameObject = null;
     }
 
     @Override
@@ -56,7 +68,7 @@ public class GameObjectToEditable implements Editable {
         // TODO Auto-generated method stub
     }
 
-    public GameObjectSimple getGameObject () {
+    public GameObject getGameObject () {
         return gameObject;
     }
 
@@ -108,13 +120,13 @@ public class GameObjectToEditable implements Editable {
     }
 
     @Override
-    public Path getPath () {
+    public List<List<Path>> getPath () {
         // TODO Auto-generated method stub
         return myPath;
     }
 
     @Override
-    public void setPath (Path path) {
+    public void setPath (List<List<Path>> path) {
         // TODO Auto-generated method stub
         myPath = path;
     }
@@ -163,15 +175,88 @@ public class GameObjectToEditable implements Editable {
         //
         //
         // imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
-        return imageView;
+        // System.out.println("WIDTH IS : " + width);
+        return ImageUtilities.changeImageSize(new ImageView(imageView.getImage()), 75, 75);
     }
 
     @Override
-    public Editable makeNewInstance () {
-        Editable copy = (Editable) DeepCopy.copy(this);
-        // need way to figure out ID
-        // copy.setID(myID);
-        // myID++;
+    public Placeable makeNewInstance () {
+        // Placeable copy = (Placeable) DeepCopy.copy(this);
+        GameObjectToEditable copy = new GameObjectToEditable();
+        copy.setHealth(health);
+        copy.setHeight(height);
+        copy.setLocation(location);
+        copy.setPath(myPath);
+        copy.setTag(tag);
+        copy.setWeapon(weapon);
+        copy.setWidth(width);
+        copy.setType(type);
+        copy.setImagePath(imagePath);
+        copy.setID(ourID);
+        copy.setImageView(imageView);
+        ourID++;
         return copy;
+    }
+
+    public void setImagePath (String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setImageView (ImageView imageView) {
+        this.imageView = imageView;
+    }
+
+    @Override
+    public double getHealth () {
+        // TODO Auto-generated method stub
+        return health;
+    }
+
+    @Override
+    public double setHealth (double health) {
+        // TODO Auto-generated method stub
+        return this.health = health;
+    }
+
+    @Override
+    public Weapon getWeapon () {
+        // TODO Auto-generated method stub
+        return weapon;
+    }
+
+    @Override
+    public void setWeapon (Weapon weapon) {
+        // TODO Auto-generated method stub
+        this.weapon = weapon;
+    }
+
+    @Override
+    public GameObjectTag getTag () {
+        // TODO Auto-generated method stub
+        return tag;
+    }
+
+    @Override
+    public void setTag (GameObjectTag tag) {
+        // TODO Auto-generated method stub
+        this.tag = tag;
+    }
+
+    @Override
+    public void setType (String type) {
+        // TODO Auto-generated method stub
+        this.type = type;
+    }
+
+    @Override
+    public Label getLabel () {
+        // TODO Auto-generated method stub
+        return label;
+    }
+
+    @Override
+    public void setLabel (Label label) {
+        // TODO Auto-generated method stub
+        this.label = label;
     }
 }

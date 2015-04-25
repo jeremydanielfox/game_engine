@@ -1,10 +1,9 @@
 package gae.gridView;
 
+import gae.listView.Authorable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.event.ChangeListener;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -16,11 +15,11 @@ import javafx.scene.paint.Color;
 /**
  * A class that holds lists of previously created PathSets as well as Anchors. The other classes
  * interact with this class to cause changes in the path segments visualized on the screen.
- * 
+ *
  * @author Kei
  *
  */
-public class PathView {
+public class PathView implements Authorable {
     private Group root;
     private Scene myScene;
     private ArrayList<Anchor> anchorList;
@@ -31,9 +30,10 @@ public class PathView {
     private int myID;
     private ObjectProperty<Integer> addPath;
     private ObjectProperty<String> addPathInstructions;
+    private static final String DEFAULT_PATH = "/images/Park_Path.png";
 
     public PathView (StackPane stack, Scene scene) {
-        this.myScene = scene;
+        myScene = scene;
         myStack = stack;
         anchorList = new ArrayList<>();
         pathSetList = new ArrayList<>();
@@ -45,7 +45,7 @@ public class PathView {
 
     /**
      * Done to have the path coordinates be relative to the grid
-     * 
+     *
      * @param container
      */
     public void setContainerArea (ContainerWrapper container) {
@@ -100,21 +100,21 @@ public class PathView {
     /**
      * Called when user needs the objects back on the screen.
      */
-    public void remakePath () {
-        myStack.getChildren().add(root);
+    public void remakePath (StackPane stack) {
+        stack.getChildren().add(root);
     }
 
     /**
      * Called when user needs the objects off the screen.
      */
-    public void resetScreen () {
-        myStack.getChildren().remove(root);
+    public void resetScreen (StackPane stack) {
+        stack.getChildren().remove(root);
     }
 
     /**
      * Creates a list of Path objects (a Path object represents a path segment). Essentially
      * represents one pathway.
-     * 
+     *
      * @return
      */
     public List<Path> createPathObjects () {
@@ -123,7 +123,7 @@ public class PathView {
             pathList.add(set.getPathObject());
         }
 
-        resetScreen();
+        resetScreen(myStack);
         return pathList;
     }
 
@@ -133,5 +133,22 @@ public class PathView {
 
     public int getID () {
         return myID;
+    }
+
+    public String getType () {
+        // TODO Auto-generated method stub
+        return "Path";
+    }
+
+    @Override
+    public String getName () {
+        // TODO Auto-generated method stub
+        return "Path";
+    }
+
+    @Override
+    public String getImagePath () {
+        // TODO Auto-generated method stub
+        return DEFAULT_PATH;
     }
 }

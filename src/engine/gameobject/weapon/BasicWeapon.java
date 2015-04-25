@@ -1,21 +1,22 @@
 package engine.gameobject.weapon;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.SetChangeListener;
+import javafx.collections.SetChangeListener.Change;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
-import engine.gameobject.units.Buffable;
-import engine.gameobject.weapon.firingstrategy.Buffer;
+import engine.gameobject.weapon.firingrate.FiringRate;
+import engine.gameobject.weapon.firingrate.FiringRateUpgrade;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
-import engine.gameobject.weapon.firingstrategy.Projectile;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
-import engine.gameobject.weapon.upgradable.firingrate.FiringRate;
-import engine.gameobject.weapon.upgradable.firingrate.FiringRateUpgrade;
-import engine.gameobject.weapon.upgradable.range.Range;
-import engine.gameobject.weapon.upgradable.range.RangeUpgrade;
+import engine.gameobject.weapon.range.RangeObserver;
+import engine.gameobject.weapon.range.RangeUpgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
@@ -24,35 +25,113 @@ import gameworld.ObjectCollection;
 /**
  * Tool of attack for a GameObject. It has inherent range and a firing rate.
  * The weapon contains all behaviors that will be applied to a GameObject target.
- * 
+ *
  * @author Nathan Prabhu and Danny Oh
  *
  */
 public class BasicWeapon implements Weapon {
-    protected int timeSinceFire;
-    protected Range myRange;
-    protected FiringRate myFiringRate;
-    protected Buffer myProjectile;
-    protected FiringStrategy myFiringStrategy;
-    private ClassSet<Upgrade> upgradables;
-    protected UpgradeTree tree;
+    private int timeSinceFire;
+    private RangeUpgrade myRange;
+    private DoubleProperty rangeProp = new SimpleDoubleProperty();
+    private FiringRate myFiringRate;
+    private GameObject myProjectile;
+    private FiringStrategy myFiringStrategy;
+    private UpgradeSet<Upgrade> upgradables;
+    private UpgradeTree tree;
+    
 
     public BasicWeapon () {
+        upgradables = new UpgradeSet<>();
         timeSinceFire = 0;
-        myRange = new RangeUpgrade(250);
+        myRange = new RangeUpgrade();
+        setRange(60);
+        myFiringRate = new FiringRateUpgrade(.5);
         myFiringRate = new FiringRateUpgrade(.5);
         myFiringStrategy = new SingleProjectile();
-        upgradables = new ClassSet<Upgrade>(new Upgrade[] { myRange,
-                                                           myFiringRate });
+        upgradables.addAll(Arrays.asList(myRange, myFiringRate));
+    }
+
+    @Override
+    public Weapon clone () {
+        BasicWeapon clone = new BasicWeapon();
+        clone.setFiringRate(myFiringRate.getRate());
+        clone.setRange(myRange.getRange());
+        clone.setFiringStrategy(myFiringStrategy);
+        clone.setProjectile(myProjectile);
+        clone.setTree(tree.clone());
+        return clone;
+    }
+
+    private UpgradeSet<Upgrade> initializeUpgrades () {
+        UpgradeSet<Upgrade> result =
+                new UpgradeSet<Upgrade>(new Upgrade[] { myRange, myFiringRate });
+        Set<Buff> collisionBuffs = myProjectile.getCollider().getCollisionBuffs();
+        Set<Buff> explosBuffs = myProjectile.getCollider().getCollisionBuffs();
+        result.addAll(collisionBuffs);
+        result.addAll(explosBuffs);
+        result.addListener((SetChangeListener<Upgrade>) change ->
+                syncBuffs(change, collisionBuffs, explosBuffs));
+        return result;
+    }
+
+    private void syncBuffs (Change<? extends Upgrade> change,
+                            Set<Buff> collisionBuffs,
+                            Set<Buff> explosBuffs) {
+
+        Buff buff = (change.wasAdded()) ? (Buff) change.getElementAdded() :
+                                       (Buff) change.getElementRemoved();
+        switch (buff.getBuffType()) {
+            case COLLISION:
+                if (change.wasAdded()) {
+                    collisionBuffs.add(buff);
+                }
+                else {
+                    collisionBuffs.remove(buff);
+                }
+                break;
+            case EXPLOSION:
+                if (change.wasAdded()) {
+                    explosBuffs.add(buff);
+                }
+                else {
+                    explosBuffs.remove(buff);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    @Settable
+    public void setRange (double range) {
+        myRange.setIncrement(range);
+        rangeProp.set(myRange.getRange());
+        myRange.addObserver(new RangeObserver(rangeProp, upgradables, myRange));        
+    }
+
+    @Override
+    @Settable
+    public void setFiringRate (double firingRate) {
+        myFiringRate = new FiringRateUpgrade(firingRate);
+    }
+
+    @Override
+    @Settable
+    public void setFiringStrategy (FiringStrategy newStrategy) {
+        myFiringStrategy = newStrategy;
+    }
+
+    @Override
+    @Settable
+    public void setProjectile (GameObject projectile) {
+        myProjectile = projectile;
+        initializeUpgrades();
     }
 
     @Settable
-    public void setRange (double range) {
-        myRange = new RangeUpgrade(range);
-    }
-
-    public void setFiringStrategy (FiringStrategy newStrategy) {
-        myFiringStrategy = newStrategy;
+    public void setTree (UpgradeTree tree) {
+        this.tree = tree;
     }
 
     /*
@@ -61,25 +140,11 @@ public class BasicWeapon implements Weapon {
      * @see engine.gameobject.weapon.Weaopn#fire(gameworld.GameWorld, engine.gameobject.PointSimple)
      */
     @Override
-    public void fire (ObjectCollection world, PointSimple location) {
+    public void fire (ObjectCollection world, GameObject target, PointSimple location) {
         if (canFire()) {
-            List<GameObject> targets =
-                    (List<GameObject>) world.objectsInRange(myRange.getRange(), location);
-            List<Buffable> buffables =
-                    // targets.stream().filter(p -> p instanceof Buffable &&
-                    // p.getPoint().getX()!=location.getX())//This needs to be filtered by team and
-                    // object type
-                    targets.stream().filter(p -> p instanceof GameObjectSimpleTest)// temporary
-                            .map(p -> (Buffable) p)
-                            .collect(Collectors.toList());
-            if (!buffables.isEmpty()) {
-                Buffable target = chooseTarget(buffables);
-                myFiringStrategy.execute(world, target, location, myProjectile);
-                timeSinceFire = 0;
-                return;
-            }
+            myFiringStrategy.execute(world, target, location, myProjectile);
+            timeSinceFire = 0;
         }
-        timeSinceFire++;
     }
 
     /*
@@ -89,7 +154,7 @@ public class BasicWeapon implements Weapon {
      */
     @Override
     public void addBuff (Buff newBuff) {
-        myProjectile.addCollisionBehavior(newBuff);
+        myProjectile.getCollider().addCollisionBehavior(newBuff);
     }
 
     /*
@@ -100,29 +165,18 @@ public class BasicWeapon implements Weapon {
     @Override
     public double getValue () {
         return tree.getValue();
-    };
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * engine.gameobject.weapon.Weaopn#setProjectile(engine.gameobject.weapon.firingstrategy.Projectile
-     * )
-     */
-    @Override @Settable
-    public void setProjectile (Projectile projectile) {
-        myProjectile = projectile;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see engine.gameobject.weapon.Weaopn#getRange()
-     */
     @Override
     public double getRange () {
+        //return ((Range) upgradables.get(myRange)).getRange();
         return myRange.getRange();
     }
+    
+    public DoubleProperty getRangeProperty(){
+        return rangeProp;
+    }
+    
 
     /*
      * (non-Javadoc)
@@ -131,7 +185,12 @@ public class BasicWeapon implements Weapon {
      */
     @Override
     public double getFiringRate () {
-        return myFiringRate.getRate();
+        return ((FiringRate) upgradables.get(myFiringRate)).getRate();
+    }
+
+    @Override
+    public void advanceTime () {
+        timeSinceFire++;
     }
 
     /*
@@ -148,12 +207,6 @@ public class BasicWeapon implements Weapon {
      * }
      */
 
-    // TODO: In bloons, we choose from the candidates using first, last, strong, weak. We could
-    // do something here as well using polymorphism. For now, we just choose a random one.
-    private Buffable chooseTarget (List<Buffable> targets) {
-        return targets.get(0);
-    }
-
     // TODO: Get the math correct here
     private double firingRateToSeconds () {
         return 60.0 / myFiringRate.getRate();
@@ -163,13 +216,15 @@ public class BasicWeapon implements Weapon {
         return timeSinceFire > firingRateToSeconds();
     }
 
+    @Override
     public List<UpgradeBundle> getNextUpgrades () {
         return tree.getNextUpgrades();
     }
 
+    @Override
     public void applyUpgrades (UpgradeBundle bundle) {
         bundle.applyUpgrades(upgradables);
+        myRange = ((RangeUpgrade) upgradables.get(new RangeUpgrade()));
         bundle.getParent().updateCurrent(bundle.getParent());
     }
-
 }

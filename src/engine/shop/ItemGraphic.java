@@ -9,7 +9,7 @@ import engine.gameobject.Graphic;
 
 /**
  * Represents an item's icon in the shop.
- * 
+ *
  * @author Nathan Prabhu and Tom Puglisi
  *
  */
@@ -20,9 +20,8 @@ public class ItemGraphic extends Parent {
     private Node itemNode;
     private String name;
     private Graphic shopGraphic;
-    private OnClickedCommand myOnClicked;
 
-    public ItemGraphic (String name, Graphic shopGraphic, OnClickedCommand myOnClicked) {
+    public ItemGraphic (String name, Graphic shopGraphic) {
         this.name = name;
         this.shopGraphic = shopGraphic;
         initialize();
@@ -39,17 +38,12 @@ public class ItemGraphic extends Parent {
         itemNode.setCursor(Cursor.HAND);
         itemNode.setEffect(new Glow(GLOW_VALUE));
     }
-    
-    public String getName() {
+
+    public String getName () {
         return name;
     }
-    
+
     public Node getGraphic () {
         return shopGraphic.getNode();
     }
-    
-    public TransitionGameObject onClicked () {
-        return myOnClicked.execute();
-    }
-
 }

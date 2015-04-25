@@ -1,9 +1,7 @@
 package View;
 
 import engine.game.Game;
-import engine.game.Player;
 import gae.gameView.Main;
-import gameworld.GameWorld;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -17,8 +15,10 @@ public class TestEngine extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
         Group root = new Group();
-        primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add constants
-        primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
+        primaryStage.setHeight(400);
+        primaryStage.setWidth(950);
+//        primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add constants
+//        primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
 
         Scene scene = new Scene(root);
         Game game = loadGame();
@@ -35,13 +35,12 @@ public class TestEngine extends Application {
     }
 
     private Game loadGame () {
-        GameWriter gw = new GameWriter();
-        GameWorld world = gw.makeWorld();
-        Player player = gw.makePlayer();
-        return gw.makeGame(player, world, gw.makeShop(player, world));
-        //return DataManager.readFromXML(Game.class, FILE_SOURCE);
-//        return DataManager.readFromXML(Game.class, FILE_SOURCE);
-
+        // GameWriter gw = new GameWriter();
+        // GameWorld world = gw.makeWorld();
+        // Player player = gw.makePlayer();
+        // return gw.makeGame(player, world, gw.makeShop(player, world));
+        return DataManager.readFromXML(Game.class, FILE_SOURCE);
+        // return DataManager.readFromXML(Game.class, FILE_SOURCE);
 
     }
 

@@ -2,7 +2,6 @@ package engine.interactions;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiConsumer;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.labels.Label;
@@ -14,7 +13,7 @@ import gameworld.GameWorld;
  * BiConsumer Functional Interfaces. The InteractionEngine represents a table of
  * interactions. It accepts two GameObjects, find the appropriate BiConsumer for
  * them, and lets the BiConsumer act upon them, modifying their states.
- * 
+ *
  * @author Jeremy
  *
  */
@@ -27,24 +26,41 @@ public class ConcreteInteractionEngine implements InteractionEngine {
     public void interact (GameObject first, GameObject second) {
         Label firstLabel = first.getLabel();
         Label secondLabel = second.getLabel();
-        Map<Label, Interaction> chosenMap;
-        Interaction interaction = null;
-        while (firstLabel != null && !myTable.containsKey(firstLabel)) {
-            chosenMap = myTable.get(firstLabel);
-            while (secondLabel != null && !chosenMap.containsKey(secondLabel)) {
-                interaction = chosenMap.get(secondLabel);
-                secondLabel = secondLabel.getSuperLabel();
-            }
-            firstLabel = firstLabel.getSuperLabel();
+        Interaction interaction = findInteraction(firstLabel, secondLabel);
+        if (interaction != null) {
+            interaction.setGameWorld(myGameWorld);
+            interaction.accept(first, second);
         }
-        interaction.setGameWorld(myGameWorld);
-        interaction.accept(first, second);
+    }
+
+    // TODO: This code is too complex... break it down/find a way to make it simpler
+    private Interaction findInteraction (Label actor, Label target) {
+        Map<Label, Interaction> actorMap;
+        Label actorSuper = actor;
+        Label targetSuper = target;
+        while (actorSuper.getSuperLabel() != null) {
+            if (!myTable.containsKey(actorSuper)) {
+                actorSuper = actorSuper.getSuperLabel();
+                continue;
+            }
+            actorMap = myTable.get(actorSuper);
+            while (targetSuper.getSuperLabel() != null) {
+                if (!actorMap.containsKey(targetSuper)) {
+                    targetSuper = targetSuper.getSuperLabel();
+                    continue;
+                }
+                return actorMap.get(targetSuper);
+            }
+            targetSuper = target;
+            actorSuper = actorSuper.getSuperLabel();
+        }
+        return null;
     }
 
     /**
      * This method lets someone define the action that occurs between two
      * GameObjects. Specifically, this action occurs from first onto second.
-     * 
+     *
      * @param first
      * @param second
      * @param consumer
@@ -52,9 +68,7 @@ public class ConcreteInteractionEngine implements InteractionEngine {
     @Override
     public void put (Label first, Label second, Interaction interaction) {
         checkNullMap(first);
-        checkNullMap(second);
         putInMap(first, second, interaction);
-        putInMap(second, first, interaction);
     }
 
     /**
@@ -63,15 +77,16 @@ public class ConcreteInteractionEngine implements InteractionEngine {
      * with another HashMap as its value
      */
     private void checkNullMap (Label label) {
-        if (myTable.get(label) == null)
+        if (myTable.get(label) == null) {
             myTable.put(label,
                         new HashMap<Label, Interaction>());
+        }
     }
 
     /**
      * Gets the HashMap associated with the String "first."
      * Puts the given BiConsumer into that HashMap with the String "second" as the key.
-     * 
+     *
      * @param first
      * @param second
      * @param consumer
@@ -83,7 +98,7 @@ public class ConcreteInteractionEngine implements InteractionEngine {
 
     @Override
     public void setWorld (GameWorld world) {
-        myGameWorld=world;
+        myGameWorld = world;
     }
 
 }

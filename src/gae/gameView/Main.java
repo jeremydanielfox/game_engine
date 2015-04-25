@@ -1,10 +1,10 @@
-
 package gae.gameView;
 
 import gae.openingView.OpeningView;
 import javafx.application.Application;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
 
 public class Main extends Application {
 
@@ -28,5 +28,6 @@ public class Main extends Application {
         OpeningView opener = new OpeningView(myStage);
         myStage.setScene(opener.getScene());
         myStage.show();
+
     }
 }

@@ -1,15 +1,12 @@
 package gae.listView;
 
+import gae.backend.Placeable;
+import gae.gridView.ContainerWrapper;
 import java.util.HashMap;
 import java.util.Map;
-import gae.backend.Editable;
-import View.ViewUtilities;
-import exception.ObjectOutOfBoundsException;
-import gae.gridView.ContainerWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -17,23 +14,21 @@ import javafx.scene.control.Accordion;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 
 /**
  * Abstract class to be extended to all Editable object's lists
- * 
+ *
  * @author Kei & Nina
  *
  */
 public class PaneList {
-    private Map<Editable, ObservableList<Editable>> instancesEditableMap;
+    private Map<Authorable, ObservableList<Authorable>> instancesEditableMap;
     private Group root;
     private StackPane stack;
-    private ObservableList<Editable> observableList;
+    private ObservableList<Authorable> observableList;
     private ContainerWrapper wrapper;
     private String type;
     private Scene scene;
@@ -41,7 +36,7 @@ public class PaneList {
 
     /**
      * Initializes the specific pane class
-     * 
+     *
      * @param root
      * @param node
      * @param scene
@@ -52,12 +47,12 @@ public class PaneList {
                                   Node node,
                                   Scene scene,
                                   ContainerWrapper wrapper,
-                                  ObservableList<Editable> editableObservableList,
+                                  ObservableList<Authorable> editableObservableList,
                                   String type) {
         this.root = root;
         this.node = node;
-        this.stack = (StackPane) node;
-        this.observableList = editableObservableList;
+        stack = (StackPane) node;
+        observableList = editableObservableList;
         this.wrapper = wrapper;
         this.type = type;
         this.scene = scene;
@@ -81,13 +76,13 @@ public class PaneList {
         }
     }
 
-    public Map<Editable, ObservableList<Editable>> getMap () {
+    public Map<Authorable, ObservableList<Authorable>> getMap () {
         return instancesEditableMap;
     }
 
     /**
      * method created to make a simple TitledPane with a text
-     * 
+     *
      * @param text
      * @return
      */
@@ -100,13 +95,13 @@ public class PaneList {
 
     private void setUpObservableList (ObservableList<TitledPane> paneList) {
 
-        for (Editable previous : observableList) {
+        for (Authorable previous : observableList) {
             setUpNewInstanceList(paneList, previous);
         }
-        observableList.addListener( (ListChangeListener.Change<? extends Editable> change) -> {
+        observableList.addListener( (ListChangeListener.Change<? extends Authorable> change) -> {
             while (change.next()) {
                 if (change.wasAdded()) { // if an editablenode was added
-                    Editable added = (Editable) change.getAddedSubList().get(0);
+                    Authorable added = change.getAddedSubList().get(0);
                     setUpNewInstanceList(paneList, added);
                 }
             }
@@ -114,12 +109,12 @@ public class PaneList {
     }
 
     private void setUpNewInstanceList (ObservableList<TitledPane> paneList,
-                                       Editable editable) {
-        if (editable.getType().equals(type)) {
-            ObservableList<Editable> instanceList =
+                                       Authorable authorable) {
+        if (authorable.getType().equals(type)) {
+            ObservableList<Authorable> instanceList =
                     FXCollections.observableArrayList();
-            instancesEditableMap.put(editable, instanceList);
-            TitledPane newPane = setTitledPaneClick(editable, instanceList);
+            instancesEditableMap.put(authorable, instanceList);
+            TitledPane newPane = setTitledPaneClick(authorable, instanceList);
             paneList.add(newPane);
         }
     }
@@ -127,7 +122,7 @@ public class PaneList {
     /**
      * sets up the clicking of the TitledPane such that one can instantiate an object by right
      * clicking the object. Also deals with binding the image to the cursor
-     * 
+     *
      * @param node
      * @param root
      * @param pane
@@ -135,18 +130,19 @@ public class PaneList {
      * @param wrapper
      * @return
      */
-    private TitledPane setTitledPaneClick (Editable editable,
-                                           ObservableList<Editable> instanceList) {
+    private TitledPane setTitledPaneClick (Authorable authorable,
+                                           ObservableList<Authorable> instanceList) {
         TitledPane newPane = new TitledPane();
+        Placeable editable = (Placeable) authorable;
         newPane.setText(editable.getName());
-        newPane.setContent(ListViewUtilities.createList(instanceList, scene));
+        newPane.setContent(ListViewUtilities.createList(instanceList, scene, "Editable"));
         newPane.setOnMousePressed(me -> {
             if (me.isSecondaryButtonDown()) {
                 ContextMenu contextmenu = new ContextMenu();
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
                     DraggableUtilities.makeEditablePlaceable(me, editable, node, instanceList,
-                                                         wrapper, root);
+                                                             wrapper, root);
                 });
                 contextmenu.getItems().add(item);
                 contextmenu.show(newPane, me.getSceneX(), me.getSceneY());

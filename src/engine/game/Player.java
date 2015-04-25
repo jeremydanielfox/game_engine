@@ -12,45 +12,55 @@ import engine.shop.wallet.Wallet;
 /**
  * This class represents a current player of the game, storing player specific information
  * such as lives left/health, score, and currency that can be used in the store.
- * 
+ *
  * @author Sierra Smith, Cosette Goldstein
  *
  */
 @Settable
 public class Player extends Observable {
 
+    private static final String DEFAULT_NAME = "Player 1";
+
     private String myName;
     private PlayerUnit myHealth;
     private PlayerUnit myScore;
     private Wallet myWallet;
 
-    // note: wallet needs to be initialzed with the right player unit before passed in here?
-    // alternative: could pass in a string or something to indicate which player unit to assign the
-    // wallet
-    
-    public Player() {
-        myName = "";
+    public Player () {
+        myName = DEFAULT_NAME;
         myHealth = new PlayerUnit();
         myScore = new PlayerUnit();
-        myWallet = new ConcreteWallet ();
+        myWallet = new ConcreteWallet();
     }
+
     public Player (String name, PlayerUnit health, PlayerUnit score, Wallet wallet) {
         myHealth = health;
         myScore = score;
         myName = name;
         myWallet = wallet;
     }
-@Settable
+
+    @Settable
     public void setName (String name) {
         myName = name;
     }
 
+    /**
+     * Adds the specifies amount to the player's score unit.
+     *
+     * @param toAdd
+     */
     public void changeScore (int toAdd) {
         myScore.changeValue(toAdd);
         setChanged();
         notifyObservers(myScore);
     }
 
+    /**
+     * Adds the specified amount to the player's health unit.
+     *
+     * @param change
+     */
     public void changeHealth (int change) {
         myHealth.changeValue(change);
         setChanged();
@@ -64,35 +74,40 @@ public class Player extends Observable {
     public double getHealth () {
         return myHealth.getValue();
     }
-    
-    public Wallet getWallet(){
+
+    public Wallet getWallet () {
         return myWallet;
     }
-    
-    public String getName(){
+
+    public String getName () {
         return myName;
     }
-    
-    public List<Displayable> getDisplayables(){
-        List <Displayable> toReturn = new ArrayList<>();
+
+    /**
+     * Returns a list of items from the player that implement the displayable interface.
+     *
+     * @return
+     */
+    public List<Displayable> getDisplayables () {
+        List<Displayable> toReturn = new ArrayList<>();
         toReturn.add(myHealth);
         toReturn.add(myScore);
         return toReturn;
     }
-    
+
     @Settable
-    public void setHealth(PlayerUnit health) {
+    public void setHealth (PlayerUnit health) {
         myHealth = health;
     }
-    
+
     @Settable
-    public void setScore(PlayerUnit score) {
+    public void setScore (PlayerUnit score) {
         myScore = score;
     }
-    
+
     @Settable
-    public void setWallet(Wallet wallet) {
+    public void setWallet (Wallet wallet) {
         myWallet = wallet;
     }
-    
+
 }

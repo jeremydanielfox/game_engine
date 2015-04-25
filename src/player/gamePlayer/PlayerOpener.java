@@ -46,6 +46,7 @@ public class PlayerOpener implements GameScreen{
         headerBox.getChildren().add(header);
         gameSelector = new GameSelector(playerScene);
 
+        /* CSS */
         playerScene.getStylesheets().add("/css/GamePlayerCSS.css");
         options.setId("optionBox");
         header.setId("playerHeader");
@@ -70,8 +71,11 @@ public class PlayerOpener implements GameScreen{
 
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
-            GamePlayerScreen screen = new GamePlayerScreen(myStage);
-            myStage.setScene(screen.makeScene());
+//            GamePlayerScreen screen = new GamePlayerScreen(myStage);
+//            myStage.setScene(screen.makeScene());
+            
+              PauseScene pause = new PauseScene(null, myStage, playerScene);
+              myStage.setScene(pause.getScreen());
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {

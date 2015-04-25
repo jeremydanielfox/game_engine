@@ -82,6 +82,7 @@ public class GameObjectSimple implements GameObject {
     @Override
     public void fire (ObjectCollection world, GameObject target) {
          myWeapon.fire(world, target, myPoint);
+         myGraphic.rotate(target.getPoint());
     }
 
     @Override
@@ -164,7 +165,7 @@ public class GameObjectSimple implements GameObject {
     @Override
     public void move () throws EndOfPathException {
         PointSimple point = myMover.move(myPoint);
-        // myGraphic.rotate(point);
+         myGraphic.rotate(point);
         setPoint(new PointSimple(point.getX(), point.getY()));
     }
 

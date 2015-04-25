@@ -12,7 +12,8 @@ import javafx.scene.Scene;
 
 
 /**
- * Holds the multiple TileContainers such that users can set boolean properties for towers and enemies
+ * Holds the multiple TileContainers such that users can set boolean properties for towers and
+ * enemies
  *
  * @author Nina Sun
  *
@@ -31,7 +32,7 @@ public class TileViewToggle extends Group implements ContainerWrapper {
                 case ENEMYMODE:
                     getChildren().clear();
                     getChildren().add(enemyview);
-                    
+
                     break;
                 case TOWERMODE:
                     getChildren().clear();
@@ -41,7 +42,7 @@ public class TileViewToggle extends Group implements ContainerWrapper {
 
         });
     }
-    
+
     public enum TileMode {
         ENEMYMODE, TOWERMODE
     }
@@ -58,35 +59,37 @@ public class TileViewToggle extends Group implements ContainerWrapper {
         return towerview.getGridWidthProperty();
     }
 
-
     @Override
     public boolean checkBounds (double x, double y) {
-        return towerview.checkBounds(x, y);
+        return tileModeProperty.get().equals(TileMode.TOWERMODE) ? towerview.checkBounds(x, y)
+                                                                : enemyview.checkBounds(x, y);
     }
 
     @Override
     public PointSimple convertCoordinates (double x, double y) {
-        return towerview.convertCoordinates(x, y);
+        return tileModeProperty.get().equals(TileMode.TOWERMODE) ? towerview.convertCoordinates(x,
+                                                                                                y)
+                                                                : enemyview
+                                                                        .convertCoordinates(x, y);
     }
-    
-    
+
     /**
      * To be used in making grid
      * 
      * @return list of grid coordinates where towers cannot be placed
      *
      */
-    public List<Point> getTowerUnwalkable(){
+    public List<Point> getTowerUnwalkable () {
         return towerview.getUnwalkableTiles();
     }
-    
+
     /**
      * To be used in making grid
      * 
      * @return list of grid coordinates where enemies cannot walk
      *
      */
-    public List<Point> getEnemyUnwalkable(){
+    public List<Point> getEnemyUnwalkable () {
         return enemyview.getUnwalkableTiles();
     }
 }

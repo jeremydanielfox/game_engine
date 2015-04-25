@@ -4,6 +4,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
+import engine.shop.tag.GameObjectTag;
 import gae.backend.Placeable;
 import gae.gridView.Path;
 import java.util.List;
@@ -35,6 +36,7 @@ public class GameObjectToEditable implements Placeable {
     private int height;
     private ImageView imageView;
     private double health;
+    private GameObjectTag tag;
 
     public GameObjectToEditable (GameObject gameObject2) {
         gameObject = gameObject2;
@@ -47,6 +49,7 @@ public class GameObjectToEditable implements Placeable {
         imagePath = gameObject.getTag().getGraphic().getImagePath();
         type = gameObject.getLabel().getName();
         imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
+        tag = gameObject.getTag();
         // gameobject is not serializable and gives an error so must set to null
         gameObject = null;
     }
@@ -196,5 +199,17 @@ public class GameObjectToEditable implements Placeable {
     public void setWeapon (Weapon weapon) {
         // TODO Auto-generated method stub
         this.weapon = weapon;
+    }
+
+    @Override
+    public GameObjectTag getTag () {
+        // TODO Auto-generated method stub
+        return tag;
+    }
+
+    @Override
+    public void setTag (GameObjectTag tag) {
+        // TODO Auto-generated method stub
+        this.tag = tag;
     }
 }

@@ -24,6 +24,7 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
         curLevelIndex = 0;
     }
 
+    @Override
     public void addLevel (Level newLevel) {
         myLevels.add(newLevel);
     }

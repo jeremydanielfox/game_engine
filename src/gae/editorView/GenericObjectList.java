@@ -26,20 +26,20 @@ public class GenericObjectList {
     private Node node;
     private Group root;
     private Class<?> klass;
-    private EventHandler<? super MouseEvent> popNewEditor;
+    private ObjectComponentEditor objectEditor;
     private ContainerWrapper wrapper;
     private Map<String, ArrayList<String>> interfaceToClassMap;
+    private int count;
 
-    public GenericObjectList (Class<?> klass,
+    public GenericObjectList (ObjectComponentEditor editor,
                               Node node,
                               ContainerWrapper wrapper,
-                              Group root,
-                              ObjectComponentEditor editor) {
-        popNewEditor = editor.popNewEditor();
+                              Group root) {
+        objectEditor = editor;
         this.node = node;
         this.root = root;
         this.wrapper = wrapper;
-        this.klass = klass;
+        this.klass = editor.getObjectClass();
         interfaceToClassMap = EditingParser.getInterfaceClasses(PROPERTY_FILE_PATH);
         createdSpecificObjects = LibraryData.getInstance().getObservableList(klass);
     }
@@ -54,7 +54,7 @@ public class GenericObjectList {
                 ContextMenu contextmenu = new ContextMenu();
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
-                    popNewEditor.handle(me);
+                    objectEditor.popNewEditor(classType + " " + count++);
                 });
                 contextmenu.getItems().add(item);
                 contextmenu.show(titledPane, me.getSceneX(), me.getSceneY());
@@ -69,7 +69,7 @@ public class GenericObjectList {
             DraggableItem draggable =
                     new DraggableItem(list.getSelectionModel().getSelectedItem(), klass, classType);
             DraggableUtilities.makeObjectPlaceable(me, draggable, node,
-                                                   createdSpecificObjects, wrapper, root);
+                                                   createdSpecificObjects, wrapper, root, objectEditor);
         });
         return list;
     }

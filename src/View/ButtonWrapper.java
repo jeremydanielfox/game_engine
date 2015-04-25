@@ -29,7 +29,6 @@ public class ButtonWrapper {
     private Goal myEnableCondition;
     private String myLabel;
     private Consumer<? extends Object> myAction;
-    private Goal myGoal;
 
     public ButtonWrapper () {
         initializeFields(DEFAULT_TEXT, e -> doNothing(), new NullGoal());
@@ -68,7 +67,7 @@ public class ButtonWrapper {
      */
     public Button getButton () {
         if (myButton == null) {
-            initializeFields(myLabel, myAction, myGoal);
+            initializeFields(myLabel, myAction, myEnableCondition);
         }
         return myButton;
     }
@@ -80,7 +79,7 @@ public class ButtonWrapper {
      */
     public boolean isEnabled () {
         if (myEnableCondition == null) {
-            initializeFields(myLabel, myAction, myGoal);
+            initializeFields(myLabel, myAction, myEnableCondition);
         }
         return myEnableCondition.isSatisfied();
     }

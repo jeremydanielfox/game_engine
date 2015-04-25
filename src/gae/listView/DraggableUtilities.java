@@ -3,6 +3,7 @@ package gae.listView;
 import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
 import gae.backend.Placeable;
+import gae.editor.ObjectComponentEditor;
 import gae.editorView.DragIntoRectangle;
 import gae.editorView.DraggableFields;
 import gae.editorView.DraggableItem;
@@ -87,7 +88,7 @@ public class DraggableUtilities {
                                             Node node,
                                             ObservableList<Object> instanceList,
                                             ContainerWrapper wrapper,
-                                            Group root) {
+                                            Group root, ObjectComponentEditor editor) {
         // TODO: figure out how to clone
         Node binder =
                 ViewUtil.bindCursor(placeable,
@@ -109,6 +110,7 @@ public class DraggableUtilities {
             //
             // placeable.setTranslateX(relativeLocation.getX());
             // placeable.setTranslateY(relativeLocation.getY());
+            editor.setObject(placeable.getDraggedObject());
             clone.setTranslateX(currentX);
             clone.setTranslateY(currentY);
             root.getChildren().add(clone);

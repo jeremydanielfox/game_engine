@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
+
 /**
  *
  * @author Eric Saba
@@ -35,25 +36,25 @@ public class ObjectComponentEditor extends ComponentEditor {
         }
         myAddExistingButton = new Button("Add Existing");
         myCreateNewButton = new Button("Create New");
-        myCreateNewButton.setOnMouseClicked(popNewEditor());
+        // myCreateNewButton.setOnMouseClicked(popNewEditor());
         // TODO: setup lambda's for these buttons
         getEditBox().getChildren().addAll(getLabel(), myAddExistingButton, myCreateNewButton);
     }
 
-    private void setObject (Object obj) {
+    public void setObject (Object obj) {
         myObject = obj;
     }
-    
-    public Class<?> getObjectClass() {
+
+    public Class<?> getObjectClass () {
         return clazz;
     }
-    
-    public EventHandler<? super MouseEvent> popNewEditor() {
-        return e -> {
-            Consumer<Object> setObjectConsumer = o -> setObject(o);
-//            GenericObjectsPane.newCustomObject(clazz, "yo", setObjectConsumer);
-            new PopUpEditorView(setObjectConsumer, biConsumer, clazz);
-        };
+
+    public void popNewEditor (String title) {
+        System.out.println("TITLE IS : " + title);
+        // Consumer<Object> setObjectConsumer = o -> setObject(o);
+        Consumer<Object> setObjectConsumer = o -> clear();
+        // GenericObjectsPane.newCustomObject(clazz, "yo", setObjectConsumer);
+        new PopUpEditorView(setObjectConsumer, biConsumer, clazz);
     }
 
     @Override

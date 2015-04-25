@@ -19,7 +19,7 @@ import engine.fieldsetting.Settable;
 public class Graphic {
 
     // note to self: need to change this image path default when using data files
-    private static final String DEFAULT_IMAGE_PATH_PREFIX = "images/";
+//    private static final String DEFAULT_IMAGE_PATH_PREFIX = "images/";
     private static final String DEFAULT_IMAGE_NAME = "robertDuvall.jpg";
 
     private double myHeight;
@@ -56,7 +56,8 @@ public class Graphic {
     }
 
     private void initializeImageView () {
-        myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
+        System.out.println("PATH IS : " + myImageName);
+        myImageView = new ImageView(myImageName);
         // for TEST purpose:
         if (myPoint == null) {
             myPoint = new Point2D(0, 0);
@@ -135,7 +136,7 @@ public class Graphic {
     }
 
     public String getImagePath () {
-        return DEFAULT_IMAGE_PATH_PREFIX + myImageName;
+        return myImageName;
     }
 
     /**

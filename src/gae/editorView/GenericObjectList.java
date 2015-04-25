@@ -26,15 +26,16 @@ public class GenericObjectList {
     private Node node;
     private Group root;
     private Class<?> klass;
-    private EventHandler<? super MouseEvent> popNewEditor;
+    private ObjectComponentEditor objectEditor;
     private ContainerWrapper wrapper;
     private Map<String, ArrayList<String>> interfaceToClassMap;
+    private int count;
 
     public GenericObjectList (ObjectComponentEditor editor,
                               Node node,
                               ContainerWrapper wrapper,
                               Group root) {
-        popNewEditor = editor.popNewEditor();
+        objectEditor = editor;
         this.node = node;
         this.root = root;
         this.wrapper = wrapper;
@@ -53,7 +54,7 @@ public class GenericObjectList {
                 ContextMenu contextmenu = new ContextMenu();
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
-                    popNewEditor.handle(me);
+                    objectEditor.popNewEditor(classType + " " + count++);
                 });
                 contextmenu.getItems().add(item);
                 contextmenu.show(titledPane, me.getSceneX(), me.getSceneY());
@@ -68,7 +69,7 @@ public class GenericObjectList {
             DraggableItem draggable =
                     new DraggableItem(list.getSelectionModel().getSelectedItem(), klass, classType);
             DraggableUtilities.makeObjectPlaceable(me, draggable, node,
-                                                   createdSpecificObjects, wrapper, root);
+                                                   createdSpecificObjects, wrapper, root, objectEditor);
         });
         return list;
     }

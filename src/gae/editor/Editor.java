@@ -36,7 +36,7 @@ public abstract class Editor implements Edits {
                 root.addToNodes(new TreeNode(method, "SliderEditor"));
             }
             else if (parameterClass.equals(String.class)) {
-                if (getPropertyName(method.getName()).equals("Image Path")) {
+                if (getPropertyName(method.getName()).equals("Image Name")) {
                     System.out.println("FileChooser  " + getPropertyName(method.getName()));
                     root.addToNodes(new TreeNode(method, "FileChooserEditor"));
                 }

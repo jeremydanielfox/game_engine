@@ -1,0 +1,20 @@
+.root {
+}
+
+#emptyPane {
+	-fx-background-color: white;
+}
+
+#content {
+	-fx-background-color: purple;
+	-fx-opacity: 0.6;
+}
+
+#instructions {
+	-fx-font-size: 30;
+	-fx-text-fill: red;
+}
+
+#instructionsBox {
+	-fx-padding: 0 0 35 0;
+}

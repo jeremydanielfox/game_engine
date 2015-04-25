@@ -1,49 +1,29 @@
 package gae.editorView;
 
 import java.util.List;
-import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import engine.gameobject.GameObjectSimple;
-import View.ImageUtilities;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
-import gae.backend.Placeable;
-import gae.backend.ResourceBundleUtil;
-import gae.backend.TempTower;
 import gae.editor.ComponentEditor;
 import gae.editor.ObjectComponentEditor;
 import gae.editor.SimpleEditor;
-import gae.gridView.ContainerWrapper;
-import gae.listView.Authorable;
-import gae.listView.DraggableUtilities;
-import gae.listView.LibraryData;
-import gae.listView.ListViewUtilities;
 import gae.openingView.UIObject;
 
 
 public class GameObjectEditorView implements UIObject {
     private Group root;
     private Scene scene;
-    private StackPane stack;
     private static final int TAB_HEIGHT = 160;
-    private static final int SIDE_WIDTH = 430;
     private static final double LIBRARY_EDITOR_PROPORTIONS = 0.68;
     private static final Class<?> DEFAULT_CLASS = GameObjectSimple.class;
     private double vboxHeight =
@@ -55,27 +35,21 @@ public class GameObjectEditorView implements UIObject {
     private VBox top;
     private AnchorPane anchor;
     private SimpleEditor simpleEditor;
-    private Placeable editable;
     private Class<?> clazz;
 
-    public GameObjectEditorView (Scene scene, Consumer<Object> consumer) {
-        simpleEditor = new SimpleEditor(DEFAULT_CLASS);
+    public GameObjectEditorView (Scene scene, Consumer<Object> consumer, BiConsumer<Class<?>, Object> biConsumer) {
+        simpleEditor = new SimpleEditor(DEFAULT_CLASS, biConsumer);
         clazz = DEFAULT_CLASS;
-        init(scene);
-        Button addButton = new Button("Create Game Object");
-        addButton.setOnAction(e -> {
-            consumer.accept(createObject());
-        });
-        addButton().accept(addButton);
+        init(scene, consumer, biConsumer);
     }
 
-    public GameObjectEditorView (Scene scene, Class<?> klass) {
-        simpleEditor = new SimpleEditor(klass);
+    public GameObjectEditorView (Scene scene, Consumer<Object> consumer, BiConsumer<Class<?>, Object> biConsumer, Class<?> klass) {
+        simpleEditor = new SimpleEditor(klass, biConsumer);
         clazz = klass;
-        init(scene);
+        init(scene, consumer, biConsumer);
     }
 
-    private void init (Scene scene) {
+    private void init (Scene scene, Consumer<Object> consumer, BiConsumer<Class<?>, Object> biConsumer) {
         root = new Group();
         root.setManaged(false);
         this.scene = scene;
@@ -86,6 +60,13 @@ public class GameObjectEditorView implements UIObject {
         top.setPrefSize(vboxWidth, vboxHeight);
         // imageLocationMap =
         // ResourceBundleUtil.useResourceBundle("gae/editorView/ObjectPathProperties");
+        Button addButton = new Button("Add");
+        addButton.setOnAction(e -> {
+            Object obj = createObject();
+            consumer.accept(obj);
+            biConsumer.accept(clazz, obj);
+        });
+        addButton().accept(addButton);
     }
 
     private BorderPane setUpBorder () {
@@ -119,7 +100,7 @@ public class GameObjectEditorView implements UIObject {
         Accordion accordion = new Accordion();
         for (ObjectComponentEditor edit : simpleEditor.getObjectComponentEditors()) {
             GenericObjectList list =
-                    new GenericObjectList(edit.getObjectClass(), bottom, bottom, root, edit);
+                    new GenericObjectList(edit, bottom, bottom, root);
             accordion.getPanes().add(list.getTitledPane());
         }
         return accordion;

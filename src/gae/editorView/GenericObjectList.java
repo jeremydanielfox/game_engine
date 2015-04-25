@@ -30,16 +30,15 @@ public class GenericObjectList {
     private ContainerWrapper wrapper;
     private Map<String, ArrayList<String>> interfaceToClassMap;
 
-    public GenericObjectList (Class<?> klass,
+    public GenericObjectList (ObjectComponentEditor editor,
                               Node node,
                               ContainerWrapper wrapper,
-                              Group root,
-                              ObjectComponentEditor editor) {
+                              Group root) {
         popNewEditor = editor.popNewEditor();
         this.node = node;
         this.root = root;
         this.wrapper = wrapper;
-        this.klass = klass;
+        this.klass = editor.getObjectClass();
         interfaceToClassMap = EditingParser.getInterfaceClasses(PROPERTY_FILE_PATH);
         createdSpecificObjects = LibraryData.getInstance().getObservableList(klass);
     }

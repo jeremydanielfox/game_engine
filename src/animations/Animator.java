@@ -72,8 +72,8 @@ public class Animator {
      */
     public void dropDown (Node node) {
         animator.setCycleCount(2);
-        animator.getKeyFrames().addAll(new KeyFrame(Duration.millis(2000), new KeyValue(node
-                                               .translateYProperty(), -500, Interpolator.EASE_IN)));
+        animator.getKeyFrames().addAll(new KeyFrame(Duration.millis(200), new KeyValue(node
+                                               .translateYProperty(), 500, Interpolator.EASE_IN)));
         animator.play();
     }
 

@@ -106,7 +106,7 @@ public class PauseScene implements GameScene {
 
         mainMenu.setOnMouseClicked(e -> {
             PlayerOpener opener = new PlayerOpener(myStage);
-            myStage.setScene(opener.getScreen());
+            myStage.setScene(opener.getScene());
         });
     }
 }

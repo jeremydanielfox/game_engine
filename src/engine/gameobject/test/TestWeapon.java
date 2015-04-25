@@ -14,7 +14,11 @@ public class TestWeapon extends BasicWeapon{
         setProjectile(new TestProjectile(type));
         setTree(new TestTree());
 
-        if (type == 4) {
+        if (type == 2){
+            setProjectile(new TestProjectile(type));
+        }
+        if(type == 4){
+            setProjectile(tower);
             setFiringStrategy(new MultipleProjectile(8));
             setRange(90);
         }

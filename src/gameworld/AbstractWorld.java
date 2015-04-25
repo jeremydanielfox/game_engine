@@ -67,7 +67,7 @@ public class AbstractWorld implements GameWorld {
          for (GameObject object: currentObjects){
              object.update(this);
              for (GameObject interactObject: currentObjects){
-                 if (interactObject != object){
+                 if (interactObject != object && !object.isDead() && !interactObject.isDead()){
                      myCollisionEngine.interact(object, interactObject);
                      myRangeEngine.interact(object, interactObject);
                  }

@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.SetChangeListener;
 import javafx.collections.SetChangeListener.Change;
 import engine.fieldsetting.Settable;
@@ -17,13 +15,10 @@ import engine.gameobject.weapon.firingrate.FiringRate;
 import engine.gameobject.weapon.firingrate.FiringRateUpgrade;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
-import engine.gameobject.weapon.range.Range;
 import engine.gameobject.weapon.range.RangeObserver;
 import engine.gameobject.weapon.range.RangeUpgrade;
-import engine.gameobject.weapon.upgradetree.UpgradeForest;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
-import engine.observable.Observer;
 import gameworld.ObjectCollection;
 
 
@@ -50,6 +45,7 @@ public class BasicWeapon implements Weapon {
         timeSinceFire = 0;
         myRange = new RangeUpgrade();
         setRange(30);
+        myFiringRate = new FiringRateUpgrade(.5);
         myFiringRate = new FiringRateUpgrade(.5);
         myFiringStrategy = new SingleProjectile();
         upgradables.addAll(Arrays.asList(myRange, myFiringRate));

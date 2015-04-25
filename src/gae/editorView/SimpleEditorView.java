@@ -1,6 +1,16 @@
 package gae.editorView;
 
+import java.util.ArrayList;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+import gae.editor.ComponentEditor;
+import gae.listView.Authorable;
 import gae.openingView.UIObject;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -22,6 +32,15 @@ public class SimpleEditorView implements UIObject {
     public SimpleEditorView () {
         vbox = new VBox();
         vbox.getChildren().addAll(getNameBox(), getTypeBox(), getImageBox(), getButtonBox());
+    }
+
+    public SimpleEditorView (ObservableList<ComponentEditor> list) {
+        vbox = new VBox();
+        for (ComponentEditor node : list) {
+            vbox.getChildren().add(node.getObject());
+        }
+//        vbox = new VBox();
+//        vbox.getChildren().addAll(getNameBox(), getTypeBox(), getImageBox(), getButtonBox());
     }
 
     private HBox getNameBox () {

@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.scene.image.ImageView;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
+import engine.shop.tag.GameObjectTag;
 import gae.gridView.Path;
 import gae.listView.Authorable;
 import gae.listView.MovableImage;
@@ -35,6 +36,8 @@ public interface Placeable extends Serializable, Authorable {
 
     public int getHeight ();
 
+    public GameObjectTag getTag ();
+
     public void setLocation (PointSimple point);
 
     public void setMovableImage (MovableImage image);
@@ -52,6 +55,8 @@ public interface Placeable extends Serializable, Authorable {
     public double setHealth (double health);
 
     public void setWeapon (Weapon weapon);
+
+    public void setTag (GameObjectTag tag);
 
     public Object clone ();
 

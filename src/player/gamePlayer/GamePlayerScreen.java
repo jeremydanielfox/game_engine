@@ -45,6 +45,7 @@ public class GamePlayerScreen implements GameScene {
         myStage.setResizable(false);
 
         myVbox = new VBox(30);
+
         pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
         myGame = loadGame();
         myPlayerName = "";
@@ -88,7 +89,7 @@ public class GamePlayerScreen implements GameScene {
      * 
      * @returns a node to add to the scene
      */
-    public Node makeDemoGame () {
+    public Node makeDemoGameView () {
 
         myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         Node node = myGameView.initializeView();
@@ -136,11 +137,9 @@ public class GamePlayerScreen implements GameScene {
         insideBox.setMaxWidth(400);
         Label labelText = new Label(label);
         Label description = new Label(text);
-        // labelText.setWidth(myPane.getRight().);
-        myPane.prefWidth(Main.SCREEN_HEIGHT);
+        
         labelText.setWrapText(true);
         description.setWrapText(true);
-        // description.
 
         description.setAlignment(Pos.CENTER);
         insideBox.getChildren().addAll(labelText, description);
@@ -219,7 +218,7 @@ public class GamePlayerScreen implements GameScene {
      */
     private void startGame () {
         Group root = new Group();
-        root.getChildren().add(makeDemoGame());
+        root.getChildren().add(makeDemoGameView());
         myScene = new Scene(root);
         myStage.setScene(myScene);
     }
@@ -241,6 +240,7 @@ public class GamePlayerScreen implements GameScene {
      */
     @Override
     public Scene getScene () {
+        makeScene();
         return myScene;
     }
 }

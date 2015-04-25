@@ -18,7 +18,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import gae.backend.Placeable;
 import gae.gameView.CheckList;
+import gae.listView.Authorable;
+import gae.listView.LibraryData;
 import gae.openingView.UIObject;
 
 public class ShopEditor implements UIObject{
@@ -29,18 +32,10 @@ public class ShopEditor implements UIObject{
         VBox vbox=new VBox();
         
         //for testing
-        List<GameObject> list=new ArrayList<>();
-        TestTower test=new TestTower(0,0,0);
-        TestEnemy tester=new TestEnemy();
-        list.add(test);
-        list.add(tester);
-        list.add(test.clone());
-        list.add(tester.clone());
-        //System.out.println(test.getTag().getName());
-        ObservableList<GameObject> oblist= FXCollections.observableArrayList(new ArrayList<>());
-        ListView<GameObject> listview=new ListView<GameObject>(oblist);
         
-        vbox.getChildren().add(makeObjectChecklist(list));
+        //System.out.println(test.getTag().getName());
+        LibraryData.getInstance().getEditableObservableList();
+        vbox.getChildren().add(makeObjectChecklist( LibraryData.getInstance().getEditableObservableList()));
         pane.getChildren().addAll(vbox, tempbutton());
     }
     @Override
@@ -49,7 +44,7 @@ public class ShopEditor implements UIObject{
         return pane;
     }
     
-    private ScrollPane makeObjectChecklist(List<GameObject> list){
+    private ScrollPane makeObjectChecklist(ObservableList<Authorable> list){
         ScrollPane pane=new ScrollPane();
         checklist=new CheckList(list);
         pane.setContent(checklist.getCheckList());
@@ -59,8 +54,12 @@ public class ShopEditor implements UIObject{
     //temporary
     private Button tempbutton(){
         Button button=new Button("Print selected");
+     
         button.setOnAction(e->{
-            for(GameObject obj: checklist.getSelected()){
+            for(Authorable aut: LibraryData.getInstance().getEditableObservableList()){
+                System.out.println(aut.getName());
+            }
+            for(Placeable obj: checklist.getSelectedPlaceables()){
                 System.out.println(obj.getTag().getName());
             }
         });

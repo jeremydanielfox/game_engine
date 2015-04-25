@@ -3,12 +3,10 @@ package gae.gameView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-<<<<<<< HEAD
 import java.util.Map;
 import engine.gameobject.GameObject;
 import engine.gameobject.Graphic;
-=======
->>>>>>> d7e5488c3a9d55c05610a2d255bb60d993598bff
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -18,28 +16,46 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import engine.gameobject.GameObject;
+import gae.backend.Placeable;
+import gae.listView.Authorable;
+import javafx.collections.ListChangeListener;
 
 
 /**
  * List of options that can be checked to indicate selection
  *
- * @author Brandon Choi
+ * @author Brandon Choi and Nina Sun
  *
  */
 
 public class CheckList {
 
     private VBox checkList;
-    private List<? extends GameObject> myObjects;
-    private Map<GameObject, Boolean> myMap;
+    private ObservableList<Placeable> myObjects;
+    private Map<CheckListItem, Boolean> myMap;
 
-    public CheckList (List<? extends GameObject> objects) {
+    @SuppressWarnings("unchecked")
+    public CheckList (ObservableList<Authorable> objects) {
         checkList = new VBox(15);
-        myObjects = objects;
-        myMap=new HashMap<>();
-        myObjects.forEach(e -> {
-            createCheckOption(e);
+        myObjects = (ObservableList<Placeable>) (ObservableList<?>) objects;
+
+        myObjects.addListener( (ListChangeListener.Change<? extends Placeable> change) -> {
+            while (change.next()) {
+                change.getAddedSubList().stream()
+                        .forEach(e -> createCheckOption(new CheckListItem(e)));
+                change.getRemoved().stream().forEach(e -> {
+                    for (CheckListItem key : myMap.keySet()) {
+                        if (key.getPlaceable().equals(e)) {
+                            checkList.getChildren().remove(key.getNode());
+                        }
+                    }
+                });
+            }
         });
+        myMap = new HashMap<>();
+        // myObjects.forEach(e -> {
+        // createCheckOption(e);
+        // });
     }
 
     public Node getCheckList () {
@@ -57,37 +73,60 @@ public class CheckList {
         temp.centerOnScreen();
     }
 
-    /*
-     * TODO: differentiate between using a Label object in JavaFX or a label as a type?
-     */
-
     /**
      * create one check option based on object given
      *
      * @param s
      */
-    private void createCheckOption (GameObject o) {
-        HBox checkOption = new HBox(10);
-        Graphic graphic=o.getTag().getGraphic().clone();
-        graphic.setHeight(50);
-        Node image=graphic.getResizedGraphic(1);
-        Label label = new Label( o.getTag().getName());
-        CheckBox checker = new CheckBox();
-        checkOption.getChildren().addAll(image, label, checker);
-        myMap.put(o, checker.isSelected());
-        checker.selectedProperty().addListener((obs, old, newVal)->{
-             myMap.put(o, newVal);
+    private void createCheckOption (CheckListItem item) {
+
+        myMap.put(item, item.getCheckBox().isSelected());
+        item.getCheckBox().selectedProperty().addListener( (obs, old, newVal) -> {
+            myMap.put(item, newVal);
         });
-        checkList.getChildren().add(checkOption);
+        checkList.getChildren().add(item.getNode());
     }
-    
-    public List<GameObject> getSelected(){
-        List<GameObject> selected=new ArrayList<>();
-        for(GameObject key: myMap.keySet()){
-            if(myMap.get(key)) selected.add(key);
+
+    private static class CheckListItem {
+        private Placeable placeable;
+        private CheckBox checkbox;
+
+        public CheckListItem (Placeable obj) {
+            placeable = obj;
+        }
+
+        public Node getNode () {
+            HBox node = new HBox(10);
+            Graphic graphic = placeable.getTag().getGraphic().clone();
+            graphic.setHeight(50);
+            Node image = graphic.getResizedGraphic(1);
+            Label label = new Label(placeable.getName());
+            checkbox = new CheckBox();
+            node.getChildren().addAll(image, label, checkbox);
+            return node;
+        }
+
+        public Placeable getPlaceable () {
+            return placeable;
+        }
+
+        public CheckBox getCheckBox () {
+            return checkbox;
+        }
+
+    }
+
+    /**
+     * gives list of selected items in checklist
+     *
+     * 
+     */
+    public List<? extends Placeable> getSelectedPlaceables () {
+        List<Placeable> selected = new ArrayList<>();
+        for (CheckListItem key : myMap.keySet()) {
+            if (myMap.get(key))
+                selected.add(key.getPlaceable());
         }
         return selected;
     }
 }
-    
-    

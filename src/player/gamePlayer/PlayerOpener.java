@@ -62,7 +62,7 @@ public class PlayerOpener extends Application {
 
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
-            GamePlayerScreen screen = new GamePlayerScreen(myStage);
+            GamePlayerScreen screen = new GamePlayerScreen(myStage,playerScene);
             myStage.setScene(screen.makeScene());
         });
 

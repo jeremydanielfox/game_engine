@@ -2,8 +2,11 @@ package musician;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import engine.interactions.Interaction;
@@ -25,14 +28,18 @@ public class MusicianSimple implements Musician {
      */
     private static MusicianSimple instance;
     private Map<Object, Music> myMusic;
+    private boolean muted;
+    private double savedVolume;
 
     /*
      * try & catch blocks implemented for methods with MediaPlayer in case it isn't instantiated yet
      */
-    MediaPlayer myMusician;
+    private MediaPlayer myMusician;
 
-    public MusicianSimple () {
+    private MusicianSimple () {
         myMusic = new HashMap<>();
+        muted = false;
+        savedVolume = 0;
     }
 
     /**
@@ -54,6 +61,31 @@ public class MusicianSimple implements Musician {
     @Override
     public void addBackgroundMusic (Scene scene, Music m) {
         myMusic.put(scene, m);
+        setUpMute(scene);
+    }
+
+    /**
+     * Sets up muting on the scene through CTRL + M. Disables typing when control is down so that
+     * typing m isn't displayed.
+     * 
+     * @param scene
+     */
+    private void setUpMute (Scene scene) {
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, (e -> {
+            if (e.isControlDown()) {
+                scene.setOnKeyTyped(null);
+                if (e.getCode().equals(KeyCode.M)) {
+
+                    if (muted) {
+                        myMusician.setVolume(savedVolume);
+                    }
+                    else {
+                        mute();
+                    }
+                    muted = !muted;
+                }
+            }
+        }));
     }
 
     @Override
@@ -63,7 +95,7 @@ public class MusicianSimple implements Musician {
             playAudio(o);
         }
         catch (Exception e) {
-            /* does nothing if myMusician is not initialized*/
+            /* does nothing if myMusician is not initialized */
         }
     }
 
@@ -75,10 +107,11 @@ public class MusicianSimple implements Musician {
     @Override
     public void mute () {
         try {
+            savedVolume = myMusician.getVolume();
             myMusician.setVolume(MUTED);
         }
         catch (Exception e) {
-            /* does nothing if myMusician is not initialized*/
+            /* does nothing if myMusician is not initialized */
         }
     }
 
@@ -95,7 +128,7 @@ public class MusicianSimple implements Musician {
             myMusician.pause();
         }
         catch (Exception e) {
-            /* does nothing if myMusician is not initialized*/
+            /* does nothing if myMusician is not initialized */
         }
     }
 }

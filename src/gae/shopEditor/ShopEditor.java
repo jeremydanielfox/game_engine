@@ -35,7 +35,7 @@ public class ShopEditor implements UIObject{
         
         //System.out.println(test.getTag().getName());
         LibraryData.getInstance().getEditableObservableList();
-        vbox.getChildren().add(makeObjectChecklist( LibraryData.getInstance().getEditableObservableList()));
+//        vbox.getChildren().add(makeObjectChecklist( LibraryData.getInstance().getEditableObservableList()));
         pane.getChildren().addAll(vbox, tempbutton());
     }
     @Override

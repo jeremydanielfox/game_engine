@@ -44,7 +44,7 @@ public class BasicWeapon implements Weapon {
         upgradables = new UpgradeSet<>();
         timeSinceFire = 0;
         myRange = new RangeUpgrade();
-        setRange(30);
+        setRange(60);
         myFiringRate = new FiringRateUpgrade(.5);
         myFiringRate = new FiringRateUpgrade(.5);
         myFiringStrategy = new SingleProjectile();
@@ -105,7 +105,7 @@ public class BasicWeapon implements Weapon {
     @Override
     @Settable
     public void setRange (double range) {
-        myRange.setIncrement(30);
+        myRange.setIncrement(range);
         rangeProp.set(myRange.getRange());
         myRange.addObserver(new RangeObserver(rangeProp, upgradables, myRange));        
     }

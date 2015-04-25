@@ -25,37 +25,41 @@ import javafx.collections.ListChangeListener;
  *
  */
 
-public class CheckList {
+public abstract class CheckList {
 
     private VBox checkList;
-    private ObservableList<Placeable> myObjects;
     private Map<CheckListItem, Boolean> myMap;
-
-    @SuppressWarnings("unchecked")
-    public CheckList (ObservableList<Authorable> objects) {
-        checkList = new VBox(15);
-        myObjects = (ObservableList<Placeable>) (ObservableList<?>) objects;
-
-        myObjects.addListener( (ListChangeListener.Change<? extends Placeable> change) -> {
-            while (change.next()) {
-                change.getAddedSubList().stream()
-                        .forEach(e -> {
-                            createCheckOption(new CheckListItem(e));
-                        });
-                change.getRemoved().stream().forEach(e -> {
-                    for (CheckListItem key : myMap.keySet()) {
-                        if (key.getPlaceable().equals(e)) {
-                            checkList.getChildren().remove(key.getNode());
-                        }
-                    }
-                });
-            }
-        });
-        myMap = new HashMap<>();
-        // myObjects.forEach(e -> {
-        // createCheckOption(e);
-        // });
+    
+    public CheckList () {
+        checkList= new VBox(15);
+        myMap=new HashMap<>();
     }
+    
+//    public CheckList (List<? extends Object> objects) {
+//        checkList = new VBox(15);
+////        myObjects = (ObservableList<Placeable>) (ObservableList<?>) objects;
+////
+////        myObjects.addListener( (ListChangeListener.Change<? extends Placeable> change) -> {
+////            while (change.next()) {
+////                change.getAddedSubList().stream()
+////                        .forEach(e -> {
+////                            createCheckOption(new CheckListItem(e));
+////                        });
+////                change.getRemoved().stream().forEach(e -> {
+////                    for (CheckListItem key : myMap.keySet()) {
+////                        if (key.getPlaceable().equals(e)) {
+////                            checkList.getChildren().remove(key.getNode());
+////                        }
+////                    }
+////                });
+////            }
+////        });
+//        myObjects=objects;
+//        myMap = new HashMap<>();
+//        // myObjects.forEach(e -> {
+//        // createCheckOption(e);
+//        // });
+//    }
 
     public Node getCheckList () {
         return checkList;
@@ -77,7 +81,7 @@ public class CheckList {
      *
      * @param s
      */
-    private void createCheckOption (CheckListItem item) {
+    public void createCheckOption (CheckListItem item) {
 
         myMap.put(item, item.getCheckBox().isSelected());
         item.getCheckBox().selectedProperty().addListener( (obs, old, newVal) -> {
@@ -85,52 +89,22 @@ public class CheckList {
         });
         checkList.getChildren().add(item.getNode());
     }
-
-    /**
-     * Item in checklist which holds a thumbnail, name, and checkbox
-     *
-     * 
-     */
-    private static class CheckListItem {
-        private Placeable placeable;
-        private CheckBox checkbox;
-
-        public CheckListItem (Placeable obj) {
-            placeable = obj;
-            checkbox = new CheckBox();
-        }
-
-        public Node getNode () {
-            HBox node = new HBox(10);
-            Graphic graphic = placeable.getTag().getGraphic().clone();
-            graphic.setHeight(50);
-            Node image = graphic.getResizedGraphic(1);
-            Label label = new Label(placeable.getName());
-
-            node.getChildren().addAll(image, label, checkbox);
-            return node;
-        }
-
-        public Placeable getPlaceable () {
-            return placeable;
-        }
-
-        public CheckBox getCheckBox () {
-            return checkbox;
-        }
-
+    
+    public Map<CheckListItem, Boolean> getMap(){
+        return myMap;
     }
+
 
     /**
      * gives list of selected items in checklist
      *
      * 
      */
-    public List<? extends Placeable> getSelectedPlaceables () {
-        List<Placeable> selected = new ArrayList<>();
+    public List<CheckListItem> getSelectedItems () {
+        List<CheckListItem> selected = new ArrayList<>();
         for (CheckListItem key : myMap.keySet()) {
             if (myMap.get(key))
-                selected.add(key.getPlaceable());
+                selected.add(key);
         }
         return selected;
     }

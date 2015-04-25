@@ -1,6 +1,7 @@
 package gae.gameView;
 
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 
 /**
  * Item to be added to a checklist
@@ -11,10 +12,12 @@ import javafx.scene.Node;
 
 public interface CheckListItem {
     /**
-     * 
      *
-     *@return Node that will have a checkbox next to it
+     *
+     *@return Node with checkbox
      */
     public Node getNode();
+    
+    public CheckBox getCheckBox();
     
 }

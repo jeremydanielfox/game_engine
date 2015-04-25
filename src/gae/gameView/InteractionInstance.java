@@ -138,7 +138,7 @@ public class InteractionInstance {
             adder = new Button();
             addBox = new HBox(15);
             Text addText = new Text("Add Labels");
-            myChecker = new CheckList(myLibraryData.getEditableObservableList());
+            myChecker = new LabelCheckList(myLibraryData.getEditableObservableList());
 
             container.setId("interactionBox");
 

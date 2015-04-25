@@ -2,39 +2,34 @@ package gae.gridView;
 
 import java.awt.Dimension;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 import gae.backend.Placeable;
 import gae.backend.TempEnemy;
 import gae.backend.TempTower;
+import gae.gridView.TileViewToggle.TileMode;
 import gae.listView.LibraryData;
 import gae.listView.LibraryView;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Popup;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 
@@ -57,8 +52,9 @@ public class LevelView {
     private ContainerWrapper wrapper;
     private LibraryView libraryview;
     private LibraryData libraryData;
-    private TileContainer container;
+    private TileViewToggle container;
     private VBox gridOptions;
+    private ObjectProperty<TileMode> tileModeProperty=new SimpleObjectProperty<>(TileMode.TOWERMODE);
 
     public Pane getBorder (Scene scene) {
         border = new Pane();
@@ -96,7 +92,8 @@ public class LevelView {
         backgroundProperty = background.imageProperty();
         gridSizeProperty = new SimpleObjectProperty<>(DEFAULT_GRID_DIMENSIONS);
         Pane root = new Pane();
-        container = new TileContainer(gridSizeProperty, scene, border);
+        container = new TileViewToggle(gridSizeProperty, scene);
+        container.getTileModeProperty().bind(tileModeProperty);
         root.getChildren().addAll(background, container, tempGrid());
         // root.getChildren().addAll(background, container);
 
@@ -155,7 +152,16 @@ public class LevelView {
 
         gridOptions.getChildren().addAll(title, changeBackground(backgroundProperty));
         makeTileDimensions();
-        makeGridToggle();
+        Node tileMode=makeToggle(makeToggleButton("Enemy Grid", TileMode.ENEMYMODE), makeToggleButton("Tower Grid", TileMode.TOWERMODE), (obs, old, newVal)->{
+            tileModeProperty.setValue((TileMode) newVal.getUserData());
+        });
+        gridOptions.getChildren().add(makeToggle(makeToggleButton("Show Grid", true), makeToggleButton("Hide Grid", false), (obs, old, newVal)->{
+            container.setVisible((boolean) newVal.getUserData());
+            tileMode.setVisible((boolean) newVal.getUserData());
+        }));
+        gridOptions.getChildren().add(tileMode);
+//        makeGridToggle();
+//        makeGridType();
     }
 
     /**
@@ -176,30 +182,47 @@ public class LevelView {
         grid.add(setHeight, 1, 1);
         Button setDimensions = new Button("Change Grid Dimensions");
         setDimensions.setOnAction(e -> {
-            gridSizeProperty.setValue(new Dimension(Integer.parseInt(setWidth.getText()), Integer
-                    .parseInt(setHeight.getText())));
+            int width =
+                    setWidth.getText().isEmpty() ? DEFAULT_GRID_DIMENSIONS.width : Integer
+                            .parseInt(setWidth.getText());
+            int height =
+                    setHeight.getText().isEmpty() ? DEFAULT_GRID_DIMENSIONS.height : Integer
+                            .parseInt(setHeight.getText());
+            gridSizeProperty.setValue(new Dimension(width, height));
         });
         gridOptions.getChildren().addAll(grid, setDimensions);
     }
 
     /**
-     * Makes grid view toggle. Called in setGridOptions()
+     * Makes toggle. Called in setGridOptions() to make toggle for tilemode and showing grid
+     * 
+     * @param first ToggleButton
+     * @param second ToggleButton
+     * @param ChangeListener for what happens when toggle selected
+     */
+
+    private Node makeToggle(ToggleButton button1, ToggleButton button2, ChangeListener<? super Toggle> listener){
+        ToggleGroup group = new ToggleGroup();
+        group.selectedToggleProperty().addListener( listener);
+        group.getToggles().addAll(button1, button2);
+        HBox hbox = new HBox();
+        hbox.getChildren().addAll(button1, button2);
+        return hbox;
+    }
+    
+    /**
+     * Makes a toggle button
+     * 
+     * @param name of button
+     * @param data toggle holds
      * 
      */
-    private void makeGridToggle () {
-        ToggleGroup group = new ToggleGroup();
-        group.selectedToggleProperty().addListener( (obs, old, up) -> {
-            container.setVisible((boolean) up.getUserData());
-        });
-        ToggleButton show = new ToggleButton("Show Grid");
-        show.setUserData(true);
-        ToggleButton hide = new ToggleButton("Hide Grid");
-        hide.setUserData(false);
-        group.getToggles().addAll(show, hide);
-        HBox hbox = new HBox();
-        hbox.getChildren().addAll(show, hide);
-        gridOptions.getChildren().add(hbox);
+    private ToggleButton makeToggleButton(String label, Object data){
+        ToggleButton button=new ToggleButton(label);
+        button.setUserData(data);
+        return button;
     }
+  
 
     private GridPane tempGrid () {
         GridPane grid = new GridPane();

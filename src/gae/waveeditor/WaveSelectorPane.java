@@ -33,9 +33,6 @@ public class WaveSelectorPane implements UIObject {
         rootNode.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
                 
         waves = FXCollections.observableArrayList();
-        makeNewWave();
-        makeNewWave();
-        makeNewWave();
 
         ListView<WaveEnemyTable> listView = new ListView<WaveEnemyTable>(waves);
         listView.setPrefSize(200, 250);

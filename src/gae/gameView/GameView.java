@@ -70,9 +70,9 @@ public class GameView implements UIMediator {
                                                          .getInterfaceClasses("engine.fieldsetting.implementing_classes")
                                                          .get("LevelBoard").get(0)).newInstance();
             
-            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(myGame.getClass().getName()), Settable.class)) {
+            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(g.getClass().getName()), Settable.class)) {
                 if (m.getName().equals("setLevelBoard")) {
-                    m.invoke(myGame, levelBoard);
+                    m.invoke(g, levelBoard);
                 }
             } 
         }

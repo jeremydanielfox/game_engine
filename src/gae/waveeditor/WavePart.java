@@ -4,8 +4,6 @@ import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
-import java.util.List;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -28,8 +26,6 @@ public class WavePart implements UIObject {
 
     private void initialize () {
         rootNode = new HBox();
-
-        //TODO: make pull from created game objects
         
         LibraryData libData = LibraryData.getInstance();
         ObservableList<GameObjectSimple> enemyList = libData.getGameObjectList();

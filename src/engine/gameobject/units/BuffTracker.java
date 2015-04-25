@@ -1,19 +1,36 @@
 package engine.gameobject.units;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import engine.gameobject.GameObject;
+import engine.gameobject.units.directdamage.DamageBuff;
 
 
 public class BuffTracker {
     private List<Buff> buffList;
-
+    private Map<Class<? extends Buff>, BuffType> immunityList;
+    
     public BuffTracker () {
         super();
         buffList = new ArrayList<>();
+        immunityList = new HashMap<>();
     }
 
+    /**
+     * Makes it so the buff tracker does not process a certain type of buff
+     * @param immunity The type of buff you want this object to be immune to
+     * @param buffType NULL if any buff type
+     */
+    public void addImmunity(Class<? extends Buff> immunity, BuffType buffType){
+        immunityList.put(immunity, buffType);
+    }
+    
     public void receiveBuff (Buff toAdd, GameObject myObject) {
+        if (isImmuneTo(toAdd)){
+            return;
+        }
         Buff equalBuff = findEqualBuff(toAdd);
         if (equalBuff == null) {
             applyBuff(toAdd, myObject);
@@ -58,6 +75,17 @@ public class BuffTracker {
             }
         }
         return null;
+    }
+    
+    private boolean isImmuneTo(Buff newBuff){
+        for (Class<? extends Buff> buff : immunityList.keySet()){
+            if (buff.isAssignableFrom(newBuff.getClass())){
+                BuffType immuneType = immunityList.get(buff);
+                return immuneType.equals(BuffType.NULL) || 
+                        immuneType.equals(newBuff.getBuffType());
+                }
+            }        
+        return false;
     }
 
 }

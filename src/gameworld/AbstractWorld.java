@@ -112,7 +112,7 @@ public class AbstractWorld implements GameWorld {
     }
 
     @Override
-    public boolean isPlacable (Node n, PointSimple pixelCoords) {
+    public boolean isPlaceable (Node n, PointSimple pixelCoords) {
         return true; // TODO plz replace with logic. Ex: towers cannot be placed on towers
     }
 

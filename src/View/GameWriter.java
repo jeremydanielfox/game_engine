@@ -142,7 +142,7 @@ public class GameWriter extends Application {
     }
 
     public ShopModel makeShop (Player player, GameWorld world) {
-        return new ShopModelSimple(world, player, 1.2);
+        return new ShopModelSimple(world, player, 1);
     }
 
     /**

@@ -15,8 +15,10 @@ public class TestEngine extends Application {
     @Override
     public void start (Stage primaryStage) throws Exception {
         Group root = new Group();
-        primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add constants
-        primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
+        primaryStage.setHeight(400);
+        primaryStage.setWidth(950);
+//        primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add constants
+//        primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
 
         Scene scene = new Scene(root);
         Game game = loadGame();

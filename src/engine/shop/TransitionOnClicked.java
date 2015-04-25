@@ -10,8 +10,8 @@ public class TransitionOnClicked implements OnClickedCommand {
     }
 
     @Override
-    public TransitionGameObject execute () {
-        return myShopModel.getTransitionGameObject(name);
+    public RangeDisplay execute () {
+        return myShopModel.getRangeDisplay(name);
     }
 
 }

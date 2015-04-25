@@ -1,5 +1,7 @@
 package engine.gameobject;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import engine.fieldsetting.Settable;
 import engine.gameobject.behaviors.Behavior;
 import engine.gameobject.behaviors.BehaviorTracker;
@@ -12,6 +14,7 @@ import engine.gameobject.units.Collider;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
+import engine.shop.RangeDisplay;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.GameObjectTagSimple;
 import gameworld.ObjectCollection;
@@ -34,8 +37,10 @@ public class GameObjectSimple implements GameObject {
     private BuffTracker myBuffs;
     private Weapon myWeapon;
     private Collider myCollider;
+    private RangeDisplay rangeDisplay;
     private BehaviorTracker myBehaviors;
     
+
     public GameObjectSimple () {
         myLabel = new SimpleLabel();
         myPoint = new PointSimple();
@@ -114,8 +119,8 @@ public class GameObjectSimple implements GameObject {
      * Prototype methods follow
      */
     @Override
-    public double getRange () {
-        return myWeapon.getRange();
+    public RangeDisplay getRangeDisplay(){
+        return new RangeDisplay(myTag.getName(), myGraphic.clone(), myWeapon.getRange());
     }
 
     // TODO: Tag cloning not done, Weapon upgrade cloning not done
@@ -129,7 +134,6 @@ public class GameObjectSimple implements GameObject {
         clone.setGraphic(myGraphic.clone());
         clone.setWeapon(myWeapon.clone());
         clone.setCollider(myCollider.clone());
-        clone.setMover(myMover.clone());
         return clone;
     }
 
@@ -149,7 +153,8 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public double getValue () {
-        return myWeapon.getValue();
+        return 10;
+        //return myWeapon.getValue();
     }
 
     /*

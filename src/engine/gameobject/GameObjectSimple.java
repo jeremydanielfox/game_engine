@@ -2,6 +2,8 @@ package engine.gameobject;
 
 import javafx.geometry.Point2D;
 import engine.fieldsetting.Settable;
+import engine.gameobject.behaviors.Behavior;
+import engine.gameobject.behaviors.BehaviorTracker;
 import engine.gameobject.labels.Label;
 import engine.gameobject.labels.LabelConcrete;
 import engine.gameobject.labels.SimpleLabel;
@@ -36,6 +38,7 @@ public class GameObjectSimple implements GameObject{
     private BuffTracker myBuffs;
     private Weapon myWeapon;
     private Collider myCollider;
+    private BehaviorTracker myBehaviors;
     
     public GameObjectSimple () {
         myLabel = new SimpleLabel();
@@ -47,6 +50,7 @@ public class GameObjectSimple implements GameObject{
         myBuffs = new BuffTracker();
         myWeapon = new NullWeapon();
         myCollider = new Collider();
+        myBehaviors = new BehaviorTracker();
     }
 
 /*
@@ -164,6 +168,18 @@ public class GameObjectSimple implements GameObject{
     public void setSpeed (double speed) {
         myMover.setSpeed(speed);
     }
+
+/*
+ * EndBehaviorful methods follow
+ */
+    
+    public void addOnDeathBehavior(Behavior behavior){
+        myBehaviors.addOnDeath(behavior);
+    }
+    
+    public void addEndOfPathBehavior(Behavior behavior){
+        myBehaviors.addEndOfPath(behavior);
+    }
     
 /*
  * GameObject specific methods follow
@@ -238,10 +254,13 @@ public class GameObjectSimple implements GameObject{
             move();
         }
         catch (EndOfPathException e) {
+            myBehaviors.endPath();
             //TODO: Encode end of path behaviors. For now, just die.
             changeHealth(-10000);
         }
         if(isDead()){
+            explode(world);
+            myBehaviors.onDeath();
             onDeath(world);
         }
     }

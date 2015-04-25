@@ -32,8 +32,9 @@ public class LibraryData {
     private ObservableList<Authorable> editableList = FXCollections.observableArrayList();
     private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
     private Map<Class<?>, ObservableList<Object>> createdObjectMap = new HashMap<>();
-    private ArrayList<GameObjectSimple> gameObjectList = new ArrayList<>();
+    private ObservableList<GameObjectSimple> gameObjectList = FXCollections.observableArrayList();
     private ObservableList<Label> labelList = FXCollections.observableArrayList();
+    private ObservableList<Object> moverList = FXCollections.observableArrayList();
 
     private LibraryData () {
         setEditableList();
@@ -48,8 +49,12 @@ public class LibraryData {
             while (change.next()) {
                 if (change.wasAdded()) { // if an editablenode was added
                     Authorable added = change.getAddedSubList().get(0);
-                    if (added instanceof Placeable)
-                        labelList.add(((Placeable) added).getLabel());
+                    if (added instanceof Placeable) {
+                        Placeable placeable = (Placeable) added;
+                        labelList.add(placeable.getLabel());
+                        moverList.add(getMover(placeable));
+                        addToExistingGameObjectList(placeable);
+                    }
                 }
             }
         });
@@ -68,14 +73,20 @@ public class LibraryData {
             createdObjectMap.get(klass).add(o);
         }
         catch (NullPointerException e) {
-            System.out.println(klass.getSimpleName() + " NOT available");
+            ObservableList<Object> list = FXCollections.observableArrayList();
+            createdObjectMap.put(klass, list);
+            createdObjectMap.get(klass).add(o);
         }
     }
 
     public ObservableList<Object> getObservableList (Class<?> klass) {
-        if (!createdObjectMap.containsKey(klass)) {
+        if (!createdObjectMap.containsKey(klass) &&
+            !klass.getSimpleName().equals("DirectPointMover")) {
             ObservableList<Object> list = FXCollections.observableArrayList();
             createdObjectMap.put(klass, list);
+        }
+        else {
+            createdObjectMap.put(klass, moverList);
         }
         return createdObjectMap.get(klass);
     }
@@ -93,7 +104,7 @@ public class LibraryData {
         pathList.add(pathView);
     }
 
-    public List<GameObjectSimple> getGameObjectList () {
+    public ObservableList<GameObjectSimple> getGameObjectList () {
         return gameObjectList;
     }
 
@@ -101,22 +112,18 @@ public class LibraryData {
         return labelList;
     }
 
-    public List<GameObjectSimple> createGameObjectList () {
-        for (Authorable authorable : editableList) {
-            Placeable editable = (Placeable) authorable;
-            GameObjectSimple object = new GameObjectSimple();
-            object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
-                                          editable.getImagePath()));
-            object.setLabel(editable.getLabel());
-            object.setTag(editable.getTag());
-            object.setMover(getMover(editable));
-            object.setPoint(editable.getLocation());
-            object.setHealth(new HealthSimple(editable.getHealth()));
-            // WHAT IS TAG/LABEL
-            // set Collider
-            gameObjectList.add(object);
-        }
-        return gameObjectList;
+    private void addToExistingGameObjectList (Authorable authorable) {
+        Placeable editable = (Placeable) authorable;
+        GameObjectSimple object = new GameObjectSimple();
+        object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
+                                      editable.getImagePath()));
+        object.setLabel(editable.getLabel());
+        object.setTag(editable.getTag());
+        object.setMover(getMover(editable));
+        object.setPoint(editable.getLocation());
+        object.setHealth(new HealthSimple(editable.getHealth()));
+        // set Collider
+        gameObjectList.add(object);
     }
 
     private MoverPath getMover (Placeable editable) {

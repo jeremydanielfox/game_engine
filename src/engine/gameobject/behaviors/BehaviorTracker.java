@@ -12,14 +12,37 @@ public class BehaviorTracker {
     public BehaviorTracker(){
         endOfPath = new ArrayList<Behavior>();
         death = new ArrayList<Behavior>();
+        death.add(new ExplosionBehavior());//On default, explode on death
+    }
+    
+    public void addOnDeath(Behavior behavior){
+        death.add(behavior);
+    }
+    
+    public void addEndOfPath(Behavior behavior){
+        endOfPath.add(behavior);
+    }
+    
+    /**
+     * Clear death behaviors
+     */
+    public void clearDeath(){
+        death.clear();
+    }
+    
+    /**
+     * Clear end of path behaviors
+     */
+    public void clearEndOfPath(){
+        endOfPath.clear();
     }
     
     public void onEndOfPath(ObjectCollection world, GameObject object){
         executeBehaviors(endOfPath, world, object);
     }
+    
     public void onDeath(ObjectCollection world, GameObject object){
         executeBehaviors(death, world, object);
-        object.explode(world);//All objects explode when they die (possibly a null explosion)
     }
     
     private void executeBehaviors(List<Behavior> behaviors, ObjectCollection world, GameObject object){

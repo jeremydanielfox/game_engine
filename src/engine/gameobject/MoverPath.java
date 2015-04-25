@@ -24,9 +24,6 @@ public class MoverPath extends BasicMover {
 		myPath = pf;
 	}
 	
-	 
-	 //This switch statement is not worth having polymorphism/using a state pattern.
-	 //No incompatible extensions will be made.
 	 /**
 	  * Moves according to path i.e. returns correct point on the path
 	  */

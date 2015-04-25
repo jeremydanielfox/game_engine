@@ -27,15 +27,15 @@ public abstract class BasicMover implements Mover {
     
     @Override
     public abstract PointSimple move (PointSimple current) throws EndOfPathException;
-    /**
-     * This switch statement is not worth having polymorphism/using a state pattern.
-     * No incompatible extensions will be made.
-     */
 
     @Settable
     @Override
     public void setSpeed (double speed) {
         inherentSpeed = speed;
+    }
+    
+    public double getSpeed(){
+        return inherentSpeed;
     }
     
     public void setFreeze (boolean frozen) {

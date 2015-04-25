@@ -5,19 +5,15 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.behaviors.Behavior;
 import engine.gameobject.behaviors.BehaviorTracker;
 import engine.gameobject.labels.Label;
-import engine.gameobject.labels.LabelConcrete;
 import engine.gameobject.labels.SimpleLabel;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
 import engine.gameobject.units.Collider;
-import engine.gameobject.units.Colliding;
-import engine.gameobject.units.Firing;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.GameObjectTagSimple;
-import gae.listView.DeepCopy;
 import gameworld.ObjectCollection;
 
 
@@ -177,8 +173,16 @@ public class GameObjectSimple implements GameObject{
         myBehaviors.addOnDeath(behavior);
     }
     
+    public void clearDeathBehavior(){
+        myBehaviors.clearDeath();
+    }
+    
     public void addEndOfPathBehavior(Behavior behavior){
         myBehaviors.addEndOfPath(behavior);
+    }
+    
+    public void clearEndOfPathBehavior(){
+        myBehaviors.clearEndOfPath();
     }
     
 /*
@@ -254,21 +258,14 @@ public class GameObjectSimple implements GameObject{
             move();
         }
         catch (EndOfPathException e) {
-            myBehaviors.endPath();
-            //TODO: Encode end of path behaviors. For now, just die.
-            changeHealth(-10000);
-        }
-        if(isDead()){
-            explode(world);
-            myBehaviors.onDeath();
-            onDeath(world);
+            myBehaviors.onEndOfPath(world, this);
+            //Note that something doesn't always have to die at end of path, but if it doesn't die, it may
+            //keep doing endofpath over and over again
         }
     }
-
+    
     @Override
-    public void onDeath (ObjectCollection world) {
-        explode(world);
-        //TODO: Birthing other units? Like blue bloon -> red bloon?
+    public void onDeath(ObjectCollection world){
+        myBehaviors.onDeath(world, this);
     }
-
 }

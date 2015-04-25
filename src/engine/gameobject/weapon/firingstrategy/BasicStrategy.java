@@ -16,6 +16,7 @@ public abstract class BasicStrategy implements FiringStrategy {
      * @param prototype
      */
     protected GameObject makeProjectile(PointSimple location, PointSimple target, GameObject prototype){
+        //TODO: Conversion for non moverpoints.
         MoverPoint newMover = (MoverPoint) prototype.getMover().clone();
         newMover.setPoint(target);
         GameObject newProjectile = (GameObject) prototype.clone();

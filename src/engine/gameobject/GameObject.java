@@ -27,14 +27,13 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
      * @param world
      */
     public void update (ObjectCollection world);
-  
+    
     /**
-     * Executes the defined ondeath behavior when the object is removed from the world.
-     * TODO: THINK ABOUT THIS EXTREMELY CAREFULLY. It's possible it shouldn't be the gameworld, but
-     * the gameobject itself that executes the ondeath behavior.
+     * Performs the ondeath behavior of the object upon the world
+     * @param world
      */
     public void onDeath (ObjectCollection world);
-
+    
     public Mover getMover ();
 
     public Label getLabel ();

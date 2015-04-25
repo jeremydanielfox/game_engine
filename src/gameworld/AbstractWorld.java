@@ -20,7 +20,6 @@ import engine.interactions.InteractionEngine;
 import engine.interactions.RangeEngine;
 import engine.interactions.ShootAt;
 import engine.pathfinding.Path;
-import engine.pathfinding.PathFree;
 
 
 public class AbstractWorld implements GameWorld{
@@ -89,7 +88,6 @@ public class AbstractWorld implements GameWorld{
             myObjects.remove(toRemove);
             toRemove.onDeath(this);
         }
-
     }
 
     @Override

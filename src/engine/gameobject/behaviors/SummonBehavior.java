@@ -3,6 +3,7 @@ package engine.gameobject.behaviors;
 import java.util.ArrayList;
 import java.util.List;
 import engine.gameobject.GameObject;
+import engine.gameobject.Mover;
 import gameworld.ObjectCollection;
 
 public class SummonBehavior implements Behavior{
@@ -19,7 +20,12 @@ public class SummonBehavior implements Behavior{
     
     public void execute(ObjectCollection world, GameObject object){
         for (GameObject toSummon : mySummons){
-            toSummon.setMover(object.getMover());
+            GameObject clone = toSummon.clone();
+            Mover newMover = object.getMover();
+            newMover.setSpeed(toSummon.getMover().getSpeed());
+            clone.setMover(newMover);
+            clone.setPoint(object.getPoint());
+            world.addObject(clone);
         }
     }
 }

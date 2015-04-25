@@ -87,16 +87,13 @@ public class GameObjectEditorView implements UIObject {
                 (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH) *
                         LIBRARY_EDITOR_PROPORTIONS;
 
-        // SimpleEditorView simpleEditorView =
-        // new SimpleEditorView(simpleEditor.getSimpleComponentEditors());
-        ObservableList<Node> simpleList = simpleEditor.getSimpleComponentEditors();
+        ObservableList<ComponentEditor> simpleList = simpleEditor.getSimpleComponentEditors();
         SimpleEditorView simpleEditorView = new SimpleEditorView(simpleList);
         VBox top = (VBox) simpleEditorView.getObject();
 
         top.setPrefSize(vboxWidth, vboxHeight);
 
-        bottom =
-                new GameObjectContainer(vboxWidth, vboxHeight, scene);
+        bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
 
@@ -108,13 +105,15 @@ public class GameObjectEditorView implements UIObject {
 
         AnchorPane.setTopAnchor(topHalf, 0.0);
         AnchorPane.setTopAnchor(bottomHalf, vboxHeight);
-        
-        simpleList.addListener( (ListChangeListener.Change<? extends Node> change) -> {
+
+        simpleList.addListener( (ListChangeListener.Change<? extends ComponentEditor> change) -> {
             while (change.next()) {
                 if (change.wasAdded()) {
-                    System.out.println("CHANGE");
-                    Node added = change.getAddedSubList().get(0);
-                    top.getChildren().add(added);
+                    ComponentEditor added = change.getAddedSubList().get(0);
+                    top.getChildren().add(added.getObject());
+                }
+                if (change.wasRemoved()) {
+                    top.getChildren().clear();
                 }
             }
         });

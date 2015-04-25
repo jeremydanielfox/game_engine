@@ -28,19 +28,19 @@ public class SimpleEditorView implements UIObject {
     // NAME, TYPE, IMAGE
     private String[] hardCodeForNow = { "Tower", "Enemy" };
     private VBox vbox;
-    private BooleanProperty changedProperty = new SimpleBooleanProperty();
 
     public SimpleEditorView () {
         vbox = new VBox();
         vbox.getChildren().addAll(getNameBox(), getTypeBox(), getImageBox(), getButtonBox());
     }
 
-    public SimpleEditorView (ObservableList<Node> list) {
+    public SimpleEditorView (ObservableList<ComponentEditor> list) {
         vbox = new VBox();
-        for (Node node : list) {
-            vbox.getChildren().add(node);
+        for (ComponentEditor node : list) {
+            vbox.getChildren().add(node.getObject());
         }
-        
+//        vbox = new VBox();
+//        vbox.getChildren().addAll(getNameBox(), getTypeBox(), getImageBox(), getButtonBox());
     }
 
     private HBox getNameBox () {

@@ -89,16 +89,15 @@ public class GameObjectEditorView implements UIObject {
 
         ObservableList<ComponentEditor> simpleList = simpleEditor.getSimpleComponentEditors();
         SimpleEditorView simpleEditorView = new SimpleEditorView(simpleList);
-        VBox top = (VBox) simpleEditorView.getObject();
 
-        top.setPrefSize(vboxWidth, vboxHeight);
+        simpleEditorView.setPrefSize(vboxWidth, vboxHeight);
 
         bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
 
         ScrollPane topHalf = new ScrollPane();
-        topHalf.setContent(top);
+        topHalf.setContent(simpleEditorView);
         ScrollPane bottomHalf = new ScrollPane();
         bottomHalf.setContent(bottom);
         anchor = new AnchorPane(topHalf, bottomHalf);
@@ -106,17 +105,6 @@ public class GameObjectEditorView implements UIObject {
         AnchorPane.setTopAnchor(topHalf, 0.0);
         AnchorPane.setTopAnchor(bottomHalf, vboxHeight);
 
-        simpleList.addListener( (ListChangeListener.Change<? extends ComponentEditor> change) -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    ComponentEditor added = change.getAddedSubList().get(0);
-                    top.getChildren().add(added.getObject());
-                }
-                if (change.wasRemoved()) {
-                    top.getChildren().clear();
-                }
-            }
-        });
         return anchor;
     }
 

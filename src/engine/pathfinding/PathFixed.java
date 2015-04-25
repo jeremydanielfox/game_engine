@@ -8,7 +8,7 @@ import engine.gameobject.PointSimple;
 
 /**
  * A path to represent a fixed path.
- * 
+ *
  * @author Kaighn
  *
  */
@@ -27,13 +27,13 @@ public class PathFixed implements Path {
 
     @Override
     public PointSimple getNextLocation (double distance, double speed, PointSimple current)
-                                                                             throws EndOfPathException {
+                                                                                           throws EndOfPathException {
         double count = 0;
         for (PathSegment seg : myPathSegments) {
             count += seg.getLength();
             if (count >= distance) {
                 PathSegment pathSeg = seg;
-                //add parenthesis to account for order of operations
+                // add parenthesis to account for order of operations
                 return pathSeg.getPoint(distance - (count - seg.getLength()));
             }
         }
@@ -45,7 +45,8 @@ public class PathFixed implements Path {
         myPathSegments = pathSegments;
     }
 
-	@Override
-	public void updatePath() {}
+    @Override
+    public void updatePath () {
+    }
 
 }

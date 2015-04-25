@@ -7,7 +7,7 @@ import engine.fieldsetting.Settable;
 /**
  * A simple class for representing a point in Cartesian point. Contains some fun utility
  * methods too.
- * 
+ *
  * @author Kaighn.
  *
  */
@@ -53,7 +53,7 @@ public class PointSimple {
 
     public static boolean pointInBetween (PointSimple start, PointSimple end, PointSimple point) {
         return inRange(start.getX(), end.getX(), point.getX()) ||
-               inRange(start.getY(), end.getY(), point.getY());
+                inRange(start.getY(), end.getY(), point.getY());
     }
 
     public static double norm (PointSimple a, PointSimple b) {
@@ -90,9 +90,10 @@ public class PointSimple {
     public void setY (double y) {
         myPoint = new Point2D(myPoint.getX(), y);
     }
-    
-    public String toString(){
-    	return myPoint.toString();
+
+    @Override
+    public String toString () {
+        return myPoint.toString();
     }
 
 }

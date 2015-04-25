@@ -10,7 +10,7 @@ import engine.fieldsetting.Triggerable;
 
 /**
  * Manages the event progression for a level
- * 
+ *
  * @author Tom Puglisi
  * @author Sierra Smith
  * @author Cosette Goldstein
@@ -34,7 +34,7 @@ public class StoryBoard extends Observable {
 
     /**
      * Update all events
-     * 
+     *
      * @return false if the StoryBoard has no more events to update
      */
     public boolean update () {
@@ -47,7 +47,7 @@ public class StoryBoard extends Observable {
 
     /**
      * If an event is complete, remove it from the list
-     * 
+     *
      * @param event
      */
     private void updateEvent (Event event) {
@@ -60,7 +60,7 @@ public class StoryBoard extends Observable {
     }
 
     /**
-     * 
+     *
      * @return the next event in the List, if there is one
      */
     private Event getCurrentEvent () {
@@ -100,7 +100,7 @@ public class StoryBoard extends Observable {
 
     /**
      * Returns the number of events left in the storyboard.
-     * 
+     *
      * @return no. of events left in storyboard
      */
     public int currentEventCount () {

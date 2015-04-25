@@ -5,8 +5,10 @@ import engine.pathfinding.EndOfPathException;
 import engine.pathfinding.Path;
 import engine.pathfinding.PathFixed;
 
+
 /**
  * A mover that moves according to a pathfinder.
+ * 
  * @author Kaighn
  *
  */

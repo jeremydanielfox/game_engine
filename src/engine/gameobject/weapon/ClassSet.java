@@ -13,7 +13,7 @@ import java.util.function.Consumer;
  * ClassSet is a collection that contains only one class-type at most, all of which extend from <T>.
  * The motivation behind this class was that Java's Sets can only check for duplication based on
  * hash value, rather than by class-type.
- * 
+ *
  * @author Nathan Prabhu
  *
  * @param <T> the type of elements maintained by this set
@@ -38,7 +38,7 @@ public class ClassSet<T> implements Set<T> {
 
     /**
      * Adds object to set. If object's class already exists, the entry will be replaced.
-     * 
+     *
      * @param T element to be added to this set
      * @return <tt>true</tt> if this set did not already contain the specified
      *         element
@@ -56,7 +56,7 @@ public class ClassSet<T> implements Set<T> {
 
     /**
      * Removes the specified element from this set if it is present.
-     * 
+     *
      * @param obj object to be removed from this set, if present
      * @return <tt>true</tt> if the set contained the specified element
      */
@@ -82,7 +82,7 @@ public class ClassSet<T> implements Set<T> {
 
     /**
      * Obtains object of the same class-type in this set if it exists
-     * 
+     *
      * @param obj object's class-type counterpart to be retrieved from this set, if present
      * @return object if it exists, otherwise null
      */
@@ -90,6 +90,7 @@ public class ClassSet<T> implements Set<T> {
         return classMap.get(obj.getClass().getSimpleName());
     }
 
+    @Override
     public void clear () {
         classMap.clear();
     }

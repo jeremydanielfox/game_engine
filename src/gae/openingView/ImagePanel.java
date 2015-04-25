@@ -3,19 +3,17 @@ package gae.openingView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+
 /**
  * ImagePanel holds visuals to represent the types of game available for the author to create. A mix
  * of CSS and Java logic is used to set up effects such as hover, select, etc.
- * 
+ *
  * @author Brandon Choi
  *
  */
@@ -76,7 +74,7 @@ public class ImagePanel implements UIObject {
 
     /**
      * sets up the logic of clicking one game option
-     * 
+     *
      * @param choices
      */
     private void setUpClick (List<HoverPicture> list) {
@@ -90,24 +88,25 @@ public class ImagePanel implements UIObject {
                     alterRest(e);
                     bindValue.setValue(e.getName());
                 }
-                else if (e.selected()) {
-                    e.changeSelectEffect();
-                    alterRest(e);
-                    bindValue.setValue(OpeningView.DEFAULT_TYPE_MSG);
-                }
-            });
+                                            else if (e.selected()) {
+                                                e.changeSelectEffect();
+                                                alterRest(e);
+                                                bindValue.setValue(OpeningView.DEFAULT_TYPE_MSG);
+                                            }
+                                        });
         });
     }
 
     /**
      * alters the status of the rest of the hover pictures except the one selected
-     * 
+     *
      * @param hp
      */
     private void alterRest (HoverPicture hp) {
         hoverPictures.forEach(e -> {
-            if (!e.equals(hp))
+            if (!e.equals(hp)) {
                 e.alter();
+            }
         });
     }
 }

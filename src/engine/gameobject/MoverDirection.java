@@ -2,32 +2,36 @@ package engine.gameobject;
 
 import engine.pathfinding.EndOfPathException;
 
-public class MoverDirection extends MoverPoint{
+
+public class MoverDirection extends MoverPoint {
     private double distanceLimit;
     private double distanceTraveled;
     private boolean pastPoint;
-    
+
     /**
      * Makes a mover that will move with set speed for length distanceLimit towards direction.
+     * 
      * @param direction
      * @param speed
      * @param distanceLimit
      */
-    public MoverDirection(PointSimple direction, double speed, double distanceLimit){
+    public MoverDirection (PointSimple direction, double speed, double distanceLimit) {
         super(direction, speed);
         this.distanceLimit = distanceLimit;
         distanceTraveled = 0;
         pastPoint = false;
     }
-    
+
     @Override
-    public PointSimple move (PointSimple current) throws EndOfPathException{
+    public PointSimple move (PointSimple current) throws EndOfPathException {
         distanceTraveled += currentSpeed();
-        if(distanceTraveled>distanceLimit)
+        if (distanceTraveled > distanceLimit) {
             throw new EndOfPathException();
-        //This switch statement is here to determine whether to find the point TOWARDS or AWAY FROM the reference.
+        }
+        // This switch statement is here to determine whether to find the point TOWARDS or AWAY FROM
+        // the reference.
         PointSimple newPoint = new PointSimple();
-        if (!pastPoint){
+        if (!pastPoint) {
             newPoint = PointSimple.pointOnLine(current, getPoint(), currentSpeed());
         }
         else {
@@ -39,14 +43,14 @@ public class MoverDirection extends MoverPoint{
         }
         return newPoint;
     }
-    
-    
+
     @Override
-    public void setPoint(PointSimple myPoint){
+    public void setPoint (PointSimple myPoint) {
         super.setPoint(myPoint);
     }
-    
-    public Mover clone (){
+
+    @Override
+    public Mover clone () {
         return new MoverDirection(getPoint(), inherentSpeed, distanceLimit);
     }
 }

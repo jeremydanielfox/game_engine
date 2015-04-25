@@ -1,6 +1,5 @@
 package engine.gameobject;
 
-import javafx.geometry.Point2D;
 import engine.fieldsetting.Settable;
 import engine.gameobject.behaviors.Behavior;
 import engine.gameobject.behaviors.BehaviorTracker;
@@ -19,12 +18,12 @@ import gameworld.ObjectCollection;
 
 /**
  * Simple (and possibly only) implementation of the gameobject.
- * 
+ *
  * @author Jeremy, Kaighn
  *
  */
 @Settable
-public class GameObjectSimple implements GameObject{
+public class GameObjectSimple implements GameObject {
     private Label myLabel;
     private PointSimple myPoint;
     private Health myHealth;
@@ -49,14 +48,15 @@ public class GameObjectSimple implements GameObject{
         myBehaviors = new BehaviorTracker();
     }
 
-/*
- * Buffable methods follow
- */
-    
+    /*
+     * Buffable methods follow
+     */
+
     /**
      * Give the object a buff e.g. burn this object
      */
-    public void receiveBuff(Buff buff){
+    @Override
+    public void receiveBuff (Buff buff) {
         myBuffs.receiveBuff(buff, this);
     }
     
@@ -67,49 +67,57 @@ public class GameObjectSimple implements GameObject{
  * Firing methods follow
  */
     
+    @Override
     @Settable
     public void setWeapon (Weapon weapon) {
         myWeapon = weapon;
     }
-    
-    public void fire(ObjectCollection world, GameObject target){
-        myWeapon.fire(world, target, myPoint);
+
+    @Override
+    public void fire (ObjectCollection world, GameObject target) {
+        // myWeapon.fire(world, target, myPoint);
     }
-    
-    public Weapon getWeapon(){
+
+    @Override
+    public Weapon getWeapon () {
         return myWeapon;
     }
-    
-/*
- * Colliding methods follow
- */
-    
-    public Collider getCollider(){
+
+    /*
+     * Colliding methods follow
+     */
+
+    @Override
+    public Collider getCollider () {
         return myCollider;
     }
-    
-    public void setCollider(Collider collider){
+
+    @Override
+    @Settable
+    public void setCollider (Collider collider) {
         myCollider = collider;
     }
 
-    public void explode(ObjectCollection world){
+    @Override
+    public void explode (ObjectCollection world) {
         myCollider.explode(world, myPoint);
     }
-    
-    public void collide(GameObject target){
-        myCollider.collide(target);
-        changeHealth(-1);
-    }
-    
-/*
- * Prototype methods follow
- */
+
     @Override
-    public double getRange(){
+    public void collide (GameObject target) {
+        // myCollider.collide(target);
+        // changeHealth(-1);
+    }
+
+    /*
+     * Prototype methods follow
+     */
+    @Override
+    public double getRange () {
         return myWeapon.getRange();
     }
-    
-    //TODO: Tag cloning not done, Weapon upgrade cloning not done
+
+    // TODO: Tag cloning not done, Weapon upgrade cloning not done
     @Override
     public GameObject clone () {
         GameObject clone = new GameObjectSimple();
@@ -123,46 +131,46 @@ public class GameObjectSimple implements GameObject{
         clone.setMover(myMover.clone());
         return clone;
     }
-    
+
     @Override
     public GameObjectTag getTag () {
         return myTag;
     }
- 
-/*
- * Purchasable methods follow
- */
-    
+
+    /*
+     * Purchasable methods follow
+     */
+
     @Override
     public Graphic getGraphic () {
         return myGraphic;
     }
-    
+
     @Override
     public double getValue () {
         return myWeapon.getValue();
     }
-    
-/*
- * Movable, Health methods follow
- */
+
+    /*
+     * Movable, Health methods follow
+     */
     @Override
     public void move () throws EndOfPathException {
         PointSimple point = myMover.move(myPoint);
-//        myGraphic.rotate(point);
+        // myGraphic.rotate(point);
         setPoint(new PointSimple(point.getX(), point.getY()));
     }
-    
+
     @Override
     public boolean isDead () {
         return myHealth.isDead();
     }
-    
+
     @Override
     public void changeHealth (double amount) {
         myHealth.changeHealth(amount);
     }
-    
+
     @Override
     public void setSpeed (double speed) {
         myMover.setSpeed(speed);
@@ -197,16 +205,18 @@ public class GameObjectSimple implements GameObject{
         return myLabel;
     }
 
+    @Override
     @Settable
     public void setLabel (Label label) {
         myLabel = label;
     }
-    
+
     @Override
     public PointSimple getPoint () {
         return new PointSimple(myPoint);
     }
 
+    @Override
     @Settable
     public void setPoint (PointSimple point) {
         myPoint = point;
@@ -221,26 +231,31 @@ public class GameObjectSimple implements GameObject{
     /**
      * Note that this takes in a new health object.
      * Should only be used when setting to a new health, not for damage.
+     * 
      * @param health
      */
+    @Override
     @Settable
     public void setHealth (Health health) {
         myHealth = health;
     }
 
-    // @Settable
+    @Override
+    @Settable
     public void setMover (Mover mover) {
         myMover = mover;
     }
 
-    @Settable @Override
+    @Settable
+    @Override
     public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }
 
+    @Override
     @Settable
     public void setTag (GameObjectTag tag) {
-        this.myTag = tag;
+        myTag = tag;
     }
 
     // // added because tag is broken and I can't test - Kei

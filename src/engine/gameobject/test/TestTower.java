@@ -8,8 +8,9 @@ import engine.gameobject.MoverNull;
 import engine.gameobject.MoverUser;
 import engine.gameobject.PointSimple;
 
-public class TestTower extends GameObjectSimple{
-    
+
+public class TestTower extends GameObjectSimple {
+
     private int type;
 
     public TestTower (int type, int xcor, int ycor) {

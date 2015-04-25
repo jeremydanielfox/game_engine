@@ -2,13 +2,14 @@ package engine.goals;
 
 import java.util.Observable;
 import engine.fieldsetting.Settable;
-import engine.game.*;
+import engine.game.Timer;
+import engine.game.TimerConcrete;
 
 
 /**
  * This class listens to a timer and "is satisfied" when the timer has reached or gone below a
  * certain time.
- * 
+ *
  * @author Sierra
  *
  */
@@ -16,7 +17,7 @@ import engine.game.*;
 public class TimerGoal extends Goal {
 
     public static final int DEFAULT_SECONDS = 0;
-    
+
     private Timer myTimer;
     private int mySecondsGoal;
 
@@ -25,26 +26,26 @@ public class TimerGoal extends Goal {
         myTimer.addObserver(this);
         mySecondsGoal = secs;
     }
-    
-    public TimerGoal(){
+
+    public TimerGoal () {
         myTimer = new TimerConcrete();
         mySecondsGoal = DEFAULT_SECONDS;
     }
 
     @Settable
-    public void setSecondsGoal(int secs){
+    public void setSecondsGoal (int secs) {
         mySecondsGoal = secs;
     }
-    
+
     @Settable
-    public void setTimer(Timer t){
+    public void setTimer (Timer t) {
         myTimer = t;
         myTimer.addObserver(this);
     }
-    
+
     @Override
     public void update (Observable o, Object arg) {
-        if(o.equals(myTimer)){
+        if (o.equals(myTimer)) {
             setIsSatisfied(myTimer.getSecondsLeft() <= mySecondsGoal);
         }
 

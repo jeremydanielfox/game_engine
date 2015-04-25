@@ -1,11 +1,8 @@
 package gae.gameView;
 
 import gae.listView.LibraryData;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -17,10 +14,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+
 /**
  * Defines a single interaction between game objects
- * 
- * 
+ *
+ *
  * @author Brandon Choi
  *
  */
@@ -59,7 +57,7 @@ public class InteractionInstance {
     /**
      * Takes the interaction map from myInteractionData and uses the keyset to pull all of the
      * interaction labels
-     * 
+     *
      * @return
      */
     private List<String> getInteractions () {
@@ -89,7 +87,7 @@ public class InteractionInstance {
 
     /**
      * Comprised of a label and a combobox with options for the user to select from
-     * 
+     *
      * @author Brandon Choi
      *
      */
@@ -120,7 +118,7 @@ public class InteractionInstance {
 
     /**
      * Holds objects that are selected between interactions
-     * 
+     *
      * @author Brandon Choi
      *
      */
@@ -140,7 +138,7 @@ public class InteractionInstance {
             adder = new Button();
             addBox = new HBox(15);
             Text addText = new Text("Add Labels");
-            myChecker = new CheckList(myLibraryData.getGameObjectList());
+            myChecker = new CheckList(myLibraryData.getEditableObservableList());
 
             container.setId("interactionBox");
 

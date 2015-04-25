@@ -10,7 +10,7 @@ import engine.gameobject.PointSimple;
  * A PathSegment represented by a Bezier curve of any number of points. The Bezier curve is
  * parametrized
  * for t values between 0 and 1, so this class normalizes the curve to length one.
- * 
+ *
  * @author Jeremy
  *
  */
@@ -27,11 +27,12 @@ public class PathSegmentBezier implements PathSegment {
      * points.
      * Automatically calculates the length of the curve upon creation.
      */
-    
-    public PathSegmentBezier() {
+
+    public PathSegmentBezier () {
         myPoints = new ArrayList<>();
         myLength = 0;
     }
+
     public PathSegmentBezier (List<PointSimple> points) {
         myPoints = points;
         myLength = approximateLength(points);
@@ -48,8 +49,9 @@ public class PathSegmentBezier implements PathSegment {
 
     @Override
     public double getLength () {
-        if (myLength == 0)
+        if (myLength == 0) {
             myLength = approximateLength(myPoints);
+        }
         return myLength;
     }
 
@@ -59,8 +61,9 @@ public class PathSegmentBezier implements PathSegment {
      * Incorrect values will be given if the t value is not between zero and one.
      */
     private PointSimple BezierRecurse (List<PointSimple> points, double t) {
-        if (points.size() == 1)
+        if (points.size() == 1) {
             return points.get(0);
+        }
         PointSimple p1 = BezierRecurse(points.subList(0, points.size() - 1), t);
         PointSimple p2 = BezierRecurse(points.subList(1, points.size()), t);
         return p1.multiply(1 - t).add(p2.multiply(t));
@@ -82,8 +85,9 @@ public class PathSegmentBezier implements PathSegment {
         }
         return currentLength;
     }
+
     @Settable
-    public void setPoints(List<PointSimple> points) {
+    public void setPoints (List<PointSimple> points) {
         myPoints = points;
     }
 

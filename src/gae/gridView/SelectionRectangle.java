@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 /**
  * The rectangle that will appear upon dragging the mouse to select an area, then show a menu
  * upon completion of the drag
- * 
+ *
  * @author Nina
  *
  */
@@ -21,16 +21,16 @@ public class SelectionRectangle extends Rectangle {
     private TileContainer parent;
 
     /**
-     * 
+     *
      * @param parent node that hosts selection rectangle
      * @param context menu that shows up upon completion of drag
      */
     public SelectionRectangle (TileContainer node, ContextMenu cm) {
         parent = node;
         contextmenu = cm;
-        this.setFill(Color.web("blue", 0.1));
-        this.setStroke(Color.BLUE);
-        this.setVisible(false);
+        setFill(Color.web("blue", 0.1));
+        setStroke(Color.BLUE);
+        setVisible(false);
         setMouseEvents();
     }
 
@@ -43,14 +43,14 @@ public class SelectionRectangle extends Rectangle {
         DoubleProperty rectX = new SimpleDoubleProperty();
         DoubleProperty rectY = new SimpleDoubleProperty();
 
-        this.layoutXProperty().bind(findTranslation(rectinitX, rectX));
-        this.layoutYProperty().bind(findTranslation(rectinitY, rectY));
-        this.widthProperty().bind(correctNegativeProperty(rectinitX, rectX));
-        this.heightProperty().bind(correctNegativeProperty(rectinitY, rectY));
+        layoutXProperty().bind(findTranslation(rectinitX, rectX));
+        layoutYProperty().bind(findTranslation(rectinitY, rectY));
+        widthProperty().bind(correctNegativeProperty(rectinitX, rectX));
+        heightProperty().bind(correctNegativeProperty(rectinitY, rectY));
 
         parent.setOnMousePressed(e -> {
-            this.setX(e.getX());
-            this.setY(e.getY());
+            setX(e.getX());
+            setY(e.getY());
             rectinitX.set(e.getX());
             rectinitY.set(e.getY());
         });
@@ -60,9 +60,9 @@ public class SelectionRectangle extends Rectangle {
             double width = parent.getGridWidthProperty().get();
             double height = parent.getGridHeightProperty().get();
             rectX.set((e.getX() > 0 && e.getX() < width) ? e.getX() : width *
-                                                                      Math.round(e.getX() / width));
+                                                         Math.round(e.getX() / width));
             rectY.set((e.getY() > 0 && e.getY() < height) ? e.getY()
-                                                         : height * Math.round(e.getY() / height));
+                                                          : height * Math.round(e.getY() / height));
             showMenu = true;
         });
         parent.setOnMouseReleased(e -> {
@@ -77,7 +77,7 @@ public class SelectionRectangle extends Rectangle {
     /**
      * Corrects for the anchor point of JavaFX node when using the mouse to select upper left of
      * initial point
-     * 
+     *
      * @param starting location
      * @param ending location
      */
@@ -99,7 +99,7 @@ public class SelectionRectangle extends Rectangle {
     /**
      * Finds absolute value of the difference of two properties to set the height and width
      * properties
-     * 
+     *
      * @param starting location
      * @param ending location
      */

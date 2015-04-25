@@ -1,15 +1,17 @@
 package gae.backend;
 
 import java.io.Serializable;
+import java.util.List;
 import javafx.scene.image.ImageView;
 import engine.gameobject.PointSimple;
 import engine.gameobject.weapon.Weapon;
+import engine.shop.tag.GameObjectTag;
 import gae.gridView.Path;
+import gae.listView.Authorable;
 import gae.listView.MovableImage;
-import java.util.List;
 
 
-public interface Editable extends Serializable {
+public interface Placeable extends Serializable, Authorable {
     public void edit ();
 
     public String getName ();
@@ -34,6 +36,8 @@ public interface Editable extends Serializable {
 
     public int getHeight ();
 
+    public GameObjectTag getTag ();
+
     public void setLocation (PointSimple point);
 
     public void setMovableImage (MovableImage image);
@@ -52,8 +56,14 @@ public interface Editable extends Serializable {
 
     public void setWeapon (Weapon weapon);
 
+    public void setTag (GameObjectTag tag);
+
+    public void setType (String type);
+
+    public void setImagePath (String path);
+
     public Object clone ();
 
-    public Editable makeNewInstance ();
+    public Placeable makeNewInstance ();
 
 }

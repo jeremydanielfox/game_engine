@@ -1,11 +1,13 @@
 package engine.gameobject.units;
 
-public interface Buffable{
-    
+public interface Buffable {
+
     /**
      * Buff this unit with buff
+     * 
      * @param buff
      */
+
     public void receiveBuff(Buff buff);
     
     /**
@@ -13,4 +15,5 @@ public interface Buffable{
      * @param buff
      */
     public void addImmunity(Buff buff);
+
 }

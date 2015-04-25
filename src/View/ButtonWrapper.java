@@ -1,10 +1,10 @@
 package View;
 
 import java.util.function.Consumer;
+import javafx.scene.control.Button;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.fieldsetting.Settable;
 import engine.goals.Goal;
-import javafx.scene.control.Button;
 import engine.goals.NullGoal;
 
 
@@ -19,7 +19,7 @@ public class ButtonWrapper {
     private Goal myGoal;
 
     public ButtonWrapper () {
-        initializeFields("", e -> this.doNothing(), new NullGoal());
+        initializeFields("", e -> doNothing(), new NullGoal());
     }
 
     public ButtonWrapper (String l, Consumer<? extends Object> action, Goal enable) {
@@ -40,14 +40,16 @@ public class ButtonWrapper {
 
     // TODO: make initialize fields work
     public Button getButton () {
-        if (myButton == null)
-            initializeFields(myLabel,myAction,myGoal);
+        if (myButton == null) {
+            initializeFields(myLabel, myAction, myGoal);
+        }
         return myButton;
     }
 
     public boolean isEnabled () {
-        if (myEnableCondition==null)
-            initializeFields(myLabel,myAction,myGoal);
+        if (myEnableCondition == null) {
+            initializeFields(myLabel, myAction, myGoal);
+        }
         return myEnableCondition.isSatisfied();
     }
 

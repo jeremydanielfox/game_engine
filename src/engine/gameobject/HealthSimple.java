@@ -5,7 +5,7 @@ import engine.fieldsetting.Settable;
 
 /**
  * Most traditional implementation of health. Can take damage and die appropriately.
- * 
+ *
  * @author Kaighn
  *
  */
@@ -22,7 +22,7 @@ public class HealthSimple implements Health {
         maxHealth = health;
         myHealth = maxHealth;
     }
-    
+
     @Override
     public boolean isDead () {
         return myHealth <= 0;

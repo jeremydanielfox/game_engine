@@ -1,6 +1,8 @@
 package engine.gameobject;
 
 import engine.fieldsetting.Settable;
+import engine.gameobject.behaviors.Behavior;
+import engine.gameobject.behaviors.BehaviorTracker;
 import engine.gameobject.labels.Label;
 import engine.gameobject.labels.SimpleLabel;
 import engine.gameobject.units.Buff;
@@ -31,7 +33,8 @@ public class GameObjectSimple implements GameObject {
     private BuffTracker myBuffs;
     private Weapon myWeapon;
     private Collider myCollider;
-
+    private BehaviorTracker myBehaviors;
+    
     public GameObjectSimple () {
         myLabel = new SimpleLabel();
         myPoint = new PointSimple();
@@ -42,6 +45,7 @@ public class GameObjectSimple implements GameObject {
         myBuffs = new BuffTracker();
         myWeapon = new NullWeapon();
         myCollider = new Collider();
+        myBehaviors = new BehaviorTracker();
     }
 
     /*
@@ -55,11 +59,14 @@ public class GameObjectSimple implements GameObject {
     public void receiveBuff (Buff buff) {
         myBuffs.receiveBuff(buff, this);
     }
-
-    /*
-     * Firing methods follow
-     */
-
+    
+    public void addImmunity(Buff buff){
+        //TODO: Implement this
+    }
+/*
+ * Firing methods follow
+ */
+    
     @Override
     @Settable
     public void setWeapon (Weapon weapon) {
@@ -169,9 +176,29 @@ public class GameObjectSimple implements GameObject {
         myMover.setSpeed(speed);
     }
 
-    /*
-     * GameObject specific methods follow
-     */
+/*
+ * EndBehaviorful methods follow
+ */
+    
+    public void addOnDeathBehavior(Behavior behavior){
+        myBehaviors.addOnDeath(behavior);
+    }
+    
+    public void clearDeathBehavior(){
+        myBehaviors.clearDeath();
+    }
+    
+    public void addEndOfPathBehavior(Behavior behavior){
+        myBehaviors.addEndOfPath(behavior);
+    }
+    
+    public void clearEndOfPathBehavior(){
+        myBehaviors.clearEndOfPath();
+    }
+    
+/*
+ * GameObject specific methods follow
+ */
 
     @Override
     public Label getLabel () {
@@ -249,18 +276,14 @@ public class GameObjectSimple implements GameObject {
             move();
         }
         catch (EndOfPathException e) {
-            // TODO: Encode end of path behaviors. For now, just die.
-            changeHealth(-10000);
-        }
-        if (isDead()) {
-            onDeath(world);
+            myBehaviors.onEndOfPath(world, this);
+            //Note that something doesn't always have to die at end of path, but if it doesn't die, it may
+            //keep doing endofpath over and over again
         }
     }
-
+    
     @Override
-    public void onDeath (ObjectCollection world) {
-        explode(world);
-        // TODO: Birthing other units? Like blue bloon -> red bloon?
+    public void onDeath(ObjectCollection world){
+        myBehaviors.onDeath(world, this);
     }
-
 }

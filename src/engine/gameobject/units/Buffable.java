@@ -7,6 +7,13 @@ public interface Buffable {
      * 
      * @param buff
      */
-    public void receiveBuff (Buff buff);
+
+    public void receiveBuff(Buff buff);
+    
+    /**
+     * Add an immunity to this unit
+     * @param buff
+     */
+    public void addImmunity(Buff buff);
 
 }

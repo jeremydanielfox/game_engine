@@ -72,7 +72,7 @@ public class PlayerOpener implements GameScene{
 //            myStage.setScene(screen.makeScene());
             
               PauseScene pause = new PauseScene(null, myStage, playerScene);
-              myStage.setScene(pause.getScreen());
+              myStage.setScene(pause.getScene());
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {

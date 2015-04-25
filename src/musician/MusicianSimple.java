@@ -9,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 import engine.interactions.Interaction;
 
 /**
@@ -59,7 +60,7 @@ public class MusicianSimple implements Musician {
     }
 
     @Override
-    public void addBackgroundMusic (Scene scene, Music m) {
+    public void addBackgroundMusic (Stage s, Scene scene, Music m) {
         myMusic.put(scene, m);
         setUpMute(scene);
     }
@@ -101,6 +102,7 @@ public class MusicianSimple implements Musician {
 
     @Override
     public void clearMusic (Object o) {
+        pauseAudio();
         myMusic.replace(o, myMusic.get(o), null);
     }
 

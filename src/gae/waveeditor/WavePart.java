@@ -1,5 +1,7 @@
 package gae.waveeditor;
 
+import engine.gameobject.GameObject;
+import gae.listView.LibraryData;
 import gae.openingView.UIObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +28,8 @@ public class WavePart implements UIObject {
         rootNode = new HBox();
 
         //TODO: make pull from created game objects
+        
+        LibraryData gameObjects = LibraryData.getInstance();
         ObservableList<String> options = 
                 FXCollections.observableArrayList(
                                                   "Enemy 1",
@@ -54,7 +58,7 @@ public class WavePart implements UIObject {
         return Integer.parseInt(quantityField.getText());
     }
     
-//    public GameObject getGameObject() {
-//        return gameObjectSelector.getSelectionModel().getSelectedItem();
-//    }
+    public GameObject getGameObject() {
+        return gameObjectSelector.getSelectionModel().getSelectedItem();
+    }
 }

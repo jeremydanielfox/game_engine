@@ -4,7 +4,6 @@ import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
 import engine.events.Wave;
-import engine.game.StoryBoard;
 import gae.openingView.UIObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,11 +73,9 @@ public class WaveSelectorPane implements UIObject {
             GameObjectQueue wQueue = new ConcreteQueue(wave.getEnemiesAsList());
             Wave newWave = new ConstantSpacingWave(wave.getPreferencesPane().getSpacingTime(), wQueue, null); //Last argument is a GameWorld object
             parent.getStoryboard().addEvent(newWave);
-        }
+        }        
         
-       StoryBoard sb = parent.getStoryboard();
-       
-       System.out.println("check");
+        System.out.println("check");
   }
 
     @Override

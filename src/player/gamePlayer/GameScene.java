@@ -10,11 +10,11 @@ import javafx.scene.Scene;
  * @author Brandon Choi, Sierra Smith
  *
  */
-public interface GameScreen {
+public interface GameScene {
     /**
      * returns the Scene for the stage to show
      *
      * @return
      */
-    Scene getScreen ();
+    Scene getScene ();
 }

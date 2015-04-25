@@ -19,7 +19,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class PauseScene implements GameScreen {
+public class PauseScene implements GameScene {
 
     private Stage myStage;
     private Scene myScene;
@@ -42,7 +42,7 @@ public class PauseScene implements GameScreen {
     }
 
     @Override
-    public Scene getScreen () {
+    public Scene getScene () {
         return myScene;
     }
     

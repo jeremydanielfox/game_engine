@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -29,7 +31,8 @@ public class SimpleEditor extends Editor implements UIObject {
     private List<ComponentEditor> editFields;
     private TreeNode root;
     private HashMap<Edits, TreeNode> nodeMap;
-    private ArrayList<ComponentEditor> simpleFields;
+    private static ObservableList<Node> simpleFields = FXCollections
+            .observableArrayList();
     private ArrayList<ObjectComponentEditor> objectFields;
 
     public SimpleEditor (Class<?> c) {
@@ -78,7 +81,7 @@ public class SimpleEditor extends Editor implements UIObject {
      * @param c
      */
     private void createEditor (Class<?> c, Label title) {
-        simpleFields = new ArrayList<ComponentEditor>();
+
         objectFields = new ArrayList<ObjectComponentEditor>();
         nodeMap = new HashMap<Edits, TreeNode>();
         simpleEditor = new VBox(30);
@@ -103,7 +106,7 @@ public class SimpleEditor extends Editor implements UIObject {
             component =
                     (ComponentEditor) getInstanceFromName(String.format("%s%s", CLASS_PATH,
                                                                         root.getInputType()));
-            simpleFields.add(component);
+            simpleFields.add(component.getObject());
         }
         component.setName(root.getMethod().getName());
         editors.add(component.getObject());
@@ -162,8 +165,12 @@ public class SimpleEditor extends Editor implements UIObject {
     protected TreeNode getTreeNode () {
         return root;
     }
-    
-    public ArrayList<ComponentEditor> getSimpleComponentEditors() {return simpleFields;}
-    
-    public ArrayList<ObjectComponentEditor> getObjectComponentEditors() {return objectFields;}
+
+    public ObservableList<Node> getSimpleComponentEditors () {
+        return simpleFields;
+    }
+
+    public ArrayList<ObjectComponentEditor> getObjectComponentEditors () {
+        return objectFields;
+    }
 }

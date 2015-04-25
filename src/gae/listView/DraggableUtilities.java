@@ -5,6 +5,7 @@ import exception.ObjectOutOfBoundsException;
 import gae.backend.Placeable;
 import gae.editorView.DragIntoRectangle;
 import gae.editorView.DraggableFields;
+import gae.editorView.DraggableItem;
 import gae.gridView.ContainerWrapper;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -15,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.HBoxBuilder;
 import View.ViewUtil;
 
 
@@ -80,12 +83,12 @@ public class DraggableUtilities {
      * @param root: where the Image will be placed
      */
     public static void makeObjectPlaceable (MouseEvent me,
-                                            Node placeable,
+                                            DraggableItem placeable,
                                             Node node,
                                             ObservableList<Object> instanceList,
                                             ContainerWrapper wrapper,
-                                            Group root,
-                                            EventHandler<? super MouseEvent> popNewEditor) {
+                                            Group root) {
+        //TODO: figure out how to clone
         Node binder =
                 ViewUtil.bindCursor(placeable,
                                     node,
@@ -98,13 +101,14 @@ public class DraggableUtilities {
                             .getTranslateY()));
             Double currentX = current.getX();
             Double currentY = current.getY();
+            System.out.println("Current X is : " + currentX);
+            System.out.println("Current Y is : " + currentY);
             if (wrapper.checkBounds(currentX, currentY)) {
                 throw new ObjectOutOfBoundsException();
             }
-            popNewEditor.handle(ev);
-            PointSimple relativeLocation = wrapper.convertCoordinates(currentX, currentY);
-            placeable.setLayoutX(relativeLocation.getX());
-            placeable.setLayoutY(relativeLocation.getY());
+            placeable.openEditor(ev);
+            placeable.setTranslateX(currentX);
+            placeable.setTranslateY(currentY);
             root.getChildren().add(placeable);
         });
         root.getChildren().add(binder);

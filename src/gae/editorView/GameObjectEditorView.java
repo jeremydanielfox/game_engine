@@ -4,6 +4,7 @@ import java.util.Map;
 import engine.gameobject.GameObjectSimple;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -16,12 +17,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import gae.backend.Placeable;
 import gae.backend.ResourceBundleUtil;
 import gae.backend.TempTower;
+import gae.editor.ComponentEditor;
 import gae.editor.ObjectComponentEditor;
 import gae.editor.SimpleEditor;
 import gae.gridView.ContainerWrapper;
@@ -84,14 +87,16 @@ public class GameObjectEditorView implements UIObject {
                 (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH) *
                         LIBRARY_EDITOR_PROPORTIONS;
 
-        SimpleEditorView simpleEditorView =
-                new SimpleEditorView(simpleEditor.getSimpleComponentEditors());
+        // SimpleEditorView simpleEditorView =
+        // new SimpleEditorView(simpleEditor.getSimpleComponentEditors());
+        ObservableList<Node> simpleList = simpleEditor.getSimpleComponentEditors();
+        SimpleEditorView simpleEditorView = new SimpleEditorView(simpleList);
         VBox top = (VBox) simpleEditorView.getObject();
+
         top.setPrefSize(vboxWidth, vboxHeight);
 
         bottom =
-                new GameObjectContainer(vboxWidth, vboxHeight, scene,
-                                        simpleEditor.getObjectComponentEditors());
+                new GameObjectContainer(vboxWidth, vboxHeight, scene);
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
 
@@ -103,6 +108,16 @@ public class GameObjectEditorView implements UIObject {
 
         AnchorPane.setTopAnchor(topHalf, 0.0);
         AnchorPane.setTopAnchor(bottomHalf, vboxHeight);
+        
+        simpleList.addListener( (ListChangeListener.Change<? extends Node> change) -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    System.out.println("CHANGE");
+                    Node added = change.getAddedSubList().get(0);
+                    top.getChildren().add(added);
+                }
+            }
+        });
         return anchor;
     }
 
@@ -115,23 +130,6 @@ public class GameObjectEditorView implements UIObject {
         }
         return accordion;
     }
-
-    // private ListView<Authorable> setUpList () {
-    // ListView<Authorable> list = ListViewUtilities.createList(optionList, null, "Image");
-    // for (String type: imageLocationMap.keySet()) {
-    // optionList.add(new DraggableFields(imageLocationMap.get(type)[0], type));
-    // }
-    // list.setOnMouseClicked(me -> {
-    // DraggableFields selected = (DraggableFields) list.getSelectionModel().getSelectedItem();
-    // for (int i = 0; i < bottom.getRectangles().size(); i++) {
-    // if (i == list.getSelectionModel().getSelectedIndex()) {
-    // DraggableUtilities.makeImagePlaceable(me, selected, bottom, bottom
-    // .getRectangles().get(i), root);
-    // }
-    // }
-    // });
-    // return list;
-    // }
 
     @Override
     public Node getObject () {

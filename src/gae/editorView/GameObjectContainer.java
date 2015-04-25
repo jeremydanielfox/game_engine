@@ -2,7 +2,6 @@ package gae.editorView;
 
 import engine.gameobject.PointSimple;
 import gae.gridView.ContainerWrapper;
-import gae.editor.ObjectComponentEditor;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Point2D;
@@ -19,13 +18,10 @@ public class GameObjectContainer extends VBox implements ContainerWrapper {
     private String[] settable = { "Weapon", "Health", "Mover" };
     private List<DragIntoRectangle> rectangleList;
     private Scene scene;
-    private ArrayList<ObjectComponentEditor> componentEditors;
 
     public GameObjectContainer (double width,
                                 double height,
-                                Scene scene,
-                                ArrayList<ObjectComponentEditor> components) {
-        componentEditors = components;
+                                Scene scene) {
         rectangleList = new ArrayList<>();
         setPrefSize(width, height);
         this.width = width;
@@ -66,10 +62,10 @@ public class GameObjectContainer extends VBox implements ContainerWrapper {
      */
     @Override
     public boolean checkBounds (double x, double y) {
-        Point2D point = this.screenToLocal(x, y);
-        System.out.println("X IS : " + point.getX());
-        System.out.println("Y IS : " + y);
-        if (point.getX() < 0 || point.getX() > getWidth() || y < 0 ||
+        // Point2D point = this.screenToLocal(x, y);
+        // System.out.println("X IS : " + point.getX());
+        // System.out.println("Y IS : " + y);
+        if (x < 0 || x > getWidth() || y < 0 ||
             y > getHeight()) {
             return true;
         }

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import engine.fieldsetting.Settable;
+import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.upgradetree.upgradebundle.BuildableBundle;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
+import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundleSimple;
 
 
 /**
@@ -25,11 +27,11 @@ public class UpgradeTreeSimple implements UpgradeTree {
     }
 
     @Settable
-    public void setUpgradeBundles(List<? extends BuildableBundle> nodes){
+    public void setUpgradeBundles (List<? extends BuildableBundle> nodes) {
         buildTree(nodes);
     }
-    
-    private void buildTree(List<? extends BuildableBundle> nodes) {
+
+    private void buildTree (List<? extends BuildableBundle> nodes) {
         first = current = nodes.get(0);
         BuildableBundle last = first;
         // take care of first node's parent
@@ -47,8 +49,7 @@ public class UpgradeTreeSimple implements UpgradeTree {
 
     @Override
     public List<UpgradeBundle> getNextUpgrades () {
-        // will only return one upgrade
-        return new ArrayList<UpgradeBundle>(Arrays.asList(current.getNext()));
+        return new ArrayList<UpgradeBundle>(Arrays.asList(current));
     }
 
     @Override
@@ -57,9 +58,7 @@ public class UpgradeTreeSimple implements UpgradeTree {
     }
 
     private double traverseActives (BuildableBundle active) {
-        if (active.equals(current)) {
-            return active.getValue();
-        }
+        if (active.equals(current)) { return active.getValue(); }
         return active.getValue() + traverseActives(active.getNext());
     }
 
@@ -67,6 +66,18 @@ public class UpgradeTreeSimple implements UpgradeTree {
     public void updateCurrent (UpgradeTree ... toUpdate) {
         // ignores parameter
         current = current.getNext();
+    }
+
+    public UpgradeTree clone () {
+        UpgradeTreeSimple clone = new UpgradeTreeSimple();
+        List<BuildableBundle> clonedList = new ArrayList<>();
+        BuildableBundle cloneCurrent = first;
+        while (cloneCurrent != null) {
+            clonedList.add(cloneCurrent.clone());
+            cloneCurrent = cloneCurrent.getNext();
+        }
+        clone.setUpgradeBundles(clonedList);
+        return clone;
     }
 
 }

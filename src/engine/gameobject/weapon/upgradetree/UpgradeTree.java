@@ -32,4 +32,6 @@ public interface UpgradeTree {
      * @param toUpdate current active tree. Should only be 0 or 1 parameters in this method.
      */
     public void updateCurrent (UpgradeTree ... toUpdate);
+    
+    public UpgradeTree clone();
 }

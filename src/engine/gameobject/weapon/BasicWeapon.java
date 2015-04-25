@@ -40,7 +40,6 @@ public class BasicWeapon implements Weapon {
         myRange = new RangeUpgrade(250);
         myFiringRate = new FiringRateUpgrade(.5);
         myFiringStrategy = new SingleProjectile();
-        tree = new UpgradeForest();
     }
 
     @Override
@@ -50,6 +49,7 @@ public class BasicWeapon implements Weapon {
         clone.setRange(myRange.getRange());
         clone.setFiringStrategy(myFiringStrategy);
         clone.setProjectile(myProjectile);
+        clone.setTree(tree.clone());
         return clone;
     }
 

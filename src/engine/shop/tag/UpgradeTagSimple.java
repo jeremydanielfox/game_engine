@@ -13,9 +13,9 @@ public class UpgradeTagSimple implements UpgradeTag {
     private Purchasable purchasable;
 
     public UpgradeTagSimple () {
-        name = "";
-        description = "";
-        shopGraphic = new Graphic();
+        name = "TestTag";
+        description = "Test description";
+        shopGraphic = new Graphic(30, 30, "Bloons_DartMonkey.png");
         purchasable = null;
     }
 
@@ -36,7 +36,7 @@ public class UpgradeTagSimple implements UpgradeTag {
 
     @Override
     public double getValue () {
-        return purchasable.getValue();
+        return (purchasable != null) ? purchasable.getValue() : 10;
     }
 
     @Override
@@ -60,6 +60,10 @@ public class UpgradeTagSimple implements UpgradeTag {
     @Settable
     public void setPurchasable (Purchasable purchasable) {
         this.purchasable = purchasable;
+    }
+    
+    public UpgradeTag clone () {
+        return new UpgradeTagSimple();
     }
 
 }

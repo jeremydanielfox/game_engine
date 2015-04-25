@@ -81,7 +81,8 @@ public class ShopModelSimple implements ShopModel {
         upgradeMap.clear();
         bundles.forEach(bundle -> {
             upgradeMap.put(bundle.getTag().getName(), bundle);
-            upgradeGraphics.add(new ItemGraphic(bundle.getTag().getName(), bundle.getTag().getShopGraphic()));
+            upgradeGraphics.add(new ItemGraphic(bundle.getTag().getName(), bundle.getTag()
+                    .getShopGraphic()));
         });
         return upgradeGraphics;
     }

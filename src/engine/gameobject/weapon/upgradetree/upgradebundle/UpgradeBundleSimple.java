@@ -3,6 +3,7 @@ package engine.gameobject.weapon.upgradetree.upgradebundle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.UpgradeSet;
@@ -11,7 +12,7 @@ import engine.shop.tag.UpgradeTag;
 
 
 /**
- * Concrete implementation of BuildableBundle
+ * Concrete implementation of BuildableBundle. Each bundle only has at most one child.
  *
  * @author Nathan Prabhu
  *
@@ -23,11 +24,17 @@ public class UpgradeBundleSimple implements BuildableBundle {
     private UpgradeBundleSimple next;
     private boolean isFinal;
     private UpgradeTree parent;
-    private UpgradeTag myUpgradeTag;
+    private UpgradeTag upgradeTag;
     private double value;
 
     public UpgradeBundleSimple () {
 
+    }
+    
+    
+    @Override
+    public void addChild (Buildable child) {
+        next = (UpgradeBundleSimple) child;
     }
 
     @Settable
@@ -37,8 +44,8 @@ public class UpgradeBundleSimple implements BuildableBundle {
     }
 
     @Settable
-    public void setValue (double value) {
-        this.value = value;
+    public void setUpgradeTag (UpgradeTag upgradeTag) {
+        this.upgradeTag = upgradeTag;
     }
 
     @Override
@@ -53,10 +60,6 @@ public class UpgradeBundleSimple implements BuildableBundle {
         upgradables.add(toAdd);
     }
 
-    @Override
-    public void addChild (Buildable child) {
-        next = (UpgradeBundleSimple) child;
-    }
 
     @Override
     public boolean isFinalUpgrade () {
@@ -71,7 +74,7 @@ public class UpgradeBundleSimple implements BuildableBundle {
     @Override
     public BuildableBundle getNext () {
         // if isFinal, shop will disallow further purchase and change graphics
-        return (isFinal) ? this : next;
+        return (isFinal) ? null : next;
     }
 
     @Override
@@ -86,17 +89,29 @@ public class UpgradeBundleSimple implements BuildableBundle {
 
     @Override
     public UpgradeTag getTag () {
-        return myUpgradeTag;
+        return upgradeTag;
     }
 
     @Override
     public double getValue () {
-        return value;
+        return getTag().getValue();
     }
+    
+    @Override
+    public BuildableBundle clone () {
+        UpgradeBundleSimple clone = new UpgradeBundleSimple();
+        List<Upgrade> cloneList = new ArrayList<Upgrade>();
+        for (Upgrade u: upgrades){
+            cloneList.add(u);
+        }
+        clone.setUpgrades(cloneList.toArray(new Upgrade[cloneList.size()]));
+        clone.setUpgradeTag(upgradeTag.clone());
+        return clone;
+    }
+    
 
-    @Settable
-    public void setUpgradeTag (UpgradeTag upgradeTag) {
-        myUpgradeTag = upgradeTag;
+    public List<Upgrade> getUpgrades(){
+        return upgrades;
     }
 
 }

@@ -110,8 +110,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         play();
     }
 
-    @Override
-    public void buildTimeline () {
+    private void buildTimeline () {
         KeyFrame frame = makeKeyFrame(DEFAULT_FRAME_RATE);
         myAnimation = new Timeline();
         myAnimation.setCycleCount(Animation.INDEFINITE);
@@ -158,8 +157,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         }
     }
 
-    @Override
-    public void executeFrameActions () {
+    private void executeFrameActions () {
         // after updating game, how to update after level ends? need to look into checking something
         // like gameEnded()
         myGame.update();
@@ -279,11 +277,6 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     public void play () {
         myAnimation.play();
         myHeadsUp.update();
-    }
-
-    @Override
-    public void addButton (Button b, int x, int y) {
-        vbox.getChildren().add(b);
     }
 
     @Override

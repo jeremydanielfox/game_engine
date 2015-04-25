@@ -11,7 +11,7 @@ public class FixedWorld extends AbstractWorld {
     private double myPathWidth = 17;
 
     @Override
-    public boolean isPlacable (Node n, PointSimple pixelCoords) {
+    public boolean isPlaceable (Node n, PointSimple pixelCoords) {
         n.setLayoutX(pixelCoords.getX());
         n.setLayoutY(pixelCoords.getY());
         int i = 0;
@@ -23,9 +23,7 @@ public class FixedWorld extends AbstractWorld {
                                                new PointSimple(c.getCenterX(), c.getCenterY()));
                 c.setCenterX(pathPoint.getX() + 28);
                 c.setCenterY(pathPoint.getY() + 28);
-                if (c.intersects(n.getBoundsInParent())) {
-                    return false;
-                }
+                if (c.intersects(n.getBoundsInParent())) { return false; }
             }
             catch (EndOfPathException e) {
                 break;

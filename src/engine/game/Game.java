@@ -60,4 +60,18 @@ public interface Game {
      * @return
      */
     public String getGameName ();
+
+    /**
+     * Returns the string instructions of the game.
+     * 
+     * @return
+     */
+    public String getInstructions ();
+
+    /**
+     * Returns the string description of the game.
+     * 
+     * @return
+     */
+    public String getDescription ();
 }

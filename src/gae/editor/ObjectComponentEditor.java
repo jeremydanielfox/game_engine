@@ -1,11 +1,11 @@
 package gae.editor;
 
+import gae.editorView.PopUpEditorView;
+import gae.gameView.GenericObjectsPane;
 import java.util.function.Consumer;
-import javafx.scene.Scene;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.stage.Stage;
-
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -19,8 +19,10 @@ public class ObjectComponentEditor extends ComponentEditor {
     private Button myAddExistingButton;
     private Button myCreateNewButton;
     private Object myObject;
+    private Class<?> clazz;
 
     public ObjectComponentEditor (Class<?> klass) {
+        clazz = klass;
         try {
             myObject = Class.forName(klass.getName()).newInstance();
         }
@@ -31,23 +33,25 @@ public class ObjectComponentEditor extends ComponentEditor {
         }
         myAddExistingButton = new Button("Add Existing");
         myCreateNewButton = new Button("Create New");
-        myCreateNewButton.setOnMouseClicked(e -> {
-            Consumer<Object> setObjectConsumer = o -> setObject(o);
-            PopUpEditor popUp = new PopUpEditor(klass, setObjectConsumer);
-            ScrollPane scroll = new ScrollPane();
-            scroll.setPrefSize(300, 500);
-            scroll.setContent(popUp.getObject());
-            Scene editorScene = new Scene(scroll);
-            Stage editorStage = new Stage();
-            editorStage.setScene(editorScene);
-            editorStage.show();
-        });
+        myCreateNewButton.setOnMouseClicked(popNewEditor());
         // TODO: setup lambda's for these buttons
         getEditBox().getChildren().addAll(getLabel(), myAddExistingButton, myCreateNewButton);
     }
 
     private void setObject (Object obj) {
         myObject = obj;
+    }
+    
+    public Class<?> getObjectClass() {
+        return clazz;
+    }
+    
+    public EventHandler<? super MouseEvent> popNewEditor() {
+        return e -> {
+            Consumer<Object> setObjectConsumer = o -> setObject(o);
+//            GenericObjectsPane.newCustomObject(clazz, "yo", setObjectConsumer);
+            new PopUpEditorView(setObjectConsumer, clazz);
+        };
     }
 
     @Override

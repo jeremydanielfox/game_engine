@@ -4,14 +4,20 @@ import engine.gameobject.PointSimple;
 import exception.ObjectOutOfBoundsException;
 import gae.backend.Placeable;
 import gae.editorView.DragIntoRectangle;
+import gae.editorView.DraggableFields;
+import gae.editorView.DraggableItem;
 import gae.gridView.ContainerWrapper;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.HBoxBuilder;
 import View.ViewUtil;
 
 
@@ -40,12 +46,12 @@ public class DraggableUtilities {
                 ViewUtil.bindCursor(transitionImage,
                                     node,
                                     ViewUtil
-                                    .getMouseLocation(me, transitionImage),
-                                    KeyCode.ESCAPE, false);
+                                            .getMouseLocation(me, transitionImage),
+                                    KeyCode.Q, false);
         binder.setOnMouseClicked(ev -> {
             Point2D current =
                     binder.localToParent(new Point2D(binder.getTranslateX(), binder
-                                                     .getTranslateY()));
+                            .getTranslateY()));
             Double currentX = current.getX();
             Double currentY = current.getY();
             if (wrapper.checkBounds(currentX, currentY)) {
@@ -65,23 +71,47 @@ public class DraggableUtilities {
         root.getChildren().add(binder);
     }
 
-    public static void makeImagePlaceable (MouseEvent me,
-                                           ImageView image,
-                                           Node node, DragIntoRectangle correct,
-                                           Group root) {
-        ImageContainer clone = new ImageContainer(new ImageView(image.getImage()));
-        ImageView imageView = (ImageView) ListViewUtilities.createCellContentWithIcon(clone);
+    /**
+     * places the node on the location clicked. When the location is clicked, a new instance of the
+     * object is added to a list and a MovableImage is placed on the location.
+     *
+     * @param me: MouseEvent to bind the cursor to the EditableNode
+     * @param editablenode: The EditableNode
+     * @param node: Node that will be clicked on
+     * @param instanceList: List of Editables
+     * @param wrapper: The object which determines the bounds of where the object can be placed
+     * @param root: where the Image will be placed
+     */
+    public static void makeObjectPlaceable (MouseEvent me,
+                                            DraggableItem placeable,
+                                            Node node,
+                                            ObservableList<Object> instanceList,
+                                            ContainerWrapper wrapper,
+                                            Group root) {
+        // TODO: figure out how to clone
         Node binder =
-                ViewUtil.bindCursor(imageView,
+                ViewUtil.bindCursor(placeable,
                                     node,
                                     ViewUtil
-                                    .getMouseLocation(me, imageView),
-                                    KeyCode.ESCAPE, false);
+                                            .getMouseLocation(me, placeable),
+                                    KeyCode.Q, false);
         binder.setOnMouseClicked(ev -> {
-            if (image.getBoundsInLocal().intersects(correct.getBoundsInLocal())) {
-                correct.setCorrect(imageView);
+            DraggableItem clone = placeable.getNewInstance();
+            Point2D current =
+                    binder.localToParent(new Point2D(binder.getTranslateX(), binder
+                            .getTranslateY()));
+            Double currentX = current.getX();
+            Double currentY = current.getY();
+            if (wrapper.checkBounds(currentX, currentY)) {
+                throw new ObjectOutOfBoundsException();
             }
-
+            // PointSimple relativeLocation = wrapper.convertCoordinates(currentX, currentY);
+            //
+            // placeable.setTranslateX(relativeLocation.getX());
+            // placeable.setTranslateY(relativeLocation.getY());
+            clone.setTranslateX(currentX);
+            clone.setTranslateY(currentY);
+            root.getChildren().add(clone);
         });
         root.getChildren().add(binder);
     }

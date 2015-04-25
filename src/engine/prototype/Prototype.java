@@ -1,5 +1,6 @@
 package engine.prototype;
 
+import engine.shop.RangeDisplay;
 import engine.shop.tag.GameObjectTag;
 
 
@@ -13,6 +14,6 @@ public interface Prototype<E> {
 
     public GameObjectTag getTag ();
 
-    public double getRange ();
+    public RangeDisplay getRangeDisplay ();
 
 }

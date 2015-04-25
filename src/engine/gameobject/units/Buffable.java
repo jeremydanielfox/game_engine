@@ -7,6 +7,14 @@ public interface Buffable {
      * 
      * @param buff
      */
-    public void receiveBuff (Buff buff);
+
+    public void receiveBuff(Buff buff);
+    
+   /**
+    * Make immune to certain type of buff
+    * @param immunity class of added immunity
+    * @param buffType specific bufftype (BuffType.NULL if regardless of bufftype)
+    */
+    public void addImmunity(Class<? extends Buff> immunity, BuffType buffType);
 
 }

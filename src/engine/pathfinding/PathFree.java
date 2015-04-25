@@ -9,7 +9,7 @@ import java.util.Map;
 import voogasalad.util.pathsearch.graph.GridCell;
 import voogasalad.util.pathsearch.pathalgorithms.NoPathExistsException;
 import voogasalad.util.pathsearch.wrappers.GridWrapper;
-
+import engine.fieldsetting.Settable;
 
 /**
  * A path to represent a free path. Game objects will receive their next
@@ -24,24 +24,40 @@ public class PathFree implements Path {
     private Map<GridCell, GridCell> myPath;
     private CoordinateTransformer myTrans;
     private GameObject[][] objectMatrix;
-    private GridCell spawnPoint, bounds;
-    private List<GridCell> endPoints;
+    private GridCell bounds;
+    private List<GridCell> endPoints, spawnPoints, obstacles;
 
     public PathFree (CoordinateTransformer cTrans, GameObject[][] matrix) {
         myAlgorithm = new GridWrapper();
         myTrans = cTrans;
         objectMatrix = matrix;
         endPoints = new ArrayList<>();
-        endPoints.add(new GridCell(8, 8));
-        endPoints.add(new GridCell(5, 0));
-        spawnPoint = new GridCell(0, 0);
+        endPoints.add(new GridCell(9, 9));
+//        endPoints.add(new GridCell(0, 9));
+//        endPoints.add(new GridCell(9, 0));
+        spawnPoints = new ArrayList<>();
+        spawnPoints.add(new GridCell(0, 0));
+//        spawnPoints.add(new GridCell(4, 4));
         bounds = new GridCell(matrix.length, matrix[0].length);
+        obstacles = new ArrayList<>();
     }
 
     @Override
     public void updatePath () throws NoPathExistsException {
-        myAlgorithm.initializeGraph(objectMatrix, go -> go != null);
+    	Boolean[][] obstacleMatrix = new Boolean[objectMatrix.length][objectMatrix[0].length];
+    	for(int r = 0; r < objectMatrix.length; r++){
+    		for(int c = 0; c < objectMatrix[0].length; c++){
+    			obstacleMatrix[r][c] = objectMatrix[r][c] != null || obstacles.contains(new GridCell(r,c));
+    		}
+    	}
+        myAlgorithm.initializeGraph(obstacleMatrix, b -> (Boolean)b);
         myPath = myAlgorithm.allShortestPaths(GridCell.toArray(endPoints));
+        
+        for(GridCell end : endPoints){
+        	for(GridCell start : spawnPoints){
+                myAlgorithm.shortestPath(end.getRow(),end.getCol(), start.getRow(), start.getCol());
+        	}
+        }
         // myPathCoordinates = myPath.stream().map(cell ->
         // myTrans.tranformGridToWorld(cell)).collect(Collectors.toList());
         // p = new PathFixed();
@@ -72,18 +88,27 @@ public class PathFree implements Path {
             if (currentCell.withinBounds(bounds)) {// TODO make better algorithmically
                 for (GridCell c : myPath.keySet()) {
                     if (c.distance(currentCell) == 1) {
-                        return myTrans.tranformGridToWorld(c);
-                        // return
-                        // PointSimple.pointOnLine(current,myTrans.tranformGridToWorld(c),speed);
+                        return myTrans.transformGridToWorldInexact(c);
                     }
                 }
             }
-            return myTrans.tranformGridToWorld(spawnPoint);
+            return myTrans.tranformGridToWorld(spawnPoints.get((int)(Math.random()*spawnPoints.size())));
         }
     }
 
-    @Override
-    public void addPathSegment (PathSegment ps) {
-    }
+	@Override
+	public void addPathSegment(PathSegment ps) {}	
+	
+	public void setEndPoints(List<GridCell> endpoints){
+		endPoints = endpoints;
+	}
+	
+	public void setSpawnPoints(List<GridCell> spawnpoints){
+		spawnPoints = spawnpoints;
+	}
+	
+	public void setObstacles(List<GridCell> obstacles){
+		this.obstacles = obstacles;
+	}
 
 }

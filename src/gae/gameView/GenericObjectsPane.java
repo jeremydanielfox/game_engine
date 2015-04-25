@@ -3,6 +3,7 @@ package gae.gameView;
 import engine.gameobject.GameObjectSimple;
 import gae.editor.PopUpEditor;
 import gae.openingView.UIObject;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,9 +22,11 @@ public class GenericObjectsPane implements UIObject {
 
     private VBox baseNode;
     private Consumer<Object> function;
+    private BiConsumer<Class<?>, Object> biconsumer;
 
-    public GenericObjectsPane (Consumer<Object> consumer) {
+    public GenericObjectsPane (Consumer<Object> consumer, BiConsumer<Class<?>, Object> biconsumer) {
         function = consumer;
+        this.biconsumer = biconsumer;
         initialize();
     }
 
@@ -48,17 +51,21 @@ public class GenericObjectsPane implements UIObject {
 
     private void cellClicked (MouseEvent e, String selected) {
         if (e.getClickCount() == 2) {
-            newCustomObject(selected);
+            newCustomObject(GameObjectSimple.class, selected, function);
         }
     }
 
-    private void newCustomObject (String type) {
-        PopUpEditor editor = new PopUpEditor(GameObjectSimple.class, type, function);
+    public static void newCustomObject (Class<?> klass, String title, Consumer<Object> consumer) {
+        Stage editorStage = new Stage();
+        Consumer<Object> closeConsumer = e -> {
+            consumer.accept(e);
+            editorStage.close();
+        };
+        PopUpEditor editor = new PopUpEditor(klass, title, closeConsumer);
         ScrollPane scroll = new ScrollPane();
         scroll.setPrefSize(300, 500);
         scroll.setContent(editor.getObject());
         Scene editorScene = new Scene(scroll);
-        Stage editorStage = new Stage();
         editorStage.setScene(editorScene);
         editorStage.show();
     }

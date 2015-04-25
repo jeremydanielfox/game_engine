@@ -4,6 +4,7 @@ import gae.backend.Placeable;
 import gae.gridView.LevelView;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -36,7 +37,7 @@ public class CentralTabView implements UIObject {
         // refactor this code
         ShopTab shopTab = new ShopTab();
         hudTab = new HudEditorTab(null);
-        GameObjectEditorTab gameObjectTab = new GameObjectEditorTab(scene);
+        GameObjectEditorTab gameObjectTab = new GameObjectEditorTab(scene, getConsumer());
 
         tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode(),
                                  gameObjectTab.getBaseTabNode());
@@ -65,5 +66,12 @@ public class CentralTabView implements UIObject {
 
     public Consumer<Object> getConsumer () {
         return e -> libraryData.addGameObjectToList(e);
+    }
+
+    public BiConsumer<Class<?>, Object> getBiconsumer () {
+        BiConsumer<Class<?>, Object> biConsumer = (klass, o) -> {
+            libraryData.addCreatedObjectToList(klass, o);
+        };
+        return biConsumer;
     }
 }

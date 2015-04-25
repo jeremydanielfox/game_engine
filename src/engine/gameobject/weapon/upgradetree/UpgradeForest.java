@@ -39,5 +39,9 @@ public class UpgradeForest implements UpgradeTree {
         List<UpgradeTree> updatingTrees = new ArrayList<>(Arrays.asList(toUpdate));
         updatingTrees.forEach(tree -> tree.updateCurrent(new UpgradeTree[0]));
     }
+    
+    public UpgradeTree clone () {
+        return null;
+    }
 
 }

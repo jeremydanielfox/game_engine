@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.event.EventHandler;
 import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
@@ -66,9 +67,9 @@ public class ShopModelSimple implements ShopModel {
     public List<ItemGraphic> getItemGraphics () {
         List<ItemGraphic> items = new ArrayList<ItemGraphic>();
         prototypeMap.values().forEach(prototype -> items.add(new ItemGraphic(prototype.getTag()
-                                                                             .getName(), ((PriceTag) prototype.getTag())
-                                                                             .getShopGraphic(), new TransitionOnClicked(this, prototype
-                                                                                                                        .getTag().getName()))));
+                .getName(), ((PriceTag) prototype.getTag())
+                .getShopGraphic())));
+
         return items;
     }
 
@@ -81,7 +82,7 @@ public class ShopModelSimple implements ShopModel {
         bundles.forEach(bundle -> {
             upgradeMap.put(bundle.getTag().getName(), bundle);
             upgradeGraphics.add(new ItemGraphic(bundle.getTag().getName(), bundle.getTag()
-                                                .getShopGraphic(), new BuyOnClicked(this, bundle.getTag().getName())));
+                    .getShopGraphic()));
         });
         return upgradeGraphics;
     }
@@ -92,14 +93,13 @@ public class ShopModelSimple implements ShopModel {
      * @param name Name of GameObject
      * @param location Location to be placed
      */
-    @Override
-    public boolean purchaseGameObject (String name, PointSimple location) {
+    public boolean purchaseGameObject (String name, PointSimple location, EventHandler selected) {
         if (canPurchase(name) && checkPlacement(name, location)) {
             currentPlayer.getWallet().withdraw(getPrice(name));
-            // myGameWorld.addObject(prototypeMap.get(name).clone());
             try {
-                GameObject tower = new TestTower(100, 100, 100);
-                // TODO: add listener of some sort to access ShopView?
+                //GameObject tower = prototypeMap.get(name).clone();
+                GameObject tower = new TestTower(1, 100, 100);
+                tower.getGraphic().getNode().setOnMousePressed(selected);
                 myGameWorld.addObject(tower, location);
                 return true;
             }
@@ -120,9 +120,11 @@ public class ShopModelSimple implements ShopModel {
      */
     @Override
     public void purchaseUpgrade (String name) {
-        currentPlayer.getWallet().withdraw(getPrice(name));
-        currentGameObject.getWeapon().applyUpgrades(upgradeMap.get(name));
-        getUpgradeGraphics(currentGameObject);
+        if (canPurchase(name)){
+            currentPlayer.getWallet().withdraw(getPrice(name));
+            currentGameObject.getWeapon().applyUpgrades(upgradeMap.get(name));
+            getUpgradeGraphics(currentGameObject);
+        }
     }
 
     @Override
@@ -135,11 +137,8 @@ public class ShopModelSimple implements ShopModel {
     }
 
     @Override
-    public TransitionGameObject getTransitionGameObject (String name) {
-        Prototype<GameObject> prototype = prototypeMap.get(name);
-        return new TransitionGameObject(prototype.getTag().getName(),
-                                        prototype.getTag().getGraphic(),
-                                        prototype.getRange());
+    public RangeDisplay getRangeDisplay (String name) {
+        return prototypeMap.get(name).getRangeDisplay();
     }
 
     @Override
@@ -167,8 +166,8 @@ public class ShopModelSimple implements ShopModel {
 
     @Override
     public boolean checkPlacement (String name, PointSimple location) {
-        return myGameWorld.isPlacable(prototypeMap.get(name).getTag().getGraphic().getNode(),
-                                      location);
+        return myGameWorld.isPlaceable(prototypeMap.get(name).getTag().getGraphic().getNode(),
+                                       location);
     }
 
 }

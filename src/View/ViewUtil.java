@@ -10,8 +10,6 @@ import javafx.scene.input.MouseEvent;
 
 public class ViewUtil {
 
-    private static Point2D previous;
-
     /**
      * Binds the cursor to the node. Binding will be disabled, and the node will be removed from the
      * scene, when the appropriate key is pressed.
@@ -30,7 +28,6 @@ public class ViewUtil {
                 // mouseEvent.consume();
                 Point2D current = getMouseLocation(mouseEvent, node);
                 wrapGroup.relocate(current.getX(), current.getY());
-                previous = current;
             });
         }
         else {
@@ -38,25 +35,30 @@ public class ViewUtil {
                 // mouseEvent.consume();
                 Point2D current = getMouseLocation(mouseEvent, node);
                 wrapGroup.relocate(current.getX(), current.getY());
-                previous = current;
             });
         }
-
-        // TODO: figure out why keyPressed caller must be scene, and not pane or node
-        // EDIT: I changed this to node and it worked perfectly for me!
         pane.getScene().setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == key) {
                 unbindCursor(pane, node);
             }
         });
 
+        // TODO: figure out why keyPressed caller must be scene, and not pane or node
+        // EDIT: I changed this to node and it worked perfectly for me!
+
         return wrapGroup;
     }
 
     public static void unbindCursor (Node pane, Node node) {
         pane.getScene().setOnMouseMoved(null);
+        pane.getScene().setOnKeyPressed(null);
         node.setVisible(false);
-        ((Group) node.getParent()).getChildren().remove(node);
+        try {
+            ((Group) node.getParent()).getChildren().remove(node);
+        }
+        catch (NullPointerException e) {
+
+        }
     }
 
     public static void addMouseMovementHandler () {

@@ -1,9 +1,8 @@
 package player.gamePlayer;
 
 import gae.gameView.Main;
-
+import View.GamePlayerScreen;
 import java.util.Arrays;
-
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import View.GamePlayerScreen;
 
 /**
  * Opens the game player. It will ideally have a few pre-authored games for the user to play but

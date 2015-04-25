@@ -39,7 +39,7 @@ public class GameObjectTagSimple implements GameObjectTag {
     @Override
     public Graphic getGraphic () {
         return (purchasable != null) ? purchasable.getGraphic()
-                                    : new Graphic(40, 40, "Bloons_TackShooter.png");
+                                     : new Graphic(40, 40, "Bloons_TackShooter.png");
     }
 
     @Override

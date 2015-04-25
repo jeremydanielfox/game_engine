@@ -2,7 +2,6 @@ package engine.gameobject.weapon.range;
 
 import java.util.Optional;
 import engine.fieldsetting.Settable;
-import engine.gameobject.units.BuffType;
 import engine.gameobject.weapon.Upgrade;
 
 
@@ -26,7 +25,7 @@ public class RangeUpgrade implements Range, Upgrade {
         this.increment = increment;
         decorated = Optional.empty();
     }
-    
+
     @Settable
     public void setIncrement (double increment) {
         this.increment = increment;

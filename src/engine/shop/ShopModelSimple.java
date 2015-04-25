@@ -20,7 +20,7 @@ import gameworld.StructurePlacementException;
 /**
  * Manages the maps containing the purchasable prototypes. Assumes all given Prototypes contain a
  * PriceTag, and are therefore available for purchase.
- * 
+ *
  * @author Tom Puglisi
  *
  */
@@ -41,7 +41,7 @@ public class ShopModelSimple implements ShopModel {
         // List<Prototype<GameObject>>prototypes =
 
         this.markup = markup;
-        this.myGameWorld = world;
+        myGameWorld = world;
         currentPlayer = player;
         prototypeMap = new HashMap<>();
         upgradeMap = new HashMap<>();
@@ -58,6 +58,7 @@ public class ShopModelSimple implements ShopModel {
         prototypes.forEach(prototype -> addPrototype(prototype));
     }
 
+    @Override
     public void addPrototype (Prototype<GameObject> prototype) {
         prototypeMap.put(prototype.getTag().getName(), prototype);
     }
@@ -68,9 +69,11 @@ public class ShopModelSimple implements ShopModel {
         prototypeMap.values().forEach(prototype -> items.add(new ItemGraphic(prototype.getTag()
                 .getName(), ((PriceTag) prototype.getTag())
                 .getShopGraphic())));
+
         return items;
     }
 
+    @Override
     public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject) {
         currentGameObject = gameObject;
         List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
@@ -78,15 +81,14 @@ public class ShopModelSimple implements ShopModel {
         upgradeMap.clear();
         bundles.forEach(bundle -> {
             upgradeMap.put(bundle.getTag().getName(), bundle);
-            upgradeGraphics.add(new ItemGraphic(bundle.getTag().getName(), bundle.getTag()
-                    .getShopGraphic()));
+            upgradeGraphics.add(new ItemGraphic(bundle.getTag().getName(), bundle.getTag().getShopGraphic()));
         });
         return upgradeGraphics;
     }
 
     /**
      * Purchases and item and places it at the selected position on the screen
-     * 
+     *
      * @param name Name of GameObject
      * @param location Location to be placed
      */
@@ -112,7 +114,7 @@ public class ShopModelSimple implements ShopModel {
     /**
      * Applies an upgrade to the given GameObject and subtracts the appropriate amount from the
      * player's wallet.
-     * 
+     *
      * @param itemGraphic
      */
     @Override
@@ -122,6 +124,7 @@ public class ShopModelSimple implements ShopModel {
         getUpgradeGraphics(currentGameObject);
     }
 
+    @Override
     public boolean canPurchase (String name) {
         return currentPlayer.getWallet().getBalance() >= getPrice(name);
     }
@@ -147,7 +150,7 @@ public class ShopModelSimple implements ShopModel {
     // TODO: account for the possibility of a "name" not in either map
     private PriceTag getPriceTag (String name) {
         if (prototypeMap.containsKey(name)) {
-            return (PriceTag) prototypeMap.get(name).getTag();
+            return prototypeMap.get(name).getTag();
         }
         else {
             return upgradeMap.get(name).getTag();
@@ -158,6 +161,7 @@ public class ShopModelSimple implements ShopModel {
         NAME, DESCRIPTION, PRICE
     }
 
+    @Override
     public boolean checkPlacement (String name, PointSimple location) {
         return myGameWorld.isPlaceable(prototypeMap.get(name).getTag().getGraphic().getNode(),
                                        location);

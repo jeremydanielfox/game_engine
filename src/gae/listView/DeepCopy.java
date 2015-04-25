@@ -1,11 +1,11 @@
 package gae.listView;
 
-import java.io.IOException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.NotSerializableException;
-import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 
 /**
@@ -44,9 +44,9 @@ public class DeepCopy {
         }
         catch (NotSerializableException e) {
             System.out.println("Not serializable!");
-            //TODO: figure out why it can't copy GameObject (just doesn't copy it)
-//            Editable editable = (Editable) orig;
-//            return editable.clone();
+            // TODO: figure out why it can't copy GameObject (just doesn't copy it)
+            // Editable editable = (Editable) orig;
+            // return editable.clone();
         }
         catch (IOException e) {
             e.printStackTrace();

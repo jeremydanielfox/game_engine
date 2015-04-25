@@ -10,7 +10,7 @@ import engine.fieldsetting.Settable;
 
 /**
  * This class encapsulates the node for each game object.
- * 
+ *
  * @author Sierra Smith
  * @author Cosette Goldstein
  *
@@ -48,6 +48,7 @@ public class Graphic {
         // initializeImageView();
     }
 
+    @Override
     public Graphic clone () {
         Graphic clone = new Graphic(myHeight, myWidth, myImageName);
         clone.initializeImageView();
@@ -83,7 +84,7 @@ public class Graphic {
 
     /**
      * Assign the given point to both the ImageView and a copy of the point in this class.
-     * 
+     *
      * @param point
      */
     public void setPoint (PointSimple point) {
@@ -115,12 +116,13 @@ public class Graphic {
      * At some point, the ImageView will be null because this object will have been written out of
      * xstream, and the imageview will have been omitted. At this point, the method re-initializes
      * the imageview using the stored criteria.
-     * 
+     *
      * @return
      */
     private ImageView getImageView () {
-        if (myImageView == null)
+        if (myImageView == null) {
             initializeImageView();
+        }
         return myImageView;
     }
 
@@ -138,7 +140,7 @@ public class Graphic {
 
     /**
      * Rotates the node for this graphic according to a point and its rotator.
-     * 
+     *
      * @param point
      */
     public void rotate (PointSimple point) {

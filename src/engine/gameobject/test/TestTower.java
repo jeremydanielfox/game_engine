@@ -9,6 +9,7 @@ import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.GameObjectTagSimple;
 
 public class TestTower extends GameObjectSimple {
+
     private int type;
 
     public TestTower (int type, int xcor, int ycor) {
@@ -30,4 +31,3 @@ public class TestTower extends GameObjectSimple {
     }
 
 }
-

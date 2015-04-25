@@ -31,10 +31,10 @@ import View.ViewUtil;
 
 /**
  * View of the shop. Contains a node that can be directly added to the main View.
- * 
+ *
  * NOTE: layout of the shop is being hard-coded now, to resemble bloons. Future refactoring will
  * factor out the separate nodes in the container to allow for more customization.
- * 
+ *
  * @author Nathan Prabhu
  *
  */
@@ -140,7 +140,7 @@ public class ShopView extends Parent {
 
     /**
      * To be called by View when gameobject is selected during game.
-     * 
+     *
      * @param gameObject selected
      */
     public void displayUpgrades (GameObject gameObject) {
@@ -206,10 +206,5 @@ public class ShopView extends Parent {
     private void selectGameObject(MouseEvent event) {
         GameObject selected = world.getObjectFromNode((Node) event.getSource());
         selector.setCurrent(selected);
-        //node.setOnMousePressed();
-        // get GameObject with node as key
-        // GameObject will be asked for range, can then place appropriate RangeDisplay
-        // OR... every GameObject has its own RangeDisplay. And graphic can change accordingly
-        // will then use GameObject to display next UpgradeBundle
     }
 }

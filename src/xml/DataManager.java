@@ -10,7 +10,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 /**
  * Class that allows someone to write and read objects to and from XML via XStream.
- * 
+ *
  * @author Jeremy
  *
  */
@@ -40,15 +40,16 @@ public class DataManager {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * Takes in a Class and a filePath.
      * Reads in an xml file from the filePath and constructs it as an object.
      * Returns the object cast as the given Class.
+     * 
      * @param <E>
      */
     public static <T> T readFromXML (Class<T> klass, String filePath) {
         File file = new File(filePath);
-        return (T) klass.cast(myXStream.fromXML(file));
+        return klass.cast(myXStream.fromXML(file));
     }
 }

@@ -1,6 +1,8 @@
 package gae.gridView;
 
+import engine.gameobject.PointSimple;
 import javafx.beans.property.DoubleProperty;
+import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -10,7 +12,7 @@ import javafx.scene.shape.StrokeType;
 
 /**
  * A class specifically for the circles that are bound to the four points in a Bezier curve.
- * 
+ *
  * @author Kei
  *
  */
@@ -41,7 +43,7 @@ public class Anchor extends Circle {
 
     /**
      * initialize the properties of this JavaFX object
-     * 
+     *
      * @param color
      */
     private void init (Color color) {
@@ -61,7 +63,7 @@ public class Anchor extends Circle {
      * be able to drag the object and have the coordinates update
      */
     private void enableDrag () {
-        final Pair dragDelta = new Pair(0, 0);
+        final PointSimple dragDelta = new PointSimple(0, 0);
         // setOnMousePressed(e -> {
         // dragDelta.x = getCenterX() - e.getX();
         // dragDelta.y = getCenterY() - e.getY();
@@ -110,11 +112,11 @@ public class Anchor extends Circle {
 
     /**
      * checks for collision - used for snapping in different anchors
-     * 
+     *
      * @param object
      * @return
      */
     public boolean checkIntersect (Node object) {
-        return this.getBoundsInParent().intersects(object.getBoundsInParent());
+        return getBoundsInParent().intersects(object.getBoundsInParent());
     }
 }

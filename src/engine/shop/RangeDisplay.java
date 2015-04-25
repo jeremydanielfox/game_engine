@@ -1,6 +1,5 @@
 package engine.shop;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -10,8 +9,9 @@ import engine.gameobject.Graphic;
 
 
 /**
+ *
  * A GameObject's graphic overlaid on top of its current range.
- * 
+ *
  * @author Nathan Prabhu and Tom Puglisi
  *
  */
@@ -19,19 +19,20 @@ import engine.gameobject.Graphic;
 public class RangeDisplay {
 
     private static final Color ERROR_COLOR = Color.rgb(255, 51, 51, 0.5); // half-transparent red
+
     private static final Color NORMAL_COLOR = Color.rgb(255, 255, 255, 0.5); // half-transparent
                                                                              // white
 
     private Graphic graphic;
     private double range;
     private String name;
-    private BooleanProperty isPlaceable;
     @XStreamOmitField
     private Circle rangeDetection;
     @XStreamOmitField
     private transient StackPane pane;
 
     public RangeDisplay (String name, Graphic myGraphic, double range) {
+        graphic = myGraphic;
         this.name = name;
         this.graphic = myGraphic;
         this.range = range;

@@ -11,7 +11,9 @@ import engine.goals.NullGoal;
 /**
  * This class contains information needed to create, enable, and set up the click action for a
  * button. It was created to allow a game designer to add a custom button to the game and use a goal
- * to determine when it should be enabled and give it a lambda function to execute on click.
+ * to determine when it should be enabled and give it a lambda function to execute on click. It
+ * assumes that anything passed into it's constructor and set methods is not null, and it depends on
+ * the Goal interface to act as the enable condition for the button.
  * 
  * @author Sierra
  * @author Cosette

@@ -7,6 +7,7 @@ import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
 import java.util.List;
+import javafx.beans.property.DoubleProperty;
 
 
 public interface Weapon {
@@ -64,6 +65,8 @@ public interface Weapon {
      * @return
      */
     public abstract double getRange ();
+    
+    public abstract DoubleProperty getRangeProperty();
 
     /**
      * returns firing rate of weapon

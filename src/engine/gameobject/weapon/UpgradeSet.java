@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
@@ -25,10 +26,11 @@ import engine.gameobject.units.BuffType;
  * @param <T> the type of elements maintained by this set
  */
 
-public class UpgradeSet<T extends Upgrade> implements Set<T> {
+public class UpgradeSet<T extends Upgrade> implements ObservableSet<T> {
 
     // maps UpgradeType (String) to T
     private HashMap<String, T> upgradeMap;
+    private ObservableSet<T> obsSet;
 
     public <T> UpgradeSet () {
         this.upgradeMap = new HashMap<>();
@@ -36,6 +38,9 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
 
     public UpgradeSet (T ... objects) {
         this.upgradeMap = new HashMap<>();
+        obsSet =
+                FXCollections.observableSet(upgradeMap.values().stream()
+                                            .collect(Collectors.toSet()));
         addAll(Arrays.asList(objects));
     }
 
@@ -45,15 +50,8 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
      * @param obj object's class-type counterpart to be retrieved from this set, if present
      * @return object if it exists, otherwise null
      */
-    public T get (T obj) {
-        return upgradeMap.get(new UpgradeType(obj));
-    }
-
-    public void addListener (SetChangeListener<T> listener) {
-        ObservableSet<T> obs =
-                FXCollections.observableSet(upgradeMap.values().stream()
-                                            .collect(Collectors.toSet()));
-        obs.addListener(listener);
+    public T get (T obj) {       
+        return upgradeMap.get(new UpgradeType(obj).toString());
     }
 
     @Override
@@ -99,8 +97,8 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
      */
     @Override
     public boolean add (T e) {
-        UpgradeType toAdd = new UpgradeType(e);
-        return upgradeMap.put(toAdd.toString(), e) == null;
+        upgradeMap.put(new UpgradeType(e).toString(), e);
+        return true;
     }
 
     @Override
@@ -203,5 +201,29 @@ public class UpgradeSet<T extends Upgrade> implements Set<T> {
                                  buffTypeString);
         }
     }
+
+    @Override
+    public void addListener (InvalidationListener listener) {
+        obsSet.addListener(listener);
+        
+    }
+
+    @Override
+    public void removeListener (InvalidationListener listener) {
+        obsSet.removeListener(listener);
+    }
+
+    @Override
+    public void addListener (SetChangeListener<? super T> listener) {
+        obsSet.addListener(listener);
+        
+    }
+
+    @Override
+    public void removeListener (SetChangeListener<? super T> listener) {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 }

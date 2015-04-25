@@ -45,7 +45,8 @@ public class GamePlayerScreen implements GameScene {
         myStage.setResizable(false);
 
         myVbox = new VBox(30);
-        //pauseScreen = new PauseScene(e -> resumeGame(), myStage,getScene());
+
+        pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
         myGame = loadGame();
         myPlayerName = "";
         myPreviousScene = previousScene;

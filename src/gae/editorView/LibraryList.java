@@ -22,6 +22,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 
 
 /**
@@ -33,9 +34,10 @@ import javafx.scene.paint.Color;
 public class LibraryList {
 
     private Map<String, ObservableList<Authorable>> editableMap;
+    private static final double ACCORDION_PROPORTIONS = 0.15;
     private LibraryData data = LibraryData.getInstance();
-    private String[] hardCodeForNow = { "Tower", "Enemy" }; // types of GameObjects
     private Scene scene;
+    private Accordion accordion;
 
     public LibraryList (Scene scene) {
         this.scene = scene;
@@ -52,13 +54,9 @@ public class LibraryList {
      * @return
      */
     public Accordion initialize () {
-        Accordion accordion = new Accordion();
-        for (String type : hardCodeForNow) {
-            ObservableList<Authorable> list = FXCollections.observableArrayList();
-            editableMap.put(type, list);
-            TitledPane titledPane = getTitledPane(type);
-            accordion.getPanes().add(titledPane);
-        }
+        accordion = new Accordion();
+        accordion.setPrefWidth(Screen.getPrimary().getVisualBounds().getWidth() *
+                               ACCORDION_PROPORTIONS);
         setUpLists(data.getEditableObservableList());
         return accordion;
     }
@@ -68,16 +66,26 @@ public class LibraryList {
             while (change.next()) {
                 if (change.wasAdded()) { // if an editablenode was added
                     Placeable added = (Placeable) change.getAddedSubList().get(0);
+                    if (!editableMap.containsKey(added.getType())) {
+                        ObservableList<Authorable> newList = FXCollections.observableArrayList();
+                        editableMap.put(added.getType(), newList);
+                        TitledPane titledPane = getTitledPane(added.getType());
+                        accordion.getPanes().add(titledPane);
+                    }
                     editableMap.get(added.getType()).add(added);
                 }
             }
         });
         for (Authorable authorable : observableList) {
             Placeable editable = (Placeable) authorable;
-            editableMap.get(editable.getType()).add(editable);
+            try {
+                editableMap.get(editable.getType()).add(editable);
+            }
+            catch (NullPointerException e) {
+
+            }
         }
     }
-
 
     /**
      * method created to make a simple TitledPane with a text

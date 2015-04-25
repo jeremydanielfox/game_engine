@@ -58,6 +58,10 @@ public interface Placeable extends Serializable, Authorable {
 
     public void setTag (GameObjectTag tag);
 
+    public void setType (String type);
+
+    public void setImagePath (String path);
+
     public Object clone ();
 
     public Placeable makeNewInstance ();

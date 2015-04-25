@@ -1,6 +1,8 @@
 package gae.editorView;
 
+import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import engine.gameobject.GameObjectSimple;
 import View.ImageUtilities;
 import javafx.collections.FXCollections;
@@ -10,6 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -36,43 +39,57 @@ import gae.openingView.UIObject;
 
 
 public class GameObjectEditorView implements UIObject {
-    private ObservableList<Authorable> optionList = FXCollections.observableArrayList();
-    private Map<String, String[]> imageLocationMap;
     private Group root;
     private Scene scene;
-    private BorderPane border;
+    private StackPane stack;
     private static final int TAB_HEIGHT = 160;
     private static final int SIDE_WIDTH = 430;
-    private static final double LIBRARY_EDITOR_PROPORTIONS = 0.75;
+    private static final double LIBRARY_EDITOR_PROPORTIONS = 0.68;
     private static final Class<?> DEFAULT_CLASS = GameObjectSimple.class;
+    private double vboxHeight =
+            (Screen.getPrimary().getVisualBounds().getHeight() - TAB_HEIGHT) / 2;
+    private double vboxWidth =
+            (Screen.getPrimary().getVisualBounds().getWidth()) *
+                    LIBRARY_EDITOR_PROPORTIONS;
     private GameObjectContainer bottom;
+    private VBox top;
     private AnchorPane anchor;
     private SimpleEditor simpleEditor;
     private Placeable editable;
     private Class<?> clazz;
 
-    public GameObjectEditorView (Scene scene) {
-        init(scene);
+    public GameObjectEditorView (Scene scene, Consumer<Object> consumer) {
         simpleEditor = new SimpleEditor(DEFAULT_CLASS);
         clazz = DEFAULT_CLASS;
+        init(scene);
+        Button addButton = new Button("Create Game Object");
+        addButton.setOnAction(e -> {
+            consumer.accept(createObject());
+        });
+        addButton().accept(addButton);
     }
 
     public GameObjectEditorView (Scene scene, Class<?> klass) {
-        init(scene);
         simpleEditor = new SimpleEditor(klass);
         clazz = klass;
+        init(scene);
     }
 
     private void init (Scene scene) {
         root = new Group();
         root.setManaged(false);
         this.scene = scene;
-        imageLocationMap =
-                ResourceBundleUtil.useResourceBundle("gae/editorView/ObjectPathProperties");
+
+        List<ComponentEditor> simpleList = simpleEditor.getSimpleComponentEditors();
+        SimpleEditorView simpleEditorView = new SimpleEditorView(simpleList);
+        top = (VBox) simpleEditorView.getObject();
+        top.setPrefSize(vboxWidth, vboxHeight);
+        // imageLocationMap =
+        // ResourceBundleUtil.useResourceBundle("gae/editorView/ObjectPathProperties");
     }
 
     private BorderPane setUpBorder () {
-        border = new BorderPane();
+        BorderPane border = new BorderPane();
 
         border.setCenter(setUpAnchor());
         border.setRight(setUpAccordion());
@@ -81,22 +98,8 @@ public class GameObjectEditorView implements UIObject {
         return border;
     }
 
-    private AnchorPane setUpAnchor () {
-        double vboxHeight = (Screen.getPrimary().getVisualBounds().getHeight() - TAB_HEIGHT) / 2;
-        double vboxWidth =
-                (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH) *
-                        LIBRARY_EDITOR_PROPORTIONS;
-
-        // SimpleEditorView simpleEditorView =
-        // new SimpleEditorView(simpleEditor.getSimpleComponentEditors());
-        ObservableList<Node> simpleList = simpleEditor.getSimpleComponentEditors();
-        SimpleEditorView simpleEditorView = new SimpleEditorView(simpleList);
-        VBox top = (VBox) simpleEditorView.getObject();
-
-        top.setPrefSize(vboxWidth, vboxHeight);
-
-        bottom =
-                new GameObjectContainer(vboxWidth, vboxHeight, scene);
+    private Node setUpAnchor () {
+        bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
 
@@ -104,20 +107,11 @@ public class GameObjectEditorView implements UIObject {
         topHalf.setContent(top);
         ScrollPane bottomHalf = new ScrollPane();
         bottomHalf.setContent(bottom);
+
         anchor = new AnchorPane(topHalf, bottomHalf);
 
         AnchorPane.setTopAnchor(topHalf, 0.0);
         AnchorPane.setTopAnchor(bottomHalf, vboxHeight);
-        
-        simpleList.addListener( (ListChangeListener.Change<? extends Node> change) -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    System.out.println("CHANGE");
-                    Node added = change.getAddedSubList().get(0);
-                    top.getChildren().add(added);
-                }
-            }
-        });
         return anchor;
     }
 
@@ -125,7 +119,7 @@ public class GameObjectEditorView implements UIObject {
         Accordion accordion = new Accordion();
         for (ObjectComponentEditor edit : simpleEditor.getObjectComponentEditors()) {
             GenericObjectList list =
-                    new GenericObjectList(edit.getObjectClass(), bottom, root, scene, edit);
+                    new GenericObjectList(edit.getObjectClass(), bottom, bottom, root, edit);
             accordion.getPanes().add(list.getTitledPane());
         }
         return accordion;
@@ -141,4 +135,8 @@ public class GameObjectEditorView implements UIObject {
         return simpleEditor.createObject(clazz);
     }
 
+    public Consumer<Node> addButton () {
+        Consumer<Node> consumer = node -> top.getChildren().add(node);
+        return consumer;
+    }
 }

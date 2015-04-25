@@ -47,7 +47,7 @@ public class DraggableUtilities {
                                     node,
                                     ViewUtil
                                             .getMouseLocation(me, transitionImage),
-                                    KeyCode.ESCAPE, false);
+                                    KeyCode.Q, false);
         binder.setOnMouseClicked(ev -> {
             Point2D current =
                     binder.localToParent(new Point2D(binder.getTranslateX(), binder
@@ -88,49 +88,30 @@ public class DraggableUtilities {
                                             ObservableList<Object> instanceList,
                                             ContainerWrapper wrapper,
                                             Group root) {
-        //TODO: figure out how to clone
+        // TODO: figure out how to clone
         Node binder =
                 ViewUtil.bindCursor(placeable,
                                     node,
                                     ViewUtil
                                             .getMouseLocation(me, placeable),
-                                    KeyCode.ESCAPE, false);
+                                    KeyCode.Q, false);
         binder.setOnMouseClicked(ev -> {
+            DraggableItem clone = placeable.getNewInstance();
             Point2D current =
                     binder.localToParent(new Point2D(binder.getTranslateX(), binder
                             .getTranslateY()));
             Double currentX = current.getX();
             Double currentY = current.getY();
-            System.out.println("Current X is : " + currentX);
-            System.out.println("Current Y is : " + currentY);
             if (wrapper.checkBounds(currentX, currentY)) {
                 throw new ObjectOutOfBoundsException();
             }
-            placeable.openEditor(ev);
-            placeable.setTranslateX(currentX);
-            placeable.setTranslateY(currentY);
-            root.getChildren().add(placeable);
-        });
-        root.getChildren().add(binder);
-    }
-
-    public static void makeImagePlaceable (MouseEvent me,
-                                           DraggableFields image,
-                                           Node node, DragIntoRectangle correct,
-                                           Group root) {
-        DraggableFields clone = new DraggableFields(image.getCloneImage());
-        ImageView imageView = (ImageView) ListViewUtilities.createCellContentWithIcon(clone);
-        Node binder =
-                ViewUtil.bindCursor(imageView,
-                                    node,
-                                    ViewUtil
-                                            .getMouseLocation(me, imageView),
-                                    KeyCode.ESCAPE, false);
-        binder.setOnMouseClicked(ev -> {
-            if (image.getImageView().getBoundsInLocal().intersects(correct.getBoundsInLocal())) {
-                correct.setCorrect(imageView, image.getName());
-            }
-
+            // PointSimple relativeLocation = wrapper.convertCoordinates(currentX, currentY);
+            //
+            // placeable.setTranslateX(relativeLocation.getX());
+            // placeable.setTranslateY(relativeLocation.getY());
+            clone.setTranslateX(currentX);
+            clone.setTranslateY(currentY);
+            root.getChildren().add(clone);
         });
         root.getChildren().add(binder);
     }

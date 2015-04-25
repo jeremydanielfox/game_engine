@@ -25,7 +25,7 @@ public class PathFree implements Path {
     private CoordinateTransformer myTrans;
     private GameObject[][] objectMatrix;
     private GridCell bounds;
-    private List<GridCell> endPoints, spawnPoints;
+    private List<GridCell> endPoints, spawnPoints, obstacles;
 
     public PathFree (CoordinateTransformer cTrans, GameObject[][] matrix) {
         myAlgorithm = new GridWrapper();
@@ -39,11 +39,18 @@ public class PathFree implements Path {
         spawnPoints.add(new GridCell(0, 0));
 //        spawnPoints.add(new GridCell(4, 4));
         bounds = new GridCell(matrix.length, matrix[0].length);
+        obstacles = new ArrayList<>();
     }
 
     @Override
     public void updatePath () throws NoPathExistsException {
-        myAlgorithm.initializeGraph(objectMatrix, go -> go != null);
+    	Boolean[][] obstacleMatrix = new Boolean[objectMatrix.length][objectMatrix[0].length];
+    	for(int r = 0; r < objectMatrix.length; r++){
+    		for(int c = 0; c < objectMatrix[0].length; c++){
+    			obstacleMatrix[r][c] = objectMatrix[r][c] != null || obstacles.contains(new GridCell(r,c));
+    		}
+    	}
+        myAlgorithm.initializeGraph(obstacleMatrix, b -> (Boolean)b);
         myPath = myAlgorithm.allShortestPaths(GridCell.toArray(endPoints));
         
         for(GridCell end : endPoints){
@@ -81,9 +88,7 @@ public class PathFree implements Path {
             if (currentCell.withinBounds(bounds)) {// TODO make better algorithmically
                 for (GridCell c : myPath.keySet()) {
                     if (c.distance(currentCell) == 1) {
-                        return myTrans.tranformGridToWorld(c);
-                        // return
-                        // PointSimple.pointOnLine(current,myTrans.tranformGridToWorld(c),speed);
+                        return myTrans.transformGridToWorldInexact(c);
                     }
                 }
             }
@@ -100,6 +105,10 @@ public class PathFree implements Path {
 	
 	public void setSpawnPoints(List<GridCell> spawnpoints){
 		spawnPoints = spawnpoints;
+	}
+	
+	public void setObstacles(List<GridCell> obstacles){
+		this.obstacles = obstacles;
 	}
 
 }

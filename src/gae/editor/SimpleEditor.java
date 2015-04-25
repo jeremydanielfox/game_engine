@@ -31,8 +31,7 @@ public class SimpleEditor extends Editor implements UIObject {
     private List<ComponentEditor> editFields;
     private TreeNode root;
     private HashMap<Edits, TreeNode> nodeMap;
-    private static ObservableList<Node> simpleFields = FXCollections
-            .observableArrayList();
+    private ArrayList<ComponentEditor> simpleFields;
     private ArrayList<ObjectComponentEditor> objectFields;
 
     public SimpleEditor (Class<?> c) {
@@ -81,8 +80,8 @@ public class SimpleEditor extends Editor implements UIObject {
      * @param c
      */
     private void createEditor (Class<?> c, Label title) {
-
         objectFields = new ArrayList<ObjectComponentEditor>();
+        simpleFields = new ArrayList<ComponentEditor>();
         nodeMap = new HashMap<Edits, TreeNode>();
         simpleEditor = new VBox(30);
         simpleEditor.getChildren().add(title);
@@ -106,10 +105,10 @@ public class SimpleEditor extends Editor implements UIObject {
             component =
                     (ComponentEditor) getInstanceFromName(String.format("%s%s", CLASS_PATH,
                                                                         root.getInputType()));
-            simpleFields.add(component.getObject());
+            simpleFields.add(component);
         }
-        component.setName(root.getMethod().getName());
         editors.add(component.getObject());
+        component.setName(root.getMethod().getName());
         nodeMap.put(component, root);
     }
 
@@ -166,7 +165,7 @@ public class SimpleEditor extends Editor implements UIObject {
         return root;
     }
 
-    public ObservableList<Node> getSimpleComponentEditors () {
+    public ArrayList<ComponentEditor> getSimpleComponentEditors () {
         return simpleFields;
     }
 

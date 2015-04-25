@@ -7,17 +7,17 @@ import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
-
 /**
  * Animator holds all possible animations used within the authoring environment (and beyond, if
- * needed) such as a node shaking
+ * needed) such as a node shaking. Implements Singleton model so only one animator exists.
  *
  * @author Brandon Choi
  *
  */
 public class Animator {
 
-    Timeline animator;
+    private static Animator instance;
+    private Timeline animator;
 
     public Animator () {
         animator = new Timeline();
@@ -26,6 +26,17 @@ public class Animator {
             animator.pause();
             animator.getKeyFrames().clear();
         });
+    }
+
+    /**
+     * implements Singleton
+     * 
+     * @return
+     */
+    public static synchronized Animator getInstance () {
+        if (instance == null)
+            instance = new Animator();
+        return instance;
     }
 
     /**
@@ -40,8 +51,8 @@ public class Animator {
         animator.getKeyFrames().addAll(new KeyFrame(Duration.millis(20),
                                                     new KeyValue(node.translateXProperty(), 20,
                                                                  Interpolator.LINEAR)),
-                                                                 new KeyFrame(Duration.millis(20), new KeyValue(node
-                                                                                                                .translateXProperty(), -20, Interpolator.LINEAR)));
+                                       new KeyFrame(Duration.millis(20), new KeyValue(node
+                                               .translateXProperty(), -20, Interpolator.LINEAR)));
         animator.play();
     }
 
@@ -55,6 +66,18 @@ public class Animator {
     }
 
     /**
+     * drops the new screen down from above
+     * 
+     * @param o
+     */
+    public void dropDown (Node node) {
+        animator.setCycleCount(2);
+        animator.getKeyFrames().addAll(new KeyFrame(Duration.millis(2000), new KeyValue(node
+                                               .translateYProperty(), -500, Interpolator.EASE_IN)));
+        animator.play();
+    }
+
+    /**
      * makes a node blink
      *
      * @param node
@@ -64,8 +87,8 @@ public class Animator {
         animator.getKeyFrames().addAll(new KeyFrame(Duration.millis(50),
                                                     new KeyValue(node.opacityProperty(), 0,
                                                                  Interpolator.EASE_IN)),
-                                                                 new KeyFrame(Duration.millis(50), new KeyValue(node
-                                                                                                                .opacityProperty(), 1, Interpolator.EASE_IN)));
+                                       new KeyFrame(Duration.millis(50), new KeyValue(node
+                                               .opacityProperty(), 1, Interpolator.EASE_IN)));
         animator.play();
     }
 

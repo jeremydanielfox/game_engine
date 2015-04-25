@@ -8,6 +8,7 @@ import engine.shop.tag.GameObjectTag;
 import gae.backend.Placeable;
 import gae.gridView.Path;
 import java.util.List;
+import View.ImageUtilities;
 import javafx.scene.image.ImageView;
 
 
@@ -38,8 +39,12 @@ public class GameObjectToEditable implements Placeable {
     private double health;
     private GameObjectTag tag;
 
-    public GameObjectToEditable (GameObject gameObject2) {
-        gameObject = gameObject2;
+    public GameObjectToEditable () {
+
+    }
+
+    public GameObjectToEditable (GameObject gameObject) {
+        this.gameObject = gameObject;
         /*
          * doing the following instantiation because it doesn't copy GameObjectSimple (not
          * Serializable)
@@ -51,7 +56,7 @@ public class GameObjectToEditable implements Placeable {
         imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
         tag = gameObject.getTag();
         // gameobject is not serializable and gives an error so must set to null
-        gameObject = null;
+        // gameObject = null;
     }
 
     @Override
@@ -166,15 +171,35 @@ public class GameObjectToEditable implements Placeable {
         //
         //
         // imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
-        return imageView;
+        // System.out.println("WIDTH IS : " + width);
+        return ImageUtilities.changeImageSize(new ImageView(imageView.getImage()), 75, 75);
     }
 
     @Override
     public Placeable makeNewInstance () {
-        Placeable copy = (Placeable) DeepCopy.copy(this);
+        // Placeable copy = (Placeable) DeepCopy.copy(this);
+        GameObjectToEditable copy = new GameObjectToEditable();
+        copy.setHealth(health);
+        copy.setHeight(height);
+        copy.setLocation(location);
+        copy.setPath(myPath);
+        copy.setTag(tag);
+        copy.setWeapon(weapon);
+        copy.setWidth(width);
+        copy.setType(type);
+        copy.setImagePath(imagePath);
         copy.setID(ourID);
+        copy.setImageView(imageView);
         ourID++;
         return copy;
+    }
+
+    public void setImagePath (String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setImageView (ImageView imageView) {
+        this.imageView = imageView;
     }
 
     @Override
@@ -211,5 +236,11 @@ public class GameObjectToEditable implements Placeable {
     public void setTag (GameObjectTag tag) {
         // TODO Auto-generated method stub
         this.tag = tag;
+    }
+
+    @Override
+    public void setType (String type) {
+        // TODO Auto-generated method stub
+        this.type = type;
     }
 }

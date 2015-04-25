@@ -132,7 +132,6 @@ public class GamePlayerScreen extends Application {
         board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
         board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
                                          story));
-        new ShopModelSimple(world, myPlayer, 1.2);
         // EDIT: temp change -- game won't have accurate shop - Nathan
         myGame =
                 new ConcreteGame(new ShopModelSimple(), myPlayer, board,

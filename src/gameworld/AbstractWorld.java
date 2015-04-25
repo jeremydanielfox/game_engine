@@ -67,7 +67,7 @@ public class AbstractWorld implements GameWorld {
          for (GameObject object: currentObjects){
              object.update(this);
              for (GameObject interactObject: currentObjects){
-                 if (interactObject != object){
+                 if (interactObject != object && !object.isDead() && !interactObject.isDead()){
                      myCollisionEngine.interact(object, interactObject);
                      myRangeEngine.interact(object, interactObject);
                  }
@@ -112,7 +112,7 @@ public class AbstractWorld implements GameWorld {
     }
 
     @Override
-    public boolean isPlacable (Node n, PointSimple pixelCoords) {
+    public boolean isPlaceable (Node n, PointSimple pixelCoords) {
         return true; // TODO plz replace with logic. Ex: towers cannot be placed on towers
     }
 

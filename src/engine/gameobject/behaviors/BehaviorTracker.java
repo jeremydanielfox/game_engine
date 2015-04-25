@@ -13,6 +13,7 @@ public class BehaviorTracker {
         endOfPath = new ArrayList<Behavior>();
         death = new ArrayList<Behavior>();
         death.add(new ExplosionBehavior());//On default, explode on death
+        endOfPath.add(new DeathBehavior());
     }
     
     public void addOnDeath(Behavior behavior){

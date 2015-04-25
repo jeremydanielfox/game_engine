@@ -1,5 +1,7 @@
 package engine.gameobject;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import engine.fieldsetting.Settable;
 import engine.gameobject.behaviors.Behavior;
 import engine.gameobject.behaviors.BehaviorTracker;
@@ -7,10 +9,12 @@ import engine.gameobject.labels.Label;
 import engine.gameobject.labels.SimpleLabel;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
+import engine.gameobject.units.BuffType;
 import engine.gameobject.units.Collider;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
+import engine.shop.RangeDisplay;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.GameObjectTagSimple;
 import gameworld.ObjectCollection;
@@ -33,8 +37,10 @@ public class GameObjectSimple implements GameObject {
     private BuffTracker myBuffs;
     private Weapon myWeapon;
     private Collider myCollider;
+    private RangeDisplay rangeDisplay;
     private BehaviorTracker myBehaviors;
     
+
     public GameObjectSimple () {
         myLabel = new SimpleLabel();
         myPoint = new PointSimple();
@@ -60,8 +66,8 @@ public class GameObjectSimple implements GameObject {
         myBuffs.receiveBuff(buff, this);
     }
     
-    public void addImmunity(Buff buff){
-        //TODO: Implement this
+    public void addImmunity(Class<? extends Buff> immunity, BuffType buffType){
+        myBuffs.addImmunity(immunity, buffType);
     }
 /*
  * Firing methods follow
@@ -75,7 +81,7 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public void fire (ObjectCollection world, GameObject target) {
-        // myWeapon.fire(world, target, myPoint);
+         myWeapon.fire(world, target, myPoint);
     }
 
     @Override
@@ -105,16 +111,16 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public void collide (GameObject target) {
-        // myCollider.collide(target);
-        // changeHealth(-1);
+         myCollider.collide(target);
+         changeHealth(-1);
     }
 
     /*
      * Prototype methods follow
      */
     @Override
-    public double getRange () {
-        return myWeapon.getRange();
+    public RangeDisplay getRangeDisplay(){
+        return new RangeDisplay(myTag.getName(), myGraphic.clone(), myWeapon.getRange());
     }
 
     // TODO: Tag cloning not done, Weapon upgrade cloning not done
@@ -128,7 +134,6 @@ public class GameObjectSimple implements GameObject {
         clone.setGraphic(myGraphic.clone());
         clone.setWeapon(myWeapon.clone());
         clone.setCollider(myCollider.clone());
-        clone.setMover(myMover.clone());
         return clone;
     }
 
@@ -148,7 +153,8 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public double getValue () {
-        return myWeapon.getValue();
+        return 10;
+        //return myWeapon.getValue();
     }
 
     /*

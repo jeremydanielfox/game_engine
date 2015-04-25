@@ -7,6 +7,7 @@ import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
 import java.util.List;
+import javafx.beans.property.DoubleProperty;
 
 
 // TODO: There must be a better way to do this than just have empty methods everywhere.
@@ -35,6 +36,10 @@ public class NullWeapon implements Weapon {
     @Override
     public double getRange () {
         return 0;
+    }
+    
+    public DoubleProperty getRangeProperty(){
+        return null;
     }
 
     @Override

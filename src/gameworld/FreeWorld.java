@@ -37,7 +37,7 @@ public class FreeWorld extends AbstractWorld {
 	@Override
 	public void addObject (GameObject toSpawn, PointSimple pixelCoords)
 			throws StructurePlacementException {
-		if (!isPlacable(toSpawn.getGraphic().getNode(), pixelCoords)) {
+		if (!isPlaceable(toSpawn.getGraphic().getNode(), pixelCoords)) {
 			throw new StructurePlacementException();
 		}
 		GridCell c = myTransform.transformWorldToGrid(pixelCoords);
@@ -57,7 +57,7 @@ public class FreeWorld extends AbstractWorld {
 	}
 
 	@Override
-	public boolean isPlacable (Node n, PointSimple pixelCoords) {
+	public boolean isPlaceable (Node n, PointSimple pixelCoords) {
 		GridCell c = myTransform.transformWorldToGrid(pixelCoords);
 		if (c.getRow() < 0 || c.getRow() >= myGrid.length || c.getCol() < 0 ||
 				c.getCol() >= myGrid[0].length) {

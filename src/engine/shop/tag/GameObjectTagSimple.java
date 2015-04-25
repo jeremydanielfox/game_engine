@@ -18,6 +18,13 @@ public class GameObjectTagSimple implements GameObjectTag {
         shopGraphic = new Graphic();
         purchasable = null;
     }
+    
+    public GameObjectTagSimple (String name, String desc, Graphic shopGraphic, PurchasableGameObject purchasable){
+        this.name = name;
+        description = desc;
+        this.shopGraphic = shopGraphic;
+        this.purchasable = purchasable;
+    }
 
     @Override
     public String getName () {

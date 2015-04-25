@@ -32,14 +32,8 @@ public class WavePart implements UIObject {
         //TODO: make pull from created game objects
         
         LibraryData libData = LibraryData.getInstance();
-        ObservableList<GameObjectSimple> enemyList = libData.getEditableObservableList();
+        ObservableList<GameObjectSimple> enemyList = libData.getGameObjectList();
         
-        ObservableList<String> options = 
-                FXCollections.observableArrayList(
-                                                  "Enemy 1",
-                                                  "Enemy 2",
-                                                  "Enemy 3"
-                        );
         gameObjectSelector = new ComboBox<GameObjectSimple>(enemyList);
         
         quantityField = new TextField("Enter Quantity");

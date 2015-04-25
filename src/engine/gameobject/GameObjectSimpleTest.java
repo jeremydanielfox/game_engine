@@ -38,7 +38,7 @@ public class GameObjectSimpleTest extends GameObjectSimple {
         points.add(new PointSimple(500, 500));
         myBez.setPoints(points);
         myPath.addPathSegment(myBez);
-        myPath = DataManager.readFromXML(PathFixed.class, "src/gae/listView/Test.xml");
+        myPath = DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml");
         // XStream xstream = new XStream(new DomDriver());
         // File file = new File("src/gae/listView/Test.xml");
         // myPath = (PathFixed) xstream.fromXML(file);

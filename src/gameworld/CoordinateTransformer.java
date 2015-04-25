@@ -20,12 +20,33 @@ public class CoordinateTransformer {
         w = windowWidth / numCols;
     }
 
+    /**
+     * Returns the cell which contains the point.
+     * @param point
+     * @return
+     */
     public GridCell transformWorldToGrid (PointSimple point) {
       return new GridCell((int) (point.getY() / h), (int) (point.getX() / w));
     }
 
+    /**
+     * Returns the exact pixel center of the cell.
+     * @param cell
+     * @return
+     */
     public PointSimple tranformGridToWorld (GridCell cell) {
         return new PointSimple(cell.getCol() * h + h / 2, cell.getRow() * w + w / 2);
     }
-
+    
+    /**
+     * Returns a randomly off center point near the middle of the cell.
+     * @param cell
+     * @return
+     */
+    public PointSimple transformGridToWorldInexact(GridCell cell){
+    	PointSimple p = tranformGridToWorld(cell);
+    	double offsetX = Math.min(h, w)*(Math.random()-.5);
+    	double offsetY = Math.min(h, w)*(Math.random()-.5);
+    	return new PointSimple(p.getX() + offsetX, p.getY() + offsetY);
+    }
 }

@@ -4,6 +4,7 @@ import engine.interactions.Interaction;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.media.Media;
+import javafx.stage.Stage;
 
 /**
  * Interface whose implementors will enable music & sound effects to be played when using any of our
@@ -29,7 +30,7 @@ public interface Musician {
      * @param scene
      * @param m
      */
-    void addBackgroundMusic (Scene scene, Music m);
+    void addBackgroundMusic (Stage s, Scene scene, Music m);
 
     /**
      * Restarts the music or sounds from the beginning

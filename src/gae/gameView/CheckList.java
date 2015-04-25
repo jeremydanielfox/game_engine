@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import engine.gameobject.GameObject;
 import engine.gameobject.Graphic;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import engine.gameobject.GameObject;
 import gae.backend.Placeable;
 import gae.listView.Authorable;
 import javafx.collections.ListChangeListener;
@@ -42,7 +39,9 @@ public class CheckList {
         myObjects.addListener( (ListChangeListener.Change<? extends Placeable> change) -> {
             while (change.next()) {
                 change.getAddedSubList().stream()
-                        .forEach(e -> createCheckOption(new CheckListItem(e)));
+                        .forEach(e -> {
+                            createCheckOption(new CheckListItem(e));
+                        });
                 change.getRemoved().stream().forEach(e -> {
                     for (CheckListItem key : myMap.keySet()) {
                         if (key.getPlaceable().equals(e)) {
@@ -87,12 +86,18 @@ public class CheckList {
         checkList.getChildren().add(item.getNode());
     }
 
+    /**
+     * Item in checklist which holds a thumbnail, name, and checkbox
+     *
+     * 
+     */
     private static class CheckListItem {
         private Placeable placeable;
         private CheckBox checkbox;
 
         public CheckListItem (Placeable obj) {
             placeable = obj;
+            checkbox = new CheckBox();
         }
 
         public Node getNode () {
@@ -101,7 +106,7 @@ public class CheckList {
             graphic.setHeight(50);
             Node image = graphic.getResizedGraphic(1);
             Label label = new Label(placeable.getName());
-            checkbox = new CheckBox();
+
             node.getChildren().addAll(image, label, checkbox);
             return node;
         }

@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class PauseScene implements GameScreen {
+public class PauseScene implements GameScene {
 
     private Stage myStage;
     private Scene myScene, myPrevious;
@@ -70,7 +70,7 @@ public class PauseScene implements GameScreen {
     }
 
     @Override
-    public Scene getScreen () {
+    public Scene getScene () {
         return myScene;
     }
     
@@ -106,7 +106,7 @@ public class PauseScene implements GameScreen {
 
         mainMenu.setOnMouseClicked(e -> {
             PlayerOpener opener = new PlayerOpener(myStage);
-            myStage.setScene(opener.getScreen());
+            myStage.setScene(opener.getScene());
         });
     }
 }

@@ -106,7 +106,7 @@ public class DraggableUtilities {
             if (wrapper.checkBounds(currentX, currentY)) {
                 throw new ObjectOutOfBoundsException();
             }
-            placeable.openEditor(ev);
+//            placeable.openEditor(ev);
             placeable.setTranslateX(currentX);
             placeable.setTranslateY(currentY);
             root.getChildren().add(placeable);

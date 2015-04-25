@@ -48,14 +48,14 @@ public class LibraryData {
     }
 
     public void addCreatedObjectToList (Class<?> klass, Object o) {
-        if (!createdObjectMap.containsKey(klass)) {
-            ObservableList<Object> list = FXCollections.observableArrayList();
-            createdObjectMap.put(klass, list);
-        }
         createdObjectMap.get(klass).add(o);
     }
 
     public ObservableList<Object> getObservableList (Class<?> klass) {
+        if (!createdObjectMap.containsKey(klass)) {
+            ObservableList<Object> list = FXCollections.observableArrayList();
+            createdObjectMap.put(klass, list);
+        }
         return createdObjectMap.get(klass);
     }
 

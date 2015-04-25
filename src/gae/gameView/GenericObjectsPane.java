@@ -3,6 +3,7 @@ package gae.gameView;
 import engine.gameobject.GameObjectSimple;
 import gae.editor.PopUpEditor;
 import gae.openingView.UIObject;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,9 +22,11 @@ public class GenericObjectsPane implements UIObject {
 
     private VBox baseNode;
     private Consumer<Object> function;
+    private BiConsumer<Class<?>, Object> biconsumer;
 
-    public GenericObjectsPane (Consumer<Object> consumer) {
+    public GenericObjectsPane (Consumer<Object> consumer, BiConsumer<Class<?>, Object> biconsumer) {
         function = consumer;
+        this.biconsumer = biconsumer;
         initialize();
     }
 

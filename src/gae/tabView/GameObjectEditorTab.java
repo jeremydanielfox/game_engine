@@ -1,5 +1,6 @@
 package gae.tabView;
 
+import java.util.function.Consumer;
 import gae.editorView.GameObjectEditorView;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
@@ -12,11 +13,11 @@ public class GameObjectEditorTab {
     private Tab baseNode;
     private GameObjectEditorView view;
 
-    public GameObjectEditorTab (Scene scene) {
+    public GameObjectEditorTab (Scene scene, Consumer<Object> consumer) {
         baseNode = new Tab();
         baseNode.setText("Game Object Editor");
 
-        view = new GameObjectEditorView(scene);
+        view = new GameObjectEditorView(scene, consumer);
         baseNode.setContent(view.getObject());
         baseNode.setClosable(false);
     }

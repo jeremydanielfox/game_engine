@@ -28,7 +28,7 @@ public class GameObjectContainer extends VBox implements ContainerWrapper {
     private Label getLabel () {
         Label title = new Label("My Properties");
         title.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        title.setTranslateX(width*0.45);
+        title.setTranslateX(width * LABEL_LOCATION_PROPORTIONS);
         return title;
     }
 
@@ -37,11 +37,10 @@ public class GameObjectContainer extends VBox implements ContainerWrapper {
      */
     @Override
     public boolean checkBounds (double x, double y) {
-        // Point2D point = this.screenToLocal(x, y);
+//        Point2D point = this.screenToLocal(x, y);
         // System.out.println("X IS : " + point.getX());
         // System.out.println("Y IS : " + y);
-        if (x < 0 || x > getWidth() || y < 0 ||
-            y > getHeight()) {
+        if (x < 0 || x > getWidth() || y < 0 || y > getHeight()) {
             return true;
         }
         return false;

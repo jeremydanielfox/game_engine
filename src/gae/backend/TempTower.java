@@ -202,4 +202,16 @@ public class TempTower implements Placeable, UIObject {
         // TODO Auto-generated method stub
         
     }
+
+    @Override
+    public void setType (String type) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setImagePath (String path) {
+        // TODO Auto-generated method stub
+        
+    }
 }

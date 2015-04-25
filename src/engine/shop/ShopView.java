@@ -1,5 +1,9 @@
 package engine.shop;
 
+import engine.gameobject.GameObject;
+import engine.gameobject.PointSimple;
+import engine.shop.ShopModelSimple.ItemInfo;
+import gameworld.GameWorld;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +16,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -24,10 +27,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import View.ViewUtil;
-import engine.gameobject.GameObject;
-import engine.gameobject.PointSimple;
-import engine.shop.ShopModelSimple.ItemInfo;
-import gameworld.GameWorld;
 
 
 /**
@@ -49,19 +48,17 @@ public class ShopView extends Parent {
 
     private ShopModel model;
     private Scene scene;
-    private Pane pane; // TODO: use View to call method instead
-
+    private Pane pane;
+   
     private FlowPane shopIcons;
     private StackPane infoBox;
-
-    private BooleanProperty infoBoxActive;
+    private GameObjectSelector selector;
     private GameWorld world;
 
     public ShopView (GameWorld world, ShopModel model, Pane pane) {
         this.world = world;
         this.model = model;
         this.pane = pane;
-        infoBoxActive = new SimpleBooleanProperty(false);
         initialize();
     }
 
@@ -71,7 +68,7 @@ public class ShopView extends Parent {
         shopContainer.setMaxWidth(SHOP_WIDTH);
         shopIcons = new FlowPane();
         infoBox = new StackPane();
-
+        selector = new GameObjectSelector(this::displayUpgrades, infoBox, pane);
         shopContainer.getChildren().addAll(shopIcons, infoBox);
 
         // add Icons
@@ -83,6 +80,11 @@ public class ShopView extends Parent {
         infoBox.setMinHeight(INFO_HEIGHT);
 
         getChildren().add(shopContainer);
+    }
+    
+    
+    private void clearInfoBox(Pane infoBox){
+        infoBox.getChildren().clear();
     }
 
     // TODO this should only be for GameObject ItemGraphics
@@ -117,6 +119,7 @@ public class ShopView extends Parent {
         base.getChildren().addAll(labels.values());
         Label name = labels.get(ItemInfo.NAME);
         name.setStyle("-fx-font-weight: bold");
+        clearInfoBox(infoBox);
         infoBox.getChildren().add(base);
     }
 
@@ -190,7 +193,7 @@ public class ShopView extends Parent {
         transNode.setOnMouseClicked(event -> {
             PointSimple current = new PointSimple(event.getSceneX(), event.getSceneY());
             EventHandler<MouseEvent> selected = selection -> selectGameObject(selection);
-            if (model.purchaseGameObject(transition.getName(), current)) {
+            if (model.purchaseGameObject(transition.getName(), current, selected)) {
                 ViewUtil.unbindCursor(pane, transNode);
                 // TODO:
                 // new TestTower: onClicked - show radius, show available upgrades -- call
@@ -199,9 +202,10 @@ public class ShopView extends Parent {
             }
         });
     }
-    
+
     private void selectGameObject(MouseEvent event) {
         GameObject selected = world.getObjectFromNode((Node) event.getSource());
+        selector.setCurrent(selected);
         //node.setOnMousePressed();
         // get GameObject with node as key
         // GameObject will be asked for range, can then place appropriate RangeDisplay

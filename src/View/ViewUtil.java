@@ -15,8 +15,6 @@ import javafx.scene.layout.Pane;
 
 public class ViewUtil {
 
-    private static Point2D previous;
-
     /**
      * Binds the cursor to the node. Binding will be disabled, and the node will be removed from the
      * scene, when the appropriate key is pressed.
@@ -35,7 +33,6 @@ public class ViewUtil {
                 // mouseEvent.consume();
                 Point2D current = getMouseLocation(mouseEvent, node);
                 wrapGroup.relocate(current.getX(), current.getY());
-                previous = current;
             });
         }
         else {
@@ -43,7 +40,6 @@ public class ViewUtil {
                 // mouseEvent.consume();
                 Point2D current = getMouseLocation(mouseEvent, node);
                 wrapGroup.relocate(current.getX(), current.getY());
-                previous = current;
             });
         }
 
@@ -60,6 +56,7 @@ public class ViewUtil {
 
     public static void unbindCursor (Node pane, Node node) {
         pane.getScene().setOnMouseMoved(null);
+        pane.getScene().setOnKeyPressed(null);
         node.setVisible(false);
         ((Group) node.getParent()).getChildren().remove(node);
     }

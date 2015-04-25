@@ -2,6 +2,7 @@ package engine.shop;
 
 import java.util.List;
 import java.util.Map;
+import javafx.event.EventHandler;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.prototype.Prototype;
@@ -37,7 +38,7 @@ public interface ShopModel {
      * @param location
      * @return whether GameObject was purchased or not
      */
-    public boolean purchaseGameObject (String name, PointSimple location);
+    public boolean purchaseGameObject (String name, PointSimple location, EventHandler selected);
     
     public void purchaseUpgrade (String name);
 

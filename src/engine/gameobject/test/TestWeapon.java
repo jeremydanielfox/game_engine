@@ -4,12 +4,15 @@ import engine.gameobject.GameObject;
 import engine.gameobject.MoverDirection;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.firingstrategy.MultipleProjectile;
+import engine.gameobject.weapon.upgradetree.TestTree;
 
 public class TestWeapon extends BasicWeapon{
     
     public TestWeapon(int type){
         super();
         setProjectile(new TestProjectile(type));
+        setTree(new TestTree());
+        
         if(type == 4){
             setFiringStrategy(new MultipleProjectile(8));
             setRange(90);

@@ -24,15 +24,21 @@ public class UpgradeBundleSimple implements BuildableBundle {
     private boolean isFinal;
     private UpgradeTree parent;
     private UpgradeTag myUpgradeTag;
+    private double value;
 
     public UpgradeBundleSimple () {
 
     }
 
     @Settable
-    void setUpgrades (Upgrade ... upgrades) {
+    public void setUpgrades (Upgrade ... upgrades) {
         this.upgrades = new ArrayList<>(Arrays.asList(upgrades));
         isFinal = false;
+    }
+
+    @Settable
+    public void setValue (double value) {
+        this.value = value;
     }
 
     @Override
@@ -85,8 +91,7 @@ public class UpgradeBundleSimple implements BuildableBundle {
 
     @Override
     public double getValue () {
-        // TODO Auto-generated method stub
-        return 0;
+        return value;
     }
 
     @Settable

@@ -3,8 +3,6 @@ package engine.gameobject;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import View.ViewUtil;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.fieldsetting.Settable;
@@ -92,10 +90,8 @@ public class Graphic {
         Point2D temp = new Point2D(point.getX() + ViewUtil.getCenterOffsetX(myImageView),
                                    point.getY() + ViewUtil.getCenterOffsetY(myImageView));
         rotate(new PointSimple(temp));
-        myPoint =
-                temp;
-        getImageView().setX(myPoint.getX());
-        getImageView().setY(myPoint.getY());
+        myPoint = temp;
+        getImageView().relocate(myPoint.getX(), myPoint.getY());
     }
 
     @Settable

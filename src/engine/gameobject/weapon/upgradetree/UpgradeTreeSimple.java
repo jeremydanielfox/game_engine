@@ -25,11 +25,11 @@ public class UpgradeTreeSimple implements UpgradeTree {
     }
     
     @Settable
-    public void setUpgradeBundles(List<BuildableBundle> nodes){
+    public void setUpgradeBundles(List<? extends BuildableBundle> nodes){
         buildTree(nodes);
     }
     
-    private void buildTree(List<BuildableBundle> nodes) {
+    private void buildTree(List<? extends BuildableBundle> nodes) {
         first = current = nodes.get(0);
         BuildableBundle last = first;
         // take care of first node's parent

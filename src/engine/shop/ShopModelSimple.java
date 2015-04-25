@@ -1,18 +1,17 @@
 package engine.shop;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.event.EventHandler;
 import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.TestTower;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import engine.prototype.Prototype;
-import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.PriceTag;
 import gameworld.GameWorld;
 import gameworld.StructurePlacementException;
@@ -68,8 +67,7 @@ public class ShopModelSimple implements ShopModel {
         List<ItemGraphic> items = new ArrayList<ItemGraphic>();
         prototypeMap.values().forEach(prototype -> items.add(new ItemGraphic(prototype.getTag()
                 .getName(), ((PriceTag) prototype.getTag())
-                .getShopGraphic(), new TransitionOnClicked(this, prototype
-                .getTag().getName()))));
+                .getShopGraphic())));
         return items;
     }
 
@@ -81,7 +79,7 @@ public class ShopModelSimple implements ShopModel {
         bundles.forEach(bundle -> {
             upgradeMap.put(bundle.getTag().getName(), bundle);
             upgradeGraphics.add(new ItemGraphic(bundle.getTag().getName(), bundle.getTag()
-                    .getShopGraphic(), new BuyOnClicked(this, bundle.getTag().getName())));
+                    .getShopGraphic()));
         });
         return upgradeGraphics;
     }
@@ -92,13 +90,13 @@ public class ShopModelSimple implements ShopModel {
      * @param name Name of GameObject
      * @param location Location to be placed
      */
-    public boolean purchaseGameObject (String name, PointSimple location) {
+    public boolean purchaseGameObject (String name, PointSimple location, EventHandler selected) {
         if (canPurchase(name) && checkPlacement(name, location)) {
             currentPlayer.getWallet().withdraw(getPrice(name));
             // myGameWorld.addObject(prototypeMap.get(name).clone());
             try {
                 GameObject tower = new TestTower(100, 100, 100);
-                //TODO: add listener of some sort to access ShopView?
+                tower.getGraphic().getNode().setOnMousePressed(selected);
                 myGameWorld.addObject(tower, location);
                 return true;
             }
@@ -162,7 +160,7 @@ public class ShopModelSimple implements ShopModel {
 
     public boolean checkPlacement (String name, PointSimple location) {
         return myGameWorld.isPlaceable(prototypeMap.get(name).getTag().getGraphic().getNode(),
-                                      location);
+                                       location);
     }
 
 }

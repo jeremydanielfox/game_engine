@@ -1,16 +1,15 @@
 package gae.openingView;
 
 import gae.gameView.GameView;
-
 import java.io.File;
 import java.lang.reflect.Method;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import musician.Music;
 import musician.MusicSimple;
 import musician.Musician;
@@ -36,7 +35,7 @@ import animations.Animator;
 public class OpeningView implements UIMediator {
 
     private static final String HAWIIAN_SONG = "hula.mp3";
-    private static final String MUSIC_PATH = "file:/Users/brandonchoi/Documents/CS308/voogasalad_RDatGV/src/musician/";
+    private static final String MUSIC_PATH = "src/musician/";
     static final Animator myAnimator = Animator.getInstance();
     static final String DEFAULT_TYPE_MSG = "Choose from right ->";
     private static final String OPENINGVIEW_CSS = "css/OpeningViewCSS.css";
@@ -83,7 +82,7 @@ public class OpeningView implements UIMediator {
      * @param s
      */
     private void setMusic (String s) {
-        Music backgroundMusic = new MusicSimple(new Media(MUSIC_PATH + s));
+        Music backgroundMusic = new MusicSimple(new Media(Paths.get(MUSIC_PATH + s).toUri().toString()));
         myMusician.addBackgroundMusic(myScene, backgroundMusic);
         myMusician.playAudio(myScene);
     }

@@ -12,6 +12,9 @@ import gameworld.ObjectCollection;
  */
 public class PlantBehavior implements Behavior{
 
+    public PlantBehavior(){
+        
+    }
     @Override
     public void execute (ObjectCollection world, GameObject object) {
         object.setMover(new MoverNull());

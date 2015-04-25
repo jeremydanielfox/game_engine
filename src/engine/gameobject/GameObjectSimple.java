@@ -7,6 +7,7 @@ import engine.gameobject.labels.Label;
 import engine.gameobject.labels.SimpleLabel;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
+import engine.gameobject.units.BuffType;
 import engine.gameobject.units.Collider;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;
@@ -60,8 +61,8 @@ public class GameObjectSimple implements GameObject {
         myBuffs.receiveBuff(buff, this);
     }
     
-    public void addImmunity(Buff buff){
-        //TODO: Implement this
+    public void addImmunity(Class<? extends Buff> immunity, BuffType buffType){
+        myBuffs.addImmunity(immunity, buffType);
     }
 /*
  * Firing methods follow
@@ -75,7 +76,7 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public void fire (ObjectCollection world, GameObject target) {
-        // myWeapon.fire(world, target, myPoint);
+         myWeapon.fire(world, target, myPoint);
     }
 
     @Override
@@ -105,8 +106,8 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public void collide (GameObject target) {
-        // myCollider.collide(target);
-        // changeHealth(-1);
+         myCollider.collide(target);
+         changeHealth(-1);
     }
 
     /*

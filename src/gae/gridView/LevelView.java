@@ -98,7 +98,6 @@ public class LevelView {
                 new LibraryView(libraryData.getEditableObservableList());
         Group leftview =
                 libraryview.getGroup(stack, scene, wrapper);
-        // TODO: can't do the above since it messes up the coordinates - got to fix
         leftview.getChildren().add(gridOptions());
         return leftview;
     }

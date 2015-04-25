@@ -88,4 +88,5 @@ public class MovableImage extends Region {
     public void deleteImage () {
         getChildren().remove(wrapGroup);
     }
+
 }

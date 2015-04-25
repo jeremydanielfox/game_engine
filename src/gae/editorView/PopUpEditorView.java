@@ -2,10 +2,12 @@ package gae.editorView;
 
 import gae.listView.LibraryData;
 import java.util.function.Consumer;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
@@ -18,7 +20,7 @@ public class PopUpEditorView {
         Scene editorScene = new Scene(scroll);
 
         GameObjectEditorView editor = new GameObjectEditorView(editorScene, klass);
-        BorderPane pane = (BorderPane) editor.getObject();
+        Node pane = (BorderPane) editor.getObject();
         scroll.setContent(pane);
         editorStage.setScene(editorScene);
         editorStage.show();

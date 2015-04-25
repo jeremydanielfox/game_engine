@@ -14,6 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
@@ -24,20 +25,20 @@ public class GenericObjectList {
     private ObservableList<Object> createdSpecificObjects;
     private Node node;
     private Group root;
-    private Scene scene;
     private Class<?> klass;
     private EventHandler<? super MouseEvent> popNewEditor;
+    private ContainerWrapper wrapper;
     private Map<String, ArrayList<String>> interfaceToClassMap;
 
     public GenericObjectList (Class<?> klass,
                               Node node,
+                              ContainerWrapper wrapper,
                               Group root,
-                              Scene scene,
                               ObjectComponentEditor editor) {
         popNewEditor = editor.popNewEditor();
         this.node = node;
         this.root = root;
-        this.scene = scene;
+        this.wrapper = wrapper;
         this.klass = klass;
         interfaceToClassMap = EditingParser.getInterfaceClasses(PROPERTY_FILE_PATH);
         createdSpecificObjects = LibraryData.getInstance().getObservableList(klass);
@@ -47,27 +48,30 @@ public class GenericObjectList {
         TitledPane titledPane = new TitledPane();
         String classType = getType();
         titledPane.setText(classType);
-        titledPane.setContent(ListViewUtilities
-                .createGenericList(createdSpecificObjects, classType));
-        DraggableItem draggable = new DraggableItem(classType, popNewEditor);
-        titledPane.setOnMouseClicked(me -> {
+        titledPane.setContent(setList(classType));
+        titledPane.setOnMousePressed(me -> {
             if (me.isSecondaryButtonDown()) {
                 ContextMenu contextmenu = new ContextMenu();
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
-                    // DraggableUtilities.makeObjectPlaceable(me, draggable.getNewInstance(),
-                    // node,
-                    // createdSpecificObjects,
-                    // (ContainerWrapper) node, root);
-
                     popNewEditor.handle(me);
                 });
-
                 contextmenu.getItems().add(item);
                 contextmenu.show(titledPane, me.getSceneX(), me.getSceneY());
             }
         });
         return titledPane;
+    }
+
+    private ListView<?> setList (String classType) {
+        ListView<?> list = ListViewUtilities.createGenericList(createdSpecificObjects, classType);
+        list.setOnMousePressed(me -> {
+            DraggableItem draggable =
+                    new DraggableItem(list.getSelectionModel().getSelectedItem(), klass, classType);
+            DraggableUtilities.makeObjectPlaceable(me, draggable, node,
+                                                   createdSpecificObjects, wrapper, root);
+        });
+        return list;
     }
 
     private String getType () {

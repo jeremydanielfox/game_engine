@@ -41,15 +41,15 @@ import gae.openingView.UIObject;
 public class GameObjectEditorView implements UIObject {
     private Group root;
     private Scene scene;
-    private BorderPane border;
+    private StackPane stack;
     private static final int TAB_HEIGHT = 160;
     private static final int SIDE_WIDTH = 430;
-    private static final double LIBRARY_EDITOR_PROPORTIONS = 0.75;
+    private static final double LIBRARY_EDITOR_PROPORTIONS = 0.68;
     private static final Class<?> DEFAULT_CLASS = GameObjectSimple.class;
     private double vboxHeight =
             (Screen.getPrimary().getVisualBounds().getHeight() - TAB_HEIGHT) / 2;
     private double vboxWidth =
-            (Screen.getPrimary().getVisualBounds().getWidth() - SIDE_WIDTH) *
+            (Screen.getPrimary().getVisualBounds().getWidth()) *
                     LIBRARY_EDITOR_PROPORTIONS;
     private GameObjectContainer bottom;
     private VBox top;
@@ -89,7 +89,7 @@ public class GameObjectEditorView implements UIObject {
     }
 
     private BorderPane setUpBorder () {
-        border = new BorderPane();
+        BorderPane border = new BorderPane();
 
         border.setCenter(setUpAnchor());
         border.setRight(setUpAccordion());
@@ -98,7 +98,7 @@ public class GameObjectEditorView implements UIObject {
         return border;
     }
 
-    private AnchorPane setUpAnchor () {
+    private Node setUpAnchor () {
         bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
@@ -112,7 +112,6 @@ public class GameObjectEditorView implements UIObject {
 
         AnchorPane.setTopAnchor(topHalf, 0.0);
         AnchorPane.setTopAnchor(bottomHalf, vboxHeight);
-
         return anchor;
     }
 
@@ -120,7 +119,7 @@ public class GameObjectEditorView implements UIObject {
         Accordion accordion = new Accordion();
         for (ObjectComponentEditor edit : simpleEditor.getObjectComponentEditors()) {
             GenericObjectList list =
-                    new GenericObjectList(edit.getObjectClass(), bottom, root, scene, edit);
+                    new GenericObjectList(edit.getObjectClass(), bottom, bottom, root, edit);
             accordion.getPanes().add(list.getTitledPane());
         }
         return accordion;

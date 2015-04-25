@@ -1,7 +1,7 @@
 package gae.editor;
 
 import gae.editorView.PopUpEditorView;
-import gae.gameView.GenericObjectsPane;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -20,9 +20,11 @@ public class ObjectComponentEditor extends ComponentEditor {
     private Button myCreateNewButton;
     private Object myObject;
     private Class<?> clazz;
+    private BiConsumer<Class<?>, Object> biConsumer;
 
-    public ObjectComponentEditor (Class<?> klass) {
+    public ObjectComponentEditor (Class<?> klass, BiConsumer<Class<?>, Object> biconsumer) {
         clazz = klass;
+        biConsumer = biconsumer;
         try {
             myObject = Class.forName(klass.getName()).newInstance();
         }
@@ -50,7 +52,7 @@ public class ObjectComponentEditor extends ComponentEditor {
         return e -> {
             Consumer<Object> setObjectConsumer = o -> setObject(o);
 //            GenericObjectsPane.newCustomObject(clazz, "yo", setObjectConsumer);
-            new PopUpEditorView(setObjectConsumer, clazz);
+            new PopUpEditorView(setObjectConsumer, biConsumer, clazz);
         };
     }
 

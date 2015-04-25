@@ -47,23 +47,26 @@ public class GenericObjectList {
         TitledPane titledPane = new TitledPane();
         String classType = getType();
         titledPane.setText(classType);
-        titledPane.setContent(ListViewUtilities.createGenericList(createdSpecificObjects));
+        titledPane.setContent(ListViewUtilities
+                .createGenericList(createdSpecificObjects, classType));
         DraggableItem draggable = new DraggableItem(classType, popNewEditor);
         titledPane.setOnMouseClicked(me -> {
-            // if (me.isSecondaryButtonDown()) {
+            if (me.isSecondaryButtonDown()) {
                 ContextMenu contextmenu = new ContextMenu();
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
-                    DraggableUtilities.makeObjectPlaceable(me, draggable.getNewInstance(),
-                                                           node,
-                                                           createdSpecificObjects,
-                                                           (ContainerWrapper) node, root);
+                    // DraggableUtilities.makeObjectPlaceable(me, draggable.getNewInstance(),
+                    // node,
+                    // createdSpecificObjects,
+                    // (ContainerWrapper) node, root);
+
+                    popNewEditor.handle(me);
                 });
 
                 contextmenu.getItems().add(item);
                 contextmenu.show(titledPane, me.getSceneX(), me.getSceneY());
-                // }
-            });
+            }
+        });
         return titledPane;
     }
 

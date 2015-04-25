@@ -138,7 +138,8 @@ public class ListViewUtilities {
      * @param scene
      * @return
      */
-    public static ListView<?> createGenericList (ObservableList<Object> authorables) {
+    public static ListView<?> createGenericList (ObservableList<Object> authorables,
+                                                 String classType) {
         ListView<Object> list = new ListView<>();
         list.setPrefWidth(200);
         list.setItems(authorables);
@@ -153,7 +154,7 @@ public class ListViewUtilities {
                         setGraphic(null);
                     }
                     else if (object != null) {
-                        setText("hI");
+                        setText(classType);
                         // setGraphic(ListViewUtilities.createCellContentWithIcon(object));
                     }
                 }

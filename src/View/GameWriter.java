@@ -120,7 +120,7 @@ public class GameWriter extends Application {
     public GameWorld makeWorld () {
         FixedWorld world = new FixedWorld();
         // world.addObject(new TestTower(2, 330, 130));
-        world.addObject(new TestTower(5, 270, 270));
+        //world.addObject(new TestTower(5, 270, 270));
         // world.addObject(new TestTower(3, 355, 455));
         world.setPath(DataManager.readFromXML(PathFixed.class, "src/gae/listView/Test.xml"));
         return world;

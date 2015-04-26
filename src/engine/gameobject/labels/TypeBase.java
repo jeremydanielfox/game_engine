@@ -22,44 +22,9 @@ public class TypeBase extends SimpleType {
         super(myName, superType);
     }
 
-    /*
-     * @Override
-     * public String getLabel () {
-     * return name;
-     * }
-     * 
-     * 
-     * @Override
-     * public boolean hasSubLabel () {
-     * return mySubLabels.size() > 0;
-     * }
-     * 
-     * @Override
-     * public Collection<Label> getSubLabels () {
-     * return Collections.unmodifiableCollection(mySubLabels);
-     * }
-     * 
-     * @Override
-     * public boolean hasSuperLabel () {
-     * return false;
-     * }
-     * 
-     * @Override
-     * public Label getSuperLabel () {
-     * return null;
-     * }
-     * 
-     * @Override
-     * public void addSubLabel (Label label) {
-     * mySubLabels.add(label);
-     * }
-     * 
-     * 
-     * @Override
-     * public void removeSubLabel (Label label) {
-     * mySubLabels.remove(label);
-     * 
-     * }
-     */
+    @Override
+    public int hashCode(){
+        return 23 * myName.hashCode();
+    }
 
 }

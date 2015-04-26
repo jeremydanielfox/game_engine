@@ -27,17 +27,16 @@ import gameworld.ObjectCollection;
  * @author Nathan Prabhu and Danny Oh
  *
  */
+@Settable
 public class BasicWeapon implements Weapon{
     private int timeSinceFire;
     private RangeUpgrade myRange;
     private DoubleProperty rangeProp = new SimpleDoubleProperty();
-    private String title;
     private FiringRate myFiringRate;
     private GameObject myProjectile;
     private FiringStrategy myFiringStrategy;
     private UpgradeSet<Upgrade> upgradables;
     private UpgradeTree tree;
-    private int index;
 
     private double value;
 
@@ -136,7 +135,7 @@ public class BasicWeapon implements Weapon{
         initializeUpgrades();
     }
 
-    @Settable
+//    @Settable - commented out since we can't handle trees for now.
     public void setTree (UpgradeTree tree) {
         this.tree = tree;
     }

@@ -94,7 +94,7 @@ public class LevelView {
         Pane root = new Pane();
         container = new TileViewToggle(gridSizeProperty, scene);
         container.getTileModeProperty().bind(tileModeProperty);
-        root.getChildren().addAll(background, container, tempGrid());
+        root.getChildren().addAll(background, container);
         // root.getChildren().addAll(background, container);
 
         stack.getChildren().addAll(root);

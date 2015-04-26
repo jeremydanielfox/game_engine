@@ -5,6 +5,8 @@ import gae.gridView.ContainerWrapper;
 import gae.gridView.PathView;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -23,15 +25,12 @@ import javafx.scene.layout.StackPane;
  *
  */
 public class LibraryView {
-    /*
-     * should be able to get the gameObjects list from a properties file
-     */
-    private String[] gameObjects = { "Tower", "Enemy" };
     private List<PaneList> listOfListObjects;
     private Group root;
     private Group objectGroup;
     private Node nodeScene;
     private ObservableList<Authorable> editableObservableList;
+    private List<String> instantiatedTypes;
     private Scene myScene;
     private Accordion accordion;
     private TitledPane pathTitledPane;
@@ -40,6 +39,7 @@ public class LibraryView {
 
     public LibraryView (ObservableList<Authorable> editableObservableList) {
         this.editableObservableList = editableObservableList;
+        instantiatedTypes = new ArrayList<>();
     }
 
     public Scene getScene () {
@@ -82,13 +82,25 @@ public class LibraryView {
     private Node view () {
         listOfListObjects = new ArrayList<>();
         accordion = new Accordion();
-        for (String gameObject : gameObjects) {
-            PaneList paneList = new PaneList();
-            listOfListObjects.add(paneList);
-            accordion.getPanes().add(paneList.initialize(objectGroup, nodeScene, myScene, wrapper,
-                                                         editableObservableList, gameObject));
-
-        }
+        editableObservableList
+                .addListener( (ListChangeListener.Change<? extends Authorable> change) -> {
+                    while (change.next()) {
+                        if (change.wasAdded()) { // if an editablenode was added
+                    Placeable added = (Placeable) change.getAddedSubList().get(0);
+                    String type = added.getType();
+                    if (instantiatedTypes.contains(type)) {
+                        instantiatedTypes.add(type);
+                        PaneList paneList = new PaneList();
+                        listOfListObjects.add(paneList);
+                        accordion.getPanes()
+                                .add(paneList.initialize(objectGroup, nodeScene, myScene,
+                                                         wrapper,
+                                                         editableObservableList,
+                                                         type));
+                    }
+                }
+            }
+        });
         pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
         pathTitledPane =
                 pathList.getTitledPane("Path");

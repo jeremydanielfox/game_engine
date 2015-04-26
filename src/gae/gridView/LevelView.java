@@ -115,7 +115,7 @@ public class LevelView {
     private Group getLibraryView () {
         libraryData = LibraryData.getInstance();
         libraryview =
-                new LibraryView(libraryData.getEditableObservableList());
+                new LibraryView();
         Group leftview =
                 libraryview.getGroup(stack, scene, wrapper);
         setGridOptions();

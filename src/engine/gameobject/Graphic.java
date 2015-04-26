@@ -57,7 +57,6 @@ public class Graphic implements Title {
     }
 
     private void initializeImageView () {
-        System.out.println(myImageName);
         myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
 
         // myImageView.setOnMouseEntered(o -> System.out.println("boom"));

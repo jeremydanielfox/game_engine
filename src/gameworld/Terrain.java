@@ -38,6 +38,6 @@ public class Terrain {
 		myMatrix[r][c] = t;
 	}
 	public TerrainTile getTerrainTile(GridCell c){
-		return myMatrix[c.getRow()][c.getCol()];
+		return myMatrix[c.getRow()-1][c.getCol()-1];
 	}
 }

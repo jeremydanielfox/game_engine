@@ -25,20 +25,22 @@ public class FreezeBuff extends Buff implements Freeze {
     public FreezeBuff () {
         super(0);
         this.increment = 0;
-        type = UpgradeType.COLLISION;
         decorated = Optional.empty();
     }
 
-    public FreezeBuff (int increment) {
+    public FreezeBuff (double increment) {
         super(increment);
-        this.increment = increment;
-        type = UpgradeType.COLLISION;
+        this.increment = (int) increment;
         decorated = Optional.empty();
     }
 
+    /**
+     * Sets duration to increment
+     * @param increment
+     */
     @Settable
-    public void setIncrement (int increment) {
-        this.increment = increment;
+    public void setIncrement (double increment) {
+        this.increment = (int) increment;
     }
 
 //    @Settable

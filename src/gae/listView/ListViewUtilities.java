@@ -1,8 +1,8 @@
 package gae.listView;
 
-import engine.titles.Title;
 import gae.backend.Placeable;
 import gae.editorView.DraggableFields;
+import gae.editorView.GameObjectInformation;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -154,7 +154,7 @@ public class ListViewUtilities {
                         setGraphic(null);
                     }
                     else if (object != null) {
-                        setText(((Title) object).getTitle());
+                        setText(GameObjectInformation.getInstance().getTitle(object));
                         // setGraphic(ListViewUtilities.createCellContentWithIcon(object));
                     }
                 }

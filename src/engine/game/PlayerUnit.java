@@ -2,12 +2,10 @@ package engine.game;
 
 import View.Displayable;
 import engine.fieldsetting.Settable;
-import engine.titles.Title;
 
 
 @Settable
-public class PlayerUnit extends Displayable implements Title {
-    private String myTitle;
+public class PlayerUnit extends Displayable{
     private double myValue;
     private String myLabel;
 
@@ -57,27 +55,5 @@ public class PlayerUnit extends Displayable implements Title {
     @Settable
     public void setStartingValue (double value) {
         myValue = value;
-    }
-
-    @Override
-    public String getTitle () {
-        return myTitle;
-    }
-
-    @Override
-    public void setTitle (String title) {
-        myTitle = title;
-    }
-
-    @Override
-    public int getIndex () {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void setIndex (int existing) {
-        // TODO Auto-generated method stub
-        
     }
 }

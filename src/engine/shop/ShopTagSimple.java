@@ -2,15 +2,12 @@ package engine.shop;
 
 import engine.fieldsetting.Settable;
 import engine.gameobject.Graphic;
-import engine.titles.Title;
 
 
-public class ShopTagSimple implements ShopTag, Title {
+public class ShopTagSimple implements ShopTag {
     private String myName;
     private String myDescription;
     private Graphic myShopGraphic;
-    private String myTitle="";
-    private int index;
 
     public ShopTagSimple () {
         myName = "";
@@ -55,30 +52,4 @@ public class ShopTagSimple implements ShopTag, Title {
         clone.setShopGraphic(myShopGraphic.clone());
         return clone;
     }
-    
-
-    @Override
-    public String getTitle () {
-        // TODO Auto-generated method stub
-        return myTitle;
-    }
-
-    @Settable
-    @Override
-    public void setTitle (String title) {
-        myTitle = title;
-    }
-
-    @Override
-    public int getIndex () {
-        // TODO Auto-generated method stub
-        return index;
-    }
-
-    @Override
-    public void setIndex (int index) {
-        // TODO Auto-generated method stub
-        this.index = index;
-    }
-
 }

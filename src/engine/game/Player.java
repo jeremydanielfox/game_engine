@@ -7,7 +7,6 @@ import View.Displayable;
 import engine.fieldsetting.Settable;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
-import engine.titles.Title;
 
 
 /**
@@ -18,7 +17,7 @@ import engine.titles.Title;
  *
  */
 @Settable
-public class Player extends Observable implements Title {
+public class Player extends Observable {
 
     private static final String DEFAULT_NAME = "Player 1";
 
@@ -110,27 +109,4 @@ public class Player extends Observable implements Title {
     public void setWallet (Wallet wallet) {
         myWallet = wallet;
     }
-
-    @Override
-    public String getTitle () {
-        return myName;
-    }
-
-    @Override
-    public void setTitle (String title) {
-        myName = title;
-    }
-
-    @Override
-    public int getIndex () {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void setIndex (int existing) {
-        // TODO Auto-generated method stub
-        
-    }
-
 }

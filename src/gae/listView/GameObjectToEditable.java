@@ -63,6 +63,7 @@ public class GameObjectToEditable implements Placeable {
         imageView = new ImageView(imagePath);
         path = gameObject.getMover();
         location = gameObject.getPoint();
+        weapon = gameObject.getWeapon();
     }
 
     @Override

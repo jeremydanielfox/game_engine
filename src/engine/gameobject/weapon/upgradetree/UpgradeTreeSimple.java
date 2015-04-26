@@ -44,12 +44,11 @@ public class UpgradeTreeSimple implements UpgradeTree {
             last.addChild(node);
             last = node;
         }
-        last.markFinalUpgrade();
     }
 
     @Override
     public List<UpgradeBundle> getNextUpgrades () {
-        return new ArrayList<UpgradeBundle>(Arrays.asList(current));
+        return (current == null) ? new ArrayList<>() : new ArrayList<>(Arrays.asList(current));
     }
 
     @Override
@@ -64,7 +63,7 @@ public class UpgradeTreeSimple implements UpgradeTree {
 
     @Override
     public void updateCurrent (UpgradeTree ... toUpdate) {
-        current = (current.isFinalUpgrade()) ? current : current.getNext();
+        current = current.isFinalUpgrade() ? null : current.getNext();
     }
 
     public UpgradeTree clone () {

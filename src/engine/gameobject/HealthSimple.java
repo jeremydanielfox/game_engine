@@ -13,12 +13,14 @@ import engine.fieldsetting.Settable;
 public class HealthSimple implements Health {
     private double myHealth;
     private double maxHealth;
-    
-    public HealthSimple(){
+    private String myTitle = "";
+    private int index;
+
+    public HealthSimple () {
         this(0);
     }
-    
-    public HealthSimple(double health){
+
+    public HealthSimple (double health) {
         maxHealth = health;
         myHealth = maxHealth;
     }
@@ -44,7 +46,7 @@ public class HealthSimple implements Health {
         myHealth = maxHealth;
     }
 
-    public Health clone(){
+    public Health clone () {
         return new HealthSimple(maxHealth);
     }
 }

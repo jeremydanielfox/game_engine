@@ -1,12 +1,14 @@
 package gae.backend;
 
 import java.io.Serializable;
-import java.util.List;
 import javafx.scene.image.ImageView;
+import engine.gameobject.GameObject;
+import engine.gameobject.Graphic;
+import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
+import engine.gameobject.labels.Type;
 import engine.gameobject.weapon.Weapon;
-import engine.shop.tag.GameObjectTag;
-import gae.gridView.Path;
+import engine.shop.ShopTag;
 import gae.listView.Authorable;
 import gae.listView.MovableImage;
 
@@ -20,7 +22,11 @@ public interface Placeable extends Serializable, Authorable {
 
     public String getImagePath ();
 
+    public String getShopImagePath ();
+
     public ImageView getImageView ();
+
+    public ImageView getShopImageView ();
 
     public PointSimple getLocation ();
 
@@ -30,13 +36,13 @@ public interface Placeable extends Serializable, Authorable {
 
     public Weapon getWeapon ();
 
-    public List<List<Path>> getPath ();
+    public Mover getPath ();
 
     public int getWidth ();
 
     public int getHeight ();
 
-    public GameObjectTag getTag ();
+    public Type getLabel ();
 
     public void setLocation (PointSimple point);
 
@@ -46,7 +52,7 @@ public interface Placeable extends Serializable, Authorable {
 
     public void setID (int id);
 
-    public void setPath (List<List<Path>> path);
+    public void setPath (Mover path);
 
     public void setWidth (int width);
 
@@ -56,14 +62,29 @@ public interface Placeable extends Serializable, Authorable {
 
     public void setWeapon (Weapon weapon);
 
-    public void setTag (GameObjectTag tag);
-
     public void setType (String type);
 
     public void setImagePath (String path);
+
+    public void setGraphic (Graphic graphic);
+
+    public void setShopImagePath (String path);
+
+    public void setLabel (Type label);
 
     public Object clone ();
 
     public Placeable makeNewInstance ();
 
+    public Graphic getGraphic ();
+
+    public void setName (String name);
+
+    public void setDescription (String description);
+
+    public ShopTag getShopTag ();
+
+    public String getDescription ();
+
+    public GameObject getGameObject ();
 }

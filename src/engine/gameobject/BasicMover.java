@@ -42,12 +42,8 @@ public abstract class BasicMover implements Mover {
         this.frozen = frozen;
     }
 
-    /**
-     *
-     * @param percentage i.e. .90 for 90% speedup
-     */
     public void speedBuff (double percentage) {
-        speedModifier = speedModifier + percentage;
+        speedModifier = speedModifier + percentage/100;
     }
 
     @Override

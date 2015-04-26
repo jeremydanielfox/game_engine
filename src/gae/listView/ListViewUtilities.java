@@ -1,7 +1,7 @@
 package gae.listView;
 
 import gae.backend.Placeable;
-import gae.editorView.DraggableFields;
+import gae.editorView.GameObjectInformation;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -31,22 +31,13 @@ public class ListViewUtilities {
      * @return
      */
     public static Node createCellContentWithIcon (Authorable authorable) {
-        if (authorable.getType().equals("Image")) { // image Case
-            DraggableFields container = (DraggableFields) authorable;
-            ImageView image = container.getImageView();
-            image.setFitHeight(THUMBNAIL_SIZE_VERTICAL);
-            image.setPreserveRatio(true);
-            return image;
-        }
-        else { // otherwise
-            HBox content = new HBox();
-            ImageView image = new ImageView(authorable.getImagePath());
-            image.setFitHeight(THUMBNAIL_SIZE_HORIZONTAL);
-            image.setPreserveRatio(true);
-            content.getChildren().addAll(image,
-                                         new Label(authorable.getName() + authorable.getID()));
-            return content;
-        }
+        HBox content = new HBox();
+        ImageView image = new ImageView(authorable.getImagePath());
+        image.setFitHeight(THUMBNAIL_SIZE_HORIZONTAL);
+        image.setPreserveRatio(true);
+        content.getChildren().addAll(image,
+                                     new Label(authorable.getName() + authorable.getID()));
+        return content;
     }
 
     public static void setEditableSelection (ListView<Authorable> list,
@@ -131,18 +122,17 @@ public class ListViewUtilities {
     }
 
     /**
-     * creates a ListView given an observable list of Editables, with specific properties, such as
-     * deleting objects and highlighting selected objects
+     * creates a ListView given an observable list of Objects
      *
      * @param editables
      * @param scene
      * @return
      */
-    public static ListView<?> createGenericList (ObservableList<Object> authorables,
+    public static ListView<?> createGenericList (ObservableList<Object> objects,
                                                  String classType) {
         ListView<Object> list = new ListView<>();
         list.setPrefWidth(200);
-        list.setItems(authorables);
+        list.setItems(objects);
 
         list.setCellFactory( (myList) -> {
             return new ListCell<Object>() {
@@ -154,7 +144,7 @@ public class ListViewUtilities {
                         setGraphic(null);
                     }
                     else if (object != null) {
-                        setText(classType);
+                        setText(GameObjectInformation.getInstance().getTitle(object));
                         // setGraphic(ListViewUtilities.createCellContentWithIcon(object));
                     }
                 }

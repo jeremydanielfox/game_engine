@@ -3,36 +3,51 @@ package engine.gameobject;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.fieldsetting.Settable;
 import engine.pathfinding.EndOfPathException;
+
 
 @Settable
 public class MoverUser extends BasicMover {
     private PointSimple none = new PointSimple(0, 0);
     private PointSimple currentDirection = none;
-    private Node myNode;
-    
-    public MoverUser() {
-        this.inherentSpeed=5;
+    private Graphic myGraphic;
+    @XStreamOmitField
+    private transient Node myNode;
+
+    public MoverUser () {
+        this.inherentSpeed = 5;
     }
 
     @Override
     public PointSimple move (PointSimple current) throws EndOfPathException {
+        if (myNode == null)
+            initializeNode(myGraphic);
         PointSimple direction = new PointSimple(currentDirection);
         currentDirection = none;
         return current.add(direction);
     }
+
     @Settable
-    public void setNode(Node node) {
-        node.setFocusTraversable(true);
-        node.setOnKeyPressed(e -> handleKeyInput(e));
-        myNode = node;
+    public void setGraphic (Graphic graphic) {
+        myGraphic = graphic;
+    }
+
+    /**
+     * @param graphic
+     */
+    private void initializeNode (Graphic graphic) {
+        myNode = graphic.getNode();
+        myNode.setFocusTraversable(true);
+        myNode.setOnKeyPressed(e -> handleKeyInput(e));
     }
 
     @Override
     public Mover clone () {
-        // TODO Auto-generated method stub
-        return null;
+        MoverUser mover =  new MoverUser();
+        mover.setGraphic(myGraphic);
+        return mover;
     }
 
     public void moveRight () {
@@ -44,7 +59,7 @@ public class MoverUser extends BasicMover {
     }
 
     public void moveNorth () {
-         currentDirection = new PointSimple(0, -this.inherentSpeed);
+        currentDirection = new PointSimple(0, -this.inherentSpeed);
     }
 
     public void moveSouth () {
@@ -52,23 +67,14 @@ public class MoverUser extends BasicMover {
     }
 
     private void handleKeyInput (KeyEvent e) {
-        System.out.println("handled");
         KeyCode keyCode = e.getCode();
-        if (keyCode == KeyCode.D) {
-            System.out.println("RIGHT");
+        if (keyCode == KeyCode.D)
             moveRight();
-        }
-        else if (keyCode == KeyCode.A) {
-            System.out.println("BOOM BABY LEFT");
+        else if (keyCode == KeyCode.A)
             moveLeft();
-        }
-        else if (keyCode == KeyCode.W) {
-            System.out.println("up");
+        else if (keyCode == KeyCode.W)
             moveNorth();
-        }
-        else if (keyCode == KeyCode.S) {
-            System.out.println("down");
+        else if (keyCode == KeyCode.S)
             moveSouth();
-        }
     }
 }

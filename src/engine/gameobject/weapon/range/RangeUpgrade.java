@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import engine.fieldsetting.Settable;
+import engine.gameobject.units.UpgradeType;
 import engine.gameobject.weapon.Upgrade;
-import engine.observable.Observable;
 import engine.observable.Observer;
 
 
@@ -16,24 +16,35 @@ import engine.observable.Observer;
  *
  */
 
-public class RangeUpgrade implements Range, Upgrade, Observable {
+public class RangeUpgrade implements Range, Upgrade {
 
     private List<Observer> observers = new ArrayList<>();
     private double increment;
     private Optional<Range> decorated;
+    private UpgradeType type;
 
     public RangeUpgrade () {
         this(0);
     }
 
     public RangeUpgrade (double increment) {
-        this.increment = increment;
+        setIncrement(increment);
+        setType(UpgradeType.NULL);
         decorated = Optional.empty();
     }
 
     @Settable
     public void setIncrement (double increment) {
         this.increment = increment;
+    }
+
+    private void setType (UpgradeType type) {
+       this.type = type;
+    }
+
+    @Override
+    public UpgradeType getType () {
+        return type;
     }
 
     @Override
@@ -48,19 +59,12 @@ public class RangeUpgrade implements Range, Upgrade, Observable {
     @Override
     public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((Range) decorated);
-        notifyObservers();
     }
 
     public Upgrade clone () {
-        RangeUpgrade clone = new RangeUpgrade(increment);
-        clone.addObserver(observers.get(0));
-        System.out.println("trig");
-        return clone;
+        return new RangeUpgrade(increment);
     }
 
-    public int getObserver(){
-        return observers.size();
-    }
     
     @Override
     public void addObserver (Observer observer) {
@@ -69,14 +73,12 @@ public class RangeUpgrade implements Range, Upgrade, Observable {
 
     @Override
     public void removeObserver (Observer observer) {
-        // TODO Auto-generated method stub
-        
+        observers.add(observer);
     }
 
     @Override
     public void notifyObservers () {
         observers.forEach(obs -> obs.update());
-        
     }
 
 }

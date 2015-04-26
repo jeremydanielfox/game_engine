@@ -1,7 +1,7 @@
 package gae.editor;
 
 import gae.editorView.PopUpEditorView;
-import gae.gameView.GenericObjectsPane;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -20,38 +20,59 @@ public class ObjectComponentEditor extends ComponentEditor {
     private Button myCreateNewButton;
     private Object myObject;
     private Class<?> clazz;
+    private BiConsumer<Class<?>, Object> biConsumer;
 
-    public ObjectComponentEditor (Class<?> klass) {
+    public ObjectComponentEditor (Class<?> klass, BiConsumer<Class<?>, Object> biconsumer) {
         clazz = klass;
+        biConsumer = biconsumer;
         try {
             myObject = Class.forName(klass.getName()).newInstance();
         }
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException e1) {
-            System.out.println("error: " + klass.getName());
-            myObject = null;
-            e1.printStackTrace();
+            System.out.println(klass.getName() + " defaulted to first concrete class.");
+            try {
+                myObject = EditingParser.getConcreteClassFromMap(klass).newInstance();
+            }
+            catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+                myObject = null;
+            }
+//            e1.printStackTrace();
         }
         myAddExistingButton = new Button("Add Existing");
         myCreateNewButton = new Button("Create New");
-        myCreateNewButton.setOnMouseClicked(popNewEditor());
+        // myCreateNewButton.setOnMouseClicked(popNewEditor());
         // TODO: setup lambda's for these buttons
         getEditBox().getChildren().addAll(getLabel(), myAddExistingButton, myCreateNewButton);
     }
 
-    private void setObject (Object obj) {
+    public void setObject (Object obj) {
         myObject = obj;
     }
-    
-    public Class<?> getObjectClass() {
-        return clazz;
+
+    public BiConsumer<Class<?>, Object> getBiConsumer () {
+        return biConsumer;
+    }
+
+    public Class<?> getObjectClass () {
+        return myObject.getClass();
     }
     
-    public EventHandler<? super MouseEvent> popNewEditor() {
-        return e -> {
-            Consumer<Object> setObjectConsumer = o -> setObject(o);
-//            GenericObjectsPane.newCustomObject(clazz, "yo", setObjectConsumer);
-            new PopUpEditorView(setObjectConsumer, clazz);
-        };
+    /**
+     * The instantiated object's class and the variable clazz can be different classes if ObjectComponentEditor is 
+     * instantiated with an interface class.
+     * 
+     * @return interface if any
+     */
+    public Class<?> getInterfaceClass() {
+        return clazz;
+    }
+
+    public void popNewEditor (int index) {
+        // Consumer<Object> setObjectConsumer = o -> setObject(o);
+        Consumer<Object> setObjectConsumer = o -> clear();
+        // GenericObjectsPane.newCustomObject(clazz, "yo", setObjectConsumer);
+        new PopUpEditorView(setObjectConsumer, biConsumer, myObject.getClass(), index);
     }
 
     @Override

@@ -109,5 +109,4 @@ public class Player extends Observable {
     public void setWallet (Wallet wallet) {
         myWallet = wallet;
     }
-
 }

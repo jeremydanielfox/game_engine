@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import engine.gameobject.GameObject;
+import engine.gameobject.Purchasable;
 
 
 /**
@@ -12,11 +13,12 @@ import engine.gameobject.GameObject;
  * @author Tom Puglisi
  *
  */
+@Deprecated
 public class PrototypeService {
-    private Map<String, Prototype<GameObject>> prototypeMap;
+    private Map<String, Purchasable<GameObject>> prototypeMap;
 
-    public PrototypeService (List<Prototype<GameObject>> prototypes) {
-        prototypeMap = new HashMap<String, Prototype<GameObject>>();
+    public PrototypeService (List<Purchasable<GameObject>> prototypes) {
+        prototypeMap = new HashMap<String, Purchasable<GameObject>>();
         // prototypes.stream().forEach(prototype -> prototypeMap.put(prototype.getName(),
         // prototype));
     }
@@ -25,7 +27,7 @@ public class PrototypeService {
         return prototypeMap.get(name).clone();
     }
 
-    public void addPrototype (Prototype<GameObject> prototype) {
+    public void addPrototype (Purchasable<GameObject> prototype) {
         // prototypeMap.put(prototype.getName(), prototype);
     }
 }

@@ -1,14 +1,11 @@
 package engine.gameobject;
 
-import engine.gameobject.behaviors.Behavior;
 import engine.gameobject.behaviors.EndBehaviorful;
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.units.Colliding;
 import engine.gameobject.units.Firing;
-import engine.prototype.Prototype;
-import engine.shop.PurchasableGameObject;
-import engine.shop.tag.GameObjectTag;
+import engine.shop.RangeDisplay;
 import gameworld.ObjectCollection;
 
 
@@ -18,7 +15,7 @@ import gameworld.ObjectCollection;
  *
  */
 
-public interface GameObject extends Firing, Colliding, Buffable, Movable, Health, PurchasableGameObject, Prototype<GameObject>, EndBehaviorful {
+public interface GameObject extends Firing, Colliding, Buffable, Movable, Health, Purchasable<GameObject>, EndBehaviorful {
 
     // public void updateGraphics ();//cannot implement yet
 
@@ -37,19 +34,11 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
     
     public Mover getMover ();
 
-    public Label getLabel ();
+    public Type getLabel ();
 
-    public void setGraphic (Graphic graphic);
+    //public void setGraphic (Graphic graphic);
 
-    public void setLabel (Label label);
-
-    /**
-     * Tags contain important GameObject info (e.g. name, description, image)
-     *
-     * @return
-     */
-    @Override
-    public GameObjectTag getTag ();
+    public void setLabel (Type label);
 
     /**
      * Returns the Cartesian coordinate of the game object.
@@ -69,7 +58,9 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
     public void setMover (Mover mover);
 
     public void setHealth (Health clone);
-
-    public void setTag (GameObjectTag myTag);
+    
+    public RangeDisplay getRangeDisplay ();
+    
+    public Graphic getGraphic ();
 
 }

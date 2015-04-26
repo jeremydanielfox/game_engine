@@ -12,7 +12,6 @@ import engine.fieldsetting.Settable;
  */
 @Settable
 public class TimerConcrete extends Timer {
-
     public static final String DEFAULT_LABEL = "Time left";
     private static final String ZERO_SEC_PREFIX = "0";
     private static final String COLON = ":";

@@ -1,8 +1,7 @@
 package engine.gameobject;
 
 import engine.pathfinding.EndOfPathException;
-
-
+@Deprecated
 public class DirectPointMover extends MoverPoint {
 
     public DirectPointMover () {

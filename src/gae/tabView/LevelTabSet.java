@@ -1,31 +1,35 @@
 package gae.tabView;
 
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 
+/**
+ * Holds the individual tabs for each level
+ * @author JohnGilhuly
+ *
+ */
 
 public class LevelTabSet {
     private TabPane baseNode;
 
-    public LevelTabSet (Pane world, Pane prefs) {
-        initialize(world, prefs);
-
-        // actual code is only world and prefs
+    public LevelTabSet (Pane world, Node waves) {
+        initialize(world, waves);
     }
 
-    private void initialize (Pane world, Pane prefs) {
+    private void initialize (Pane world, Node waves) {
         baseNode = new TabPane();
         // actual code is worldTab.setContent(world)
         Tab worldTab = new Tab("World");
         worldTab.setContent(world);
         worldTab.setClosable(false);
-
-        Tab prefsTab = new Tab("Preferences");
-        prefsTab.setContent(prefs);
-        worldTab.setClosable(false);
-
-        baseNode.getTabs().addAll(worldTab, prefsTab);
+        
+        Tab waveTab = new Tab("Waves");
+        waveTab.setContent(waves);
+        waveTab.setClosable(false);
+        
+        baseNode.getTabs().addAll(worldTab, waveTab);
     }
 
     public TabPane getBaseNode () {

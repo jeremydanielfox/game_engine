@@ -23,6 +23,7 @@ import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.test.TestTower;
+import engine.gameobject.test.bloons.BlueBloon;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
@@ -48,7 +49,7 @@ public class GameWriter extends Application {
     private StoryBoard makeStoryBoard (GameWorld world, Player player) {
         List<GameObject> waveObjects = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            waveObjects.add(new GameObjectSimpleTest());
+            waveObjects.add(new BlueBloon());
         }
         GameObjectQueue q = new ConcreteQueue(waveObjects);
         TimedEvent wave = new RandomSpanWave(2, 20, q, world);
@@ -88,7 +89,7 @@ public class GameWriter extends Application {
         Level levelOne = new ConcreteLevel("images/Park_Path.png", list2, list, world, story);
         levelOne.addTimer(t);
         board.addLevel(levelOne);
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(10,10),
                                          new StoryBoard()));
 
         return board;
@@ -118,11 +119,11 @@ public class GameWriter extends Application {
      * @return
      */
     public GameWorld makeWorld () {
-        FixedWorld world = new FixedWorld();
+        FixedWorld world = new FixedWorld(10,10);
         // world.addObject(new TestTower(2, 330, 130));
         //world.addObject(new TestTower(5, 270, 270));
         // world.addObject(new TestTower(3, 355, 455));
-        world.setPath(DataManager.readFromXML(PathFixed.class, "src/gae/listView/Test.xml"));
+        world.setPath(DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml"));
         return world;
     }
 

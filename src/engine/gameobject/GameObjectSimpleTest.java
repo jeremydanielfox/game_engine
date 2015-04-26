@@ -3,7 +3,6 @@ package engine.gameobject;
 import java.util.ArrayList;
 import java.util.List;
 import xml.DataManager;
-import engine.gameobject.behaviors.DeathBehavior;
 import engine.gameobject.test.EnemyLabel;
 import engine.gameobject.weapon.NullWeapon;
 import engine.pathfinding.PathFixed;
@@ -30,26 +29,11 @@ public class GameObjectSimpleTest extends GameObjectSimple {
         setHealth(new HealthSimple(4));
         setWeapon(new NullWeapon());
         PathFixed myPath = new PathFixed();
-        PathSegmentBezier myBez = new PathSegmentBezier();
-        List<PointSimple> points = new ArrayList<PointSimple>();
-        points.add(new PointSimple(0, 0));
-        points.add(new PointSimple(100, 800));
-        points.add(new PointSimple(800, 100));
-        points.add(new PointSimple(500, 500));
-        myBez.setPoints(points);
-        myPath.addPathSegment(myBez);
-        myPath = DataManager.readFromXML(PathFixed.class, "src/gae/listView/Test.xml");
+        myPath = DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml");
         // XStream xstream = new XStream(new DomDriver());
         // File file = new File("src/gae/listView/Test.xml");
         // myPath = (PathFixed) xstream.fromXML(file);
         setMover(new MoverPath(myPath, 1));
     }
-
-    // This method is outdated. Now encapsulated in graphics class.
-    // private void createNode () {
-    // Circle circle = new Circle();
-    // circle.setFill(Color.ALICEBLUE);
-    // myNode = circle;
-    // }
 
 }

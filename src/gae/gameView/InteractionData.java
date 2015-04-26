@@ -1,11 +1,13 @@
 package gae.gameView;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import engine.gameobject.GameObject;
+
+import engine.gameobject.labels.Type;
 import engine.interactions.BuffImparter;
 import engine.interactions.CollisionEngine;
 import engine.interactions.Interaction;
@@ -30,7 +32,7 @@ public class InteractionData {
      */
     private static final List<String> MAP_KEYS = Arrays.asList("Collide", "Shoot",
                                                                "Do not collide", "Do not shoot");
-    private static final List<Class> MAP_VALUES = Arrays.asList(BuffImparter.class, ShootAt.class,
+    private static final List<Class<? extends Interaction>> MAP_VALUES = Arrays.asList(BuffImparter.class, ShootAt.class,
                                                                 NoInteraction.class,
                                                                 NoInteraction.class);
 
@@ -84,7 +86,7 @@ public class InteractionData {
      * @param i
      * @param two
      */
-    public void addInteraction (List<GameObject> one, Interaction i, List<GameObject> two) {
+    public void addInteraction (List<Type> one, Interaction i, List<Type> two) {
         if (i instanceof BuffImparter) {
             massPut(one, i, two, myCollisions);
         }
@@ -106,13 +108,13 @@ public class InteractionData {
      * @param two
      * @param engine
      */
-    private void massPut (List<GameObject> one,
+    private void massPut (List<Type> one,
                           Interaction i,
-                          List<GameObject> two,
+                          List<Type> two,
                           InteractionEngine engine) {
         one.forEach(e -> {
             two.forEach(f -> {
-                engine.put(e.getLabel(), f.getLabel(), i);
+                engine.put(e, f, i);
             });
         });
     }

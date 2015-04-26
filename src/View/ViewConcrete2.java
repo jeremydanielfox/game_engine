@@ -87,7 +87,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myGameWorldPane.setMaxWidth(myDisplayHeight);
         myPane.setCenter(myGameWorldPane);
         initializeGameWorld();
-        vbox.setFocusTraversable(false);
+       // vbox.setFocusTraversable(false);
         return myPane;
     }
 
@@ -186,7 +186,6 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
                 }
             });
         myHeadsUp.update();
-
     }
 
     private void addInitialObjects () {// This is actually a rendering method now.

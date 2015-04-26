@@ -11,6 +11,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 
+/**
+ * HudEditor tab content
+ * @author JohnGilhuly
+ *
+ */
 
 public class HudEditor implements UIObject {
     private static final double ANCHOR_OFFSET = 5.0;

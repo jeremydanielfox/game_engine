@@ -68,12 +68,11 @@ public class ObjectComponentEditor extends ComponentEditor {
         return clazz;
     }
 
-    public void popNewEditor (String title) {
-        System.out.println("TITLE IS : " + title);
+    public void popNewEditor (int index) {
         // Consumer<Object> setObjectConsumer = o -> setObject(o);
         Consumer<Object> setObjectConsumer = o -> clear();
         // GenericObjectsPane.newCustomObject(clazz, "yo", setObjectConsumer);
-        new PopUpEditorView(setObjectConsumer, biConsumer, myObject.getClass());
+        new PopUpEditorView(setObjectConsumer, biConsumer, myObject.getClass(), index);
     }
 
     @Override

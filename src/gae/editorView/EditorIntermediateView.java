@@ -20,7 +20,7 @@ import gae.editor.ObjectComponentEditor;
  *concrete object.
  */
 public class EditorIntermediateView {
-    public EditorIntermediateView(ArrayList<String> concreteClasses, ObjectComponentEditor componentEditor, String title) {
+    public EditorIntermediateView(ArrayList<String> concreteClasses, ObjectComponentEditor componentEditor, int i) {
         Stage editorStage = new Stage();
         VBox vbox = new VBox();
         vbox.setPrefSize(250, 80);
@@ -38,7 +38,7 @@ public class EditorIntermediateView {
             String className = comboBox.getSelectionModel().getSelectedItem();
             if (className != null) {
                 componentEditor.setObject(EditingParser.getInstanceFromName(className));
-                componentEditor.popNewEditor(title);
+                componentEditor.popNewEditor(i);
                 editorStage.close();
             }
             //TODO: show an error

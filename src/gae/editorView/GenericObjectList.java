@@ -29,7 +29,6 @@ public class GenericObjectList {
     private ObjectComponentEditor objectEditor;
     private ContainerWrapper wrapper;
     private Map<String, ArrayList<String>> interfaceToClassMap;
-    private int count;
 
     public GenericObjectList (ObjectComponentEditor editor,
                               Node node,
@@ -55,13 +54,13 @@ public class GenericObjectList {
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
                     if (klass.getSimpleName().equals("Collider")) {
-                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass, interfaceToClassMap);
+                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass);
                     }
-                        else {
-                            EditorIntermediate.handleEditorPop(objectEditor, String.format("%s  %d", classType, count++));
-//                            objectEditor.popNewEditor(classType + " " + count++);
-                        }
-                    });
+                    else {
+                        EditorIntermediate.handleEditorPop(objectEditor, -1);
+//                        objectEditor.popNewEditor(-1);
+                    }
+                });
                 contextmenu.getItems().add(item);
                 contextmenu.show(titledPane, me.getSceneX(), me.getSceneY());
             }
@@ -73,11 +72,12 @@ public class GenericObjectList {
         ListView<?> list = ListViewUtilities.createGenericList(createdSpecificObjects, classType);
         BooleanProperty unclicked = new SimpleBooleanProperty(false);
         list.setOnMouseClicked(me -> {
+            System.out.println("UNCLICKED IS (If false you can make new)" + unclicked);
             if (me.getClickCount() == 2 && !unclicked.get()) {
                 unclicked.set(true);
                 DraggableItem draggable =
-                        new DraggableItem(list.getSelectionModel().getSelectedItem(), klass,
-                                          classType);
+                        new DraggableItem(list.getSelectionModel().getSelectedItem(), list
+                                .getSelectionModel().getSelectedIndex(), klass, objectEditor);
                 DraggableUtilities.makeObjectPlaceable(me, draggable, node,
                                                        createdSpecificObjects, wrapper, root,
                                                        objectEditor, unclicked);

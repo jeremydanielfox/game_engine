@@ -15,11 +15,19 @@ import engine.gameobject.weapon.Upgrade;
  * @author Danny Oh and Nathan Prabhu
  *
  */
+@Settable
 public class FreezeBuff extends Buff implements Freeze {
 
     private int increment;
     private BuffType type;
     private Optional<Freeze> decorated;
+
+    public FreezeBuff () {
+        super(0);
+        this.increment = 0;
+        type = BuffType.COLLISION;
+        decorated = Optional.empty();
+    }
 
     public FreezeBuff (int increment) {
         super(increment);
@@ -33,7 +41,7 @@ public class FreezeBuff extends Buff implements Freeze {
         this.increment = increment;
     }
 
-    @Settable
+//    @Settable
     public void setBuffType (BuffType type) {
         this.type = type;
     }

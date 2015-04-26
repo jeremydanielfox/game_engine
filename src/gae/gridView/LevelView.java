@@ -94,7 +94,7 @@ public class LevelView {
         Pane root = new Pane();
         container = new TileViewToggle(gridSizeProperty, scene);
         container.getTileModeProperty().bind(tileModeProperty);
-        root.getChildren().addAll(background, container, tempGrid());
+        root.getChildren().addAll(background, container);
         // root.getChildren().addAll(background, container);
 
         stack.getChildren().addAll(root);
@@ -115,7 +115,7 @@ public class LevelView {
     private Group getLibraryView () {
         libraryData = LibraryData.getInstance();
         libraryview =
-                new LibraryView(libraryData.getEditableObservableList());
+                new LibraryView();
         Group leftview =
                 libraryview.getGroup(stack, scene, wrapper);
         setGridOptions();
@@ -247,5 +247,13 @@ public class LevelView {
     public Consumer<Placeable> getConsumer () {
         Consumer<Placeable> consumer = e -> libraryData.addEditableToList(e);
         return consumer;
+    }
+    
+    public ObjectProperty<Dimension> getGridDimensionProperty() {
+        return gridSizeProperty;    
+    }
+    
+    public String getBackgroundImagePath() {
+        return DEFAULT_IMAGE_PATH;
     }
 }

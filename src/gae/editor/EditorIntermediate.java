@@ -14,12 +14,12 @@ import java.util.Map;
  */
 public class EditorIntermediate {
     
-    public static void handleEditorPop(ObjectComponentEditor componentEditor, String title) {
+    public static void handleEditorPop(ObjectComponentEditor componentEditor, int i) {
         Map<String, ArrayList<String>> map = EditingParser.getInterfaceClasses("engine.fieldsetting.implementing_classes");
         ArrayList<String> array = map.get(componentEditor.getInterfaceClass().getName());
-        if (array == null) componentEditor.popNewEditor(title);
+        if (array == null) componentEditor.popNewEditor(i);
         else if (array.size() < 2) {
-            componentEditor.popNewEditor(title);
-        } else new EditorIntermediateView(array, componentEditor, title);
+            componentEditor.popNewEditor(i);
+        } else new EditorIntermediateView(array, componentEditor, i);
     }
 }

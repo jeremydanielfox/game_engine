@@ -110,8 +110,9 @@ public class SimpleEditor extends Editor implements UIObject {
                     (ComponentEditor) EditingParser.getInstanceFromName(String.format("%s%s", CLASS_PATH,
                                                                         root.getInputType()));
             simpleFields.add(component);
+            editors.add(component.getObject());
         }
-        editors.add(component.getObject());
+//        editors.add(component.getObject());
         component.setName(root.getMethod().getName());
         nodeMap.put(component, root);
     }

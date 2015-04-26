@@ -31,7 +31,7 @@ public abstract class Editor implements Edits {
         for (Method method : methods) {
             // System.out.println(method.toString());
             Type parameterClass = method.getGenericParameterTypes()[0];
-            if (parameterClass.equals(double.class)) {
+            if (parameterClass.equals(double.class) || parameterClass.equals(int.class)) {
                 System.out.println("double  " + getPropertyName(method.getName()));
                 root.addToNodes(new TreeNode(method, "SliderEditor"));
             }

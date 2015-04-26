@@ -27,7 +27,7 @@ public class MoverEditorOpener extends PopUpEditorView {
     public MoverEditorOpener (Consumer<Object> consumer,
                               BiConsumer<Class<?>, Object> biConsumer,
                               Class<?> klass) {
-        super(consumer, biConsumer, klass);
+        super(consumer, biConsumer, klass, 0);
         // TODO Auto-generated constructor stub
     }
 

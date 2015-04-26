@@ -1,8 +1,19 @@
 package gae.gameView;
 
+import engine.gameobject.labels.Type;
+import engine.gameobject.labels.SimpleType;
+import engine.interactions.BuffImparter;
+import engine.interactions.Interaction;
+import engine.interactions.NoInteraction;
+import engine.interactions.ShootAt;
 import gae.listView.LibraryData;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import sun.security.jca.GetInstance.Instance;
+import xml.DataManager;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -14,18 +25,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-
 /**
  * Defines a single interaction between game objects
  *
  *
  * @author Brandon Choi
  *
- */
-
-/*
- * label1 [collide || no collide] label2 -need access to library view for labels / objects -create
- * tree of hierarchy for labels
  */
 
 public class InteractionInstance {
@@ -36,11 +41,6 @@ public class InteractionInstance {
     private DropDown interactionType;
     private ObjectContainer box1, box2;
     private Button create;
-
-    /*
-     * TODO: pull classes via reflection and then map the options in the interactionType to specific
-     * interaction classes in the engine
-     */
 
     public InteractionInstance (InteractionData data, LibraryData library) {
         myInteractionData = data;
@@ -68,11 +68,53 @@ public class InteractionInstance {
         return interactions;
     }
 
+    /**
+     * when create is pressed, the interaction is added to the interaction data
+     */
     private void createButtonFunction () {
+        // create.setOnMousePressed(e -> {
+        // Interaction i;
+        // try {
+        // i = (Interaction) myInteractionData.getInteractionMap()
+        // .get(interactionType.getSelected()).newInstance();
+        //
+        // myInteractionData.addInteraction(box1.getLabelList(), i, box2.getLabelList());
+        // }
+        // catch (Exception e1) {
+        // e1.printStackTrace();
+        // }
+        // });
+
+        /*
+         * TO EXPORT: DataManager.writeToXML(myObject, filepath);
+         * 
+         * FOR TESTING:
+         */
+
         create.setOnMousePressed(e -> {
-            /*
-             * TODO
-             */
+            List<Type> list1 = Arrays.asList(new SimpleType("one"), new SimpleType("two"),
+                                             new SimpleType("three"), new SimpleType("four"),
+                                             new SimpleType("five"));
+            List<Type> list2 = Arrays.asList(new SimpleType("danny"), new SimpleType("jeremy"),
+                                             new SimpleType("eric"), new SimpleType("kaighn"),
+                                             new SimpleType("nina"));
+
+            BuffImparter bf = new BuffImparter();
+            myInteractionData.addInteraction(list1, bf, list2);
+
+            ShootAt sa = new ShootAt();
+            myInteractionData.addInteraction(list1, sa, list2);
+            
+            List<Type> list3 = Arrays.asList(new SimpleType("a"));
+            List<Type> list4 = Arrays.asList(new SimpleType("b"));
+            
+            NoInteraction ni = new NoInteraction();
+            myInteractionData.addInteraction(list3, ni, list4);
+
+            DataManager.writeToXML(myInteractionData.getEngines().get(0),
+                                   "src/xml/ExampleInteraction.xml");
+            DataManager.writeToXML(myInteractionData.getEngines().get(1),
+                                   "src/xml/ExampleInteraction2.xml");
         });
     }
 
@@ -95,15 +137,19 @@ public class InteractionInstance {
 
         private VBox container;
         private Label label;
-        private ComboBox choices;
+        private ComboBox<String> choices;
 
         public DropDown (String n, List<String> options) {
             container = new VBox();
             container.setAlignment(Pos.CENTER);
             container.setId("interactionOptions");
             label = new Label(n);
-            choices = new ComboBox();
+            choices = new ComboBox<>();
             createDropDown(options);
+        }
+
+        public String getSelected () {
+            return choices.getSelectionModel().getSelectedItem();
         }
 
         private void createDropDown (List<String> options) {
@@ -129,6 +175,7 @@ public class InteractionInstance {
         private ScrollPane scroller;
         private Button adder;
         private HBox addBox;
+        private List<Type> labelList;
         private LabelCheckList myChecker;
 
         public ObjectContainer () {
@@ -148,6 +195,10 @@ public class InteractionInstance {
             buttonGraphic.setFitWidth(25);
             buttonGraphic.setFitHeight(25);
             createObjectContainer();
+        }
+
+        public List<Type> getLabelList () {
+            return labelList;
         }
 
         /**

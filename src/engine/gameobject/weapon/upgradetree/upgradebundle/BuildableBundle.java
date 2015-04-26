@@ -1,7 +1,5 @@
 package engine.gameobject.weapon.upgradetree.upgradebundle;
 
-import java.util.List;
-import engine.gameobject.weapon.Upgrade;
 
 /**
  * Marker interface that allows access to methods in UpgradeBundle AND Buildable. Motivation for

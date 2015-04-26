@@ -60,7 +60,7 @@ public class ShopEditor implements UIObject{
                 System.out.println(aut.getName());
             }
             for(Placeable obj: checklist.getSelectedPlaceables()){
-                System.out.println(obj.getTag().getName());
+                System.out.println(obj.getShopTag().getName());
             }
         });
         return button;

@@ -1,9 +1,10 @@
 package gae.backend;
 
+import engine.gameobject.Graphic;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Label;
 import engine.gameobject.weapon.Weapon;
-import engine.shop.tag.GameObjectTag;
+import engine.shop.ShopTag;
 import gae.gridView.Path;
 import gae.listView.DeepCopy;
 import gae.listView.MovableImage;
@@ -193,18 +194,6 @@ public class TempEnemy implements Placeable, UIObject {
     }
 
     @Override
-    public GameObjectTag getTag () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setTag (GameObjectTag tag) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public void setType (String type) {
         // TODO Auto-generated method stub
         
@@ -224,6 +213,48 @@ public class TempEnemy implements Placeable, UIObject {
 
     @Override
     public void setLabel (Label label) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public ShopTag getShopTag () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getShopImagePath () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ImageView getShopImageView () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setShopImagePath (String path) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Graphic getGraphic () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setName (String name) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setDescription (String description) {
         // TODO Auto-generated method stub
         
     }

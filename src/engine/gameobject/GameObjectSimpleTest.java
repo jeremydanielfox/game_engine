@@ -3,7 +3,6 @@ package engine.gameobject;
 import java.util.ArrayList;
 import java.util.List;
 import xml.DataManager;
-import engine.gameobject.behaviors.DeathBehavior;
 import engine.gameobject.test.EnemyLabel;
 import engine.gameobject.weapon.NullWeapon;
 import engine.pathfinding.PathFixed;
@@ -44,12 +43,5 @@ public class GameObjectSimpleTest extends GameObjectSimple {
         // myPath = (PathFixed) xstream.fromXML(file);
         setMover(new MoverPath(myPath, 1));
     }
-
-    // This method is outdated. Now encapsulated in graphics class.
-    // private void createNode () {
-    // Circle circle = new Circle();
-    // circle.setFill(Color.ALICEBLUE);
-    // myNode = circle;
-    // }
 
 }

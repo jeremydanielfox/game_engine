@@ -1,15 +1,16 @@
 package gae.backend;
 
-import java.io.Serializable;
-import java.util.List;
-import javafx.scene.image.ImageView;
+import engine.gameobject.Graphic;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Label;
 import engine.gameobject.weapon.Weapon;
-import engine.shop.tag.GameObjectTag;
+import engine.shop.ShopTag;
 import gae.gridView.Path;
 import gae.listView.Authorable;
 import gae.listView.MovableImage;
+import java.io.Serializable;
+import java.util.List;
+import javafx.scene.image.ImageView;
 
 
 public interface Placeable extends Serializable, Authorable {
@@ -20,8 +21,12 @@ public interface Placeable extends Serializable, Authorable {
     public String getType ();
 
     public String getImagePath ();
+    
+    public String getShopImagePath ();
 
     public ImageView getImageView ();
+    
+    public ImageView getShopImageView ();
 
     public PointSimple getLocation ();
 
@@ -37,7 +42,7 @@ public interface Placeable extends Serializable, Authorable {
 
     public int getHeight ();
 
-    public GameObjectTag getTag ();
+    public ShopTag getShopTag ();
     
     public Label getLabel();
 
@@ -59,16 +64,22 @@ public interface Placeable extends Serializable, Authorable {
 
     public void setWeapon (Weapon weapon);
 
-    public void setTag (GameObjectTag tag);
-
     public void setType (String type);
 
     public void setImagePath (String path);
+    
+    public void setShopImagePath (String path);
     
     public void setLabel(Label label);
 
     public Object clone ();
 
     public Placeable makeNewInstance ();
+    
+    public Graphic getGraphic ();
+    
+    public void setName (String name);
+    
+    public void setDescription (String description);
 
 }

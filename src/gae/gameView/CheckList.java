@@ -102,7 +102,7 @@ public class CheckList {
 
         public Node getNode () {
             HBox node = new HBox(10);
-            Graphic graphic = placeable.getTag().getGraphic().clone();
+            Graphic graphic = placeable.getGraphic().clone();
             graphic.setHeight(50);
             Node image = graphic.getResizedGraphic(1);
             Label label = new Label(placeable.getName());

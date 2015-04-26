@@ -5,7 +5,7 @@ import java.util.Map;
 import javafx.event.EventHandler;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import engine.prototype.Prototype;
+import engine.gameobject.Purchasable;
 import engine.shop.ShopModelSimple.ItemInfo;
 
 
@@ -15,7 +15,7 @@ public interface ShopModel {
      *
      * @param prototype
      */
-    public void addPrototype (Prototype<GameObject> prototype);
+    public void addPurchasable (Purchasable<GameObject> prototype);
 
     /**
      *

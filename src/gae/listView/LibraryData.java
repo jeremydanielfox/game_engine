@@ -108,7 +108,7 @@ public class LibraryData {
             object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
                                           editable.getImagePath()));
             object.setLabel(editable.getLabel());
-            object.setTag(editable.getTag());
+            object.setShopTag(editable.getShopTag());
             object.setMover(getMover(editable));
             object.setPoint(editable.getLocation());
             object.setHealth(new HealthSimple(editable.getHealth()));

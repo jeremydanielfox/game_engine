@@ -18,18 +18,18 @@ import engine.gameobject.PointSimple;
 public class GameObjectSelector {
 
     private Node prev = null;
-    private ObjectProperty<GameObject> current = new SimpleObjectProperty<GameObject>(null);
-    private Pane infoBox;
+    private ObjectProperty<GameObject> current = new SimpleObjectProperty<GameObject>();
     private Pane worldPane;
 
     private Consumer<GameObject> displayUpgrades;
+    private Runnable clearInfoBox;
 
     private static final List<KeyCode> DESELECTION_KEYS = Arrays
             .asList(new KeyCode[] { KeyCode.ESCAPE });
 
-    public GameObjectSelector (Consumer<GameObject> displayUpgrades, Pane infoBox, Pane worldPane) {
-        this.infoBox = infoBox;
+    public GameObjectSelector (Consumer<GameObject> displayUpgrades, Runnable clearInfoBox, Pane worldPane) {
         this.worldPane = worldPane;
+        this.clearInfoBox = clearInfoBox;
         this.displayUpgrades = displayUpgrades;
 
         initialize();
@@ -38,7 +38,7 @@ public class GameObjectSelector {
 
     private void initialize () {
         current.addListener( (obs, old, cur) -> {
-            clearInfoBox();
+            clearInfoBox.run();
             select(null);
             if (prev !=null){
                 worldPane.getChildren().remove(prev);
@@ -51,7 +51,7 @@ public class GameObjectSelector {
                 displayUpgrades.accept(cur);
                 worldPane.setOnKeyPressed(event -> {
                     if (event.getCode() == KeyCode.ESCAPE) {
-                        clearInfoBox();
+                        clearInfoBox.run();
                         worldPane.getChildren().remove(rangeDisp);
                         worldPane.setOnKeyPressed(null);
                     }
@@ -67,10 +67,6 @@ public class GameObjectSelector {
         rangeDisp.relocate(point.getX(), point.getY());
         worldPane.getChildren().add(rangeDisp);
         return rangeDisp;
-    }
-
-    private void clearInfoBox () {
-        infoBox.getChildren().clear();
     }
 
     public void select (GameObject obj) {

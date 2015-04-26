@@ -7,8 +7,6 @@ import gameworld.GameWorld;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -50,7 +48,7 @@ public class ShopView extends Parent {
     private ShopModel model;
     private Scene scene;
     private Pane pane;
-   
+
     private FlowPane shopIcons;
     private StackPane infoBox;
     private GameObjectSelector selector;
@@ -69,7 +67,9 @@ public class ShopView extends Parent {
         shopContainer.setMaxWidth(SHOP_WIDTH);
         shopIcons = new FlowPane();
         infoBox = new StackPane();
-        selector = new GameObjectSelector(this::displayUpgrades, infoBox, pane);
+        selector = new GameObjectSelector(this::displayUpgrades, this::clearInfoBox, pane);
+        
+        
         shopContainer.getChildren().addAll(shopIcons, infoBox);
 
         // add Icons
@@ -82,9 +82,8 @@ public class ShopView extends Parent {
 
         getChildren().add(shopContainer);
     }
-    
-    
-    private void clearInfoBox(Pane infoBox){
+
+    private void clearInfoBox () {
         infoBox.getChildren().clear();
     }
 
@@ -120,7 +119,7 @@ public class ShopView extends Parent {
         base.getChildren().addAll(labels.values());
         Label name = labels.get(ItemInfo.NAME);
         name.setStyle("-fx-font-weight: bold");
-        clearInfoBox(infoBox);
+        clearInfoBox();
         infoBox.getChildren().add(base);
     }
 
@@ -145,10 +144,12 @@ public class ShopView extends Parent {
      * @param gameObject selected
      */
     public void displayUpgrades (GameObject gameObject) {
+        clearInfoBox();
         VBox base = new VBox();
+        base.setSpacing(10);
         base.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.8),
                                                              null, null)));
-        Label name = new Label(gameObject.getTag().getName());
+        Label name = new Label(gameObject.getName());
         base.getChildren().add(name);
 
         List<ItemGraphic> upgrades = model.getUpgradeGraphics(gameObject);
@@ -161,8 +162,9 @@ public class ShopView extends Parent {
     private StackPane makeUpgradePanel (ItemGraphic upgrade) {
         StackPane upgradePanel = new StackPane();
         upgradePanel.setOnMouseEntered(event -> upgradePanel.setCursor(Cursor.HAND));
-        upgradePanel.setOnMouseClicked(event-> model.purchaseUpgrade(upgrade.getName()));
-        
+        upgradePanel.setOnMouseClicked(event -> model.purchaseUpgrade(upgrade.getName(),
+                                                                      this::displayUpgrades));
+
         upgradePanel.setBackground(new Background(new BackgroundFill(Color.LAWNGREEN, null, null)));
 
         VBox entries = new VBox();
@@ -203,7 +205,7 @@ public class ShopView extends Parent {
         });
     }
 
-    private void selectGameObject(MouseEvent event) {
+    private void selectGameObject (MouseEvent event) {
         GameObject selected = world.getObjectFromNode((Node) event.getSource());
         selector.select(selected);
     }

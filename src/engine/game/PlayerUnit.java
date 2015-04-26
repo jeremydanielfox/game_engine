@@ -9,8 +9,7 @@ import engine.fieldsetting.Settable;
  *
  */
 @Settable
-public class PlayerUnit extends Displayable {
-
+public class PlayerUnit extends Displayable{
     private double myValue;
     private String myLabel;
 

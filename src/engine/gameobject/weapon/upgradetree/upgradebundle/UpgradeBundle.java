@@ -1,10 +1,9 @@
 package engine.gameobject.weapon.upgradetree.upgradebundle;
 
+import engine.gameobject.Purchasable;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.UpgradeSet;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
-import engine.shop.Purchasable;
-import engine.shop.tag.UpgradeTag;
 
 
 /**
@@ -15,7 +14,7 @@ import engine.shop.tag.UpgradeTag;
  * @author Nathan Prabhu
  *
  */
-public interface UpgradeBundle extends Purchasable {
+public interface UpgradeBundle extends Purchasable<UpgradeBundle> {
 
     /**
      * Upgrades the existing upgrades and replaces them in the map. If the current type of
@@ -36,7 +35,5 @@ public interface UpgradeBundle extends Purchasable {
      * @return parent UpgradeTree
      */
     public UpgradeTree getParent ();
-
-    public UpgradeTag getTag ();
 
 }

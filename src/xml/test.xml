@@ -1,0 +1,116 @@
+<engine.game.ConcreteGame>
+  <myPlayer>
+    <changed>false</changed>
+    <obs/>
+    <myName>Player 1</myName>
+    <myHealth>
+      <changed>false</changed>
+      <obs/>
+      <myValue>0.0</myValue>
+      <myLabel></myLabel>
+    </myHealth>
+    <myScore>
+      <changed>false</changed>
+      <obs/>
+      <myValue>0.0</myValue>
+      <myLabel></myLabel>
+    </myScore>
+    <myWallet class="engine.shop.wallet.ConcreteWallet">
+      <myUnit>
+        <changed>false</changed>
+        <obs/>
+        <myValue>0.0</myValue>
+        <myLabel></myLabel>
+      </myUnit>
+    </myWallet>
+  </myPlayer>
+  <myLevelBoard class="engine.game.ConcreteLevelBoard">
+    <changed>false</changed>
+    <obs/>
+    <myTitle></myTitle>
+    <myLevels>
+      <engine.game.ConcreteLevel>
+        <myTitle></myTitle>
+        <myImagePath>/images/Park_Path.png</myImagePath>
+        <myWinningGoals>
+          <engine.goals.EventsCompleteGoal>
+            <isSatisfied>false</isSatisfied>
+            <myStoryBoard>
+              <changed>false</changed>
+              <obs/>
+              <eventList/>
+              <myTitle></myTitle>
+            </myStoryBoard>
+          </engine.goals.EventsCompleteGoal>
+        </myWinningGoals>
+        <myLosingGoals/>
+        <myGameWorld class="gameworld.FixedWorld">
+          <myObjects/>
+          <myCollisionEngine class="engine.interactions.CollisionEngine">
+            <myTable>
+              <entry>
+                <engine.gameobject.test.ProjectileLabel>
+                  <superType class="engine.gameobject.labels.TypeBase">
+                    <myName>Base</myName>
+                  </superType>
+                  <myName>Projectile</myName>
+                </engine.gameobject.test.ProjectileLabel>
+                <map>
+                  <entry>
+                    <engine.gameobject.test.EnemyLabel>
+                      <superType class="engine.gameobject.labels.TypeBase">
+                        <myName>Base</myName>
+                      </superType>
+                      <myName>Enemy</myName>
+                    </engine.gameobject.test.EnemyLabel>
+                    <engine.interactions.BuffImparter/>
+                  </entry>
+                </map>
+              </entry>
+            </myTable>
+            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
+          </myCollisionEngine>
+          <myRangeEngine class="engine.interactions.RangeEngine">
+            <myTable>
+              <entry>
+                <engine.gameobject.test.TowerLabel>
+                  <superType class="engine.gameobject.labels.TypeBase">
+                    <myName>Base</myName>
+                  </superType>
+                  <myName>Tower</myName>
+                </engine.gameobject.test.TowerLabel>
+                <map>
+                  <entry>
+                    <engine.gameobject.test.EnemyLabel>
+                      <superType class="engine.gameobject.labels.TypeBase">
+                        <myName>Base</myName>
+                      </superType>
+                      <myName>Enemy</myName>
+                    </engine.gameobject.test.EnemyLabel>
+                    <engine.interactions.ShootAt/>
+                  </entry>
+                </map>
+              </entry>
+            </myTable>
+            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
+          </myRangeEngine>
+          <myNodeToGameObjectMap/>
+          <myPathWidth>17.0</myPathWidth>
+        </myGameWorld>
+        <myStoryBoard reference="../myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard"/>
+      </engine.game.ConcreteLevel>
+    </myLevels>
+    <curLevelIndex>0</curLevelIndex>
+  </myLevelBoard>
+  <myShop class="engine.shop.ShopModelSimple">
+    <prototypeMap/>
+    <upgradeMap/>
+    <markup>1.0</markup>
+  </myShop>
+  <myButtons/>
+  <myGameName></myGameName>
+  <myAuthor></myAuthor>
+  <myType></myType>
+  <myDescription></myDescription>
+  <myInstructions></myInstructions>
+</engine.game.ConcreteGame>

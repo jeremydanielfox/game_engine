@@ -30,7 +30,7 @@ public abstract class Wave extends TimedEvent {
 
     public Wave () {
         super(DEFAULT_FRAME_TRIGGER);
-        initializeVars(new ConcreteQueue(), new FixedWorld());
+        initializeVars(new ConcreteQueue(), new FixedWorld(10,10));
     }
 
     public Wave (GameObjectQueue objects, GameWorld world) {

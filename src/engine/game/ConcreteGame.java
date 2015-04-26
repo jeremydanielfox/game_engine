@@ -1,9 +1,11 @@
 package engine.game;
 
+import java.util.ArrayList;
 import java.util.List;
 import View.ButtonWrapper;
 import engine.fieldsetting.Settable;
 import engine.shop.ShopModel;
+import engine.shop.ShopModelSimple;
 
 
 /**
@@ -33,6 +35,15 @@ public class ConcreteGame implements Game {
 
     public ConcreteGame () {
         // initialize(new Player(), new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
+        myPlayer = new Player();
+        myLevelBoard = new ConcreteLevelBoard();
+        myShop = new ShopModelSimple();
+        myButtons = new ArrayList<>();
+        myGameName = "";
+        myAuthor = "";
+        myType = "";
+        myDescription = "";
+        myInstructions = "";
     }
 
     public ConcreteGame (ShopModel shop,
@@ -58,47 +69,46 @@ public class ConcreteGame implements Game {
     }
 
     @Settable
-    public void setName(String name){
+    public void setName (String name) {
         myGameName = name;
     }
-    
+
     @Settable
-    public void setAuthor(String author){
+    public void setAuthor (String author) {
         myAuthor = author;
     }
-    
-    
-    public String getAuthor(){
+
+    public String getAuthor () {
         return myAuthor;
     }
-    
+
     @Settable
-    public void setDescription(String description){
+    public void setDescription (String description) {
         myDescription = description;
     }
-    
-    public String getDescription(){
+
+    public String getDescription () {
         return myDescription;
     }
-    
+
     @Settable
-    public void setType(String type){
+    public void setType (String type) {
         myType = type;
     }
-    
-    public String getType(){
+
+    public String getType () {
         return myType;
     }
-    
+
     @Settable
-    public void setInstructions(String instruct){
+    public void setInstructions (String instruct) {
         myInstructions = instruct;
     }
-    
-    public String getInstructions(){
+
+    public String getInstructions () {
         return myInstructions;
     }
-    
+
     @Override
     public void update () {
         myLevelBoard.update();
@@ -147,6 +157,11 @@ public class ConcreteGame implements Game {
     @Override
     public String getGameName () {
         return myGameName;
+    }
+
+    @Settable
+    public void setShop (ShopModel shop) {
+        myShop = shop;
     }
 
 }

@@ -7,7 +7,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-
 /**
  *
  * @author Eric Saba
@@ -30,9 +29,15 @@ public class ObjectComponentEditor extends ComponentEditor {
             myObject = Class.forName(klass.getName()).newInstance();
         }
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException e1) {
-            System.out.println("error: " + klass.getName());
-            myObject = null;
-            e1.printStackTrace();
+            System.out.println(klass.getName() + " defaulted to first concrete class.");
+            try {
+                myObject = EditingParser.getConcreteClassFromMap(klass).newInstance();
+            }
+            catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+                myObject = null;
+            }
+//            e1.printStackTrace();
         }
         myAddExistingButton = new Button("Add Existing");
         myCreateNewButton = new Button("Create New");
@@ -45,16 +50,29 @@ public class ObjectComponentEditor extends ComponentEditor {
         myObject = obj;
     }
 
+    public BiConsumer<Class<?>, Object> getBiConsumer () {
+        return biConsumer;
+    }
+
     public Class<?> getObjectClass () {
+        return myObject.getClass();
+    }
+    
+    /**
+     * The instantiated object's class and the variable clazz can be different classes if ObjectComponentEditor is 
+     * instantiated with an interface class.
+     * 
+     * @return interface if any
+     */
+    public Class<?> getInterfaceClass() {
         return clazz;
     }
 
-    public void popNewEditor (String title) {
-        System.out.println("TITLE IS : " + title);
+    public void popNewEditor (int index) {
         // Consumer<Object> setObjectConsumer = o -> setObject(o);
         Consumer<Object> setObjectConsumer = o -> clear();
         // GenericObjectsPane.newCustomObject(clazz, "yo", setObjectConsumer);
-        new PopUpEditorView(setObjectConsumer, biConsumer, clazz);
+        new PopUpEditorView(setObjectConsumer, biConsumer, myObject.getClass(), index);
     }
 
     @Override

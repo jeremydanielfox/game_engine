@@ -21,7 +21,7 @@ public class Graphic {
     // note to self: need to change this image path default when using data files
     private static final String DEFAULT_IMAGE_PATH_PREFIX = "/images/";
     private static final String DEFAULT_IMAGE_NAME = "robertDuvall.jpg";
-
+    private String myTitle = "";
     private double myHeight;
     private double myWidth;
     private String myImageName;
@@ -29,6 +29,7 @@ public class Graphic {
     @XStreamOmitField
     private transient ImageView myImageView;
     private Rotator myRotator;
+    private int index;
 
     public Graphic () {
         myImageName = DEFAULT_IMAGE_NAME;
@@ -57,10 +58,7 @@ public class Graphic {
 
     private void initializeImageView () {
         myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
-        // for TEST purpose:
-        if (myPoint == null) {
-            myPoint = new Point2D(0, 0);
-        }
+
         // myImageView.setOnMouseEntered(o -> System.out.println("boom"));
         // myImageView.setOnMouseClicked(e -> System.out.println("clicked"));
         // myImageView.setFocusTraversable(true);
@@ -150,5 +148,4 @@ public class Graphic {
                             myPoint.getY() - ViewUtil.getCenterOffsetY(myImageView));
         myRotator.rotate(myImageView, new PointSimple(centerOfMyImage), point);
     }
-
 }

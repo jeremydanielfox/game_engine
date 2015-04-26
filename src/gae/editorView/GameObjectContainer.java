@@ -3,6 +3,7 @@ package gae.editorView;
 import engine.gameobject.PointSimple;
 import gae.gridView.ContainerWrapper;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -37,7 +38,7 @@ public class GameObjectContainer extends VBox implements ContainerWrapper {
      */
     @Override
     public boolean checkBounds (double x, double y) {
-//        Point2D point = this.screenToLocal(x, y);
+        // Point2D point = this.screenToLocal(x, y);
         // System.out.println("X IS : " + point.getX());
         // System.out.println("Y IS : " + y);
         if (x < 0 || x > getWidth() || y < 0 || y > getHeight()) {

@@ -211,7 +211,7 @@ public class PathList {
                 }
             }
             // *****************************************//
-            DataManager.writeToXML(myPath, "src/xml/TestPath.xml");
+            DataManager.writeToXML(myPath, "src/xml/RealPath.xml");
         });
 
         return display;

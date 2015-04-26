@@ -122,7 +122,7 @@ public class GameWriter extends Application {
         // world.addObject(new TestTower(2, 330, 130));
         //world.addObject(new TestTower(5, 270, 270));
         // world.addObject(new TestTower(3, 355, 455));
-        world.setPath(DataManager.readFromXML(PathFixed.class, "src/gae/listView/Test.xml"));
+        world.setPath(DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml"));
         return world;
     }
 

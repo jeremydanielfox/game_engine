@@ -27,16 +27,15 @@ import gameworld.StructurePlacementException;
 public class ShopModelSimple implements ShopModel {
     private Player currentPlayer;
     private GameWorld myGameWorld;
-    private Map<String, Purchasable<GameObject>> purchasableMap;
-    private Map<String, UpgradeBundle> upgradeMap;
-    private final double markup;
+    private Map<String, Purchasable<GameObject>> purchasableMap = new HashMap<>();
+    private Map<String, UpgradeBundle> upgradeMap = new HashMap<>();
+    private double markup;
     private GameObject currentGameObject;
 
     public ShopModelSimple () {
         markup = 1;
     }
 
-    // For test only
     public ShopModelSimple (GameWorld world, Player player, double markup) {
         this.markup = markup;
         myGameWorld = world;
@@ -53,6 +52,21 @@ public class ShopModelSimple implements ShopModel {
         purchasableMap = new HashMap<String, Purchasable<GameObject>>();
         upgradeMap = new HashMap<String, UpgradeBundle>();
         purchasables.forEach(purchasable -> addPurchasable(purchasable));
+    }
+    
+    @Settable
+    public void setMarkup (double markup) {
+        this.markup = markup;
+    }
+    
+    @Settable
+    public void setGameWorld (GameWorld world) {
+        myGameWorld = world;
+    }
+    
+    @Settable
+    public void setPlayer (Player player) {
+        currentPlayer = player;
     }
 
     @Override
@@ -74,7 +88,7 @@ public class ShopModelSimple implements ShopModel {
 
     @Override
     public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject) {
-        currentGameObject = gameObject;
+        currentGameObject = gameObject;;
         List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
         List<ItemGraphic> upgradeGraphics = new ArrayList<ItemGraphic>();
         upgradeMap.clear();

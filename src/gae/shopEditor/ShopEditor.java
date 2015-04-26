@@ -15,38 +15,43 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class ShopEditor implements UIObject{
 
-    private Pane pane=new StackPane();
+public class ShopEditor implements UIObject {
+
+    private Pane pane = new StackPane();
     private CheckList checklist;
-    public ShopEditor(){
-        VBox vbox=new VBox();
-        Text text=new Text("Select Items for Shop");
-        vbox.getChildren().addAll(text, makeObjectChecklist( LibraryData.getInstance().getEditableObservableList()));
+
+    public ShopEditor () {
+        VBox vbox = new VBox();
+        Text text = new Text("Select Items for Shop");
+        vbox.getChildren().addAll(text,
+                                  makeObjectChecklist(LibraryData.getInstance()
+                                          .getEditableObservableList()));
         pane.getChildren().addAll(vbox, tempbutton());
     }
+
     @Override
     public Node getObject () {
         return pane;
     }
-    
-    private ScrollPane makeObjectChecklist(ObservableList<Authorable> list){
-        ScrollPane pane=new ScrollPane();
-        checklist=new ShopCheckList(list);
+
+    private ScrollPane makeObjectChecklist (ObservableList<Authorable> list) {
+        ScrollPane pane = new ScrollPane();
+        checklist = new ShopCheckList(list);
         pane.setContent(checklist.getCheckList());
         return pane;
     }
-    
-    //temporary
-    private Button tempbutton(){
-        Button button=new Button("Print selected");
-     
-        button.setOnAction(e->{
-            for(Placeable obj: ((ShopCheckList) checklist).getSelectedPlaceables()){
+
+    // temporary
+    private Button tempbutton () {
+        Button button = new Button("Print selected");
+
+        button.setOnAction(e -> {
+            for (Placeable obj : ((ShopCheckList) checklist).getSelectedPlaceables()) {
                 System.out.println(obj.getName());
             }
         });
         return button;
     }
-    
+
 }

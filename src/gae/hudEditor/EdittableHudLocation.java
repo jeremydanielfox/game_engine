@@ -15,6 +15,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Square that can contain specific hud attributes
+ * @author JohnGilhuly
+ *
+ */
 
 public class EdittableHudLocation implements UIObject {
     private static final double RECTANGLE_SIZE = 200;

@@ -111,8 +111,9 @@ public class BasicWeapon implements Weapon {
     private void updateRange () {
         myRange = (RangeUpgrade) upgradables.get(myRange);
         rangeProp.setValue(myRange.getRange());
+        myRange.addObserver(new UpgradeObserver(this::updateRange));
     }
-
+  
     @Override
     @Settable
     public void setFiringRate (double firingRate) {

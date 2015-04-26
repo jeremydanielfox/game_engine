@@ -2,7 +2,7 @@ package engine.gameobject.weapon.upgradetree;
 
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 
-
+@Deprecated
 public interface SingleTree extends UpgradeTree {
 
     /**

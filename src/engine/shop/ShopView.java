@@ -67,7 +67,9 @@ public class ShopView extends Parent {
         shopContainer.setMaxWidth(SHOP_WIDTH);
         shopIcons = new FlowPane();
         infoBox = new StackPane();
-        selector = new GameObjectSelector(this::displayUpgrades, infoBox, pane);
+        selector = new GameObjectSelector(this::displayUpgrades, this::clearInfoBox, pane);
+        
+        
         shopContainer.getChildren().addAll(shopIcons, infoBox);
 
         // add Icons

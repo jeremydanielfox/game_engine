@@ -31,6 +31,11 @@ public class SoundEffectSimple implements Music {
     }
     
     @Override
+    public String getPath () {
+        return sound.getSource();
+    }
+    
+    @Override
     public void replace (Media m) {
         sound = m;
     }

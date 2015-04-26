@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import engine.gameobject.GameObject;
 import engine.gameobject.labels.Type;
 import engine.interactions.BuffImparter;
 import engine.interactions.CollisionEngine;
@@ -33,7 +32,7 @@ public class InteractionData {
      */
     private static final List<String> MAP_KEYS = Arrays.asList("Collide", "Shoot",
                                                                "Do not collide", "Do not shoot");
-    private static final List<Class> MAP_VALUES = Arrays.asList(BuffImparter.class, ShootAt.class,
+    private static final List<Class<? extends Interaction>> MAP_VALUES = Arrays.asList(BuffImparter.class, ShootAt.class,
                                                                 NoInteraction.class,
                                                                 NoInteraction.class);
 

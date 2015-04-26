@@ -1,8 +1,13 @@
 package gae.gameView;
 
+import engine.gameobject.labels.Type;
+import engine.interactions.Interaction;
 import gae.listView.LibraryData;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import sun.security.jca.GetInstance.Instance;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -13,8 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
-
 
 /**
  * Defines a single interaction between game objects
@@ -59,15 +62,25 @@ public class InteractionInstance {
         return interactions;
     }
 
-    
-    /*
+    /* TO EXPORT:
      * DataManager.writeToXML(myObject, filepath);
      */
-    
-    
+
+    /**
+     * when create is pressed, the interaction is added to the interaction data
+     */
     private void createButtonFunction () {
         create.setOnMousePressed(e -> {
-            myInteractionData.addInteraction(box1.getLabelList(), myInteractionData.getInteractionMap().get(interactionType.getSelected()), box2.getLabelList());
+            Interaction i;
+            try {
+                i = (Interaction) myInteractionData.getInteractionMap()
+                        .get(interactionType.getSelected()).newInstance();
+
+                myInteractionData.addInteraction(box1.getLabelList(), i, box2.getLabelList());
+            }
+            catch (Exception e1) {
+                e1.printStackTrace();
+            }
         });
     }
 
@@ -100,8 +113,8 @@ public class InteractionInstance {
             choices = new ComboBox<>();
             createDropDown(options);
         }
-        
-        public String getSelected() {
+
+        public String getSelected () {
             return choices.getSelectionModel().getSelectedItem();
         }
 
@@ -128,7 +141,7 @@ public class InteractionInstance {
         private ScrollPane scroller;
         private Button adder;
         private HBox addBox;
-        private List<Label> labelList;
+        private List<Type> labelList;
         private LabelCheckList myChecker;
 
         public ObjectContainer () {
@@ -149,8 +162,8 @@ public class InteractionInstance {
             buttonGraphic.setFitHeight(25);
             createObjectContainer();
         }
-        
-        public List<? extends Label> getLabelList() {
+
+        public List<Type> getLabelList () {
             return labelList;
         }
 

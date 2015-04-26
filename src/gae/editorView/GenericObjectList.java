@@ -56,12 +56,11 @@ public class GenericObjectList {
                     if (klass.getSimpleName().equals("Collider")) {
                         new ColliderEditorOpener(objectEditor.getBiConsumer(), klass);
                     }
-                        else {
-                            // EditorIntermediate.handleEditorPop(objectEditor,
-                            // String.format("%s  %d", classType, count++));
-                            objectEditor.popNewEditor(-1);
-                        }
-                    });
+                    else {
+                        EditorIntermediate.handleEditorPop(objectEditor, -1);
+//                        objectEditor.popNewEditor(-1);
+                    }
+                });
                 contextmenu.getItems().add(item);
                 contextmenu.show(titledPane, me.getSceneX(), me.getSceneY());
             }

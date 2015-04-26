@@ -69,7 +69,6 @@ public class ShopModelSimple implements ShopModel {
         prototypeMap.values().forEach(prototype -> items.add(new ItemGraphic(prototype.getTag()
                 .getName(), ((PriceTag) prototype.getTag())
                 .getShopGraphic())));
-
         return items;
     }
 

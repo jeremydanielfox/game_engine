@@ -1,9 +1,12 @@
 package engine.gameobject.weapon.firingrate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.range.RangeUpgrade;
+import engine.observable.Observer;
 
 
 /**
@@ -19,6 +22,7 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
 
     private double increment;
     private Optional<FiringRate> decorated;
+    private List<Observer> observers = new ArrayList<>();
 
     public FiringRateUpgrade () {
         this(0);
@@ -51,5 +55,20 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
     @Override
     public Upgrade clone () {
         return new FiringRateUpgrade(increment);
+    }
+    
+    @Override
+    public void addObserver (Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver (Observer observer) {
+        // TODO Auto-generated method stub   
+    }
+
+    @Override
+    public void notifyObservers () {
+        observers.forEach(obs -> obs.update());
     }
 }

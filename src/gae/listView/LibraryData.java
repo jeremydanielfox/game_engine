@@ -130,7 +130,7 @@ public class LibraryData {
                                       editable.getImagePath()));
         object.setLabel(editable.getLabel());
         object.setTag(editable.getTag());
-        object.setMover(getMover(editable));
+        object.setMover(editable.getPath());
         object.setPoint(editable.getLocation());
         object.setHealth(new HealthSimple(editable.getHealth()));
         // set Collider
@@ -153,31 +153,6 @@ public class LibraryData {
             points.add(temp.getEnd());
             tempBez.setPoints(points);
             myPath.addPathSegment(tempBez);
-        }
-        mover.setPath(myPath);
-        return mover;
-    }
-
-    private MoverPath getMover (Placeable editable) {
-        List<List<Path>> allPaths = editable.getPath();
-        MoverPath mover = new MoverPath();
-        PathFixed myPath = new PathFixed();
-        for (List<Path> lists : allPaths) {
-
-            for (int i = 0; i < lists.size(); i++) {
-                // System.out.println("Path " + i + "'s coordinates");
-                Path temp = lists.get(i);
-                temp.printInfo();
-                // System.out.println();
-                PathSegmentBezier tempBez = new PathSegmentBezier();
-                List<PointSimple> points = new ArrayList<>();
-                points.add(temp.getStart());
-                points.add(temp.getControlOne());
-                points.add(temp.getControlTwo());
-                points.add(temp.getEnd());
-                tempBez.setPoints(points);
-                myPath.addPathSegment(tempBez);
-            }
         }
         mover.setPath(myPath);
         return mover;

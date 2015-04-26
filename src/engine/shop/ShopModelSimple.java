@@ -96,8 +96,8 @@ public class ShopModelSimple implements ShopModel {
         if (canPurchase(name) && checkPlacement(name, location)) {
             currentPlayer.getWallet().withdraw(getPrice(name));
             try {
-                //GameObject tower = prototypeMap.get(name).clone();
-                GameObject tower = new TestTower(1, 100, 100);
+                GameObject tower = prototypeMap.get(name).clone();
+//                GameObject tower = new TestTower(1, 100, 100);
                 tower.getGraphic().getNode().setOnMousePressed(selected);
                 myGameWorld.addObject(tower, location);
                 return true;

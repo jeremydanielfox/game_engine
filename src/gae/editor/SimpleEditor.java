@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.BiConsumer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -27,21 +28,22 @@ public class SimpleEditor extends Editor implements UIObject {
 
     private static final String CLASS_PATH = "gae.editor.";
 
-    private VBox simpleEditor;
+    private VBox simpleEditorVBox;
     private List<ComponentEditor> editFields;
     private TreeNode root;
     private HashMap<Edits, TreeNode> nodeMap;
     private ArrayList<ComponentEditor> simpleFields;
     private ArrayList<ObjectComponentEditor> objectFields;
+    private BiConsumer<Class<?>, Object> biConsumer;
 
-    public SimpleEditor (Class<?> c) {
+    public SimpleEditor (Class<?> c, BiConsumer<Class<?>, Object> biconsumer) {
         Label title = new Label(c.getSimpleName());
-        createEditor(c, title);
+        createEditor(c, title, biconsumer);
     }
 
-    public SimpleEditor (Class<?> c, String objectName) {
+    public SimpleEditor (Class<?> c, BiConsumer<Class<?>, Object> biconsumer, String objectName) {
         Label title = new Label(objectName);
-        createEditor(c, title);
+        createEditor(c, title, biconsumer);
     }
 
     @Override
@@ -70,7 +72,7 @@ public class SimpleEditor extends Editor implements UIObject {
 
     @Override
     public Node getObject () {
-        return simpleEditor;
+        return simpleEditorVBox;
     }
 
     /**
@@ -78,19 +80,21 @@ public class SimpleEditor extends Editor implements UIObject {
      * fields
      * 
      * @param c
+     * @param biconsumer2 
      */
-    private void createEditor (Class<?> c, Label title) {
+    private void createEditor (Class<?> c, Label title, BiConsumer<Class<?>, Object> biconsumer) {
+        biConsumer = biconsumer;
         objectFields = new ArrayList<ObjectComponentEditor>();
         simpleFields = new ArrayList<ComponentEditor>();
         nodeMap = new HashMap<Edits, TreeNode>();
-        simpleEditor = new VBox(30);
-        simpleEditor.getChildren().add(title);
+        simpleEditorVBox = new VBox(30);
+        simpleEditorVBox.getChildren().add(title);
         root = getMethodsTree(c, null);
         ArrayList<Node> editors = new ArrayList<Node>();
         for (TreeNode subNode : root.getChildren()) {
             loadArrayWithEditors(subNode, editors);
         }
-        simpleEditor.getChildren().addAll(editors);
+        simpleEditorVBox.getChildren().addAll(editors);
     }
 
     private void loadArrayWithEditors (TreeNode root, ArrayList<Node> editors) {
@@ -98,7 +102,7 @@ public class SimpleEditor extends Editor implements UIObject {
         if (root.getInputType().equals("ObjectComponentEditor")) {
             Class<?> klass = (Class<?>) root.getMethod().getGenericParameterTypes()[0];
             klass = getConcreteClassFromMap(klass);
-            component = new ObjectComponentEditor(klass);
+            component = new ObjectComponentEditor(klass, biConsumer);
             objectFields.add((ObjectComponentEditor) component);
         }
         else {

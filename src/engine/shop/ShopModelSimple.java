@@ -11,7 +11,6 @@ import engine.fieldsetting.Settable;
 import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import engine.gameobject.test.TestTower;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import engine.prototype.Prototype;
 import engine.shop.tag.PriceTag;

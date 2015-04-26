@@ -1,13 +1,11 @@
-package engine.gameobject.units.poison;
+package engine.gameobject.units.slow;
 
 import java.awt.Color;
 import java.util.Optional;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.units.Buff;
-import engine.gameobject.units.BuffType;
 import engine.gameobject.weapon.Upgrade;
-
 
 /**
  * Buff that poisons its targets. Inflicts total damage across the entire duration of the buff.
@@ -15,22 +13,22 @@ import engine.gameobject.weapon.Upgrade;
  * @author Danny Oh and Nathan Prabhu
  *
  */
-public class PoisonBuff extends Buff implements Poison {
+public class SlowBuff extends Buff implements Slow {
 
     private int timeIncr;
-    private double damageIncr;
-    private Optional<PoisonBuff> decorated;
+    private double slowPercent;
+    private Optional<SlowBuff> decorated;
 
     /**
-     * Makes a poison buff
+     * Makes a slow buff
      * 
-     * @param timeIncr: Time the damage occurs over
-     * @param damageIncr: Total damage
+     * @param timeIncr: Time the slow lasts
+     * @param slowPercent: slow percentage
      */
-    public PoisonBuff (int timeIncr, double damageIncr) {
+    public SlowBuff (int timeIncr, double slowPercent) {
         super(timeIncr);
         this.timeIncr = timeIncr;
-        this.damageIncr = damageIncr;
+        this.slowPercent = slowPercent;
         decorated = Optional.empty();
     }
 
@@ -40,8 +38,8 @@ public class PoisonBuff extends Buff implements Poison {
     }
 
     @Settable
-    public void setDamage (double damageIncr) {
-        this.damageIncr = damageIncr;
+    public void setDamage (double slowPercent) {
+        this.slowPercent = slowPercent;
     }
 
     @Override
@@ -49,6 +47,7 @@ public class PoisonBuff extends Buff implements Poison {
         float[] hsbvals = new float[3];
         Color.RGBtoHSB(139, 0, 139, hsbvals);
         adjustEffect(myUnit, -hsbvals[0], -hsbvals[1], -hsbvals[2], 0);
+        myUnit.getMover().speedBuff(-slowPercent);
     }
 
     @Override
@@ -56,20 +55,16 @@ public class PoisonBuff extends Buff implements Poison {
         float[] hsbvals = new float[3];
         Color.RGBtoHSB(139, 0, 139, hsbvals);
         adjustEffect(myUnit, hsbvals[0], hsbvals[1], hsbvals[2], 0);
+        myUnit.getMover().speedBuff(+slowPercent);
     }
 
     @Override
-    protected void changeOverTime (GameObject myUnit) {
-        myUnit.changeHealth(-getDamage() / getDuration());
+    public double getSlowPercent () {
+        return decorated.map(this::getIncrementedSlow).orElse(slowPercent);
     }
 
-    @Override
-    public double getDamage () {
-        return decorated.map(this::getIncrementedDamage).orElse(damageIncr);
-    }
-
-    private double getIncrementedDamage (PoisonBuff sublayer) {
-        return sublayer.getDuration() + damageIncr;
+    private double getIncrementedSlow (SlowBuff sublayer) {
+        return sublayer.getDuration() + slowPercent;
     }
 
     @Override
@@ -77,22 +72,22 @@ public class PoisonBuff extends Buff implements Poison {
         return decorated.map(this::getIncrementedDuration).orElse(timeIncr);
     }
 
-    private int getIncrementedDuration (PoisonBuff sublayer) {
+    private int getIncrementedDuration (SlowBuff sublayer) {
         return sublayer.getDuration() + timeIncr;
     }
 
     @Override
     public boolean isStrongerBuff (Buff otherBuff) {
-        // TODO: You need to compare leftover damage?
         return otherBuff.timeLeft() <= timeLeft();
     }
 
     public Buff clone(){
-        return new PoisonBuff(getDuration(), getDamage());
+        return new SlowBuff(getDuration(), getSlowPercent());
     }
 
     @Override
     public void upgrade (Upgrade decorated) {
-        this.decorated = Optional.of((PoisonBuff) decorated);
+        this.decorated = Optional.of((SlowBuff) decorated);
     }
+
 }

@@ -1,6 +1,5 @@
 package engine.gameobject.weapon;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import javafx.beans.property.DoubleProperty;

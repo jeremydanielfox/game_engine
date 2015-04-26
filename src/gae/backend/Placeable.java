@@ -3,6 +3,7 @@ package gae.backend;
 import java.io.Serializable;
 import java.util.List;
 import javafx.scene.image.ImageView;
+import engine.gameobject.GameObject;
 import engine.gameobject.Graphic;
 import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
@@ -42,8 +43,8 @@ public interface Placeable extends Serializable, Authorable {
     public Graphic getGraphic ();
 
     public GameObjectTag getTag ();
-    
-    public Type getLabel();
+
+    public Type getLabel ();
 
     public void setLocation (PointSimple point);
 
@@ -70,11 +71,12 @@ public interface Placeable extends Serializable, Authorable {
     public void setImagePath (String path);
 
     public void setGraphic (Graphic graphic);
-    
-    public void setLabel(Type label);
+
+    public void setLabel (Type label);
 
     public Object clone ();
 
     public Placeable makeNewInstance ();
 
+    public GameObject getGameObject ();
 }

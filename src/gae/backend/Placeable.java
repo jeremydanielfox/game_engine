@@ -42,13 +42,8 @@ public interface Placeable extends Serializable, Authorable {
     public Graphic getGraphic ();
 
     public GameObjectTag getTag ();
-<<<<<<< HEAD
     
     public Type getLabel();
-=======
-
-    public Type getLabel ();
->>>>>>> b5d5af9e04748064c3d59fb227299e3a5ec70429
 
     public void setLocation (PointSimple point);
 

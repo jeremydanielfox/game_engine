@@ -6,6 +6,8 @@ import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 
 /**
@@ -28,13 +30,16 @@ public class ShopCheckListItem implements CheckListItem {
      * @author Nina Sun
      */
     public Node getNode () {
-        HBox node = new HBox(10);
+        HBox hbox = new HBox(10);
         Graphic graphic = placeable.getTag().getGraphic().clone();
         graphic.setHeight(50);
         Node image = graphic.getResizedGraphic(1);
-        Label label = new Label(placeable.getName());
-        node.getChildren().addAll(image, label, checkbox);
-        return node;
+        Label label = new Label(placeable.getTag().getName());
+        Text description=new Text(placeable.getTag().getDescription());
+        Text price =new Text("Price "+placeable.getTag().getValue());
+        VBox vbox=new VBox(label, description, price);
+        hbox.getChildren().addAll(image, vbox, checkbox);
+        return hbox;
     }
 
     public CheckBox getCheckBox () {

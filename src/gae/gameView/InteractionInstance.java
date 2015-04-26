@@ -1,13 +1,17 @@
 package gae.gameView;
 
 import engine.gameobject.labels.Type;
+import engine.gameobject.labels.SimpleType;
+import engine.interactions.BuffImparter;
 import engine.interactions.Interaction;
 import gae.listView.LibraryData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import sun.security.jca.GetInstance.Instance;
+import xml.DataManager;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -62,25 +66,40 @@ public class InteractionInstance {
         return interactions;
     }
 
-    /* TO EXPORT:
-     * DataManager.writeToXML(myObject, filepath);
-     */
+
 
     /**
      * when create is pressed, the interaction is added to the interaction data
      */
     private void createButtonFunction () {
+//        create.setOnMousePressed(e -> {
+//            Interaction i;
+//            try {
+//                i = (Interaction) myInteractionData.getInteractionMap()
+//                        .get(interactionType.getSelected()).newInstance();
+//
+//                myInteractionData.addInteraction(box1.getLabelList(), i, box2.getLabelList());
+//            }
+//            catch (Exception e1) {
+//                e1.printStackTrace();
+//            }
+//        });
+        
+        
+        /* 
+         * TO EXPORT:
+         * DataManager.writeToXML(myObject, filepath);
+         * 
+         * FOR TESTING:
+         */
+        
         create.setOnMousePressed(e -> {
-            Interaction i;
-            try {
-                i = (Interaction) myInteractionData.getInteractionMap()
-                        .get(interactionType.getSelected()).newInstance();
-
-                myInteractionData.addInteraction(box1.getLabelList(), i, box2.getLabelList());
-            }
-            catch (Exception e1) {
-                e1.printStackTrace();
-            }
+            List<Type> list1 = Arrays.asList(new SimpleType("one"), new SimpleType("two"), new SimpleType("three"));
+            List<Type> list2 = Arrays.asList(new SimpleType("danny"), new SimpleType("jeremy"), new SimpleType("eric"));
+            BuffImparter bf = new BuffImparter();
+            myInteractionData.addInteraction(list1, bf, list2);
+            
+            DataManager.writeToXML(myInteractionData.getEngines().get(0), "src/xml/ExampleInteraction.xml");
         });
     }
 

@@ -1,0 +1,85 @@
+<engine.interactions.CollisionEngine>
+  <myTable>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>one</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>danny</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.BuffImparter/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>eric</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.BuffImparter reference="../../entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>jeremy</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.BuffImparter reference="../../entry/engine.interactions.BuffImparter"/>
+        </entry>
+      </map>
+    </entry>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>two</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry[2]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry[3]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+      </map>
+    </entry>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>three</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry[2]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry[3]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+      </map>
+    </entry>
+  </myTable>
+</engine.interactions.CollisionEngine>

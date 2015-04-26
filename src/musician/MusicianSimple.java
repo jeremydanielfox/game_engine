@@ -1,5 +1,6 @@
 package musician;
 
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,11 +44,11 @@ public class MusicianSimple implements Musician {
         myMusic = new HashMap<>();
         muted = false;
         savedVolume = 0;
-        
-        rayGunSound = new Media("src/musician/raygun.wav");
-        laserSound = new Media("/src/musician/laser.wav");
-        gunSound = new Media("/src/musician/gun.wav");
-        
+
+        rayGunSound = new Media(Paths.get("src/musician/raygun.wav").toUri().toString());
+        laserSound = new Media(Paths.get("src/musician/laser.wav").toUri().toString());
+        gunSound = new Media(Paths.get("src/musician/gun.wav").toUri().toString());
+
         rayGun = new MediaPlayer(rayGunSound);
         laser = new MediaPlayer(laserSound);
         gun = new MediaPlayer(gunSound);

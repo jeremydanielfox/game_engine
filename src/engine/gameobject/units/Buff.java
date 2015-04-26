@@ -68,7 +68,7 @@ public abstract class Buff implements Upgrade {
      *
      * @return
      */
-    public int timeLeft () {
+    public double timeLeft () {
         return getDuration() - timeSinceStart;
     }
 

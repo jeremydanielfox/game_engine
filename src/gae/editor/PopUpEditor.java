@@ -3,8 +3,10 @@ package gae.editor;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
 public class PopUpEditor extends SimpleEditor {
@@ -20,16 +22,17 @@ public class PopUpEditor extends SimpleEditor {
     }
 
     private void init (Class<?> c, Consumer<Object> function) {
+        Stage s = new Stage();
         VBox editor = (VBox) getObject();
-        for (Node node: editor.getChildren()) {
-            System.out.println("ADDED TO VBOX : " + node);
-        }
         Button addButton = new Button("Add");
         addButton.setOnAction(e -> {
             Object obj = createObject(c);
             function.accept(obj);
+            s.close();  
         });
         editor.getChildren().add(addButton);
+        s.setScene(new Scene(editor));
+        s.show();
     }
 
 }

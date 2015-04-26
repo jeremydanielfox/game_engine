@@ -3,6 +3,7 @@ package gae.editorView;
 import java.util.ArrayList;
 import java.util.Map;
 import gae.editor.EditingParser;
+import gae.editor.EditorIntermediate;
 import gae.editor.ObjectComponentEditor;
 import gae.gridView.ContainerWrapper;
 import gae.listView.DraggableUtilities;
@@ -57,7 +58,8 @@ public class GenericObjectList {
                         new ColliderEditorOpener(objectEditor.getBiConsumer(), klass);
                     }
                         else {
-                            objectEditor.popNewEditor(classType + " " + count++);
+                            EditorIntermediate.handleEditorPop(objectEditor, String.format("%s  %d", classType, count++));
+//                            objectEditor.popNewEditor(classType + " " + count++);
                         }
                     });
                 contextmenu.getItems().add(item);

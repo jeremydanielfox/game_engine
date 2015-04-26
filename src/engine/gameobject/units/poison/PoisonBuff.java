@@ -21,6 +21,13 @@ public class PoisonBuff extends Buff implements Poison {
     private double damageIncr;
     private Optional<PoisonBuff> decorated;
 
+    public PoisonBuff () {
+        super(0);
+        this.timeIncr = 0;
+        this.damageIncr = 0;
+        decorated = Optional.empty();
+    }
+
     /**
      * Makes a poison buff
      * 
@@ -87,7 +94,7 @@ public class PoisonBuff extends Buff implements Poison {
         return otherBuff.timeLeft() <= timeLeft();
     }
 
-    public Buff clone(){
+    public Buff clone () {
         return new PoisonBuff(getDuration(), getDamage());
     }
 

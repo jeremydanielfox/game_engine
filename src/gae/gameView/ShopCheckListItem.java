@@ -2,6 +2,7 @@ package gae.gameView;
 
 import engine.gameobject.Graphic;
 import gae.backend.Placeable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -31,6 +32,7 @@ public class ShopCheckListItem implements CheckListItem {
      */
     public Node getNode () {
         HBox hbox = new HBox(10);
+        hbox.setAlignment(Pos.CENTER);
         Graphic graphic = placeable.getGraphic().clone();
         graphic.setHeight(50);
         Node image = graphic.getResizedGraphic(1);

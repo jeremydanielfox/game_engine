@@ -61,16 +61,12 @@ public class GameObjectToEditable implements Placeable {
         type = gameObject.getLabel().getName();
         description = gameObject.getDescription();
         shopImagePath = gameObject.getShopGraphic().getImagePath();
-        // imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
-        System.out.println(imagePath);
         imageView = new ImageView(gameObject.getGraphic().getImagePath());
         shopImageView = new ImageView(gameObject.getShopGraphic().getImagePath());
         path = gameObject.getMover();
         graphic = gameObject.getGraphic();
         shopGraphic = gameObject.getShopGraphic();
         location = gameObject.getPoint();
-        // gameobject is not serializable and gives an error so must set to null
-        // gameObject = null;
     }
 
     @Override
@@ -255,7 +251,7 @@ public class GameObjectToEditable implements Placeable {
     public Graphic getGraphic () {
         return graphic;
     }
-    
+
     public void setLabel (Type label) {
         this.label = label;
     }

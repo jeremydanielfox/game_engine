@@ -33,8 +33,8 @@ public class LibraryData {
     private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
     private Map<Class<?>, ObservableList<Object>> createdObjectMap = new HashMap<>();
     private ObservableList<GameObjectSimple> gameObjectList = FXCollections.observableArrayList();
-    private ObservableList<Object> moverList = FXCollections.observableArrayList();
     private ObservableList<Type> labelList = FXCollections.observableArrayList();
+    private ObservableList<Object> moverList = FXCollections.observableArrayList();
 
     private LibraryData () {
         setLists();
@@ -124,21 +124,18 @@ public class LibraryData {
         return labelList;
     }
 
-    public List<GameObjectSimple> createGameObjectList () {
-        for (Authorable authorable : editableList) {
-            Placeable editable = (Placeable) authorable;
-            GameObjectSimple object = new GameObjectSimple();
-            object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
-                                          editable.getImagePath()));
-            object.setLabel(editable.getLabel());
-            object.setShopTag(editable.getShopTag());
-            object.setMover(editable.getPath());
-            object.setPoint(editable.getLocation());
-            object.setHealth(new HealthSimple(editable.getHealth()));
-            // set Collider
-            gameObjectList.add(object);
-        }
-        return gameObjectList;
+    private void addToExistingGameObjectList (Authorable authorable) {
+        Placeable editable = (Placeable) authorable;
+        GameObjectSimple object = new GameObjectSimple();
+        object.setPoint(editable.getLocation());
+        object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
+                                      editable.getImagePath()));
+        object.setLabel(editable.getLabel());
+        object.setShopTag(editable.getShopTag());
+        object.setMover(editable.getPath());
+        object.setHealth(new HealthSimple(editable.getHealth()));
+        // set Collider
+        gameObjectList.add(object);
     }
 
     private MoverPath getMover (List<Path> list) {

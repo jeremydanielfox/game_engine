@@ -29,14 +29,6 @@ public class GameObjectSimpleTest extends GameObjectSimple {
         setHealth(new HealthSimple(4));
         setWeapon(new NullWeapon());
         PathFixed myPath = new PathFixed();
-        PathSegmentBezier myBez = new PathSegmentBezier();
-        List<PointSimple> points = new ArrayList<PointSimple>();
-        points.add(new PointSimple(0, 0));
-        points.add(new PointSimple(100, 800));
-        points.add(new PointSimple(800, 100));
-        points.add(new PointSimple(500, 500));
-        myBez.setPoints(points);
-        myPath.addPathSegment(myBez);
         myPath = DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml");
         // XStream xstream = new XStream(new DomDriver());
         // File file = new File("src/gae/listView/Test.xml");

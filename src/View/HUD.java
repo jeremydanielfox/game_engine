@@ -130,6 +130,7 @@ public class HUD implements Observer {
 
     private void makeShop () {
         //TESTING purposes:
+        shop.addPurchasable(new TestTower(1,0,0));
         shop.addPurchasable(new TestTower(0,0,0));
         myWholeDisplay.getChildren().add(new ShopView(world, shop, myPane));
     }

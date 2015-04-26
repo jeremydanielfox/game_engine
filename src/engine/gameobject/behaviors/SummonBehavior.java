@@ -21,7 +21,7 @@ public class SummonBehavior implements Behavior{
     public void execute(ObjectCollection world, GameObject object){
         for (GameObject toSummon : mySummons){
             GameObject clone = toSummon.clone();
-            Mover newMover = object.getMover();
+            Mover newMover = object.getMover().clone();//clone this?
             newMover.setSpeed(toSummon.getMover().getSpeed());
             clone.setMover(newMover);
             clone.setPoint(object.getPoint());

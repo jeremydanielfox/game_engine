@@ -1,6 +1,8 @@
 package gae.editorView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import engine.gameobject.GameObjectSimple;
@@ -37,6 +39,7 @@ public class GameObjectEditorView implements UIObject {
     private AnchorPane anchor;
     private SimpleEditor simpleEditor;
     private Class<?> clazz;
+    private static Map<Class<?>, SimpleEditor> simpleEditorMap = new HashMap<>();
 
     public GameObjectEditorView (Scene scene,
                                  Consumer<Object> consumer,
@@ -50,7 +53,13 @@ public class GameObjectEditorView implements UIObject {
                                  Consumer<Object> consumer,
                                  BiConsumer<Class<?>, Object> biConsumer,
                                  Class<?> klass) {
-        simpleEditor = new SimpleEditor(klass, biConsumer);
+        if (!simpleEditorMap.containsKey(klass)) {
+            simpleEditor = new SimpleEditor(klass, biConsumer);
+            simpleEditorMap.put(klass, simpleEditor);
+        }
+        else {
+            simpleEditor = simpleEditorMap.get(klass);
+        }
         clazz = klass;
         init(scene, consumer, biConsumer);
     }

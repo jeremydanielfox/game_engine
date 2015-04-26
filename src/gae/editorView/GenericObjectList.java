@@ -60,7 +60,7 @@ public class GenericObjectList {
                         else {
                             // EditorIntermediate.handleEditorPop(objectEditor,
                             // String.format("%s  %d", classType, count++));
-                            objectEditor.popNewEditor(classType + " " + count++);
+                            objectEditor.popNewEditor();
                         }
                     });
                 contextmenu.getItems().add(item);
@@ -77,7 +77,7 @@ public class GenericObjectList {
             if (me.getClickCount() == 2 && !unclicked.get()) {
                 unclicked.set(true);
                 DraggableItem draggable =
-                        new DraggableItem(list.getSelectionModel().getSelectedItem(), klass);
+                        new DraggableItem(list.getSelectionModel().getSelectedItem(), klass, objectEditor);
                 DraggableUtilities.makeObjectPlaceable(me, draggable, node,
                                                        createdSpecificObjects, wrapper, root,
                                                        objectEditor, unclicked);

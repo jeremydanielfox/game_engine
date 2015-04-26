@@ -5,20 +5,20 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import engine.titles.Title;
+import gae.editor.ObjectComponentEditor;
 
 
 public class DraggableItem extends Region {
     private String name;
     private Class<?> klass;
     private Object object;
+    private ObjectComponentEditor editor;
 
-    public DraggableItem (Object object, Class<?> klass) {
+    public DraggableItem (Object object, Class<?> klass, ObjectComponentEditor editor) {
         name = ((Title) object).getTitle();
         this.object = object;
         this.klass = klass;
-        if (object == null) {
-            throw new EmptyListException();
-        }
+        this.editor = editor;
         this.getChildren().add(setFields(new HBox()));
     }
 
@@ -31,7 +31,7 @@ public class DraggableItem extends Region {
         newBox.getChildren().add(label);
         newBox.setOnMouseClicked(e -> {
             if (e.getClickCount() == 2) {
-                // popNewEditor.handle(e);
+                editor.popNewEditor();
             }
         });
         return newBox;
@@ -44,6 +44,6 @@ public class DraggableItem extends Region {
     }
 
     public DraggableItem getNewInstance () {
-        return new DraggableItem(object, klass);
+        return new DraggableItem(object, klass, editor);
     }
 }

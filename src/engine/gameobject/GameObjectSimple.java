@@ -277,7 +277,7 @@ public class GameObjectSimple implements GameObject, Title {
 
     @Override
     public RangeDisplay getRangeDisplay () {
-        return new RangeDisplay(getName(), myGraphic.clone(), myWeapon.getRangeProperty());
+        return new RangeDisplay(getName(), myGraphic, myWeapon.getRangeProperty());
     }
 
     @Override

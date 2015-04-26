@@ -42,12 +42,10 @@ public class RangeUpgrade implements Range, Upgrade {
        this.type = type;
     }
 
-
     @Override
     public UpgradeType getType () {
         return type;
     }
-
 
     @Override
     public double getRange () {

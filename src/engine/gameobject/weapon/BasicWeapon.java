@@ -212,7 +212,7 @@ public class BasicWeapon implements Weapon {
 
     // TODO: Get the math correct here
     private double firingRateToSeconds () {
-        return 60.0 / myFiringRate.getRate();
+        return 60.0 / getFiringRate();
     }
 
     private boolean canFire () {

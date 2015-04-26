@@ -6,11 +6,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Collectors;
-import engine.gameobject.units.UpgradeType;
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
+import engine.gameobject.units.UpgradeType;
 
 
 /**
@@ -150,7 +150,7 @@ public class UpgradeSet<T extends Upgrade> implements ObservableSet<T> {
     }
 
     /**
-     * Defines upgrade uniqueness, according to Class name and UpgradeType
+     * Defines upgrade uniqueness, according to Class name and UpgradeTypere
      *
      * @author Nathan Prabhu
      *

@@ -4,7 +4,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.MoverDirection;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.firingstrategy.MultipleProjectile;
-import engine.gameobject.weapon.upgradetree.TestTree;
+import engine.gameobject.weapon.upgradetree.TestForest;
 
 public class TestWeapon extends BasicWeapon{
     
@@ -13,7 +13,7 @@ public class TestWeapon extends BasicWeapon{
         //setProjectile(tower);
         setFiringRate(.5);
         setProjectile(new TestProjectile(type));
-        setTree(new TestTree());
+        setTree(new TestForest());
         if (type == 1){
             setProjectile(tower);
             setRange(300);

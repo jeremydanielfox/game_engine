@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import engine.gameobject.GameObject;
+import engine.gameobject.labels.Label;
 import engine.interactions.BuffImparter;
 import engine.interactions.CollisionEngine;
 import engine.interactions.Interaction;
@@ -84,7 +86,7 @@ public class InteractionData {
      * @param i
      * @param two
      */
-    public void addInteraction (List<GameObject> one, Interaction i, List<GameObject> two) {
+    public void addInteraction (List<Label> one, Interaction i, List<Label> two) {
         if (i instanceof BuffImparter) {
             massPut(one, i, two, myCollisions);
         }
@@ -106,13 +108,13 @@ public class InteractionData {
      * @param two
      * @param engine
      */
-    private void massPut (List<GameObject> one,
+    private void massPut (List<Label> one,
                           Interaction i,
-                          List<GameObject> two,
+                          List<Label> two,
                           InteractionEngine engine) {
         one.forEach(e -> {
             two.forEach(f -> {
-                engine.put(e.getLabel(), f.getLabel(), i);
+                engine.put(e, f, i);
             });
         });
     }

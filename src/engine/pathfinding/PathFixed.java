@@ -13,9 +13,10 @@ import engine.gameobject.PointSimple;
  *
  */
 @Settable
-public class PathFixed implements Path {
+public class PathFixed implements Path{
     private List<PathSegment> myPathSegments;
-
+    private String myTitle="";
+    private int myIndex=0;
     public PathFixed () {
         myPathSegments = new LinkedList<>();
     }

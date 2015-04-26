@@ -68,16 +68,20 @@
                           <engine.gameobject.test.ProjectileLabel>
                             <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
+                              <index>0</index>
                             </superType>
                             <myName>Projectile</myName>
+                            <index>0</index>
                           </engine.gameobject.test.ProjectileLabel>
                           <map>
                             <entry>
                               <engine.gameobject.test.EnemyLabel>
                                 <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
+                                  <index>0</index>
                                 </superType>
                                 <myName>Enemy</myName>
+                                <index>0</index>
                               </engine.gameobject.test.EnemyLabel>
                               <engine.interactions.BuffImparter/>
                             </entry>
@@ -92,16 +96,20 @@
                           <engine.gameobject.test.TowerLabel>
                             <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
+                              <index>0</index>
                             </superType>
                             <myName>Tower</myName>
+                            <index>0</index>
                           </engine.gameobject.test.TowerLabel>
                           <map>
                             <entry>
                               <engine.gameobject.test.EnemyLabel>
                                 <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
+                                  <index>0</index>
                                 </superType>
                                 <myName>Enemy</myName>
+                                <index>0</index>
                               </engine.gameobject.test.EnemyLabel>
                               <engine.interactions.ShootAt/>
                             </entry>
@@ -609,6 +617,7 @@
                           <myLength>0.0</myLength>
                         </engine.pathfinding.PathSegmentBezier>
                       </myPathSegments>
+                      <myIndex>0</myIndex>
                     </myPath>
                     <myTerrain>
                       <myMatrix>
@@ -1037,6 +1046,10 @@
                         <h>60.0</h>
                         <w>60.0</w>
                       </myTrans>
+                      <myBounds>
+                        <myRow>10</myRow>
+                        <myCol>10</myCol>
+                      </myBounds>
                     </myTerrain>
                     <myTrans reference="../myTerrain/myTrans"/>
                     <myPathWidth>17.0</myPathWidth>
@@ -1047,8 +1060,10 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -1061,6 +1076,7 @@
                           <myHealth>1.0</myHealth>
                           <maxHealth>1.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.4</inherentSpeed>
@@ -1565,6 +1581,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -1592,8 +1609,10 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
+                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
+                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -1606,6 +1625,7 @@
                                     <myHealth>1.0</myHealth>
                                     <maxHealth>1.0</maxHealth>
                                     <myTitle></myTitle>
+                                    <index>0</index>
                                   </myHealth>
                                   <myMover class="engine.gameobject.MoverPath">
                                     <inherentSpeed>1.0</inherentSpeed>
@@ -2110,6 +2130,7 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
+                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -2144,6 +2165,7 @@
                                       <hash>0</hash>
                                     </myPoint>
                                     <myRotator class="engine.gameobject.RotateToPoint"/>
+                                    <index>0</index>
                                   </myGraphic>
                                   <myShopTag class="engine.shop.ShopTagSimple">
                                     <myName></myName>
@@ -2159,9 +2181,11 @@
                                         <hash>0</hash>
                                       </myPoint>
                                       <myRotator class="engine.gameobject.RotateToPoint"/>
+                                      <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
                                   <myTitle></myTitle>
+                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -2178,6 +2202,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -2193,16 +2218,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -2215,6 +2244,7 @@
                           <myHealth>1.0</myHealth>
                           <maxHealth>1.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.4</inherentSpeed>
@@ -2719,6 +2749,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -2746,8 +2777,10 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
+                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
+                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -2760,6 +2793,7 @@
                                     <myHealth>1.0</myHealth>
                                     <maxHealth>1.0</maxHealth>
                                     <myTitle></myTitle>
+                                    <index>0</index>
                                   </myHealth>
                                   <myMover class="engine.gameobject.MoverPath">
                                     <inherentSpeed>1.0</inherentSpeed>
@@ -3264,6 +3298,7 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
+                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -3298,6 +3333,7 @@
                                       <hash>0</hash>
                                     </myPoint>
                                     <myRotator class="engine.gameobject.RotateToPoint"/>
+                                    <index>0</index>
                                   </myGraphic>
                                   <myShopTag class="engine.shop.ShopTagSimple">
                                     <myName></myName>
@@ -3313,9 +3349,11 @@
                                         <hash>0</hash>
                                       </myPoint>
                                       <myRotator class="engine.gameobject.RotateToPoint"/>
+                                      <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
                                   <myTitle></myTitle>
+                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -3332,6 +3370,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -3347,16 +3386,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -3369,6 +3412,7 @@
                           <myHealth>1.0</myHealth>
                           <maxHealth>1.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.4</inherentSpeed>
@@ -3873,6 +3917,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -3900,8 +3945,10 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
+                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
+                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -3914,6 +3961,7 @@
                                     <myHealth>1.0</myHealth>
                                     <maxHealth>1.0</maxHealth>
                                     <myTitle></myTitle>
+                                    <index>0</index>
                                   </myHealth>
                                   <myMover class="engine.gameobject.MoverPath">
                                     <inherentSpeed>1.0</inherentSpeed>
@@ -4418,6 +4466,7 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
+                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -4452,6 +4501,7 @@
                                       <hash>0</hash>
                                     </myPoint>
                                     <myRotator class="engine.gameobject.RotateToPoint"/>
+                                    <index>0</index>
                                   </myGraphic>
                                   <myShopTag class="engine.shop.ShopTagSimple">
                                     <myName></myName>
@@ -4467,9 +4517,11 @@
                                         <hash>0</hash>
                                       </myPoint>
                                       <myRotator class="engine.gameobject.RotateToPoint"/>
+                                      <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
                                   <myTitle></myTitle>
+                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -4486,6 +4538,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -4501,16 +4554,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -4523,6 +4580,7 @@
                           <myHealth>1.0</myHealth>
                           <maxHealth>1.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.4</inherentSpeed>
@@ -5027,6 +5085,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -5054,8 +5113,10 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
+                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
+                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -5068,6 +5129,7 @@
                                     <myHealth>1.0</myHealth>
                                     <maxHealth>1.0</maxHealth>
                                     <myTitle></myTitle>
+                                    <index>0</index>
                                   </myHealth>
                                   <myMover class="engine.gameobject.MoverPath">
                                     <inherentSpeed>1.0</inherentSpeed>
@@ -5572,6 +5634,7 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
+                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -5606,6 +5669,7 @@
                                       <hash>0</hash>
                                     </myPoint>
                                     <myRotator class="engine.gameobject.RotateToPoint"/>
+                                    <index>0</index>
                                   </myGraphic>
                                   <myShopTag class="engine.shop.ShopTagSimple">
                                     <myName></myName>
@@ -5621,9 +5685,11 @@
                                         <hash>0</hash>
                                       </myPoint>
                                       <myRotator class="engine.gameobject.RotateToPoint"/>
+                                      <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
                                   <myTitle></myTitle>
+                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -5640,6 +5706,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -5655,16 +5722,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -5677,6 +5748,7 @@
                           <myHealth>1.0</myHealth>
                           <maxHealth>1.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.4</inherentSpeed>
@@ -6181,6 +6253,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -6208,8 +6281,10 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
+                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
+                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -6222,6 +6297,7 @@
                                     <myHealth>1.0</myHealth>
                                     <maxHealth>1.0</maxHealth>
                                     <myTitle></myTitle>
+                                    <index>0</index>
                                   </myHealth>
                                   <myMover class="engine.gameobject.MoverPath">
                                     <inherentSpeed>1.0</inherentSpeed>
@@ -6726,6 +6802,7 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
+                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -6760,6 +6837,7 @@
                                       <hash>0</hash>
                                     </myPoint>
                                     <myRotator class="engine.gameobject.RotateToPoint"/>
+                                    <index>0</index>
                                   </myGraphic>
                                   <myShopTag class="engine.shop.ShopTagSimple">
                                     <myName></myName>
@@ -6775,9 +6853,11 @@
                                         <hash>0</hash>
                                       </myPoint>
                                       <myRotator class="engine.gameobject.RotateToPoint"/>
+                                      <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
                                   <myTitle></myTitle>
+                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -6794,6 +6874,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -6809,16 +6890,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -6831,6 +6916,7 @@
                           <myHealth>1.0</myHealth>
                           <maxHealth>1.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.4</inherentSpeed>
@@ -7335,6 +7421,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -7362,8 +7449,10 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
+                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
+                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -7376,6 +7465,7 @@
                                     <myHealth>1.0</myHealth>
                                     <maxHealth>1.0</maxHealth>
                                     <myTitle></myTitle>
+                                    <index>0</index>
                                   </myHealth>
                                   <myMover class="engine.gameobject.MoverPath">
                                     <inherentSpeed>1.0</inherentSpeed>
@@ -7880,6 +7970,7 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
+                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -7914,6 +8005,7 @@
                                       <hash>0</hash>
                                     </myPoint>
                                     <myRotator class="engine.gameobject.RotateToPoint"/>
+                                    <index>0</index>
                                   </myGraphic>
                                   <myShopTag class="engine.shop.ShopTagSimple">
                                     <myName></myName>
@@ -7929,9 +8021,11 @@
                                         <hash>0</hash>
                                       </myPoint>
                                       <myRotator class="engine.gameobject.RotateToPoint"/>
+                                      <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
                                   <myTitle></myTitle>
+                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -7948,6 +8042,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -7963,16 +8058,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -7985,6 +8084,7 @@
                           <myHealth>1.0</myHealth>
                           <maxHealth>1.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.4</inherentSpeed>
@@ -8489,6 +8589,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -8516,8 +8617,10 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
+                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
+                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -8530,6 +8633,7 @@
                                     <myHealth>1.0</myHealth>
                                     <maxHealth>1.0</maxHealth>
                                     <myTitle></myTitle>
+                                    <index>0</index>
                                   </myHealth>
                                   <myMover class="engine.gameobject.MoverPath">
                                     <inherentSpeed>1.0</inherentSpeed>
@@ -9034,6 +9138,7 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
+                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -9068,6 +9173,7 @@
                                       <hash>0</hash>
                                     </myPoint>
                                     <myRotator class="engine.gameobject.RotateToPoint"/>
+                                    <index>0</index>
                                   </myGraphic>
                                   <myShopTag class="engine.shop.ShopTagSimple">
                                     <myName></myName>
@@ -9083,9 +9189,11 @@
                                         <hash>0</hash>
                                       </myPoint>
                                       <myRotator class="engine.gameobject.RotateToPoint"/>
+                                      <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
                                   <myTitle></myTitle>
+                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -9102,6 +9210,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -9117,16 +9226,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -9139,6 +9252,7 @@
                           <myHealth>1.0</myHealth>
                           <maxHealth>1.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.4</inherentSpeed>
@@ -9643,6 +9757,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -9670,8 +9785,10 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
+                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
+                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -9684,6 +9801,7 @@
                                     <myHealth>1.0</myHealth>
                                     <maxHealth>1.0</maxHealth>
                                     <myTitle></myTitle>
+                                    <index>0</index>
                                   </myHealth>
                                   <myMover class="engine.gameobject.MoverPath">
                                     <inherentSpeed>1.0</inherentSpeed>
@@ -10188,6 +10306,7 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
+                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -10222,6 +10341,7 @@
                                       <hash>0</hash>
                                     </myPoint>
                                     <myRotator class="engine.gameobject.RotateToPoint"/>
+                                    <index>0</index>
                                   </myGraphic>
                                   <myShopTag class="engine.shop.ShopTagSimple">
                                     <myName></myName>
@@ -10237,9 +10357,11 @@
                                         <hash>0</hash>
                                       </myPoint>
                                       <myRotator class="engine.gameobject.RotateToPoint"/>
+                                      <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
                                   <myTitle></myTitle>
+                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -10256,6 +10378,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -10271,16 +10394,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -10293,6 +10420,7 @@
                           <myHealth>1.0</myHealth>
                           <maxHealth>1.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.4</inherentSpeed>
@@ -10797,6 +10925,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -10824,8 +10953,10 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
+                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
+                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -10838,6 +10969,7 @@
                                     <myHealth>1.0</myHealth>
                                     <maxHealth>1.0</maxHealth>
                                     <myTitle></myTitle>
+                                    <index>0</index>
                                   </myHealth>
                                   <myMover class="engine.gameobject.MoverPath">
                                     <inherentSpeed>1.0</inherentSpeed>
@@ -11342,6 +11474,7 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
+                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -11376,6 +11509,7 @@
                                       <hash>0</hash>
                                     </myPoint>
                                     <myRotator class="engine.gameobject.RotateToPoint"/>
+                                    <index>0</index>
                                   </myGraphic>
                                   <myShopTag class="engine.shop.ShopTagSimple">
                                     <myName></myName>
@@ -11391,9 +11525,11 @@
                                         <hash>0</hash>
                                       </myPoint>
                                       <myRotator class="engine.gameobject.RotateToPoint"/>
+                                      <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
                                   <myTitle></myTitle>
+                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -11410,6 +11546,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -11425,16 +11562,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -11447,6 +11588,7 @@
                           <myHealth>1.0</myHealth>
                           <maxHealth>1.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.4</inherentSpeed>
@@ -11951,6 +12093,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -11978,8 +12121,10 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
+                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
+                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -11992,6 +12137,7 @@
                                     <myHealth>1.0</myHealth>
                                     <maxHealth>1.0</maxHealth>
                                     <myTitle></myTitle>
+                                    <index>0</index>
                                   </myHealth>
                                   <myMover class="engine.gameobject.MoverPath">
                                     <inherentSpeed>1.0</inherentSpeed>
@@ -12496,6 +12642,7 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
+                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -12530,6 +12677,7 @@
                                       <hash>0</hash>
                                     </myPoint>
                                     <myRotator class="engine.gameobject.RotateToPoint"/>
+                                    <index>0</index>
                                   </myGraphic>
                                   <myShopTag class="engine.shop.ShopTagSimple">
                                     <myName></myName>
@@ -12545,9 +12693,11 @@
                                         <hash>0</hash>
                                       </myPoint>
                                       <myRotator class="engine.gameobject.RotateToPoint"/>
+                                      <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
                                   <myTitle></myTitle>
+                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -12564,6 +12714,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -12579,9 +12730,11 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                     </myOrderedObjects>
                     <curIndex>0</curIndex>
@@ -12590,16 +12743,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1259</int>
-                    <int>23</int>
-                    <int>342</int>
-                    <int>2198</int>
-                    <int>1519</int>
-                    <int>2149</int>
-                    <int>2079</int>
-                    <int>7</int>
-                    <int>172</int>
-                    <int>442</int>
+                    <int>2125</int>
+                    <int>1020</int>
+                    <int>732</int>
+                    <int>2036</int>
+                    <int>945</int>
+                    <int>1155</int>
+                    <int>499</int>
+                    <int>849</int>
+                    <int>1176</int>
+                    <int>1878</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -12612,8 +12765,10 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -12626,6 +12781,7 @@
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -13130,6 +13286,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -13164,6 +13321,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -13179,16 +13337,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -13201,6 +13363,7 @@
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -13705,6 +13868,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -13739,6 +13903,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -13754,16 +13919,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -13776,6 +13945,7 @@
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -14280,6 +14450,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -14314,6 +14485,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -14329,16 +14501,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -14351,6 +14527,7 @@
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -14855,6 +15032,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -14889,6 +15067,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -14904,16 +15083,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -14926,6 +15109,7 @@
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -15430,6 +15614,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -15464,6 +15649,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -15479,16 +15665,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -15501,6 +15691,7 @@
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -16005,6 +16196,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -16039,6 +16231,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -16054,16 +16247,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -16076,6 +16273,7 @@
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -16580,6 +16778,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -16614,6 +16813,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -16629,16 +16829,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -16651,6 +16855,7 @@
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -17155,6 +17360,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -17189,6 +17395,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -17204,16 +17411,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -17226,6 +17437,7 @@
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -17730,6 +17942,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -17764,6 +17977,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -17779,16 +17993,20 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
+                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
+                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -17801,6 +18019,7 @@
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
                           <myTitle></myTitle>
+                          <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -18305,6 +18524,7 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
+                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -18339,6 +18559,7 @@
                             <hash>0</hash>
                           </myPoint>
                           <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
@@ -18354,9 +18575,11 @@
                               <hash>0</hash>
                             </myPoint>
                             <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
                         <myTitle></myTitle>
+                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                     </myOrderedObjects>
                     <curIndex>0</curIndex>
@@ -18366,7 +18589,6 @@
                   <myFramesSinceLastRelease>0</myFramesSinceLastRelease>
                 </engine.events.ConstantSpacingWave>
               </eventList>
-              <myTitle></myTitle>
             </myStoryBoard>
           </engine.goals.EventsCompleteGoal>
           <engine.goals.ScoreGoal reference="../../../../../myPlayer/obs/engine.goals.ScoreGoal"/>
@@ -18404,7 +18626,6 @@
                 <engine.goals.EventsCompleteGoal reference="../../.."/>
               </obs>
               <eventList/>
-              <myTitle></myTitle>
             </myStoryBoard>
           </engine.goals.EventsCompleteGoal>
           <engine.goals.ScoreGoal reference="../../../../../myPlayer/obs/engine.goals.ScoreGoal[2]"/>
@@ -18418,16 +18639,20 @@
                 <engine.gameobject.test.ProjectileLabel>
                   <superType class="engine.gameobject.labels.TypeBase">
                     <myName>Base</myName>
+                    <index>0</index>
                   </superType>
                   <myName>Projectile</myName>
+                  <index>0</index>
                 </engine.gameobject.test.ProjectileLabel>
                 <map>
                   <entry>
                     <engine.gameobject.test.EnemyLabel>
                       <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
+                        <index>0</index>
                       </superType>
                       <myName>Enemy</myName>
+                      <index>0</index>
                     </engine.gameobject.test.EnemyLabel>
                     <engine.interactions.BuffImparter/>
                   </entry>
@@ -18442,16 +18667,20 @@
                 <engine.gameobject.test.TowerLabel>
                   <superType class="engine.gameobject.labels.TypeBase">
                     <myName>Base</myName>
+                    <index>0</index>
                   </superType>
                   <myName>Tower</myName>
+                  <index>0</index>
                 </engine.gameobject.test.TowerLabel>
                 <map>
                   <entry>
                     <engine.gameobject.test.EnemyLabel>
                       <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
+                        <index>0</index>
                       </superType>
                       <myName>Enemy</myName>
+                      <index>0</index>
                     </engine.gameobject.test.EnemyLabel>
                     <engine.interactions.ShootAt/>
                   </entry>
@@ -18888,6 +19117,10 @@
               <h>60.0</h>
               <w>60.0</w>
             </myTrans>
+            <myBounds>
+              <myRow>10</myRow>
+              <myCol>10</myCol>
+            </myBounds>
           </myTerrain>
           <myTrans reference="../myTerrain/myTrans"/>
           <myPathWidth>17.0</myPathWidth>

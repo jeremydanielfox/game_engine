@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.io.File;
 import java.util.function.Consumer;
 import gae.backend.Placeable;
-import gae.backend.TempEnemy;
-import gae.backend.TempTower;
 import gae.gridView.TileViewToggle.TileMode;
 import gae.listView.LibraryData;
 import gae.listView.LibraryView;
@@ -220,29 +218,35 @@ public class LevelView {
         return button;
     }
   
-
+    /*
+     * Removed once editor works
+     * 
+    @Deprecated
     private GridPane tempGrid () {
         GridPane grid = new GridPane();
         grid.setHgap(0);
         grid.setTranslateX(200);
-        grid.add(tempButtonTower(), 0, 0);
-        grid.add(tempButtonEnemy(), 0, 1);
+//        grid.add(tempButtonTower(), 0, 0);
+//        grid.add(tempButtonEnemy(), 0, 1);
         return grid;
     }
 
+    @Deprecated
     private Button tempButtonTower () {
         Button temp = new Button("add Tower");
-        Placeable Placeable = new TempTower();
-        temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
+//        Placeable Placeable = new TempTower();
+//        temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
         return temp;
     }
 
+    @Deprecated
     private Button tempButtonEnemy () {
         Button temp = new Button("add Enemy");
-        Placeable Placeable = new TempEnemy();
-        temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
+//        Placeable Placeable = new TempEnemy();
+//        temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
         return temp;
     }
+    */
 
     public Consumer<Placeable> getConsumer () {
         Consumer<Placeable> consumer = e -> libraryData.addEditableToList(e);

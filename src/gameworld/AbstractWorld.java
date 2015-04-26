@@ -127,7 +127,11 @@ public class AbstractWorld implements GameWorld {
     @Override
     public boolean isPlaceable (Node n, PointSimple pixelCoords) {
     	GridCell c = myTrans.transformWorldToGrid(pixelCoords);
-    	return myTerrain.getTerrainTile(c).getPlace();
+    	try {
+			return myTerrain.getTerrainTile(c).getPlace();
+		} catch (InvalidArgumentException e) {
+			return false;
+		}
     }
 
     @Override
@@ -147,12 +151,20 @@ public class AbstractWorld implements GameWorld {
     
 	@Settable
 	public void setObstacles(List<GridCell> obstacles){
-		obstacles.forEach(c -> myTerrain.getTerrainTile(c).setWalk(false));
+		for(GridCell c : obstacles){
+			try {
+				myTerrain.getTerrainTile(c).setWalk(false);
+			} catch(InvalidArgumentException e){}
+		}
 		PathFree path = (PathFree) myPath;
 		path.setObstacles(obstacles);
 	}
 	
 	public void setTowerObstacles(List<GridCell> tObstacles){
-		tObstacles.forEach(c -> myTerrain.getTerrainTile(c).setPlace(false));
+		for(GridCell c : tObstacles){
+			try {
+				myTerrain.getTerrainTile(c).setPlace(false);
+			} catch(InvalidArgumentException e){}
+		}
 	}
 }

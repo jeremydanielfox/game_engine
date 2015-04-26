@@ -15,7 +15,6 @@ import engine.pathfinding.EndOfPathException;
 import engine.shop.RangeDisplay;
 import engine.shop.ShopTag;
 import engine.shop.ShopTagSimple;
-import engine.titles.Title;
 import gameworld.ObjectCollection;
 
 
@@ -26,7 +25,7 @@ import gameworld.ObjectCollection;
  *
  */
 @Settable
-public class GameObjectSimple implements GameObject, Title {
+public class GameObjectSimple implements GameObject {
     private Type myLabel;
     private PointSimple myPoint;
     private Health myHealth;
@@ -293,29 +292,6 @@ public class GameObjectSimple implements GameObject, Title {
 
     public String toString () {
         return "GameObject: " + myLabel.getName();
-    }
-
-    @Override
-    public String getTitle () {
-        return myTitle;
-    }
-
-    @Settable
-    @Override
-    public void setTitle (String title) {
-        myTitle = title;
-    }
-
-    @Override
-    public int getIndex () {
-        // TODO Auto-generated method stub
-        return index;
-    }
-
-    @Override
-    public void setIndex (int index) {
-        // TODO Auto-generated method stub
-        this.index = index;
     }
 
 }

@@ -9,8 +9,8 @@ import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
-import engine.titles.Title;
 import gae.backend.Placeable;
+import gae.editorView.GameObjectInformation;
 import gae.gridView.Path;
 import gae.gridView.PathView;
 import java.util.ArrayList;
@@ -81,9 +81,9 @@ public class LibraryData {
 
     public void addCreatedObjectToList (Class<?> klass, Object o) {
         try {
-            Title casted = (Title) o;
-            if (casted.getIndex() >= 0) {
-                createdObjectMap.get(klass).set(casted.getIndex(), o);
+            int index = GameObjectInformation.getInstance().getIndex(o);
+            if (index >= 0) {
+                createdObjectMap.get(klass).set(index, o);
                 System.out.println("replaced");
             }
             else {

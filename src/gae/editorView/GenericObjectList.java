@@ -8,11 +8,12 @@ import gae.gridView.ContainerWrapper;
 import gae.listView.DraggableUtilities;
 import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
@@ -65,13 +66,25 @@ public class GenericObjectList {
 
     private ListView<?> setList (String classType) {
         ListView<?> list = ListViewUtilities.createGenericList(createdSpecificObjects, classType);
-        list.setOnMousePressed(me -> {
-            DraggableItem draggable =
-                    new DraggableItem(list.getSelectionModel().getSelectedItem(), klass, classType);
-            DraggableUtilities.makeObjectPlaceable(me, draggable, node,
-                                                   createdSpecificObjects, wrapper, root, objectEditor);
+        BooleanProperty unclicked = new SimpleBooleanProperty(false);
+        list.setOnMouseClicked(me -> {
+            if (me.getClickCount() == 2 && !unclicked.get()) {
+                unclicked.set(true);
+                DraggableItem draggable =
+                        new DraggableItem(list.getSelectionModel().getSelectedItem(), klass,
+                                          classType);
+                DraggableUtilities.makeObjectPlaceable(me, draggable, node,
+                                                       createdSpecificObjects, wrapper, root,
+                                                       objectEditor, unclicked);
+            }
         });
         return list;
+    }
+
+    private EventHandler<MouseEvent> unselect (ListView<?> list) {
+        return e -> {
+            list.getSelectionModel().clearSelection();
+        };
     }
 
     private String getType () {

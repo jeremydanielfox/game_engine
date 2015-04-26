@@ -8,12 +8,14 @@ import gae.editorView.DragIntoRectangle;
 import gae.editorView.DraggableFields;
 import gae.editorView.DraggableItem;
 import gae.gridView.ContainerWrapper;
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -88,7 +90,9 @@ public class DraggableUtilities {
                                             Node node,
                                             ObservableList<Object> instanceList,
                                             ContainerWrapper wrapper,
-                                            Group root, ObjectComponentEditor editor) {
+                                            Group root,
+                                            ObjectComponentEditor editor,
+                                            BooleanProperty unclicked) {
         // TODO: figure out how to clone
         Node binder =
                 ViewUtil.bindCursor(placeable,
@@ -106,6 +110,7 @@ public class DraggableUtilities {
             if (wrapper.checkBounds(currentX, currentY)) {
                 throw new ObjectOutOfBoundsException();
             }
+//            event.handle(ev);
             // PointSimple relativeLocation = wrapper.convertCoordinates(currentX, currentY);
             //
             // placeable.setTranslateX(relativeLocation.getX());
@@ -114,6 +119,8 @@ public class DraggableUtilities {
             clone.setTranslateX(currentX);
             clone.setTranslateY(currentY);
             root.getChildren().add(clone);
+            ViewUtil.unbindCursor(node, placeable);
+            unclicked.setValue(false);
         });
         root.getChildren().add(binder);
     }

@@ -9,6 +9,7 @@ public class SimpleType implements Type, Title {
 
     private Type superType;
     private String myName;
+    private int index;
 
     public SimpleType () {
         superType = new TypeBase();
@@ -73,9 +74,20 @@ public class SimpleType implements Type, Title {
         return myName;
     }
 
-    @Settable
     @Override
     public void setTitle (String title) {
         myName = title;
+    }
+
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return index;
+    }
+
+    @Override
+    public void setIndex (int index) {
+        // TODO Auto-generated method stub
+        this.index = index;
     }
 }

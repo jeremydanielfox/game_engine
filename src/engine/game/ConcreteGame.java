@@ -176,4 +176,16 @@ public class ConcreteGame implements Game, Title {
         myShop = shop;
     }
 
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void setIndex (int existing) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

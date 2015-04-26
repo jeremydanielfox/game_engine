@@ -10,6 +10,7 @@ public class ShopTagSimple implements ShopTag, Title {
     private String myDescription;
     private Graphic myShopGraphic;
     private String myTitle="";
+    private int index;
 
     public ShopTagSimple () {
         myName = "";
@@ -66,6 +67,18 @@ public class ShopTagSimple implements ShopTag, Title {
     @Override
     public void setTitle (String title) {
         myTitle = title;
+    }
+
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return index;
+    }
+
+    @Override
+    public void setIndex (int index) {
+        // TODO Auto-generated method stub
+        this.index = index;
     }
 
 }

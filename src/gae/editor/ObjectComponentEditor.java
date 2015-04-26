@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
+
 /**
  *
  * @author Eric Saba
@@ -52,12 +53,11 @@ public class ObjectComponentEditor extends ComponentEditor {
         return clazz;
     }
 
-    public void popNewEditor (String title) {
-        System.out.println("TITLE IS : " + title);
+    public void popNewEditor (int index) {
         // Consumer<Object> setObjectConsumer = o -> setObject(o);
         Consumer<Object> setObjectConsumer = o -> clear();
         // GenericObjectsPane.newCustomObject(clazz, "yo", setObjectConsumer);
-        new PopUpEditorView(setObjectConsumer, biConsumer, clazz);
+        new PopUpEditorView(setObjectConsumer, biConsumer, clazz, index);
     }
 
     @Override

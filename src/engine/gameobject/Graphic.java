@@ -30,6 +30,7 @@ public class Graphic implements Title {
     @XStreamOmitField
     private transient ImageView myImageView;
     private Rotator myRotator;
+    private int index;
 
     public Graphic () {
         myImageName = DEFAULT_IMAGE_NAME;
@@ -158,6 +159,18 @@ public class Graphic implements Title {
     @Override
     public void setTitle (String title) {
         myTitle = title;
+    }
+
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return index;
+    }
+
+    @Override
+    public void setIndex (int index) {
+        // TODO Auto-generated method stub
+        this.index = index;
     }
 
 }

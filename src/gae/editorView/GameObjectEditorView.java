@@ -1,14 +1,13 @@
 package gae.editorView;
 
-import java.util.ArrayList;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import engine.gameobject.GameObjectSimple;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import gae.editor.ComponentEditor;
@@ -50,6 +48,7 @@ public class GameObjectEditorView implements UIObject {
     private TextField title;
     // not best way to do it because it takes up a lot of space but lack of time
     private static Map<Class<?>, Node> titleFieldMap = new HashMap<>();
+    private BiConsumer<Class<?>, Object> biConsumer;
 
     public GameObjectEditorView (Scene scene,
                                  Consumer<Object> consumer,
@@ -82,13 +81,13 @@ public class GameObjectEditorView implements UIObject {
     private void init (Scene scene,
                        Consumer<Object> consumer,
                        BiConsumer<Class<?>, Object> biConsumer) {
+        this.biConsumer = biConsumer;
         root = new Group();
         root.setManaged(false);
         this.scene = scene;
         top = new VBox();
         List<ComponentEditor> simpleList = simpleEditor.getSimpleComponentEditors();
         SimpleEditorView simpleEditorView = new SimpleEditorView(simpleList);
-        // top = (VBox) simpleEditorView.getObject();
         top.getChildren().addAll(titleBox(), (VBox) simpleEditorView.getObject());
         top.setPrefSize(vboxWidth, vboxHeight);
         Button addButton = new Button("Add");
@@ -140,7 +139,7 @@ public class GameObjectEditorView implements UIObject {
         Accordion accordion = new Accordion();
         for (ObjectComponentEditor edit : simpleEditor.getObjectComponentEditors()) {
             GenericObjectList list =
-                    new GenericObjectList(edit, bottom, bottom, root);
+                    new GenericObjectList(edit, bottom, bottom, root, setList());
             accordion.getPanes().add(list.getTitledPane());
         }
         return accordion;
@@ -156,4 +155,22 @@ public class GameObjectEditorView implements UIObject {
         return simpleEditor.createObject(clazz);
     }
 
+    public BiConsumer<List<List<Object>>, List<Method>> setList () {
+        return (list, methodList) -> {
+            try {
+                Class<?> clazz = Class.forName("engine.gameobject.units.Collider");
+                SimpleEditor simpleEditor = new SimpleEditor(clazz, biConsumer);
+                Object obj = simpleEditor.createObject(clazz);
+                for (int i = 0; i < methodList.size(); i++) {
+                    methodList.get(i).invoke(obj, list.get(i));
+                }
+                biConsumer.accept(clazz, obj);
+            }
+            catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException
+                    | InvocationTargetException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        };
+    }
 }

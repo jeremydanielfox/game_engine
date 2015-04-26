@@ -1,7 +1,11 @@
 package gae.editorView;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import gae.editor.EditingParser;
 import gae.editor.EditorIntermediate;
 import gae.editor.ObjectComponentEditor;
@@ -29,16 +33,18 @@ public class GenericObjectList {
     private ObjectComponentEditor objectEditor;
     private ContainerWrapper wrapper;
     private Map<String, ArrayList<String>> interfaceToClassMap;
+    private BiConsumer<List<List<Object>>, List<Method>> setlists;
 
     public GenericObjectList (ObjectComponentEditor editor,
                               Node node,
                               ContainerWrapper wrapper,
-                              Group root) {
+                              Group root, BiConsumer<List<List<Object>>, List<Method>> setLists) {
         objectEditor = editor;
         this.node = node;
         this.root = root;
         this.wrapper = wrapper;
         this.klass = editor.getObjectClass();
+        this.setlists = setLists;
         interfaceToClassMap = EditingParser.getInterfaceClasses(PROPERTY_FILE_PATH);
         createdSpecificObjects = LibraryData.getInstance().getObservableList(klass);
     }
@@ -54,7 +60,7 @@ public class GenericObjectList {
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
                     if (klass.getSimpleName().equals("Collider")) {
-                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass);
+                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass, setlists);
                     }
                     else {
                         EditorIntermediate.handleEditorPop(objectEditor, -1);

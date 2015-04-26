@@ -40,7 +40,7 @@ public class MoverEditorOpener extends PopUpEditorView {
         // TODO Auto-generated method stub
         libraryData = LibraryData.getInstance();
         createdDropDownList = new ArrayList<>();
-        super.initialize();
+//        super.initialize();
     }
 
     private void save () {

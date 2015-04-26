@@ -2,6 +2,7 @@ package player.gamePlayer;
 
 import View.EngineView;
 import View.GameWriter;
+import View.GameWriterConcrete2;
 import View.ViewConcrete2;
 import voogasalad.util.highscore.HighScoreController;
 import voogasalad.util.highscore.HighScoreException;
@@ -24,7 +25,11 @@ import engine.game.Player;
 import gae.gameView.Main;
 import gameworld.GameWorld;
 
-
+/**
+ * 
+ * @author goldstein
+ *
+ */
 public class GamePlayerScreen implements GameScene {
 
     private static final String USER_NAME_PROMPT_TEXT = "ENTER A NAME";
@@ -91,7 +96,7 @@ public class GamePlayerScreen implements GameScene {
      */
     public Node makeDemoGameView () {
 
-        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT,new GameOverScreen(myStage,myScene,myPreviousScene,myGame));
         Node node = myGameView.initializeView();
         return node;
 
@@ -137,7 +142,7 @@ public class GamePlayerScreen implements GameScene {
         insideBox.setMaxWidth(400);
         Label labelText = new Label(label);
         Label description = new Label(text);
-        
+
         labelText.setWrapText(true);
         description.setWrapText(true);
 
@@ -150,7 +155,7 @@ public class GamePlayerScreen implements GameScene {
     /**
      * Displays high scores using HighScoreController from the high score utility.
      */
-    private void displayScores () {
+    public void displayScores () {
         HighScoreController scores = HighScoreController.getController();
         try {
             scores.displayHighScores(myGame.getGameName(), "Score:", 500, 500);
@@ -170,6 +175,8 @@ public class GamePlayerScreen implements GameScene {
      */
     private void changeScene (Scene sceneToChange) {
         myStage.setScene(sceneToChange);
+//         GameOverScreen gameover=new GameOverScreen(myStage,myScene,myPreviousScene,myGame);
+  //       myStage.setScene(gameover.getScene());
     }
 
     /**
@@ -229,7 +236,7 @@ public class GamePlayerScreen implements GameScene {
      * @return
      */
     private Game loadGame () {
-        GameWriter gw = new GameWriter();
+        GameWriterConcrete2 gw = new GameWriterConcrete2();
         GameWorld world = gw.makeWorld();
         Player player = gw.makePlayer();
         return gw.makeGame(player, world, gw.makeShop(player, world));

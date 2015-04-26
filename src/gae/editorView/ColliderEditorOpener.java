@@ -11,9 +11,12 @@ import javafx.scene.layout.VBox;
 
 public class ColliderEditorOpener extends EditorOpener {
     private static final String TITLE = "Collider Editor";
+    private BiConsumer<Class<?>, Object> biconsumer;
 
-    public ColliderEditorOpener (BiConsumer<Class<?>, Object> biconsumer, Class<?> klass) {
+    public ColliderEditorOpener (BiConsumer<Class<?>, Object> biconsumer,
+                                 Class<?> klass) {
         super(biconsumer, klass);
+        this.biconsumer = biconsumer;
     }
 
     @Override
@@ -23,6 +26,10 @@ public class ColliderEditorOpener extends EditorOpener {
         SimpleEditorView simpleEditorView = new SimpleEditorView(simpleList);
         VBox top = (VBox) simpleEditorView.getObject();
         border.setTop(top);
+        BuffEditor explosion = new BuffEditor();
+        BuffEditor collision = new BuffEditor();
+        border.setLeft(explosion.setLists("Explosion", biconsumer));
+        border.setRight(collision.setLists("Collison", biconsumer));
         return border;
     }
 

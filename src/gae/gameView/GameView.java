@@ -1,11 +1,18 @@
 package gae.gameView;
 
-import gae.backend.Placeable;
+import engine.fieldsetting.Settable;
+import engine.game.Game;
+import engine.game.LevelBoard;
+import engine.shop.ShopModelSimple;
+import gae.editor.EditingParser;
 // import gae.backend.GameManager;
 import gae.openingView.UIMediator;
 import gae.openingView.UIObject;
 import gae.tabView.CentralTabView;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.EventObject;
+import java.util.Map;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -29,25 +36,68 @@ public class GameView implements UIMediator {
     private static final Image CURSOR_GRAPHIC = new Image("/images/swordCursor.jpg");
     private static final String GAMEVIEW_CSS = "css/GameViewCSS.css";
     private BorderPane myUI;
-    private CentralTabView myTabs; // replace with main editor
+    private CentralTabView myTabs;
     private Scene myScene;
     // private LibraryView myLibrary;
     private UtilitiesBar utilities;
-    private GenericObjectsPane myGenericObjects;
+    private Map<String, String> openingViewData;
+
+    private Game myGame;
 
     // private GameManager myGameManager;
 
-    public GameView () {
+    public GameView (Map<String, String> dataResults) {
         myUI = new BorderPane();
         myScene = new Scene(myUI);
-        myTabs = new CentralTabView(myScene);
+        myGame = createGameWithLevelBoard();
+        
+        if (dataResults != null) {
+            openingViewData = dataResults;
+            myTabs = new CentralTabView(myScene, myGame, openingViewData.get("Game Type"));
+        }
+        else {
+            myTabs = new CentralTabView(myScene, myGame, null);
+        }
+
         myScene.getStylesheets().add(GAMEVIEW_CSS);
         // myLibrary = new LibraryView();
-        utilities = new UtilitiesBar();
-        myGenericObjects = new GenericObjectsPane(myTabs.getConsumer(), myTabs.getBiconsumer());
+        utilities = new UtilitiesBar(myGame);
         // myLibrary = new LibraryView();
         insertBorders();
         // changeCursor(CURSOR_GRAPHIC);
+    }
+
+    private Game createGameWithLevelBoard () {
+        Game g = null;
+        try {
+            g =
+                    (Game) Class.forName(EditingParser
+                                         .getInterfaceClasses("engine.fieldsetting.implementing_classes")
+                                         .get("Game").get(0)).newInstance();
+
+            LevelBoard levelBoard = (LevelBoard) Class.forName(EditingParser
+                                                               .getInterfaceClasses("engine.fieldsetting.implementing_classes")
+                                                               .get("LevelBoard").get(0)).newInstance();
+
+            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(g.getClass().getName()), Settable.class)) {
+                if (m.getName().equals("setLevelBoard")) {
+                    m.invoke(g, levelBoard);
+                }
+                if (m.getName().equals("setShop")) {
+                    m.invoke(g, new ShopModelSimple());
+                }
+            } 
+        }
+        catch (InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        if (g == null) {
+            Exception e = new NullPointerException();
+            e.printStackTrace();
+        }
+
+        return g;
     }
 
     @Override
@@ -67,7 +117,7 @@ public class GameView implements UIMediator {
         myScene.setCursor(new ImageCursor(new Image("/images/swordCursor.jpg")));
         myScene.getStylesheets().add(GAMEVIEW_CSS);
         // myLibrary = new LibraryView();
-        utilities = new UtilitiesBar();
+        utilities = new UtilitiesBar(myGame);
         myUI.setTop(utilities.getUtilitiesBar());
     }
 
@@ -86,6 +136,6 @@ public class GameView implements UIMediator {
     private void insertBorders () {
         myUI.setTop(utilities.getUtilitiesBar());
         myUI.setCenter(myTabs.getObject());
-//        myUI.setRight(myGenericObjects.getObject());
+        //        myUI.setRight(myGenericObjects.getObject());
     }
 }

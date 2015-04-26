@@ -96,7 +96,7 @@ public class GamePlayerScreen extends Application {
     public Node makeDemoGame () {
         ConcreteLevelBoard board = new ConcreteLevelBoard();
 
-        GameWorld world = new FixedWorld();
+        GameWorld world = new FixedWorld(10,10);
         world.addObject(new GameObjectSimpleTest());
         world.addObject(new TestTower(1, 270, 270));
         List<GameObject> waveObjects = new ArrayList<>();
@@ -130,7 +130,7 @@ public class GamePlayerScreen extends Application {
         list3.add(score2);
 
         board.addLevel(new ConcreteLevel("images/Park_Path.png", list2, list, world, story));
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(),
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(10,10),
                                          story));
         // EDIT: temp change -- game won't have accurate shop - Nathan
         myGame =

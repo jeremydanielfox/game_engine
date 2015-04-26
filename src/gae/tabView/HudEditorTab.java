@@ -4,8 +4,11 @@ import gae.hudEditor.HudEditor;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 
-
-// Potentially combine this with the ShopTab using an abstract class
+/**
+ * Hud Editor Tab
+ * @author JohnGilhuly
+ *
+ */
 
 public class HudEditorTab {
 

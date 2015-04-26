@@ -48,8 +48,6 @@ public class GameObjectEditorView implements UIObject {
     private TextField title;
     // not best way to do it because it takes up a lot of space but lack of time
     private static Map<Class<?>, Node> titleFieldMap = new HashMap<>();
-    private BiConsumer<Class<?>, Object> biConsumer;
-
     public GameObjectEditorView (Scene scene,
                                  Consumer<Object> consumer,
                                  BiConsumer<Class<?>, Object> biConsumer) {
@@ -81,7 +79,6 @@ public class GameObjectEditorView implements UIObject {
     private void init (Scene scene,
                        Consumer<Object> consumer,
                        BiConsumer<Class<?>, Object> biConsumer) {
-        this.biConsumer = biConsumer;
         root = new Group();
         root.setManaged(false);
         this.scene = scene;
@@ -139,7 +136,7 @@ public class GameObjectEditorView implements UIObject {
         Accordion accordion = new Accordion();
         for (ObjectComponentEditor edit : simpleEditor.getObjectComponentEditors()) {
             GenericObjectList list =
-                    new GenericObjectList(edit, bottom, bottom, root, setList());
+                    new GenericObjectList(edit, bottom, bottom, root);
             accordion.getPanes().add(list.getTitledPane());
         }
         return accordion;
@@ -155,22 +152,5 @@ public class GameObjectEditorView implements UIObject {
         return simpleEditor.createObject(clazz);
     }
 
-    public BiConsumer<List<List<Object>>, List<Method>> setList () {
-        return (list, methodList) -> {
-            try {
-                Class<?> clazz = Class.forName("engine.gameobject.units.Collider");
-                SimpleEditor simpleEditor = new SimpleEditor(clazz, biConsumer);
-                Object obj = simpleEditor.createObject(clazz);
-                for (int i = 0; i < methodList.size(); i++) {
-                    methodList.get(i).invoke(obj, list.get(i));
-                }
-                biConsumer.accept(clazz, obj);
-            }
-            catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException
-                    | InvocationTargetException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        };
-    }
+    
 }

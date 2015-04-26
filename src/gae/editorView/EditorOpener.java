@@ -1,8 +1,5 @@
 package gae.editorView;
 
-import gae.editor.SimpleEditor;
-import java.lang.reflect.Method;
-import java.util.List;
 import java.util.function.BiConsumer;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,11 +10,10 @@ public abstract class EditorOpener {
     private Stage s;
 
     public EditorOpener (BiConsumer<Class<?>, Object> biconsumer,
-                         Class<?> klass,
-                         BiConsumer<List<List<Object>>, List<Method>> listSetter) {
+                         Class<?> klass, int index) {
         s = new Stage();
         Scene scene =
-                new Scene(setUpParent(new SimpleEditor(klass, biconsumer), biconsumer, listSetter));
+                new Scene(setUpParent(klass, biconsumer, index));
         s.setWidth(330);
         s.setHeight(500);
         s.setScene(scene);
@@ -29,9 +25,8 @@ public abstract class EditorOpener {
         s.close();
     }
 
-    public abstract Parent setUpParent (SimpleEditor editor,
-                                        BiConsumer<Class<?>, Object> biconsumer,
-                                        BiConsumer<List<List<Object>>, List<Method>> listSetter);
+    public abstract Parent setUpParent (Class<?> klass,
+                                        BiConsumer<Class<?>, Object> biconsumer, int index);
 
     public abstract String getTitle ();
 }

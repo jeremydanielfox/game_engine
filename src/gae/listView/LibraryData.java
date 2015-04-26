@@ -80,17 +80,16 @@ public class LibraryData {
     }
 
     public void addCreatedObjectToList (Class<?> klass, Object o) {
-        try {
+        if (createdObjectMap.containsKey(klass)) {
             int index = GameObjectInformation.getInstance().getIndex(o);
             if (index >= 0) {
                 createdObjectMap.get(klass).set(index, o);
-                System.out.println("replaced");
             }
             else {
                 createdObjectMap.get(klass).add(o);
             }
         }
-        catch (NullPointerException e) {
+        else {
             ObservableList<Object> list = FXCollections.observableArrayList();
             createdObjectMap.put(klass, list);
             createdObjectMap.get(klass).add(o);

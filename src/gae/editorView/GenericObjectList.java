@@ -6,15 +6,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import gae.backend.Placeable;
 import gae.editor.EditingParser;
 import gae.editor.EditorIntermediate;
 import gae.editor.ObjectComponentEditor;
 import gae.gridView.ContainerWrapper;
+import gae.listView.Authorable;
 import gae.listView.DraggableUtilities;
 import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -26,6 +29,7 @@ import javafx.scene.control.TitledPane;
 
 public class GenericObjectList {
     private static final String PROPERTY_FILE_PATH = "engine.fieldsetting.implementing_classes";
+    private static final int UNSELECTED_INDEX = -1;
     private ObservableList<Object> createdSpecificObjects;
     private Node node;
     private Group root;
@@ -33,18 +37,16 @@ public class GenericObjectList {
     private ObjectComponentEditor objectEditor;
     private ContainerWrapper wrapper;
     private Map<String, ArrayList<String>> interfaceToClassMap;
-    private BiConsumer<List<List<Object>>, List<Method>> setlists;
 
     public GenericObjectList (ObjectComponentEditor editor,
                               Node node,
                               ContainerWrapper wrapper,
-                              Group root, BiConsumer<List<List<Object>>, List<Method>> setLists) {
+                              Group root) {
         objectEditor = editor;
         this.node = node;
         this.root = root;
         this.wrapper = wrapper;
         this.klass = editor.getObjectClass();
-        this.setlists = setLists;
         interfaceToClassMap = EditingParser.getInterfaceClasses(PROPERTY_FILE_PATH);
         createdSpecificObjects = LibraryData.getInstance().getObservableList(klass);
     }
@@ -60,13 +62,14 @@ public class GenericObjectList {
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
                     if (klass.getSimpleName().equals("Collider")) {
-                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass, setlists);
+                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass,
+                                                 UNSELECTED_INDEX);
                     }
-                    else {
-                        EditorIntermediate.handleEditorPop(objectEditor, -1);
-//                        objectEditor.popNewEditor(-1);
-                    }
-                });
+                        else {
+                            EditorIntermediate.handleEditorPop(objectEditor, UNSELECTED_INDEX);
+                            // objectEditor.popNewEditor(-1);
+                        }
+                    });
                 contextmenu.getItems().add(item);
                 contextmenu.show(titledPane, me.getSceneX(), me.getSceneY());
             }

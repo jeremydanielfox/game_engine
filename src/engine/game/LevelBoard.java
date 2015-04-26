@@ -32,6 +32,8 @@ public interface LevelBoard {
      *
      * @return
      */
+    public boolean isWon();
+    public boolean isLost();
     public String getCurrentLevelMap ();
 
     /**

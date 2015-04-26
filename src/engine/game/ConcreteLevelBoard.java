@@ -18,6 +18,8 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
 
     private List<Level> myLevels;
     private int curLevelIndex;
+    private boolean isLost;
+    private boolean isWon;
 
     public ConcreteLevelBoard () {
         myLevels = new ArrayList<Level>();
@@ -55,7 +57,17 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
         boolean answer =
                 ((curLevelIndex == myLevels.size() - 1) && (myLevels.get(curLevelIndex).isWon())) ||
                 myLevels.get(curLevelIndex).isLost();
+        isWon=myLevels.get(curLevelIndex).isWon();
+        isLost=myLevels.get(curLevelIndex).isLost();
         return answer;
+        
+    }
+    
+    public boolean isWon(){
+        return isWon;
+    }
+    public boolean isLost(){
+        return isLost;
     }
 
     @Override

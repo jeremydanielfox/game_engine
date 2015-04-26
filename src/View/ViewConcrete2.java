@@ -68,6 +68,17 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myDisplayHeight = stageHeight;
         myEndScreen=screen;
     }
+    
+    public ViewConcrete2 (Game game,
+                          double stageWidth,
+                          double stageHeight) {
+        myGame = game;
+        myLevelBoard = myGame.getLevelBoard();
+        myLevelBoard.addObserver(this);
+        myDisplayWidth = stageWidth;
+        myDisplayHeight = stageHeight;
+        
+    }
 
     @Override
     public Node initializeView () {
@@ -208,7 +219,10 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
                     e.printStackTrace();
                     System.out.println("Issue saving when game ends");
                 }
-                
+                if (myLevelBoard.isLost())
+                    myEndScreen.setResultsText("YOU LOST");
+                else if (myLevelBoard.isWon())
+                    myEndScreen.setResultsText("YOU WON");
                 myEndScreen.setScene();
                 
 //                PopUpScreen gameOver = new PopUpScreen();

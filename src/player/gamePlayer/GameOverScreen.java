@@ -24,12 +24,14 @@ public class GameOverScreen implements GameScene {
     private Scene myScene;
     private Scene myGameSelectScene;
     private Game myGame;
+    private Text myResultsText;
     
     public GameOverScreen(Stage stage, Scene previousScene,Scene gameSelectionScene,Game game) {
         myStage=stage;
         myPreviousScene=previousScene;
         myGameSelectScene=gameSelectionScene;
         myGame=game;
+        myResultsText=new Text("");
         makeScene();
     }
 
@@ -37,15 +39,16 @@ public class GameOverScreen implements GameScene {
         GridPane grid = new GridPane();
         myScene=new Scene(grid);
         VBox vbox=new VBox(45);
-        //text should be "you win" or "you lose"
-        Button btn1=formatButton("Play Again",1.25);//go back to GamePlayerScreen
+        Button btn1=formatButton("Play Again",1.25);
         btn1.setOnAction(e->myStage.setScene(myPreviousScene));
-        Button btn2=formatButton("Select New Game",1.25);//choose new game from PlayerOpener
+        Button btn2=formatButton("Select New Game",1.25);
         btn2.setOnAction(e->myStage.setScene(myGameSelectScene));
-        Button btn3=formatButton("View High Scores",1.25);//open high scores again
+        Button btn3=formatButton("View High Scores",1.25);
         btn3.setOnAction(e->displayScores());
         
-        vbox.getChildren().addAll(formatText("WOOHOO",6.5),formatText("YOU WIN",3.0),btn1,btn2,btn3);
+        Text headerText=formatText("GAME OVER",6.5);
+        myResultsText=formatText(getResultsText(),3.5);
+        vbox.getChildren().addAll(headerText,myResultsText,btn1,btn2,btn3);
         vbox.setAlignment(Pos.CENTER);
         grid.add(vbox, 0, 0);
         grid.setAlignment(Pos.CENTER);
@@ -90,4 +93,12 @@ public class GameOverScreen implements GameScene {
         }
     }
     
+    public void setResultsText(String text) {
+        myResultsText.setText(text);
+    }
+    
+    private String getResultsText(){
+        //myResultsText,formatText()
+        return myResultsText.toString();
+    }
 }

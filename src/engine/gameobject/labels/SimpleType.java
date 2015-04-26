@@ -1,11 +1,10 @@
 package engine.gameobject.labels;
 
 import engine.fieldsetting.Settable;
-import engine.titles.Title;
 
 
 @Settable
-public class SimpleType implements Type, Title {
+public class SimpleType implements Type{
 
     private Type superType;
     private String myName;
@@ -62,32 +61,5 @@ public class SimpleType implements Type, Title {
             }
         }
         return false;
-    }
-
-    @Override
-    public int hashCode () {
-        return myName.hashCode();
-    }
-
-    @Override
-    public String getTitle () {
-        return myName;
-    }
-
-    @Override
-    public void setTitle (String title) {
-        myName = title;
-    }
-
-    @Override
-    public int getIndex () {
-        // TODO Auto-generated method stub
-        return index;
-    }
-
-    @Override
-    public void setIndex (int index) {
-        // TODO Auto-generated method stub
-        this.index = index;
     }
 }

@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import engine.titles.Title;
 import gae.editor.ObjectComponentEditor;
 
 
@@ -30,12 +29,11 @@ public class DraggableItem extends Region {
 //            this.getChildren().clear();
 //            this.getChildren().add(setFields(new HBox(),((Title) object).getTitle()));
 //        });
-        this.getChildren().add(setFields(new HBox(),((Title) object).getTitle()));
+        this.getChildren().add(setFields(new HBox(),GameObjectInformation.getInstance().getTitle(object)));
     }
 
     private HBox setFields (HBox newBox, String name) {
         Label label = new Label(name);
-
         label.setStyle("-fx-font-size: 30px;\n" +
                        "    -fx-font-weight: bold;\n" +
                        "    -fx-text-fill: #333333;\n" +

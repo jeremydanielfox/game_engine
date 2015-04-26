@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import engine.fieldsetting.Settable;
-import engine.titles.Title;
 import gameworld.GameWorld;
 
 
@@ -15,7 +14,7 @@ import gameworld.GameWorld;
  *
  */
 @Settable
-public class ConcreteLevelBoard extends Observable implements LevelBoard, Title {
+public class ConcreteLevelBoard extends Observable implements LevelBoard {
 private String myTitle="";
     private List<Level> myLevels;
     private int curLevelIndex;
@@ -90,29 +89,4 @@ private String myTitle="";
         }
         return null;
     }
-
-    @Override
-    public String getTitle () {
-        // TODO Auto-generated method stub
-        return myTitle;
-    }
-
-    @Override
-    public void setTitle (String title) {
-        // TODO Auto-generated method stub
-        myTitle = title;
-    }
-
-    @Override
-    public int getIndex () {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void setIndex (int existing) {
-        // TODO Auto-generated method stub
-        
-    }
-
 }

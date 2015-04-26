@@ -617,7 +617,6 @@
                           <myLength>0.0</myLength>
                         </engine.pathfinding.PathSegmentBezier>
                       </myPathSegments>
-                      <myIndex>0</myIndex>
                     </myPath>
                     <myTerrain>
                       <myMatrix>
@@ -1580,7 +1579,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -2129,7 +2127,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -2748,7 +2745,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -3297,7 +3293,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -3916,7 +3911,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -4465,7 +4459,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -5084,7 +5077,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -5633,7 +5625,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -6252,7 +6243,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -6801,7 +6791,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -7420,7 +7409,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -7969,7 +7957,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -8588,7 +8575,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -9137,7 +9123,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -9756,7 +9741,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -10305,7 +10289,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -10924,7 +10907,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -11473,7 +11455,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -12092,7 +12073,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -12641,7 +12621,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -12742,16 +12721,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1310</int>
-                    <int>337</int>
-                    <int>889</int>
-                    <int>1110</int>
-                    <int>652</int>
-                    <int>1163</int>
-                    <int>1247</int>
-                    <int>1098</int>
-                    <int>819</int>
-                    <int>116</int>
+                    <int>197</int>
+                    <int>901</int>
+                    <int>100</int>
+                    <int>1429</int>
+                    <int>1440</int>
+                    <int>569</int>
+                    <int>1413</int>
+                    <int>1063</int>
+                    <int>1864</int>
+                    <int>288</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -13285,7 +13264,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -13867,7 +13845,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -14449,7 +14426,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -15031,7 +15007,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -15613,7 +15588,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -16195,7 +16169,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -16777,7 +16750,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -17359,7 +17331,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -17941,7 +17912,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -18523,7 +18493,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -19127,6 +19096,8 @@
       </engine.game.ConcreteLevel>
     </myLevels>
     <curLevelIndex>0</curLevelIndex>
+    <isLost>false</isLost>
+    <isWon>false</isWon>
   </myLevelBoard>
   <myShop class="engine.shop.ShopModelSimple">
     <currentPlayer reference="../../myPlayer"/>

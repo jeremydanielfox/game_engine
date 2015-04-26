@@ -3,9 +3,11 @@ package gae.editor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import engine.fieldsetting.Settable;
+import engine.gameobject.units.Buff;
 
 
 /**
@@ -15,6 +17,7 @@ import engine.fieldsetting.Settable;
  */
 public abstract class Editor implements Edits {
     private Map<String, ArrayList<String>> myPropertiesMap;
+    private final static String COLLECTIONS_TYPE = "java.util.Collection<engine.gameobject.units.Buff>";
 
     public Editor () {
         myPropertiesMap =
@@ -31,6 +34,7 @@ public abstract class Editor implements Edits {
         for (Method method : methods) {
             // System.out.println(method.toString());
             Type parameterClass = method.getGenericParameterTypes()[0];
+            String das = parameterClass.getTypeName();
             if (parameterClass.equals(double.class) || parameterClass.equals(int.class)) {
                 System.out.println("double  " + getPropertyName(method.getName()));
                 root.addToNodes(new TreeNode(method, "SliderEditor"));
@@ -44,6 +48,9 @@ public abstract class Editor implements Edits {
                     System.out.println("String  " + getPropertyName(method.getName()));
                     root.addToNodes(new TreeNode(method, "TextEditor"));
                 }
+            }
+            else if (parameterClass.getTypeName().equals(COLLECTIONS_TYPE)) {
+                root.addToNodes(new TreeNode(method, "CollectionComponentEditor"));
             }
             else {
                 System.out.println(parameterClass.getTypeName() + ":");

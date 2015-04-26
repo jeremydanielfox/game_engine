@@ -1,7 +1,6 @@
 package gae.listView;
 
 import gae.backend.Placeable;
-import gae.editorView.DraggableFields;
 import gae.editorView.GameObjectInformation;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -32,22 +31,13 @@ public class ListViewUtilities {
      * @return
      */
     public static Node createCellContentWithIcon (Authorable authorable) {
-        if (authorable.getType().equals("Image")) { // image Case
-            DraggableFields container = (DraggableFields) authorable;
-            ImageView image = container.getImageView();
-            image.setFitHeight(THUMBNAIL_SIZE_VERTICAL);
-            image.setPreserveRatio(true);
-            return image;
-        }
-        else { // otherwise
-            HBox content = new HBox();
-            ImageView image = new ImageView(authorable.getImagePath());
-            image.setFitHeight(THUMBNAIL_SIZE_HORIZONTAL);
-            image.setPreserveRatio(true);
-            content.getChildren().addAll(image,
-                                         new Label(authorable.getName() + authorable.getID()));
-            return content;
-        }
+        HBox content = new HBox();
+        ImageView image = new ImageView(authorable.getImagePath());
+        image.setFitHeight(THUMBNAIL_SIZE_HORIZONTAL);
+        image.setPreserveRatio(true);
+        content.getChildren().addAll(image,
+                                     new Label(authorable.getName() + authorable.getID()));
+        return content;
     }
 
     public static void setEditableSelection (ListView<Authorable> list,

@@ -14,7 +14,7 @@ import engine.gameobject.weapon.Upgrade;
  * @author Danny Oh and Nathan Prabhu
  *
  */
-@Settable
+
 public class DamageBuff extends Buff implements DirectDamage {
 
     private double increment;

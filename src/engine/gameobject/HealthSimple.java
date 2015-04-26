@@ -1,6 +1,7 @@
 package engine.gameobject;
 
 import engine.fieldsetting.Settable;
+import engine.titles.Title;
 
 
 /**
@@ -10,15 +11,16 @@ import engine.fieldsetting.Settable;
  *
  */
 @Settable
-public class HealthSimple implements Health {
+public class HealthSimple implements Health, Title {
     private double myHealth;
     private double maxHealth;
-    
-    public HealthSimple(){
+    private String myTitle = "";
+
+    public HealthSimple () {
         this(0);
     }
-    
-    public HealthSimple(double health){
+
+    public HealthSimple (double health) {
         maxHealth = health;
         myHealth = maxHealth;
     }
@@ -44,7 +46,19 @@ public class HealthSimple implements Health {
         myHealth = maxHealth;
     }
 
-    public Health clone(){
+    public Health clone () {
         return new HealthSimple(maxHealth);
+    }
+
+    @Override
+    public String getTitle () {
+        // TODO Auto-generated method stub
+        return myTitle;
+    }
+
+    @Settable
+    @Override
+    public void setTitle (String title) {
+        myTitle = title;
     }
 }

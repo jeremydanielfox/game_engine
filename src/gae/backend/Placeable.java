@@ -42,8 +42,8 @@ public interface Placeable extends Serializable, Authorable {
     public Graphic getGraphic ();
 
     public GameObjectTag getTag ();
-
-    public Type getLabel ();
+    
+    public Type getLabel();
 
     public void setLocation (PointSimple point);
 
@@ -70,8 +70,8 @@ public interface Placeable extends Serializable, Authorable {
     public void setImagePath (String path);
 
     public void setGraphic (Graphic graphic);
-
-    public void setLabel (Type label);
+    
+    public void setLabel(Type label);
 
     public Object clone ();
 

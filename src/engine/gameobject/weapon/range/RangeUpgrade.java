@@ -3,11 +3,8 @@ package engine.gameobject.weapon.range;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
-import engine.observable.Observable;
 import engine.observable.Observer;
 
 

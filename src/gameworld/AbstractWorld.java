@@ -34,6 +34,11 @@ public class AbstractWorld implements GameWorld {
         initiateRangeEngine();
         myNodeToGameObjectMap = new HashMap<>();
     }
+    
+    @Settable
+    public void setObjects(List<GameObject> objects) {
+        myObjects = objects;
+    }
 
     /*
      * The private methods that follow is unofficial code:

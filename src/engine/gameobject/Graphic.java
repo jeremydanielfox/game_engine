@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import View.ViewUtil;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.fieldsetting.Settable;
+import engine.titles.Title;
 
 
 /**
@@ -16,12 +17,12 @@ import engine.fieldsetting.Settable;
  *
  */
 @Settable
-public class Graphic {
+public class Graphic implements Title {
 
     // note to self: need to change this image path default when using data files
     private static final String DEFAULT_IMAGE_PATH_PREFIX = "/images/";
     private static final String DEFAULT_IMAGE_NAME = "robertDuvall.jpg";
-
+    private String myTitle = "";
     private double myHeight;
     private double myWidth;
     private String myImageName;
@@ -146,6 +147,17 @@ public class Graphic {
                 new Point2D(myPoint.getX() - ViewUtil.getCenterOffsetX(myImageView),
                             myPoint.getY() - ViewUtil.getCenterOffsetY(myImageView));
         myRotator.rotate(myImageView, new PointSimple(centerOfMyImage), point);
+    }
+
+    @Override
+    public String getTitle () {
+        return myTitle;
+    }
+
+    @Settable
+    @Override
+    public void setTitle (String title) {
+        myTitle = title;
     }
 
 }

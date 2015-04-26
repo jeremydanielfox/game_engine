@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import gae.editor.ComponentEditor;
@@ -37,19 +38,26 @@ public class GameObjectEditorView implements UIObject {
     private SimpleEditor simpleEditor;
     private Class<?> clazz;
 
-    public GameObjectEditorView (Scene scene, Consumer<Object> consumer, BiConsumer<Class<?>, Object> biConsumer) {
+    public GameObjectEditorView (Scene scene,
+                                 Consumer<Object> consumer,
+                                 BiConsumer<Class<?>, Object> biConsumer) {
         simpleEditor = new SimpleEditor(DEFAULT_CLASS, biConsumer);
         clazz = DEFAULT_CLASS;
         init(scene, consumer, biConsumer);
     }
 
-    public GameObjectEditorView (Scene scene, Consumer<Object> consumer, BiConsumer<Class<?>, Object> biConsumer, Class<?> klass) {
+    public GameObjectEditorView (Scene scene,
+                                 Consumer<Object> consumer,
+                                 BiConsumer<Class<?>, Object> biConsumer,
+                                 Class<?> klass) {
         simpleEditor = new SimpleEditor(klass, biConsumer);
         clazz = klass;
         init(scene, consumer, biConsumer);
     }
 
-    private void init (Scene scene, Consumer<Object> consumer, BiConsumer<Class<?>, Object> biConsumer) {
+    private void init (Scene scene,
+                       Consumer<Object> consumer,
+                       BiConsumer<Class<?>, Object> biConsumer) {
         root = new Group();
         root.setManaged(false);
         this.scene = scene;
@@ -71,7 +79,6 @@ public class GameObjectEditorView implements UIObject {
 
     private BorderPane setUpBorder () {
         BorderPane border = new BorderPane();
-
         border.setCenter(setUpAnchor());
         border.setRight(setUpAccordion());
         LibraryList library = new LibraryList(scene);

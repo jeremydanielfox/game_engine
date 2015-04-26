@@ -98,7 +98,7 @@ public class GameWriterConcrete2 extends Application {
 		levelOne.addTimer(t);
 		board.addLevel(levelOne);
 		board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3,
-				list, new FixedWorld(), new StoryBoard()));
+				list, new FixedWorld(13,13), new StoryBoard()));
 
 		return board;
 	}

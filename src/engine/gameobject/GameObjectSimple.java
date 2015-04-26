@@ -1,12 +1,10 @@
 package engine.gameobject;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import engine.fieldsetting.Settable;
 import engine.gameobject.behaviors.Behavior;
 import engine.gameobject.behaviors.BehaviorTracker;
-import engine.gameobject.labels.Type;
 import engine.gameobject.labels.SimpleType;
+import engine.gameobject.labels.Type;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
 import engine.gameobject.units.BuffType;
@@ -17,6 +15,7 @@ import engine.pathfinding.EndOfPathException;
 import engine.shop.RangeDisplay;
 import engine.shop.tag.GameObjectTag;
 import engine.shop.tag.GameObjectTagSimple;
+import engine.titles.Title;
 import gameworld.ObjectCollection;
 
 
@@ -27,7 +26,7 @@ import gameworld.ObjectCollection;
  *
  */
 @Settable
-public class GameObjectSimple implements GameObject {
+public class GameObjectSimple implements GameObject, Title {
     private Type myLabel;
     private PointSimple myPoint;
     private Health myHealth;
@@ -39,7 +38,7 @@ public class GameObjectSimple implements GameObject {
     private Collider myCollider;
     private RangeDisplay rangeDisplay;
     private BehaviorTracker myBehaviors;
-    
+    private String myTitle = "";
 
     public GameObjectSimple () {
         myLabel = new SimpleType();
@@ -65,14 +64,15 @@ public class GameObjectSimple implements GameObject {
     public void receiveBuff (Buff buff) {
         myBuffs.receiveBuff(buff, this);
     }
-    
-    public void addImmunity(Class<? extends Buff> immunity, BuffType buffType){
+
+    public void addImmunity (Class<? extends Buff> immunity, BuffType buffType) {
         myBuffs.addImmunity(immunity, buffType);
     }
-/*
- * Firing methods follow
- */
-    
+
+    /*
+     * Firing methods follow
+     */
+
     @Override
     @Settable
     public void setWeapon (Weapon weapon) {
@@ -81,8 +81,8 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public void fire (ObjectCollection world, GameObject target) {
-         myWeapon.fire(world, target, myPoint);
-         myGraphic.rotate(target.getPoint());
+        myWeapon.fire(world, target, myPoint);
+        myGraphic.rotate(target.getPoint());
     }
 
     @Override
@@ -112,15 +112,15 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public void collide (GameObject target) {
-         myCollider.collide(target);
-         changeHealth(-1);
+        myCollider.collide(target);
+        changeHealth(-1);
     }
 
     /*
      * Prototype methods follow
      */
     @Override
-    public RangeDisplay getRangeDisplay(){
+    public RangeDisplay getRangeDisplay () {
         return new RangeDisplay(myTag.getName(), myGraphic.clone(), myWeapon.getRangeProperty());
     }
 
@@ -156,7 +156,7 @@ public class GameObjectSimple implements GameObject {
     @Override
     public double getValue () {
         return 10;
-        //return myWeapon.getValue();
+        // return myWeapon.getValue();
     }
 
     /*
@@ -165,7 +165,7 @@ public class GameObjectSimple implements GameObject {
     @Override
     public void move () throws EndOfPathException {
         PointSimple point = myMover.move(myPoint);
-         myGraphic.rotate(point);
+        myGraphic.rotate(point);
         setPoint(new PointSimple(point.getX(), point.getY()));
     }
 
@@ -184,29 +184,29 @@ public class GameObjectSimple implements GameObject {
         myMover.setSpeed(speed);
     }
 
-/*
- * EndBehaviorful methods follow
- */
-    
-    public void addOnDeathBehavior(Behavior behavior){
+    /*
+     * EndBehaviorful methods follow
+     */
+
+    public void addOnDeathBehavior (Behavior behavior) {
         myBehaviors.addOnDeath(behavior);
     }
-    
-    public void clearDeathBehavior(){
+
+    public void clearDeathBehavior () {
         myBehaviors.clearDeath();
     }
-    
-    public void addEndOfPathBehavior(Behavior behavior){
+
+    public void addEndOfPathBehavior (Behavior behavior) {
         myBehaviors.addEndOfPath(behavior);
     }
-    
-    public void clearEndOfPathBehavior(){
+
+    public void clearEndOfPathBehavior () {
         myBehaviors.clearEndOfPath();
     }
-    
-/*
- * GameObject specific methods follow
- */
+
+    /*
+     * GameObject specific methods follow
+     */
 
     @Override
     public Type getLabel () {
@@ -285,13 +285,30 @@ public class GameObjectSimple implements GameObject {
         }
         catch (EndOfPathException e) {
             myBehaviors.onEndOfPath(world, this);
-            //Note that something doesn't always have to die at end of path, but if it doesn't die, it may
-            //keep doing endofpath over and over again
+            // Note that something doesn't always have to die at end of path, but if it doesn't die,
+            // it may
+            // keep doing endofpath over and over again
         }
     }
-    
+
     @Override
-    public void onDeath(ObjectCollection world){
+    public void onDeath (ObjectCollection world) {
         myBehaviors.onDeath(world, this);
+    }
+
+    @Override
+    public String toString () {
+        return "GameObject: " + myLabel.getName();
+    }
+
+    @Override
+    public String getTitle () {
+        return myTitle;
+    }
+
+    @Settable
+    @Override
+    public void setTitle (String title) {
+        myTitle = title;
     }
 }

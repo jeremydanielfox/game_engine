@@ -4,6 +4,7 @@ import java.util.List;
 import View.ButtonWrapper;
 import engine.fieldsetting.Settable;
 import engine.shop.ShopModel;
+import engine.titles.Title;
 
 
 /**
@@ -13,7 +14,7 @@ import engine.shop.ShopModel;
  *
  */
 @Settable
-public class ConcreteGame implements Game {
+public class ConcreteGame implements Game, Title {
 
     private static final String DEFAULT_NAME = "GameName";
     private static final String DEFAULT_AUTHOR = "Sierra";
@@ -58,47 +59,46 @@ public class ConcreteGame implements Game {
     }
 
     @Settable
-    public void setName(String name){
+    public void setName (String name) {
         myGameName = name;
     }
-    
+
     @Settable
-    public void setAuthor(String author){
+    public void setAuthor (String author) {
         myAuthor = author;
     }
-    
-    
-    public String getAuthor(){
+
+    public String getAuthor () {
         return myAuthor;
     }
-    
+
     @Settable
-    public void setDescription(String description){
+    public void setDescription (String description) {
         myDescription = description;
     }
-    
-    public String getDescription(){
+
+    public String getDescription () {
         return myDescription;
     }
-    
+
     @Settable
-    public void setType(String type){
+    public void setType (String type) {
         myType = type;
     }
-    
-    public String getType(){
+
+    public String getType () {
         return myType;
     }
-    
+
     @Settable
-    public void setInstructions(String instruct){
+    public void setInstructions (String instruct) {
         myInstructions = instruct;
     }
-    
-    public String getInstructions(){
+
+    public String getInstructions () {
         return myInstructions;
     }
-    
+
     @Override
     public void update () {
         myLevelBoard.update();
@@ -147,6 +147,17 @@ public class ConcreteGame implements Game {
     @Override
     public String getGameName () {
         return myGameName;
+    }
+
+    @Override
+    public String getTitle () {
+        return myGameName;
+    }
+
+    @Settable
+    @Override
+    public void setTitle (String title) {
+        myGameName = title;
     }
 
 }

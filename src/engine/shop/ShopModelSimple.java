@@ -87,14 +87,17 @@ public class ShopModelSimple implements ShopModel {
     }
 
     @Override
-    public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject) {
+    public List<UpgradeGraphic> getUpgradeGraphics (GameObject gameObject) {
         currentGameObject = gameObject;
         List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
-        List<ItemGraphic> upgradeGraphics = new ArrayList<ItemGraphic>();
+        List<UpgradeGraphic> upgradeGraphics = new ArrayList<>();
         upgradeMap.clear();
         bundles.forEach(bundle -> {
-            upgradeMap.put(bundle.getName(), bundle);
-            upgradeGraphics.add(new ItemGraphic(bundle.getName(), bundle.getShopGraphic()));
+            String name = bundle.getName();
+            upgradeMap.put(name, bundle);
+            ItemGraphic graphic = new ItemGraphic(name, bundle.getShopGraphic());
+            graphic.unGlow();
+            upgradeGraphics.add(new UpgradeGraphic(graphic, canPurchase(name), bundle.isFinalUpgrade()));
         });
         return upgradeGraphics;
     }
@@ -180,6 +183,32 @@ public class ShopModelSimple implements ShopModel {
     public boolean checkPlacement (String name, PointSimple location) {
         return myGameWorld.isPlaceable(((GameObject) purchasableMap.get(name)).getGraphic().getNode(),
                                        location);
+    }
+    
+    
+    public class UpgradeGraphic{
+        
+        private ItemGraphic graphic;
+        private boolean canAfford;
+        private boolean isFinal;
+
+        private UpgradeGraphic (ItemGraphic graphic, boolean canAfford, boolean isFinal){
+            this.graphic = graphic;
+            this.canAfford = canAfford;
+            this.isFinal = isFinal;
+        }
+        
+        public ItemGraphic getGraphic(){
+            return graphic;
+        }
+        
+        public boolean canAfford(){
+            return canAfford;
+        }
+        
+        public boolean isFinal(){
+            return isFinal;
+        }
     }
 
 }

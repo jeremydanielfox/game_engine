@@ -3,10 +3,12 @@ package engine.shop;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.shop.ShopModelSimple.ItemInfo;
+import engine.shop.ShopModelSimple.UpgradeGraphic;
 import gameworld.GameWorld;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -25,6 +27,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import View.ViewUtil;
 
 
@@ -49,6 +52,8 @@ public class ShopView extends Parent {
     private Scene scene;
     private Pane pane;
 
+    private Stack<Node> infoBoxStack = new Stack<>();
+
     private FlowPane shopIcons;
     private StackPane infoBox;
     private GameObjectSelector selector;
@@ -67,9 +72,9 @@ public class ShopView extends Parent {
         shopContainer.setMaxWidth(SHOP_WIDTH);
         shopIcons = new FlowPane();
         infoBox = new StackPane();
-        selector = new GameObjectSelector(this::displayUpgrades, this::clearInfoBox, pane);
-        
-        
+        selector =
+                new GameObjectSelector(this::displayUpgrades, this::removeFromInfoBox, pane);
+
         shopContainer.getChildren().addAll(shopIcons, infoBox);
 
         // add Icons
@@ -83,9 +88,6 @@ public class ShopView extends Parent {
         getChildren().add(shopContainer);
     }
 
-    private void clearInfoBox () {
-        infoBox.getChildren().clear();
-    }
 
     // TODO this should only be for GameObject ItemGraphics
     // TODO probably shouldn't hard-code MouseClick as command type
@@ -93,14 +95,19 @@ public class ShopView extends Parent {
         shopIcons.setHgap(5);
         shopIcons.setVgap(5);
         List<ItemGraphic> icons = model.getItemGraphics();
-        icons.forEach(gameObjectIcon -> {
-            gameObjectIcon.setOnMouseEntered(mouseEvent -> displayGameObjectInfo(gameObjectIcon));
-            gameObjectIcon.setOnMouseExited(mouseEvent -> infoBox.getChildren().clear());
-            gameObjectIcon.setOnMouseClicked(mouseEvent -> {
+        icons.forEach(icon -> {
+            Node base = makeGameObjectInfo(icon);
+            icon.setOnMouseEntered(mouseEvent -> {
+                addToInfoBox(base);
+                // clearInfoBox();
+                // infoBox.getChildren().add(base);
+            });
+            icon.setOnMouseExited(mouseEvent -> removeFromInfoBox());
+            icon.setOnMouseClicked(mouseEvent -> {
                 RangeDisplay transition =
-                        model.getRangeDisplay(gameObjectIcon.getName());
+                        model.getRangeDisplay(icon.getName());
                 Point2D location = ViewUtil.getMouseSceneLoc(mouseEvent, transition.getNode());
-                initializeTransition(model.getRangeDisplay(gameObjectIcon.getName()),
+                initializeTransition(model.getRangeDisplay(icon.getName()),
                                      location);
             });
 
@@ -108,7 +115,26 @@ public class ShopView extends Parent {
         shopIcons.getChildren().addAll(icons);
     }
 
-    private void displayGameObjectInfo (ItemGraphic icon) {
+    private void addToInfoBox (Node base) {
+        infoBoxStack.push(base);
+        readInfoBoxStack();
+    }
+
+    private void removeFromInfoBox () {
+        if (!infoBoxStack.isEmpty()) {
+            infoBoxStack.pop();
+        }
+        readInfoBoxStack();
+    }
+
+    private void readInfoBoxStack () {
+        infoBox.getChildren().clear();
+        if (!infoBoxStack.isEmpty()) {
+            infoBox.getChildren().add(infoBoxStack.peek());
+        }
+    }
+
+    private Node makeGameObjectInfo (ItemGraphic icon) {
         VBox base = new VBox();
         base.setSpacing(10);
         base.setPadding(new Insets(10, 10, 10, 10));
@@ -119,8 +145,7 @@ public class ShopView extends Parent {
         base.getChildren().addAll(labels.values());
         Label name = labels.get(ItemInfo.NAME);
         name.setStyle("-fx-font-weight: bold");
-        clearInfoBox();
-        infoBox.getChildren().add(base);
+        return base;
     }
 
     private Map<ItemInfo, Label> makeInfoLabels (Map<ItemInfo, String> infoMap) {
@@ -144,7 +169,7 @@ public class ShopView extends Parent {
      * @param gameObject selected
      */
     public void displayUpgrades (GameObject gameObject) {
-        clearInfoBox();
+        removeFromInfoBox();
         VBox base = new VBox();
         base.setSpacing(10);
         base.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.8),
@@ -152,25 +177,32 @@ public class ShopView extends Parent {
         Label name = new Label(gameObject.getName());
         base.getChildren().add(name);
 
-        List<ItemGraphic> upgrades = model.getUpgradeGraphics(gameObject);
-        for (ItemGraphic upgrade : upgrades) {
+        List<UpgradeGraphic> upgrades = model.getUpgradeGraphics(gameObject);
+        for (UpgradeGraphic upgrade : upgrades) {
             base.getChildren().add(makeUpgradePanel(upgrade));
         }
-        infoBox.getChildren().add(base);
+        addToInfoBox(base);
     }
 
-    private StackPane makeUpgradePanel (ItemGraphic upgrade) {
+    private StackPane makeUpgradePanel (UpgradeGraphic upgrade) {
+        ItemGraphic graphic = upgrade.getGraphic();
+        
         StackPane upgradePanel = new StackPane();
         upgradePanel.setOnMouseEntered(event -> upgradePanel.setCursor(Cursor.HAND));
-        upgradePanel.setOnMouseClicked(event -> model.purchaseUpgrade(upgrade.getName(),
-                                                                      this::displayUpgrades));
-
-        upgradePanel.setBackground(new Background(new BackgroundFill(Color.LAWNGREEN, null, null)));
+        upgradePanel.setOnMouseClicked(event -> {
+            if (!upgrade.isFinal() && upgrade.canAfford()){
+                model.purchaseUpgrade(graphic.getName(),this::displayUpgrades);
+            }
+        });
+        
+        Paint panelColor = setPanelColor(upgrade);
+        
+        upgradePanel.setBackground(new Background(new BackgroundFill(panelColor, null, null)));
 
         VBox entries = new VBox();
-        Map<ItemInfo, Label> labels = makeInfoLabels(model.getInfo(upgrade.getName()));
+        Map<ItemInfo, Label> labels = makeInfoLabels(model.getInfo(graphic.getName()));
         HBox first = new HBox();
-        first.getChildren().addAll(upgrade.getGraphic(), labels.get(ItemInfo.NAME));
+        first.getChildren().addAll(graphic, labels.get(ItemInfo.NAME));
         Label second = labels.get(ItemInfo.DESCRIPTION);
         Label third = labels.get(ItemInfo.PRICE);
         third.setTextFill(Color.YELLOW);
@@ -179,6 +211,18 @@ public class ShopView extends Parent {
         upgradePanel.getChildren().add(entries);
 
         return upgradePanel;
+    }
+    
+    private Paint setPanelColor(UpgradeGraphic upgrade){
+        if (!upgrade.canAfford()) {
+            return Color.RED;
+        }
+        else if (upgrade.isFinal()) { 
+            return Color.LAWNGREEN;
+        }
+        else { // normal upgrade
+           return  Color.MEDIUMSEAGREEN;
+        }
     }
 
     private void bindCursor (Point2D initial, Node node) {

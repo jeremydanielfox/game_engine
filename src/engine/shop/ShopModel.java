@@ -8,6 +8,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.Purchasable;
 import engine.shop.ShopModelSimple.ItemInfo;
+import engine.shop.ShopModelSimple.UpgradeGraphic;
 import gameworld.GameWorld;
 
 
@@ -35,7 +36,7 @@ public interface ShopModel {
      * @param gameObject
      * @return a list of ItemGraphics to be displayed in the shop
      */
-    public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject);
+    public List<UpgradeGraphic> getUpgradeGraphics (GameObject gameObject);
 
     /**
      * Purchases the named GameObject and places it at the given position on the screen

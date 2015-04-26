@@ -5,8 +5,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import engine.fieldsetting.Settable;
 import engine.gameobject.behaviors.Behavior;
 import engine.gameobject.behaviors.BehaviorTracker;
-import engine.gameobject.labels.Label;
-import engine.gameobject.labels.SimpleLabel;
+import engine.gameobject.labels.Type;
+import engine.gameobject.labels.SimpleType;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
 import engine.gameobject.units.BuffType;
@@ -28,7 +28,7 @@ import gameworld.ObjectCollection;
  */
 @Settable
 public class GameObjectSimple implements GameObject {
-    private Label myLabel;
+    private Type myLabel;
     private PointSimple myPoint;
     private Health myHealth;
     private Mover myMover;
@@ -42,7 +42,7 @@ public class GameObjectSimple implements GameObject {
     
 
     public GameObjectSimple () {
-        myLabel = new SimpleLabel();
+        myLabel = new SimpleType();
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();
@@ -121,7 +121,7 @@ public class GameObjectSimple implements GameObject {
      */
     @Override
     public RangeDisplay getRangeDisplay(){
-        return new RangeDisplay(myTag.getName(), myGraphic.clone(), myWeapon.getRange());
+        return new RangeDisplay(myTag.getName(), myGraphic.clone(), myWeapon.getRangeProperty());
     }
 
     // TODO: Tag cloning not done, Weapon upgrade cloning not done
@@ -209,13 +209,13 @@ public class GameObjectSimple implements GameObject {
  */
 
     @Override
-    public Label getLabel () {
+    public Type getLabel () {
         return myLabel;
     }
 
     @Override
     @Settable
-    public void setLabel (Label label) {
+    public void setLabel (Type label) {
         myLabel = label;
     }
 

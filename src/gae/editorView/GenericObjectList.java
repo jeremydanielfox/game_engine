@@ -11,14 +11,12 @@ import gae.listView.ListViewUtilities;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
-import javafx.scene.input.MouseEvent;
 
 
 public class GenericObjectList {
@@ -55,8 +53,13 @@ public class GenericObjectList {
                 ContextMenu contextmenu = new ContextMenu();
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
-                    objectEditor.popNewEditor(classType + " " + count++);
-                });
+                    if (klass.getSimpleName().equals("Collider")) {
+                        new ColliderEditorOpener();
+                    }
+                        else {
+                            objectEditor.popNewEditor(classType + " " + count++);
+                        }
+                    });
                 contextmenu.getItems().add(item);
                 contextmenu.show(titledPane, me.getSceneX(), me.getSceneY());
             }
@@ -79,12 +82,6 @@ public class GenericObjectList {
             }
         });
         return list;
-    }
-
-    private EventHandler<MouseEvent> unselect (ListView<?> list) {
-        return e -> {
-            list.getSelectionModel().clearSelection();
-        };
     }
 
     private String getType () {

@@ -1,5 +1,6 @@
 package musician;
 
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +32,8 @@ public class MusicianSimple implements Musician {
     private Map<Object, Music> myMusic;
     private boolean muted;
     private double savedVolume;
+    private Media rayGunSound, laserSound, gunSound;
+    private MediaPlayer rayGun, laser, gun;
 
     /*
      * try & catch blocks implemented for methods with MediaPlayer in case it isn't instantiated yet
@@ -41,6 +44,14 @@ public class MusicianSimple implements Musician {
         myMusic = new HashMap<>();
         muted = false;
         savedVolume = 0;
+
+        rayGunSound = new Media(Paths.get("src/musician/raygun.wav").toUri().toString());
+        laserSound = new Media(Paths.get("src/musician/laser.wav").toUri().toString());
+        gunSound = new Media(Paths.get("src/musician/gun.wav").toUri().toString());
+
+        rayGun = new MediaPlayer(rayGunSound);
+        laser = new MediaPlayer(laserSound);
+        gun = new MediaPlayer(gunSound);
     }
 
     /**
@@ -132,5 +143,33 @@ public class MusicianSimple implements Musician {
         catch (Exception e) {
             /* does nothing if myMusician is not initialized */
         }
+    }
+
+    /**
+     * Preset sounds that can are also settable and thus customizable
+     */
+
+    public void rayGun () {
+        rayGun.play();
+    }
+
+    public void setRayGun (Music m) {
+        rayGunSound = m.getMusic();
+    }
+
+    public void laser () {
+        laser.play();
+    }
+
+    public void setLaser (Music m) {
+        laserSound = m.getMusic();
+    }
+
+    public void gun () {
+        gun.play();
+    }
+
+    public void setGun (Music m) {
+        gunSound = m.getMusic();
     }
 }

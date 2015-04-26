@@ -68,20 +68,16 @@
                           <engine.gameobject.test.ProjectileLabel>
                             <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
-                              <index>0</index>
                             </superType>
                             <myName>Projectile</myName>
-                            <index>0</index>
                           </engine.gameobject.test.ProjectileLabel>
                           <map>
                             <entry>
                               <engine.gameobject.test.EnemyLabel>
                                 <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
-                                  <index>0</index>
                                 </superType>
                                 <myName>Enemy</myName>
-                                <index>0</index>
                               </engine.gameobject.test.EnemyLabel>
                               <engine.interactions.BuffImparter/>
                             </entry>
@@ -96,20 +92,16 @@
                           <engine.gameobject.test.TowerLabel>
                             <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
-                              <index>0</index>
                             </superType>
                             <myName>Tower</myName>
-                            <index>0</index>
                           </engine.gameobject.test.TowerLabel>
                           <map>
                             <entry>
                               <engine.gameobject.test.EnemyLabel>
                                 <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
-                                  <index>0</index>
                                 </superType>
                                 <myName>Enemy</myName>
-                                <index>0</index>
                               </engine.gameobject.test.EnemyLabel>
                               <engine.interactions.ShootAt/>
                             </entry>
@@ -1058,10 +1050,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -1606,10 +1596,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -2224,10 +2212,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -2772,10 +2758,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -3390,10 +3374,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -3938,10 +3920,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -4556,10 +4536,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -5104,10 +5082,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -5722,10 +5698,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -6270,10 +6244,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -6888,10 +6860,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -7436,10 +7406,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -8054,10 +8022,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -8602,10 +8568,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -9220,10 +9184,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -9768,10 +9730,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -10386,10 +10346,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -10934,10 +10892,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -11552,10 +11508,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -12100,10 +12054,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -12721,16 +12673,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>197</int>
-                    <int>901</int>
-                    <int>100</int>
-                    <int>1429</int>
-                    <int>1440</int>
-                    <int>569</int>
-                    <int>1413</int>
-                    <int>1063</int>
-                    <int>1864</int>
-                    <int>288</int>
+                    <int>905</int>
+                    <int>2055</int>
+                    <int>1254</int>
+                    <int>2005</int>
+                    <int>201</int>
+                    <int>2183</int>
+                    <int>1604</int>
+                    <int>599</int>
+                    <int>1729</int>
+                    <int>1707</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -12743,10 +12695,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -13324,10 +13274,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -13905,10 +13853,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -14486,10 +14432,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -15067,10 +15011,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -15648,10 +15590,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -16229,10 +16169,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -16810,10 +16748,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -17391,10 +17327,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -17972,10 +17906,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -18607,20 +18539,16 @@
                 <engine.gameobject.test.ProjectileLabel>
                   <superType class="engine.gameobject.labels.TypeBase">
                     <myName>Base</myName>
-                    <index>0</index>
                   </superType>
                   <myName>Projectile</myName>
-                  <index>0</index>
                 </engine.gameobject.test.ProjectileLabel>
                 <map>
                   <entry>
                     <engine.gameobject.test.EnemyLabel>
                       <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
-                        <index>0</index>
                       </superType>
                       <myName>Enemy</myName>
-                      <index>0</index>
                     </engine.gameobject.test.EnemyLabel>
                     <engine.interactions.BuffImparter/>
                   </entry>
@@ -18635,20 +18563,16 @@
                 <engine.gameobject.test.TowerLabel>
                   <superType class="engine.gameobject.labels.TypeBase">
                     <myName>Base</myName>
-                    <index>0</index>
                   </superType>
                   <myName>Tower</myName>
-                  <index>0</index>
                 </engine.gameobject.test.TowerLabel>
                 <map>
                   <entry>
                     <engine.gameobject.test.EnemyLabel>
                       <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
-                        <index>0</index>
                       </superType>
                       <myName>Enemy</myName>
-                      <index>0</index>
                     </engine.gameobject.test.EnemyLabel>
                     <engine.interactions.ShootAt/>
                   </entry>

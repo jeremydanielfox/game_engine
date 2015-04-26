@@ -10,9 +10,7 @@ public class TestWeapon extends BasicWeapon{
     
     public TestWeapon(int type, TestTower tower){
         super();
-        //setProjectile(tower);
         setFiringRate(.5);
-        setProjectile(new TestProjectile(type));
         setTree(new TestForest());
         if (type == 1){
             setProjectile(tower);
@@ -22,8 +20,6 @@ public class TestWeapon extends BasicWeapon{
             setProjectile(new TestProjectile(type));
             setRange(60);
         }
-        
-
         if (type == 2){
             setProjectile(new TestProjectile(type));
             setRange(60);

@@ -3,6 +3,7 @@ package gae.gameView;
 import engine.fieldsetting.Settable;
 import engine.game.Game;
 import engine.game.LevelBoard;
+import engine.shop.ShopModelSimple;
 import gae.editor.EditingParser;
 // import gae.backend.GameManager;
 import gae.openingView.UIMediator;
@@ -83,6 +84,9 @@ public class GameView implements UIMediator {
             for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(g.getClass().getName()), Settable.class)) {
                 if (m.getName().equals("setLevelBoard")) {
                     m.invoke(g, levelBoard);
+                }
+                if (m.getName().equals("setShop")) {
+                    m.invoke(g, new ShopModelSimple());
                 }
             } 
         }

@@ -29,8 +29,8 @@ import gameworld.StructurePlacementException;
 public class ShopModelSimple implements ShopModel {
     private Player currentPlayer;
     private GameWorld myGameWorld;
-    private Map<String, Prototype<GameObject>> prototypeMap;
-    private Map<String, UpgradeBundle> upgradeMap;
+    private Map<String, Prototype<GameObject>> prototypeMap = new HashMap<>();
+    private Map<String, UpgradeBundle> upgradeMap = new HashMap<>();
     private final double markup;
     private GameObject currentGameObject;
 

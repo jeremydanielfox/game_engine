@@ -12,6 +12,7 @@ import gae.gridView.LevelView;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
 import gae.waveeditor.WaveEditor;
+import gameworld.GameWorld;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -81,6 +82,11 @@ public class CentralTabView implements UIObject {
     }
 
     private void createNewLevel () {
+        levelView = new LevelView();
+        Pane levelViewPane = levelView.getBorder(scene);
+        gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
+        GameWorld nextWorld = gameWorldFactory.createGameWorld();
+        
         Level levelData = null;
         StoryBoard sb = new StoryBoard();
         List<Method> levelMethods;
@@ -97,6 +103,12 @@ public class CentralTabView implements UIObject {
                 if (m.getName().equals("setStoryBoard")) {
                     m.invoke(levelData, sb);
                 }
+                if (m.getName().equals("setGameWorld")) {
+                    m.invoke(levelData, nextWorld);
+                }
+                if (m.getName().equals("setImagePath")) {
+                    m.invoke(levelData, levelView.getBackgroundImagePath());
+                }
             }   
         }
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException e) {
@@ -104,9 +116,6 @@ public class CentralTabView implements UIObject {
         }
         
         game.getLevelBoard().addLevel(levelData);
-        levelView = new LevelView();
-        Pane levelViewPane = levelView.getBorder(scene);
-        gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
         WaveEditor waves = new WaveEditor(sb, gameWorldFactory.createGameWorld());
         LevelTabSet newLevel =
                 new LevelTabSet(levelViewPane,

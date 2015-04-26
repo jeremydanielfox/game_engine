@@ -28,7 +28,7 @@ public class LevelTabSet {
         Tab waveTab = new Tab("Waves");
         waveTab.setContent(waves);
         waveTab.setClosable(false);
-
+        
         baseNode.getTabs().addAll(worldTab, waveTab);
     }
 

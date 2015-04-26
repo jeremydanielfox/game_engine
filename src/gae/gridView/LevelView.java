@@ -250,7 +250,10 @@ public class LevelView {
     }
     
     public ObjectProperty<Dimension> getGridDimensionProperty() {
-        return gridSizeProperty;
-        
+        return gridSizeProperty;    
+    }
+    
+    public String getBackgroundImagePath() {
+        return DEFAULT_IMAGE_PATH;
     }
 }

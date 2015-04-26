@@ -79,7 +79,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     @Override
     public void initializeGameWorld () {
         setCurrentBackground();
-        myHeadsUp = new HUD(myGame.getLevelBoard().getGameWorld(), myPane, myGame.getShop());
+        myHeadsUp = new HUD(myPane, myGame.getShop());
         addControlButtons();
         for (Displayable d : myGame.getPlayer().getDisplayables()) {
             myHeadsUp.addPairedDisplay(d);

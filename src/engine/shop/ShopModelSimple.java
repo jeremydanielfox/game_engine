@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import engine.fieldsetting.Settable;
 import engine.game.Player;
 import engine.gameobject.GameObject;
@@ -126,6 +127,12 @@ public class ShopModelSimple implements ShopModel {
         }
         return false;
     }
+    
+    @Override
+    public void sellGameObject (GameObject obj) {
+        currentPlayer.getWallet().deposit(obj.getValue());
+        //myGameWorld.
+    }
 
     /**
      * Applies an upgrade to the given GameObject and subtracts the appropriate amount from the
@@ -183,6 +190,10 @@ public class ShopModelSimple implements ShopModel {
     public boolean checkPlacement (String name, PointSimple location) {
         return myGameWorld.isPlaceable(((GameObject) purchasableMap.get(name)).getGraphic().getNode(),
                                        location);
+    }
+    
+    public GameObject getObjectFromNode (Node node) {
+        return myGameWorld.getObjectFromNode(node);
     }
     
     

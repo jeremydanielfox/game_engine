@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.Purchasable;
@@ -78,4 +79,13 @@ public interface ShopModel {
      * @return true if the object is placable
      */
     public boolean checkPlacement (String name, PointSimple location);
+
+    /**
+     * Sells GameObject by removing it from GameWorld and depositing value into Player's account
+     * @param obj
+     */
+    public void sellGameObject (GameObject obj);
+
+    
+    public GameObject getObjectFromNode (Node node);
 }

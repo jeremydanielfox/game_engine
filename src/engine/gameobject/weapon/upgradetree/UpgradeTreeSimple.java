@@ -52,8 +52,8 @@ public class UpgradeTreeSimple implements UpgradeTree {
     public List<UpgradeBundle> getNextUpgrades () {
         return (current == null) ? Arrays.asList(markFinal()) : Arrays.asList(current);
     }
-    
-    private BuildableBundle markFinal(){
+
+    private BuildableBundle markFinal () {
         last.markFinalUpgrade();
         return last;
     }
@@ -64,7 +64,7 @@ public class UpgradeTreeSimple implements UpgradeTree {
     }
 
     private double traverseActives (BuildableBundle active) {
-        if (active.equals(current)) { return active.getValue(); }
+        if (active == null || active.equals(current)) { return 0; }
         return active.getValue() + traverseActives(active.getNext());
     }
 

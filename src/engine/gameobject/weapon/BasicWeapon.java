@@ -55,6 +55,7 @@ public class BasicWeapon implements Weapon{
         clone.setFiringStrategy(myFiringStrategy);
         clone.setProjectile(myProjectile);
         clone.setTree(tree.clone());
+        clone.setValue(value);
         return clone;
     }
 
@@ -170,7 +171,8 @@ public class BasicWeapon implements Weapon{
 
     @Override
     public double getValue () {
-        return (tree == null) ? value : tree.getValue();
+        double treeValue = (tree == null) ? 0 : tree.getValue();
+        return value + treeValue;
     }
 
     @Override

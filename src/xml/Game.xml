@@ -12721,16 +12721,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>428</int>
-                    <int>1768</int>
-                    <int>1705</int>
-                    <int>180</int>
-                    <int>1935</int>
-                    <int>277</int>
-                    <int>1511</int>
-                    <int>883</int>
-                    <int>486</int>
-                    <int>1858</int>
+                    <int>1670</int>
+                    <int>66</int>
+                    <int>2238</int>
+                    <int>3</int>
+                    <int>2195</int>
+                    <int>1277</int>
+                    <int>130</int>
+                    <int>1078</int>
+                    <int>42</int>
+                    <int>362</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

@@ -16,6 +16,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -59,8 +60,7 @@ public class ShopView extends Parent {
     private GameObjectSelector selector;
     private GameWorld world;
 
-    public ShopView (GameWorld world, ShopModel model, Pane pane) {
-        this.world = world;
+    public ShopView (ShopModel model, Pane pane) {
         this.model = model;
         this.pane = pane;
         initialize();
@@ -87,7 +87,6 @@ public class ShopView extends Parent {
 
         getChildren().add(shopContainer);
     }
-
 
     // TODO this should only be for GameObject ItemGraphics
     // TODO probably shouldn't hard-code MouseClick as command type
@@ -181,22 +180,27 @@ public class ShopView extends Parent {
         for (UpgradeGraphic upgrade : upgrades) {
             base.getChildren().add(makeUpgradePanel(upgrade));
         }
+
+        Button sellButton = new Button(String.format("Sell for: %d",
+                                                     Math.round(gameObject.getValue())));
+        base.getChildren().add(sellButton);
+        sellButton.setOnAction(event -> model.sellGameObject(gameObject));
         addToInfoBox(base);
     }
 
     private StackPane makeUpgradePanel (UpgradeGraphic upgrade) {
         ItemGraphic graphic = upgrade.getGraphic();
-        
+
         StackPane upgradePanel = new StackPane();
         upgradePanel.setOnMouseEntered(event -> upgradePanel.setCursor(Cursor.HAND));
         upgradePanel.setOnMouseClicked(event -> {
-            if (!upgrade.isFinal() && upgrade.canAfford()){
-                model.purchaseUpgrade(graphic.getName(),this::displayUpgrades);
+            if (!upgrade.isFinal() && upgrade.canAfford()) {
+                model.purchaseUpgrade(graphic.getName(), this::displayUpgrades);
             }
         });
-        
+
         Paint panelColor = setPanelColor(upgrade);
-        
+
         upgradePanel.setBackground(new Background(new BackgroundFill(panelColor, null, null)));
 
         VBox entries = new VBox();
@@ -204,7 +208,8 @@ public class ShopView extends Parent {
         HBox first = new HBox();
         first.getChildren().addAll(graphic, labels.get(ItemInfo.NAME));
         Label second = labels.get(ItemInfo.DESCRIPTION);
-        Label third = labels.get(ItemInfo.PRICE);
+        Label third = (upgrade.isFinal()) ?
+                                         new Label("Already bought") : labels.get(ItemInfo.PRICE);
         third.setTextFill(Color.YELLOW);
 
         entries.getChildren().addAll(first, second, third);
@@ -212,16 +217,16 @@ public class ShopView extends Parent {
 
         return upgradePanel;
     }
-    
-    private Paint setPanelColor(UpgradeGraphic upgrade){
+
+    private Paint setPanelColor (UpgradeGraphic upgrade) {
         if (!upgrade.canAfford()) {
             return Color.RED;
         }
-        else if (upgrade.isFinal()) { 
+        else if (upgrade.isFinal()) {
             return Color.LAWNGREEN;
         }
         else { // normal upgrade
-           return  Color.MEDIUMSEAGREEN;
+            return Color.MEDIUMSEAGREEN;
         }
     }
 
@@ -250,7 +255,7 @@ public class ShopView extends Parent {
     }
 
     private void selectGameObject (MouseEvent event) {
-        GameObject selected = world.getObjectFromNode((Node) event.getSource());
+        GameObject selected = model.getObjectFromNode((Node) event.getSource());
         selector.select(selected);
     }
 }

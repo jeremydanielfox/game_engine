@@ -40,12 +40,10 @@ public class HUD implements Observer {
     private BorderPane myPane;
     private HBox myDefaultButtonDisplay;
     private ShopModel shop;
-    private GameWorld world;
     
     private List<ButtonWrapper> myButtonWrapperList;
 
-    public HUD (GameWorld world, BorderPane pane, ShopModel shop) {
-        this.world = world;
+    public HUD (BorderPane pane, ShopModel shop) {
         this.shop = shop;
         initialize(pane);
     }
@@ -132,6 +130,6 @@ public class HUD implements Observer {
         //TESTING purposes:
         shop.addPurchasable(new TestTower(1,0,0));
         shop.addPurchasable(new TestTower(0,0,0));
-        myWholeDisplay.getChildren().add(new ShopView(world, shop, myPane));
+        myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
     }
 }

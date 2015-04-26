@@ -124,21 +124,18 @@ public class LibraryData {
         return labelList;
     }
 
-    public List<GameObjectSimple> createGameObjectList () {
-        for (Authorable authorable : editableList) {
-            Placeable editable = (Placeable) authorable;
-            GameObjectSimple object = new GameObjectSimple();
-            object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
-                                          editable.getImagePath()));
-            object.setLabel(editable.getLabel());
-            object.setShopTag(editable.getShopTag());
-            object.setMover(editable.getPath());
-            object.setPoint(editable.getLocation());
-            object.setHealth(new HealthSimple(editable.getHealth()));
-            // set Collider
-            gameObjectList.add(object);
-        }
-        return gameObjectList;
+    private void addToExistingGameObjectList (Authorable authorable) {
+        Placeable editable = (Placeable) authorable;
+        GameObjectSimple object = new GameObjectSimple();
+        object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
+                                      editable.getImagePath()));
+        object.setLabel(editable.getLabel());
+        object.setShopTag(editable.getShopTag());
+        object.setMover(editable.getPath());
+        object.setPoint(editable.getLocation());
+        object.setHealth(new HealthSimple(editable.getHealth()));
+        // set Collider
+        gameObjectList.add(object);
     }
 
     private MoverPath getMover (List<Path> list) {

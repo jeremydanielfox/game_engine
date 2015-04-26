@@ -50,7 +50,6 @@ public class ShopTagSimple implements ShopTag, Title {
     public ShopTag clone () {
         ShopTagSimple clone = new ShopTagSimple();
         clone.setName(myName);
-        clone.setName(myName);
         clone.setDescription(myDescription);
         clone.setShopGraphic(myShopGraphic.clone());
         return clone;

@@ -25,16 +25,16 @@ public class SlowBuff extends Buff implements Slow {
      * @param timeIncr: Time the slow lasts
      * @param slowPercent: slow percentage
      */
-    public SlowBuff (int timeIncr, double slowPercent) {
+    public SlowBuff (double timeIncr, double slowPercent) {
         super(timeIncr);
-        this.timeIncr = timeIncr;
+        this.timeIncr = (int) timeIncr;
         this.slowPercent = slowPercent;
         decorated = Optional.empty();
     }
 
     @Settable
-    public void setTime (int timeIncr) {
-        this.timeIncr = timeIncr;
+    public void setTime (double timeIncr) {
+        this.timeIncr = (int) timeIncr;
     }
 
     @Settable

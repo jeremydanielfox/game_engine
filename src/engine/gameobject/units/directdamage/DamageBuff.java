@@ -20,11 +20,9 @@ public class DamageBuff extends Buff implements DirectDamage {
     private double increment;
     private Optional<DirectDamage> decorated;
     private final static int graphicDuration = 20;
-    private UpgradeType type;
 
     public DamageBuff () {
         super(graphicDuration);
-        type = UpgradeType.COLLISION;
         this.increment = 0;
         decorated = Optional.empty();
     }
@@ -38,11 +36,6 @@ public class DamageBuff extends Buff implements DirectDamage {
     @Settable
     public void setIncrement (double increment) {
         this.increment = increment;
-    }
-
-    // @Settable
-    public void setType (UpgradeType type) {
-        this.type = type;
     }
 
     @Override

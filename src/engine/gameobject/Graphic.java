@@ -56,12 +56,8 @@ public class Graphic {
     }
 
     private void initializeImageView () {
-        System.out.println(myImageName);
         myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
-        // for TEST purpose:
-        if (myPoint == null) {
-            myPoint = new Point2D(0, 0);
-        }
+
         // myImageView.setOnMouseEntered(o -> System.out.println("boom"));
         // myImageView.setOnMouseClicked(e -> System.out.println("clicked"));
         // myImageView.setFocusTraversable(true);

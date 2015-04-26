@@ -11,7 +11,7 @@ public class BuyOnClicked implements OnClickedCommand {
 
     @Override
     public RangeDisplay execute () {
-        myShopModel.purchaseUpgrade(name);
+        myShopModel.purchaseUpgrade(name, null);
         return null;
     }
 

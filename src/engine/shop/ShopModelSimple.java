@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import javafx.event.EventHandler;
 import engine.game.Player;
 import engine.gameobject.GameObject;
@@ -97,7 +98,6 @@ public class ShopModelSimple implements ShopModel {
             currentPlayer.getWallet().withdraw(getPrice(name));
             try {
                 GameObject tower = prototypeMap.get(name).clone();
-//                GameObject tower = new TestTower(1, 100, 100);
                 tower.getGraphic().getNode().setOnMousePressed(selected);
                 myGameWorld.addObject(tower, location);
                 return true;
@@ -118,11 +118,11 @@ public class ShopModelSimple implements ShopModel {
      * @param itemGraphic
      */
     @Override
-    public void purchaseUpgrade (String name) {
+    public void purchaseUpgrade (String name, Consumer<GameObject> refreshUpgrades) {
         if (canPurchase(name)){
             currentPlayer.getWallet().withdraw(getPrice(name));
             currentGameObject.getWeapon().applyUpgrades(upgradeMap.get(name));
-            getUpgradeGraphics(currentGameObject);
+            refreshUpgrades.accept(currentGameObject);
         }
     }
 

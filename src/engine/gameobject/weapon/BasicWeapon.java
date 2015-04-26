@@ -38,6 +38,8 @@ public class BasicWeapon implements Weapon {
     private FiringStrategy myFiringStrategy;
     private UpgradeSet<Upgrade> upgradables;
     private UpgradeTree tree;
+    
+    private double value;
 
     public BasicWeapon () {
         upgradables = new UpgradeSet<>();
@@ -49,7 +51,9 @@ public class BasicWeapon implements Weapon {
 
     @Override
     public Weapon clone () {
+        System.out.println("trig1");
         BasicWeapon clone = new BasicWeapon();
+        System.out.println("trig2");
         clone.setFiringRate(myFiringRate.getRate());
         clone.setRange(myRange.getRange());
         clone.setFiringStrategy(myFiringStrategy);
@@ -110,6 +114,7 @@ public class BasicWeapon implements Weapon {
     private void updateRange () {
         myRange = (RangeUpgrade) upgradables.get(myRange);
         rangeProp.setValue(myRange.getRange());
+        System.out.println(myRange.getRange());
     }
 
     @Override
@@ -165,14 +170,14 @@ public class BasicWeapon implements Weapon {
         myProjectile.getCollider().addCollisionBehavior(newBuff);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see engine.gameobject.weapon.Weaopn#getValue()
-     */
+    @Settable
+    public void setValue (double value) {
+        this.value  = value;
+    }
+    
     @Override
     public double getValue () {
-        return tree.getValue();
+        return (tree==null) ? value : tree.getValue();
     }
 
     @Override

@@ -11,10 +11,8 @@ import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundleSimple;
 public class TestTree extends UpgradeTreeSimple {
 
     public TestTree () {
-        List<UpgradeBundleSimple> bundles =
-                new ArrayList<>(
-                                Arrays.asList(new UpgradeBundleSimple[] {new TestBundle(0), new TestBundle(1)}));
-        setUpgradeBundles(bundles);
+        setUpgradeBundles(Arrays.asList(new UpgradeBundleSimple[] { new TestBundle(0),
+                                                                   new TestBundle(1) }));
     }
 
 }

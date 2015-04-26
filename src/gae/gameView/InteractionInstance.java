@@ -100,6 +100,7 @@ public class InteractionInstance {
             myInteractionData.addInteraction(list1, bf, list2);
             
             DataManager.writeToXML(myInteractionData.getEngines().get(0), "src/xml/ExampleInteraction.xml");
+            DataManager.writeToXML(myInteractionData.getEngines().get(1), "src/xml/ExampleInteraction2.xml");
         });
     }
 

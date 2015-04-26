@@ -1,0 +1,80 @@
+<engine.game.ConcreteGame>
+  <myLevelBoard class="engine.game.ConcreteLevelBoard">
+    <changed>false</changed>
+    <obs/>
+    <myTitle></myTitle>
+    <myLevels>
+      <engine.game.ConcreteLevel>
+        <myTitle></myTitle>
+        <myImagePath></myImagePath>
+        <myWinningGoals>
+          <engine.goals.EventsCompleteGoal>
+            <isSatisfied>false</isSatisfied>
+            <myStoryBoard>
+              <changed>false</changed>
+              <obs/>
+              <eventList/>
+              <myTitle></myTitle>
+            </myStoryBoard>
+          </engine.goals.EventsCompleteGoal>
+        </myWinningGoals>
+        <myLosingGoals/>
+        <myGameWorld class="gameworld.FixedWorld">
+          <myObjects/>
+          <myCollisionEngine class="engine.interactions.CollisionEngine">
+            <myTable>
+              <entry>
+                <engine.gameobject.test.ProjectileLabel>
+                  <superType class="engine.gameobject.labels.TypeBase">
+                    <myName>Base</myName>
+                  </superType>
+                  <myName>Projectile</myName>
+                </engine.gameobject.test.ProjectileLabel>
+                <map>
+                  <entry>
+                    <engine.gameobject.test.EnemyLabel>
+                      <superType class="engine.gameobject.labels.TypeBase">
+                        <myName>Base</myName>
+                      </superType>
+                      <myName>Enemy</myName>
+                    </engine.gameobject.test.EnemyLabel>
+                    <engine.interactions.BuffImparter/>
+                  </entry>
+                </map>
+              </entry>
+            </myTable>
+            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
+          </myCollisionEngine>
+          <myRangeEngine class="engine.interactions.RangeEngine">
+            <myTable>
+              <entry>
+                <engine.gameobject.test.TowerLabel>
+                  <superType class="engine.gameobject.labels.TypeBase">
+                    <myName>Base</myName>
+                  </superType>
+                  <myName>Tower</myName>
+                </engine.gameobject.test.TowerLabel>
+                <map>
+                  <entry>
+                    <engine.gameobject.test.EnemyLabel>
+                      <superType class="engine.gameobject.labels.TypeBase">
+                        <myName>Base</myName>
+                      </superType>
+                      <myName>Enemy</myName>
+                    </engine.gameobject.test.EnemyLabel>
+                    <engine.interactions.ShootAt/>
+                  </entry>
+                </map>
+              </entry>
+            </myTable>
+            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
+          </myRangeEngine>
+          <myNodeToGameObjectMap/>
+          <myPathWidth>17.0</myPathWidth>
+        </myGameWorld>
+        <myStoryBoard reference="../myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard"/>
+      </engine.game.ConcreteLevel>
+    </myLevels>
+    <curLevelIndex>0</curLevelIndex>
+  </myLevelBoard>
+</engine.game.ConcreteGame>

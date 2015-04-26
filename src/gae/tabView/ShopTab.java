@@ -1,9 +1,13 @@
 package gae.tabView;
 
 import gae.shopEditor.ShopEditor;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 
+/**
+ * Shop editor tab
+ * @author JohnGilhuly
+ *
+ */
 
 public class ShopTab {
     private Tab baseNode;

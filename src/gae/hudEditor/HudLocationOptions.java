@@ -9,6 +9,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * The individual fields that can be included in a hud location
+ * @author JohnGilhuly
+ *
+ */
 
 public class HudLocationOptions implements UIObject {
 

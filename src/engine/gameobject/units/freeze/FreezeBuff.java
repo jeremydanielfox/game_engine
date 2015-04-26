@@ -15,6 +15,7 @@ import engine.gameobject.weapon.Upgrade;
  * @author Danny Oh and Nathan Prabhu
  *
  */
+@Settable
 public class FreezeBuff extends Buff implements Freeze {
 
     private int increment;

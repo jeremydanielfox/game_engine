@@ -6,6 +6,11 @@ import gae.editorView.GameObjectEditorView;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 
+/**
+ * Object Editor Tab
+ * @author JohnGilhuly
+ *
+ */
 
 // Potentially combine this with the ShopTab using an abstract class
 

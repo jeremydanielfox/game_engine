@@ -28,7 +28,7 @@ public class ConcreteLevel implements Level, Title {
     // we should identify images by name and have a constant image path that we pin on before
     // Retrieving image
     private String myTitle = "";
-    private String myImagePath;
+    private String myImagePath = "src/images/Park_Path.png";
     private List<Goal> myWinningGoals;
     private List<Goal> myLosingGoals;
     private GameWorld myGameWorld;
@@ -36,7 +36,7 @@ public class ConcreteLevel implements Level, Title {
     private Timer myTimer;
 
     public ConcreteLevel () {
-        initialize("", new ArrayList<Goal>(), new ArrayList<Goal>(), new FixedWorld(),
+        initialize("", new ArrayList<Goal>(), new ArrayList<Goal>(), new FixedWorld(10,10),
                    new StoryBoard());
     }
 

@@ -1,6 +1,6 @@
 package engine.gameobject.units;
 
-public enum BuffType {
+public enum UpgradeType {
 
     COLLISION, EXPLOSION, NULL
 }

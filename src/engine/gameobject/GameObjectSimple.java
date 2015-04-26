@@ -7,14 +7,14 @@ import engine.gameobject.labels.SimpleType;
 import engine.gameobject.labels.Type;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
-import engine.gameobject.units.BuffType;
+import engine.gameobject.units.UpgradeType;
 import engine.gameobject.units.Collider;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
 import engine.shop.RangeDisplay;
-import engine.shop.tag.GameObjectTag;
-import engine.shop.tag.GameObjectTagSimple;
+import engine.shop.ShopTag;
+import engine.shop.ShopTagSimple;
 import engine.titles.Title;
 import gameworld.ObjectCollection;
 
@@ -31,13 +31,12 @@ public class GameObjectSimple implements GameObject, Title {
     private PointSimple myPoint;
     private Health myHealth;
     private Mover myMover;
-    private Graphic myGraphic;
-    private GameObjectTag myTag;
     private BuffTracker myBuffs;
     private Weapon myWeapon;
     private Collider myCollider;
-    private RangeDisplay rangeDisplay;
     private BehaviorTracker myBehaviors;
+    private Graphic myGraphic;
+    private ShopTag myShopTag;
     private String myTitle = "";
 
     public GameObjectSimple () {
@@ -45,12 +44,12 @@ public class GameObjectSimple implements GameObject, Title {
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();
-        myGraphic = new Graphic();
-        myTag = new GameObjectTagSimple();
         myBuffs = new BuffTracker();
         myWeapon = new NullWeapon();
         myCollider = new Collider();
         myBehaviors = new BehaviorTracker();
+        myGraphic = new Graphic();
+        myShopTag = new ShopTagSimple();
     }
 
     /*
@@ -65,7 +64,7 @@ public class GameObjectSimple implements GameObject, Title {
         myBuffs.receiveBuff(buff, this);
     }
 
-    public void addImmunity (Class<? extends Buff> immunity, BuffType buffType) {
+    public void addImmunity (Class<? extends Buff> immunity, UpgradeType buffType) {
         myBuffs.addImmunity(immunity, buffType);
     }
 
@@ -117,46 +116,48 @@ public class GameObjectSimple implements GameObject, Title {
     }
 
     /*
-     * Prototype methods follow
-     */
-    @Override
-    public RangeDisplay getRangeDisplay () {
-        return new RangeDisplay(myTag.getName(), myGraphic.clone(), myWeapon.getRangeProperty());
-    }
-
-    // TODO: Tag cloning not done, Weapon upgrade cloning not done
-    @Override
-    public GameObject clone () {
-        GameObject clone = new GameObjectSimple();
-        clone.setLabel(myLabel);
-        clone.setTag(myTag);
-        clone.setPoint(new PointSimple(myPoint));
-        clone.setHealth(myHealth.clone());
-        clone.setGraphic(myGraphic.clone());
-        clone.setWeapon(myWeapon.clone());
-        clone.setCollider(myCollider.clone());
-        clone.setMover(myMover.clone());
-        return clone;
-    }
-
-    @Override
-    public GameObjectTag getTag () {
-        return myTag;
-    }
-
-    /*
      * Purchasable methods follow
      */
 
     @Override
-    public Graphic getGraphic () {
-        return myGraphic;
+    public String getName () {
+        return myShopTag.getName();
+    }
+
+    @Override
+    public String getDescription () {
+        return myShopTag.getDescription();
+    }
+
+    @Override
+    public Graphic getShopGraphic () {
+        return myShopTag.getShopGraphic();
+    }
+
+    @Settable
+    public void setGraphic (Graphic graphic) {
+        myGraphic = graphic;
     }
 
     @Override
     public double getValue () {
         return 10;
         // return myWeapon.getValue();
+    }
+
+    // TODO: Weapon upgrade cloning not done
+    @Override
+    public GameObject clone () {
+        GameObjectSimple clone = new GameObjectSimple();
+        clone.setLabel(myLabel);
+        clone.setPoint(new PointSimple(myPoint));
+        clone.setHealth(myHealth.clone());
+        clone.setWeapon(myWeapon.clone());
+        clone.setCollider(myCollider.clone());
+        clone.setMover(myMover.clone());
+        clone.setGraphic(myGraphic.clone());
+        clone.setShopTag(myShopTag.clone());
+        return clone;
     }
 
     /*
@@ -254,28 +255,6 @@ public class GameObjectSimple implements GameObject, Title {
         myMover = mover;
     }
 
-    @Settable
-    @Override
-    public void setGraphic (Graphic graphic) {
-        myGraphic = graphic;
-    }
-
-    @Override
-    @Settable
-    public void setTag (GameObjectTag tag) {
-        myTag = tag;
-    }
-
-    // // added because tag is broken and I can't test - Kei
-    // public String getName () {
-    // // works with return myName - editor not compatible
-    // return myTag.getName();
-    // }
-
-    // public String getLabel () {
-    // return myTag.getLabel();
-    // }
-
     @Override
     public void update (ObjectCollection world) {
         myBuffs.update(this);
@@ -297,6 +276,20 @@ public class GameObjectSimple implements GameObject, Title {
     }
 
     @Override
+    public RangeDisplay getRangeDisplay () {
+        return new RangeDisplay(getName(), myGraphic.clone(), myWeapon.getRangeProperty());
+    }
+
+    @Override
+    public Graphic getGraphic () {
+        return myGraphic;
+    }
+
+    @Settable
+    public void setShopTag (ShopTag shopTag) {
+        myShopTag = shopTag;
+    }
+
     public String toString () {
         return "GameObject: " + myLabel.getName();
     }
@@ -311,4 +304,5 @@ public class GameObjectSimple implements GameObject, Title {
     public void setTitle (String title) {
         myTitle = title;
     }
+
 }

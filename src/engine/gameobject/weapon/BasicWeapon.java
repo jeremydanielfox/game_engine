@@ -72,7 +72,7 @@ public class BasicWeapon implements Weapon {
 
         Buff buff = (change.wasAdded()) ? (Buff) change.getElementAdded() :
                                        (Buff) change.getElementRemoved();
-        switch (buff.getBuffType()) {
+        switch (buff.getType()) {
             case COLLISION:
                 if (change.wasAdded()) {
                     collisionBuffs.add(buff);

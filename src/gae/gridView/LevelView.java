@@ -248,4 +248,12 @@ public class LevelView {
         Consumer<Placeable> consumer = e -> libraryData.addEditableToList(e);
         return consumer;
     }
+    
+    public ObjectProperty<Dimension> getGridDimensionProperty() {
+        return gridSizeProperty;    
+    }
+    
+    public String getBackgroundImagePath() {
+        return DEFAULT_IMAGE_PATH;
+    }
 }

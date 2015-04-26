@@ -5,7 +5,7 @@ import java.util.Optional;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.units.Buff;
-import engine.gameobject.units.BuffType;
+import engine.gameobject.units.UpgradeType;
 import engine.gameobject.weapon.Upgrade;
 
 
@@ -20,6 +20,13 @@ public class PoisonBuff extends Buff implements Poison {
     private int timeIncr;
     private double damageIncr;
     private Optional<PoisonBuff> decorated;
+
+    public PoisonBuff () {
+        super(0);
+        this.timeIncr = 0;
+        this.damageIncr = 0;
+        decorated = Optional.empty();
+    }
 
     /**
      * Makes a poison buff
@@ -87,7 +94,7 @@ public class PoisonBuff extends Buff implements Poison {
         return otherBuff.timeLeft() <= timeLeft();
     }
 
-    public Buff clone(){
+    public Buff clone () {
         return new PoisonBuff(getDuration(), getDamage());
     }
 

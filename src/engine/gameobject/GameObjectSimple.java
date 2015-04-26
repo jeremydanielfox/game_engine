@@ -121,7 +121,7 @@ public class GameObjectSimple implements GameObject {
      */
     @Override
     public RangeDisplay getRangeDisplay(){
-        return new RangeDisplay(myTag.getName(), myGraphic.clone(), myWeapon.getRange());
+        return new RangeDisplay(myTag.getName(), myGraphic.clone(), myWeapon.getRangeProperty());
     }
 
     // TODO: Tag cloning not done, Weapon upgrade cloning not done

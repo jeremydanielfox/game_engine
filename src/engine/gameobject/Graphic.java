@@ -56,7 +56,6 @@ public class Graphic {
     }
 
     private void initializeImageView () {
-        System.out.println(myImageName);
         myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
         // for TEST purpose:
         if (myPoint == null) {

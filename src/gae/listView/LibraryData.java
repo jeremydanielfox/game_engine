@@ -9,6 +9,7 @@ import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
+import engine.titles.Title;
 import gae.backend.Placeable;
 import gae.gridView.Path;
 import gae.gridView.PathView;
@@ -80,7 +81,14 @@ public class LibraryData {
 
     public void addCreatedObjectToList (Class<?> klass, Object o) {
         try {
-            createdObjectMap.get(klass).add(o);
+            Title casted = (Title) o;
+            if (casted.getIndex() >= 0) {
+                createdObjectMap.get(klass).set(casted.getIndex(), o);
+                System.out.println("replaced");
+            }
+            else {
+                createdObjectMap.get(klass).add(o);
+            }
         }
         catch (NullPointerException e) {
             ObservableList<Object> list = FXCollections.observableArrayList();

@@ -5,7 +5,7 @@ import java.util.Optional;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.units.Buff;
-import engine.gameobject.units.BuffType;
+import engine.gameobject.units.UpgradeType;
 import engine.gameobject.weapon.Upgrade;
 
 

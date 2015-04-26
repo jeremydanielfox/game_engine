@@ -53,17 +53,17 @@ public class ShopModelSimple implements ShopModel {
         upgradeMap = new HashMap<String, UpgradeBundle>();
         purchasables.forEach(purchasable -> addPurchasable(purchasable));
     }
-    
+
     @Settable
     public void setMarkup (double markup) {
         this.markup = markup;
     }
-    
+
     @Settable
     public void setGameWorld (GameWorld world) {
         myGameWorld = world;
     }
-    
+
     @Settable
     public void setPlayer (Player player) {
         currentPlayer = player;
@@ -88,7 +88,7 @@ public class ShopModelSimple implements ShopModel {
 
     @Override
     public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject) {
-        currentGameObject = gameObject;;
+        currentGameObject = gameObject;
         List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
         List<ItemGraphic> upgradeGraphics = new ArrayList<ItemGraphic>();
         upgradeMap.clear();
@@ -132,7 +132,7 @@ public class ShopModelSimple implements ShopModel {
      */
     @Override
     public void purchaseUpgrade (String name, Consumer<GameObject> refreshUpgrades) {
-        if (canPurchase(name)){
+        if (canPurchase(name)) {
             currentPlayer.getWallet().withdraw(getPrice(name));
             currentGameObject.getWeapon().applyUpgrades(upgradeMap.get(name));
             refreshUpgrades.accept(currentGameObject);

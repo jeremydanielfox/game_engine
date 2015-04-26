@@ -68,4 +68,16 @@ public class PlayerUnit extends Displayable implements Title {
     public void setTitle (String title) {
         myTitle = title;
     }
+
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void setIndex (int existing) {
+        // TODO Auto-generated method stub
+        
+    }
 }

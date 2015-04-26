@@ -1,6 +1,8 @@
 package engine.gameobject.weapon;
 
+import engine.fieldsetting.Settable;
 import engine.gameobject.units.Buff;
+import engine.gameobject.units.UpgradeType;
 import engine.observable.Observable;
 
 // TODO: experiment with generics here
@@ -29,6 +31,8 @@ public interface Upgrade extends Observable {
     public void upgrade (Upgrade decorated);
     
     public Upgrade clone ();
+    
+    public UpgradeType getType () ;
 
 
 }

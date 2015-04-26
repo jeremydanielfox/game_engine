@@ -101,7 +101,7 @@ public class SimpleEditor extends Editor implements UIObject {
         ComponentEditor component;
         if (root.getInputType().equals("ObjectComponentEditor")) {
             Class<?> klass = (Class<?>) root.getMethod().getGenericParameterTypes()[0];
-            klass = EditingParser.getConcreteClassFromMap(klass);
+//            klass = EditingParser.getConcreteClassFromMap(klass);
             component = new ObjectComponentEditor(klass, biConsumer);
             objectFields.add((ObjectComponentEditor) component);
         }

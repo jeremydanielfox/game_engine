@@ -67,6 +67,7 @@ public class GameObjectToEditable implements Placeable {
         graphic = gameObject.getGraphic();
         shopGraphic = gameObject.getShopGraphic();
         location = gameObject.getPoint();
+        weapon = gameObject.getWeapon();
     }
 
     @Override

@@ -17,6 +17,7 @@ import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.range.RangeUpgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
+import engine.titles.Title;
 import gameworld.ObjectCollection;
 
 
@@ -27,16 +28,17 @@ import gameworld.ObjectCollection;
  * @author Nathan Prabhu and Danny Oh
  *
  */
-public class BasicWeapon implements Weapon {
+public class BasicWeapon implements Weapon, Title{
     private int timeSinceFire;
     private RangeUpgrade myRange;
     private DoubleProperty rangeProp = new SimpleDoubleProperty();
-
+    private String title;
     private FiringRate myFiringRate;
     private GameObject myProjectile;
     private FiringStrategy myFiringStrategy;
     private UpgradeSet<Upgrade> upgradables;
     private UpgradeTree tree;
+    private int index;
 
     private double value;
 
@@ -228,5 +230,29 @@ public class BasicWeapon implements Weapon {
     public void applyUpgrades (UpgradeBundle bundle) {
         bundle.applyUpgrades(upgradables);
         bundle.getParent().updateCurrent(bundle.getParent());
+    }
+
+    @Override
+    public String getTitle () {
+        // TODO Auto-generated method stub
+        return title;
+    }
+    @Settable
+    @Override
+    public void setTitle (String title) {
+        // TODO Auto-generated method stub
+        this.title = title;
+    }
+
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return index;
+    }
+
+    @Override
+    public void setIndex (int index) {
+        // TODO Auto-generated method stub
+        this.index = index;
     }
 }

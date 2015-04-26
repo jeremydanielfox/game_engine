@@ -158,4 +158,16 @@ public class ConcreteLevel implements Level, Title {
         myTitle = title;
     }
 
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void setIndex (int existing) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

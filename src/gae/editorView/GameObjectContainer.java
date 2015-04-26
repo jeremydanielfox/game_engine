@@ -3,6 +3,7 @@ package gae.editorView;
 import engine.gameobject.PointSimple;
 import gae.gridView.ContainerWrapper;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -30,11 +31,6 @@ public class GameObjectContainer extends VBox implements ContainerWrapper {
         title.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         title.setTranslateX(width * LABEL_LOCATION_PROPORTIONS);
         return title;
-    }
-
-    public void clear () {
-        this.getChildren().clear();
-        getChildren().add(getLabel());
     }
 
     /**

@@ -48,8 +48,8 @@ public class SimpleEditor extends Editor implements UIObject {
 
     @Override
     public Object createObject (Class<?> c) {
-        c = getConcreteClassFromMap(c);
-        Object obj = getInstanceFromName(c.getName());
+        c = EditingParser.getConcreteClassFromMap(c);
+        Object obj = EditingParser.getInstanceFromName(c.getName());
         for (Edits edits : nodeMap.keySet()) {
             Method method = nodeMap.get(edits).getMethod();
             Class<?> paramClass = method.getParameterTypes()[0];
@@ -101,58 +101,20 @@ public class SimpleEditor extends Editor implements UIObject {
         ComponentEditor component;
         if (root.getInputType().equals("ObjectComponentEditor")) {
             Class<?> klass = (Class<?>) root.getMethod().getGenericParameterTypes()[0];
-            klass = getConcreteClassFromMap(klass);
+            klass = EditingParser.getConcreteClassFromMap(klass);
             component = new ObjectComponentEditor(klass, biConsumer);
             objectFields.add((ObjectComponentEditor) component);
         }
         else {
             component =
-                    (ComponentEditor) getInstanceFromName(String.format("%s%s", CLASS_PATH,
+                    (ComponentEditor) EditingParser.getInstanceFromName(String.format("%s%s", CLASS_PATH,
                                                                         root.getInputType()));
             simpleFields.add(component);
+            editors.add(component.getObject());
         }
-        editors.add(component.getObject());
+//        editors.add(component.getObject());
         component.setName(root.getMethod().getName());
         nodeMap.put(component, root);
-    }
-
-    /**
-     * Checks to see if the input klass is an interface by looking in the properties map.
-     *
-     * @param klass the class to check.
-     * @return the conrete class from the map or if the input klass is not in the map, the input
-     */
-    private Class<?> getConcreteClassFromMap (Class<?> klass) {
-        if (getPropertiesMap().containsKey(klass.getName())) {
-            try {
-                String newName = getPropertiesMap().get(klass.getName()).get(0);
-                return Class.forName(newName);
-            }
-            catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-        return klass;
-    }
-
-    private Object getInstanceFromName (String name) {
-        Class<?> c = null;
-        Object component = null;
-        try {
-            c = Class.forName(name);
-            component = c.newInstance();
-        }
-        catch (ClassNotFoundException e) {
-            // e.printStackTrace();
-        }
-        catch (IllegalAccessException iae) {
-            // iae.printStackTrace();
-        }
-        catch (InstantiationException ie) {
-            // ie.printStackTrace();
-        }
-
-        return component;
     }
 
     @Override

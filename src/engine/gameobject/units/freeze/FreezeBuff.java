@@ -22,6 +22,13 @@ public class FreezeBuff extends Buff implements Freeze {
     private BuffType type;
     private Optional<Freeze> decorated;
 
+    public FreezeBuff () {
+        super(0);
+        this.increment = 0;
+        type = BuffType.COLLISION;
+        decorated = Optional.empty();
+    }
+
     public FreezeBuff (int increment) {
         super(increment);
         this.increment = increment;
@@ -34,7 +41,7 @@ public class FreezeBuff extends Buff implements Freeze {
         this.increment = increment;
     }
 
-    @Settable
+//    @Settable
     public void setBuffType (BuffType type) {
         this.type = type;
     }

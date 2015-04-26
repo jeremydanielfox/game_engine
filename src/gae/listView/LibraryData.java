@@ -33,8 +33,8 @@ public class LibraryData {
     private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
     private Map<Class<?>, ObservableList<Object>> createdObjectMap = new HashMap<>();
     private ObservableList<GameObjectSimple> gameObjectList = FXCollections.observableArrayList();
-    private ObservableList<Object> moverList = FXCollections.observableArrayList();
     private ObservableList<Type> labelList = FXCollections.observableArrayList();
+    private ObservableList<Object> moverList = FXCollections.observableArrayList();
 
     private LibraryData () {
         setLists();

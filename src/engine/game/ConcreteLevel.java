@@ -6,7 +6,6 @@ import View.Displayable;
 import engine.fieldsetting.Settable;
 import engine.goals.EventsCompleteGoal;
 import engine.goals.Goal;
-import engine.titles.Title;
 import gameworld.FixedWorld;
 import gameworld.GameWorld;
 
@@ -20,7 +19,7 @@ import gameworld.GameWorld;
  *
  */
 @Settable
-public class ConcreteLevel implements Level, Title {
+public class ConcreteLevel implements Level {
 
     private static final int EVENT_GOAL_INDEX = 0;
 
@@ -28,7 +27,7 @@ public class ConcreteLevel implements Level, Title {
     // we should identify images by name and have a constant image path that we pin on before
     // Retrieving image
     private String myTitle = "";
-    private String myImagePath;
+    private String myImagePath = "src/images/Park_Path.png";
     private List<Goal> myWinningGoals;
     private List<Goal> myLosingGoals;
     private GameWorld myGameWorld;
@@ -36,7 +35,7 @@ public class ConcreteLevel implements Level, Title {
     private Timer myTimer;
 
     public ConcreteLevel () {
-        initialize("", new ArrayList<Goal>(), new ArrayList<Goal>(), new FixedWorld(),
+        initialize("", new ArrayList<Goal>(), new ArrayList<Goal>(), new FixedWorld(10,10),
                    new StoryBoard());
     }
 
@@ -144,18 +143,6 @@ public class ConcreteLevel implements Level, Title {
             displays.add(myTimer);
         }
         return displays;
-    }
-
-    @Override
-    public String getTitle () {
-        return myTitle;
-    }
-
-    @Settable
-    @Override
-    public void setTitle (String title) {
-        // TODO Auto-generated method stub
-        myTitle = title;
     }
 
 }

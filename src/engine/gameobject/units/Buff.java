@@ -3,6 +3,7 @@ package engine.gameobject.units;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.effect.ColorAdjust;
+import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.Upgrade;
 import engine.observable.Observer;
@@ -20,11 +21,13 @@ import engine.observable.Observer;
 public abstract class Buff implements Upgrade {
     private int duration;
     private int timeSinceStart;
+    private UpgradeType type;
     private List<Observer> observers = new ArrayList<>();
 
-    public Buff (int duration) {
-        this.duration = duration;
+    public Buff (double duration) {
+        this.duration = (int) duration;
         timeSinceStart = 0;
+        type = UpgradeType.COLLISION; // could be overridden
     }
 
     /**
@@ -65,7 +68,7 @@ public abstract class Buff implements Upgrade {
      *
      * @return
      */
-    public int timeLeft () {
+    public double timeLeft () {
         return getDuration() - timeSinceStart;
     }
 
@@ -105,8 +108,6 @@ public abstract class Buff implements Upgrade {
     /**
      * Reproduces buff. Must be defined in each buff made
      */
-
-    public abstract BuffType getBuffType ();
     
     public abstract Buff clone ();
     
@@ -123,6 +124,15 @@ public abstract class Buff implements Upgrade {
     @Override
     public void notifyObservers () {
         observers.forEach(obs -> obs.update());
+    }
+    
+    @Settable
+    public void setType (UpgradeType type) {
+        this.type = type;
+    }
+    
+    public UpgradeType getType () {
+        return type;
     }
 
 }

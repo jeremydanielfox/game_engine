@@ -11,7 +11,6 @@ public class SimpleEditorView implements UIObject {
 
     public SimpleEditorView (List<ComponentEditor> list) {
         vbox = new VBox();
-        System.out.println(list);
         for (ComponentEditor editor : list) {
             vbox.getChildren().add(editor.getObject());
         }

@@ -37,7 +37,7 @@ import animations.Animator;
 
 public class OpeningView implements UIMediator {
 
-    private static final String HAWIIAN_SONG = "hula.mp3";
+    private static final String HAWIIAN_SONG = "skrillex.mp3";
     private static final String MUSIC_PATH = "src/musician/";
     static final Animator myAnimator = Animator.getInstance();
     static final String DEFAULT_TYPE_MSG = "Choose from right ->";
@@ -73,7 +73,7 @@ public class OpeningView implements UIMediator {
         myScene.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ESCAPE)) {
                 myMusician.clearMusic(myScene);
-                UIMediator author = new GameView();
+                UIMediator author = new GameView(null);
                 myScene = author.getScene();
                 myStage.setScene(myScene);
             }
@@ -119,7 +119,7 @@ public class OpeningView implements UIMediator {
         if (fieldsCompleted()) {
             if (usedObject.equals(dataForm) && action instanceof MouseEvent) {
                 myMusician.clearMusic(myScene);
-                UIMediator author = new GameView();
+                UIMediator author = new GameView(dataResults);
                 myScene = author.getScene();
                 myStage.setScene(myScene);
             }

@@ -3,6 +3,7 @@ package gae.editorView;
 import java.util.ArrayList;
 import java.util.Map;
 import gae.editor.EditingParser;
+import gae.editor.EditorIntermediate;
 import gae.editor.ObjectComponentEditor;
 import gae.gridView.ContainerWrapper;
 import gae.listView.DraggableUtilities;
@@ -21,6 +22,7 @@ import javafx.scene.control.TitledPane;
 
 public class GenericObjectList {
     private static final String PROPERTY_FILE_PATH = "engine.fieldsetting.implementing_classes";
+    private static final int UNSELECTED_INDEX = -1;
     private ObservableList<Object> createdSpecificObjects;
     private Node node;
     private Group root;
@@ -28,7 +30,6 @@ public class GenericObjectList {
     private ObjectComponentEditor objectEditor;
     private ContainerWrapper wrapper;
     private Map<String, ArrayList<String>> interfaceToClassMap;
-    private int count;
 
     public GenericObjectList (ObjectComponentEditor editor,
                               Node node,
@@ -54,10 +55,12 @@ public class GenericObjectList {
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
                     if (klass.getSimpleName().equals("Collider")) {
-                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass);
+                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass,
+                                                 UNSELECTED_INDEX);
                     }
                         else {
-                            objectEditor.popNewEditor(classType + " " + count++);
+                            EditorIntermediate.handleEditorPop(objectEditor, UNSELECTED_INDEX);
+                            // objectEditor.popNewEditor(-1);
                         }
                     });
                 contextmenu.getItems().add(item);
@@ -74,8 +77,8 @@ public class GenericObjectList {
             if (me.getClickCount() == 2 && !unclicked.get()) {
                 unclicked.set(true);
                 DraggableItem draggable =
-                        new DraggableItem(list.getSelectionModel().getSelectedItem(), klass,
-                                          classType);
+                        new DraggableItem(list.getSelectionModel().getSelectedItem(), list
+                                .getSelectionModel().getSelectedIndex(), klass, objectEditor);
                 DraggableUtilities.makeObjectPlaceable(me, draggable, node,
                                                        createdSpecificObjects, wrapper, root,
                                                        objectEditor, unclicked);

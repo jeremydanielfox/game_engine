@@ -6,12 +6,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import View.ViewConcrete2;
+import voogasalad.util.pathsearch.graph.GridCell;
 import javafx.scene.Node;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.EnemyLabel;
 import engine.gameobject.test.ProjectileLabel;
+import engine.gameobject.test.TestTower;
 import engine.gameobject.test.TowerLabel;
 import engine.interactions.BuffImparter;
 import engine.interactions.CollisionEngine;
@@ -19,6 +22,7 @@ import engine.interactions.InteractionEngine;
 import engine.interactions.RangeEngine;
 import engine.interactions.ShootAt;
 import engine.pathfinding.Path;
+import engine.pathfinding.PathFree;
 
 
 public class AbstractWorld implements GameWorld {
@@ -27,12 +31,16 @@ public class AbstractWorld implements GameWorld {
     private InteractionEngine myRangeEngine;
     private Map<Node, GameObject> myNodeToGameObjectMap;
     protected Path myPath;
+    private Terrain myTerrain;
+    protected CoordinateTransformer myTrans;
 
-    public AbstractWorld () {
+    public AbstractWorld (int numRows, int numCols) {
         myObjects = new ArrayList<GameObject>();
         initiateCollisionEngine();
         initiateRangeEngine();
         myNodeToGameObjectMap = new HashMap<>();
+		myTrans = new CoordinateTransformer(numRows, numCols, ViewConcrete2.getWorldWidth(), ViewConcrete2.getWorldHeight()); // TODO fix window 1000
+		myTerrain = new Terrain(numRows, numCols, myTrans);
     }
     
     @Settable
@@ -118,7 +126,12 @@ public class AbstractWorld implements GameWorld {
 
     @Override
     public boolean isPlaceable (Node n, PointSimple pixelCoords) {
-        return true; // TODO plz replace with logic. Ex: towers cannot be placed on towers
+    	GridCell c = myTrans.transformWorldToGrid(pixelCoords);
+    	try {
+			return myTerrain.getTerrainTile(c).getPlace();
+		} catch (InvalidArgumentException e) {
+			return false;
+		}
     }
 
     @Override
@@ -135,4 +148,23 @@ public class AbstractWorld implements GameWorld {
     public Path getPath () {
         return myPath;
     }
+    
+	@Settable
+	public void setObstacles(List<GridCell> obstacles){
+		for(GridCell c : obstacles){
+			try {
+				myTerrain.getTerrainTile(c).setWalk(false);
+			} catch(InvalidArgumentException e){}
+		}
+		PathFree path = (PathFree) myPath;
+		path.setObstacles(obstacles);
+	}
+	
+	public void setTowerObstacles(List<GridCell> tObstacles){
+		for(GridCell c : tObstacles){
+			try {
+				myTerrain.getTerrainTile(c).setPlace(false);
+			} catch(InvalidArgumentException e){}
+		}
+	}
 }

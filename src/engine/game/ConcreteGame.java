@@ -1,10 +1,11 @@
 package engine.game;
 
+import java.util.ArrayList;
 import java.util.List;
 import View.ButtonWrapper;
 import engine.fieldsetting.Settable;
 import engine.shop.ShopModel;
-import engine.titles.Title;
+import engine.shop.ShopModelSimple;
 
 
 /**
@@ -14,7 +15,7 @@ import engine.titles.Title;
  *
  */
 @Settable
-public class ConcreteGame implements Game, Title {
+public class ConcreteGame implements Game {
 
     private static final String DEFAULT_NAME = "GameName";
     private static final String DEFAULT_AUTHOR = "Sierra";
@@ -34,6 +35,15 @@ public class ConcreteGame implements Game, Title {
 
     public ConcreteGame () {
         // initialize(new Player(), new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
+        myPlayer = new Player();
+        myLevelBoard = new ConcreteLevelBoard();
+        myShop = new ShopModelSimple();
+        myButtons = new ArrayList<>();
+        myGameName = "";
+        myAuthor = "";
+        myType = "";
+        myDescription = "";
+        myInstructions = "";
     }
 
     public ConcreteGame (ShopModel shop,
@@ -149,15 +159,9 @@ public class ConcreteGame implements Game, Title {
         return myGameName;
     }
 
-    @Override
-    public String getTitle () {
-        return myGameName;
-    }
-
     @Settable
-    @Override
-    public void setTitle (String title) {
-        myGameName = title;
+    public void setShop (ShopModel shop) {
+        myShop = shop;
     }
 
 }

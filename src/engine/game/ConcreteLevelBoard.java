@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import engine.fieldsetting.Settable;
-import engine.titles.Title;
 import gameworld.GameWorld;
 
 
@@ -15,10 +14,12 @@ import gameworld.GameWorld;
  *
  */
 @Settable
-public class ConcreteLevelBoard extends Observable implements LevelBoard, Title {
-private String myTitle="";
+public class ConcreteLevelBoard extends Observable implements LevelBoard {
+    private String myTitle = "";
     private List<Level> myLevels;
     private int curLevelIndex;
+    private boolean isLost;
+    private boolean isWon;
 
     public ConcreteLevelBoard () {
         myLevels = new ArrayList<Level>();
@@ -57,7 +58,19 @@ private String myTitle="";
         boolean answer =
                 ((curLevelIndex == myLevels.size() - 1) && (myLevels.get(curLevelIndex).isWon())) ||
                         myLevels.get(curLevelIndex).isLost();
+        isWon = myLevels.get(curLevelIndex).isWon();
+        isLost = myLevels.get(curLevelIndex).isLost();
+
         return answer;
+
+    }
+
+    public boolean isWon () {
+        return isWon;
+    }
+
+    public boolean isLost () {
+        return isLost;
     }
 
     @Override
@@ -90,17 +103,4 @@ private String myTitle="";
         }
         return null;
     }
-
-    @Override
-    public String getTitle () {
-        // TODO Auto-generated method stub
-        return myTitle;
-    }
-
-    @Override
-    public void setTitle (String title) {
-        // TODO Auto-generated method stub
-        myTitle = title;
-    }
-
 }

@@ -7,18 +7,19 @@ import View.Displayable;
 import engine.fieldsetting.Settable;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
-import engine.titles.Title;
 
 
 /**
  * This class represents a current player of the game, storing player specific information
  * such as lives left/health, score, and currency that can be used in the store.
  *
- * @author Sierra Smith, Cosette Goldstein
+ * @author Sierra Smith
+ * @author Cosette Goldstein
+ * @author Brandon Choi
  *
  */
 @Settable
-public class Player extends Observable implements Title {
+public class Player extends Observable {
 
     private static final String DEFAULT_NAME = "Player 1";
 
@@ -41,7 +42,6 @@ public class Player extends Observable implements Title {
         myWallet = wallet;
     }
 
-    @Settable
     public void setName (String name) {
         myName = name;
     }
@@ -106,19 +106,15 @@ public class Player extends Observable implements Title {
         myScore = score;
     }
 
-    @Settable
     public void setWallet (Wallet wallet) {
         myWallet = wallet;
     }
-
-    @Override
-    public String getTitle () {
-        return myName;
+    
+    @Settable
+    public void setWalletUnit (String unitLabel) {
+        if(myHealth.getLabel().equals(unitLabel))
+            myWallet = new ConcreteWallet(myHealth);
+        else
+            myWallet = new ConcreteWallet(myScore);
     }
-
-    @Override
-    public void setTitle (String title) {
-        myName = title;
-    }
-
 }

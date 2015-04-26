@@ -4,6 +4,7 @@ import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverNull;
+import engine.shop.ShopTagSimple;
 
 
 public class TestEnemy extends GameObjectSimple {
@@ -14,9 +15,11 @@ public class TestEnemy extends GameObjectSimple {
         setHealth(new HealthSimple(3));
         setMover(new MoverNull());
         //setWeapon(new TestWeapon(4));
-        getTag().setName("TestTower");
-        getTag().setDescription("Just a test tower; nothing special here...");
-        getTag().setShopGraphic(new Graphic(40, 40, "Bloons_TackShooterIcon.png"));
+        ShopTagSimple shopTag = new ShopTagSimple();
+        setShopTag(shopTag);
+        shopTag.setName("TestTower");
+        shopTag.setDescription("Just a test tower; nothing special here...");
+        shopTag.setShopGraphic(new Graphic(40, 40, "Bloons_TackShooterIcon.png"));
         setLabel(new EnemyLabel());
     }
 }

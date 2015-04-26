@@ -15,6 +15,6 @@ public interface Buffable {
     * @param immunity class of added immunity
     * @param buffType specific bufftype (BuffType.NULL if regardless of bufftype)
     */
-    public void addImmunity(Class<? extends Buff> immunity, BuffType buffType);
+    public void addImmunity(Class<? extends Buff> immunity, UpgradeType buffType);
 
 }

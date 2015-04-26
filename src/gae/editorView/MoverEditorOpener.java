@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import gae.editorView.TestEngine;
 import xml.DataManager;
 import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
@@ -16,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import gae.gridView.PathView;
 import gae.listView.Authorable;
 import gae.listView.LibraryData;
@@ -27,7 +25,7 @@ public class MoverEditorOpener extends PopUpEditorView {
     public MoverEditorOpener (Consumer<Object> consumer,
                               BiConsumer<Class<?>, Object> biConsumer,
                               Class<?> klass) {
-        super(consumer, biConsumer, klass);
+        super(consumer, biConsumer, klass, 0);
         // TODO Auto-generated constructor stub
     }
 
@@ -40,14 +38,14 @@ public class MoverEditorOpener extends PopUpEditorView {
         // TODO Auto-generated method stub
         libraryData = LibraryData.getInstance();
         createdDropDownList = new ArrayList<>();
-        super.initialize();
+//        super.initialize();
     }
 
     private void save () {
         createdDropDownList.forEach( (dropDown) -> {
             PathView pathView = (PathView) dropDown.getSelectionModel().getSelectedItem();
             System.out.println("We have selected : " + pathView.getID());
-            List<Path> path = pathView.createPathObjects();
+//            List<Path> path = pathView.createPathObjects();
             // we need to add it to an Editable, which will then be converted to GameObjectSimple
             // later
 
@@ -133,9 +131,9 @@ public class MoverEditorOpener extends PopUpEditorView {
                 myPath.addPathSegment(tempBez);
             }
             DataManager.writeToXML(myPath, "src/gae/listView/Test.xml");
-            TestEngine test = new TestEngine();
+//            TestEngine test = new TestEngine();
             try {
-                test.start(new Stage());
+//                test.start(new Stage());
             }
             catch (Exception e) {
                 // TODO Auto-generated catch block

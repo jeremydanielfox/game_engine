@@ -2,7 +2,6 @@ package engine.game;
 
 import View.ViewConcrete2;
 import engine.fieldsetting.Settable;
-import engine.titles.Title;
 
 
 /**
@@ -12,7 +11,7 @@ import engine.titles.Title;
  *
  */
 @Settable
-public class TimerConcrete extends Timer implements Title {
+public class TimerConcrete extends Timer {
     public static final String DEFAULT_LABEL = "Time left";
     private static final String ZERO_SEC_PREFIX = "0";
     private static final String COLON = ":";
@@ -99,16 +98,6 @@ public class TimerConcrete extends Timer implements Title {
     private void updateObservers () {
         setChanged();
         notifyObservers();
-    }
-
-    @Override
-    public String getTitle () {
-        return myLabel;
-    }
-
-    @Override
-    public void setTitle (String title) {
-        myLabel = title;
     }
 
 }

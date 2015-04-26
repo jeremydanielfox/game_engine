@@ -17,7 +17,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Class used to create new GameObject 
+ * @author JohnGilhuly
+ *
+ */
 
+@Deprecated
 public class GenericObjectsPane implements UIObject {
 
     private VBox baseNode;

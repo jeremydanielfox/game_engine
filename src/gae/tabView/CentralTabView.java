@@ -66,9 +66,9 @@ public class CentralTabView implements UIObject {
         gameWorldFactory = createGameWorldFactory(gameTypeIn);
     }
     
-    private GameWorldFactory createGameWorldFactory (String gameTypeIn) {
-        System.out.println(gameTypeIn);
-        if (gameTypeIn.equals("Free World")) {
+    private GameWorldFactory createGameWorldFactory (String gameTypeIn) {        
+        
+        if (gameTypeIn!= null && gameTypeIn.equals("Free World")) {
             return new FreeGameWorldFactory();
         }
         else {

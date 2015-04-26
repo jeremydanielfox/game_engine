@@ -37,23 +37,33 @@ public class LibraryData {
     private ObservableList<Object> moverList = FXCollections.observableArrayList();
 
     private LibraryData () {
-        setEditableList();
+        setLists();
     }
 
     public static LibraryData getInstance () {
         return instance;
     }
 
-    private void setEditableList () {
+    private void setLists () {
         editableList.addListener( (ListChangeListener.Change<? extends Authorable> change) -> {
             while (change.next()) {
-                if (change.wasAdded()) { // if an editablenode was added
+                if (change.wasAdded()) {
                     Authorable added = change.getAddedSubList().get(0);
                     if (added instanceof Placeable) {
                         Placeable placeable = (Placeable) added;
                         labelList.add(placeable.getLabel());
-                        moverList.add(getMover(placeable));
                         addToExistingGameObjectList(placeable);
+                    }
+                }
+            }
+        });
+        pathList.addListener( (ListChangeListener.Change<? extends Authorable> change) -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    Authorable added = change.getAddedSubList().get(0);
+                    if (added instanceof PathView) {
+                        PathView pathView = (PathView) added;
+                        moverList.add(getMover(pathView.createPathObjects()));
                     }
                 }
             }
@@ -80,13 +90,14 @@ public class LibraryData {
     }
 
     public ObservableList<Object> getObservableList (Class<?> klass) {
-        if (!createdObjectMap.containsKey(klass) &&
-            !klass.getSimpleName().equals("DirectPointMover")) {
-            ObservableList<Object> list = FXCollections.observableArrayList();
-            createdObjectMap.put(klass, list);
-        }
-        else {
-            createdObjectMap.put(klass, moverList);
+        if (!createdObjectMap.containsKey(klass)) { 
+            if (!klass.getSimpleName().equals("MoverPath")) {
+                ObservableList<Object> list = FXCollections.observableArrayList();
+                createdObjectMap.put(klass, list);
+            }
+            else {
+                createdObjectMap.put(klass, moverList);
+            }
         }
         return createdObjectMap.get(klass);
     }
@@ -119,33 +130,29 @@ public class LibraryData {
                                       editable.getImagePath()));
         object.setLabel(editable.getLabel());
         object.setTag(editable.getTag());
-        object.setMover(getMover(editable));
+        object.setMover(editable.getPath());
         object.setPoint(editable.getLocation());
         object.setHealth(new HealthSimple(editable.getHealth()));
         // set Collider
         gameObjectList.add(object);
     }
 
-    private MoverPath getMover (Placeable editable) {
-        List<List<Path>> allPaths = editable.getPath();
+    private MoverPath getMover (List<Path> list) {
         MoverPath mover = new MoverPath();
         PathFixed myPath = new PathFixed();
-        for (List<Path> lists : allPaths) {
-
-            for (int i = 0; i < lists.size(); i++) {
-                // System.out.println("Path " + i + "'s coordinates");
-                Path temp = lists.get(i);
-                temp.printInfo();
-                // System.out.println();
-                PathSegmentBezier tempBez = new PathSegmentBezier();
-                List<PointSimple> points = new ArrayList<>();
-                points.add(temp.getStart());
-                points.add(temp.getControlOne());
-                points.add(temp.getControlTwo());
-                points.add(temp.getEnd());
-                tempBez.setPoints(points);
-                myPath.addPathSegment(tempBez);
-            }
+        for (int i = 0; i < list.size(); i++) {
+            // System.out.println("Path " + i + "'s coordinates");
+            Path temp = list.get(i);
+            temp.printInfo();
+            // System.out.println();
+            PathSegmentBezier tempBez = new PathSegmentBezier();
+            List<PointSimple> points = new ArrayList<>();
+            points.add(temp.getStart());
+            points.add(temp.getControlOne());
+            points.add(temp.getControlTwo());
+            points.add(temp.getEnd());
+            tempBez.setPoints(points);
+            myPath.addPathSegment(tempBez);
         }
         mover.setPath(myPath);
         return mover;

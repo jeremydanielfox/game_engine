@@ -7,8 +7,6 @@ import gameworld.GameWorld;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -148,9 +146,10 @@ public class ShopView extends Parent {
     public void displayUpgrades (GameObject gameObject) {
         clearInfoBox();
         VBox base = new VBox();
+        base.setSpacing(10);
         base.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.8),
                                                              null, null)));
-        Label name = new Label(gameObject.getTag().getName());
+        Label name = new Label(gameObject.getName());
         base.getChildren().add(name);
 
         List<ItemGraphic> upgrades = model.getUpgradeGraphics(gameObject);

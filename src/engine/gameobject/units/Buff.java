@@ -21,13 +21,13 @@ import engine.observable.Observer;
 public abstract class Buff implements Upgrade {
     private int duration;
     private int timeSinceStart;
-    private BuffType type;
+    private UpgradeType type;
     private List<Observer> observers = new ArrayList<>();
 
     public Buff (int duration) {
         this.duration = duration;
         timeSinceStart = 0;
-        type = BuffType.COLLISION; // could be overridden
+        type = UpgradeType.COLLISION; // could be overridden
     }
 
     /**
@@ -68,7 +68,7 @@ public abstract class Buff implements Upgrade {
      *
      * @return
      */
-    public int timeLeft () {
+    public double timeLeft () {
         return getDuration() - timeSinceStart;
     }
 
@@ -127,11 +127,11 @@ public abstract class Buff implements Upgrade {
     }
     
     @Settable
-    public void setType (BuffType type) {
+    public void setType (UpgradeType type) {
         this.type = type;
     }
     
-    public BuffType getBuffType () {
+    public UpgradeType getType () {
         return type;
     }
 

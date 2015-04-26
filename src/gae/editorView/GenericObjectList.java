@@ -3,6 +3,7 @@ package gae.editorView;
 import java.util.ArrayList;
 import java.util.Map;
 import gae.editor.EditingParser;
+import gae.editor.EditorIntermediate;
 import gae.editor.ObjectComponentEditor;
 import gae.gridView.ContainerWrapper;
 import gae.listView.DraggableUtilities;
@@ -28,7 +29,6 @@ public class GenericObjectList {
     private ObjectComponentEditor objectEditor;
     private ContainerWrapper wrapper;
     private Map<String, ArrayList<String>> interfaceToClassMap;
-    private int count;
 
     public GenericObjectList (ObjectComponentEditor editor,
                               Node node,
@@ -57,7 +57,9 @@ public class GenericObjectList {
                         new ColliderEditorOpener(objectEditor.getBiConsumer(), klass);
                     }
                         else {
-                            objectEditor.popNewEditor(classType + " " + count++);
+                            // EditorIntermediate.handleEditorPop(objectEditor,
+                            // String.format("%s  %d", classType, count++));
+                            objectEditor.popNewEditor(-1);
                         }
                     });
                 contextmenu.getItems().add(item);
@@ -71,11 +73,12 @@ public class GenericObjectList {
         ListView<?> list = ListViewUtilities.createGenericList(createdSpecificObjects, classType);
         BooleanProperty unclicked = new SimpleBooleanProperty(false);
         list.setOnMouseClicked(me -> {
+            System.out.println("UNCLICKED IS (If false you can make new)" + unclicked);
             if (me.getClickCount() == 2 && !unclicked.get()) {
                 unclicked.set(true);
                 DraggableItem draggable =
-                        new DraggableItem(list.getSelectionModel().getSelectedItem(), klass,
-                                          classType);
+                        new DraggableItem(list.getSelectionModel().getSelectedItem(), list
+                                .getSelectionModel().getSelectedIndex(), klass, objectEditor);
                 DraggableUtilities.makeObjectPlaceable(me, draggable, node,
                                                        createdSpecificObjects, wrapper, root,
                                                        objectEditor, unclicked);

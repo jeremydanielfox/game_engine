@@ -27,7 +27,7 @@ public class MoverEditorOpener extends PopUpEditorView {
     public MoverEditorOpener (Consumer<Object> consumer,
                               BiConsumer<Class<?>, Object> biConsumer,
                               Class<?> klass) {
-        super(consumer, biConsumer, klass);
+        super(consumer, biConsumer, klass, 0);
         // TODO Auto-generated constructor stub
     }
 
@@ -40,7 +40,7 @@ public class MoverEditorOpener extends PopUpEditorView {
         // TODO Auto-generated method stub
         libraryData = LibraryData.getInstance();
         createdDropDownList = new ArrayList<>();
-        super.initialize();
+//        super.initialize();
     }
 
     private void save () {

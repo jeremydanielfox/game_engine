@@ -28,7 +28,7 @@ public class ConcreteLevel implements Level, Title {
     // we should identify images by name and have a constant image path that we pin on before
     // Retrieving image
     private String myTitle = "";
-    private String myImagePath;
+    private String myImagePath = "src/images/Park_Path.png";
     private List<Goal> myWinningGoals;
     private List<Goal> myLosingGoals;
     private GameWorld myGameWorld;
@@ -156,6 +156,18 @@ public class ConcreteLevel implements Level, Title {
     public void setTitle (String title) {
         // TODO Auto-generated method stub
         myTitle = title;
+    }
+
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void setIndex (int existing) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

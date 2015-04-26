@@ -32,12 +32,17 @@ public class GameObjectContainer extends VBox implements ContainerWrapper {
         return title;
     }
 
+    public void clear () {
+        this.getChildren().clear();
+        getChildren().add(getLabel());
+    }
+
     /**
      * Important method that checks if the object's coordinate is on the grid
      */
     @Override
     public boolean checkBounds (double x, double y) {
-//        Point2D point = this.screenToLocal(x, y);
+        // Point2D point = this.screenToLocal(x, y);
         // System.out.println("X IS : " + point.getX());
         // System.out.println("Y IS : " + y);
         if (x < 0 || x > getWidth() || y < 0 || y > getHeight()) {

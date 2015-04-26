@@ -17,6 +17,7 @@ import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.range.RangeUpgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
+import engine.titles.Title;
 import gameworld.ObjectCollection;
 
 
@@ -27,24 +28,23 @@ import gameworld.ObjectCollection;
  * @author Nathan Prabhu and Danny Oh
  *
  */
-public class BasicWeapon implements Weapon {
+public class BasicWeapon implements Weapon, Title{
     private int timeSinceFire;
     private RangeUpgrade myRange;
     private DoubleProperty rangeProp = new SimpleDoubleProperty();
-
+    private String title;
     private FiringRate myFiringRate;
     private GameObject myProjectile;
     private FiringStrategy myFiringStrategy;
     private UpgradeSet<Upgrade> upgradables;
     private UpgradeTree tree;
+    private int index;
 
     private double value;
 
     public BasicWeapon () {
         upgradables = new UpgradeSet<>();
         timeSinceFire = 0;
-        setRange(60);
-        setFiringRate(.5);
         myFiringStrategy = new SingleProjectile();
     }
 
@@ -59,16 +59,13 @@ public class BasicWeapon implements Weapon {
         return clone;
     }
 
-    private UpgradeSet<Upgrade> initializeUpgrades () {
-        UpgradeSet<Upgrade> result =
-                new UpgradeSet<Upgrade>(new Upgrade[] { myRange, myFiringRate });
+    private void initializeUpgrades () {
         Set<Buff> collisionBuffs = myProjectile.getCollider().getCollisionBuffs();
         Set<Buff> explosBuffs = myProjectile.getCollider().getCollisionBuffs();
-        result.addAll(collisionBuffs);
-        result.addAll(explosBuffs);
-        result.addListener((SetChangeListener<Upgrade>) change ->
+        upgradables.addAll(collisionBuffs);
+        upgradables.addAll(explosBuffs);
+        upgradables.addListener((SetChangeListener<Upgrade>) change ->
                 syncBuffs(change, collisionBuffs, explosBuffs));
-        return result;
     }
 
     private void syncBuffs (Change<? extends Upgrade> change,
@@ -77,7 +74,7 @@ public class BasicWeapon implements Weapon {
 
         Buff buff = (change.wasAdded()) ? (Buff) change.getElementAdded() :
                                        (Buff) change.getElementRemoved();
-        switch (buff.getBuffType()) {
+        switch (buff.getType()) {
             case COLLISION:
                 if (change.wasAdded()) {
                     collisionBuffs.add(buff);
@@ -217,7 +214,7 @@ public class BasicWeapon implements Weapon {
 
     // TODO: Get the math correct here
     private double firingRateToSeconds () {
-        return 60.0 / myFiringRate.getRate();
+        return 60.0 / getFiringRate();
     }
 
     private boolean canFire () {
@@ -233,5 +230,29 @@ public class BasicWeapon implements Weapon {
     public void applyUpgrades (UpgradeBundle bundle) {
         bundle.applyUpgrades(upgradables);
         bundle.getParent().updateCurrent(bundle.getParent());
+    }
+
+    @Override
+    public String getTitle () {
+        // TODO Auto-generated method stub
+        return title;
+    }
+    @Settable
+    @Override
+    public void setTitle (String title) {
+        // TODO Auto-generated method stub
+        this.title = title;
+    }
+
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return index;
+    }
+
+    @Override
+    public void setIndex (int index) {
+        // TODO Auto-generated method stub
+        this.index = index;
     }
 }

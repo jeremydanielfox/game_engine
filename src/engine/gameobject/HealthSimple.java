@@ -15,6 +15,7 @@ public class HealthSimple implements Health, Title {
     private double myHealth;
     private double maxHealth;
     private String myTitle = "";
+    private int index;
 
     public HealthSimple () {
         this(0);
@@ -60,5 +61,17 @@ public class HealthSimple implements Health, Title {
     @Override
     public void setTitle (String title) {
         myTitle = title;
+    }
+
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return index;
+    }
+
+    @Override
+    public void setIndex (int index) {
+        // TODO Auto-generated method stub
+        this.index = index;
     }
 }

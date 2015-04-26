@@ -9,6 +9,7 @@ import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
+import engine.titles.Title;
 import gae.backend.Placeable;
 import gae.gridView.Path;
 import gae.gridView.PathView;
@@ -33,8 +34,8 @@ public class LibraryData {
     private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
     private Map<Class<?>, ObservableList<Object>> createdObjectMap = new HashMap<>();
     private ObservableList<GameObjectSimple> gameObjectList = FXCollections.observableArrayList();
-    private ObservableList<Object> moverList = FXCollections.observableArrayList();
     private ObservableList<Type> labelList = FXCollections.observableArrayList();
+    private ObservableList<Object> moverList = FXCollections.observableArrayList();
 
     private LibraryData () {
         setLists();
@@ -80,7 +81,14 @@ public class LibraryData {
 
     public void addCreatedObjectToList (Class<?> klass, Object o) {
         try {
-            createdObjectMap.get(klass).add(o);
+            Title casted = (Title) o;
+            if (casted.getIndex() >= 0) {
+                createdObjectMap.get(klass).set(casted.getIndex(), o);
+                System.out.println("replaced");
+            }
+            else {
+                createdObjectMap.get(klass).add(o);
+            }
         }
         catch (NullPointerException e) {
             ObservableList<Object> list = FXCollections.observableArrayList();
@@ -90,7 +98,7 @@ public class LibraryData {
     }
 
     public ObservableList<Object> getObservableList (Class<?> klass) {
-        if (!createdObjectMap.containsKey(klass)) { 
+        if (!createdObjectMap.containsKey(klass)) {
             if (!klass.getSimpleName().equals("MoverPath")) {
                 ObservableList<Object> list = FXCollections.observableArrayList();
                 createdObjectMap.put(klass, list);
@@ -109,6 +117,7 @@ public class LibraryData {
     public void addGameObjectToList (Object gameObject) {
         GameObjectToEditable editable = new GameObjectToEditable((GameObject) gameObject);
         editableList.add(editable);
+        gameObjectList.add((GameObjectSimple) gameObject);
     }
 
     public void addPathToList (PathView pathView) {
@@ -126,12 +135,12 @@ public class LibraryData {
     private void addToExistingGameObjectList (Authorable authorable) {
         Placeable editable = (Placeable) authorable;
         GameObjectSimple object = new GameObjectSimple();
+        object.setPoint(editable.getLocation());
         object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
                                       editable.getImagePath()));
         object.setLabel(editable.getLabel());
-        object.setTag(editable.getTag());
+        object.setShopTag(editable.getShopTag());
         object.setMover(editable.getPath());
-        object.setPoint(editable.getLocation());
         object.setHealth(new HealthSimple(editable.getHealth()));
         // set Collider
         gameObjectList.add(object);

@@ -1,13 +1,14 @@
 package gae.backend;
 
+import engine.gameobject.Graphic;
+import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
+import engine.gameobject.labels.Type;
 import engine.gameobject.weapon.Weapon;
-import engine.shop.tag.GameObjectTag;
-import gae.gridView.Path;
+import engine.shop.ShopTag;
 import gae.listView.DeepCopy;
 import gae.listView.MovableImage;
 import gae.openingView.UIObject;
-import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -156,18 +157,6 @@ public class TempTower implements Placeable, UIObject {
     }
 
     @Override
-    public List<List<Path>> getPath () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setPath (List<List<Path>> path) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public double getHealth () {
         // TODO Auto-generated method stub
         return 0;
@@ -192,18 +181,6 @@ public class TempTower implements Placeable, UIObject {
     }
 
     @Override
-    public GameObjectTag getTag () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setTag (GameObjectTag tag) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public void setType (String type) {
         // TODO Auto-generated method stub
         
@@ -213,5 +190,83 @@ public class TempTower implements Placeable, UIObject {
     public void setImagePath (String path) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public ShopTag getShopTag () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getShopImagePath () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ImageView getShopImageView () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setShopImagePath (String path) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Graphic getGraphic () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setName (String name) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setDescription (String description) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Mover getPath () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Type getLabel () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setPath (Mover path) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setGraphic (Graphic graphic) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setLabel (Type label) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public String getDescription () {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

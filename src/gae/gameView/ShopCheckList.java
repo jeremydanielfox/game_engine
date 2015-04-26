@@ -22,7 +22,6 @@ public class ShopCheckList extends CheckList {
     public ShopCheckList (ObservableList<Authorable> objects) {
         super();
         myObjects = (ObservableList<Placeable>) (ObservableList<?>) objects;
-
         myObjects.addListener( (ListChangeListener.Change<? extends Placeable> change) -> {
             while (change.next()) {
                 change.getAddedSubList().stream()

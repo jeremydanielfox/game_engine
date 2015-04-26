@@ -1,18 +1,16 @@
 package gae.listView;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
 import engine.gameobject.weapon.Weapon;
-import engine.shop.tag.GameObjectTag;
+import engine.shop.ShopTag;
+import engine.shop.ShopTagSimple;
 import gae.backend.Placeable;
-import gae.gridView.Path;
-import java.util.List;
-import View.ImageUtilities;
 import javafx.scene.image.ImageView;
+import View.ImageUtilities;
 
 
 /**
@@ -32,16 +30,19 @@ public class GameObjectToEditable implements Placeable {
     private Weapon weapon;
     private PointSimple location;
     private String imagePath;
+    private String shopImagePath;
     private MovableImage movableImage;
     private Graphic graphic;
+    private Graphic shopGraphic;
     private String name;
     private String type;
     private Mover path;
     private int width;
     private int height;
     private ImageView imageView;
+    private ImageView shopImageView;
     private double health;
-    private GameObjectTag tag;
+    private String description;
     private Type label;
 
     public GameObjectToEditable () {
@@ -55,18 +56,18 @@ public class GameObjectToEditable implements Placeable {
          * Serializable)
          * TODO: find out how to copy the object
          */
-        name = gameObject.getTag().getName();
+        name = gameObject.getName();
         imagePath = gameObject.getGraphic().getImagePath();
         type = gameObject.getLabel().getName();
-//        imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
-        System.out.println(imagePath);
+        description = gameObject.getDescription();
+        shopImagePath = gameObject.getShopGraphic().getImagePath();
         imageView = new ImageView(gameObject.getGraphic().getImagePath());
-        tag = gameObject.getTag();
+        shopImageView = new ImageView(gameObject.getShopGraphic().getImagePath());
         path = gameObject.getMover();
         graphic = gameObject.getGraphic();
+        shopGraphic = gameObject.getShopGraphic();
         location = gameObject.getPoint();
-        // gameobject is not serializable and gives an error so must set to null
-        // gameObject = null;
+        weapon = gameObject.getWeapon();
     }
 
     @Override
@@ -126,18 +127,6 @@ public class GameObjectToEditable implements Placeable {
     }
 
     @Override
-    public Mover getPath () {
-        // TODO Auto-generated method stub
-        return path;
-    }
-
-    @Override
-    public void setPath (Mover path) {
-        // TODO Auto-generated method stub
-        this.path = path;
-    }
-
-    @Override
     public int getWidth () {
         // TODO Auto-generated method stub
         return width;
@@ -193,13 +182,16 @@ public class GameObjectToEditable implements Placeable {
         copy.setHeight(height);
         copy.setLocation(location);
         copy.setPath(path);
-        copy.setTag(tag);
         copy.setWeapon(weapon);
         copy.setWidth(width);
         copy.setType(type);
         copy.setImagePath(imagePath);
+        copy.setShopImagePath(shopImagePath);
         copy.setID(ourID);
         copy.setImageView(imageView);
+        copy.setShopImageView(shopImageView);
+        copy.setName(name);
+        copy.setDescription(description);
         ourID++;
         return copy;
     }
@@ -208,8 +200,17 @@ public class GameObjectToEditable implements Placeable {
         this.imagePath = imagePath;
     }
 
+    @Override
+    public void setShopImagePath (String path) {
+        shopImagePath = path;
+    }
+
     public void setImageView (ImageView imageView) {
         this.imageView = imageView;
+    }
+
+    public void setShopImageView (ImageView imageView) {
+        this.shopImageView = imageView;
     }
 
     @Override
@@ -237,44 +238,72 @@ public class GameObjectToEditable implements Placeable {
     }
 
     @Override
-    public GameObjectTag getTag () {
-        // TODO Auto-generated method stub
-        return tag;
-    }
-
-    @Override
-    public void setTag (GameObjectTag tag) {
-        // TODO Auto-generated method stub
-        this.tag = tag;
-    }
-
-    @Override
     public void setType (String type) {
         // TODO Auto-generated method stub
         this.type = type;
     }
 
-    @Override
     public Type getLabel () {
         // TODO Auto-generated method stub
-        return label;
-    }
-
-    @Override
-    public void setLabel (Type label) {
-        // TODO Auto-generated method stub
-        this.label = label;
+        return null;
     }
 
     @Override
     public Graphic getGraphic () {
-        // TODO Auto-generated method stub
         return graphic;
+    }
+
+    public void setLabel (Type label) {
+        this.label = label;
+    }
+
+    @Override
+    public String getShopImagePath () {
+        return shopImagePath;
+    }
+
+    @Override
+    public ImageView getShopImageView () {
+        return shopImageView;
+    }
+
+    @Override
+    public void setName (String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void setDescription (String description) {
+        this.description = description;
+    }
+
+    @Override
+    public Mover getPath () {
+        return path;
+    }
+
+    @Override
+    public void setPath (Mover path) {
+        this.path = path;
     }
 
     @Override
     public void setGraphic (Graphic graphic) {
-        // TODO Auto-generated method stub
         this.graphic = graphic;
     }
+
+    @Override
+    public ShopTag getShopTag () {
+        ShopTagSimple shopTag = new ShopTagSimple();
+        shopTag.setName(name);
+        shopTag.setDescription(description);
+        shopTag.setShopGraphic(shopGraphic.clone());
+        return shopTag;
+    }
+
+    @Override
+    public String getDescription () {
+        return description;
+    }
+
 }

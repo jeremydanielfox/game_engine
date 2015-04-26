@@ -5,6 +5,8 @@ import gae.gridView.ContainerWrapper;
 import gae.gridView.PathView;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -23,23 +25,20 @@ import javafx.scene.layout.StackPane;
  *
  */
 public class LibraryView {
-    /*
-     * should be able to get the gameObjects list from a properties file
-     */
-    private String[] gameObjects = { "Tower", "Enemy" };
     private List<PaneList> listOfListObjects;
     private Group root;
     private Group objectGroup;
     private Node nodeScene;
     private ObservableList<Authorable> editableObservableList;
+    private List<String> instantiatedTypes;
     private Scene myScene;
     private Accordion accordion;
     private TitledPane pathTitledPane;
     private PathList pathList;
     private ContainerWrapper wrapper;
 
-    public LibraryView (ObservableList<Authorable> editableObservableList) {
-        this.editableObservableList = editableObservableList;
+    public LibraryView () {
+        instantiatedTypes = new ArrayList<>();
     }
 
     public Scene getScene () {
@@ -72,6 +71,20 @@ public class LibraryView {
         return root;
     }
 
+    private void setUpTitledPane (Authorable authorable) {
+        String type = authorable.getType();
+        if (!instantiatedTypes.contains(type)) {
+            instantiatedTypes.add(type);
+            PaneList paneList = new PaneList();
+            listOfListObjects.add(paneList);
+            accordion.getPanes()
+                    .add(paneList.initialize(objectGroup, nodeScene, myScene,
+                                             wrapper,
+                                             editableObservableList,
+                                             type));
+        }
+    }
+
     /**
      * Uses reflection to instantiate each GameObject's Pane subclass. Currently using a try/catch
      * block as Path isn't part of the Generic GameObjects that we're using. Trying to figure out
@@ -82,13 +95,20 @@ public class LibraryView {
     private Node view () {
         listOfListObjects = new ArrayList<>();
         accordion = new Accordion();
-        for (String gameObject : gameObjects) {
-            PaneList paneList = new PaneList();
-            listOfListObjects.add(paneList);
-            accordion.getPanes().add(paneList.initialize(objectGroup, nodeScene, myScene, wrapper,
-                                                         editableObservableList, gameObject));
-
+        editableObservableList = LibraryData.getInstance().getEditableObservableList();
+        for (Authorable authorable : editableObservableList) {
+            Placeable existing = (Placeable) authorable;
+            setUpTitledPane(existing);
         }
+        editableObservableList
+                .addListener( (ListChangeListener.Change<? extends Authorable> change) -> {
+                    while (change.next()) {
+                        if (change.wasAdded()) { // if an editablenode was added
+                    Placeable added = (Placeable) change.getAddedSubList().get(0);
+                    setUpTitledPane(added);
+                }
+            }
+        });
         pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
         pathTitledPane =
                 pathList.getTitledPane("Path");

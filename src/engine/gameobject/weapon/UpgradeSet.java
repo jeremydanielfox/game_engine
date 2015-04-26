@@ -33,15 +33,10 @@ public class UpgradeSet<T extends Upgrade> implements ObservableSet<T> {
     private HashMap<String, T> upgradeMap;
     private ObservableSet<T> obsSet;
 
-    public <T> UpgradeSet () {
-        this.upgradeMap = new HashMap<>();
-    }
-
-    public UpgradeSet (T ... objects) {
+    public UpgradeSet () {
         this.upgradeMap = new HashMap<>();
         obsSet = FXCollections.observableSet(upgradeMap.values().stream()
                 .collect(Collectors.toSet()));
-        addAll(Arrays.asList(objects));
     }
 
     /**
@@ -99,9 +94,10 @@ public class UpgradeSet<T extends Upgrade> implements ObservableSet<T> {
     public boolean add (T e) {
         Upgrade old = upgradeMap.put(new UpgradeType(e).toString(), e);
         if (old != null) {
+            System.out.println("called");
             old.notifyObservers();
         }
-        return old==null;
+        return old == null;
     }
 
     @Override
@@ -216,7 +212,6 @@ public class UpgradeSet<T extends Upgrade> implements ObservableSet<T> {
     @Override
     public void addListener (SetChangeListener<? super T> listener) {
         obsSet.addListener(listener);
-
     }
 
     @Override

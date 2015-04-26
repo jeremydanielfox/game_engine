@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
-import engine.prototype.Prototype;
+import engine.gameobject.Purchasable;
 import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;
 import javafx.collections.ObservableList;
@@ -29,6 +29,7 @@ import gae.openingView.UIObject;
 public class ShopEditor implements UIObject {
 
     private Pane pane = new StackPane();
+
     private ShopCheckList checklist;
 
     public ShopEditor () {
@@ -39,7 +40,7 @@ public class ShopEditor implements UIObject {
         vbox.getChildren().addAll(text,
                                   makeObjectChecklist(LibraryData.getInstance()
                                           .getEditableObservableList()));
-//        vbox.getChildren().add(tempbutton());
+        // vbox.getChildren().add(tempbutton());
         pane.getChildren().add(vbox);
         pane.setMaxWidth(Screen.getPrimary().getBounds().getWidth());
     }
@@ -57,28 +58,26 @@ public class ShopEditor implements UIObject {
         return pane;
     }
 
-    // temporary
-//    private Button tempbutton () {
-//        Button button = new Button("Print selected");
-//
-//        button.setOnAction(e -> {
-//            for (Placeable obj : (checklist.getSelectedPlaceables()) {
-//                System.out.println(obj.getTag().getName());
-//            }
-//        });
-//        return button;
-//    }
-//    
-    
-    public ShopModel makeShop(){
-        ShopModelSimple shop=new ShopModelSimple();
-        List<Prototype<GameObject>> prototypes=new ArrayList<>();
-        checklist.getSelectedPlaceables().stream().forEach(e->{
-            prototypes.add((Prototype<GameObject>) e.getGameObject());
+    public ShopModel makeShop () {
+        ShopModelSimple shop = new ShopModelSimple();
+        List<Purchasable<GameObject>> prototypes = new ArrayList<>();
+        checklist.getSelectedPlaceables().stream().forEach(e -> {
+            prototypes.add((Purchasable<GameObject>) e.getGameObject());
         });
-        shop.setPrototypes(prototypes);
+        shop.setPurchasables(prototypes);
         return shop;
     }
-    
+
+   //for testing!!!!!!!!
+    private Button tempbutton () {
+        Button button = new Button("Print selected");
+
+        button.setOnAction(e -> {
+            for (Placeable obj : ((ShopCheckList) checklist).getSelectedPlaceables()) {
+                System.out.println(obj.getName());
+            }
+        });
+        return button;
+    }
 
 }

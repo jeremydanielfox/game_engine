@@ -36,8 +36,8 @@ public class ShopCheckListItem implements CheckListItem {
         Graphic graphic = placeable.getGraphic().clone();
         graphic.setHeight(50);
         Node image = graphic.getResizedGraphic(1);
-        Label label = new Label(placeable.getTag().getName());
-        Text description=new Text(placeable.getTag().getDescription());
+        Label label = new Label(placeable.getName());
+        Text description=new Text(placeable.getDescription());
         String value;
         try{
             value=Double.toString(placeable.getWeapon().getValue());

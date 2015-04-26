@@ -4,20 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import engine.gameobject.Graphic;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import gae.backend.Placeable;
-import gae.listView.Authorable;
-import javafx.collections.ListChangeListener;
 
 
 /**

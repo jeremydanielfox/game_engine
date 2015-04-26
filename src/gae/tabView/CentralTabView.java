@@ -105,12 +105,11 @@ public class CentralTabView implements UIObject {
         
         game.getLevelBoard().addLevel(levelData);
         levelView = new LevelView();
-        LevelPreferencesTab levelPrefs = new LevelPreferencesTab();
         Pane levelViewPane = levelView.getBorder(scene);
         gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
         WaveEditor waves = new WaveEditor(sb, gameWorldFactory.createGameWorld());
         LevelTabSet newLevel =
-                new LevelTabSet(levelViewPane, levelPrefs.getStack(),
+                new LevelTabSet(levelViewPane,
                                 waves.getObject());
         Tab newTab = new Tab("Level:" + levelCount++);
         newTab.setContent(newLevel.getBaseNode());

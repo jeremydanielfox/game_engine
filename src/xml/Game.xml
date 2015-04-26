@@ -12673,16 +12673,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>2386</int>
-                    <int>1277</int>
-                    <int>2228</int>
-                    <int>464</int>
-                    <int>1379</int>
-                    <int>911</int>
-                    <int>384</int>
-                    <int>1991</int>
-                    <int>93</int>
-                    <int>2322</int>
+                    <int>905</int>
+                    <int>2055</int>
+                    <int>1254</int>
+                    <int>2005</int>
+                    <int>201</int>
+                    <int>2183</int>
+                    <int>1604</int>
+                    <int>599</int>
+                    <int>1729</int>
+                    <int>1707</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -19020,6 +19020,8 @@
       </engine.game.ConcreteLevel>
     </myLevels>
     <curLevelIndex>0</curLevelIndex>
+    <isLost>false</isLost>
+    <isWon>false</isWon>
   </myLevelBoard>
   <myShop class="engine.shop.ShopModelSimple">
     <currentPlayer reference="../../myPlayer"/>

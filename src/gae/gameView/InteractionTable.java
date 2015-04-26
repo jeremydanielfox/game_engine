@@ -1,6 +1,6 @@
 package gae.gameView;
 
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 import gae.backend.Placeable;
 import gae.gridView.PathView;
 import gae.listView.Authorable;
@@ -40,7 +40,7 @@ public class InteractionTable extends Application {
     private VBox content;
     private Button adder;
     private List<InteractionInstance> interactions;
-    private ObservableList<Label> gaeLabels;
+    private ObservableList<Type> gaeLabels;
 
     /*
      * use observable list from library data. get labels and add listener.
@@ -67,12 +67,12 @@ public class InteractionTable extends Application {
      * label is added
      */
     private void addLabelListener () {
-        gaeLabels.addListener( (ListChangeListener.Change<? extends Label> change) -> {
+        gaeLabels.addListener( (ListChangeListener.Change<? extends Type> change) -> {
             while (change.next()) {
                 if (change.wasAdded()) {
-                    Label added = change.getAddedSubList().get(0);
-                    if (added instanceof Label) {
-                        Label l = added;
+                    Type added = change.getAddedSubList().get(0);
+                    if (added instanceof Type) {
+                        Type l = added;
                         gaeLabels.add(l);
                     }
                 }

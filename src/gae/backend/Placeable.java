@@ -68,15 +68,10 @@ public interface Placeable extends Serializable, Authorable {
     public void setType (String type);
 
     public void setImagePath (String path);
-<<<<<<< HEAD
-
-    public void setLabel (Label label);
 
     public void setGraphic (Graphic graphic);
-=======
     
     public void setLabel(Type label);
->>>>>>> 0aac56c7c4d06524d21d2c4028cea44c18cc76ba
 
     public Object clone ();
 

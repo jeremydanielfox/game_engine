@@ -1,13 +1,14 @@
 package gae.gameView;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 import engine.interactions.BuffImparter;
 import engine.interactions.CollisionEngine;
 import engine.interactions.Interaction;
@@ -86,7 +87,7 @@ public class InteractionData {
      * @param i
      * @param two
      */
-    public void addInteraction (List<Label> one, Interaction i, List<Label> two) {
+    public void addInteraction (List<Type> one, Interaction i, List<Type> two) {
         if (i instanceof BuffImparter) {
             massPut(one, i, two, myCollisions);
         }
@@ -108,9 +109,9 @@ public class InteractionData {
      * @param two
      * @param engine
      */
-    private void massPut (List<Label> one,
+    private void massPut (List<Type> one,
                           Interaction i,
-                          List<Label> two,
+                          List<Type> two,
                           InteractionEngine engine) {
         one.forEach(e -> {
             two.forEach(f -> {

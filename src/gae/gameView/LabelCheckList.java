@@ -2,7 +2,7 @@ package gae.gameView;
 
 import java.util.ArrayList;
 import java.util.List;
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -15,9 +15,9 @@ import javafx.stage.Stage;
  */
 public class LabelCheckList extends CheckList {
 
-    private List<Label> myObjects;
+    private List<Type> myObjects;
 
-    public LabelCheckList (List<Label> objects) {
+    public LabelCheckList (List<Type> objects) {
         super();
         myObjects = objects;
         myObjects.forEach(e -> {
@@ -41,8 +41,8 @@ public class LabelCheckList extends CheckList {
      *
      * @return list of labels
      */
-    public List<Label> getSelectedLabels () {
-        List<Label> list = new ArrayList<>();
+    public List<Type> getSelectedLabels () {
+        List<Type> list = new ArrayList<>();
         getSelectedItems().stream().forEach(e -> list.add(((LabelCheckListItem) e).getLabel()));
         return list;
 

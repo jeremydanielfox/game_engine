@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import gae.editorView.TestEngine;
 import xml.DataManager;
 import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
@@ -133,9 +132,9 @@ public class MoverEditorOpener extends PopUpEditorView {
                 myPath.addPathSegment(tempBez);
             }
             DataManager.writeToXML(myPath, "src/gae/listView/Test.xml");
-            TestEngine test = new TestEngine();
+//            TestEngine test = new TestEngine();
             try {
-                test.start(new Stage());
+//                test.start(new Stage());
             }
             catch (Exception e) {
                 // TODO Auto-generated catch block

@@ -30,16 +30,18 @@ public class Collider {
         this.onDeath = onDeath;
     }
 
-//    @Settable
+    @Settable
     public void setCollisionList(Collection<Buff> buffs){
         Set<Buff> buffList = new HashSet<>();
         buffList.addAll(buffs);
+        System.out.println("added collision list");
     }
     
-//    @Settable
+    @Settable
     public void setExplosionList(Collection<Buff> buffs){
         onDeath.clearBuffs();
         buffs.forEach(b -> onDeath.addBuff(b));
+        System.out.println("added explosion list");
     }
     
     public void addCollisionBehavior (Buff newBuff) {

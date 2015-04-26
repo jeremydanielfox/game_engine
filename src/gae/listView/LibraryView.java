@@ -37,8 +37,7 @@ public class LibraryView {
     private PathList pathList;
     private ContainerWrapper wrapper;
 
-    public LibraryView (ObservableList<Authorable> editableObservableList) {
-        this.editableObservableList = editableObservableList;
+    public LibraryView () {
         instantiatedTypes = new ArrayList<>();
     }
 
@@ -72,6 +71,20 @@ public class LibraryView {
         return root;
     }
 
+    private void setUpTitledPane (Authorable authorable) {
+        String type = authorable.getType();
+        if (!instantiatedTypes.contains(type)) {
+            instantiatedTypes.add(type);
+            PaneList paneList = new PaneList();
+            listOfListObjects.add(paneList);
+            accordion.getPanes()
+                    .add(paneList.initialize(objectGroup, nodeScene, myScene,
+                                             wrapper,
+                                             editableObservableList,
+                                             type));
+        }
+    }
+
     /**
      * Uses reflection to instantiate each GameObject's Pane subclass. Currently using a try/catch
      * block as Path isn't part of the Generic GameObjects that we're using. Trying to figure out
@@ -82,22 +95,17 @@ public class LibraryView {
     private Node view () {
         listOfListObjects = new ArrayList<>();
         accordion = new Accordion();
+        editableObservableList = LibraryData.getInstance().getEditableObservableList();
+        for (Authorable authorable : editableObservableList) {
+            Placeable existing = (Placeable) authorable;
+            setUpTitledPane(existing);
+        }
         editableObservableList
                 .addListener( (ListChangeListener.Change<? extends Authorable> change) -> {
                     while (change.next()) {
                         if (change.wasAdded()) { // if an editablenode was added
                     Placeable added = (Placeable) change.getAddedSubList().get(0);
-                    String type = added.getType();
-                    if (instantiatedTypes.contains(type)) {
-                        instantiatedTypes.add(type);
-                        PaneList paneList = new PaneList();
-                        listOfListObjects.add(paneList);
-                        accordion.getPanes()
-                                .add(paneList.initialize(objectGroup, nodeScene, myScene,
-                                                         wrapper,
-                                                         editableObservableList,
-                                                         type));
-                    }
+                    setUpTitledPane(added);
                 }
             }
         });

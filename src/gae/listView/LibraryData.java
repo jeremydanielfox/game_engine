@@ -127,12 +127,12 @@ public class LibraryData {
     private void addToExistingGameObjectList (Authorable authorable) {
         Placeable editable = (Placeable) authorable;
         GameObjectSimple object = new GameObjectSimple();
+        object.setPoint(editable.getLocation());
         object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
                                       editable.getImagePath()));
         object.setLabel(editable.getLabel());
         object.setShopTag(editable.getShopTag());
         object.setMover(editable.getPath());
-        object.setPoint(editable.getLocation());
         object.setHealth(new HealthSimple(editable.getHealth()));
         // set Collider
         gameObjectList.add(object);

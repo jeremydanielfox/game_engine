@@ -64,6 +64,7 @@ public class GameObjectToEditable implements Placeable {
         tag = gameObject.getTag();
         path = gameObject.getMover();
         graphic = gameObject.getGraphic();
+        location = gameObject.getPoint();
         // gameobject is not serializable and gives an error so must set to null
         // gameObject = null;
     }

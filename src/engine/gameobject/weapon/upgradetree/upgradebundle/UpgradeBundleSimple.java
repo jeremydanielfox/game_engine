@@ -2,6 +2,7 @@ package engine.gameobject.weapon.upgradetree.upgradebundle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import engine.fieldsetting.Settable;
@@ -110,10 +111,4 @@ public class UpgradeBundleSimple implements BuildableBundle {
         clone.setUpgradeTag(upgradeTag.clone());
         return clone;
     }
-    
-
-    public List<Upgrade> getUpgrades(){
-        return upgrades;
-    }
-
 }

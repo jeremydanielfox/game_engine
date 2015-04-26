@@ -1,6 +1,7 @@
 package gae.openingView;
 
 import gae.gameView.GameView;
+
 import java.io.File;
 import java.lang.reflect.Method;
 import java.nio.file.Paths;
@@ -10,6 +11,7 @@ import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import musician.Music;
 import musician.MusicSimple;
 import musician.Musician;
@@ -17,6 +19,7 @@ import musician.MusicianSimple;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
@@ -45,7 +48,7 @@ public class OpeningView implements UIMediator {
     private List<UIObject> myUIObjects;
     private UIObject dataForm, imagePanel;
     private Map<String, String> dataResults;
-    private Musician myMusician;
+    private MusicianSimple myMusician;
 
     private SimpleStringProperty gameSelected;
 
@@ -83,7 +86,8 @@ public class OpeningView implements UIMediator {
      * @param s
      */
     private void setMusic (String s) {
-        Music backgroundMusic = new MusicSimple(new Media(Paths.get(MUSIC_PATH + s).toUri().toString()));
+        Music backgroundMusic = new MusicSimple(new Media(Paths.get(MUSIC_PATH + s).toUri()
+                .toString()));
         myMusician.addBackgroundMusic(myStage, myScene, backgroundMusic);
         myMusician.playAudio(myScene);
     }

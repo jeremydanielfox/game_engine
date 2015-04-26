@@ -68,7 +68,7 @@ public class UpgradeSet<T extends Upgrade> implements ObservableSet<T> {
     public boolean contains (Object o) {
         if (o instanceof Upgrade) {
             UpgradeType type = new UpgradeType((Upgrade) o);
-            return upgradeMap.containsKey(type.toString());
+            return upgradeMap.containsKey(type.toString()) || upgradeMap.containsValue(o);
         }
         return false;
     }

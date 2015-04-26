@@ -10,7 +10,6 @@ public class UpgradeObserver implements Observer{
 
     public UpgradeObserver (Runnable updateRange){
         this.updater = updateRange;
-        update();
     }
 
     @Override

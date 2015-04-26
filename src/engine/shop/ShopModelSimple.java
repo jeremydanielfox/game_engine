@@ -11,7 +11,6 @@ import engine.fieldsetting.Settable;
 import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import engine.gameobject.test.TestTower;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import engine.prototype.Prototype;
 import engine.shop.tag.PriceTag;
@@ -31,14 +30,13 @@ public class ShopModelSimple implements ShopModel {
     private GameWorld myGameWorld;
     private Map<String, Prototype<GameObject>> prototypeMap;
     private Map<String, UpgradeBundle> upgradeMap;
-    private final double markup;
+    private double markup;
     private GameObject currentGameObject;
 
     public ShopModelSimple () {
         markup = 1;
     }
 
-    // For test only
     public ShopModelSimple (GameWorld world, Player player, double markup) {
         this.markup = markup;
         myGameWorld = world;
@@ -50,6 +48,21 @@ public class ShopModelSimple implements ShopModel {
     @Settable
     public void setPrototypes (List<Prototype<GameObject>> prototypes) {
         prototypes.forEach(prototype -> addPrototype(prototype));
+    }
+    
+    @Settable
+    public void setMarkup (double markup) {
+        this.markup = markup;
+    }
+    
+    @Settable
+    public void setGameWorld (GameWorld world) {
+        myGameWorld = world;
+    }
+    
+    @Settable
+    public void setPlayer (Player player) {
+        currentPlayer = player;
     }
 
     @Override
@@ -68,7 +81,7 @@ public class ShopModelSimple implements ShopModel {
 
     @Override
     public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject) {
-        currentGameObject = gameObject;
+        currentGameObject = gameObject;;
         List<UpgradeBundle> bundles = gameObject.getWeapon().getNextUpgrades();
         List<ItemGraphic> upgradeGraphics = new ArrayList<ItemGraphic>();
         upgradeMap.clear();

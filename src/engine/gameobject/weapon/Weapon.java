@@ -75,7 +75,7 @@ public interface Weapon {
      */
     public abstract double getFiringRate ();
 
-    public abstract List<UpgradeBundle> getNextUpgrades ();
+    public List<UpgradeBundle> getNextUpgrades ();
 
     public void applyUpgrades (UpgradeBundle bundle);
 

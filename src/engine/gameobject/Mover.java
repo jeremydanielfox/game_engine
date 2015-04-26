@@ -25,6 +25,12 @@ public interface Mover {
     @Settable
     public void setSpeed (double speed);
 
+    /**
+    * Speeds/slows down the mover
+    * @param percentage i.e. 90 for 90% speedup
+    */
+   public void speedBuff (double percentage);
+      
     public double getSpeed();
     public Mover clone ();
 

@@ -9,17 +9,17 @@ package engine.gameobject.labels;
  * @author Jeremy
  *
  */
-public class LabelBase extends SimpleLabel {
+public class TypeBase extends SimpleType {
     /*
      * private static String name = "Base";
      * private static Collection<Label> mySubLabels = new HashSet<>();
      */
 
     private static String myName = "Base";
-    private static Label superLabel = null;
+    private static Type superType = null;
 
-    public LabelBase () {
-        super(myName, superLabel);
+    public TypeBase () {
+        super(myName, superType);
     }
 
     /*

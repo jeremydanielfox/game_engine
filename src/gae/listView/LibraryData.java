@@ -6,7 +6,7 @@ import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.backend.Placeable;
@@ -33,7 +33,7 @@ public class LibraryData {
     private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
     private Map<Class<?>, ObservableList<Object>> createdObjectMap = new HashMap<>();
     private ArrayList<GameObjectSimple> gameObjectList = new ArrayList<>();
-    private ObservableList<Label> labelList = FXCollections.observableArrayList();
+    private ObservableList<Type> labelList = FXCollections.observableArrayList();
 
     private LibraryData () {
         setEditableList();
@@ -97,7 +97,7 @@ public class LibraryData {
         return gameObjectList;
     }
 
-    public ObservableList<Label> getLabelList () {
+    public ObservableList<Type> getLabelList () {
         return labelList;
     }
 

@@ -5,23 +5,23 @@ import java.util.Collections;
 import engine.fieldsetting.Settable;
 
 
-public abstract class LabelConcrete implements Label {
+public abstract class TypeConcrete implements Type {
     private String myName;
-    private Label mySuperLabel;
-    private Label myBaseLabel;
-    private Collection<Label> mySubLabels;
+    private Type mySuperLabel;
+    private Type myBaseLabel;
+    private Collection<Type> mySubLabels;
 
-    public LabelConcrete () {
-        myBaseLabel = new LabelBase();
-        setSuperLabel(myBaseLabel);
+    public TypeConcrete () {
+        myBaseLabel = new TypeBase();
+        setSuperType(myBaseLabel);
     }
 
-    public LabelConcrete (Label superLabel) {
-        setSuperLabel(superLabel);
+    public TypeConcrete (Type superLabel) {
+        setSuperType(superLabel);
     }
 
     @Override
-    public Label clone () {
+    public Type clone () {
         return null;
     }
 
@@ -36,7 +36,7 @@ public abstract class LabelConcrete implements Label {
     }
 
     // @Override
-    public Collection<Label> getSubLabels () {
+    public Collection<Type> getSubLabels () {
         return Collections.unmodifiableCollection(mySubLabels);
     }
 
@@ -46,12 +46,12 @@ public abstract class LabelConcrete implements Label {
     }
 
     @Override
-    public Label getSuperLabel () {
+    public Type getSuperType () {
         return mySuperLabel;
     }
 
     // @Override
-    public void addSubLabel (Label label) {
+    public void addSubLabel (Type label) {
         mySubLabels.add(label);
 
     }
@@ -66,7 +66,7 @@ public abstract class LabelConcrete implements Label {
      */
 
     // @Override
-    public void removeSubLabel (Label label) {
+    public void removeSubLabel (Type label) {
         mySubLabels.remove(label);
     }
 

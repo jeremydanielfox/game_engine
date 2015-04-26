@@ -1,8 +1,10 @@
 package engine.gameobject;
 
+import engine.fieldsetting.Settable;
 import engine.pathfinding.EndOfPathException;
 
 
+@Settable
 public class MoverDirection extends MoverPoint {
     private double distanceLimit;
     private double distanceTraveled;
@@ -37,13 +39,14 @@ public class MoverDirection extends MoverPoint {
         else {
             newPoint = PointSimple.pointOnLine(current, getPoint(), -currentSpeed());
         }
-        //Accounting for the exact movement that puts the mover past the reference point
+        // Accounting for the exact movement that puts the mover past the reference point
         if (currentSpeed() > PointSimple.distance(current, getPoint()) && !pastPoint) {
             pastPoint = true;
         }
         return newPoint;
     }
 
+    @Settable
     @Override
     public void setPoint (PointSimple myPoint) {
         super.setPoint(myPoint);

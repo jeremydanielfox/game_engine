@@ -19,12 +19,14 @@ public class FieldMaker {
 
     private Method myMethod;
     private String methodName;
+    private String propertyName;
     private HBox field;
     private List<TextField> textFields;
 
     public FieldMaker (Method m) {
         myMethod = m;
-        methodName = extractName(m);
+        methodName = m.getName();
+        propertyName = extractName(m);
         field = new HBox(15);
         textFields = new ArrayList<>();
         createField(myMethod);
@@ -33,14 +35,24 @@ public class FieldMaker {
     public Node getField () {
         return field;
     }
+    
+    public List<TextField> getInputs() {
+        return textFields;
+    }
+    
+    public String getMethodName() {
+        return methodName;
+    }
 
     /**
      * Creates field with all setters needed using text boxes
      */
     private void createField (Method m) {
         TextField tf = new TextField();
-        Label l = new Label(methodName);
+        Label l = new Label(propertyName);
         textFields.add(tf);
+        l.setPrefWidth(100);
+        tf.setPrefWidth(150);
         field.getChildren().addAll(l, tf);
     }
 

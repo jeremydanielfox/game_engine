@@ -10,11 +10,10 @@ import engine.game.Player;
 import gae.editor.EditingParser;
 import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class PlayerBuilder extends Application {
@@ -44,24 +43,31 @@ public class PlayerBuilder extends Application {
      */
     @SuppressWarnings("static-access")
     private void populateFields (List<Method> methods) {
-        System.out.println(methods.size());
         methods.forEach(e -> {
-            Arrays.asList(e.getParameterTypes()).forEach(f -> {
-                if (f.isPrimitive() || f.equals(String.class)) {
-                    FieldMaker fm = new FieldMaker(e);
-                    fields.add(fm);
-                    builder.getChildren().add(fm.getField());
-                }
-                else {
-                    try {
-                        populateFields(parser.getMethodsWithAnnotation(Class.forName(f.getName()), Settable.class));
-                    }
-                    catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
+            Arrays.asList(e.getParameterTypes())
+                    .forEach(f -> {
+                                 if (f.isPrimitive() || f.equals(String.class)) {
+                                     FieldMaker fm = new FieldMaker(e);
+                                     fields.add(fm);
+                                     builder.getChildren().add(fm.getField());
+                                 }
+                                 else {
+                                     addSubLabel(e);
+                                     try {
+                                         populateFields(parser.getMethodsWithAnnotation(Class
+                                                 .forName(f.getName()), Settable.class));
+                                     }
+                                     catch (Exception e1) {
+                                         e1.printStackTrace();
+                                     }
+                                 }
+                             });
         });
+    }
+    
+    private void addSubLabel(Method e) {
+        Text sublabel = new Text(e.getName().substring(e.getName().indexOf("set") + "set".length()));
+        builder.getChildren().add(sublabel);
     }
 
     /**

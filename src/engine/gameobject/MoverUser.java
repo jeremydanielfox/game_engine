@@ -64,23 +64,14 @@ public class MoverUser extends BasicMover {
     }
 
     private void handleKeyInput (KeyEvent e) {
-        System.out.println("handled");
         KeyCode keyCode = e.getCode();
-        if (keyCode == KeyCode.D) {
-            System.out.println("RIGHT");
+        if (keyCode == KeyCode.D)
             moveRight();
-        }
-        else if (keyCode == KeyCode.A) {
-            System.out.println("BOOM BABY LEFT");
+        else if (keyCode == KeyCode.A)
             moveLeft();
-        }
-        else if (keyCode == KeyCode.W) {
-            System.out.println("up");
+        else if (keyCode == KeyCode.W) 
             moveNorth();
-        }
-        else if (keyCode == KeyCode.S) {
-            System.out.println("down");
+        else if (keyCode == KeyCode.S)
             moveSouth();
-        }
     }
 }

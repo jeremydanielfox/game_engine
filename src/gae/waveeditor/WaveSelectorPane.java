@@ -68,11 +68,9 @@ public class WaveSelectorPane implements UIObject {
     private void saveWaves () {
         for (WaveEnemyTable wave : waves) {            
             GameObjectQueue wQueue = new ConcreteQueue(wave.getEnemiesAsList());
-            Wave newWave = new ConstantSpacingWave(wave.getPreferencesPane().getSpacingTime(), wQueue, null); //Last argument is a GameWorld object
+            Wave newWave = new ConstantSpacingWave(wave.getPreferencesPane().getSpacingTime(), wQueue, parent.getGameWorld());
             parent.getStoryboard().addEvent(newWave);
-        }        
-        
-        System.out.println("check");
+        }              
   }
 
     @Override

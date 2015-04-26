@@ -2,6 +2,7 @@ package gae.waveeditor;
 
 import engine.game.StoryBoard;
 import gae.openingView.UIObject;
+import gameworld.GameWorld;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
@@ -9,9 +10,11 @@ public class WaveEditor implements UIObject {
     
     private BorderPane rootNode;
     private StoryBoard myStoryBoard;
+    private GameWorld myGameWorld;
 
-    public WaveEditor(StoryBoard sb) {
-        myStoryBoard = sb;
+    public WaveEditor(StoryBoard storyBoardIn, GameWorld gameWorldIn) {
+        myStoryBoard = storyBoardIn;
+        myGameWorld = gameWorldIn;
         initialize();
     }
 
@@ -34,5 +37,9 @@ public class WaveEditor implements UIObject {
 
     public StoryBoard getStoryboard () {
         return myStoryBoard;
+    }
+    
+    public GameWorld getGameWorld() {
+        return myGameWorld;
     }
 }

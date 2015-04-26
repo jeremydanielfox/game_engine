@@ -248,4 +248,9 @@ public class LevelView {
         Consumer<Placeable> consumer = e -> libraryData.addEditableToList(e);
         return consumer;
     }
+    
+    public ObjectProperty<Dimension> getGridDimensionProperty() {
+        return gridSizeProperty;
+        
+    }
 }

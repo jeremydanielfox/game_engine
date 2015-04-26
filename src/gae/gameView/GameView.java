@@ -11,6 +11,7 @@ import gae.tabView.CentralTabView;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.EventObject;
+import java.util.Map;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -39,16 +40,25 @@ public class GameView implements UIMediator {
     // private LibraryView myLibrary;
     private UtilitiesBar utilities;
     private GenericObjectsPane myGenericObjects;
+    private Map<String, String> openingViewData;
 
     private Game myGame;
 
     // private GameManager myGameManager;
 
-    public GameView () {
+    public GameView (Map<String, String> dataResults) {
         myUI = new BorderPane();
         myScene = new Scene(myUI);
         myGame = createGameWithLevelBoard();
-        myTabs = new CentralTabView(myScene, myGame);
+        
+        if (dataResults != null) {
+            openingViewData = dataResults;
+            myTabs = new CentralTabView(myScene, myGame, openingViewData.get("Game Type"));
+        }
+        else {
+            myTabs = new CentralTabView(myScene, myGame, null);
+        }
+
         myScene.getStylesheets().add(GAMEVIEW_CSS);
         // myLibrary = new LibraryView();
         utilities = new UtilitiesBar(myGame);
@@ -67,9 +77,9 @@ public class GameView implements UIMediator {
                                          .get("Game").get(0)).newInstance();
 
             LevelBoard levelBoard = (LevelBoard) Class.forName(EditingParser
-                                                         .getInterfaceClasses("engine.fieldsetting.implementing_classes")
-                                                         .get("LevelBoard").get(0)).newInstance();
-            
+                                                               .getInterfaceClasses("engine.fieldsetting.implementing_classes")
+                                                               .get("LevelBoard").get(0)).newInstance();
+
             for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(g.getClass().getName()), Settable.class)) {
                 if (m.getName().equals("setLevelBoard")) {
                     m.invoke(g, levelBoard);
@@ -79,12 +89,12 @@ public class GameView implements UIMediator {
         catch (InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         }
-        
+
         if (g == null) {
             Exception e = new NullPointerException();
             e.printStackTrace();
         }
-        
+
         return g;
     }
 

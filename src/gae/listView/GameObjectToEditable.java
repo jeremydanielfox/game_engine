@@ -2,6 +2,8 @@ package gae.listView;
 
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
+import engine.gameobject.Graphic;
+import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
 import engine.gameobject.weapon.Weapon;
@@ -31,9 +33,10 @@ public class GameObjectToEditable implements Placeable {
     private PointSimple location;
     private String imagePath;
     private MovableImage movableImage;
+    private Graphic graphic;
     private String name;
     private String type;
-    private List<List<Path>> myPath;
+    private Mover path;
     private int width;
     private int height;
     private ImageView imageView;
@@ -59,6 +62,8 @@ public class GameObjectToEditable implements Placeable {
         System.out.println(imagePath);
         imageView = new ImageView(gameObject.getGraphic().getImagePath());
         tag = gameObject.getTag();
+        path = gameObject.getMover();
+        graphic = gameObject.getGraphic();
         // gameobject is not serializable and gives an error so must set to null
         // gameObject = null;
     }
@@ -120,15 +125,15 @@ public class GameObjectToEditable implements Placeable {
     }
 
     @Override
-    public List<List<Path>> getPath () {
+    public Mover getPath () {
         // TODO Auto-generated method stub
-        return myPath;
+        return path;
     }
 
     @Override
-    public void setPath (List<List<Path>> path) {
+    public void setPath (Mover path) {
         // TODO Auto-generated method stub
-        myPath = path;
+        this.path = path;
     }
 
     @Override
@@ -186,7 +191,7 @@ public class GameObjectToEditable implements Placeable {
         copy.setHealth(health);
         copy.setHeight(height);
         copy.setLocation(location);
-        copy.setPath(myPath);
+        copy.setPath(path);
         copy.setTag(tag);
         copy.setWeapon(weapon);
         copy.setWidth(width);
@@ -258,5 +263,17 @@ public class GameObjectToEditable implements Placeable {
     public void setLabel (Type label) {
         // TODO Auto-generated method stub
         this.label = label;
+    }
+
+    @Override
+    public Graphic getGraphic () {
+        // TODO Auto-generated method stub
+        return graphic;
+    }
+
+    @Override
+    public void setGraphic (Graphic graphic) {
+        // TODO Auto-generated method stub
+        this.graphic = graphic;
     }
 }

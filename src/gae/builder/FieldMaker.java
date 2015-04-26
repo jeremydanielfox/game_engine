@@ -1,8 +1,11 @@
 package gae.builder;
 
 import java.lang.reflect.Method;
-
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 /**
@@ -17,12 +20,14 @@ public class FieldMaker {
     private Method myMethod;
     private String methodName;
     private HBox field;
+    private List<TextField> textFields;
 
     public FieldMaker (Method m) {
         myMethod = m;
         methodName = extractName(m);
         field = new HBox(15);
-        createField();
+        textFields = new ArrayList<>();
+        createField(myMethod);
     }
 
     public Node getField () {
@@ -30,11 +35,13 @@ public class FieldMaker {
     }
 
     /**
-     * Creates field with all setters needed. Uses recursion to check if parameters of the method
-     * need to be built as well.
+     * Creates field with all setters needed using text boxes
      */
-    private void createField () {
-        
+    private void createField (Method m) {
+        TextField tf = new TextField();
+        Label l = new Label(methodName);
+        textFields.add(tf);
+        field.getChildren().addAll(l, tf);
     }
 
     /**
@@ -46,6 +53,6 @@ public class FieldMaker {
     private String extractName (Method m) {
         String s = m.getName();
         int i = s.indexOf("set");
-        return m.getName().substring(i);
+        return m.getName().substring(i + "set".length());
     }
 }

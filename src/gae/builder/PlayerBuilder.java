@@ -2,7 +2,9 @@ package gae.builder;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 import engine.fieldsetting.Settable;
 import engine.game.Player;
 import gae.editor.EditingParser;
@@ -24,6 +26,7 @@ public class PlayerBuilder extends Application {
     private List<Method> settables;
     private List<FieldMaker> fields;
 
+    @SuppressWarnings("static-access")
     public PlayerBuilder () {
         playerData = new PlayerData();
         builder = new VBox(15);
@@ -31,19 +34,36 @@ public class PlayerBuilder extends Application {
         parser = new EditingParser();
         settables = parser.getMethodsWithAnnotation(Player.class, Settable.class);
         fields = new ArrayList<>();
-        populateFields();
+        populateFields(settables);
         setUpCreateButton();
     }
 
     /**
-     * Fills the player builder with the appropriate fields necessary for the user
+     * Creates field with all setters needed. Uses recursion to check if parameters of the method
+     * need to be built as well.
      */
-    private void populateFields () {
-        settables.forEach(e -> {
-            
+    @SuppressWarnings("static-access")
+    private void populateFields (List<Method> methods) {
+        System.out.println(methods.size());
+        methods.forEach(e -> {
+            Arrays.asList(e.getParameterTypes()).forEach(f -> {
+                if (f.isPrimitive() || f.equals(String.class)) {
+                    FieldMaker fm = new FieldMaker(e);
+                    fields.add(fm);
+                    builder.getChildren().add(fm.getField());
+                }
+                else {
+                    try {
+                        populateFields(parser.getMethodsWithAnnotation(Class.forName(f.getName()), Settable.class));
+                    }
+                    catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
         });
     }
-    
+
     /**
      * when create button is clicked, all inputed data is sent to PlayerData
      */
@@ -51,7 +71,7 @@ public class PlayerBuilder extends Application {
         builder.getChildren().add(createButton);
         createButton.setAlignment(Pos.CENTER);
         createButton.setOnMouseClicked(e -> {
-
+            /* modifty player data */
         });
     }
 

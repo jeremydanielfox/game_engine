@@ -36,11 +36,10 @@ public class GameView implements UIMediator {
     private static final Image CURSOR_GRAPHIC = new Image("/images/swordCursor.jpg");
     private static final String GAMEVIEW_CSS = "css/GameViewCSS.css";
     private BorderPane myUI;
-    private CentralTabView myTabs; // replace with main editor
+    private CentralTabView myTabs;
     private Scene myScene;
     // private LibraryView myLibrary;
     private UtilitiesBar utilities;
-    private GenericObjectsPane myGenericObjects;
     private Map<String, String> openingViewData;
 
     private Game myGame;
@@ -63,7 +62,6 @@ public class GameView implements UIMediator {
         myScene.getStylesheets().add(GAMEVIEW_CSS);
         // myLibrary = new LibraryView();
         utilities = new UtilitiesBar(myGame);
-        myGenericObjects = new GenericObjectsPane(myTabs.getConsumer(), myTabs.getBiconsumer());
         // myLibrary = new LibraryView();
         insertBorders();
         // changeCursor(CURSOR_GRAPHIC);

@@ -10,8 +10,6 @@ import javafx.scene.image.Image;
  *
  */
 
-// Potentially combine this with the ShopTab using an abstract class
-
 public class HudEditorTab {
 
     private Tab baseNode;

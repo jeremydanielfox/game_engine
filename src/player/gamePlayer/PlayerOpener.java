@@ -69,6 +69,7 @@ public class PlayerOpener implements GameScene{
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
             GamePlayerScreen screen = new GamePlayerScreen(myStage,playerScene);
+            screen.setImage(gameSelector.getCurrentImage());
             myStage.setScene(screen.makeScene());
             
 

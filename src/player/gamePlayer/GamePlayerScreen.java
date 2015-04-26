@@ -42,6 +42,7 @@ public class GamePlayerScreen implements GameScene {
     private BorderPane myPane;
     private String myPlayerName; // myPlayerName holds the name of the user to later be put into
                                  // high scores.
+    private ImageView image;
     private Scene myPreviousScene;
     private Scene myScene;
 
@@ -51,6 +52,8 @@ public class GamePlayerScreen implements GameScene {
 
         myVbox = new VBox(30);
 
+        //image=new ImageView();
+        
         pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
         myGame = loadGame();
         myPlayerName = "";
@@ -64,24 +67,25 @@ public class GamePlayerScreen implements GameScene {
      */
     public Scene makeScene () {
         myPane = new BorderPane();
-        myPane.setPadding(new Insets(0, 40, 0, 0));
+        myPane.setPadding(new Insets(0, 40, 0, 40));
         myScene = new Scene(myPane);
         makeSideBar();
         myVbox.setAlignment(Pos.CENTER);
         myPane.setRight(myVbox);
 
         VBox gameTypeImageVBox = new VBox();
-        // this image below needs to be the image that was selected when the play button was pushed
-        // from the previous scene
-        ImageView image = new ImageView("images/Park_Path.png");
-        image.setPreserveRatio(true);
-        image.setFitHeight(Main.SCREEN_HEIGHT - 100);
         gameTypeImageVBox.getChildren().addAll(image);
         gameTypeImageVBox.setAlignment(Pos.CENTER);
         myPane.setLeft(gameTypeImageVBox);
         return myScene;
     }
 
+    public void setImage(ImageView n){
+        image=n;
+        image.setPreserveRatio(true);
+        image.setFitHeight(Main.SCREEN_HEIGHT - 100);
+    }
+    
     /**
      * @return myPlayerName user input of name to begin game
      */
@@ -236,7 +240,7 @@ public class GamePlayerScreen implements GameScene {
      * @return
      */
     private Game loadGame () {
-        GameWriterConcrete2 gw = new GameWriterConcrete2();
+        GameWriter gw = new GameWriter();
         GameWorld world = gw.makeWorld();
         Player player = gw.makePlayer();
         return gw.makeGame(player, world, gw.makeShop(player, world));

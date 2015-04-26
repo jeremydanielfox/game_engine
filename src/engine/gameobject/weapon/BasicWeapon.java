@@ -1,6 +1,5 @@
 package engine.gameobject.weapon;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import javafx.beans.property.DoubleProperty;
@@ -112,8 +111,9 @@ public class BasicWeapon implements Weapon {
     private void updateRange () {
         myRange = (RangeUpgrade) upgradables.get(myRange);
         rangeProp.setValue(myRange.getRange());
+        myRange.addObserver(new UpgradeObserver(this::updateRange));
     }
-
+  
     @Override
     @Settable
     public void setFiringRate (double firingRate) {

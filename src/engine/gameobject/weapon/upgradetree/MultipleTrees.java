@@ -3,7 +3,7 @@ package engine.gameobject.weapon.upgradetree;
 import java.util.List;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 
-
+@Deprecated
 public interface MultipleTrees extends UpgradeTree {
 
     /**

@@ -36,7 +36,7 @@ public class ConcreteLevel implements Level, Title {
     private Timer myTimer;
 
     public ConcreteLevel () {
-        initialize("", new ArrayList<Goal>(), new ArrayList<Goal>(), new FixedWorld(),
+        initialize("", new ArrayList<Goal>(), new ArrayList<Goal>(), new FixedWorld(10,10),
                    new StoryBoard());
     }
 

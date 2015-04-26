@@ -1046,6 +1046,10 @@
                         <h>60.0</h>
                         <w>60.0</w>
                       </myTrans>
+                      <myBounds>
+                        <myRow>10</myRow>
+                        <myCol>10</myCol>
+                      </myBounds>
                     </myTerrain>
                     <myTrans reference="../myTerrain/myTrans"/>
                     <myPathWidth>17.0</myPathWidth>
@@ -12739,16 +12743,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>630</int>
-                    <int>2234</int>
-                    <int>2255</int>
-                    <int>3</int>
-                    <int>1873</int>
-                    <int>2039</int>
-                    <int>78</int>
-                    <int>1465</int>
-                    <int>438</int>
-                    <int>1421</int>
+                    <int>2125</int>
+                    <int>1020</int>
+                    <int>732</int>
+                    <int>2036</int>
+                    <int>945</int>
+                    <int>1155</int>
+                    <int>499</int>
+                    <int>849</int>
+                    <int>1176</int>
+                    <int>1878</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -19113,6 +19117,10 @@
               <h>60.0</h>
               <w>60.0</w>
             </myTrans>
+            <myBounds>
+              <myRow>10</myRow>
+              <myCol>10</myCol>
+            </myBounds>
           </myTerrain>
           <myTrans reference="../myTerrain/myTrans"/>
           <myPathWidth>17.0</myPathWidth>

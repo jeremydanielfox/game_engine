@@ -1,24 +1,14 @@
 package gae.shopEditor;
 
-import java.util.ArrayList;
-import java.util.List;
-import engine.gameobject.GameObject;
-import engine.gameobject.test.TestEnemy;
-import engine.gameobject.test.TestTower;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
+
 import javafx.collections.ObservableList;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
 import gae.backend.Placeable;
 import gae.gameView.CheckList;
 import gae.gameView.ShopCheckList;

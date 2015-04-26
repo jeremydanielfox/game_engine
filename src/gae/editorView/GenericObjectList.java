@@ -55,7 +55,7 @@ public class GenericObjectList {
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
                     if (klass.getSimpleName().equals("Collider")) {
-                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass);
+                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass, interfaceToClassMap);
                     }
                         else {
                             EditorIntermediate.handleEditorPop(objectEditor, String.format("%s  %d", classType, count++));

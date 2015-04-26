@@ -56,14 +56,14 @@ public class GameObjectToEditable implements Placeable {
          * TODO: find out how to copy the object
          */
         name = gameObject.getTag().getName();
-        imagePath = gameObject.getGraphic().getImagePath();
+        graphic = gameObject.getGraphic();
+        tag = gameObject.getTag();
+        imagePath = graphic.getImagePath();
         type = gameObject.getLabel().getName();
 //        imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
-        System.out.println(imagePath);
-        imageView = new ImageView(gameObject.getGraphic().getImagePath());
-        tag = gameObject.getTag();
+       
+        imageView = new ImageView(imagePath);
         path = gameObject.getMover();
-        graphic = gameObject.getGraphic();
         location = gameObject.getPoint();
         // gameobject is not serializable and gives an error so must set to null
         // gameObject = null;

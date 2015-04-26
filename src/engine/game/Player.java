@@ -13,7 +13,8 @@ import engine.shop.wallet.Wallet;
  * This class represents a current player of the game, storing player specific information
  * such as lives left/health, score, and currency that can be used in the store.
  *
- * @author Sierra Smith, Cosette Goldstein
+ * @author Sierra Smith
+ * @author Cosette Goldstein
  *
  */
 @Settable
@@ -40,7 +41,6 @@ public class Player extends Observable {
         myWallet = wallet;
     }
 
-    @Settable
     public void setName (String name) {
         myName = name;
     }

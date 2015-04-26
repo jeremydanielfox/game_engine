@@ -90,7 +90,7 @@ public class LibraryData {
     }
 
     public ObservableList<Object> getObservableList (Class<?> klass) {
-        if (!createdObjectMap.containsKey(klass)) { 
+        if (!createdObjectMap.containsKey(klass)) {
             if (!klass.getSimpleName().equals("MoverPath")) {
                 ObservableList<Object> list = FXCollections.observableArrayList();
                 createdObjectMap.put(klass, list);
@@ -109,6 +109,7 @@ public class LibraryData {
     public void addGameObjectToList (Object gameObject) {
         GameObjectToEditable editable = new GameObjectToEditable((GameObject) gameObject);
         editableList.add(editable);
+        gameObjectList.add((GameObjectSimple) gameObject);
     }
 
     public void addPathToList (PathView pathView) {

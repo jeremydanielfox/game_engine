@@ -58,8 +58,9 @@ public class GenericObjectList {
                         new ColliderEditorOpener(objectEditor.getBiConsumer(), klass);
                     }
                         else {
-                            EditorIntermediate.handleEditorPop(objectEditor, String.format("%s  %d", classType, count++));
-//                            objectEditor.popNewEditor(classType + " " + count++);
+                            // EditorIntermediate.handleEditorPop(objectEditor,
+                            // String.format("%s  %d", classType, count++));
+                            objectEditor.popNewEditor(classType + " " + count++);
                         }
                     });
                 contextmenu.getItems().add(item);
@@ -76,8 +77,7 @@ public class GenericObjectList {
             if (me.getClickCount() == 2 && !unclicked.get()) {
                 unclicked.set(true);
                 DraggableItem draggable =
-                        new DraggableItem(list.getSelectionModel().getSelectedItem(), klass,
-                                          classType);
+                        new DraggableItem(list.getSelectionModel().getSelectedItem(), klass);
                 DraggableUtilities.makeObjectPlaceable(me, draggable, node,
                                                        createdSpecificObjects, wrapper, root,
                                                        objectEditor, unclicked);

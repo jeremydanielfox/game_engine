@@ -1,5 +1,6 @@
 package gae.listView;
 
+import engine.titles.Title;
 import gae.backend.Placeable;
 import gae.editorView.DraggableFields;
 import javafx.collections.ObservableList;
@@ -137,11 +138,11 @@ public class ListViewUtilities {
      * @param scene
      * @return
      */
-    public static ListView<?> createGenericList (ObservableList<Object> authorables,
+    public static ListView<?> createGenericList (ObservableList<Object> objects,
                                                  String classType) {
         ListView<Object> list = new ListView<>();
         list.setPrefWidth(200);
-        list.setItems(authorables);
+        list.setItems(objects);
 
         list.setCellFactory( (myList) -> {
             return new ListCell<Object>() {
@@ -153,7 +154,7 @@ public class ListViewUtilities {
                         setGraphic(null);
                     }
                     else if (object != null) {
-                        setText(classType);
+                        setText(((Title) object).getTitle());
                         // setGraphic(ListViewUtilities.createCellContentWithIcon(object));
                     }
                 }

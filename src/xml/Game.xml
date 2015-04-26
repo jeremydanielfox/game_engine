@@ -38,8 +38,10 @@
   <myLevelBoard class="engine.game.ConcreteLevelBoard">
     <changed>false</changed>
     <obs/>
+    <myTitle></myTitle>
     <myLevels>
       <engine.game.ConcreteLevel>
+        <myTitle></myTitle>
         <myImagePath>images/Park_Path.png</myImagePath>
         <myWinningGoals>
           <engine.goals.EventsCompleteGoal>
@@ -64,17 +66,17 @@
                       <myTable>
                         <entry>
                           <engine.gameobject.test.ProjectileLabel>
-                            <superLabel class="engine.gameobject.labels.LabelBase">
+                            <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
-                            </superLabel>
+                            </superType>
                             <myName>Projectile</myName>
                           </engine.gameobject.test.ProjectileLabel>
                           <map>
                             <entry>
                               <engine.gameobject.test.EnemyLabel>
-                                <superLabel class="engine.gameobject.labels.LabelBase">
+                                <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
-                                </superLabel>
+                                </superType>
                                 <myName>Enemy</myName>
                               </engine.gameobject.test.EnemyLabel>
                               <engine.interactions.BuffImparter/>
@@ -88,17 +90,17 @@
                       <myTable>
                         <entry>
                           <engine.gameobject.test.TowerLabel>
-                            <superLabel class="engine.gameobject.labels.LabelBase">
+                            <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
-                            </superLabel>
+                            </superType>
                             <myName>Tower</myName>
                           </engine.gameobject.test.TowerLabel>
                           <map>
                             <entry>
                               <engine.gameobject.test.EnemyLabel>
-                                <superLabel class="engine.gameobject.labels.LabelBase">
+                                <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
-                                </superLabel>
+                                </superType>
                                 <myName>Enemy</myName>
                               </engine.gameobject.test.EnemyLabel>
                               <engine.interactions.ShootAt/>
@@ -608,15 +610,444 @@
                         </engine.pathfinding.PathSegmentBezier>
                       </myPathSegments>
                     </myPath>
+                    <myTerrain>
+                      <myMatrix>
+                        <gameworld.TerrainTile-array>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                        </gameworld.TerrainTile-array>
+                        <gameworld.TerrainTile-array>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                        </gameworld.TerrainTile-array>
+                        <gameworld.TerrainTile-array>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                        </gameworld.TerrainTile-array>
+                        <gameworld.TerrainTile-array>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                        </gameworld.TerrainTile-array>
+                        <gameworld.TerrainTile-array>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                        </gameworld.TerrainTile-array>
+                        <gameworld.TerrainTile-array>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                        </gameworld.TerrainTile-array>
+                        <gameworld.TerrainTile-array>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                        </gameworld.TerrainTile-array>
+                        <gameworld.TerrainTile-array>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                        </gameworld.TerrainTile-array>
+                        <gameworld.TerrainTile-array>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                        </gameworld.TerrainTile-array>
+                        <gameworld.TerrainTile-array>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                          <gameworld.TerrainTile>
+                            <canWalk>true</canWalk>
+                            <canPlace>true</canPlace>
+                          </gameworld.TerrainTile>
+                        </gameworld.TerrainTile-array>
+                      </myMatrix>
+                      <myTrans>
+                        <h>60.0</h>
+                        <w>60.0</w>
+                      </myTrans>
+                    </myTerrain>
+                    <myTrans reference="../myTerrain/myTrans"/>
                     <myPathWidth>17.0</myPathWidth>
                   </myWorld>
                   <myQueue class="engine.events.ConcreteQueue">
                     <myOrderedObjects class="linked-list">
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -629,6 +1060,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -1135,32 +1567,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -1182,12 +1588,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -1200,6 +1635,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -1706,32 +2142,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -1753,12 +2163,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -1771,6 +2210,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -2277,32 +2717,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -2324,12 +2738,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -2342,6 +2785,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -2848,32 +3292,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -2895,12 +3313,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -2913,6 +3360,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -3419,32 +3867,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -3466,12 +3888,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -3484,6 +3935,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -3990,32 +4442,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -4037,12 +4463,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -4055,6 +4510,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -4561,32 +5017,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -4608,12 +5038,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -4626,6 +5085,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -5132,32 +5592,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -5179,12 +5613,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -5197,6 +5660,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -5703,32 +6167,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -5750,12 +6188,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -5768,6 +6235,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -6274,32 +6742,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -6321,6 +6763,35 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                     </myOrderedObjects>
                     <curIndex>0</curIndex>
@@ -6329,16 +6800,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>127</int>
-                    <int>1499</int>
-                    <int>1927</int>
-                    <int>1215</int>
-                    <int>2219</int>
-                    <int>2257</int>
-                    <int>866</int>
-                    <int>1456</int>
-                    <int>1643</int>
-                    <int>1134</int>
+                    <int>747</int>
+                    <int>1907</int>
+                    <int>826</int>
+                    <int>697</int>
+                    <int>1871</int>
+                    <int>262</int>
+                    <int>1184</int>
+                    <int>1291</int>
+                    <int>697</int>
+                    <int>1725</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -6349,9 +6820,9 @@
                     <myOrderedObjects class="linked-list">
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -6364,6 +6835,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -6870,32 +7342,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -6917,12 +7363,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -6935,6 +7410,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -7441,32 +7917,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -7488,12 +7938,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -7506,6 +7985,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -8012,32 +8492,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -8059,12 +8513,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -8077,6 +8560,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -8583,32 +9067,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -8630,12 +9088,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -8648,6 +9135,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -9154,32 +9642,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -9201,12 +9663,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -9219,6 +9710,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -9725,32 +10217,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -9772,12 +10238,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -9790,6 +10285,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -10296,32 +10792,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -10343,12 +10813,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -10361,6 +10860,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -10867,32 +11367,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -10914,12 +11388,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -10932,6 +11435,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -11438,32 +11942,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -11485,12 +11963,41 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myLabel class="engine.gameobject.test.EnemyLabel">
-                          <superLabel class="engine.gameobject.labels.LabelBase">
+                          <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                          </superLabel>
+                          </superType>
                           <myName>Enemy</myName>
                         </myLabel>
                         <myPoint>
@@ -11503,6 +12010,7 @@
                         <myHealth class="engine.gameobject.HealthSimple">
                           <myHealth>4.0</myHealth>
                           <maxHealth>4.0</maxHealth>
+                          <myTitle></myTitle>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
                           <inherentSpeed>1.0</inherentSpeed>
@@ -12009,32 +12517,6 @@
                             </myPathSegments>
                           </myPath>
                         </myMover>
-                        <myGraphic>
-                          <myHeight>25.0</myHeight>
-                          <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>10000.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                        </myGraphic>
-                        <myTag class="engine.shop.tag.GameObjectTagSimple">
-                          <name></name>
-                          <description></description>
-                          <shopGraphic>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                          </shopGraphic>
-                        </myTag>
                         <myBuffs>
                           <buffList/>
                           <immunityList/>
@@ -12056,6 +12538,35 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
+                        <myGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>25.0</myHeight>
+                          <myWidth>25.0</myWidth>
+                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>10000.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                        </myGraphic>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName></myName>
+                          <myDescription></myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>0.0</myHeight>
+                            <myWidth>0.0</myWidth>
+                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                          </myShopGraphic>
+                        </myShopTag>
+                        <myTitle></myTitle>
                       </engine.gameobject.GameObjectSimpleTest>
                     </myOrderedObjects>
                     <curIndex>0</curIndex>
@@ -12065,6 +12576,7 @@
                   <myFramesSinceLastRelease>0</myFramesSinceLastRelease>
                 </engine.events.ConstantSpacingWave>
               </eventList>
+              <myTitle></myTitle>
             </myStoryBoard>
           </engine.goals.EventsCompleteGoal>
           <engine.goals.ScoreGoal reference="../../../../../myPlayer/obs/engine.goals.ScoreGoal"/>
@@ -12091,6 +12603,7 @@
         <myTimer class="engine.game.TimerConcrete" reference="../myLosingGoals/engine.goals.TimerGoal/myTimer"/>
       </engine.game.ConcreteLevel>
       <engine.game.ConcreteLevel>
+        <myTitle></myTitle>
         <myImagePath>images/example_path.jpeg</myImagePath>
         <myWinningGoals>
           <engine.goals.EventsCompleteGoal>
@@ -12101,6 +12614,7 @@
                 <engine.goals.EventsCompleteGoal reference="../../.."/>
               </obs>
               <eventList/>
+              <myTitle></myTitle>
             </myStoryBoard>
           </engine.goals.EventsCompleteGoal>
           <engine.goals.ScoreGoal reference="../../../../../myPlayer/obs/engine.goals.ScoreGoal[2]"/>
@@ -12112,17 +12626,17 @@
             <myTable>
               <entry>
                 <engine.gameobject.test.ProjectileLabel>
-                  <superLabel class="engine.gameobject.labels.LabelBase">
+                  <superType class="engine.gameobject.labels.TypeBase">
                     <myName>Base</myName>
-                  </superLabel>
+                  </superType>
                   <myName>Projectile</myName>
                 </engine.gameobject.test.ProjectileLabel>
                 <map>
                   <entry>
                     <engine.gameobject.test.EnemyLabel>
-                      <superLabel class="engine.gameobject.labels.LabelBase">
+                      <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
-                      </superLabel>
+                      </superType>
                       <myName>Enemy</myName>
                     </engine.gameobject.test.EnemyLabel>
                     <engine.interactions.BuffImparter/>
@@ -12136,17 +12650,17 @@
             <myTable>
               <entry>
                 <engine.gameobject.test.TowerLabel>
-                  <superLabel class="engine.gameobject.labels.LabelBase">
+                  <superType class="engine.gameobject.labels.TypeBase">
                     <myName>Base</myName>
-                  </superLabel>
+                  </superType>
                   <myName>Tower</myName>
                 </engine.gameobject.test.TowerLabel>
                 <map>
                   <entry>
                     <engine.gameobject.test.EnemyLabel>
-                      <superLabel class="engine.gameobject.labels.LabelBase">
+                      <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
-                      </superLabel>
+                      </superType>
                       <myName>Enemy</myName>
                     </engine.gameobject.test.EnemyLabel>
                     <engine.interactions.ShootAt/>
@@ -12157,6 +12671,435 @@
             <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
           </myRangeEngine>
           <myNodeToGameObjectMap/>
+          <myTerrain>
+            <myMatrix>
+              <gameworld.TerrainTile-array>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+              </gameworld.TerrainTile-array>
+              <gameworld.TerrainTile-array>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+              </gameworld.TerrainTile-array>
+              <gameworld.TerrainTile-array>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+              </gameworld.TerrainTile-array>
+              <gameworld.TerrainTile-array>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+              </gameworld.TerrainTile-array>
+              <gameworld.TerrainTile-array>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+              </gameworld.TerrainTile-array>
+              <gameworld.TerrainTile-array>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+              </gameworld.TerrainTile-array>
+              <gameworld.TerrainTile-array>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+              </gameworld.TerrainTile-array>
+              <gameworld.TerrainTile-array>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+              </gameworld.TerrainTile-array>
+              <gameworld.TerrainTile-array>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+              </gameworld.TerrainTile-array>
+              <gameworld.TerrainTile-array>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+                <gameworld.TerrainTile>
+                  <canWalk>true</canWalk>
+                  <canPlace>true</canPlace>
+                </gameworld.TerrainTile>
+              </gameworld.TerrainTile-array>
+            </myMatrix>
+            <myTrans>
+              <h>60.0</h>
+              <w>60.0</w>
+            </myTrans>
+          </myTerrain>
+          <myTrans reference="../myTerrain/myTrans"/>
           <myPathWidth>17.0</myPathWidth>
         </myGameWorld>
         <myStoryBoard reference="../myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard"/>
@@ -12167,7 +13110,7 @@
   <myShop class="engine.shop.ShopModelSimple">
     <currentPlayer reference="../../myPlayer"/>
     <myGameWorld class="gameworld.FixedWorld" reference="../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.RandomSpanWave/myWorld"/>
-    <prototypeMap/>
+    <purchasableMap/>
     <upgradeMap/>
     <markup>1.0</markup>
   </myShop>

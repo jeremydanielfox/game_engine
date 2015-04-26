@@ -1,7 +1,7 @@
 package engine.gameobject;
 
 import engine.gameobject.behaviors.EndBehaviorful;
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.units.Colliding;
 import engine.gameobject.units.Firing;
@@ -34,11 +34,11 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
     
     public Mover getMover ();
 
-    public Label getLabel ();
+    public Type getLabel ();
 
     //public void setGraphic (Graphic graphic);
 
-    public void setLabel (Label label);
+    public void setLabel (Type label);
 
     /**
      * Returns the Cartesian coordinate of the game object.

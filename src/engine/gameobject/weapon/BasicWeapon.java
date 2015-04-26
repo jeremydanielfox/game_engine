@@ -31,12 +31,14 @@ public class BasicWeapon implements Weapon {
     private int timeSinceFire;
     private RangeUpgrade myRange;
     private DoubleProperty rangeProp = new SimpleDoubleProperty();
-   
+
     private FiringRate myFiringRate;
     private GameObject myProjectile;
     private FiringStrategy myFiringStrategy;
     private UpgradeSet<Upgrade> upgradables;
     private UpgradeTree tree;
+
+    private double value;
 
     public BasicWeapon () {
         upgradables = new UpgradeSet<>();
@@ -116,11 +118,11 @@ public class BasicWeapon implements Weapon {
     public void setFiringRate (double firingRate) {
         myFiringRate = new FiringRateUpgrade(firingRate);
         upgradables.add(myFiringRate);
-        //myFiringRate.addObserver(new UpgradeObserver(this::updateFiringRate));
+        // myFiringRate.addObserver(new UpgradeObserver(this::updateFiringRate));
     }
-    
+
     private void updateFiringRate () {
-        
+
     }
 
     @Override
@@ -164,14 +166,14 @@ public class BasicWeapon implements Weapon {
         myProjectile.getCollider().addCollisionBehavior(newBuff);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see engine.gameobject.weapon.Weaopn#getValue()
-     */
+    @Settable
+    public void setValue (double value) {
+        this.value = value;
+    }
+
     @Override
     public double getValue () {
-        return tree.getValue();
+        return (tree == null) ? value : tree.getValue();
     }
 
     @Override

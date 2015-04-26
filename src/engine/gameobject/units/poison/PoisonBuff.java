@@ -20,7 +20,6 @@ public class PoisonBuff extends Buff implements Poison {
     private int timeIncr;
     private double damageIncr;
     private Optional<PoisonBuff> decorated;
-    private BuffType type;
 
     /**
      * Makes a poison buff
@@ -33,11 +32,6 @@ public class PoisonBuff extends Buff implements Poison {
         this.timeIncr = timeIncr;
         this.damageIncr = damageIncr;
         decorated = Optional.empty();
-    }
-
-    @Settable
-    public void setBuffType (BuffType type) {
-        this.type = type;
     }
 
     @Settable
@@ -100,10 +94,5 @@ public class PoisonBuff extends Buff implements Poison {
     @Override
     public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((PoisonBuff) decorated);
-    }
-
-    @Override
-    public BuffType getBuffType () {
-        return type;
     }
 }

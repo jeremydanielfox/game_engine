@@ -4,6 +4,7 @@ import engine.pathfinding.EndOfPathException;
 
 
 public class MoverNull implements Mover {
+    
     @Override
     public PointSimple move (PointSimple current) throws EndOfPathException {
         return current;
@@ -22,6 +23,11 @@ public class MoverNull implements Mover {
     @Override
     public double getSpeed () {
         return 0;
+    }
+
+    @Override
+    public void speedBuff (double percentage) {
+        //Do nothing
     }
 
 }

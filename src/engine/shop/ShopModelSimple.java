@@ -5,7 +5,9 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import javafx.event.EventHandler;
+import engine.fieldsetting.Settable;
 import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
@@ -36,14 +38,11 @@ public class ShopModelSimple implements ShopModel {
 
     // For test only
     public ShopModelSimple (GameWorld world, Player player, double markup) {
-        // List<Prototype<GameObject>>prototypes =
-
         this.markup = markup;
         myGameWorld = world;
         currentPlayer = player;
         purchasableMap = new HashMap<>();
         upgradeMap = new HashMap<>();
-        // prototypes.forEach(prototype -> addPrototype(prototype));
     }
 
     public ShopModelSimple (List<Purchasable<GameObject>> purchasables,
@@ -59,6 +58,11 @@ public class ShopModelSimple implements ShopModel {
     @Override
     public void addPurchasable (Purchasable<GameObject> purchasable) {
         purchasableMap.put(purchasable.getName(), purchasable);
+    }
+    
+    @Settable
+    public void setPurchasables (List<Purchasable<GameObject>> purchasables) {
+        purchasables.forEach(prototype -> addPurchasable(prototype));
     }
 
     @Override
@@ -113,11 +117,11 @@ public class ShopModelSimple implements ShopModel {
      * @param itemGraphic
      */
     @Override
-    public void purchaseUpgrade (String name) {
+    public void purchaseUpgrade (String name, Consumer<GameObject> refreshUpgrades) {
         if (canPurchase(name)){
             currentPlayer.getWallet().withdraw(getPrice(name));
             currentGameObject.getWeapon().applyUpgrades(upgradeMap.get(name));
-            getUpgradeGraphics(currentGameObject);
+            refreshUpgrades.accept(currentGameObject);
         }
     }
 

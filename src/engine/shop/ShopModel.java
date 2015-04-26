@@ -2,6 +2,7 @@ package engine.shop;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import javafx.event.EventHandler;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
@@ -40,7 +41,7 @@ public interface ShopModel {
      */
     public boolean purchaseGameObject (String name, PointSimple location, EventHandler selected);
     
-    public void purchaseUpgrade (String name);
+    public void purchaseUpgrade (String name, Consumer<GameObject> refreshUpgrades);
 
     /**
      *
@@ -71,5 +72,4 @@ public interface ShopModel {
      * @return true if the object is placable
      */
     public boolean checkPlacement (String name, PointSimple location);
-
 }

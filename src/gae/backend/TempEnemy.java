@@ -1,15 +1,14 @@
 package gae.backend;
 
 import engine.gameobject.Graphic;
+import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 import engine.gameobject.weapon.Weapon;
 import engine.shop.ShopTag;
-import gae.gridView.Path;
 import gae.listView.DeepCopy;
 import gae.listView.MovableImage;
 import gae.openingView.UIObject;
-import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -158,18 +157,6 @@ public class TempEnemy implements Placeable, UIObject {
     }
 
     @Override
-    public List<List<Path>> getPath () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setPath (List<List<Path>> path) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public double getHealth () {
         // TODO Auto-generated method stub
         return 0;
@@ -201,18 +188,6 @@ public class TempEnemy implements Placeable, UIObject {
 
     @Override
     public void setImagePath (String path) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public Label getLabel () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setLabel (Label label) {
         // TODO Auto-generated method stub
         
     }
@@ -257,5 +232,41 @@ public class TempEnemy implements Placeable, UIObject {
     public void setDescription (String description) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public Mover getPath () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Type getLabel () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setPath (Mover path) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setGraphic (Graphic graphic) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setLabel (Type label) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public String getDescription () {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

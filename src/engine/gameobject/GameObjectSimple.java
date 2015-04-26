@@ -3,8 +3,8 @@ package engine.gameobject;
 import engine.fieldsetting.Settable;
 import engine.gameobject.behaviors.Behavior;
 import engine.gameobject.behaviors.BehaviorTracker;
-import engine.gameobject.labels.Label;
-import engine.gameobject.labels.SimpleLabel;
+import engine.gameobject.labels.SimpleType;
+import engine.gameobject.labels.Type;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
 import engine.gameobject.units.BuffType;
@@ -15,6 +15,7 @@ import engine.pathfinding.EndOfPathException;
 import engine.shop.RangeDisplay;
 import engine.shop.ShopTag;
 import engine.shop.ShopTagSimple;
+import engine.titles.Title;
 import gameworld.ObjectCollection;
 
 
@@ -25,8 +26,8 @@ import gameworld.ObjectCollection;
  *
  */
 @Settable
-public class GameObjectSimple implements GameObject {
-    private Label myLabel;
+public class GameObjectSimple implements GameObject, Title {
+    private Type myLabel;
     private PointSimple myPoint;
     private Health myHealth;
     private Mover myMover;
@@ -36,9 +37,10 @@ public class GameObjectSimple implements GameObject {
     private BehaviorTracker myBehaviors;
     private Graphic myGraphic;
     private ShopTag myShopTag;
+    private String myTitle = "";
 
     public GameObjectSimple () {
-        myLabel = new SimpleLabel();
+        myLabel = new SimpleType();
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();
@@ -116,7 +118,7 @@ public class GameObjectSimple implements GameObject {
     /*
      * Purchasable methods follow
      */
-    
+
     @Override
     public String getName () {
         return myShopTag.getName();
@@ -208,13 +210,13 @@ public class GameObjectSimple implements GameObject {
      */
 
     @Override
-    public Label getLabel () {
+    public Type getLabel () {
         return myLabel;
     }
 
     @Override
     @Settable
-    public void setLabel (Label label) {
+    public void setLabel (Type label) {
         myLabel = label;
     }
 
@@ -282,10 +284,25 @@ public class GameObjectSimple implements GameObject {
     public Graphic getGraphic () {
         return myGraphic;
     }
-    
+
     @Settable
     public void setShopTag (ShopTag shopTag) {
         myShopTag = shopTag;
+    }
+
+    public String toString () {
+        return "GameObject: " + myLabel.getName();
+    }
+
+    @Override
+    public String getTitle () {
+        return myTitle;
+    }
+
+    @Settable
+    @Override
+    public void setTitle (String title) {
+        myTitle = title;
     }
 
 }

@@ -1,3 +1,198 @@
 <engine.interactions.RangeEngine>
-  <myTable/>
+  <myTable>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>a</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>b</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.NoInteraction/>
+        </entry>
+      </map>
+    </entry>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>four</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>danny</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.ShootAt/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>kaighn</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.ShootAt reference="../../entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>eric</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.ShootAt reference="../../entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>jeremy</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.ShootAt reference="../../entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>nina</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.ShootAt reference="../../entry/engine.interactions.ShootAt"/>
+        </entry>
+      </map>
+    </entry>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>one</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[2]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[3]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[4]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[5]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+      </map>
+    </entry>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>two</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[2]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[3]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[4]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[5]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+      </map>
+    </entry>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>three</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[2]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[3]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[4]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[5]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+      </map>
+    </entry>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>five</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[2]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[3]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[4]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[5]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.ShootAt reference="../../../../entry[2]/map/entry/engine.interactions.ShootAt"/>
+        </entry>
+      </map>
+    </entry>
+  </myTable>
 </engine.interactions.RangeEngine>

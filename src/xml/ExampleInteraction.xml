@@ -5,7 +5,26 @@
         <superType class="engine.gameobject.labels.TypeBase">
           <myName>Base</myName>
         </superType>
-        <myName>one</myName>
+        <myName>a</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>b</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.NoInteraction/>
+        </entry>
+      </map>
+    </entry>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>four</myName>
       </engine.gameobject.labels.SimpleType>
       <map>
         <entry>
@@ -16,6 +35,15 @@
             <myName>danny</myName>
           </engine.gameobject.labels.SimpleType>
           <engine.interactions.BuffImparter/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>kaighn</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.BuffImparter reference="../../entry/engine.interactions.BuffImparter"/>
         </entry>
         <entry>
           <engine.gameobject.labels.SimpleType>
@@ -35,6 +63,45 @@
           </engine.gameobject.labels.SimpleType>
           <engine.interactions.BuffImparter reference="../../entry/engine.interactions.BuffImparter"/>
         </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>nina</myName>
+          </engine.gameobject.labels.SimpleType>
+          <engine.interactions.BuffImparter reference="../../entry/engine.interactions.BuffImparter"/>
+        </entry>
+      </map>
+    </entry>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>one</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[2]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[3]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[4]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[5]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
       </map>
     </entry>
     <entry>
@@ -46,16 +113,24 @@
       </engine.gameobject.labels.SimpleType>
       <map>
         <entry>
-          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry/engine.gameobject.labels.SimpleType"/>
-          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
         </entry>
         <entry>
-          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry[2]/engine.gameobject.labels.SimpleType"/>
-          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[2]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
         </entry>
         <entry>
-          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry[3]/engine.gameobject.labels.SimpleType"/>
-          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[3]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[4]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[5]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
         </entry>
       </map>
     </entry>
@@ -68,16 +143,54 @@
       </engine.gameobject.labels.SimpleType>
       <map>
         <entry>
-          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry/engine.gameobject.labels.SimpleType"/>
-          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
         </entry>
         <entry>
-          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry[2]/engine.gameobject.labels.SimpleType"/>
-          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[2]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
         </entry>
         <entry>
-          <engine.gameobject.labels.SimpleType reference="../../../../entry/map/entry[3]/engine.gameobject.labels.SimpleType"/>
-          <engine.interactions.BuffImparter reference="../../../../entry/map/entry/engine.interactions.BuffImparter"/>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[3]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[4]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[5]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+      </map>
+    </entry>
+    <entry>
+      <engine.gameobject.labels.SimpleType>
+        <superType class="engine.gameobject.labels.TypeBase">
+          <myName>Base</myName>
+        </superType>
+        <myName>five</myName>
+      </engine.gameobject.labels.SimpleType>
+      <map>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[2]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[3]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[4]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
+        </entry>
+        <entry>
+          <engine.gameobject.labels.SimpleType reference="../../../../entry[2]/map/entry[5]/engine.gameobject.labels.SimpleType"/>
+          <engine.interactions.BuffImparter reference="../../../../entry[2]/map/entry/engine.interactions.BuffImparter"/>
         </entry>
       </map>
     </entry>

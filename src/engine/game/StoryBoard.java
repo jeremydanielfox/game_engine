@@ -6,7 +6,6 @@ import java.util.Observable;
 import engine.events.Event;
 import engine.fieldsetting.Settable;
 import engine.fieldsetting.Triggerable;
-import engine.titles.Title;
 
 
 /**
@@ -18,9 +17,8 @@ import engine.titles.Title;
  *
  */
 @Settable
-public class StoryBoard extends Observable implements Title {
+public class StoryBoard extends Observable {
     private List<Event> eventList;
-    private String myTitle = "";
 
     public StoryBoard (Event ... events) {
         eventList = new ArrayList<Event>();
@@ -107,28 +105,6 @@ public class StoryBoard extends Observable implements Title {
      */
     public int currentEventCount () {
         return eventList.size();
-    }
-
-    @Override
-    public String getTitle () {
-        return myTitle;
-    }
-
-    @Override
-    public void setTitle (String title) {
-        myTitle = title;
-    }
-
-    @Override
-    public int getIndex () {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void setIndex (int existing) {
-        // TODO Auto-generated method stub
-        
     }
 
 }

@@ -6,7 +6,6 @@ import View.ButtonWrapper;
 import engine.fieldsetting.Settable;
 import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;
-import engine.titles.Title;
 
 
 /**
@@ -16,7 +15,7 @@ import engine.titles.Title;
  *
  */
 @Settable
-public class ConcreteGame implements Game, Title {
+public class ConcreteGame implements Game {
 
     private static final String DEFAULT_NAME = "GameName";
     private static final String DEFAULT_AUTHOR = "Sierra";
@@ -160,32 +159,9 @@ public class ConcreteGame implements Game, Title {
         return myGameName;
     }
 
-    @Override
-    public String getTitle () {
-        return myGameName;
-    }
-
-    @Settable
-    @Override
-    public void setTitle (String title) {
-        myGameName = title;
-    }
-
     @Settable
     public void setShop (ShopModel shop) {
         myShop = shop;
-    }
-
-    @Override
-    public int getIndex () {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void setIndex (int existing) {
-        // TODO Auto-generated method stub
-        
     }
 
 }

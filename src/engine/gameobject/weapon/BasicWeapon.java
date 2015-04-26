@@ -32,13 +32,13 @@ public class BasicWeapon implements Weapon {
     private int timeSinceFire;
     private RangeUpgrade myRange;
     private DoubleProperty rangeProp = new SimpleDoubleProperty();
-   
+
     private FiringRate myFiringRate;
     private GameObject myProjectile;
     private FiringStrategy myFiringStrategy;
     private UpgradeSet<Upgrade> upgradables;
     private UpgradeTree tree;
-    
+
     private double value;
 
     public BasicWeapon () {
@@ -51,9 +51,7 @@ public class BasicWeapon implements Weapon {
 
     @Override
     public Weapon clone () {
-        System.out.println("trig1");
         BasicWeapon clone = new BasicWeapon();
-        System.out.println("trig2");
         clone.setFiringRate(myFiringRate.getRate());
         clone.setRange(myRange.getRange());
         clone.setFiringStrategy(myFiringStrategy);
@@ -114,7 +112,6 @@ public class BasicWeapon implements Weapon {
     private void updateRange () {
         myRange = (RangeUpgrade) upgradables.get(myRange);
         rangeProp.setValue(myRange.getRange());
-        System.out.println(myRange.getRange());
     }
 
     @Override
@@ -122,11 +119,11 @@ public class BasicWeapon implements Weapon {
     public void setFiringRate (double firingRate) {
         myFiringRate = new FiringRateUpgrade(firingRate);
         upgradables.add(myFiringRate);
-        //myFiringRate.addObserver(new UpgradeObserver(this::updateFiringRate));
+        // myFiringRate.addObserver(new UpgradeObserver(this::updateFiringRate));
     }
-    
+
     private void updateFiringRate () {
-        
+
     }
 
     @Override
@@ -172,12 +169,12 @@ public class BasicWeapon implements Weapon {
 
     @Settable
     public void setValue (double value) {
-        this.value  = value;
+        this.value = value;
     }
-    
+
     @Override
     public double getValue () {
-        return (tree==null) ? value : tree.getValue();
+        return (tree == null) ? value : tree.getValue();
     }
 
     @Override

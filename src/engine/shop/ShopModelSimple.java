@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import javafx.event.EventHandler;
+import engine.fieldsetting.Settable;
 import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
@@ -39,23 +40,15 @@ public class ShopModelSimple implements ShopModel {
 
     // For test only
     public ShopModelSimple (GameWorld world, Player player, double markup) {
-        // List<Prototype<GameObject>>prototypes =
-
         this.markup = markup;
         myGameWorld = world;
         currentPlayer = player;
         prototypeMap = new HashMap<>();
         upgradeMap = new HashMap<>();
-        // prototypes.forEach(prototype -> addPrototype(prototype));
     }
-
-    public ShopModelSimple (List<Prototype<GameObject>> prototypes,
-                            GameWorld currentGameWorld,
-                            Player currentPlayer, double markup) {
-        this.markup = markup;
-        this.currentPlayer = currentPlayer;
-        prototypeMap = new HashMap<String, Prototype<GameObject>>();
-        upgradeMap = new HashMap<String, UpgradeBundle>();
+    
+    @Settable
+    public void setPrototypes (List<Prototype<GameObject>> prototypes) {
         prototypes.forEach(prototype -> addPrototype(prototype));
     }
 

@@ -8,11 +8,8 @@
 	-fx-height: 25px;
 }
 
-.root {
-	-fx-font-family: "Courier Sans Serif";
-  -fx-background-image-opacity: 0.4;
-	-fx-background-color: white;
-}
+
+/*TABS*/
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-opacity: .1;

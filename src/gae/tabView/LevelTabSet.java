@@ -5,8 +5,10 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 
+
 /**
  * Holds the individual tabs for each level
+ * 
  * @author JohnGilhuly
  *
  */
@@ -24,12 +26,16 @@ public class LevelTabSet {
         Tab worldTab = new Tab("World");
         worldTab.setContent(world);
         worldTab.setClosable(false);
-        
+
         Tab waveTab = new Tab("Waves");
         waveTab.setContent(waves);
         waveTab.setClosable(false);
         
-        baseNode.getTabs().addAll(worldTab, waveTab);
+        Tab prefTab = new Tab("Preferences");
+//        prefTab.setContent(waves);
+        prefTab.setClosable(false);
+
+        baseNode.getTabs().addAll(worldTab, waveTab, prefTab);
     }
 
     public TabPane getBaseNode () {

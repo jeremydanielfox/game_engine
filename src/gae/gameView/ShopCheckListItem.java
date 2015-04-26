@@ -38,12 +38,13 @@ public class ShopCheckListItem implements CheckListItem {
         Node image = graphic.getResizedGraphic(1);
         Label label = new Label(placeable.getName());
         Text description=new Text(placeable.getDescription());
+        System.out.println(placeable.getWeapon().getValue());
         String value;
         try{
             value=Double.toString(placeable.getWeapon().getValue());
         }
         catch(Exception e){
-            value="No weapon set";
+            value="No weapon value found";
         }
         Text price =new Text("Price: "+value);
         VBox vbox=new VBox(label, description, price);

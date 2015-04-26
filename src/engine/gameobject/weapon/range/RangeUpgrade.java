@@ -3,6 +3,8 @@ package engine.gameobject.weapon.range;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import engine.fieldsetting.Settable;
 import engine.gameobject.weapon.Upgrade;
 import engine.observable.Observable;
@@ -16,7 +18,7 @@ import engine.observable.Observer;
  *
  */
 
-public class RangeUpgrade implements Range, Upgrade, Observable {
+public class RangeUpgrade implements Range, Upgrade {
 
     private List<Observer> observers = new ArrayList<>();
     private double increment;
@@ -27,7 +29,7 @@ public class RangeUpgrade implements Range, Upgrade, Observable {
     }
 
     public RangeUpgrade (double increment) {
-        this.increment = increment;
+        setIncrement(increment);
         decorated = Optional.empty();
     }
 
@@ -48,19 +50,12 @@ public class RangeUpgrade implements Range, Upgrade, Observable {
     @Override
     public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((Range) decorated);
-        notifyObservers();
     }
 
     public Upgrade clone () {
-        RangeUpgrade clone = new RangeUpgrade(increment);
-        clone.addObserver(observers.get(0));
-        System.out.println("trig");
-        return clone;
+        return new RangeUpgrade(increment);
     }
 
-    public int getObserver(){
-        return observers.size();
-    }
     
     @Override
     public void addObserver (Observer observer) {
@@ -69,14 +64,12 @@ public class RangeUpgrade implements Range, Upgrade, Observable {
 
     @Override
     public void removeObserver (Observer observer) {
-        // TODO Auto-generated method stub
-        
+        observers.add(observer);
     }
 
     @Override
     public void notifyObservers () {
         observers.forEach(obs -> obs.update());
-        
     }
 
 }

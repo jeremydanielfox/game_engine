@@ -13,7 +13,7 @@ public class TestTree extends UpgradeTreeSimple {
     public TestTree () {
         List<UpgradeBundleSimple> bundles =
                 new ArrayList<>(
-                                Arrays.asList(new UpgradeBundleSimple[] {new TestBundle(), new TestBundle(1)}));
+                                Arrays.asList(new UpgradeBundleSimple[] {new TestBundle(0), new TestBundle(1)}));
         setUpgradeBundles(bundles);
     }
 

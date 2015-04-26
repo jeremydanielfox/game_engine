@@ -1,6 +1,5 @@
 package gae.tabView;
 
-import gae.backend.Placeable;
 import gae.gridView.LevelView;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
@@ -37,7 +36,7 @@ public class CentralTabView implements UIObject {
         // refactor this code
         ShopTab shopTab = new ShopTab();
         hudTab = new HudEditorTab(null);
-        GameObjectEditorTab gameObjectTab = new GameObjectEditorTab(scene, getConsumer());
+        GameObjectEditorTab gameObjectTab = new GameObjectEditorTab(scene, getConsumer(), getBiconsumer());
 
         tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode(),
                                  gameObjectTab.getBaseTabNode());

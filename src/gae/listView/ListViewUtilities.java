@@ -131,8 +131,7 @@ public class ListViewUtilities {
     }
 
     /**
-     * creates a ListView given an observable list of Editables, with specific properties, such as
-     * deleting objects and highlighting selected objects
+     * creates a ListView given an observable list of Objects
      *
      * @param editables
      * @param scene

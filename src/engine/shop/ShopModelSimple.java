@@ -5,11 +5,12 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import javafx.event.EventHandler;
+import engine.fieldsetting.Settable;
 import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import engine.gameobject.test.TestTower;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import engine.prototype.Prototype;
 import engine.shop.tag.PriceTag;
@@ -38,23 +39,15 @@ public class ShopModelSimple implements ShopModel {
 
     // For test only
     public ShopModelSimple (GameWorld world, Player player, double markup) {
-        // List<Prototype<GameObject>>prototypes =
-
         this.markup = markup;
         myGameWorld = world;
         currentPlayer = player;
         prototypeMap = new HashMap<>();
         upgradeMap = new HashMap<>();
-        // prototypes.forEach(prototype -> addPrototype(prototype));
     }
-
-    public ShopModelSimple (List<Prototype<GameObject>> prototypes,
-                            GameWorld currentGameWorld,
-                            Player currentPlayer, double markup) {
-        this.markup = markup;
-        this.currentPlayer = currentPlayer;
-        prototypeMap = new HashMap<String, Prototype<GameObject>>();
-        upgradeMap = new HashMap<String, UpgradeBundle>();
+    
+    @Settable
+    public void setPrototypes (List<Prototype<GameObject>> prototypes) {
         prototypes.forEach(prototype -> addPrototype(prototype));
     }
 
@@ -97,7 +90,6 @@ public class ShopModelSimple implements ShopModel {
             currentPlayer.getWallet().withdraw(getPrice(name));
             try {
                 GameObject tower = prototypeMap.get(name).clone();
-//                GameObject tower = new TestTower(1, 100, 100);
                 tower.getGraphic().getNode().setOnMousePressed(selected);
                 myGameWorld.addObject(tower, location);
                 return true;
@@ -118,11 +110,11 @@ public class ShopModelSimple implements ShopModel {
      * @param itemGraphic
      */
     @Override
-    public void purchaseUpgrade (String name) {
+    public void purchaseUpgrade (String name, Consumer<GameObject> refreshUpgrades) {
         if (canPurchase(name)){
             currentPlayer.getWallet().withdraw(getPrice(name));
             currentGameObject.getWeapon().applyUpgrades(upgradeMap.get(name));
-            getUpgradeGraphics(currentGameObject);
+            refreshUpgrades.accept(currentGameObject);
         }
     }
 

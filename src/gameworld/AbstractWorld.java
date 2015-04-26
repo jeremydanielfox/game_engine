@@ -42,6 +42,11 @@ public class AbstractWorld implements GameWorld {
 		myTrans = new CoordinateTransformer(numRows, numCols, ViewConcrete2.getWorldWidth(), ViewConcrete2.getWorldHeight()); // TODO fix window 1000
 		myTerrain = new Terrain(numRows, numCols, myTrans);
     }
+    
+    @Settable
+    public void setObjects(List<GameObject> objects) {
+        myObjects = objects;
+    }
 
     /*
      * The private methods that follow is unofficial code:

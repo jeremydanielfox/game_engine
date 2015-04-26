@@ -73,6 +73,7 @@ public class GameObjectEditorView implements UIObject {
             Object obj = createObject();
             consumer.accept(obj);
             biConsumer.accept(clazz, obj);
+            bottom.clear();
         });
         addButton().accept(addButton);
     }

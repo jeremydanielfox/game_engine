@@ -1,6 +1,7 @@
 package gae.gameView;
 
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
+
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
@@ -13,10 +14,10 @@ import javafx.scene.text.Text;
  * @author Nina Sun
  */
 public class LabelCheckListItem implements CheckListItem {
-    private Label label;
+    private Type label;
     private CheckBox checkbox;
 
-    public LabelCheckListItem (Label obj) {
+    public LabelCheckListItem (Type obj) {
         label = obj;
         checkbox = new CheckBox();
     }
@@ -44,7 +45,7 @@ public class LabelCheckListItem implements CheckListItem {
      * 
      * @return label
      */
-    public Label getLabel () {
+    public Type getLabel () {
         return label;
     }
 

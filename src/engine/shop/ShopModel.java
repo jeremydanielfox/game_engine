@@ -8,9 +8,14 @@ import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.prototype.Prototype;
 import engine.shop.ShopModelSimple.ItemInfo;
+import gameworld.GameWorld;
 
 
 public interface ShopModel {
+    
+    
+    public void setGameWorld (GameWorld world);
+    
     /**
      * Adds an item to the shop's inventory
      *

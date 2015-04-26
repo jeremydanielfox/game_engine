@@ -68,20 +68,16 @@
                           <engine.gameobject.test.ProjectileLabel>
                             <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
-                              <index>0</index>
                             </superType>
                             <myName>Projectile</myName>
-                            <index>0</index>
                           </engine.gameobject.test.ProjectileLabel>
                           <map>
                             <entry>
                               <engine.gameobject.test.EnemyLabel>
                                 <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
-                                  <index>0</index>
                                 </superType>
                                 <myName>Enemy</myName>
-                                <index>0</index>
                               </engine.gameobject.test.EnemyLabel>
                               <engine.interactions.BuffImparter/>
                             </entry>
@@ -96,20 +92,16 @@
                           <engine.gameobject.test.TowerLabel>
                             <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
-                              <index>0</index>
                             </superType>
                             <myName>Tower</myName>
-                            <index>0</index>
                           </engine.gameobject.test.TowerLabel>
                           <map>
                             <entry>
                               <engine.gameobject.test.EnemyLabel>
                                 <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
-                                  <index>0</index>
                                 </superType>
                                 <myName>Enemy</myName>
-                                <index>0</index>
                               </engine.gameobject.test.EnemyLabel>
                               <engine.interactions.ShootAt/>
                             </entry>
@@ -617,7 +609,6 @@
                           <myLength>0.0</myLength>
                         </engine.pathfinding.PathSegmentBezier>
                       </myPathSegments>
-                      <myIndex>0</myIndex>
                     </myPath>
                     <myTerrain>
                       <myMatrix>
@@ -1052,7 +1043,6 @@
                       </myBounds>
                     </myTerrain>
                     <myTrans reference="../myTerrain/myTrans"/>
-                    <myPathWidth>17.0</myPathWidth>
                   </myWorld>
                   <myQueue class="engine.events.ConcreteQueue">
                     <myOrderedObjects class="linked-list">
@@ -1060,10 +1050,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -1581,7 +1569,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -1609,10 +1596,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -2130,7 +2115,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -2228,10 +2212,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -2749,7 +2731,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -2777,10 +2758,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -3298,7 +3277,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -3396,10 +3374,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -3917,7 +3893,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -3945,10 +3920,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -4466,7 +4439,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -4564,10 +4536,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -5085,7 +5055,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -5113,10 +5082,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -5634,7 +5601,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -5732,10 +5698,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -6253,7 +6217,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -6281,10 +6244,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -6802,7 +6763,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -6900,10 +6860,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -7421,7 +7379,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -7449,10 +7406,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -7970,7 +7925,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -8068,10 +8022,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -8589,7 +8541,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -8617,10 +8568,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -9138,7 +9087,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -9236,10 +9184,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -9757,7 +9703,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -9785,10 +9730,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -10306,7 +10249,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -10404,10 +10346,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -10925,7 +10865,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -10953,10 +10892,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -11474,7 +11411,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -11572,10 +11508,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -12093,7 +12027,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -12121,10 +12054,8 @@
                                   <myLabel class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
                                   </myLabel>
                                   <myPoint>
                                     <myPoint>
@@ -12642,7 +12573,6 @@
                                           <myLength>0.0</myLength>
                                         </engine.pathfinding.PathSegmentBezier>
                                       </myPathSegments>
-                                      <myIndex>0</myIndex>
                                     </myPath>
                                   </myMover>
                                   <myBuffs>
@@ -12743,16 +12673,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>724</int>
-                    <int>1494</int>
-                    <int>1443</int>
-                    <int>544</int>
-                    <int>701</int>
-                    <int>1845</int>
-                    <int>2285</int>
-                    <int>1110</int>
-                    <int>119</int>
-                    <int>1887</int>
+                    <int>2386</int>
+                    <int>1277</int>
+                    <int>2228</int>
+                    <int>464</int>
+                    <int>1379</int>
+                    <int>911</int>
+                    <int>384</int>
+                    <int>1991</int>
+                    <int>93</int>
+                    <int>2322</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -12765,10 +12695,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -13286,7 +13214,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -13347,10 +13274,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -13868,7 +13793,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -13929,10 +13853,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -14450,7 +14372,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -14511,10 +14432,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -15032,7 +14951,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -15093,10 +15011,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -15614,7 +15530,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -15675,10 +15590,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -16196,7 +16109,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -16257,10 +16169,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -16778,7 +16688,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -16839,10 +16748,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -17360,7 +17267,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -17421,10 +17327,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -17942,7 +17846,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -18003,10 +17906,8 @@
                         <myLabel class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
                         </myLabel>
                         <myPoint>
                           <myPoint>
@@ -18524,7 +18425,6 @@
                                 <myLength>0.0</myLength>
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
-                            <myIndex>0</myIndex>
                           </myPath>
                         </myMover>
                         <myBuffs>
@@ -18639,20 +18539,16 @@
                 <engine.gameobject.test.ProjectileLabel>
                   <superType class="engine.gameobject.labels.TypeBase">
                     <myName>Base</myName>
-                    <index>0</index>
                   </superType>
                   <myName>Projectile</myName>
-                  <index>0</index>
                 </engine.gameobject.test.ProjectileLabel>
                 <map>
                   <entry>
                     <engine.gameobject.test.EnemyLabel>
                       <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
-                        <index>0</index>
                       </superType>
                       <myName>Enemy</myName>
-                      <index>0</index>
                     </engine.gameobject.test.EnemyLabel>
                     <engine.interactions.BuffImparter/>
                   </entry>
@@ -18667,20 +18563,16 @@
                 <engine.gameobject.test.TowerLabel>
                   <superType class="engine.gameobject.labels.TypeBase">
                     <myName>Base</myName>
-                    <index>0</index>
                   </superType>
                   <myName>Tower</myName>
-                  <index>0</index>
                 </engine.gameobject.test.TowerLabel>
                 <map>
                   <entry>
                     <engine.gameobject.test.EnemyLabel>
                       <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
-                        <index>0</index>
                       </superType>
                       <myName>Enemy</myName>
-                      <index>0</index>
                     </engine.gameobject.test.EnemyLabel>
                     <engine.interactions.ShootAt/>
                   </entry>
@@ -19123,7 +19015,6 @@
             </myBounds>
           </myTerrain>
           <myTrans reference="../myTerrain/myTrans"/>
-          <myPathWidth>17.0</myPathWidth>
         </myGameWorld>
         <myStoryBoard reference="../myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard"/>
       </engine.game.ConcreteLevel>

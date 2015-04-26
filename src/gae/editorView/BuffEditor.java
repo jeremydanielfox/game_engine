@@ -38,6 +38,10 @@ public class BuffEditor {
         return vbox;
     }
 
+    public List<Object> getBuffList () {
+        return buffList;
+    }
+
     private Consumer<Object> getConsumer () {
         return e -> {
             buffList.add(e);

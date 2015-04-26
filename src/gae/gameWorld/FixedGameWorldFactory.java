@@ -27,7 +27,7 @@ public class FixedGameWorldFactory implements GameWorldFactory {
 
     @Override
     public GameWorld createGameWorld () {
-        return new FixedWorld();
+        return new FixedWorld(dimensions.get().width, dimensions.get().height);
     }
 
 }

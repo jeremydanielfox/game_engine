@@ -1,10 +1,10 @@
 package engine.interactions;
 
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 
 
 public class CollisionEngine extends ConcreteInteractionEngine {
-    public void impartsBuffs (Label buffer, Label buffable) {
+    public void impartsBuffs (Type buffer, Type buffable) {
         super.put(buffer, buffable, new BuffImparter());
     }
 }

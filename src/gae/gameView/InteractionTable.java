@@ -33,6 +33,10 @@ public class InteractionTable extends Application {
     private VBox content;
     private Button adder;
     private List<InteractionInstance> interactions;
+    
+    /*
+     * use observable list from library data. get labels and add listener. 
+     */
 
     public InteractionTable () {
         myInteractionData = new InteractionData();

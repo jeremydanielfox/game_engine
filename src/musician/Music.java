@@ -17,6 +17,12 @@ public interface Music {
     Media getMusic();
     
     /**
+     * gets path of the media file
+     * @return
+     */
+    String getPath();
+    
+    /**
      * replaces media file with new m
      * 
      * @param m

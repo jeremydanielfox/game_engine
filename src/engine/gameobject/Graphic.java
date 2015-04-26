@@ -56,7 +56,6 @@ public class Graphic {
     }
 
     private void initializeImageView () {
-        System.out.println(myImageName);
         myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
         // for TEST purpose:
         if (myPoint == null) {
@@ -91,7 +90,6 @@ public class Graphic {
     public void setPoint (PointSimple point) {
         Point2D temp = new Point2D(point.getX() + ViewUtil.getCenterOffsetX(myImageView),
                                    point.getY() + ViewUtil.getCenterOffsetY(myImageView));
-        rotate(new PointSimple(temp));
         myPoint = temp;
         getImageView().relocate(myPoint.getX(), myPoint.getY());
     }
@@ -140,12 +138,17 @@ public class Graphic {
     }
 
     /**
-     * Rotates the node for this graphic according to a point and its rotator.
+     * Rotates the node for this graphic according to a point and its rotator. It uses the center of
+     * the graphic as
+     * the current/from point and the point passed in as the "to" point.
      *
      * @param point
      */
     public void rotate (PointSimple point) {
-        myRotator.rotate(myImageView, new PointSimple(myPoint), point);
+        Point2D centerOfMyImage =
+                new Point2D(myPoint.getX() - ViewUtil.getCenterOffsetX(myImageView),
+                            myPoint.getY() - ViewUtil.getCenterOffsetY(myImageView));
+        myRotator.rotate(myImageView, new PointSimple(centerOfMyImage), point);
     }
 
 }

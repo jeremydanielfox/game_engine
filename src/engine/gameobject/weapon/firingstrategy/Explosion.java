@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
@@ -42,6 +43,12 @@ public class Explosion {
     }
 
     /**
+     * Clears buff from the explosion
+     */
+    public void clearBuffs(){
+        explosBuffs.clear();
+    }
+    /**
      * Adds newBuff as an explosion behavior
      * 
      * @param newBuff
@@ -67,7 +74,7 @@ public class Explosion {
 
     private boolean checkTeam (GameObject target) {
         // TODO: Check if target is on the other team...
-        if (target instanceof GameObjectSimpleTest) {
+        if (target instanceof GameObjectSimple) {
             return true;
         }
         return false;

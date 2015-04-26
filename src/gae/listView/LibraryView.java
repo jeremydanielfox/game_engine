@@ -2,10 +2,8 @@ package gae.listView;
 
 import gae.backend.Placeable;
 import gae.gridView.ContainerWrapper;
-import gae.gridView.PathView;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;

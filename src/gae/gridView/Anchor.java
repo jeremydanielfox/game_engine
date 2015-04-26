@@ -2,7 +2,6 @@ package gae.gridView;
 
 import engine.gameobject.PointSimple;
 import javafx.beans.property.DoubleProperty;
-import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -64,17 +63,6 @@ public class Anchor extends Circle {
      */
     private void enableDrag () {
         final PointSimple dragDelta = new PointSimple(0, 0);
-        // setOnMousePressed(e -> {
-        // dragDelta.x = getCenterX() - e.getX();
-        // dragDelta.y = getCenterY() - e.getY();
-        // getScene().setCursor(Cursor.MOVE);
-        // });
-        //
-        // setOnMouseReleased(e -> {
-        // getScene().setCursor(Cursor.HAND);
-        // });
-
-        // FIX: dragDelta doesn't really matter anymore
         setOnMouseDragged(e -> {
             double newX = e.getX() + dragDelta.getX();
             try {

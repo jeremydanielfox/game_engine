@@ -1,23 +1,16 @@
 package gae.editorView;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import gae.backend.Placeable;
 import gae.editor.EditingParser;
 import gae.editor.EditorIntermediate;
 import gae.editor.ObjectComponentEditor;
 import gae.gridView.ContainerWrapper;
-import gae.listView.Authorable;
 import gae.listView.DraggableUtilities;
 import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -81,7 +74,6 @@ public class GenericObjectList {
         ListView<?> list = ListViewUtilities.createGenericList(createdSpecificObjects, classType);
         BooleanProperty unclicked = new SimpleBooleanProperty(false);
         list.setOnMouseClicked(me -> {
-            System.out.println("UNCLICKED IS (If false you can make new)" + unclicked);
             if (me.getClickCount() == 2 && !unclicked.get()) {
                 unclicked.set(true);
                 DraggableItem draggable =

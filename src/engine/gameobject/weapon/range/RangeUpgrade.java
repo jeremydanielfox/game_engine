@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import engine.fieldsetting.Settable;
+import engine.gameobject.units.UpgradeType;
 import engine.gameobject.weapon.Upgrade;
 import engine.observable.Observer;
 
@@ -20,6 +21,7 @@ public class RangeUpgrade implements Range, Upgrade {
     private List<Observer> observers = new ArrayList<>();
     private double increment;
     private Optional<Range> decorated;
+    private UpgradeType type;
 
     public RangeUpgrade () {
         this(0);
@@ -27,12 +29,22 @@ public class RangeUpgrade implements Range, Upgrade {
 
     public RangeUpgrade (double increment) {
         setIncrement(increment);
+        setType(UpgradeType.NULL);
         decorated = Optional.empty();
     }
 
     @Settable
     public void setIncrement (double increment) {
         this.increment = increment;
+    }
+
+    private void setType (UpgradeType type) {
+       this.type = type;
+    }
+
+    @Override
+    public UpgradeType getType () {
+        return type;
     }
 
     @Override

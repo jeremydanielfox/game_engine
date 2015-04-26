@@ -146,6 +146,7 @@ public class ShopView extends Parent {
     public void displayUpgrades (GameObject gameObject) {
         clearInfoBox();
         VBox base = new VBox();
+        base.setSpacing(10);
         base.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.8),
                                                              null, null)));
         Label name = new Label(gameObject.getName());

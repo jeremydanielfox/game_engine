@@ -7,7 +7,7 @@ import engine.gameobject.labels.SimpleType;
 import engine.gameobject.labels.Type;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
-import engine.gameobject.units.BuffType;
+import engine.gameobject.units.UpgradeType;
 import engine.gameobject.units.Collider;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;
@@ -65,7 +65,7 @@ public class GameObjectSimple implements GameObject, Title {
         myBuffs.receiveBuff(buff, this);
     }
 
-    public void addImmunity (Class<? extends Buff> immunity, BuffType buffType) {
+    public void addImmunity (Class<? extends Buff> immunity, UpgradeType buffType) {
         myBuffs.addImmunity(immunity, buffType);
     }
 
@@ -278,7 +278,7 @@ public class GameObjectSimple implements GameObject, Title {
 
     @Override
     public RangeDisplay getRangeDisplay () {
-        return new RangeDisplay(getName(), myGraphic.clone(), myWeapon.getRangeProperty());
+        return new RangeDisplay(getName(), myGraphic, myWeapon.getRangeProperty());
     }
 
     @Override

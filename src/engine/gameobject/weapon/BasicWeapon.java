@@ -45,8 +45,6 @@ public class BasicWeapon implements Weapon, Title{
     public BasicWeapon () {
         upgradables = new UpgradeSet<>();
         timeSinceFire = 0;
-        setRange(60);
-        setFiringRate(1);
         myFiringStrategy = new SingleProjectile();
     }
 
@@ -61,16 +59,13 @@ public class BasicWeapon implements Weapon, Title{
         return clone;
     }
 
-    private UpgradeSet<Upgrade> initializeUpgrades () {
-        UpgradeSet<Upgrade> result =
-                new UpgradeSet<Upgrade>(new Upgrade[] { myRange, myFiringRate });
+    private void initializeUpgrades () {
         Set<Buff> collisionBuffs = myProjectile.getCollider().getCollisionBuffs();
         Set<Buff> explosBuffs = myProjectile.getCollider().getCollisionBuffs();
-        result.addAll(collisionBuffs);
-        result.addAll(explosBuffs);
-        result.addListener((SetChangeListener<Upgrade>) change ->
+        upgradables.addAll(collisionBuffs);
+        upgradables.addAll(explosBuffs);
+        upgradables.addListener((SetChangeListener<Upgrade>) change ->
                 syncBuffs(change, collisionBuffs, explosBuffs));
-        return result;
     }
 
     private void syncBuffs (Change<? extends Upgrade> change,
@@ -79,7 +74,7 @@ public class BasicWeapon implements Weapon, Title{
 
         Buff buff = (change.wasAdded()) ? (Buff) change.getElementAdded() :
                                        (Buff) change.getElementRemoved();
-        switch (buff.getBuffType()) {
+        switch (buff.getType()) {
             case COLLISION:
                 if (change.wasAdded()) {
                     collisionBuffs.add(buff);
@@ -219,7 +214,7 @@ public class BasicWeapon implements Weapon, Title{
 
     // TODO: Get the math correct here
     private double firingRateToSeconds () {
-        return 60.0 / myFiringRate.getRate();
+        return 60.0 / getFiringRate();
     }
 
     private boolean canFire () {

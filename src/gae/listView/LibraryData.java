@@ -6,6 +6,7 @@ import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
+import engine.gameobject.labels.Label;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.backend.Placeable;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 
@@ -27,17 +29,31 @@ import javafx.collections.ObservableList;
  */
 public class LibraryData {
     private static LibraryData instance = new LibraryData();
+    private ObservableList<Authorable> editableList = FXCollections.observableArrayList();
+    private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
+    private Map<Class<?>, ObservableList<Object>> createdObjectMap = new HashMap<>();
+    private ArrayList<GameObjectSimple> gameObjectList = new ArrayList<>();
+    private ObservableList<Label> labelList = FXCollections.observableArrayList();
 
     private LibraryData () {
+        setEditableList();
     }
 
     public static LibraryData getInstance () {
         return instance;
     }
 
-    private ObservableList<Authorable> editableList = FXCollections.observableArrayList();
-    private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
-    private Map<Class<?>, ObservableList<Object>> createdObjectMap = new HashMap<>();
+    private void setEditableList () {
+        editableList.addListener( (ListChangeListener.Change<? extends Authorable> change) -> {
+            while (change.next()) {
+                if (change.wasAdded()) { // if an editablenode was added
+                    Authorable added = change.getAddedSubList().get(0);
+                    if (added instanceof Placeable)
+                        labelList.add(((Placeable) added).getLabel());
+                }
+            }
+        });
+    }
 
     public ObservableList<Authorable> getEditableObservableList () {
         return editableList;
@@ -48,7 +64,12 @@ public class LibraryData {
     }
 
     public void addCreatedObjectToList (Class<?> klass, Object o) {
-        createdObjectMap.get(klass).add(o);
+        try {
+            createdObjectMap.get(klass).add(o);
+        }
+        catch (NullPointerException e) {
+            System.out.println(klass.getSimpleName() + " NOT available");
+        }
     }
 
     public ObservableList<Object> getObservableList (Class<?> klass) {
@@ -73,19 +94,27 @@ public class LibraryData {
     }
 
     public List<GameObjectSimple> getGameObjectList () {
-        List<GameObjectSimple> gameObjectList = new ArrayList<>();
+        return gameObjectList;
+    }
+
+    public ObservableList<Label> getLabelList () {
+        return labelList;
+    }
+
+    public List<GameObjectSimple> createGameObjectList () {
         for (Authorable authorable : editableList) {
             Placeable editable = (Placeable) authorable;
             GameObjectSimple object = new GameObjectSimple();
             object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
                                           editable.getImagePath()));
-            // object.setLabel(editableNode.getLabel());
-            // object.setTag(editableNode.getTag());
+            object.setLabel(editable.getLabel());
+            object.setTag(editable.getTag());
             object.setMover(getMover(editable));
             object.setPoint(editable.getLocation());
             object.setHealth(new HealthSimple(editable.getHealth()));
             // WHAT IS TAG/LABEL
             // set Collider
+            gameObjectList.add(object);
         }
         return gameObjectList;
     }

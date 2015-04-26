@@ -51,17 +51,17 @@ public class GenericObjectsPane implements UIObject {
 
     private void cellClicked (MouseEvent e, String selected) {
         if (e.getClickCount() == 2) {
-            newCustomObject(GameObjectSimple.class, selected, function);
+            newCustomObject(GameObjectSimple.class, selected, function, biconsumer);
         }
     }
 
-    public static void newCustomObject (Class<?> klass, String title, Consumer<Object> consumer) {
+    public static void newCustomObject (Class<?> klass, String title, Consumer<Object> consumer, BiConsumer<Class<?>, Object> biConsumer) {
         Stage editorStage = new Stage();
         Consumer<Object> closeConsumer = e -> {
             consumer.accept(e);
             editorStage.close();
         };
-        PopUpEditor editor = new PopUpEditor(klass, title, closeConsumer);
+        PopUpEditor editor = new PopUpEditor(klass, title, closeConsumer, biConsumer);
         ScrollPane scroll = new ScrollPane();
         scroll.setPrefSize(300, 500);
         scroll.setContent(editor.getObject());

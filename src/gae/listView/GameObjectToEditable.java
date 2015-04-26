@@ -3,6 +3,7 @@ package gae.listView;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
+import engine.gameobject.labels.Label;
 import engine.gameobject.weapon.Weapon;
 import engine.shop.tag.GameObjectTag;
 import gae.backend.Placeable;
@@ -38,6 +39,7 @@ public class GameObjectToEditable implements Placeable {
     private ImageView imageView;
     private double health;
     private GameObjectTag tag;
+    private Label label;
 
     public GameObjectToEditable () {
 
@@ -51,9 +53,11 @@ public class GameObjectToEditable implements Placeable {
          * TODO: find out how to copy the object
          */
         name = gameObject.getTag().getName();
-        imagePath = gameObject.getTag().getGraphic().getImagePath();
+        imagePath = gameObject.getGraphic().getImagePath();
         type = gameObject.getLabel().getName();
-        imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
+//        imageView = (ImageView) gameObject.getTag().getGraphic().getResizedGraphic(1);
+        System.out.println(imagePath);
+        imageView = new ImageView(gameObject.getGraphic().getImagePath());
         tag = gameObject.getTag();
         // gameobject is not serializable and gives an error so must set to null
         // gameObject = null;
@@ -242,5 +246,17 @@ public class GameObjectToEditable implements Placeable {
     public void setType (String type) {
         // TODO Auto-generated method stub
         this.type = type;
+    }
+
+    @Override
+    public Label getLabel () {
+        // TODO Auto-generated method stub
+        return label;
+    }
+
+    @Override
+    public void setLabel (Label label) {
+        // TODO Auto-generated method stub
+        this.label = label;
     }
 }

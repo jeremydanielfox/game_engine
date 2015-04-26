@@ -21,6 +21,11 @@ public class MusicSimple implements Music {
     public Media getMusic () {
         return music;
     }
+    
+    @Override
+    public String getPath () {
+        return music.getSource();
+    }
 
     @Override
     public void replace (Media m) {

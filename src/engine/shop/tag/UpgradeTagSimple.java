@@ -11,9 +11,12 @@ public class UpgradeTagSimple implements UpgradeTag {
     private Graphic shopGraphic;
     private String description;
     private Purchasable purchasable;
+    private int type;
 
-    public UpgradeTagSimple () {
-        name = "TestTag";
+    public UpgradeTagSimple (int i) {
+        //for test
+        type = i;
+        name = (i==0) ? "Range Upgrade 1": "Range Upgrade 2";
         description = "Test description";
         shopGraphic = new Graphic(30, 30, "Bloons_DartMonkey.png");
         purchasable = null;
@@ -63,7 +66,7 @@ public class UpgradeTagSimple implements UpgradeTag {
     }
     
     public UpgradeTag clone () {
-        return new UpgradeTagSimple();
+        return new UpgradeTagSimple(type);
     }
 
 }

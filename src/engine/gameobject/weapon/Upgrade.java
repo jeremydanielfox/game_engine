@@ -1,6 +1,7 @@
 package engine.gameobject.weapon;
 
 import engine.gameobject.units.Buff;
+import engine.observable.Observable;
 
 // TODO: experiment with generics here
 /**
@@ -19,7 +20,7 @@ import engine.gameobject.units.Buff;
  * @author Nathan Prabhu
  *
  */
-public interface Upgrade {
+public interface Upgrade extends Observable {
 
     /**
      *

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import engine.fieldsetting.Settable;
 import engine.gameobject.PointSimple;
+import engine.titles.Title;
 
 
 /**
@@ -13,9 +14,10 @@ import engine.gameobject.PointSimple;
  *
  */
 @Settable
-public class PathFixed implements Path {
+public class PathFixed implements Path, Title {
     private List<PathSegment> myPathSegments;
-
+    private String myTitle="";
+    private int myIndex=0;
     public PathFixed () {
         myPathSegments = new LinkedList<>();
     }
@@ -47,6 +49,26 @@ public class PathFixed implements Path {
 
     @Override
     public void updatePath () {
+    }
+
+    @Override
+    public String getTitle () {
+        return myTitle;
+    }
+
+    @Override
+    public void setTitle (String title) {
+        myTitle = title;
+    }
+
+    @Override
+    public int getIndex () {
+        return myIndex;
+    }
+
+    @Override
+    public void setIndex (int index) {
+        myIndex = index;
     }
 
 }

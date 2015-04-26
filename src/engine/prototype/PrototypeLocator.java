@@ -7,6 +7,7 @@ package engine.prototype;
  * @author Tom Puglisi
  *
  */
+@Deprecated
 public class PrototypeLocator {
     private static PrototypeService myPrototypeService;
 

@@ -10,7 +10,8 @@ import xml.DataManager;
 
 
 public class TestEngine extends Application {
-    private static final String FILE_SOURCE = "src/xml/test.xml";
+
+    private static final String FILE_SOURCE = "src/xml/Game.xml";
 
     @Override
     public void start (Stage primaryStage) throws Exception {
@@ -22,7 +23,6 @@ public class TestEngine extends Application {
 
         Scene scene = new Scene(root);
         Game game = loadGame();
-        System.out.println("Read");
         EngineView view = new ViewConcrete2(game, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 
         // pane.setCenter(view.initializeView());

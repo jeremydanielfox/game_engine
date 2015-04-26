@@ -45,7 +45,7 @@ public class BasicWeapon implements Weapon, Title{
         upgradables = new UpgradeSet<>();
         timeSinceFire = 0;
         setRange(60);
-        setFiringRate(.5);
+        setFiringRate(1);
         myFiringStrategy = new SingleProjectile();
     }
 

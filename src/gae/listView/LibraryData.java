@@ -131,7 +131,7 @@ public class LibraryData {
         object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
                                       editable.getImagePath()));
         object.setLabel(editable.getLabel());
-        object.setTag(editable.getTag());
+        object.setShopTag(editable.getShopTag());
         object.setMover(editable.getPath());
         object.setHealth(new HealthSimple(editable.getHealth()));
         // set Collider

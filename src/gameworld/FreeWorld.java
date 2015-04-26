@@ -109,8 +109,10 @@ public class FreeWorld extends AbstractWorld {
 			for(int c = 0; c < myGrid[0].length; c++){
 				GameObject g = myGrid[r][c];
 				if(g != null){
+				   System.out.println("is working");
 					GridCell cell = myTransform.transformWorldToGrid(g.getPoint());
 					if(myGrid[cell.getRow()][cell.getCol()] != g){
+					    System.out.println("yoyoyoyoy");
 						myGrid[cell.getRow()][cell.getCol()] = g;
 						myGrid[r][c] = null;
 						try {

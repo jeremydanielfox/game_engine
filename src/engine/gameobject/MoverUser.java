@@ -45,8 +45,9 @@ public class MoverUser extends BasicMover {
 
     @Override
     public Mover clone () {
-        // TODO Auto-generated method stub
-        return null;
+        MoverUser mover =  new MoverUser();
+        mover.setGraphic(myGraphic);
+        return mover;
     }
 
     public void moveRight () {

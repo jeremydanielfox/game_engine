@@ -68,8 +68,11 @@ public class UpgradeBundleSimple implements BuildableBundle {
 
     @Override
     public BuildableBundle getNext () {
-        // if isFinal, shop will disallow further purchase and change graphics
-        return (isFinal) ? null : next;
+        if (next == null){
+            markFinalUpgrade();
+            return null;
+        }
+        return next;
     }
 
     @Override

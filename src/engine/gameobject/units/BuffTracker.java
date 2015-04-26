@@ -9,7 +9,7 @@ import engine.gameobject.GameObject;
 
 public class BuffTracker {
     private List<Buff> buffList;
-    private Map<Class<? extends Buff>, BuffType> immunityList;
+    private Map<Class<? extends Buff>, UpgradeType> immunityList;
     
     public BuffTracker () {
         super();
@@ -22,7 +22,7 @@ public class BuffTracker {
      * @param immunity The type of buff you want this object to be immune to
      * @param buffType NULL if any buff type
      */
-    public void addImmunity(Class<? extends Buff> immunity, BuffType buffType){
+    public void addImmunity(Class<? extends Buff> immunity, UpgradeType buffType){
         immunityList.put(immunity, buffType);
     }
     
@@ -79,9 +79,9 @@ public class BuffTracker {
     private boolean isImmuneTo(Buff newBuff){
         for (Class<? extends Buff> buff : immunityList.keySet()){
             if (buff.isAssignableFrom(newBuff.getClass())){
-                BuffType immuneType = immunityList.get(buff);
-                return immuneType.equals(BuffType.NULL) || 
-                        immuneType.equals(newBuff.getBuffType());
+                UpgradeType immuneType = immunityList.get(buff);
+                return immuneType.equals(UpgradeType.NULL) || 
+                        immuneType.equals(newBuff.getType());
                 }
             }        
         return false;

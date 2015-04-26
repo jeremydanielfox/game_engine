@@ -1,6 +1,6 @@
 package engine.shop;
 
-import engine.gameobject.units.BuffType;
+import engine.gameobject.units.UpgradeType;
 import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.units.freeze.FreezeBuff;
 import engine.gameobject.weapon.Upgrade;
@@ -74,11 +74,11 @@ public class View extends Application {
         Set<Upgrade> test = new UpgradeSet<>();
         test.add(new DamageBuff(5));
         FreezeBuff freeze1 = new FreezeBuff(10);
-        freeze1.setBuffType(BuffType.COLLISION);
+        freeze1.setBuffType(UpgradeType.COLLISION);
         FreezeBuff freeze2 = new FreezeBuff(100);
-        freeze2.setBuffType(BuffType.COLLISION);
+        freeze2.setBuffType(UpgradeType.COLLISION);
         FreezeBuff freeze3 = new FreezeBuff(100);
-        freeze3.setBuffType(BuffType.EXPLOSION);
+        freeze3.setBuffType(UpgradeType.EXPLOSION);
         test.add(freeze1);
         test.add(freeze2);
         test.add(freeze3);

@@ -45,6 +45,10 @@ public class ObjectComponentEditor extends ComponentEditor {
         myObject = obj;
     }
 
+    public BiConsumer<Class<?>, Object> getBiConsumer () {
+        return biConsumer;
+    }
+
     public Class<?> getObjectClass () {
         return clazz;
     }

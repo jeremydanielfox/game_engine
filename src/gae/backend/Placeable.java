@@ -3,6 +3,8 @@ package gae.backend;
 import java.io.Serializable;
 import java.util.List;
 import javafx.scene.image.ImageView;
+import engine.gameobject.Graphic;
+import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
 import engine.gameobject.weapon.Weapon;
@@ -31,11 +33,13 @@ public interface Placeable extends Serializable, Authorable {
 
     public Weapon getWeapon ();
 
-    public List<List<Path>> getPath ();
+    public Mover getPath ();
 
     public int getWidth ();
 
     public int getHeight ();
+
+    public Graphic getGraphic ();
 
     public GameObjectTag getTag ();
     
@@ -49,7 +53,7 @@ public interface Placeable extends Serializable, Authorable {
 
     public void setID (int id);
 
-    public void setPath (List<List<Path>> path);
+    public void setPath (Mover path);
 
     public void setWidth (int width);
 
@@ -64,6 +68,8 @@ public interface Placeable extends Serializable, Authorable {
     public void setType (String type);
 
     public void setImagePath (String path);
+
+    public void setGraphic (Graphic graphic);
     
     public void setLabel(Type label);
 

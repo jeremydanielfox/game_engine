@@ -7,18 +7,15 @@ import engine.shop.tag.UpgradeTagSimple;
 
 public class TestBundle extends UpgradeBundleSimple {
 
-    public TestBundle () {
-        this(0);
-    }
 
     public TestBundle (int i) {
         if (i == 0) {
             setUpgrades(new Upgrade[] { new RangeUpgrade(30) });
-            setUpgradeTag(new UpgradeTagSimple());
+            setUpgradeTag(new UpgradeTagSimple(0));
         }
         if (i == 1) {
             setUpgrades(new Upgrade[] { new RangeUpgrade(30) });
-            setUpgradeTag(new UpgradeTagSimple());
+            setUpgradeTag(new UpgradeTagSimple(1));
         }
     }
 }

@@ -1,6 +1,7 @@
 package gae.backend;
 
 import engine.gameobject.PointSimple;
+import engine.gameobject.labels.Label;
 import engine.gameobject.weapon.Weapon;
 import engine.shop.tag.GameObjectTag;
 import gae.gridView.Path;
@@ -211,6 +212,18 @@ public class TempEnemy implements Placeable, UIObject {
 
     @Override
     public void setImagePath (String path) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Label getLabel () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setLabel (Label label) {
         // TODO Auto-generated method stub
         
     }

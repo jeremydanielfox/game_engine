@@ -15,7 +15,6 @@ import engine.gameobject.weapon.firingrate.FiringRate;
 import engine.gameobject.weapon.firingrate.FiringRateUpgrade;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
-import engine.gameobject.weapon.range.RangeObserver;
 import engine.gameobject.weapon.range.RangeUpgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
@@ -33,22 +32,19 @@ public class BasicWeapon implements Weapon {
     private int timeSinceFire;
     private RangeUpgrade myRange;
     private DoubleProperty rangeProp = new SimpleDoubleProperty();
+   
     private FiringRate myFiringRate;
     private GameObject myProjectile;
     private FiringStrategy myFiringStrategy;
     private UpgradeSet<Upgrade> upgradables;
     private UpgradeTree tree;
-    
 
     public BasicWeapon () {
         upgradables = new UpgradeSet<>();
         timeSinceFire = 0;
-        myRange = new RangeUpgrade();
         setRange(60);
-        myFiringRate = new FiringRateUpgrade(.5);
-        myFiringRate = new FiringRateUpgrade(.5);
+        setFiringRate(.5);
         myFiringStrategy = new SingleProjectile();
-        upgradables.addAll(Arrays.asList(myRange, myFiringRate));
     }
 
     @Override
@@ -105,15 +101,27 @@ public class BasicWeapon implements Weapon {
     @Override
     @Settable
     public void setRange (double range) {
-        myRange.setIncrement(range);
-        rangeProp.set(myRange.getRange());
-        myRange.addObserver(new RangeObserver(rangeProp, upgradables, myRange));        
+        myRange = new RangeUpgrade(range);
+        rangeProp.setValue(range);
+        upgradables.add(myRange);
+        myRange.addObserver(new UpgradeObserver(this::updateRange));
+    }
+
+    private void updateRange () {
+        myRange = (RangeUpgrade) upgradables.get(myRange);
+        rangeProp.setValue(myRange.getRange());
     }
 
     @Override
     @Settable
     public void setFiringRate (double firingRate) {
         myFiringRate = new FiringRateUpgrade(firingRate);
+        upgradables.add(myFiringRate);
+        //myFiringRate.addObserver(new UpgradeObserver(this::updateFiringRate));
+    }
+    
+    private void updateFiringRate () {
+        
     }
 
     @Override
@@ -169,14 +177,12 @@ public class BasicWeapon implements Weapon {
 
     @Override
     public double getRange () {
-        //return ((Range) upgradables.get(myRange)).getRange();
-        return myRange.getRange();
+        return rangeProp.get();
     }
-    
-    public DoubleProperty getRangeProperty(){
+
+    public DoubleProperty getRangeProperty () {
         return rangeProp;
     }
-    
 
     /*
      * (non-Javadoc)
@@ -224,7 +230,6 @@ public class BasicWeapon implements Weapon {
     @Override
     public void applyUpgrades (UpgradeBundle bundle) {
         bundle.applyUpgrades(upgradables);
-        myRange = ((RangeUpgrade) upgradables.get(new RangeUpgrade()));
         bundle.getParent().updateCurrent(bundle.getParent());
     }
 }

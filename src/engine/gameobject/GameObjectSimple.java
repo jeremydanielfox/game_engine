@@ -38,6 +38,7 @@ public class GameObjectSimple implements GameObject, Title {
     private Graphic myGraphic;
     private ShopTag myShopTag;
     private String myTitle = "";
+    private int index;
 
     public GameObjectSimple () {
         myLabel = new SimpleType();
@@ -303,6 +304,18 @@ public class GameObjectSimple implements GameObject, Title {
     @Override
     public void setTitle (String title) {
         myTitle = title;
+    }
+
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return index;
+    }
+
+    @Override
+    public void setIndex (int index) {
+        // TODO Auto-generated method stub
+        this.index = index;
     }
 
 }

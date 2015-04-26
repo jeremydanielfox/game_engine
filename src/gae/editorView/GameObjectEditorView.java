@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import engine.gameobject.GameObjectSimple;
+import engine.titles.Title;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -40,6 +43,8 @@ public class GameObjectEditorView implements UIObject {
     private SimpleEditor simpleEditor;
     private Class<?> clazz;
     private static Map<Class<?>, SimpleEditor> simpleEditorMap = new HashMap<>();
+    private int index = -1;
+    private BooleanProperty edited;
 
     public GameObjectEditorView (Scene scene,
                                  Consumer<Object> consumer,
@@ -52,13 +57,14 @@ public class GameObjectEditorView implements UIObject {
     public GameObjectEditorView (Scene scene,
                                  Consumer<Object> consumer,
                                  BiConsumer<Class<?>, Object> biConsumer,
-                                 Class<?> klass) {
+                                 Class<?> klass, int index) {
         if (!simpleEditorMap.containsKey(klass)) {
             simpleEditor = new SimpleEditor(klass, biConsumer);
             simpleEditorMap.put(klass, simpleEditor);
         }
         else {
             simpleEditor = simpleEditorMap.get(klass);
+            this.index = index;
         }
         clazz = klass;
         init(scene, consumer, biConsumer);
@@ -67,6 +73,8 @@ public class GameObjectEditorView implements UIObject {
     private void init (Scene scene,
                        Consumer<Object> consumer,
                        BiConsumer<Class<?>, Object> biConsumer) {
+        edited = new SimpleBooleanProperty();
+        edited.set(false);
         root = new Group();
         root.setManaged(false);
         this.scene = scene;
@@ -75,16 +83,17 @@ public class GameObjectEditorView implements UIObject {
         SimpleEditorView simpleEditorView = new SimpleEditorView(simpleList);
         top = (VBox) simpleEditorView.getObject();
         top.setPrefSize(vboxWidth, vboxHeight);
-        // imageLocationMap =
-        // ResourceBundleUtil.useResourceBundle("gae/editorView/ObjectPathProperties");
         Button addButton = new Button("Add");
         addButton.setOnAction(e -> {
             Object obj = createObject();
+            Title casted = (Title) obj;
+            casted.setIndex(index);
+            edited.set(true);
             consumer.accept(obj);
             biConsumer.accept(clazz, obj);
             bottom.clear();
         });
-        addButton().accept(addButton);
+        top.getChildren().add(addButton);
     }
 
     private BorderPane setUpBorder () {
@@ -133,8 +142,4 @@ public class GameObjectEditorView implements UIObject {
         return simpleEditor.createObject(clazz);
     }
 
-    public Consumer<Node> addButton () {
-        Consumer<Node> consumer = node -> top.getChildren().add(node);
-        return consumer;
-    }
 }

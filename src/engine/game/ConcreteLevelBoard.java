@@ -103,4 +103,16 @@ private String myTitle="";
         myTitle = title;
     }
 
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void setIndex (int existing) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

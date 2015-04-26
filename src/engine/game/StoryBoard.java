@@ -119,4 +119,16 @@ public class StoryBoard extends Observable implements Title {
         myTitle = title;
     }
 
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void setIndex (int existing) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

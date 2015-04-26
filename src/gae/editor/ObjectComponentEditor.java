@@ -53,11 +53,11 @@ public class ObjectComponentEditor extends ComponentEditor {
         return clazz;
     }
 
-    public void popNewEditor () {
+    public void popNewEditor (int index) {
         // Consumer<Object> setObjectConsumer = o -> setObject(o);
         Consumer<Object> setObjectConsumer = o -> clear();
         // GenericObjectsPane.newCustomObject(clazz, "yo", setObjectConsumer);
-        new PopUpEditorView(setObjectConsumer, biConsumer, clazz);
+        new PopUpEditorView(setObjectConsumer, biConsumer, clazz, index);
     }
 
     @Override

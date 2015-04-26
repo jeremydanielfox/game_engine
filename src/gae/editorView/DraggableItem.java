@@ -1,7 +1,9 @@
 package gae.editorView;
 
 import exception.EmptyListException;
+import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import engine.titles.Title;
@@ -9,21 +11,31 @@ import gae.editor.ObjectComponentEditor;
 
 
 public class DraggableItem extends Region {
-    private String name;
     private Class<?> klass;
     private Object object;
     private ObjectComponentEditor editor;
+    private int index;
 
-    public DraggableItem (Object object, Class<?> klass, ObjectComponentEditor editor) {
-        name = ((Title) object).getTitle();
+    public DraggableItem (Object object,
+                          int listIndex,
+                          Class<?> klass,
+                          ObjectComponentEditor editor) {
         this.object = object;
         this.klass = klass;
         this.editor = editor;
-        this.getChildren().add(setFields(new HBox()));
+        this.index = listIndex;
+//        this.edited = edited;
+//        edited.addListener((obsevable, oldValue, newValue) -> {
+//            System.out.println("changed");
+//            this.getChildren().clear();
+//            this.getChildren().add(setFields(new HBox(),((Title) object).getTitle()));
+//        });
+        this.getChildren().add(setFields(new HBox(),((Title) object).getTitle()));
     }
 
-    private HBox setFields (HBox newBox) {
+    private HBox setFields (HBox newBox, String name) {
         Label label = new Label(name);
+
         label.setStyle("-fx-font-size: 30px;\n" +
                        "    -fx-font-weight: bold;\n" +
                        "    -fx-text-fill: #333333;\n" +
@@ -31,9 +43,11 @@ public class DraggableItem extends Region {
         newBox.getChildren().add(label);
         newBox.setOnMouseClicked(e -> {
             if (e.getClickCount() == 2) {
-                editor.popNewEditor();
+                editor.popNewEditor(index);
             }
         });
+        final Tooltip tooltip = new Tooltip("Double Click to Edit " + name);
+        Tooltip.install(newBox, tooltip);
         return newBox;
     }
 
@@ -44,6 +58,6 @@ public class DraggableItem extends Region {
     }
 
     public DraggableItem getNewInstance () {
-        return new DraggableItem(object, klass, editor);
+        return new DraggableItem(object, index, klass, editor);
     }
 }

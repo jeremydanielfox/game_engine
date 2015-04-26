@@ -38,6 +38,7 @@ public class BasicWeapon implements Weapon, Title{
     private FiringStrategy myFiringStrategy;
     private UpgradeSet<Upgrade> upgradables;
     private UpgradeTree tree;
+    private int index;
 
     private double value;
 
@@ -246,5 +247,17 @@ public class BasicWeapon implements Weapon, Title{
     public void setTitle (String title) {
         // TODO Auto-generated method stub
         this.title = title;
+    }
+
+    @Override
+    public int getIndex () {
+        // TODO Auto-generated method stub
+        return index;
+    }
+
+    @Override
+    public void setIndex (int index) {
+        // TODO Auto-generated method stub
+        this.index = index;
     }
 }

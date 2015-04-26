@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 
 public abstract class EditorOpener {
-    public void initialize () {
+    public EditorOpener() {
         Stage s = new Stage();
         Scene scene = new Scene(setUpParent());
         s.setWidth(330);

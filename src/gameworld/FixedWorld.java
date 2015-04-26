@@ -6,7 +6,7 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.PointSimple;
 import engine.pathfinding.EndOfPathException;
 
-
+@Settable
 public class FixedWorld extends AbstractWorld {
     private double myPathWidth = 17;
 

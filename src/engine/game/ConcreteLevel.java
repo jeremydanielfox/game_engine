@@ -6,6 +6,7 @@ import View.Displayable;
 import engine.fieldsetting.Settable;
 import engine.goals.EventsCompleteGoal;
 import engine.goals.Goal;
+import engine.titles.Title;
 import gameworld.FixedWorld;
 import gameworld.GameWorld;
 
@@ -19,13 +20,14 @@ import gameworld.GameWorld;
  *
  */
 @Settable
-public class ConcreteLevel implements Level {
+public class ConcreteLevel implements Level, Title {
 
     private static final int EVENT_GOAL_INDEX = 0;
 
     // note to self: we need to save all of the images out to one directory
     // we should identify images by name and have a constant image path that we pin on before
     // Retrieving image
+    private String myTitle = "";
     private String myImagePath;
     private List<Goal> myWinningGoals;
     private List<Goal> myLosingGoals;
@@ -142,6 +144,18 @@ public class ConcreteLevel implements Level {
             displays.add(myTimer);
         }
         return displays;
+    }
+
+    @Override
+    public String getTitle () {
+        return myTitle;
+    }
+
+    @Settable
+    @Override
+    public void setTitle (String title) {
+        // TODO Auto-generated method stub
+        myTitle = title;
     }
 
 }

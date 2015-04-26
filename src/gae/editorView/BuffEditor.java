@@ -45,7 +45,6 @@ public class BuffEditor {
     private Consumer<Object> getConsumer () {
         return e -> {
             buffList.add(e);
-            System.out.println(buffList);
         };
     }
 }

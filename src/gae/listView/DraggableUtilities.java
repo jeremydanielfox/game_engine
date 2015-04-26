@@ -93,7 +93,7 @@ public class DraggableUtilities {
                                     node,
                                     ViewUtil
                                             .getMouseLocation(me, placeable),
-                                    KeyCode.Q, false);
+                                    KeyCode.Q, unclicked);
         binder.setOnMouseClicked(ev -> {
             DraggableItem clone = placeable.getNewInstance();
             Point2D current =

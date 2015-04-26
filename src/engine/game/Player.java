@@ -15,6 +15,7 @@ import engine.shop.wallet.Wallet;
  *
  * @author Sierra Smith
  * @author Cosette Goldstein
+ * @author Brandon Choi
  *
  */
 @Settable
@@ -105,8 +106,15 @@ public class Player extends Observable {
         myScore = score;
     }
 
-    @Settable
     public void setWallet (Wallet wallet) {
         myWallet = wallet;
+    }
+    
+    @Settable
+    public void setWalletUnit (String unitLabel) {
+        if(myHealth.getLabel().equals(unitLabel))
+            myWallet = new ConcreteWallet(myHealth);
+        else
+            myWallet = new ConcreteWallet(myScore);
     }
 }

@@ -1,16 +1,16 @@
 package engine.gameobject.labels;
 
-public interface Label {
+public interface Type {
 
     public void setName (String name);
 
     public String getName ();
 
-    public Label getSuperLabel ();
+    public Type getSuperType ();
 
-    public void setSuperLabel (Label parent);
+    public void setSuperType (Type parent);
 
-    public Label clone ();
+    public Type clone ();
     /*
      * public String getLabel();
      * 

@@ -1,5 +1,6 @@
 package gae.editorView;
 
+import exception.EmptyListException;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -14,12 +15,15 @@ public class DraggableItem extends Region {
         this.classType = classType;
         this.object = object;
         this.klass = klass;
+        if (object==null) {
+            throw new EmptyListException();
+        }
         this.getChildren().add(setFields(new HBox()));
     }
 
     private HBox setFields (HBox newBox) {
         Label label = new Label(classType);
-        label.setStyle("-fx-font-size: 12px;\n" +
+        label.setStyle("-fx-font-size: 30px;\n" +
                        "    -fx-font-weight: bold;\n" +
                        "    -fx-text-fill: #333333;\n" +
                        "    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );");

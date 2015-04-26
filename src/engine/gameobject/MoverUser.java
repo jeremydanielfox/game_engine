@@ -7,6 +7,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import engine.fieldsetting.Settable;
 import engine.pathfinding.EndOfPathException;
 
+
 @Settable
 public class MoverUser extends BasicMover {
     private PointSimple none = new PointSimple(0, 0);
@@ -14,21 +15,22 @@ public class MoverUser extends BasicMover {
     private Graphic myGraphic;
     @XStreamOmitField
     private transient Node myNode;
-    
-    public MoverUser() {
-        this.inherentSpeed=5;
+
+    public MoverUser () {
+        this.inherentSpeed = 5;
     }
 
     @Override
     public PointSimple move (PointSimple current) throws EndOfPathException {
-        if (myNode==null)
+        if (myNode == null)
             initializeNode(myGraphic);
         PointSimple direction = new PointSimple(currentDirection);
         currentDirection = none;
         return current.add(direction);
     }
+
     @Settable
-    public void setGraphic(Graphic graphic) {
+    public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }
 
@@ -56,7 +58,7 @@ public class MoverUser extends BasicMover {
     }
 
     public void moveNorth () {
-         currentDirection = new PointSimple(0, -this.inherentSpeed);
+        currentDirection = new PointSimple(0, -this.inherentSpeed);
     }
 
     public void moveSouth () {
@@ -69,7 +71,7 @@ public class MoverUser extends BasicMover {
             moveRight();
         else if (keyCode == KeyCode.A)
             moveLeft();
-        else if (keyCode == KeyCode.W) 
+        else if (keyCode == KeyCode.W)
             moveNorth();
         else if (keyCode == KeyCode.S)
             moveSouth();

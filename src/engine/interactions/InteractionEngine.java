@@ -1,7 +1,7 @@
 package engine.interactions;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 import gameworld.GameWorld;
 
 
@@ -19,8 +19,8 @@ public interface InteractionEngine {
      */
     public void interact (GameObject first, GameObject second);
 
-    public void put (Label first,
-                     Label second,
+    public void put (Type first,
+                     Type second,
                      Interaction interaction);
 
     public void setWorld (GameWorld world);

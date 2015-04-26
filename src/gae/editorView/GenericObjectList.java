@@ -8,16 +8,15 @@ import gae.gridView.ContainerWrapper;
 import gae.listView.DraggableUtilities;
 import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
-import javafx.scene.input.MouseEvent;
 
 
 public class GenericObjectList {
@@ -54,8 +53,13 @@ public class GenericObjectList {
                 ContextMenu contextmenu = new ContextMenu();
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
-                    objectEditor.popNewEditor(classType + " " + count++);
-                });
+                    if (klass.getSimpleName().equals("Collider")) {
+                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass);
+                    }
+                        else {
+                            objectEditor.popNewEditor(classType + " " + count++);
+                        }
+                    });
                 contextmenu.getItems().add(item);
                 contextmenu.show(titledPane, me.getSceneX(), me.getSceneY());
             }
@@ -65,11 +69,17 @@ public class GenericObjectList {
 
     private ListView<?> setList (String classType) {
         ListView<?> list = ListViewUtilities.createGenericList(createdSpecificObjects, classType);
-        list.setOnMousePressed(me -> {
-            DraggableItem draggable =
-                    new DraggableItem(list.getSelectionModel().getSelectedItem(), klass, classType);
-            DraggableUtilities.makeObjectPlaceable(me, draggable, node,
-                                                   createdSpecificObjects, wrapper, root, objectEditor);
+        BooleanProperty unclicked = new SimpleBooleanProperty(false);
+        list.setOnMouseClicked(me -> {
+            if (me.getClickCount() == 2 && !unclicked.get()) {
+                unclicked.set(true);
+                DraggableItem draggable =
+                        new DraggableItem(list.getSelectionModel().getSelectedItem(), klass,
+                                          classType);
+                DraggableUtilities.makeObjectPlaceable(me, draggable, node,
+                                                       createdSpecificObjects, wrapper, root,
+                                                       objectEditor, unclicked);
+            }
         });
         return list;
     }

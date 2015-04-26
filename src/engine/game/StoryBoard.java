@@ -6,6 +6,7 @@ import java.util.Observable;
 import engine.events.Event;
 import engine.fieldsetting.Settable;
 import engine.fieldsetting.Triggerable;
+import engine.titles.Title;
 
 
 /**
@@ -17,8 +18,9 @@ import engine.fieldsetting.Triggerable;
  *
  */
 @Settable
-public class StoryBoard extends Observable {
+public class StoryBoard extends Observable implements Title {
     private List<Event> eventList;
+    private String myTitle = "";
 
     public StoryBoard (Event ... events) {
         eventList = new ArrayList<Event>();
@@ -105,6 +107,16 @@ public class StoryBoard extends Observable {
      */
     public int currentEventCount () {
         return eventList.size();
+    }
+
+    @Override
+    public String getTitle () {
+        return myTitle;
+    }
+
+    @Override
+    public void setTitle (String title) {
+        myTitle = title;
     }
 
 }

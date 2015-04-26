@@ -11,6 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * The holder of wave parts which comprise a wave
+ * @author JohnGilhuly
+ *
+ */
+
 public class WaveEnemyTable implements UIObject {
     private ScrollPane rootNode;
     private WavePreferencesPane myPreferences;

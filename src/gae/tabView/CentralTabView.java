@@ -25,8 +25,12 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-
-
+/**
+ * Central container for the central tab view in the gae editor
+ * 
+ * @author JohnGilhuly
+ *
+ */
 
 public class CentralTabView implements UIObject {
     private VBox baseNode;

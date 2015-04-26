@@ -12,6 +12,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
+/**
+ * The individual pieces of a wave
+ * 
+ * @author JohnGilhuly
+ *
+ */
+
 public class WavePart implements UIObject {
 
     private HBox rootNode;

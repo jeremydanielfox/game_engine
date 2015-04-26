@@ -6,6 +6,12 @@ import gameworld.GameWorld;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * Class to edit the composition of waves for a given level
+ * @author John Gilhuly
+ *
+ */
+
 public class WaveEditor implements UIObject {
     
     private BorderPane rootNode;

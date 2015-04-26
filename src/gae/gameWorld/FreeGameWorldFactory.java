@@ -5,6 +5,12 @@ import gameworld.GameWorld;
 import java.awt.Dimension;
 import javafx.beans.property.ObjectProperty;
 
+/**
+ * Creates GameWorlds with free paths
+ * @author JohnGilhuly
+ *
+ */
+
 public class FreeGameWorldFactory implements GameWorldFactory {
 
     ObjectProperty<Dimension> dimensions;

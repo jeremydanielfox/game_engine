@@ -5,7 +5,7 @@ import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 import engine.gameobject.weapon.Weapon;
 import engine.shop.tag.GameObjectTag;
 import gae.backend.Placeable;
@@ -42,7 +42,7 @@ public class GameObjectToEditable implements Placeable {
     private ImageView imageView;
     private double health;
     private GameObjectTag tag;
-    private Label label;
+    private Type label;
 
     public GameObjectToEditable () {
 
@@ -255,13 +255,13 @@ public class GameObjectToEditable implements Placeable {
     }
 
     @Override
-    public Label getLabel () {
+    public Type getLabel () {
         // TODO Auto-generated method stub
         return label;
     }
 
     @Override
-    public void setLabel (Label label) {
+    public void setLabel (Type label) {
         // TODO Auto-generated method stub
         this.label = label;
     }

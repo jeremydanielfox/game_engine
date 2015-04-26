@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import engine.gameobject.Graphic;
 import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 import engine.gameobject.weapon.Weapon;
 import engine.shop.tag.GameObjectTag;
 import gae.gridView.Path;
@@ -43,7 +43,7 @@ public interface Placeable extends Serializable, Authorable {
 
     public GameObjectTag getTag ();
 
-    public Label getLabel ();
+    public Type getLabel ();
 
     public void setLocation (PointSimple point);
 
@@ -69,9 +69,9 @@ public interface Placeable extends Serializable, Authorable {
 
     public void setImagePath (String path);
 
-    public void setLabel (Label label);
-
     public void setGraphic (Graphic graphic);
+
+    public void setLabel (Type label);
 
     public Object clone ();
 

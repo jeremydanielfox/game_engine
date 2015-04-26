@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
-import engine.gameobject.labels.Label;
+import engine.gameobject.labels.Type;
 import gameworld.GameWorld;
 
 
@@ -19,13 +19,13 @@ import gameworld.GameWorld;
  */
 @Settable
 public class ConcreteInteractionEngine implements InteractionEngine {
-    private Map<Label, Map<Label, Interaction>> myTable = new HashMap<>();
+    private Map<Type, Map<Type, Interaction>> myTable = new HashMap<>();
     private GameWorld myGameWorld;
 
     @Override
     public void interact (GameObject first, GameObject second) {
-        Label firstLabel = first.getLabel();
-        Label secondLabel = second.getLabel();
+        Type firstLabel = first.getLabel();
+        Type secondLabel = second.getLabel();
         Interaction interaction = findInteraction(firstLabel, secondLabel);
         if (interaction != null) {
             interaction.setGameWorld(myGameWorld);
@@ -34,25 +34,25 @@ public class ConcreteInteractionEngine implements InteractionEngine {
     }
 
     // TODO: This code is too complex... break it down/find a way to make it simpler
-    private Interaction findInteraction (Label actor, Label target) {
-        Map<Label, Interaction> actorMap;
-        Label actorSuper = actor;
-        Label targetSuper = target;
-        while (actorSuper.getSuperLabel() != null) {
+    private Interaction findInteraction (Type actor, Type target) {
+        Map<Type, Interaction> actorMap;
+        Type actorSuper = actor;
+        Type targetSuper = target;
+        while (actorSuper.getSuperType() != null) {
             if (!myTable.containsKey(actorSuper)) {
-                actorSuper = actorSuper.getSuperLabel();
+                actorSuper = actorSuper.getSuperType();
                 continue;
             }
             actorMap = myTable.get(actorSuper);
-            while (targetSuper.getSuperLabel() != null) {
+            while (targetSuper.getSuperType() != null) {
                 if (!actorMap.containsKey(targetSuper)) {
-                    targetSuper = targetSuper.getSuperLabel();
+                    targetSuper = targetSuper.getSuperType();
                     continue;
                 }
                 return actorMap.get(targetSuper);
             }
             targetSuper = target;
-            actorSuper = actorSuper.getSuperLabel();
+            actorSuper = actorSuper.getSuperType();
         }
         return null;
     }
@@ -66,7 +66,7 @@ public class ConcreteInteractionEngine implements InteractionEngine {
      * @param consumer
      */
     @Override
-    public void put (Label first, Label second, Interaction interaction) {
+    public void put (Type first, Type second, Interaction interaction) {
         checkNullMap(first);
         putInMap(first, second, interaction);
     }
@@ -76,10 +76,10 @@ public class ConcreteInteractionEngine implements InteractionEngine {
      * HashMap,
      * with another HashMap as its value
      */
-    private void checkNullMap (Label label) {
+    private void checkNullMap (Type label) {
         if (myTable.get(label) == null) {
             myTable.put(label,
-                        new HashMap<Label, Interaction>());
+                        new HashMap<Type, Interaction>());
         }
     }
 
@@ -91,7 +91,7 @@ public class ConcreteInteractionEngine implements InteractionEngine {
      * @param second
      * @param consumer
      */
-    private void putInMap (Label first, Label second, Interaction interaction) {
+    private void putInMap (Type first, Type second, Interaction interaction) {
         Map temp = myTable.get(first);
         temp.put(second, interaction);
     }

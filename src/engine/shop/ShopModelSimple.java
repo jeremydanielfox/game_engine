@@ -35,6 +35,7 @@ public class ShopModelSimple implements ShopModel {
 
     public ShopModelSimple () {
         markup = 1;
+        currentPlayer = new Player();
     }
 
     public ShopModelSimple (GameWorld world, Player player, double markup) {

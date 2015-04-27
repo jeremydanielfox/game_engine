@@ -105,6 +105,8 @@ public class UtilitiesBar {
         fileChooser.setTitle("Save Game File");
         File chosen = fileChooser.showSaveDialog(utilitiesBar.getScene().getWindow());
         DataManager.writeToXML(game, chosen.getAbsolutePath());
+        ShopModel shop = game.getShop();
+        System.out.println("test");
     }
 
     private void chooseFile () {

@@ -43,8 +43,8 @@ public class ListViewUtilities {
     public static void setEditableSelection (ListView<Authorable> list,
                                              ObservableList<Authorable> authorables,
                                              Scene scene) {
-        try {
-            list.setOnMousePressed(e -> {
+        list.setOnMousePressed(e -> {
+            try {
                 if (e.getClickCount() == 1) {
                     Placeable selected = (Placeable) list.getSelectionModel().getSelectedItem();
                     selected.getMovableImage().selectEditableImage();
@@ -60,15 +60,16 @@ public class ListViewUtilities {
                             editable.getMovableImage().unselectEditableImage();
                     }
                 }
-                    else if (e.getClickCount() == 2) {
-                        Placeable selected = (Placeable) list.getSelectionModel().getSelectedItem();
-                        selected.getMovableImage().unselectEditableImage();
-                        list.getSelectionModel().clearSelection();
-                    }
-                });
-        }
-        catch (NullPointerException e) {
-        }
+                else if (e.getClickCount() == 2) {
+                    Placeable selected = (Placeable) list.getSelectionModel().getSelectedItem();
+                    selected.getMovableImage().unselectEditableImage();
+                    list.getSelectionModel().clearSelection();
+                }
+            }
+            catch (NullPointerException nullpointer) {
+                // no movable object for this case
+            }
+        });
     }
 
     /**

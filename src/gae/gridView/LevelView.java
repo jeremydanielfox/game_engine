@@ -88,15 +88,6 @@ public class LevelView {
     }
 
     /**
-     * Temporary method to pass in the PlaceableNode all the way to the LibraryView
-     * 
-     * @param node
-     */
-    public void getAddFunction (Placeable Placeable) {
-        libraryData.addEditableToList(Placeable);
-    }
-
-    /**
      * Creates a StackPane that includes the background image and the TileContainer, put together in
      * a Group. It's put in a Group so that it's easy to modify.
      * 
@@ -288,11 +279,6 @@ public class LevelView {
         ToggleButton button = new ToggleButton(label);
         button.setUserData(data);
         return button;
-    }
-
-    public Consumer<Placeable> getConsumer () {
-        Consumer<Placeable> consumer = e -> libraryData.addEditableToList(e);
-        return consumer;
     }
 
     public ObjectProperty<Dimension> getGridDimensionProperty () {

@@ -37,8 +37,8 @@ public class AbstractWorld implements GameWorld {
 
     public AbstractWorld (int numRows, int numCols) {
         myObjects = new ArrayList<GameObject>();
-        initiateCollisionEngine();
-        initiateRangeEngine();
+//        initiateCollisionEngine();
+//        initiateRangeEngine();
         myNodeToGameObjectMap = new HashMap<>();
 		myTrans = new CoordinateTransformer(numRows, numCols, ViewConcrete2.getWorldWidth(), ViewConcrete2.getWorldHeight()); // TODO fix window 1000
 		myTerrain = new Terrain(numRows, numCols, myTrans);

@@ -46,7 +46,7 @@ public class GamePlayerScreen implements GameScene {
     private Scene myPreviousScene;
     private Scene myScene;
 
-    public GamePlayerScreen (Stage s, Scene previousScene) {
+    public GamePlayerScreen (Stage s, Scene previousScene,Game game) {
         myStage = s;
         myStage.setResizable(false);
 
@@ -55,7 +55,8 @@ public class GamePlayerScreen implements GameScene {
         //image=new ImageView();
         
         pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
-        myGame = loadGame();
+        //myGame = loadGame();
+        myGame=game;
         myPlayerName = "";
         myPreviousScene = previousScene;
     }

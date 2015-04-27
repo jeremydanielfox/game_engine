@@ -31,6 +31,7 @@ public class FreezeBuff extends Buff implements Freeze {
     public FreezeBuff (double increment) {
         super(increment);
         this.increment = (int) increment;
+        setBuffType(UpgradeType.COLLISION);
         decorated = Optional.empty();
     }
 

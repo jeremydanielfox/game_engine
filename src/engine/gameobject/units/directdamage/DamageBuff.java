@@ -41,6 +41,7 @@ public class DamageBuff extends Buff implements DirectDamage {
     @Override
     public void apply (GameObject myUnit) {
         myUnit.changeHealth(-1 * getDamage());
+        //System.out.println(getDamage());
         adjustEffect(myUnit, -1, 1, 0, 0);
     }
 

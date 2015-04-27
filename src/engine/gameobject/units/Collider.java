@@ -15,6 +15,8 @@ public class Collider {
 
     private Set<GameObject> collidedID;
     private Set<Buff> collisionBuffs;
+    
+    
     private Explosion onDeath;
 
     @Settable
@@ -47,6 +49,8 @@ public class Collider {
     public void addCollisionBehavior (Buff newBuff) {
         removeDuplicateBuff(newBuff);
         collisionBuffs.add(newBuff);
+        
+        
     }
 
     @Settable
@@ -89,7 +93,7 @@ public class Collider {
     }
 
     public Set<Buff> getCollisionBuffs () {
-        return Collections.unmodifiableSet(collisionBuffs);
+        return collisionBuffs;
     }
 
     public Set<Buff> getExplosionBuffs () {

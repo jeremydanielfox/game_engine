@@ -5,15 +5,18 @@ import engine.fieldsetting.Triggerable;
 import engine.game.StoryBoard;
 import engine.goals.Goal;
 import gae.editor.EditingParser;
+
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -38,16 +41,29 @@ public class ButtonBuilder extends Application {
 
     private VBox container;
     private EditingParser parser;
+    private ButtonData buttonData;
     private Map<Method, String> settableMap;
     private Map<Method, String> triggerableMap;
+    private Button create;
 
-    public ButtonBuilder (){
+    private TextField buttonName;
+    private ComboBox<String> action, enableCondition;
+
+    public ButtonBuilder () {
         container = new VBox(15);
+        buttonData = new ButtonData();
         settableMap = new HashMap<>();
         triggerableMap = new HashMap<>();
+        create = new Button("CREATE");
+
+        buttonName = new TextField();
+        action = new ComboBox<>();
+        enableCondition = new ComboBox<>();
+
         createMap(settableMap, ButtonWrapper.class, Settable.class);
         createMap(triggerableMap, StoryBoard.class, Triggerable.class);
         createFields();
+        container.getChildren().add(create);
     }
 
     public VBox getContainer () {
@@ -72,7 +88,11 @@ public class ButtonBuilder extends Application {
      * @return
      */
     private String extractName (String method) {
-        return method.substring(3);
+        int index = 0;
+        if (method.contains("set"))
+            index = method.indexOf("set") + "set".length();
+        
+        return method.substring(index);
     }
 
     /**
@@ -82,6 +102,7 @@ public class ButtonBuilder extends Application {
         settableMap.keySet().forEach(e -> {
             createFieldSetter(settableMap.get(e), Arrays.asList(e.getParameterTypes()));
         });
+        fillComboBoxes();
     }
 
     /**
@@ -92,59 +113,46 @@ public class ButtonBuilder extends Application {
     private void createFieldSetter (String methodName, List<Class> parameterTypes) {
         HBox fieldSetter = new HBox(15);
         Label label = new Label(methodName);
-        fieldSetter.getChildren().add(label);
-
         parameterTypes.forEach(e -> {
-            Node field = null;
-
+            Node n = null;
             /*
-             * if field requires a String, then create a text field
+             * if field requires a String, then use text field
              */
-            if (e.isInstance(String.class)) {
-                field = new TextField();
+            if (e.getName().equals(String.class.getName())) {
+                n = buttonName;
             }
 
             /*
-             * if field requires a Consumer, then create drop down of all options for them to use
+             * if field requires a Consumer, then use drop down of all options for them to use
              */
-            else if (e.isInstance(Consumer.class)) {
-                field = getPossibleActions();
+            else if (e.getName().equals(Consumer.class.getName())) {
+                n = action;
             }
 
             /*
-             * if field requires a Goal, then create a drop down of all goals created & give them
-             * option to create new Goal
+             * if field requires a Goal, then use drop down of all goals created & give them option
+             * to create new Goal
              */
-            else if (e.isInstance(Goal.class)) {
-                field = getTriggerables();
+            else if (e.getName().equals(Goal.class.getName())) {
+                n = enableCondition;
             }
+            ;
 
-            if (field != null)
-                fieldSetter.getChildren().add(field);
+            if (n != null)
+                fieldSetter.getChildren().addAll(label, n);
         });
-        container.getChildren().add(fieldSetter);
+        container.getChildren().addAll(fieldSetter);
     }
 
     /**
-     *
-     * @return
+     * fills drop downs with appropriate choices based on reflection of annotations
      */
-    @SuppressWarnings("rawtypes")
-    private ComboBox getPossibleActions () {
-        
-        return null;
+    private void fillComboBoxes () {
+        triggerableMap.keySet().forEach(e -> {
+            
+        });
     }
 
-    /**
-     *
-     * @return
-     */
-    @SuppressWarnings("rawtypes")
-    private ComboBox getTriggerables () {
-        
-        return null;
-    }
-    
     public static void main (String[] args) {
         launch(args);
     }

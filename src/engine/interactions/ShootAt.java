@@ -16,7 +16,6 @@ public class ShootAt extends Interaction {
     @Override
     public void accept (GameObject t, GameObject u) {
         if (t.getPoint().withinRange(u.getPoint(), t.getWeapon().getRange())) {
-            MusicianSimple.getInstance().laser();
             t.fire(super.getGameWorld(), u);
         }
     }

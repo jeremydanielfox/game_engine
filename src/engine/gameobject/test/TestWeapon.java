@@ -25,7 +25,7 @@ public class TestWeapon extends BasicWeapon{
         }
         if (type == 2){
             setProjectile(new TestProjectile(type));
-            setRange(60);
+            setRange(500);
         }
         if(type == 4){
             setProjectile(object);

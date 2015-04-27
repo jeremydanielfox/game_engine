@@ -33,7 +33,7 @@ public class TestBundle extends UpgradeBundleSimple {
             setValue(15);
         }
         
-        shopTag.setShopGraphic(new Graphic(30, 30, "Bloons_DartMonkey.png"));
+        shopTag.setShopGraphic(new Graphic(30, 30, "/images/Bloons_DartMonkey.png"));
         
     }
 }

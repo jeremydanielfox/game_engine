@@ -55,6 +55,11 @@ public class MoverDirection extends MoverPoint {
     }
 
     @Settable
+    public void setRange(double range){
+        distanceLimit = range;
+    }
+    
+    @Settable
     @Override
     public void setPoint (PointSimple myPoint) {
         super.setPoint(myPoint);

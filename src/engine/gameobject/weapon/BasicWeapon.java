@@ -2,12 +2,14 @@ package engine.gameobject.weapon;
 
 import java.util.List;
 import java.util.Set;
+import musician.MusicianSimple;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.SetChangeListener;
 import javafx.collections.SetChangeListener.Change;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.weapon.firingrate.FiringRate;
@@ -15,6 +17,7 @@ import engine.gameobject.weapon.firingrate.FiringRateUpgrade;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.range.RangeUpgrade;
+import engine.gameobject.weapon.upgradetree.NullTree;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
@@ -27,6 +30,7 @@ import gameworld.ObjectCollection;
  * @author Nathan Prabhu and Danny Oh
  *
  */
+
 @Settable
 public class BasicWeapon implements Weapon{
     private int timeSinceFire;
@@ -44,6 +48,11 @@ public class BasicWeapon implements Weapon{
         upgradables = new UpgradeSet<>();
         timeSinceFire = 0;
         myFiringStrategy = new SingleProjectile();
+        myFiringRate = new FiringRateUpgrade();
+        myRange = new RangeUpgrade();
+        myProjectile = new GameObjectSimple();
+        tree = new NullTree();
+        value = 0;
     }
 
     @Override
@@ -58,6 +67,7 @@ public class BasicWeapon implements Weapon{
         return clone;
     }
 
+    //TODO: make collisionBuffs unmodifable somehow...
     private void initializeUpgrades () {
         Set<Buff> collisionBuffs = myProjectile.getCollider().getCollisionBuffs();
         Set<Buff> explosBuffs = myProjectile.getCollider().getCollisionBuffs();
@@ -67,27 +77,34 @@ public class BasicWeapon implements Weapon{
                 syncBuffs(change, collisionBuffs, explosBuffs));
     }
 
+    /**
+     * Adds new buffs to either collision or explosion buff set, if added to upgrade set.
+     * 
+     * @param change
+     * @param collisionBuffs
+     * @param explosBuffs
+     */
     private void syncBuffs (Change<? extends Upgrade> change,
                             Set<Buff> collisionBuffs,
                             Set<Buff> explosBuffs) {
 
-        Buff buff = (change.wasAdded()) ? (Buff) change.getElementAdded() :
-                                       (Buff) change.getElementRemoved();
-        switch (buff.getType()) {
+        Upgrade upg = change.wasAdded() ? change.getElementAdded() :
+                                       change.getElementRemoved();
+        switch (upg.getType()) {
             case COLLISION:
                 if (change.wasAdded()) {
-                    collisionBuffs.add(buff);
+                    collisionBuffs.add((Buff) upg);
                 }
                 else {
-                    collisionBuffs.remove(buff);
+                    collisionBuffs.remove((Buff) upg);
                 }
                 break;
             case EXPLOSION:
                 if (change.wasAdded()) {
-                    explosBuffs.add(buff);
+                    explosBuffs.add((Buff) upg);
                 }
                 else {
-                    explosBuffs.remove(buff);
+                    explosBuffs.remove((Buff) upg);
                 }
                 break;
             default:
@@ -109,7 +126,7 @@ public class BasicWeapon implements Weapon{
         rangeProp.setValue(myRange.getRange());
         myRange.addObserver(new UpgradeObserver(this::updateRange));
     }
-  
+
     @Override
     @Settable
     public void setFiringRate (double firingRate) {
@@ -137,13 +154,14 @@ public class BasicWeapon implements Weapon{
     }
 
     /*
-     * (non-Javadoc)
+     * (non-Javadoc)d
      * 
      * @see engine.gameobject.weapon.Weaopn#fire(gameworld.GameWorld, engine.gameobject.PointSimple)
      */
     @Override
     public void fire (ObjectCollection world, GameObject target, PointSimple location) {
         if (canFire()) {
+            MusicianSimple.getInstance().laser();
             myFiringStrategy.execute(world, target, location, myProjectile);
             timeSinceFire = 0;
         }

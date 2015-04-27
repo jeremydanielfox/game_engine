@@ -14,9 +14,11 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import xml.DataManager;
 import engine.game.Game;
+import engine.shop.ShopModel;
 
 
 public class UtilitiesBar {
@@ -94,7 +96,7 @@ public class UtilitiesBar {
         });
 
         fullscreenButton.setOnMousePressed(e -> {
-
+            maximizeWindow();
         });
     }
 
@@ -103,6 +105,8 @@ public class UtilitiesBar {
         fileChooser.setTitle("Save Game File");
         File chosen = fileChooser.showSaveDialog(utilitiesBar.getScene().getWindow());
         DataManager.writeToXML(game, chosen.getAbsolutePath());
+        ShopModel shop = game.getShop();
+        System.out.println("test");
     }
 
     private void chooseFile () {
@@ -123,6 +127,11 @@ public class UtilitiesBar {
         helpRoot.getChildren().add(browser);
         stage.setScene(new Scene(helpRoot, 800, 800));
         stage.show();
+    }
+    
+    private void maximizeWindow () {
+        utilitiesBar.getScene().getWindow().setWidth(Screen.getPrimary().getBounds().getWidth());
+        utilitiesBar.getScene().getWindow().setHeight(Screen.getPrimary().getBounds().getHeight());
     }
 
     private void placeButtons () {

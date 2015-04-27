@@ -16,7 +16,6 @@ import engine.interactions.NoInteraction;
 import engine.interactions.RangeEngine;
 import engine.interactions.ShootAt;
 
-
 /**
  * Class that acts as the data holder of all interactions authored. This will hold the interactions
  * that will be exported out to the engine.
@@ -32,9 +31,8 @@ public class InteractionData {
      */
     private static final List<String> MAP_KEYS = Arrays.asList("Collide", "Shoot",
                                                                "Do not collide", "Do not shoot");
-    private static final List<Class<? extends Interaction>> MAP_VALUES = Arrays.asList(BuffImparter.class, ShootAt.class,
-                                                                NoInteraction.class,
-                                                                NoInteraction.class);
+    private static final List<Class<? extends Interaction>> MAP_VALUES = Arrays
+            .asList(BuffImparter.class, ShootAt.class, NoInteraction.class, NoInteraction.class);
 
     private List<InteractionEngine> myInteractionEngines;
     private InteractionEngine myCollisions;
@@ -57,6 +55,19 @@ public class InteractionData {
      */
     public List<InteractionEngine> getEngines () {
         return myInteractionEngines;
+    }
+
+    /**
+     * next two methods returns individual engines if needed
+     * 
+     * @return
+     */
+    public InteractionEngine getCollisionEngine () {
+        return myCollisions;
+    }
+
+    public InteractionEngine getRangeEngine () {
+        return myShoots;
     }
 
     /**
@@ -108,10 +119,7 @@ public class InteractionData {
      * @param two
      * @param engine
      */
-    private void massPut (List<Type> one,
-                          Interaction i,
-                          List<Type> two,
-                          InteractionEngine engine) {
+    private void massPut (List<Type> one, Interaction i, List<Type> two, InteractionEngine engine) {
         one.forEach(e -> {
             two.forEach(f -> {
                 engine.put(e, f, i);

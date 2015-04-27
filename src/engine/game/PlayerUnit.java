@@ -14,7 +14,7 @@ public class PlayerUnit extends Displayable{
     private String myLabel;
 
     public PlayerUnit () {
-        myValue = 0;
+        myValue = 100;
         myLabel = "";
     }
 

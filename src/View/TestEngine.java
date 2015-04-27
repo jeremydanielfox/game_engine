@@ -11,8 +11,7 @@ import xml.DataManager;
 
 public class TestEngine extends Application {
 
-    private static final String FILE_SOURCE = "src/xml/GameFreePath.xml";
-
+    private static final String FILE_SOURCE = "src/xml/ibelieve.xml";
 
     @Override
     public void start (Stage primaryStage) throws Exception {
@@ -41,7 +40,7 @@ public class TestEngine extends Application {
         // GameWorld world = gw.makeWorld();
         // Player player = gw.makePlayer();
         // return gw.makeGame(player, world, gw.makeShop(player, world));
-        //DataManager.addBtn();
+        // DataManager.addBtn();
         return DataManager.readFromXML(Game.class, FILE_SOURCE);
 
     }

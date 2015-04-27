@@ -1,5 +1,6 @@
 package gae.gameWorld;
 
+import gameworld.AbstractWorld;
 import gameworld.FreeWorld;
 import gameworld.GameWorld;
 import java.awt.Dimension;
@@ -25,7 +26,7 @@ public class FreeGameWorldFactory implements GameWorldFactory {
     }
     
     @Override
-    public GameWorld createGameWorld () {
+    public AbstractWorld createGameWorld () {
         return new FreeWorld(dimensions.get().width, dimensions.get().height) ;
     }
 

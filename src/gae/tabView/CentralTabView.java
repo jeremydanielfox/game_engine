@@ -16,6 +16,7 @@ import gae.gridView.LevelView;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
 import gae.waveeditor.WaveEditor;
+import gameworld.AbstractWorld;
 import gameworld.FreeWorld;
 import gameworld.GameWorld;
 import java.lang.reflect.InvocationTargetException;
@@ -58,6 +59,7 @@ public class CentralTabView implements UIObject {
     private boolean editorInstantiated;
     private FreeWorld freeworld;
     private BooleanProperty isFreeWorld = new SimpleBooleanProperty();
+    ShopModel shopModel;
 
     public CentralTabView (Scene sceneIn, Game gameIn, String gameTypeIn) {
         scene = sceneIn;
@@ -115,7 +117,7 @@ public class CentralTabView implements UIObject {
     private void setUpShopAndLinkToGame () throws ClassNotFoundException, IllegalAccessException,
                                           IllegalArgumentException, InvocationTargetException {
 
-        ShopModel shopModel = ((ShopTab) shopTab).getShop();
+        shopModel = ((ShopTab) shopTab).getShop();
 
         for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(game.getClass()
                 .getName()), Settable.class)) {
@@ -146,13 +148,15 @@ public class CentralTabView implements UIObject {
         levelView = new LevelView(setSpawnPoints(), isFreeWorld);
         Pane levelViewPane = levelView.getBorder(scene);
         gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
-        GameWorld nextWorld = gameWorldFactory.createGameWorld();
+        AbstractWorld nextWorld = gameWorldFactory.createGameWorld();
         if (nextWorld instanceof FreeWorld) {
             freeworld = (FreeWorld) nextWorld;
             LibraryData.getInstance().addFreeWorldPath(freeworld.getPath());
         }
         WaveEditor waves = createLevelAndWaveObject(gameWorldFactory.createGameWorld());
         InteractionTable iTable = new InteractionTable();
+        nextWorld.setCollisionEngine(iTable.getData().getCollisionEngine());
+        nextWorld.setRangeEngine(iTable.getData().getRangeEngine());
 
         LevelTabSet newLevel = new LevelTabSet(levelViewPane, waves.getObject(), iTable.getTable());
 
@@ -180,6 +184,13 @@ public class CentralTabView implements UIObject {
             for (Method m : levelMethods) {
                 checkAndInvokeMethods(nextWorld, levelData, sb, m);
             }
+
+            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(shopModel.getClass()
+                    .getName()), Settable.class)) {
+                if (m.getName().equals("setGameWorld")) {
+                    m.invoke(shopModel, nextWorld);
+                }
+            }
         }
         catch (InstantiationException |
                 IllegalAccessException |
@@ -189,7 +200,7 @@ public class CentralTabView implements UIObject {
         }
 
         game.getLevelBoard().addLevel(levelData);
-        return new WaveEditor(sb, gameWorldFactory.createGameWorld());
+        return new WaveEditor(sb, levelData.getGameWorld());
     }
 
     private void checkAndInvokeMethods (GameWorld nextWorld,

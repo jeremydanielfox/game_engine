@@ -24,7 +24,7 @@ public class DirectionHandler {
     
     public PointSimple getDirection(){
         if (myNode == null)
-            initializeNode(myGraphic);
+        initializeNode(myGraphic);
         PointSimple ret = new PointSimple(myDirection.getX(), myDirection.getY());
         myDirection = ORIGIN;
         return ret;

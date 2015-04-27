@@ -77,7 +77,7 @@ public class WaveSelectorPane implements UIObject {
             GameObjectQueue wQueue = new ConcreteQueue(wave.getEnemiesAsList());
             Wave newWave;
             if (wave.getPreferencesPane().randomWaveSpacing()) {
-                newWave = new RandomSpanWave(wave.getPreferencesPane().getSpacingTime(), wQueue, parent.getGameWorld());
+                newWave = new RandomSpanWave(wave.getPreferencesPane().getTotalSpacingTime(), wQueue, parent.getGameWorld());
             }
             else {
                 newWave = new ConstantSpacingWave(wave.getPreferencesPane().getSpacingTime(), wQueue, parent.getGameWorld());

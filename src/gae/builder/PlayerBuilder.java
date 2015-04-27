@@ -4,24 +4,21 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import engine.fieldsetting.Settable;
 import engine.game.Player;
 import gae.editor.EditingParser;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-public class PlayerBuilder extends Application {
+public class PlayerBuilder implements Builder {
 
     private static final String SET_WALLET_METHOD = "setWalletUnit";
     private VBox builder;
@@ -53,6 +50,24 @@ public class PlayerBuilder extends Application {
         builder.getChildren().add(walletBox);
         builder.getChildren().add(createButton);
         setUpCreateButton();
+    }
+    
+    @Override
+    public Node getBuilder () {
+        return builder;
+    }
+
+    @Override
+    public void build () {
+        fields.forEach(e -> {
+            allInputs.add(e.getInput().getText());
+        });
+        allInputs.add(walletDropDown.getSelectionModel().getSelectedItem());
+        playerData.fillProperties();
+    }
+    
+    public PlayerData getPlayerData() {
+        return playerData;
     }
 
     /**
@@ -116,31 +131,7 @@ public class PlayerBuilder extends Application {
     private void setUpCreateButton () {
         createButton.setAlignment(Pos.CENTER);
         createButton.setOnMouseClicked(e -> {
-            fillInputMap();
-            playerData.fillProperties();
+            build();
         });
-    }
-    
-    /**
-     * fills the input map correctly based on user inputs
-     */
-    private void fillInputMap() {
-        fields.forEach(e -> {
-            allInputs.add(e.getInput().getText());
-        });
-        allInputs.add(walletDropDown.getSelectionModel().getSelectedItem());
-    }
-
-    public static void main (String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start (Stage arg0) throws Exception {
-        Stage myStage = new Stage();
-        Scene s = new Scene(builder, 400, 400);
-        myStage.setScene(s);
-        myStage.show();
-        myStage.centerOnScreen();
     }
 }

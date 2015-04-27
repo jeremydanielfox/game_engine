@@ -9,6 +9,7 @@ import gae.gameWorld.FixedGameWorldFactory;
 import gae.gameWorld.FreeGameWorldFactory;
 import gae.gameWorld.GameWorldFactory;
 import gae.gridView.LevelView;
+import gae.levelPreferences.LevelPreferencesEditor;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
 import gae.waveeditor.WaveEditor;
@@ -117,9 +118,10 @@ public class CentralTabView implements UIObject {
         
         game.getLevelBoard().addLevel(levelData);
         WaveEditor waves = new WaveEditor(sb, gameWorldFactory.createGameWorld());
+        LevelPreferencesEditor prefs=new LevelPreferencesEditor();
         LevelTabSet newLevel =
                 new LevelTabSet(levelViewPane,
-                                waves.getObject());
+                                waves.getObject(), prefs.getObject());
         Tab newTab = new Tab("Level:" + levelCount++);
         newTab.setContent(newLevel.getBaseNode());
         newTab.setClosable(false);

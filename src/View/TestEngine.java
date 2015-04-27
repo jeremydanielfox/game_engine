@@ -41,7 +41,6 @@ public class TestEngine extends Application {
         // return gw.makeGame(player, world, gw.makeShop(player, world));
         //DataManager.addBtn();
         return DataManager.readFromXML(Game.class, FILE_SOURCE);
-        // return DataManager.readFromXML(Game.class, FILE_SOURCE);
 
     }
 

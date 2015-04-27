@@ -16,7 +16,7 @@ public class BlueBloon extends GameObjectSimple {
     public BlueBloon () {
         super();
         setLabel(new EnemyLabel());
-        setGraphic(new Graphic(25, 35, "Blue_Bloon.png"));
+        setGraphic(new Graphic(25, 35, "/images/Blue_Bloon.png"));
         setPoint(new PointSimple(0, 10000));
         setHealth(new HealthSimple(1));
         setWeapon(new NullWeapon());

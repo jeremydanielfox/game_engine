@@ -147,6 +147,8 @@ public class GameWriter extends Application {
         Player myPlayer = makePlayer();
         GameWorld myWorld = makeWorld();
         ShopModel myShop = new ShopModelSimple(myWorld, myPlayer, 1);
+        myShop.addPurchasable(new TestTower(0,0,0));
+        myShop.addPurchasable(new TestTower(1,0,0));
         Game myGame = makeGame(myPlayer, myWorld, myShop);
 
         DataManager.writeToXML(myGame, FILE_DESTINATION);

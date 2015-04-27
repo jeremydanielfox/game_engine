@@ -12,7 +12,6 @@ public class TestWeapon extends BasicWeapon{
         super();
         setFiringRate(.5);
         setValue(10);
-        setProjectile(new TestProjectile(type));
         setTree(new TestForest());
         if (type == 1){
             setProjectile(tower);

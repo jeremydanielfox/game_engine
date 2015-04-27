@@ -25,8 +25,8 @@ public class TestProjectile extends GameObjectSimple {
         setWeapon(new NullWeapon());
         setLabel(new ProjectileLabel());
         if (type == 0 || type == 2 || type == 4) {
-            //getCollider().addCollisionBehavior(new DamageBuff(4));
-            getCollider().addCollisionBehavior(new FreezeBuff(120));
+            getCollider().addCollisionBehavior(new DamageBuff(4));
+            //getCollider().addCollisionBehavior(new FreezeBuff(120));
         }
         if (type == 3) {
             getCollider().addExplosionBuff(new PoisonBuff(1000, 4));

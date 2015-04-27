@@ -12668,6 +12668,18 @@
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
 <<<<<<< HEAD
+                    <int>1017</int>
+                    <int>1976</int>
+                    <int>2146</int>
+                    <int>131</int>
+                    <int>376</int>
+                    <int>1471</int>
+                    <int>989</int>
+                    <int>2278</int>
+                    <int>1954</int>
+                    <int>333</int>
+=======
+<<<<<<< HEAD
                     <int>606</int>
                     <int>2128</int>
                     <int>933</int>
@@ -12729,6 +12741,7 @@
                     <int>1131</int>
 >>>>>>> b7774359617b21483cb3a3ccc8ab3965a87cc6f0
 >>>>>>> f45597593a8f63cd6ddf9ab34460685c90d01cf3
+>>>>>>> 142c240b04926f31f3c6d8043a08728abe608a5f
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

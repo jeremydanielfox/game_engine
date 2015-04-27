@@ -27,6 +27,7 @@ import gameworld.ObjectCollection;
  * @author Nathan Prabhu and Danny Oh
  *
  */
+
 @Settable
 public class BasicWeapon implements Weapon{
     private int timeSinceFire;
@@ -58,6 +59,7 @@ public class BasicWeapon implements Weapon{
         return clone;
     }
 
+    //TODO: make collisionBuffs unmodifable somehow...
     private void initializeUpgrades () {
         Set<Buff> collisionBuffs = myProjectile.getCollider().getCollisionBuffs();
         Set<Buff> explosBuffs = myProjectile.getCollider().getCollisionBuffs();
@@ -67,27 +69,34 @@ public class BasicWeapon implements Weapon{
                 syncBuffs(change, collisionBuffs, explosBuffs));
     }
 
+    /**
+     * Adds new buffs to either collision or explosion buff set, if added to upgrade set.
+     * 
+     * @param change
+     * @param collisionBuffs
+     * @param explosBuffs
+     */
     private void syncBuffs (Change<? extends Upgrade> change,
                             Set<Buff> collisionBuffs,
                             Set<Buff> explosBuffs) {
 
-        Buff buff = (change.wasAdded()) ? (Buff) change.getElementAdded() :
-                                       (Buff) change.getElementRemoved();
-        switch (buff.getType()) {
+        Upgrade upg = change.wasAdded() ? change.getElementAdded() :
+                                       change.getElementRemoved();
+        switch (upg.getType()) {
             case COLLISION:
                 if (change.wasAdded()) {
-                    collisionBuffs.add(buff);
+                    collisionBuffs.add((Buff) upg);
                 }
                 else {
-                    collisionBuffs.remove(buff);
+                    collisionBuffs.remove((Buff) upg);
                 }
                 break;
             case EXPLOSION:
                 if (change.wasAdded()) {
-                    explosBuffs.add(buff);
+                    explosBuffs.add((Buff) upg);
                 }
                 else {
-                    explosBuffs.remove(buff);
+                    explosBuffs.remove((Buff) upg);
                 }
                 break;
             default:
@@ -109,7 +118,7 @@ public class BasicWeapon implements Weapon{
         rangeProp.setValue(myRange.getRange());
         myRange.addObserver(new UpgradeObserver(this::updateRange));
     }
-  
+
     @Override
     @Settable
     public void setFiringRate (double firingRate) {

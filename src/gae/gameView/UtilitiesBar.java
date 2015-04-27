@@ -17,6 +17,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import xml.DataManager;
 import engine.game.Game;
+import engine.shop.ShopModel;
 
 
 public class UtilitiesBar {

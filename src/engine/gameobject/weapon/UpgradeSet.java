@@ -90,6 +90,7 @@ public class UpgradeSet<T extends Upgrade> implements ObservableSet<T> {
     @Override
     public boolean add (T e) {
         Upgrade old = upgradeMap.put(new UpgradeWrapper(e).toString(), e);
+        obsSet.add(e);
         if (old != null) {
             old.notifyObservers();
         }

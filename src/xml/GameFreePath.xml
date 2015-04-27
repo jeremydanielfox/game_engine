@@ -267,7 +267,29 @@
                               </entry>
                             </upgradeMap>
                             <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
-                              <backingSet/>
+                              <backingSet>
+                                <engine.gameobject.weapon.range.RangeUpgrade>
+                                  <observers>
+                                    <engine.gameobject.weapon.UpgradeObserver>
+                                      <updater class="null"/>
+                                    </engine.gameobject.weapon.UpgradeObserver>
+                                  </observers>
+                                  <increment>60.0</increment>
+                                  <decorated reference="../../../../../myRange/decorated"/>
+                                  <type>NULL</type>
+                                </engine.gameobject.weapon.range.RangeUpgrade>
+                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
+                                <engine.gameobject.units.directdamage.DamageBuff>
+                                  <duration>20</duration>
+                                  <timeSinceStart>0</timeSinceStart>
+                                  <type>COLLISION</type>
+                                  <observers/>
+                                  <increment>4.0</increment>
+                                  <decorated reference="../../../../../myRange/decorated"/>
+                                </engine.gameobject.units.directdamage.DamageBuff>
+                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
+                                <engine.gameobject.units.directdamage.DamageBuff reference="../../../../myProjectile/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff"/>
+                              </backingSet>
                               <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$Generic">
                                 <changeListeners>
                                   <null/>
@@ -349,14 +371,15 @@
                                 <engine.gameobject.weapon.upgradetree.TestTree>
                                   <first class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
                                     <upgrades>
-                                      <engine.gameobject.units.directdamage.DamageBuff>
-                                        <duration>20</duration>
+                                      <engine.gameobject.units.freeze.FreezeBuff>
+                                        <duration>60000</duration>
                                         <timeSinceStart>0</timeSinceStart>
-                                        <type>COLLISION</type>
+                                        <type defined-in="engine.gameobject.units.Buff">COLLISION</type>
                                         <observers/>
-                                        <increment>10.0</increment>
+                                        <increment>60000</increment>
+                                        <type>COLLISION</type>
                                         <decorated reference="../../../../../../../../myRange/decorated"/>
-                                      </engine.gameobject.units.directdamage.DamageBuff>
+                                      </engine.gameobject.units.freeze.FreezeBuff>
                                     </upgrades>
                                     <next class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
                                       <upgrades>
@@ -390,10 +413,10 @@
                                     </next>
                                     <isFinal>false</isFinal>
                                     <parent class="engine.gameobject.weapon.upgradetree.TestTree" reference="../.."/>
-                                    <myValue>90.0</myValue>
+                                    <myValue>15.0</myValue>
                                     <myShopTag class="engine.shop.ShopTagSimple">
-                                      <myName>Damage Upgrade</myName>
-                                      <myDescription>Damage + 10</myDescription>
+                                      <myName>Freeze Upgrade</myName>
+                                      <myDescription>Freeze + 10</myDescription>
                                       <myShopGraphic>
                                         <myTitle></myTitle>
                                         <myHeight>30.0</myHeight>
@@ -621,7 +644,7 @@
                           </pseudoClassStates>
                           <image class="javafx.scene.image.ImageView$1">
                             <value class="javafx.scene.image.Image">
-                              <url>file:/Users/myungoh/Documents/CS308/vooga3/bin/images/Bloons_TackShooter.png</url>
+                              <url>file:/Users/Nate/Documents/Duke/Senior%20Year/CS_308/voogasalad_RDatGV/bin/images/Bloons_TackShooter.png</url>
                               <progress>
                                 <value>1.0</value>
                                 <valid>true</valid>
@@ -15043,22 +15066,22 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </entry>
                         <entry>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>0</myRow>
-                            <myCol>8</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                          <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>0</myRow>
-                            <myCol>9</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                        </entry>
-                        <entry>
-                          <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>9</myRow>
                             <myCol>3</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>9</myRow>
                             <myCol>4</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                        </entry>
+                        <entry>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>0</myRow>
+                            <myCol>8</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>0</myRow>
+                            <myCol>9</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -15163,22 +15186,22 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </entry>
                         <entry>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>0</myRow>
-                            <myCol>9</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                          <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>1</myRow>
-                            <myCol>9</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                        </entry>
-                        <entry>
-                          <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>9</myRow>
                             <myCol>4</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>9</myRow>
                             <myCol>5</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                        </entry>
+                        <entry>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>0</myRow>
+                            <myCol>9</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>1</myRow>
+                            <myCol>9</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -15733,22 +15756,22 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </entry>
                         <entry>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>0</myRow>
-                            <myCol>6</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                          <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>0</myRow>
-                            <myCol>7</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                        </entry>
-                        <entry>
-                          <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>9</myRow>
                             <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>9</myRow>
                             <myCol>2</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                        </entry>
+                        <entry>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>0</myRow>
+                            <myCol>6</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>0</myRow>
+                            <myCol>7</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -17300,16 +17323,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>2213</int>
-                    <int>891</int>
-                    <int>329</int>
-                    <int>147</int>
-                    <int>430</int>
-                    <int>622</int>
-                    <int>744</int>
-                    <int>1225</int>
-                    <int>361</int>
-                    <int>1734</int>
+                    <int>434</int>
+                    <int>770</int>
+                    <int>464</int>
+                    <int>1379</int>
+                    <int>928</int>
+                    <int>161</int>
+                    <int>2023</int>
+                    <int>165</int>
+                    <int>693</int>
+                    <int>841</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

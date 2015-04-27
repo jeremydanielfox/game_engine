@@ -45,6 +45,8 @@ public class ShopEditor implements UIObject {
       //   vbox.getChildren().add(tempbutton());
         pane.getChildren().add(vbox);
         pane.setMaxWidth(Screen.getPrimary().getBounds().getWidth());
+        
+        shop = new ShopModelSimple();
     }
 
     @Override

@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
  *
  */
 
-public class HudEditorTab {
+public class HudEditorTab implements ITab {
 
     private Tab baseNode;
     private HudEditor hEditor;
@@ -32,6 +32,7 @@ public class HudEditorTab {
         hEditor.setBackgroundImage(backgroundImage);
     }
 
+    @Override
     public Tab getBaseTabNode () {
         return baseNode;
     }

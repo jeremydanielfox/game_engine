@@ -92,15 +92,13 @@ public class FreeWorld extends AbstractWorld {
 				GameObject g = myGrid[r][c];
 				if (g != null) {
 					GridCell cell = myTrans.transformWorldToGrid(g.getPoint());
+					PointSimple position = myTrans.findIntraCellPosition(g.getPoint());
+					if(!cell.withinBounds(myBounds)){
+						oustGameObject(r, c, g, cell, position);
+					}
 					if (myGrid[cell.getRow()][cell.getCol()] != g) {
 						if(myGrid[cell.getRow()][cell.getCol()] != null){
-							PointSimple position = myTrans.findIntraCellPosition(g.getPoint());
-							if(cell.getRow() == r){
-								g.setPoint(myTrans.transformGridCellsToWorldWall(new GridCell(r,c), cell, position.getY()));
-							}
-							if(cell.getCol() == c){
-								g.setPoint(myTrans.transformGridCellsToWorldWall(new GridCell(r,c), cell, position.getX()));
-							}
+							oustGameObject(r, c, g, cell, position);
 						}
 						else{
 							myGrid[cell.getRow()][cell.getCol()] = g;
@@ -108,18 +106,23 @@ public class FreeWorld extends AbstractWorld {
 							try {
 								myPath.updatePath();
 							} catch (NoPathExistsException e) {
-								PointSimple position = myTrans.findIntraCellPosition(g.getPoint());
-								if(cell.getRow() == r){
-									g.setPoint(myTrans.transformGridCellsToWorldWall(new GridCell(r,c), cell, position.getY()));
-								}
-								else if(cell.getCol() == c){
-									g.setPoint(myTrans.transformGridCellsToWorldWall(new GridCell(r,c), cell, position.getX()));
-								}
+//								PointSimple position = myTrans.findIntraCellPosition(g.getPoint());
+								oustGameObject(r, c, g, cell, position);
 							}
 						}
 					}
 				}
 			}
+		}
+	}
+
+	private void oustGameObject(int r, int c, GameObject g, GridCell cell,
+			PointSimple position) {
+		if(cell.getRow() == r){
+			g.setPoint(myTrans.transformGridCellsToWorldWall(new GridCell(r,c), cell, position.getY()));
+		}
+		if(cell.getCol() == c){
+			g.setPoint(myTrans.transformGridCellsToWorldWall(new GridCell(r,c), cell, position.getX()));
 		}
 	}
 

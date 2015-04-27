@@ -16550,6 +16550,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                       </myBounds>
                     </myTerrain>
                     <myTrans reference="../myPath/myTrans"/>
+                    <myBounds>
+                      <myRow>10</myRow>
+                      <myCol>10</myCol>
+                    </myBounds>
                     <myGrid reference="../myPath/objectMatrix"/>
                     <mySpawnPoints class="java.util.Arrays$ArrayList" reference="../myPath/spawnPoints"/>
                     <myEndPoints class="java.util.Arrays$ArrayList" reference="../myPath/endPoints"/>
@@ -17299,16 +17303,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1199</int>
-                    <int>2195</int>
-                    <int>907</int>
-                    <int>1267</int>
-                    <int>1680</int>
-                    <int>78</int>
-                    <int>2318</int>
-                    <int>2097</int>
-                    <int>1155</int>
-                    <int>2058</int>
+                    <int>1423</int>
+                    <int>710</int>
+                    <int>1688</int>
+                    <int>1298</int>
+                    <int>164</int>
+                    <int>145</int>
+                    <int>1018</int>
+                    <int>1525</int>
+                    <int>1194</int>
+                    <int>706</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -23903,6 +23907,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
             </myBounds>
           </myTerrain>
           <myTrans reference="../myTerrain/myTrans"/>
+          <myBounds>
+            <myRow>13</myRow>
+            <myCol>13</myCol>
+          </myBounds>
         </myGameWorld>
         <myStoryBoard reference="../myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard"/>
       </engine.game.ConcreteLevel>

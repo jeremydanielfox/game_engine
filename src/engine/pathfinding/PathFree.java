@@ -66,7 +66,6 @@ public class PathFree implements Path {
         GridCell currentCell = myTrans.transformWorldToGrid(current);
         GridCell nextCell = myPath.get(currentCell);
 
-        // GridWrapper.printGradient(myPath);
         for (GridCell endpoint : endPoints) {
             if (currentCell.equals(endpoint)) {
                 throw new EndOfPathException();

@@ -33,6 +33,7 @@ public class AbstractWorld implements GameWorld {
     protected Path myPath;
     private Terrain myTerrain;
     protected CoordinateTransformer myTrans;
+    protected GridCell myBounds;
 
     public AbstractWorld (int numRows, int numCols) {
         myObjects = new ArrayList<GameObject>();
@@ -41,6 +42,7 @@ public class AbstractWorld implements GameWorld {
         myNodeToGameObjectMap = new HashMap<>();
 		myTrans = new CoordinateTransformer(numRows, numCols, ViewConcrete2.getWorldWidth(), ViewConcrete2.getWorldHeight()); // TODO fix window 1000
 		myTerrain = new Terrain(numRows, numCols, myTrans);
+		myBounds = new GridCell(numRows, numCols);
     }
     
     @Settable

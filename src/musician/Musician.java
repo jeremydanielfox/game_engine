@@ -4,6 +4,7 @@ import engine.interactions.Interaction;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
@@ -60,4 +61,9 @@ public interface Musician {
      * pauses media file currently being played
      */
     void pauseAudio();
+    
+    /**
+     * reinitializes the media player
+     */
+    MediaPlayer reinitialize(MediaPlayer mp, Media m);
 }

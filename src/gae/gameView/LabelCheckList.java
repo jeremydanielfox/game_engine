@@ -2,10 +2,10 @@ package gae.gameView;
 
 import java.util.ArrayList;
 import java.util.List;
-import engine.gameobject.labels.Type;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import engine.gameobject.labels.Type;
 
 
 /**
@@ -30,7 +30,7 @@ public class LabelCheckList extends CheckList {
      */
     public void showCheckList () {
         Stage temp = new Stage();
-        Scene scene = new Scene((Parent) getCheckList());
+        Scene scene = new Scene(new StackPane(getCheckList()));
         temp.setScene(scene);
         temp.show();
         temp.centerOnScreen();

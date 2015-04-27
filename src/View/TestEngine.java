@@ -13,7 +13,6 @@ public class TestEngine extends Application {
 
     private static final String FILE_SOURCE = "src/xml/Game.xml";
 
-
     @Override
     public void start (Stage primaryStage) throws Exception {
         Group root = new Group();

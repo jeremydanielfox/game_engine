@@ -79,6 +79,10 @@ public class ShopModelSimple implements ShopModel {
     public void setPurchasables (List<Purchasable<GameObject>> purchasables) {
         purchasables.forEach(prototype -> addPurchasable(prototype));
     }
+    
+    public Map<String, Purchasable<GameObject>> getMap(){
+        return purchasableMap;
+    }
 
     @Override
     public List<ItemGraphic> getItemGraphics () {

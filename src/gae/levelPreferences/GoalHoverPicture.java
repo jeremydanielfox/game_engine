@@ -18,7 +18,6 @@ public class GoalHoverPicture implements UIObject {
         options.setVisible(false);
         hoverPic.getObject().setOnMouseClicked(e->{
             hoverPic.changeSelectEffect();
-            hoverPic.alter();
             options.setVisible(hoverPic.selected());
         });
     }

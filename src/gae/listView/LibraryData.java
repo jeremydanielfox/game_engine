@@ -104,7 +104,7 @@ public class LibraryData {
     }
 
     public ObservableList<Object> getObservableList (Class<?> klass) {
-        if (!createdObjectMap.containsKey(klass)) {
+        if (!createdObjectMap.containsKey(getSimplifiedName(klass))) {
             if (!klass.getSimpleName().equals("PathFixed")) {
                 ObservableList<Object> list = FXCollections.observableArrayList();
                 createdObjectMap.put(getSimplifiedName(klass), list);

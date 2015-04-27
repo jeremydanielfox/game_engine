@@ -152,7 +152,7 @@ public class LibraryData {
         object.setLabel(editable.getLabel());
         object.setShopTag(editable.getShopTag());
         object.setMover(editable.getPath());
-        object.setHealth(new HealthSimple(editable.getHealth()));
+        object.setHealth(editable.getHealth());
         object.setCollider(editable.getCollider());
         object.setWeapon(editable.getWeapon());
         gameObjectList.add(object);

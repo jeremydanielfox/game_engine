@@ -58,13 +58,6 @@ public class PathFree implements Path {
                 myAlgorithm.shortestPath(end.getRow(),end.getCol(), start.getRow(), start.getCol());
         	}
         }
-        // myPathCoordinates = myPath.stream().map(cell ->
-        // myTrans.tranformGridToWorld(cell)).collect(Collectors.toList());
-        // p = new PathFixed();
-        // for(int i = 0; i < myPathCoordinates.size()-1; i++){
-        // p.addPathSegment(new
-        // PathSegmentStraight(myPathCoordinates.get(i),myPathCoordinates.get(i+1)));
-        // }
     }
 
     @Override

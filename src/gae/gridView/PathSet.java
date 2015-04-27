@@ -54,7 +54,7 @@ public class PathSet extends Region {
         visibleList = new ArrayList<>();
     }
 
-    public Path getPathObject () {
+    public AuthoringPath getPathObject () {
         // EDIT: We could just use Point2D --> this is JavaFX so not recommended
         PointSimple start =
                 container.convertCoordinates(curve.getStartX(), curve.getStartY());
@@ -64,7 +64,7 @@ public class PathSet extends Region {
                 container.convertCoordinates(curve.getControlX1(), curve.getControlY1());
         PointSimple control2 =
                 container.convertCoordinates(curve.getControlX2(), curve.getControlY2());
-        return new Path(start, end, control1, control2);
+        return new AuthoringPath(start, end, control1, control2);
     }
 
     public void changeColor (Color color) {

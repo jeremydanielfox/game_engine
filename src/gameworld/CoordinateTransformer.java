@@ -49,4 +49,10 @@ public class CoordinateTransformer {
     	double offsetY = Math.min(h, w)*(Math.random()-.5);
     	return new PointSimple(p.getX() + offsetX, p.getY() + offsetY);
     }
+    
+    public PointSimple transformGridCellsToWorldMidPoint(GridCell c1, GridCell c2){
+    	PointSimple p1 = this.tranformGridToWorld(c1);
+    	PointSimple p2 = this.tranformGridToWorld(c2);
+    	return PointSimple.pointOnLine(p1, p2, PointSimple.distance(p1, p2)/2);
+    }
 }

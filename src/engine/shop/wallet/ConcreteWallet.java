@@ -1,5 +1,6 @@
 package engine.shop.wallet;
 
+import engine.fieldsetting.Settable;
 import engine.game.PlayerUnit;
 
 
@@ -28,6 +29,11 @@ public class ConcreteWallet extends Wallet {
     @Override
     public void withdraw (double amount) {
         myUnit.changeValue(amount * (-1));
+    }
+    
+    @Settable
+    public void setPlayerUnit(PlayerUnit unit){
+        myUnit = unit;
     }
 
 }

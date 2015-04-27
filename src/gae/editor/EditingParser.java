@@ -82,13 +82,13 @@ public class EditingParser {
             component = c.newInstance();
         }
         catch (ClassNotFoundException e) {
-            // e.printStackTrace();
+//             e.printStackTrace();
         }
         catch (IllegalAccessException iae) {
-            // iae.printStackTrace();
+//             iae.printStackTrace();
         }
         catch (InstantiationException ie) {
-            // ie.printStackTrace();
+//             ie.printStackTrace();
         }
 
         return component;

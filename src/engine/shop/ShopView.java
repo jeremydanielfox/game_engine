@@ -219,11 +219,11 @@ public class ShopView extends Parent {
     }
 
     private Paint setPanelColor (UpgradeGraphic upgrade) {
+        if (upgrade.isFinal()) {
+            return Color.LAWNGREEN;
+        }
         if (!upgrade.canAfford()) {
             return Color.RED;
-        }
-        else if (upgrade.isFinal()) {
-            return Color.LAWNGREEN;
         }
         else { // normal upgrade
             return Color.MEDIUMSEAGREEN;

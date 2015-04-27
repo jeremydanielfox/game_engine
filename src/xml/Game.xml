@@ -1047,12 +1047,12 @@
                   <myQueue class="engine.events.ConcreteQueue">
                     <myOrderedObjects class="linked-list">
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -1593,12 +1593,12 @@
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
                                     </superType>
                                     <myName>Enemy</myName>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -2209,12 +2209,12 @@
                         <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -2755,12 +2755,12 @@
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
                                     </superType>
                                     <myName>Enemy</myName>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -3371,12 +3371,12 @@
                         <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -3917,12 +3917,12 @@
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
                                     </superType>
                                     <myName>Enemy</myName>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -4533,12 +4533,12 @@
                         <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -5079,12 +5079,12 @@
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
                                     </superType>
                                     <myName>Enemy</myName>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -5695,12 +5695,12 @@
                         <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -6241,12 +6241,12 @@
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
                                     </superType>
                                     <myName>Enemy</myName>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -6857,12 +6857,12 @@
                         <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -7403,12 +7403,12 @@
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
                                     </superType>
                                     <myName>Enemy</myName>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -8019,12 +8019,12 @@
                         <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -8565,12 +8565,12 @@
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
                                     </superType>
                                     <myName>Enemy</myName>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -9181,12 +9181,12 @@
                         <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -9727,12 +9727,12 @@
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
                                     </superType>
                                     <myName>Enemy</myName>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -10343,12 +10343,12 @@
                         <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -10889,12 +10889,12 @@
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
                                     </superType>
                                     <myName>Enemy</myName>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -11505,12 +11505,12 @@
                         <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -12051,12 +12051,12 @@
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
                                     </superType>
                                     <myName>Enemy</myName>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -12673,16 +12673,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1472</int>
-                    <int>644</int>
-                    <int>1230</int>
-                    <int>1850</int>
-                    <int>1423</int>
-                    <int>114</int>
-                    <int>179</int>
-                    <int>37</int>
-                    <int>2388</int>
-                    <int>1030</int>
+                    <int>1848</int>
+                    <int>2295</int>
+                    <int>1670</int>
+                    <int>1436</int>
+                    <int>1890</int>
+                    <int>1800</int>
+                    <int>184</int>
+                    <int>1579</int>
+                    <int>1985</int>
+                    <int>1930</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -12692,12 +12692,12 @@
                   <myQueue class="engine.events.ConcreteQueue">
                     <myOrderedObjects class="linked-list">
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -13271,12 +13271,12 @@
                         <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -13850,12 +13850,12 @@
                         <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -14429,12 +14429,12 @@
                         <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -15008,12 +15008,12 @@
                         <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -15587,12 +15587,12 @@
                         <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -16166,12 +16166,12 @@
                         <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -16745,12 +16745,12 @@
                         <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -17324,12 +17324,12 @@
                         <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -17903,12 +17903,12 @@
                         <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
                           <myName>Enemy</myName>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>

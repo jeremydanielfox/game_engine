@@ -3,7 +3,11 @@ package engine.game;
 import View.Displayable;
 import engine.fieldsetting.Settable;
 
-
+/**
+ * 
+ * @author Sierra
+ *
+ */
 @Settable
 public class PlayerUnit extends Displayable{
     private double myValue;

@@ -8,6 +8,7 @@ import javafx.collections.SetChangeListener;
 import javafx.collections.SetChangeListener.Change;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
 import engine.gameobject.units.Buff;
 import engine.gameobject.weapon.firingrate.FiringRate;
@@ -16,6 +17,7 @@ import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.range.RangeUpgrade;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
+import engine.gameobject.weapon.upgradetree.UpgradeTreeSimple;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
 
@@ -45,6 +47,11 @@ public class BasicWeapon implements Weapon{
         upgradables = new UpgradeSet<>();
         timeSinceFire = 0;
         myFiringStrategy = new SingleProjectile();
+        myFiringRate = new FiringRateUpgrade();
+        myRange = new RangeUpgrade();
+        myProjectile = new GameObjectSimple();
+        tree = new UpgradeTreeSimple();
+        value = 0;
     }
 
     @Override

@@ -84,7 +84,7 @@ public class WaveEnemyTable implements UIObject {
         List<GameObject> enemies = new ArrayList<GameObject>();
         for (WavePart wp: myWaveParts) {
             for (int i = 0; i < wp.getQuantity(); i++) {                
-                enemies.add(wp.getGameObject());
+                enemies.add(wp.getGameObject().clone());
             }
         }
         return enemies;

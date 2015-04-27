@@ -18,13 +18,11 @@ import gae.openingView.UIObject;
 import gae.waveeditor.WaveEditor;
 import gameworld.FreeWorld;
 import gameworld.GameWorld;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
@@ -35,6 +33,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 
 /**
  * Central container for the central tab view in the gae editor
@@ -56,6 +55,7 @@ public class CentralTabView implements UIObject {
     private Game game;
     private GameWorldFactory gameWorldFactory;
     private boolean editorInstantiated;
+    ShopModel shopModel;
 
     public CentralTabView (Scene sceneIn, Game gameIn, String gameTypeIn) {
         scene = sceneIn;
@@ -94,9 +94,9 @@ public class CentralTabView implements UIObject {
             setUpPlayerAndLinkToGame();
         }
         catch (ClassNotFoundException |
-               IllegalAccessException |
-               IllegalArgumentException |
-               InvocationTargetException e1) {
+                IllegalAccessException |
+                IllegalArgumentException |
+                InvocationTargetException e1) {
             e1.printStackTrace();
         }
     }
@@ -113,8 +113,7 @@ public class CentralTabView implements UIObject {
     private void setUpShopAndLinkToGame () throws ClassNotFoundException, IllegalAccessException,
                                           IllegalArgumentException, InvocationTargetException {
 
-        ShopModel shopModel = ((ShopTab) shopTab).getShop();
-     
+        shopModel = ((ShopTab) shopTab).getShop();
 
         for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(game.getClass()
                 .getName()), Settable.class)) {
@@ -126,9 +125,10 @@ public class CentralTabView implements UIObject {
 
     @SuppressWarnings("unused")
     private void setUpPlayerAndLinkToGame ()
-        throws ClassNotFoundException, IllegalAccessException, IllegalArgumentException,
-        InvocationTargetException {
-        
+                                            throws ClassNotFoundException, IllegalAccessException,
+                                            IllegalArgumentException,
+                                            InvocationTargetException {
+
         PlayerBuilder playerBuilder = new PlayerBuilder();
         Player myPlayer = (Player) playerBuilder.getData().getBuiltObject();
 
@@ -169,8 +169,8 @@ public class CentralTabView implements UIObject {
         try {
             levelData = (Level) Class
                     .forName(EditingParser
-                                     .getInterfaceClasses("engine.fieldsetting.implementing_classes")
-                                     .get("Level").get(0)).newInstance();
+                            .getInterfaceClasses("engine.fieldsetting.implementing_classes")
+                            .get("Level").get(0)).newInstance();
 
             levelMethods = EditingParser.getMethodsWithAnnotation(Class.forName(levelData
                     .getClass().getName()), Settable.class);
@@ -178,23 +178,31 @@ public class CentralTabView implements UIObject {
             for (Method m : levelMethods) {
                 checkAndInvokeMethods(nextWorld, levelData, sb, m);
             }
+
+            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(shopModel.getClass()
+                    .getName()), Settable.class)) {
+                if (m.getName().equals("setGameWorld")) {
+                    m.invoke(shopModel, nextWorld);
+                }
+            }
         }
         catch (InstantiationException |
-               IllegalAccessException |
-               InvocationTargetException |
-               ClassNotFoundException e) {
+                IllegalAccessException |
+                InvocationTargetException |
+                ClassNotFoundException e) {
             e.printStackTrace();
         }
 
         game.getLevelBoard().addLevel(levelData);
-        return new WaveEditor(sb, gameWorldFactory.createGameWorld());
+        return new WaveEditor(sb, levelData.getGameWorld());
     }
 
     private void checkAndInvokeMethods (GameWorld nextWorld,
                                         Level levelData,
                                         StoryBoard sb,
                                         Method m)
-        throws IllegalAccessException, InvocationTargetException {
+                                                 throws IllegalAccessException,
+                                                 InvocationTargetException {
         if (m.getName().equals("setStoryBoard")) {
             m.invoke(levelData, sb);
         }

@@ -9,6 +9,7 @@ import gae.gridView.PathView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiConsumer;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import voogasalad.util.pathsearch.graph.GridCell;
 import xml.DataManager;
 
 

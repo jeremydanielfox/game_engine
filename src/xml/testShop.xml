@@ -6,20 +6,20 @@
     <myHealth>
       <changed>false</changed>
       <obs/>
-      <myValue>0.0</myValue>
+      <myValue>100.0</myValue>
       <myLabel></myLabel>
     </myHealth>
     <myScore>
       <changed>false</changed>
       <obs/>
-      <myValue>0.0</myValue>
+      <myValue>100.0</myValue>
       <myLabel></myLabel>
     </myScore>
     <myWallet class="engine.shop.wallet.ConcreteWallet">
       <myUnit>
         <changed>false</changed>
         <obs/>
-        <myValue>0.0</myValue>
+        <myValue>100.0</myValue>
         <myLabel></myLabel>
       </myUnit>
     </myWallet>
@@ -1760,18 +1760,41 @@
     <isWon>false</isWon>
   </myLevelBoard>
   <myShop class="engine.shop.ShopModelSimple">
+    <currentPlayer>
+      <changed>false</changed>
+      <obs/>
+      <myName>Player 1</myName>
+      <myHealth>
+        <changed>false</changed>
+        <obs/>
+        <myValue>100.0</myValue>
+        <myLabel></myLabel>
+      </myHealth>
+      <myScore>
+        <changed>false</changed>
+        <obs/>
+        <myValue>100.0</myValue>
+        <myLabel></myLabel>
+      </myScore>
+      <myWallet class="engine.shop.wallet.ConcreteWallet">
+        <myUnit>
+          <changed>false</changed>
+          <obs/>
+          <myValue>100.0</myValue>
+          <myLabel></myLabel>
+        </myUnit>
+      </myWallet>
+    </currentPlayer>
+    <myGameWorld class="gameworld.FixedWorld" reference="../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myGameWorld"/>
     <purchasableMap>
       <entry>
-        <string>Blue Balloon</string>
+        <string></string>
         <engine.gameobject.GameObjectSimple>
           <myType class="engine.gameobject.labels.SimpleType">
-            <superType class="engine.gameobject.labels.SimpleType">
-              <superType class="engine.gameobject.labels.TypeBase">
-                <myName>Base</myName>
-              </superType>
-              <myName> </myName>
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
             </superType>
-            <myName>Enemy</myName>
+            <myName> </myName>
           </myType>
           <myPoint>
             <myPoint>
@@ -1781,12 +1804,40 @@
             </myPoint>
           </myPoint>
           <myHealth class="engine.gameobject.HealthSimple">
-            <myHealth>10.0</myHealth>
-            <maxHealth>10.0</maxHealth>
+            <myHealth>0.0</myHealth>
+            <maxHealth>0.0</maxHealth>
             <myTitle></myTitle>
             <index>0</index>
           </myHealth>
-          <myMover class="engine.gameobject.MoverNull"/>
+          <myMover class="engine.gameobject.MoverUser">
+            <inherentSpeed>5.0</inherentSpeed>
+            <speedModifier>1.0</speedModifier>
+            <myDistance>0.0</myDistance>
+            <frozen>false</frozen>
+            <myHandler>
+              <myGraphic>
+                <myTitle></myTitle>
+                <myHeight>0.0</myHeight>
+                <myWidth>0.0</myWidth>
+                <myImageName>/images/robertDuvall.jpg</myImageName>
+                <myPoint>
+                  <x>0.0</x>
+                  <y>0.0</y>
+                  <hash>0</hash>
+                </myPoint>
+                <myRotator class="engine.gameobject.RotateToPoint"/>
+                <index>0</index>
+              </myGraphic>
+              <myDirection>
+                <myPoint>
+                  <x>0.0</x>
+                  <y>0.0</y>
+                  <hash>0</hash>
+                </myPoint>
+              </myDirection>
+              <ORIGIN reference="../myDirection"/>
+            </myHandler>
+          </myMover>
           <myBuffs>
             <buffList/>
             <immunityList/>
@@ -1911,9 +1962,9 @@
           </myBehaviors>
           <myGraphic>
             <myTitle></myTitle>
-            <myHeight>10.0</myHeight>
-            <myWidth>10.0</myWidth>
-            <myImageName>/images/Blue_Bloon.png</myImageName>
+            <myHeight>0.0</myHeight>
+            <myWidth>0.0</myWidth>
+            <myImageName>/images/robertDuvall.jpg</myImageName>
             <myPoint>
               <x>0.0</x>
               <y>0.0</y>
@@ -1923,9 +1974,21 @@
             <index>0</index>
           </myGraphic>
           <myShopTag class="engine.shop.ShopTagSimple">
-            <myName>Blue Balloon</myName>
-            <myDescription>This is a bloon</myDescription>
-            <myShopGraphic reference="../../myGraphic"/>
+            <myName></myName>
+            <myDescription></myDescription>
+            <myShopGraphic>
+              <myTitle></myTitle>
+              <myHeight>0.0</myHeight>
+              <myWidth>0.0</myWidth>
+              <myImageName>/images/robertDuvall.jpg</myImageName>
+              <myPoint>
+                <x>0.0</x>
+                <y>0.0</y>
+                <hash>0</hash>
+              </myPoint>
+              <myRotator class="engine.gameobject.RotateToPoint"/>
+              <index>0</index>
+            </myShopGraphic>
           </myShopTag>
         </engine.gameobject.GameObjectSimple>
       </entry>

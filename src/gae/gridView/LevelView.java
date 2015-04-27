@@ -1,12 +1,19 @@
 package gae.gridView;
 
 import java.awt.Dimension;
+import java.awt.Point;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import voogasalad.util.pathsearch.graph.GridCell;
 import gae.backend.Placeable;
 import gae.gridView.TileViewToggle.TileMode;
 import gae.listView.LibraryData;
 import gae.listView.LibraryView;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -29,7 +36,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.beans.property.BooleanProperty;
 
 
 /**
@@ -55,6 +61,14 @@ public class LevelView {
     private VBox gridOptions;
     private ObjectProperty<TileMode> tileModeProperty =
             new SimpleObjectProperty<>(TileMode.TOWERMODE);
+    private BiConsumer<List<GridCell>, List<GridCell>> biconsumer;
+    private BooleanProperty isFreeWorld;
+
+    public LevelView (BiConsumer<List<GridCell>, List<GridCell>> biconsumer,
+                      BooleanProperty isFreeWorld) {
+        this.biconsumer = biconsumer;
+        this.isFreeWorld = isFreeWorld;
+    }
 
     public Pane getBorder (Scene scene) {
         border = new Pane();
@@ -95,7 +109,6 @@ public class LevelView {
         container = new TileViewToggle(gridSizeProperty, scene);
         container.getTileModeProperty().bind(tileModeProperty);
         root.getChildren().addAll(background, container);
-        // root.getChildren().addAll(background, container);
 
         stack.getChildren().addAll(root);
         root.setTranslateX(scene.getWidth() / 6);
@@ -151,21 +164,48 @@ public class LevelView {
 
         gridOptions.getChildren().addAll(title, changeBackground(backgroundProperty));
         makeTileDimensions();
-        Node tileMode =
-                makeToggle(makeToggleButton("Enemy Grid", TileMode.ENEMYMODE),
-                           makeToggleButton("Tower Grid", TileMode.TOWERMODE),
-                           (obs, old, newVal) -> {
-                               tileModeProperty.setValue((TileMode) newVal.getUserData());
-                           });
-        gridOptions.getChildren().add(makeToggle(makeToggleButton("Show Grid", true),
-                                                 makeToggleButton("Hide Grid", false),
-                                                 (obs, old, newVal) -> {
-                                                     container.setVisible((boolean) newVal
-                                                             .getUserData());
-                                                     tileMode.setVisible((boolean) newVal
-                                                             .getUserData());
-                                                 }));
+        List<ToggleButton> optionList =
+                Arrays.asList(new ToggleButton[] {
+                                                  makeToggleButton("Enemy Grid", TileMode.ENEMYMODE),
+                                                  makeToggleButton("Tower Grid", TileMode.TOWERMODE),
+                                                  makeToggleButton("Spawn Point",
+                                                                   TileMode.STARTPOINTMODE),
+                                                  makeToggleButton("End Point",
+                                                                   TileMode.ENDPOINTMODE) });
+        List<ToggleButton> gridOptionsList =
+                Arrays.asList(new ToggleButton[] { makeToggleButton("Show Grid", true),
+                                                  makeToggleButton("Hide Grid", false) });
+        Node tileMode = makeToggle(optionList, (obs, old, newVal) -> {
+            tileModeProperty.setValue((TileMode) newVal.getUserData());
+        });
+        gridOptions.getChildren().add(makeToggle(gridOptionsList, (obs, old, newVal) -> {
+            container.setVisible((boolean) newVal
+                    .getUserData());
+            tileMode.setVisible((boolean) newVal
+                    .getUserData());
+        }));
         gridOptions.getChildren().add(tileMode);
+        isFreeWorld.addListener( (observable, oldv, newv) -> {
+            System.out.println("changing");
+            boolean isFree = (boolean) newv;
+            if (isFree) {
+                gridOptions.getChildren().add(setSpawnPoints());
+            }
+        });
+    }
+
+    private Button setSpawnPoints () {
+        Button button = new Button("Set Spawn Points");
+        List<GridCell> start = new ArrayList<>();
+        List<GridCell> end = new ArrayList<>();
+        for (Point point : container.getStartPoints()) {
+            start.add(new GridCell(point.x, point.y));
+        }
+        for (Point point : container.getEndPoints()) {
+            end.add(new GridCell(point.x, point.y));
+        }
+        biconsumer.accept(start, end);
+        return button;
     }
 
     /**
@@ -205,14 +245,15 @@ public class LevelView {
      * @param ChangeListener for what happens when toggle selected
      */
 
-    private Node makeToggle (ToggleButton button1,
-                             ToggleButton button2,
+    private Node makeToggle (List<ToggleButton> list,
                              ChangeListener<? super Toggle> listener) {
         ToggleGroup group = new ToggleGroup();
         group.selectedToggleProperty().addListener(listener);
-        group.getToggles().addAll(button1, button2);
         HBox hbox = new HBox();
-        hbox.getChildren().addAll(button1, button2);
+        for (ToggleButton button : list) {
+            group.getToggles().add(button);
+            hbox.getChildren().add(button);
+        }
         return hbox;
     }
 
@@ -228,36 +269,6 @@ public class LevelView {
         button.setUserData(data);
         return button;
     }
-
-    /*
-     * Removed once editor works
-     * 
-     * @Deprecated
-     * private GridPane tempGrid () {
-     * GridPane grid = new GridPane();
-     * grid.setHgap(0);
-     * grid.setTranslateX(200);
-     * // grid.add(tempButtonTower(), 0, 0);
-     * // grid.add(tempButtonEnemy(), 0, 1);
-     * return grid;
-     * }
-     * 
-     * @Deprecated
-     * private Button tempButtonTower () {
-     * Button temp = new Button("add Tower");
-     * // Placeable Placeable = new TempTower();
-     * // temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
-     * return temp;
-     * }
-     * 
-     * @Deprecated
-     * private Button tempButtonEnemy () {
-     * Button temp = new Button("add Enemy");
-     * // Placeable Placeable = new TempEnemy();
-     * // temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
-     * return temp;
-     * }
-     */
 
     public Consumer<Placeable> getConsumer () {
         Consumer<Placeable> consumer = e -> libraryData.addEditableToList(e);

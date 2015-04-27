@@ -34,6 +34,7 @@ import engine.gameobject.MoverUser;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.TestTower;
 import engine.gameobject.weapon.NullWeapon;
+import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.firingstrategy.UserStrategy;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
@@ -158,6 +159,7 @@ public class GameWriterConcrete2 extends Application {
 //			pewpew.setGraphic(g.getGraphic());
 //			g.getWeapon().setFiringStrategy(pewpew);
 			g.setWeapon(new NullWeapon());
+
 			world.addObject(g, new PointSimple(300,300));
         }
         catch (StructurePlacementException e1) {

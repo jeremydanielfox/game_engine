@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
  * Represents an editor based on a slider. Could be used for features such as setting movement or
  * firing speed.
  *
- * @author Brandon Choi
+ * @author Kei Yoshikoshi
  *
  */
 
@@ -24,24 +24,10 @@ public class DoubleTextEditor extends ComponentEditor {
     public DoubleTextEditor () {
         super();
         doubleTextField = new DoubleNumberTextField();
+        doubleTextField.setPromptText("Input Double Value");
         getEditBox().getChildren().addAll(getLabel(), doubleTextField);
     }
 
-    /*
-     * public SliderEditor (String name, double bottom, double high) {
-     * slider = new Slider(bottom, high, DEFAULT);
-     * slider.setShowTickLabels(true);
-     * slider.setShowTickMarks(true);
-     * getEditBox().getChildren().addAll(getLabel(), slider);
-     * }
-     * 
-     * public SliderEditor (String name, double high) {
-     * slider = new Slider(DEFAULT, high, DEFAULT);
-     * slider.setShowTickLabels(true);
-     * slider.setShowTickMarks(true);
-     * getEditBox().getChildren().addAll(getLabel(), slider);
-     * }
-     */
     @Override
     public void clear () {
         doubleTextField.clear();
@@ -54,6 +40,9 @@ public class DoubleTextEditor extends ComponentEditor {
 
     @Override
     public Object createObject (Class<?> c) {
+        if (doubleTextField.getText().equals("")) {
+            return 0.0;
+        }
         return Double.parseDouble(doubleTextField.getText());
     }
 

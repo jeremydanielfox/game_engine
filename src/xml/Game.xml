@@ -12671,16 +12671,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1103</int>
-                    <int>1574</int>
-                    <int>2096</int>
-                    <int>179</int>
-                    <int>1902</int>
-                    <int>295</int>
-                    <int>588</int>
-                    <int>1348</int>
-                    <int>1358</int>
-                    <int>1430</int>
+                    <int>1655</int>
+                    <int>1378</int>
+                    <int>1406</int>
+                    <int>1897</int>
+                    <int>572</int>
+                    <int>842</int>
+                    <int>2155</int>
+                    <int>1097</int>
+                    <int>661</int>
+                    <int>902</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -19349,13 +19349,13 @@
                 </myPoint>
               </myPoint>
               <myHealth class="engine.gameobject.HealthSimple">
-                <myHealth>1.0</myHealth>
-                <maxHealth>1.0</maxHealth>
+                <myHealth>100.0</myHealth>
+                <maxHealth>100.0</maxHealth>
                 <myTitle></myTitle>
                 <index>0</index>
               </myHealth>
               <myMover class="engine.gameobject.MoverDirection">
-                <inherentSpeed>2.5</inherentSpeed>
+                <inherentSpeed>2.0</inherentSpeed>
                 <speedModifier>1.0</speedModifier>
                 <myDistance>0.0</myDistance>
                 <frozen>false</frozen>

@@ -17,8 +17,8 @@ import engine.gameobject.weapon.firingrate.FiringRateUpgrade;
 import engine.gameobject.weapon.firingstrategy.FiringStrategy;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.range.RangeUpgrade;
+import engine.gameobject.weapon.upgradetree.NullTree;
 import engine.gameobject.weapon.upgradetree.UpgradeTree;
-import engine.gameobject.weapon.upgradetree.UpgradeTreeSimple;
 import engine.gameobject.weapon.upgradetree.upgradebundle.UpgradeBundle;
 import gameworld.ObjectCollection;
 
@@ -51,7 +51,7 @@ public class BasicWeapon implements Weapon{
         myFiringRate = new FiringRateUpgrade();
         myRange = new RangeUpgrade();
         myProjectile = new GameObjectSimple();
-        tree = new UpgradeTreeSimple();
+        tree = new NullTree();
         value = 0;
     }
 

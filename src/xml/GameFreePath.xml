@@ -17005,16 +17005,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>880</int>
-                    <int>1113</int>
-                    <int>1733</int>
-                    <int>2181</int>
-                    <int>2317</int>
-                    <int>2031</int>
-                    <int>1977</int>
-                    <int>611</int>
-                    <int>2028</int>
-                    <int>549</int>
+                    <int>2003</int>
+                    <int>1943</int>
+                    <int>989</int>
+                    <int>995</int>
+                    <int>690</int>
+                    <int>306</int>
+                    <int>1354</int>
+                    <int>917</int>
+                    <int>1128</int>
+                    <int>1732</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

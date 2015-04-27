@@ -20,8 +20,8 @@ public class TestProjectile extends GameObjectSimple {
         myType = type;
         setGraphic(new Graphic(20, 20, "/images/robertDuvall.jpg"));
         setPoint(new PointSimple(300, 300));
-        setHealth(new HealthSimple(1));
-        setMover(new MoverDirection(getPoint(), 2.5, 500));
+        setHealth(new HealthSimple(100));
+        setMover(new MoverDirection(getPoint(), 2, 500));
         setWeapon(new NullWeapon());
         setLabel(new ProjectileLabel());
         if (type == 0 || type == 2 || type == 4) {

@@ -3,11 +3,8 @@ package engine.shop;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -22,14 +19,15 @@ public class GameObjectSelector {
     private Pane worldPane;
 
     private Consumer<GameObject> displayUpgrades;
-    private Runnable clearInfoBox;
+    private Runnable removeSelf;
 
     private static final List<KeyCode> DESELECTION_KEYS = Arrays
             .asList(new KeyCode[] { KeyCode.ESCAPE });
 
-    public GameObjectSelector (Consumer<GameObject> displayUpgrades, Runnable clearInfoBox, Pane worldPane) {
+    public GameObjectSelector (Consumer<GameObject> displayUpgrades, Runnable removeSelf, Pane worldPane) {
+        
         this.worldPane = worldPane;
-        this.clearInfoBox = clearInfoBox;
+        this.removeSelf = removeSelf;
         this.displayUpgrades = displayUpgrades;
 
         initialize();
@@ -38,7 +36,7 @@ public class GameObjectSelector {
 
     private void initialize () {
         current.addListener( (obs, old, cur) -> {
-            clearInfoBox.run();
+            removeSelf.run();
             select(null);
             if (prev !=null){
                 worldPane.getChildren().remove(prev);
@@ -50,8 +48,8 @@ public class GameObjectSelector {
                 prev = rangeDisp;
                 displayUpgrades.accept(cur);
                 worldPane.setOnKeyPressed(event -> {
-                    if (event.getCode() == KeyCode.ESCAPE) {
-                        clearInfoBox.run();
+                    if (DESELECTION_KEYS.contains(event.getCode())) {
+                        removeSelf.run();
                         worldPane.getChildren().remove(rangeDisp);
                         worldPane.setOnKeyPressed(null);
                     }

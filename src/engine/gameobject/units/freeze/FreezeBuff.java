@@ -5,7 +5,7 @@ import engine.fieldsetting.Settable;
 import engine.gameobject.BasicMover;
 import engine.gameobject.GameObject;
 import engine.gameobject.units.Buff;
-import engine.gameobject.units.BuffType;
+import engine.gameobject.units.UpgradeType;
 import engine.gameobject.weapon.Upgrade;
 
 
@@ -19,30 +19,32 @@ import engine.gameobject.weapon.Upgrade;
 public class FreezeBuff extends Buff implements Freeze {
 
     private int increment;
-    private BuffType type;
+    private UpgradeType type;
     private Optional<Freeze> decorated;
 
     public FreezeBuff () {
         super(0);
         this.increment = 0;
-        type = BuffType.COLLISION;
         decorated = Optional.empty();
     }
 
-    public FreezeBuff (int increment) {
+    public FreezeBuff (double increment) {
         super(increment);
-        this.increment = increment;
-        type = BuffType.COLLISION;
+        this.increment = (int) increment;
         decorated = Optional.empty();
     }
 
+    /**
+     * Sets duration to increment
+     * @param increment
+     */
     @Settable
-    public void setIncrement (int increment) {
-        this.increment = increment;
+    public void setIncrement (double increment) {
+        this.increment = (int) increment;
     }
 
 //    @Settable
-    public void setBuffType (BuffType type) {
+    public void setBuffType (UpgradeType type) {
         this.type = type;
     }
 
@@ -83,7 +85,7 @@ public class FreezeBuff extends Buff implements Freeze {
     }
 
     @Override
-    public BuffType getBuffType () {
+    public UpgradeType getType () {
         return type;
     }
 }

@@ -23,6 +23,7 @@ import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.test.TestTower;
+import engine.gameobject.test.bloons.BlueBloon;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
@@ -48,7 +49,7 @@ public class GameWriter extends Application {
     private StoryBoard makeStoryBoard (GameWorld world, Player player) {
         List<GameObject> waveObjects = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            waveObjects.add(new GameObjectSimpleTest());
+            waveObjects.add(new BlueBloon());
         }
         GameObjectQueue q = new ConcreteQueue(waveObjects);
         TimedEvent wave = new RandomSpanWave(2, 20, q, world);

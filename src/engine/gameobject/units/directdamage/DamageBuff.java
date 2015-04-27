@@ -4,7 +4,7 @@ import java.util.Optional;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.units.Buff;
-import engine.gameobject.units.BuffType;
+import engine.gameobject.units.UpgradeType;
 import engine.gameobject.weapon.Upgrade;
 
 
@@ -20,11 +20,9 @@ public class DamageBuff extends Buff implements DirectDamage {
     private double increment;
     private Optional<DirectDamage> decorated;
     private final static int graphicDuration = 20;
-    private BuffType type;
 
     public DamageBuff () {
         super(graphicDuration);
-        type = BuffType.COLLISION;
         this.increment = 0;
         decorated = Optional.empty();
     }
@@ -38,11 +36,6 @@ public class DamageBuff extends Buff implements DirectDamage {
     @Settable
     public void setIncrement (double increment) {
         this.increment = increment;
-    }
-
-    // @Settable
-    public void setType (BuffType type) {
-        this.type = type;
     }
 
     @Override

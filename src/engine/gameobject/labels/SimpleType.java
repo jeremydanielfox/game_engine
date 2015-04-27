@@ -1,11 +1,10 @@
 package engine.gameobject.labels;
 
 import engine.fieldsetting.Settable;
-import engine.titles.Title;
 
 
 @Settable
-public class SimpleType implements Type, Title {
+public class SimpleType implements Type{
 
     private Type superType;
     private String myName;
@@ -52,30 +51,14 @@ public class SimpleType implements Type, Title {
         return new SimpleType(myName, superType);
     }
 
+    @Override
+    public int hashCode(){
+        return 7 * myName.hashCode() + 97 * superType.hashCode();
+    }
+    
     // TODO: equals method needs work... possibly should go all the way down to basetype
     @Override
     public boolean equals (Object other) {
-        if (other instanceof Type) {
-            if (((Type) other).getName().equals(myName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode () {
-        return myName.hashCode();
-    }
-
-    @Override
-    public String getTitle () {
-        return myName;
-    }
-
-    @Settable
-    @Override
-    public void setTitle (String title) {
-        myName = title;
+        return hashCode() == other.hashCode();
     }
 }

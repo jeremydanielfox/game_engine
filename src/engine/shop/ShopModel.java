@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import engine.prototype.Prototype;
+import engine.gameobject.Purchasable;
 import engine.shop.ShopModelSimple.ItemInfo;
+import engine.shop.ShopModelSimple.UpgradeGraphic;
 import gameworld.GameWorld;
 
 
@@ -21,7 +23,7 @@ public interface ShopModel {
      *
      * @param prototype
      */
-    public void addPrototype (Prototype<GameObject> prototype);
+    public void addPurchasable (Purchasable<GameObject> prototype);
 
     /**
      *
@@ -35,7 +37,7 @@ public interface ShopModel {
      * @param gameObject
      * @return a list of ItemGraphics to be displayed in the shop
      */
-    public List<ItemGraphic> getUpgradeGraphics (GameObject gameObject);
+    public List<UpgradeGraphic> getUpgradeGraphics (GameObject gameObject);
 
     /**
      * Purchases the named GameObject and places it at the given position on the screen
@@ -77,4 +79,13 @@ public interface ShopModel {
      * @return true if the object is placable
      */
     public boolean checkPlacement (String name, PointSimple location);
+
+    /**
+     * Sells GameObject by removing it from GameWorld and depositing value into Player's account
+     * @param obj
+     */
+    public void sellGameObject (GameObject obj);
+
+    
+    public GameObject getObjectFromNode (Node node);
 }

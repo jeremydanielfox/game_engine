@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import View.ViewConcrete2;
 import voogasalad.util.pathsearch.graph.GridCell;
 import javafx.scene.Node;
@@ -15,6 +14,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.EnemyLabel;
 import engine.gameobject.test.ProjectileLabel;
+import engine.gameobject.test.TestTower;
 import engine.gameobject.test.TowerLabel;
 import engine.interactions.BuffImparter;
 import engine.interactions.CollisionEngine;
@@ -127,7 +127,11 @@ public class AbstractWorld implements GameWorld {
     @Override
     public boolean isPlaceable (Node n, PointSimple pixelCoords) {
     	GridCell c = myTrans.transformWorldToGrid(pixelCoords);
-    	return myTerrain.getTerrainTile(c).getPlace();
+    	try {
+			return myTerrain.getTerrainTile(c).getPlace();
+		} catch (InvalidArgumentException e) {
+			return false;
+		}
     }
 
     @Override
@@ -147,12 +151,20 @@ public class AbstractWorld implements GameWorld {
     
 	@Settable
 	public void setObstacles(List<GridCell> obstacles){
-		obstacles.forEach(c -> myTerrain.getTerrainTile(c).setWalk(false));
+		for(GridCell c : obstacles){
+			try {
+				myTerrain.getTerrainTile(c).setWalk(false);
+			} catch(InvalidArgumentException e){}
+		}
 		PathFree path = (PathFree) myPath;
 		path.setObstacles(obstacles);
 	}
 	
 	public void setTowerObstacles(List<GridCell> tObstacles){
-		tObstacles.forEach(c -> myTerrain.getTerrainTile(c).setPlace(false));
+		for(GridCell c : tObstacles){
+			try {
+				myTerrain.getTerrainTile(c).setPlace(false);
+			} catch(InvalidArgumentException e){}
+		}
 	}
 }

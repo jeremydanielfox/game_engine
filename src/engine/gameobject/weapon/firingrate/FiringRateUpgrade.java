@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import engine.fieldsetting.Settable;
+import engine.gameobject.units.UpgradeType;
 import engine.gameobject.weapon.Upgrade;
-import engine.gameobject.weapon.range.RangeUpgrade;
 import engine.observable.Observer;
 
 
@@ -23,6 +23,7 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
     private double increment;
     private Optional<FiringRate> decorated;
     private List<Observer> observers = new ArrayList<>();
+    private UpgradeType type;
 
     public FiringRateUpgrade () {
         this(0);
@@ -30,12 +31,22 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
 
     public FiringRateUpgrade (double increment) {
         this.increment = increment;
+        setType(UpgradeType.NULL);
         decorated = Optional.empty();
     }
 
     @Settable
     public void setIncrement (double increment) {
         this.increment = increment;
+    }
+
+    private void setType (UpgradeType type) {
+        this.type = type;
+    }
+
+    @Override
+    public UpgradeType getType () {
+        return type;
     }
 
     @Override
@@ -51,12 +62,12 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
     public void upgrade (Upgrade decorated) {
         this.decorated = Optional.of((FiringRate) decorated);
     }
-    
+
     @Override
     public Upgrade clone () {
         return new FiringRateUpgrade(increment);
     }
-    
+
     @Override
     public void addObserver (Observer observer) {
         observers.add(observer);
@@ -64,7 +75,7 @@ public class FiringRateUpgrade implements FiringRate, Upgrade {
 
     @Override
     public void removeObserver (Observer observer) {
-        // TODO Auto-generated method stub   
+        // TODO Auto-generated method stub
     }
 
     @Override

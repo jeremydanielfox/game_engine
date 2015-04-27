@@ -3,7 +3,6 @@ package gae.editorView;
 import engine.gameobject.PointSimple;
 import gae.gridView.ContainerWrapper;
 import javafx.geometry.Point2D;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -12,15 +11,11 @@ import javafx.scene.text.FontWeight;
 
 public class GameObjectContainer extends VBox implements ContainerWrapper {
     private double width;
-    private Scene scene;
     private static final double LABEL_LOCATION_PROPORTIONS = 0.45;
 
-    public GameObjectContainer (double width,
-                                double height,
-                                Scene scene) {
+    public GameObjectContainer (double width, double height) {
         setPrefSize(width, height);
         this.width = width;
-        this.scene = scene;
         setSpacing(100);
         getChildren().add(getLabel());
     }
@@ -37,7 +32,7 @@ public class GameObjectContainer extends VBox implements ContainerWrapper {
      */
     @Override
     public boolean checkBounds (double x, double y) {
-//        Point2D point = this.screenToLocal(x, y);
+        // Point2D point = this.screenToLocal(x, y);
         // System.out.println("X IS : " + point.getX());
         // System.out.println("Y IS : " + y);
         if (x < 0 || x > getWidth() || y < 0 || y > getHeight()) {

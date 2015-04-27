@@ -5,7 +5,7 @@ import java.util.Optional;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.units.Buff;
-import engine.gameobject.units.BuffType;
+import engine.gameobject.units.UpgradeType;
 import engine.gameobject.weapon.Upgrade;
 
 
@@ -34,16 +34,16 @@ public class PoisonBuff extends Buff implements Poison {
      * @param timeIncr: Time the damage occurs over
      * @param damageIncr: Total damage
      */
-    public PoisonBuff (int timeIncr, double damageIncr) {
+    public PoisonBuff (double timeIncr, double damageIncr) {
         super(timeIncr);
-        this.timeIncr = timeIncr;
+        this.timeIncr = (int) timeIncr;
         this.damageIncr = damageIncr;
         decorated = Optional.empty();
     }
 
     @Settable
-    public void setTime (int timeIncr) {
-        this.timeIncr = timeIncr;
+    public void setTime (double timeIncr) {
+        this.timeIncr = (int) timeIncr;
     }
 
     @Settable

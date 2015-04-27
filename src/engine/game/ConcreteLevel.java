@@ -6,7 +6,6 @@ import View.Displayable;
 import engine.fieldsetting.Settable;
 import engine.goals.EventsCompleteGoal;
 import engine.goals.Goal;
-import engine.titles.Title;
 import gameworld.FixedWorld;
 import gameworld.GameWorld;
 
@@ -20,7 +19,7 @@ import gameworld.GameWorld;
  *
  */
 @Settable
-public class ConcreteLevel implements Level, Title {
+public class ConcreteLevel implements Level {
 
     private static final int EVENT_GOAL_INDEX = 0;
 
@@ -144,18 +143,6 @@ public class ConcreteLevel implements Level, Title {
             displays.add(myTimer);
         }
         return displays;
-    }
-
-    @Override
-    public String getTitle () {
-        return myTitle;
-    }
-
-    @Settable
-    @Override
-    public void setTitle (String title) {
-        // TODO Auto-generated method stub
-        myTitle = title;
     }
 
 }

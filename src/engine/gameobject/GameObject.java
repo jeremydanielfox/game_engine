@@ -62,5 +62,7 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
     public RangeDisplay getRangeDisplay ();
     
     public Graphic getGraphic ();
+    
+    public Health getHealth ();
 
 }

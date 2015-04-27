@@ -12667,6 +12667,7 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
+<<<<<<< HEAD
                     <int>606</int>
                     <int>2128</int>
                     <int>933</int>
@@ -12677,6 +12678,57 @@
                     <int>170</int>
                     <int>1829</int>
                     <int>1817</int>
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+                    <int>2115</int>
+                    <int>368</int>
+                    <int>1272</int>
+                    <int>2061</int>
+                    <int>752</int>
+                    <int>2050</int>
+                    <int>75</int>
+                    <int>1216</int>
+                    <int>244</int>
+                    <int>2363</int>
+=======
+                    <int>2234</int>
+                    <int>455</int>
+                    <int>966</int>
+                    <int>723</int>
+                    <int>451</int>
+                    <int>208</int>
+                    <int>1060</int>
+                    <int>1505</int>
+                    <int>743</int>
+                    <int>1566</int>
+>>>>>>> Stashed changes
+=======
+                    <int>1369</int>
+                    <int>227</int>
+                    <int>677</int>
+                    <int>1414</int>
+                    <int>422</int>
+                    <int>1701</int>
+                    <int>1096</int>
+                    <int>2052</int>
+                    <int>1894</int>
+                    <int>187</int>
+>>>>>>> 3bd3796e259613a6e7a79f93fd382dae5d523608
+=======
+                    <int>1880</int>
+                    <int>243</int>
+                    <int>164</int>
+                    <int>837</int>
+                    <int>1759</int>
+                    <int>876</int>
+                    <int>1307</int>
+                    <int>624</int>
+                    <int>1593</int>
+                    <int>1131</int>
+>>>>>>> b7774359617b21483cb3a3ccc8ab3965a87cc6f0
+>>>>>>> f45597593a8f63cd6ddf9ab34460685c90d01cf3
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

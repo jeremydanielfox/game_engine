@@ -293,4 +293,9 @@ public class GameObjectSimple implements GameObject {
         return "GameObject: " + myType.getName();
     }
 
+    @Override
+    public Health getHealth () {
+        return myHealth;
+    }
+
 }

@@ -141,8 +141,7 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public double getValue () {
-        return 10;
-        // return myWeapon.getValue();
+        return myWeapon.getValue();
     }
 
     // TODO: Weapon upgrade cloning not done

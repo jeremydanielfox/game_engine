@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import gae.gridView.PathView;
 import gae.listView.Authorable;
 import gae.listView.LibraryData;
@@ -46,7 +45,7 @@ public class MoverEditorOpener extends PopUpEditorView {
         createdDropDownList.forEach( (dropDown) -> {
             PathView pathView = (PathView) dropDown.getSelectionModel().getSelectedItem();
             System.out.println("We have selected : " + pathView.getID());
-            List<Path> path = pathView.createPathObjects();
+//            List<Path> path = pathView.createPathObjects();
             // we need to add it to an Editable, which will then be converted to GameObjectSimple
             // later
 

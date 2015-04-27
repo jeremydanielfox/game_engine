@@ -13,12 +13,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import xml.DataManager;
@@ -63,7 +61,7 @@ public class PathList {
         buttonStates = new ArrayList<>();
 
         buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
-                                                       updatePath }));
+                                                      updatePath }));
         // stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
         stack.getChildren().add(makeGridPane());
     }
@@ -92,7 +90,7 @@ public class PathList {
                 }
             });
         });
-   
+
         pane.setContent(listView);
         return pane;
     }
@@ -144,11 +142,11 @@ public class PathList {
                 if (newValue.intValue() == 0) {
                     makeCurve.setDisable(true);
                 }
-                else {
-                    makeCurve.setDisable(false);
-                    label.setTextFill(Color.BLACK);
-                }
-            });
+                                                   else {
+                                                       makeCurve.setDisable(false);
+                                                       label.setTextFill(Color.BLACK);
+                                                   }
+                                               });
         });
         return makeCurve;
     }

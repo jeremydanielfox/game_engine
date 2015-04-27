@@ -12671,16 +12671,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1888</int>
-                    <int>643</int>
-                    <int>1659</int>
-                    <int>663</int>
-                    <int>950</int>
-                    <int>1789</int>
-                    <int>2123</int>
-                    <int>1440</int>
-                    <int>1759</int>
-                    <int>1095</int>
+                    <int>1306</int>
+                    <int>1203</int>
+                    <int>2201</int>
+                    <int>1898</int>
+                    <int>1548</int>
+                    <int>981</int>
+                    <int>2135</int>
+                    <int>1844</int>
+                    <int>1001</int>
+                    <int>1150</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -19129,7 +19129,7 @@
                             <myTitle></myTitle>
                             <myHeight>30.0</myHeight>
                             <myWidth>30.0</myWidth>
-                            <myImageName>Bloons_DartMonkey.png</myImageName>
+                            <myImageName>/images/Bloons_DartMonkey.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -19150,7 +19150,7 @@
                           <myTitle></myTitle>
                           <myHeight>30.0</myHeight>
                           <myWidth>30.0</myWidth>
-                          <myImageName>Bloons_DartMonkey.png</myImageName>
+                          <myImageName>/images/Bloons_DartMonkey.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -19196,7 +19196,7 @@
                             <myTitle></myTitle>
                             <myHeight>30.0</myHeight>
                             <myWidth>30.0</myWidth>
-                            <myImageName>Bloons_DartMonkey.png</myImageName>
+                            <myImageName>/images/Bloons_DartMonkey.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -19217,7 +19217,7 @@
                           <myTitle></myTitle>
                           <myHeight>30.0</myHeight>
                           <myWidth>30.0</myWidth>
-                          <myImageName>Bloons_DartMonkey.png</myImageName>
+                          <myImageName>/images/Bloons_DartMonkey.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -19366,7 +19366,7 @@
                     <hash>0</hash>
                   </myPoint>
                 </myPoint>
-                <distanceLimit>250.0</distanceLimit>
+                <distanceLimit>500.0</distanceLimit>
                 <distanceTraveled>0.0</distanceTraveled>
                 <pastPoint>false</pastPoint>
               </myMover>
@@ -19493,7 +19493,7 @@
                             <myTitle></myTitle>
                             <myHeight>30.0</myHeight>
                             <myWidth>30.0</myWidth>
-                            <myImageName>Bloons_DartMonkey.png</myImageName>
+                            <myImageName>/images/Bloons_DartMonkey.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -19514,7 +19514,7 @@
                           <myTitle></myTitle>
                           <myHeight>30.0</myHeight>
                           <myWidth>30.0</myWidth>
-                          <myImageName>Bloons_DartMonkey.png</myImageName>
+                          <myImageName>/images/Bloons_DartMonkey.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -19560,7 +19560,7 @@
                             <myTitle></myTitle>
                             <myHeight>30.0</myHeight>
                             <myWidth>30.0</myWidth>
-                            <myImageName>Bloons_DartMonkey.png</myImageName>
+                            <myImageName>/images/Bloons_DartMonkey.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -19581,7 +19581,7 @@
                           <myTitle></myTitle>
                           <myHeight>30.0</myHeight>
                           <myWidth>30.0</myWidth>
-                          <myImageName>Bloons_DartMonkey.png</myImageName>
+                          <myImageName>/images/Bloons_DartMonkey.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>

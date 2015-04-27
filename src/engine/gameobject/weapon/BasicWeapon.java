@@ -2,6 +2,7 @@ package engine.gameobject.weapon;
 
 import java.util.List;
 import java.util.Set;
+import musician.MusicianSimple;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.SetChangeListener;
@@ -146,13 +147,14 @@ public class BasicWeapon implements Weapon{
     }
 
     /*
-     * (non-Javadoc)
+     * (non-Javadoc)d
      * 
      * @see engine.gameobject.weapon.Weaopn#fire(gameworld.GameWorld, engine.gameobject.PointSimple)
      */
     @Override
     public void fire (ObjectCollection world, GameObject target, PointSimple location) {
         if (canFire()) {
+            MusicianSimple.getInstance().laser();
             myFiringStrategy.execute(world, target, location, myProjectile);
             timeSinceFire = 0;
         }

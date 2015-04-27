@@ -14,12 +14,15 @@ import gae.gridView.LevelView;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
 import gae.waveeditor.WaveEditor;
+import gameworld.FreeWorld;
 import gameworld.GameWorld;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -48,8 +51,11 @@ public class CentralTabView implements UIObject {
     private LibraryData libraryData;
     private Game game;
     private GameWorldFactory gameWorldFactory;
+    private boolean editorInstantiated;
+    private BooleanProperty freeWorld;
 
     public CentralTabView (Scene sceneIn, Game gameIn, String gameTypeIn) {
+        freeWorld = new SimpleBooleanProperty();
         scene = sceneIn;
         game = gameIn;
         initialize(gameTypeIn);
@@ -64,16 +70,20 @@ public class CentralTabView implements UIObject {
         // refactor this code
         shopTab = new ShopTab();
         hudTab = new HudEditorTab(null);
-        gameObjectTab =
-                new GameObjectEditorTab(scene, getConsumer(), getBiconsumer());
 
-        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode(),
-                                 gameObjectTab.getBaseTabNode());
+        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode());
 
         Button newLevel = new Button("Add Level");
-        newLevel.setOnAction(e -> createNewLevel());
+        newLevel.setOnAction(e -> {
+            if (!editorInstantiated) {
+                GameObjectEditorTab gameObjectTab =
+                        new GameObjectEditorTab(scene, getConsumer(), getBiconsumer());
+                tabView.getTabs().add(gameObjectTab.getBaseTabNode());
+                editorInstantiated = true;
+            }
+            createNewLevel();
+        });
         baseNode.getChildren().addAll(newLevel, tabView);
-
         gameWorldFactory = createGameWorldFactory(gameTypeIn);
 
         try {
@@ -82,6 +92,15 @@ public class CentralTabView implements UIObject {
         catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e1) {
             e1.printStackTrace();
+        }
+    }
+
+    private GameWorldFactory createGameWorldFactory (String gameTypeIn) {
+        if (gameTypeIn != null && gameTypeIn.equals("Free World")) {
+            return new FreeGameWorldFactory();
+        }
+        else {
+            return new FixedGameWorldFactory();
         }
     }
 
@@ -99,10 +118,15 @@ public class CentralTabView implements UIObject {
     }
 
     private void createNewLevel () {
-        levelView = new LevelView();
+        levelView = new LevelView(freeWorld);
         Pane levelViewPane = levelView.getBorder(scene);
         gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
-
+        GameWorld nextWorld = gameWorldFactory.createGameWorld();
+        if (nextWorld instanceof FreeWorld) {
+            FreeWorld game = (FreeWorld) nextWorld;
+            LibraryData.getInstance().addFreeWorldPath(game.getPath());
+            freeWorld.setValue(true);
+        }
         WaveEditor waves = createLevelAndWaveObject(gameWorldFactory.createGameWorld());
         InteractionTable iTable = new InteractionTable();
 
@@ -158,15 +182,6 @@ public class CentralTabView implements UIObject {
         }
         else if (m.getName().equals("setImagePath")) {
             m.invoke(levelData, levelView.getBackgroundImagePath());
-        }
-    }
-
-    private GameWorldFactory createGameWorldFactory (String gameTypeIn) {
-        if (gameTypeIn != null && gameTypeIn.equals("Free World")) {
-            return new FreeGameWorldFactory();
-        }
-        else {
-            return new FixedGameWorldFactory();
         }
     }
 

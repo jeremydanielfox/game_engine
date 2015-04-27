@@ -14,6 +14,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import xml.DataManager;
 import engine.game.Game;
@@ -94,7 +95,7 @@ public class UtilitiesBar {
         });
 
         fullscreenButton.setOnMousePressed(e -> {
-
+            maximizeWindow();
         });
     }
 
@@ -123,6 +124,11 @@ public class UtilitiesBar {
         helpRoot.getChildren().add(browser);
         stage.setScene(new Scene(helpRoot, 800, 800));
         stage.show();
+    }
+    
+    private void maximizeWindow () {
+        utilitiesBar.getScene().getWindow().setWidth(Screen.getPrimary().getBounds().getWidth());
+        utilitiesBar.getScene().getWindow().setHeight(Screen.getPrimary().getBounds().getHeight());
     }
 
     private void placeButtons () {

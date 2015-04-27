@@ -35,9 +35,9 @@ public abstract class Editor implements Edits {
             // System.out.println(method.toString());
             Type parameterClass = method.getGenericParameterTypes()[0];
             String das = parameterClass.getTypeName();
-            if (parameterClass.equals(double.class) || parameterClass.equals(int.class)) {
+            if (parameterClass.equals(double.class)) {
                 System.out.println("double  " + getPropertyName(method.getName()));
-                root.addToNodes(new TreeNode(method, "SliderEditor"));
+                root.addToNodes(new TreeNode(method, "DoubleTextEditor"));
             }
             else if (parameterClass.equals(String.class)) {
                 if (getPropertyName(method.getName()).equals("Image Path")) {

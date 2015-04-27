@@ -8,13 +8,12 @@ import engine.gameobject.units.UpgradeType;
 import engine.gameobject.weapon.Upgrade;
 
 
+
 /**
- * Buff for direct damage.
- * 
+ * Creates buff that does damage, @param increment is damage
  * @author Danny Oh and Nathan Prabhu
  *
  */
-
 public class DamageBuff extends Buff implements DirectDamage {
 
     private double increment;

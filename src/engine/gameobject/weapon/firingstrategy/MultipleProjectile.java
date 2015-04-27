@@ -6,11 +6,16 @@ import gameworld.ObjectCollection;
 
 
 public class MultipleProjectile extends BasicStrategy {
-
+    private final static int DEFAULT_NUM_PROJETILES = 3;
+    
     private int projectilesCreated;
 
     public MultipleProjectile (int numProjectiles) {
         projectilesCreated = numProjectiles;
+    }
+    
+    public MultipleProjectile () {
+        projectilesCreated = DEFAULT_NUM_PROJETILES;
     }
 
     @Override

@@ -17,8 +17,8 @@ public class TestTower extends GameObjectSimple {
         ShopTagSimple shopTag = new ShopTagSimple();
         setShopTag(shopTag);
         shopTag.setDescription("Just a test tower; nothing special here...");
-        shopTag.setShopGraphic(new Graphic(40, 40, "Bloons_TackShooterIcon.png"));
-        setGraphic(new Graphic(40, 40, "Bloons_TackShooter.png"));
+        shopTag.setShopGraphic(new Graphic(40, 40, "/images/Bloons_TackShooterIcon.png"));
+        setGraphic(new Graphic(40, 40, "/images/Bloons_TackShooter.png"));
         setPoint(new PointSimple(xcor, ycor));
         setHealth(new HealthSimple(3));
         clearEndOfPathBehavior();

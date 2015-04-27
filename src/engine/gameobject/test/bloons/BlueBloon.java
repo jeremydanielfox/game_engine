@@ -6,7 +6,6 @@ import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
-import engine.gameobject.behaviors.Behavior;
 import engine.gameobject.behaviors.SummonBehavior;
 import engine.gameobject.test.EnemyLabel;
 import engine.gameobject.weapon.NullWeapon;

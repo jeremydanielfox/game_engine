@@ -1586,7 +1586,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                             <engine.gameobject.behaviors.PlayerChangeBehavior>
                               <playersToChange>
                                 <engine.game.Player reference="../../../../../../../../../../../../../../../../myPlayer"/>
@@ -2140,7 +2140,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -2176,8 +2176,6 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -2221,8 +2219,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -2764,7 +2760,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                             <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
@@ -3311,7 +3307,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -3347,8 +3343,6 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -3385,8 +3379,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -3928,7 +3920,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                             <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
@@ -4475,7 +4467,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -4511,8 +4503,6 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -4549,8 +4539,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -5092,7 +5080,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                             <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
@@ -5639,7 +5627,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -5675,8 +5663,6 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -5713,8 +5699,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -6256,7 +6240,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                             <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
@@ -6803,7 +6787,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -6839,8 +6823,6 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -6877,8 +6859,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -7420,7 +7400,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                             <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
@@ -7967,7 +7947,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -8003,8 +7983,6 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -8041,8 +8019,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -8584,7 +8560,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                             <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
@@ -9131,7 +9107,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -9167,8 +9143,6 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -9205,8 +9179,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -9748,7 +9720,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                             <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
@@ -10295,7 +10267,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -10331,8 +10303,6 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -10369,8 +10339,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -10912,7 +10880,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                             <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
@@ -11459,7 +11427,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -11495,8 +11463,6 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -11533,8 +11499,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -12076,7 +12040,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                             <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
@@ -12623,7 +12587,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -12659,8 +12623,6 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
@@ -12697,8 +12659,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                     </myOrderedObjects>
                     <curIndex>0</curIndex>
@@ -12707,16 +12667,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1940</int>
-                    <int>1623</int>
-                    <int>443</int>
-                    <int>2262</int>
-                    <int>1516</int>
-                    <int>467</int>
-                    <int>698</int>
-                    <int>438</int>
-                    <int>396</int>
-                    <int>1453</int>
+                    <int>182</int>
+                    <int>1993</int>
+                    <int>963</int>
+                    <int>1207</int>
+                    <int>1745</int>
+                    <int>2044</int>
+                    <int>1935</int>
+                    <int>2310</int>
+                    <int>1745</int>
+                    <int>1852</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -13265,7 +13225,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -13301,8 +13261,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -13844,7 +13802,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -13880,8 +13838,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -14423,7 +14379,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -14459,8 +14415,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -15002,7 +14956,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -15038,8 +14992,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -15581,7 +15533,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -15617,8 +15569,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -16160,7 +16110,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -16196,8 +16146,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -16739,7 +16687,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -16775,8 +16723,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -17318,7 +17264,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -17354,8 +17300,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -17897,7 +17841,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -17933,8 +17877,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
                         <myType class="engine.gameobject.test.EnemyLabel">
@@ -18476,7 +18418,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -18512,8 +18454,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                     </myOrderedObjects>
                     <curIndex>0</curIndex>

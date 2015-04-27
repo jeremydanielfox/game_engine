@@ -36,8 +36,6 @@ public class GameObjectSimple implements GameObject {
     private BehaviorTracker myBehaviors;
     private Graphic myGraphic;
     private ShopTag myShopTag;
-    private String myTitle = "";
-    private int index;
 
     public GameObjectSimple () {
         myType = new SimpleType();
@@ -156,6 +154,7 @@ public class GameObjectSimple implements GameObject {
         clone.setMover(myMover.clone());
         clone.setGraphic(myGraphic.clone());
         clone.setShopTag(myShopTag.clone());
+        clone.myBehaviors = myBehaviors;//TODO: ??????????
         return clone;
     }
 

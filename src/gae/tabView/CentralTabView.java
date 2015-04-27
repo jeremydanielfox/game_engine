@@ -56,10 +56,8 @@ public class CentralTabView implements UIObject {
     private Game game;
     private GameWorldFactory gameWorldFactory;
     private boolean editorInstantiated;
-    private BooleanProperty freeWorld;
 
     public CentralTabView (Scene sceneIn, Game gameIn, String gameTypeIn) {
-        freeWorld = new SimpleBooleanProperty();
         scene = sceneIn;
         game = gameIn;
         initialize(gameTypeIn);
@@ -116,6 +114,7 @@ public class CentralTabView implements UIObject {
                                           IllegalArgumentException, InvocationTargetException {
 
         ShopModel shopModel = ((ShopTab) shopTab).getShop();
+     
 
         for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(game.getClass()
                 .getName()), Settable.class)) {
@@ -142,14 +141,13 @@ public class CentralTabView implements UIObject {
     }
 
     private void createNewLevel () {
-        levelView = new LevelView(freeWorld);
+        levelView = new LevelView();
         Pane levelViewPane = levelView.getBorder(scene);
         gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
         GameWorld nextWorld = gameWorldFactory.createGameWorld();
         if (nextWorld instanceof FreeWorld) {
             FreeWorld game = (FreeWorld) nextWorld;
             LibraryData.getInstance().addFreeWorldPath(game.getPath());
-            freeWorld.setValue(true);
         }
         WaveEditor waves = createLevelAndWaveObject(gameWorldFactory.createGameWorld());
         InteractionTable iTable = new InteractionTable();

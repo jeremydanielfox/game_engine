@@ -12671,16 +12671,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1973</int>
-                    <int>596</int>
-                    <int>1000</int>
-                    <int>1715</int>
-                    <int>929</int>
-                    <int>753</int>
-                    <int>2066</int>
-                    <int>2290</int>
-                    <int>1216</int>
-                    <int>231</int>
+                    <int>1888</int>
+                    <int>643</int>
+                    <int>1659</int>
+                    <int>663</int>
+                    <int>950</int>
+                    <int>1789</int>
+                    <int>2123</int>
+                    <int>1440</int>
+                    <int>1759</int>
+                    <int>1095</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -19008,7 +19008,647 @@
   <myShop class="engine.shop.ShopModelSimple">
     <currentPlayer reference="../../myPlayer"/>
     <myGameWorld class="gameworld.FixedWorld" reference="../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.RandomSpanWave/myWorld"/>
-    <purchasableMap/>
+    <purchasableMap>
+      <entry>
+        <string>TestTower2</string>
+        <engine.gameobject.test.TestTower>
+          <myType class="engine.gameobject.test.TowerLabel">
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>Tower</myName>
+          </myType>
+          <myPoint>
+            <myPoint>
+              <x>0.0</x>
+              <y>0.0</y>
+              <hash>0</hash>
+            </myPoint>
+          </myPoint>
+          <myHealth class="engine.gameobject.HealthSimple">
+            <myHealth>3.0</myHealth>
+            <maxHealth>3.0</maxHealth>
+            <myTitle></myTitle>
+            <index>0</index>
+          </myHealth>
+          <myMover class="engine.gameobject.MoverDirection">
+            <inherentSpeed>1.0</inherentSpeed>
+            <speedModifier>1.0</speedModifier>
+            <myDistance>0.0</myDistance>
+            <frozen>false</frozen>
+            <myPoint>
+              <myPoint>
+                <x>0.0</x>
+                <y>0.0</y>
+                <hash>0</hash>
+              </myPoint>
+            </myPoint>
+            <distanceLimit>200.0</distanceLimit>
+            <distanceTraveled>0.0</distanceTraveled>
+            <pastPoint>false</pastPoint>
+          </myMover>
+          <myBuffs>
+            <buffList/>
+            <immunityList/>
+          </myBuffs>
+          <myWeapon class="engine.gameobject.test.TestWeapon">
+            <timeSinceFire>0</timeSinceFire>
+            <myRange>
+              <observers>
+                <engine.gameobject.weapon.UpgradeObserver>
+                  <updater class="null"/>
+                </engine.gameobject.weapon.UpgradeObserver>
+              </observers>
+              <increment>300.0</increment>
+              <decorated/>
+              <type>NULL</type>
+            </myRange>
+            <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
+              <value>300.0</value>
+              <valid>false</valid>
+              <name></name>
+            </rangeProp>
+            <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
+              <increment>0.5</increment>
+              <decorated reference="../../myRange/decorated"/>
+              <observers/>
+              <type>NULL</type>
+            </myFiringRate>
+            <myProjectile class="engine.gameobject.test.TestTower" reference="../.."/>
+            <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile"/>
+            <upgradables>
+              <upgradeMap>
+                <entry>
+                  <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
+                  <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
+                </entry>
+                <entry>
+                  <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
+                  <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
+                </entry>
+              </upgradeMap>
+              <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
+                <backingSet>
+                  <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
+                  <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
+                </backingSet>
+                <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
+                  <listener class="null"/>
+                </listenerHelper>
+              </obsSet>
+            </upgradables>
+            <tree class="engine.gameobject.weapon.upgradetree.TestForest">
+              <trees class="java.util.Arrays$ArrayList">
+                <a class="engine.gameobject.weapon.upgradetree.TestTree-array">
+                  <engine.gameobject.weapon.upgradetree.TestTree>
+                    <first class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
+                      <upgrades>
+                        <engine.gameobject.weapon.range.RangeUpgrade>
+                          <observers/>
+                          <increment>50.0</increment>
+                          <decorated reference="../../../../../../../../myRange/decorated"/>
+                          <type>NULL</type>
+                        </engine.gameobject.weapon.range.RangeUpgrade>
+                      </upgrades>
+                      <next class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
+                        <upgrades>
+                          <engine.gameobject.weapon.firingrate.FiringRateUpgrade>
+                            <increment>1.0</increment>
+                            <decorated reference="../../../../../../../../../myRange/decorated"/>
+                            <observers/>
+                            <type>NULL</type>
+                          </engine.gameobject.weapon.firingrate.FiringRateUpgrade>
+                        </upgrades>
+                        <isFinal>false</isFinal>
+                        <parent class="engine.gameobject.weapon.upgradetree.TestTree" reference="../../.."/>
+                        <myValue>25.0</myValue>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName>Firing Rate Upgrade</myName>
+                          <myDescription>Firing Rate x2</myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>30.0</myHeight>
+                            <myWidth>30.0</myWidth>
+                            <myImageName>Bloons_DartMonkey.png</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
+                          </myShopGraphic>
+                        </myShopTag>
+                      </next>
+                      <isFinal>false</isFinal>
+                      <parent class="engine.gameobject.weapon.upgradetree.TestTree" reference="../.."/>
+                      <myValue>15.0</myValue>
+                      <myShopTag class="engine.shop.ShopTagSimple">
+                        <myName>Range Upgrade</myName>
+                        <myDescription>Range + 50</myDescription>
+                        <myShopGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>30.0</myHeight>
+                          <myWidth>30.0</myWidth>
+                          <myImageName>Bloons_DartMonkey.png</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>0.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
+                        </myShopGraphic>
+                      </myShopTag>
+                    </first>
+                    <current class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle" reference="../first"/>
+                    <last class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle" reference="../first/next"/>
+                  </engine.gameobject.weapon.upgradetree.TestTree>
+                  <engine.gameobject.weapon.upgradetree.TestTree>
+                    <first class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
+                      <upgrades>
+                        <engine.gameobject.units.freeze.FreezeBuff>
+                          <duration>60000</duration>
+                          <timeSinceStart>0</timeSinceStart>
+                          <type defined-in="engine.gameobject.units.Buff">COLLISION</type>
+                          <observers/>
+                          <increment>60000</increment>
+                          <type>COLLISION</type>
+                          <decorated reference="../../../../../../../../myRange/decorated"/>
+                        </engine.gameobject.units.freeze.FreezeBuff>
+                      </upgrades>
+                      <next class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
+                        <upgrades>
+                          <engine.gameobject.weapon.range.RangeUpgrade>
+                            <observers/>
+                            <increment>50.0</increment>
+                            <decorated reference="../../../../../../../../../myRange/decorated"/>
+                            <type>NULL</type>
+                          </engine.gameobject.weapon.range.RangeUpgrade>
+                        </upgrades>
+                        <isFinal>false</isFinal>
+                        <parent class="engine.gameobject.weapon.upgradetree.TestTree" reference="../../.."/>
+                        <myValue>15.0</myValue>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName>Range Upgrade</myName>
+                          <myDescription>Range + 50</myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>30.0</myHeight>
+                            <myWidth>30.0</myWidth>
+                            <myImageName>Bloons_DartMonkey.png</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
+                          </myShopGraphic>
+                        </myShopTag>
+                      </next>
+                      <isFinal>false</isFinal>
+                      <parent class="engine.gameobject.weapon.upgradetree.TestTree" reference="../.."/>
+                      <myValue>15.0</myValue>
+                      <myShopTag class="engine.shop.ShopTagSimple">
+                        <myName>Freeze Upgrade</myName>
+                        <myDescription>Freeze + 10</myDescription>
+                        <myShopGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>30.0</myHeight>
+                          <myWidth>30.0</myWidth>
+                          <myImageName>Bloons_DartMonkey.png</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>0.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
+                        </myShopGraphic>
+                      </myShopTag>
+                    </first>
+                    <current class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle" reference="../first"/>
+                    <last class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle" reference="../first/next"/>
+                  </engine.gameobject.weapon.upgradetree.TestTree>
+                </a>
+              </trees>
+            </tree>
+            <value>10.0</value>
+          </myWeapon>
+          <myCollider>
+            <collidedID/>
+            <collisionBuffs/>
+            <onDeath>
+              <radius>0.0</radius>
+              <explosBuffs/>
+            </onDeath>
+          </myCollider>
+          <myBehaviors>
+            <endOfPath>
+              <engine.gameobject.behaviors.PlantBehavior/>
+            </endOfPath>
+            <death>
+              <engine.gameobject.behaviors.ExplosionBehavior/>
+            </death>
+          </myBehaviors>
+          <myGraphic>
+            <myTitle></myTitle>
+            <myHeight>40.0</myHeight>
+            <myWidth>40.0</myWidth>
+            <myImageName>/images/Bloons_TackShooter.png</myImageName>
+            <myPoint>
+              <x>0.0</x>
+              <y>0.0</y>
+              <hash>0</hash>
+            </myPoint>
+            <myRotator class="engine.gameobject.RotateToPoint"/>
+            <index>0</index>
+          </myGraphic>
+          <myShopTag class="engine.shop.ShopTagSimple">
+            <myName>TestTower2</myName>
+            <myDescription>Just a test tower; nothing special here...</myDescription>
+            <myShopGraphic>
+              <myTitle></myTitle>
+              <myHeight>40.0</myHeight>
+              <myWidth>40.0</myWidth>
+              <myImageName>/images/Bloons_TackShooterIcon.png</myImageName>
+              <myPoint>
+                <x>0.0</x>
+                <y>0.0</y>
+                <hash>0</hash>
+              </myPoint>
+              <myRotator class="engine.gameobject.RotateToPoint"/>
+              <index>0</index>
+            </myShopGraphic>
+          </myShopTag>
+        </engine.gameobject.test.TestTower>
+      </entry>
+      <entry>
+        <string>TestTower</string>
+        <engine.gameobject.test.TestTower>
+          <myType class="engine.gameobject.test.TowerLabel">
+            <superType class="engine.gameobject.labels.TypeBase">
+              <myName>Base</myName>
+            </superType>
+            <myName>Tower</myName>
+          </myType>
+          <myPoint>
+            <myPoint>
+              <x>0.0</x>
+              <y>0.0</y>
+              <hash>0</hash>
+            </myPoint>
+          </myPoint>
+          <myHealth class="engine.gameobject.HealthSimple">
+            <myHealth>3.0</myHealth>
+            <maxHealth>3.0</maxHealth>
+            <myTitle></myTitle>
+            <index>0</index>
+          </myHealth>
+          <myMover class="engine.gameobject.MoverNull"/>
+          <myBuffs>
+            <buffList/>
+            <immunityList/>
+          </myBuffs>
+          <myWeapon class="engine.gameobject.test.TestWeapon">
+            <timeSinceFire>0</timeSinceFire>
+            <myRange>
+              <observers>
+                <engine.gameobject.weapon.UpgradeObserver>
+                  <updater class="null"/>
+                </engine.gameobject.weapon.UpgradeObserver>
+              </observers>
+              <increment>60.0</increment>
+              <decorated reference="../../../../../entry/engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
+              <type>NULL</type>
+            </myRange>
+            <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
+              <value>60.0</value>
+              <valid>false</valid>
+              <name></name>
+            </rangeProp>
+            <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
+              <increment>0.5</increment>
+              <decorated reference="../../../../../entry/engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
+              <observers/>
+              <type>NULL</type>
+            </myFiringRate>
+            <myProjectile class="engine.gameobject.test.TestProjectile">
+              <myType class="engine.gameobject.test.ProjectileLabel" defined-in="engine.gameobject.GameObjectSimple">
+                <superType class="engine.gameobject.labels.TypeBase">
+                  <myName>Base</myName>
+                </superType>
+                <myName>Projectile</myName>
+              </myType>
+              <myPoint>
+                <myPoint>
+                  <x>300.0</x>
+                  <y>300.0</y>
+                  <hash>0</hash>
+                </myPoint>
+              </myPoint>
+              <myHealth class="engine.gameobject.HealthSimple">
+                <myHealth>1.0</myHealth>
+                <maxHealth>1.0</maxHealth>
+                <myTitle></myTitle>
+                <index>0</index>
+              </myHealth>
+              <myMover class="engine.gameobject.MoverDirection">
+                <inherentSpeed>2.5</inherentSpeed>
+                <speedModifier>1.0</speedModifier>
+                <myDistance>0.0</myDistance>
+                <frozen>false</frozen>
+                <myPoint>
+                  <myPoint>
+                    <x>300.0</x>
+                    <y>300.0</y>
+                    <hash>0</hash>
+                  </myPoint>
+                </myPoint>
+                <distanceLimit>250.0</distanceLimit>
+                <distanceTraveled>0.0</distanceTraveled>
+                <pastPoint>false</pastPoint>
+              </myMover>
+              <myBuffs>
+                <buffList/>
+                <immunityList/>
+              </myBuffs>
+              <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
+              <myCollider>
+                <collidedID/>
+                <collisionBuffs>
+                  <engine.gameobject.units.directdamage.DamageBuff>
+                    <duration>20</duration>
+                    <timeSinceStart>0</timeSinceStart>
+                    <type>COLLISION</type>
+                    <observers/>
+                    <increment>4.0</increment>
+                    <decorated reference="../../../../../../../../entry/engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
+                  </engine.gameobject.units.directdamage.DamageBuff>
+                </collisionBuffs>
+                <onDeath>
+                  <radius>0.0</radius>
+                  <explosBuffs/>
+                </onDeath>
+              </myCollider>
+              <myBehaviors>
+                <endOfPath>
+                  <engine.gameobject.behaviors.DisappearBehavior/>
+                </endOfPath>
+                <death>
+                  <engine.gameobject.behaviors.ExplosionBehavior/>
+                </death>
+              </myBehaviors>
+              <myGraphic>
+                <myTitle></myTitle>
+                <myHeight>20.0</myHeight>
+                <myWidth>20.0</myWidth>
+                <myImageName>/images/robertDuvall.jpg</myImageName>
+                <myPoint>
+                  <x>300.0</x>
+                  <y>300.0</y>
+                  <hash>0</hash>
+                </myPoint>
+                <myRotator class="engine.gameobject.RotateToPoint"/>
+                <index>0</index>
+              </myGraphic>
+              <myShopTag class="engine.shop.ShopTagSimple">
+                <myName></myName>
+                <myDescription></myDescription>
+                <myShopGraphic>
+                  <myTitle></myTitle>
+                  <myHeight>0.0</myHeight>
+                  <myWidth>0.0</myWidth>
+                  <myImageName>/images/robertDuvall.jpg</myImageName>
+                  <myPoint>
+                    <x>0.0</x>
+                    <y>0.0</y>
+                    <hash>0</hash>
+                  </myPoint>
+                  <myRotator class="engine.gameobject.RotateToPoint"/>
+                  <index>0</index>
+                </myShopGraphic>
+              </myShopTag>
+              <myType>0</myType>
+            </myProjectile>
+            <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.MultipleProjectile">
+              <projectilesCreated>7</projectilesCreated>
+            </myFiringStrategy>
+            <upgradables>
+              <upgradeMap>
+                <entry>
+                  <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
+                  <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
+                </entry>
+                <entry>
+                  <string>[Upgrade: DamageBuff, BuffType: COLLISION]</string>
+                  <engine.gameobject.units.directdamage.DamageBuff reference="../../../../myProjectile/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff"/>
+                </entry>
+                <entry>
+                  <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
+                  <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
+                </entry>
+              </upgradeMap>
+              <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
+                <backingSet>
+                  <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
+                  <engine.gameobject.units.directdamage.DamageBuff reference="../../../../myProjectile/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff"/>
+                  <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
+                </backingSet>
+                <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
+                  <listener class="null"/>
+                </listenerHelper>
+              </obsSet>
+            </upgradables>
+            <tree class="engine.gameobject.weapon.upgradetree.TestForest">
+              <trees class="java.util.Arrays$ArrayList">
+                <a class="engine.gameobject.weapon.upgradetree.TestTree-array">
+                  <engine.gameobject.weapon.upgradetree.TestTree>
+                    <first class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
+                      <upgrades>
+                        <engine.gameobject.weapon.range.RangeUpgrade>
+                          <observers/>
+                          <increment>50.0</increment>
+                          <decorated reference="../../../../../../../../../../../entry/engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
+                          <type>NULL</type>
+                        </engine.gameobject.weapon.range.RangeUpgrade>
+                      </upgrades>
+                      <next class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
+                        <upgrades>
+                          <engine.gameobject.weapon.firingrate.FiringRateUpgrade>
+                            <increment>1.0</increment>
+                            <decorated reference="../../../../../../../../../../../../entry/engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
+                            <observers/>
+                            <type>NULL</type>
+                          </engine.gameobject.weapon.firingrate.FiringRateUpgrade>
+                        </upgrades>
+                        <isFinal>false</isFinal>
+                        <parent class="engine.gameobject.weapon.upgradetree.TestTree" reference="../../.."/>
+                        <myValue>25.0</myValue>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName>Firing Rate Upgrade</myName>
+                          <myDescription>Firing Rate x2</myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>30.0</myHeight>
+                            <myWidth>30.0</myWidth>
+                            <myImageName>Bloons_DartMonkey.png</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
+                          </myShopGraphic>
+                        </myShopTag>
+                      </next>
+                      <isFinal>false</isFinal>
+                      <parent class="engine.gameobject.weapon.upgradetree.TestTree" reference="../.."/>
+                      <myValue>15.0</myValue>
+                      <myShopTag class="engine.shop.ShopTagSimple">
+                        <myName>Range Upgrade</myName>
+                        <myDescription>Range + 50</myDescription>
+                        <myShopGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>30.0</myHeight>
+                          <myWidth>30.0</myWidth>
+                          <myImageName>Bloons_DartMonkey.png</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>0.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
+                        </myShopGraphic>
+                      </myShopTag>
+                    </first>
+                    <current class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle" reference="../first"/>
+                    <last class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle" reference="../first/next"/>
+                  </engine.gameobject.weapon.upgradetree.TestTree>
+                  <engine.gameobject.weapon.upgradetree.TestTree>
+                    <first class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
+                      <upgrades>
+                        <engine.gameobject.units.freeze.FreezeBuff>
+                          <duration>60000</duration>
+                          <timeSinceStart>0</timeSinceStart>
+                          <type defined-in="engine.gameobject.units.Buff">COLLISION</type>
+                          <observers/>
+                          <increment>60000</increment>
+                          <type>COLLISION</type>
+                          <decorated reference="../../../../../../../../../../../entry/engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
+                        </engine.gameobject.units.freeze.FreezeBuff>
+                      </upgrades>
+                      <next class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
+                        <upgrades>
+                          <engine.gameobject.weapon.range.RangeUpgrade>
+                            <observers/>
+                            <increment>50.0</increment>
+                            <decorated reference="../../../../../../../../../../../../entry/engine.gameobject.test.TestTower/myWeapon/myRange/decorated"/>
+                            <type>NULL</type>
+                          </engine.gameobject.weapon.range.RangeUpgrade>
+                        </upgrades>
+                        <isFinal>false</isFinal>
+                        <parent class="engine.gameobject.weapon.upgradetree.TestTree" reference="../../.."/>
+                        <myValue>15.0</myValue>
+                        <myShopTag class="engine.shop.ShopTagSimple">
+                          <myName>Range Upgrade</myName>
+                          <myDescription>Range + 50</myDescription>
+                          <myShopGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>30.0</myHeight>
+                            <myWidth>30.0</myWidth>
+                            <myImageName>Bloons_DartMonkey.png</myImageName>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
+                          </myShopGraphic>
+                        </myShopTag>
+                      </next>
+                      <isFinal>false</isFinal>
+                      <parent class="engine.gameobject.weapon.upgradetree.TestTree" reference="../.."/>
+                      <myValue>15.0</myValue>
+                      <myShopTag class="engine.shop.ShopTagSimple">
+                        <myName>Freeze Upgrade</myName>
+                        <myDescription>Freeze + 10</myDescription>
+                        <myShopGraphic>
+                          <myTitle></myTitle>
+                          <myHeight>30.0</myHeight>
+                          <myWidth>30.0</myWidth>
+                          <myImageName>Bloons_DartMonkey.png</myImageName>
+                          <myPoint>
+                            <x>0.0</x>
+                            <y>0.0</y>
+                            <hash>0</hash>
+                          </myPoint>
+                          <myRotator class="engine.gameobject.RotateToPoint"/>
+                          <index>0</index>
+                        </myShopGraphic>
+                      </myShopTag>
+                    </first>
+                    <current class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle" reference="../first"/>
+                    <last class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle" reference="../first/next"/>
+                  </engine.gameobject.weapon.upgradetree.TestTree>
+                </a>
+              </trees>
+            </tree>
+            <value>10.0</value>
+          </myWeapon>
+          <myCollider>
+            <collidedID/>
+            <collisionBuffs/>
+            <onDeath>
+              <radius>0.0</radius>
+              <explosBuffs/>
+            </onDeath>
+          </myCollider>
+          <myBehaviors>
+            <endOfPath>
+              <engine.gameobject.behaviors.PlantBehavior/>
+            </endOfPath>
+            <death>
+              <engine.gameobject.behaviors.ExplosionBehavior/>
+            </death>
+          </myBehaviors>
+          <myGraphic>
+            <myTitle></myTitle>
+            <myHeight>40.0</myHeight>
+            <myWidth>40.0</myWidth>
+            <myImageName>/images/Bloons_TackShooter.png</myImageName>
+            <myPoint>
+              <x>0.0</x>
+              <y>0.0</y>
+              <hash>0</hash>
+            </myPoint>
+            <myRotator class="engine.gameobject.RotateToPoint"/>
+            <index>0</index>
+          </myGraphic>
+          <myShopTag class="engine.shop.ShopTagSimple">
+            <myName>TestTower</myName>
+            <myDescription>Just a test tower; nothing special here...</myDescription>
+            <myShopGraphic>
+              <myTitle></myTitle>
+              <myHeight>40.0</myHeight>
+              <myWidth>40.0</myWidth>
+              <myImageName>/images/Bloons_TackShooterIcon.png</myImageName>
+              <myPoint>
+                <x>0.0</x>
+                <y>0.0</y>
+                <hash>0</hash>
+              </myPoint>
+              <myRotator class="engine.gameobject.RotateToPoint"/>
+              <index>0</index>
+            </myShopGraphic>
+          </myShopTag>
+        </engine.gameobject.test.TestTower>
+      </entry>
+    </purchasableMap>
     <upgradeMap/>
     <markup>1.0</markup>
   </myShop>

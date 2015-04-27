@@ -55,11 +55,6 @@ public class LevelView {
     private VBox gridOptions;
     private ObjectProperty<TileMode> tileModeProperty =
             new SimpleObjectProperty<>(TileMode.TOWERMODE);
-    private BooleanProperty freeWorld;
-
-    public LevelView (BooleanProperty freeWorld) {
-        this.freeWorld = freeWorld;
-    }
 
     public Pane getBorder (Scene scene) {
         border = new Pane();
@@ -122,7 +117,7 @@ public class LevelView {
         libraryview =
                 new LibraryView();
         Group leftview =
-                libraryview.getGroup(stack, scene, wrapper, freeWorld);
+                libraryview.getGroup(stack, scene, wrapper);
         setGridOptions();
         leftview.getChildren().add(gridOptions);
         return leftview;

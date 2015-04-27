@@ -12673,6 +12673,7 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
+<<<<<<< Updated upstream
                     <int>2115</int>
                     <int>368</int>
                     <int>1272</int>
@@ -12683,6 +12684,18 @@
                     <int>1216</int>
                     <int>244</int>
                     <int>2363</int>
+=======
+                    <int>2234</int>
+                    <int>455</int>
+                    <int>966</int>
+                    <int>723</int>
+                    <int>451</int>
+                    <int>208</int>
+                    <int>1060</int>
+                    <int>1505</int>
+                    <int>743</int>
+                    <int>1566</int>
+>>>>>>> Stashed changes
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

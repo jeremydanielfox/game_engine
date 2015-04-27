@@ -186,6 +186,7 @@ public class LevelView {
         }));
         gridOptions.getChildren().add(tileMode);
         isFreeWorld.addListener( (observable, oldv, newv) -> {
+            System.out.println("changing");
             boolean isFree = (boolean) newv;
             if (isFree) {
                 gridOptions.getChildren().add(setSpawnPoints());

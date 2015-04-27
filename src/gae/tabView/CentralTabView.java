@@ -18,13 +18,12 @@ import gae.openingView.UIObject;
 import gae.waveeditor.WaveEditor;
 import gameworld.FreeWorld;
 import gameworld.GameWorld;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-
+import voogasalad.util.pathsearch.graph.GridCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
@@ -35,6 +34,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 
 /**
  * Central container for the central tab view in the gae editor
@@ -56,6 +56,8 @@ public class CentralTabView implements UIObject {
     private Game game;
     private GameWorldFactory gameWorldFactory;
     private boolean editorInstantiated;
+    private FreeWorld freeworld;
+    private BooleanProperty isFreeWorld = new SimpleBooleanProperty();
 
     public CentralTabView (Scene sceneIn, Game gameIn, String gameTypeIn) {
         scene = sceneIn;
@@ -94,9 +96,9 @@ public class CentralTabView implements UIObject {
             setUpPlayerAndLinkToGame();
         }
         catch (ClassNotFoundException |
-               IllegalAccessException |
-               IllegalArgumentException |
-               InvocationTargetException e1) {
+                IllegalAccessException |
+                IllegalArgumentException |
+                InvocationTargetException e1) {
             e1.printStackTrace();
         }
     }
@@ -125,9 +127,10 @@ public class CentralTabView implements UIObject {
 
     @SuppressWarnings("unused")
     private void setUpPlayerAndLinkToGame ()
-        throws ClassNotFoundException, IllegalAccessException, IllegalArgumentException,
-        InvocationTargetException {
-        
+                                            throws ClassNotFoundException, IllegalAccessException,
+                                            IllegalArgumentException,
+                                            InvocationTargetException {
+
         PlayerBuilder playerBuilder = new PlayerBuilder();
         Player myPlayer = (Player) playerBuilder.getData().getBuiltObject();
 
@@ -140,13 +143,13 @@ public class CentralTabView implements UIObject {
     }
 
     private void createNewLevel () {
-        levelView = new LevelView();
+        levelView = new LevelView(setSpawnPoints(), isFreeWorld);
         Pane levelViewPane = levelView.getBorder(scene);
         gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
         GameWorld nextWorld = gameWorldFactory.createGameWorld();
         if (nextWorld instanceof FreeWorld) {
-            FreeWorld game = (FreeWorld) nextWorld;
-            LibraryData.getInstance().addFreeWorldPath(game.getPath());
+            freeworld = (FreeWorld) nextWorld;
+            LibraryData.getInstance().addFreeWorldPath(freeworld.getPath());
         }
         WaveEditor waves = createLevelAndWaveObject(gameWorldFactory.createGameWorld());
         InteractionTable iTable = new InteractionTable();
@@ -168,8 +171,8 @@ public class CentralTabView implements UIObject {
         try {
             levelData = (Level) Class
                     .forName(EditingParser
-                                     .getInterfaceClasses("engine.fieldsetting.implementing_classes")
-                                     .get("Level").get(0)).newInstance();
+                            .getInterfaceClasses("engine.fieldsetting.implementing_classes")
+                            .get("Level").get(0)).newInstance();
 
             levelMethods = EditingParser.getMethodsWithAnnotation(Class.forName(levelData
                     .getClass().getName()), Settable.class);
@@ -179,9 +182,9 @@ public class CentralTabView implements UIObject {
             }
         }
         catch (InstantiationException |
-               IllegalAccessException |
-               InvocationTargetException |
-               ClassNotFoundException e) {
+                IllegalAccessException |
+                InvocationTargetException |
+                ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -193,7 +196,8 @@ public class CentralTabView implements UIObject {
                                         Level levelData,
                                         StoryBoard sb,
                                         Method m)
-        throws IllegalAccessException, InvocationTargetException {
+                                                 throws IllegalAccessException,
+                                                 InvocationTargetException {
         if (m.getName().equals("setStoryBoard")) {
             m.invoke(levelData, sb);
         }
@@ -219,5 +223,12 @@ public class CentralTabView implements UIObject {
             libraryData.addCreatedObjectToList(klass, o);
         };
         return biConsumer;
+    }
+
+    public BiConsumer<List<GridCell>, List<GridCell>> setSpawnPoints () {
+        return (start, end) -> {
+            freeworld.setSpawnPoints(start);
+            freeworld.setEndPoints(end);
+        };
     }
 }

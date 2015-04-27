@@ -4,6 +4,8 @@ import gae.backend.Placeable;
 import gae.gridView.ContainerWrapper;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
+import voogasalad.util.pathsearch.graph.GridCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -126,7 +128,7 @@ public class LibraryView {
             pathList.setScreen();
         });
         accordion.getPanes().add(pathTitledPane);
-//        setUpToggle();
+        // setUpToggle();
         return accordion;
     }
 

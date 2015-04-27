@@ -79,7 +79,7 @@ public class Collider {
 
     private void onCollision (GameObject target) {
         for (Buff b : collisionBuffs) {
-            target.receiveBuff(b);
+            target.receiveBuff(b.clone());
         }
     }
 

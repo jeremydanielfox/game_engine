@@ -1,7 +1,5 @@
 package gae.editorView;
 
-import exception.FieldAlreadyExistingException;
-import javafx.beans.property.BooleanProperty;
 import javafx.scene.Group;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -9,7 +7,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import gae.editor.EditorIntermediate;
 import gae.editor.ObjectComponentEditor;
 import javafx.scene.paint.Color;
 

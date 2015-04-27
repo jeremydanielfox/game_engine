@@ -21,7 +21,7 @@ public class TestProjectile extends GameObjectSimple {
         setGraphic(new Graphic(20, 20, "robertDuvall.jpg"));
         setPoint(new PointSimple(300, 300));
         setHealth(new HealthSimple(1));
-        setMover(new MoverDirection(getPoint(), 3.3, 250));
+        setMover(new MoverDirection(getPoint(), 2.5, 250));
         setWeapon(new NullWeapon());
         setLabel(new ProjectileLabel());
         if (type == 0 || type == 2 || type == 4) {

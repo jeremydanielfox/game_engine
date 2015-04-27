@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import View.ViewConcrete2;
 import voogasalad.util.pathsearch.graph.GridCell;
 import javafx.scene.Node;
@@ -15,6 +14,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.EnemyLabel;
 import engine.gameobject.test.ProjectileLabel;
+import engine.gameobject.test.TestTower;
 import engine.gameobject.test.TowerLabel;
 import engine.interactions.BuffImparter;
 import engine.interactions.CollisionEngine;

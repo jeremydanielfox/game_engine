@@ -5,6 +5,7 @@ import engine.gameobject.Graphic;
 import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
+import engine.gameobject.units.Collider;
 import engine.gameobject.weapon.Weapon;
 import engine.shop.ShopTag;
 import engine.shop.ShopTagSimple;
@@ -26,7 +27,6 @@ public class GameObjectToEditable implements Placeable {
     private static final long serialVersionUID = 1L;
     private static int ourID = 0;
     private int myID = 0;
-    private int Size = 10;
     private Weapon weapon;
     private PointSimple location;
     private String imagePath;
@@ -43,7 +43,8 @@ public class GameObjectToEditable implements Placeable {
     private ImageView shopImageView;
     private double health;
     private String description;
-    private Type label;
+    private Type gameObjectType;
+    private Collider collider;
 
     public GameObjectToEditable () {
 
@@ -51,14 +52,10 @@ public class GameObjectToEditable implements Placeable {
 
     public GameObjectToEditable (GameObject gameObject) {
         this.gameObject = gameObject;
-        /*
-         * doing the following instantiation because it doesn't copy GameObjectSimple (not
-         * Serializable)
-         * TODO: find out how to copy the object
-         */
         name = gameObject.getName();
         imagePath = gameObject.getGraphic().getImagePath();
-        type = gameObject.getLabel().getName();
+        gameObjectType = gameObject.getLabel();
+        type = gameObjectType.getName();
         description = gameObject.getDescription();
         shopImagePath = gameObject.getShopGraphic().getImagePath();
         imageView = new ImageView(gameObject.getGraphic().getImagePath());
@@ -68,6 +65,8 @@ public class GameObjectToEditable implements Placeable {
         shopGraphic = gameObject.getShopGraphic();
         location = gameObject.getPoint();
         weapon = gameObject.getWeapon();
+        System.out.println(weapon);
+        collider = gameObject.getCollider();
     }
 
     @Override
@@ -185,6 +184,7 @@ public class GameObjectToEditable implements Placeable {
         copy.setWeapon(weapon);
         copy.setWidth(width);
         copy.setType(type);
+        copy.setLabel(gameObjectType);
         copy.setImagePath(imagePath);
         copy.setShopImagePath(shopImagePath);
         copy.setID(ourID);
@@ -192,6 +192,7 @@ public class GameObjectToEditable implements Placeable {
         copy.setShopImageView(shopImageView);
         copy.setName(name);
         copy.setDescription(description);
+        copy.setCollider(collider);
         ourID++;
         return copy;
     }
@@ -215,37 +216,31 @@ public class GameObjectToEditable implements Placeable {
 
     @Override
     public double getHealth () {
-        // TODO Auto-generated method stub
         return health;
     }
 
     @Override
     public double setHealth (double health) {
-        // TODO Auto-generated method stub
         return this.health = health;
     }
 
     @Override
     public Weapon getWeapon () {
-        // TODO Auto-generated method stub
         return weapon;
     }
 
     @Override
     public void setWeapon (Weapon weapon) {
-        // TODO Auto-generated method stub
         this.weapon = weapon;
     }
 
     @Override
     public void setType (String type) {
-        // TODO Auto-generated method stub
         this.type = type;
     }
 
     public Type getLabel () {
-        // TODO Auto-generated method stub
-        return null;
+        return gameObjectType;
     }
 
     @Override
@@ -254,7 +249,7 @@ public class GameObjectToEditable implements Placeable {
     }
 
     public void setLabel (Type label) {
-        this.label = label;
+        this.gameObjectType = label;
     }
 
     @Override
@@ -304,6 +299,16 @@ public class GameObjectToEditable implements Placeable {
     @Override
     public String getDescription () {
         return description;
+    }
+
+    @Override
+    public void setCollider (Collider collider) {
+        this.collider = collider;
+    }
+
+    @Override
+    public Collider getCollider () {
+        return collider;
     }
 
 }

@@ -62,6 +62,7 @@ public class GameObjectEditorView implements UIObject {
         if (!simpleEditorMap.containsKey(klass)) {
             simpleEditor = new SimpleEditor(klass, biConsumer);
             title = new TextField();
+            title.setPromptText("Insert title");
             titleFieldMap.put(klass, title);
             simpleEditorMap.put(klass, simpleEditor);
         }

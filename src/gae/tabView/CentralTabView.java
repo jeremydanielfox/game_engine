@@ -24,6 +24,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import voogasalad.util.pathsearch.graph.GridCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
@@ -56,6 +57,8 @@ public class CentralTabView implements UIObject {
     private Game game;
     private GameWorldFactory gameWorldFactory;
     private boolean editorInstantiated;
+    private FreeWorld freeworld;
+    private BooleanProperty isFreeWorld = new SimpleBooleanProperty();
     ShopModel shopModel;
 
     public CentralTabView (Scene sceneIn, Game gameIn, String gameTypeIn) {
@@ -142,13 +145,13 @@ public class CentralTabView implements UIObject {
     }
 
     private void createNewLevel () {
-        levelView = new LevelView();
+        levelView = new LevelView(setSpawnPoints(), isFreeWorld);
         Pane levelViewPane = levelView.getBorder(scene);
         gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
         AbstractWorld nextWorld = gameWorldFactory.createGameWorld();
         if (nextWorld instanceof FreeWorld) {
-            FreeWorld game = (FreeWorld) nextWorld;
-            LibraryData.getInstance().addFreeWorldPath(game.getPath());
+            freeworld = (FreeWorld) nextWorld;
+            LibraryData.getInstance().addFreeWorldPath(freeworld.getPath());
         }
         WaveEditor waves = createLevelAndWaveObject(gameWorldFactory.createGameWorld());
         InteractionTable iTable = new InteractionTable();
@@ -231,5 +234,12 @@ public class CentralTabView implements UIObject {
             libraryData.addCreatedObjectToList(klass, o);
         };
         return biConsumer;
+    }
+
+    public BiConsumer<List<GridCell>, List<GridCell>> setSpawnPoints () {
+        return (start, end) -> {
+            freeworld.setSpawnPoints(start);
+            freeworld.setEndPoints(end);
+        };
     }
 }

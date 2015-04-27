@@ -37,14 +37,17 @@ public class TileView extends Group {
                 data.changeState();
             }
         });
-        walkableProperty.addListener( (observable, oldValue, newValue) -> {
+        setProperty(walkableProperty);
+    }
+
+    private void setProperty (BooleanProperty property) {
+        property.addListener( (observable, oldValue, newValue) -> {
             if (!newValue) {
                 rect.setFill(Color.web(color, .5));
             }
                 else {
                     rect.setFill(Color.TRANSPARENT);
                 }
-
             });
     }
 

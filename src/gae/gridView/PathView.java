@@ -117,8 +117,8 @@ public class PathView implements Authorable {
      *
      * @return
      */
-    public List<Path> createPathObjects () {
-        List<Path> pathList = new ArrayList<>();
+    public List<AuthoringPath> createPathObjects () {
+        List<AuthoringPath> pathList = new ArrayList<>();
         for (PathSet set : pathSetList) {
             pathList.add(set.getPathObject());
         }

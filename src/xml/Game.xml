@@ -68,20 +68,16 @@
                           <engine.gameobject.test.ProjectileLabel>
                             <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
-                              <index>0</index>
                             </superType>
                             <myName>Projectile</myName>
-                            <index>0</index>
                           </engine.gameobject.test.ProjectileLabel>
                           <map>
                             <entry>
                               <engine.gameobject.test.EnemyLabel>
                                 <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
-                                  <index>0</index>
                                 </superType>
                                 <myName>Enemy</myName>
-                                <index>0</index>
                               </engine.gameobject.test.EnemyLabel>
                               <engine.interactions.BuffImparter/>
                             </entry>
@@ -96,20 +92,16 @@
                           <engine.gameobject.test.TowerLabel>
                             <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
-                              <index>0</index>
                             </superType>
                             <myName>Tower</myName>
-                            <index>0</index>
                           </engine.gameobject.test.TowerLabel>
                           <map>
                             <entry>
                               <engine.gameobject.test.EnemyLabel>
                                 <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
-                                  <index>0</index>
                                 </superType>
                                 <myName>Enemy</myName>
-                                <index>0</index>
                               </engine.gameobject.test.EnemyLabel>
                               <engine.interactions.ShootAt/>
                             </entry>
@@ -1055,14 +1047,12 @@
                   <myQueue class="engine.events.ConcreteQueue">
                     <myOrderedObjects class="linked-list">
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -1596,21 +1586,27 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior>
+                              <playersToChange>
+                                <engine.game.Player reference="../../../../../../../../../../../../../../../../myPlayer"/>
+                              </playersToChange>
+                              <moneyChange>0</moneyChange>
+                              <healthChange>-10</healthChange>
+                              <pointChange>0</pointChange>
+                            </engine.gameobject.behaviors.PlayerChangeBehavior>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -2144,7 +2140,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -2180,11 +2176,17 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior>
+                              <playersToChange>
+                                <engine.game.Player reference="../../../../../../../../../../../../../../../../myPlayer"/>
+                              </playersToChange>
+                              <moneyChange>10</moneyChange>
+                              <healthChange>0</healthChange>
+                              <pointChange>10</pointChange>
+                            </engine.gameobject.behaviors.PlayerChangeBehavior>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -2217,18 +2219,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -2762,21 +2760,20 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -3310,7 +3307,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -3346,11 +3343,10 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -3383,18 +3379,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -3928,21 +3920,20 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -4476,7 +4467,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -4512,11 +4503,10 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -4549,18 +4539,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -5094,21 +5080,20 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -5642,7 +5627,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -5678,11 +5663,10 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -5715,18 +5699,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -6260,21 +6240,20 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -6808,7 +6787,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -6844,11 +6823,10 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -6881,18 +6859,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -7426,21 +7400,20 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -7974,7 +7947,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -8010,11 +7983,10 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -8047,18 +8019,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -8592,21 +8560,20 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -9140,7 +9107,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -9176,11 +9143,10 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -9213,18 +9179,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -9758,21 +9720,20 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -10306,7 +10267,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -10342,11 +10303,10 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -10379,18 +10339,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -10924,21 +10880,20 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -11472,7 +11427,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -11508,11 +11463,10 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -11545,18 +11499,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                       <engine.gameobject.test.bloons.BlueBloon>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -12090,21 +12040,20 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                             <engine.gameobject.behaviors.SummonBehavior>
                               <mySummons>
                                 <engine.gameobject.test.bloons.RedBloon>
-                                  <myLabel class="engine.gameobject.test.EnemyLabel">
+                                  <myType class="engine.gameobject.test.EnemyLabel">
                                     <superType class="engine.gameobject.labels.TypeBase">
                                       <myName>Base</myName>
-                                      <index>0</index>
                                     </superType>
                                     <myName>Enemy</myName>
-                                    <index>0</index>
-                                  </myLabel>
+                                  </myType>
                                   <myPoint>
                                     <myPoint>
                                       <x>0.0</x>
@@ -12638,7 +12587,7 @@
                                   </myCollider>
                                   <myBehaviors>
                                     <endOfPath>
-                                      <engine.gameobject.behaviors.DeathBehavior/>
+                                      <engine.gameobject.behaviors.DisappearBehavior/>
                                     </endOfPath>
                                     <death>
                                       <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -12674,11 +12623,10 @@
                                       <index>0</index>
                                     </myShopGraphic>
                                   </myShopTag>
-                                  <myTitle></myTitle>
-                                  <index>0</index>
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -12711,8 +12659,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.test.bloons.BlueBloon>
                     </myOrderedObjects>
                     <curIndex>0</curIndex>
@@ -12721,16 +12667,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1336</int>
-                    <int>318</int>
-                    <int>477</int>
-                    <int>2261</int>
-                    <int>222</int>
-                    <int>2130</int>
-                    <int>1567</int>
-                    <int>729</int>
-                    <int>458</int>
-                    <int>1174</int>
+                    <int>586</int>
+                    <int>621</int>
+                    <int>414</int>
+                    <int>370</int>
+                    <int>965</int>
+                    <int>980</int>
+                    <int>776</int>
+                    <int>2267</int>
+                    <int>1550</int>
+                    <int>1069</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -12740,14 +12686,12 @@
                   <myQueue class="engine.events.ConcreteQueue">
                     <myOrderedObjects class="linked-list">
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -13281,7 +13225,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -13317,18 +13261,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -13862,7 +13802,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -13898,18 +13838,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -14443,7 +14379,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -14479,18 +14415,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -15024,7 +14956,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -15060,18 +14992,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -15605,7 +15533,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -15641,18 +15569,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -16186,7 +16110,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -16222,18 +16146,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -16767,7 +16687,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -16803,18 +16723,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -17348,7 +17264,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -17384,18 +17300,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -17929,7 +17841,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -17965,18 +17877,14 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myLabel class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyLabel">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
-                            <index>0</index>
                           </superType>
                           <myName>Enemy</myName>
-                          <index>0</index>
-                        </myLabel>
+                        </myType>
                         <myPoint>
                           <myPoint>
                             <x>0.0</x>
@@ -18510,7 +18418,7 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
-                            <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.DisappearBehavior/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -18546,8 +18454,6 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
-                        <myTitle></myTitle>
-                        <index>0</index>
                       </engine.gameobject.GameObjectSimpleTest>
                     </myOrderedObjects>
                     <curIndex>0</curIndex>
@@ -18607,20 +18513,16 @@
                 <engine.gameobject.test.ProjectileLabel>
                   <superType class="engine.gameobject.labels.TypeBase">
                     <myName>Base</myName>
-                    <index>0</index>
                   </superType>
                   <myName>Projectile</myName>
-                  <index>0</index>
                 </engine.gameobject.test.ProjectileLabel>
                 <map>
                   <entry>
                     <engine.gameobject.test.EnemyLabel>
                       <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
-                        <index>0</index>
                       </superType>
                       <myName>Enemy</myName>
-                      <index>0</index>
                     </engine.gameobject.test.EnemyLabel>
                     <engine.interactions.BuffImparter/>
                   </entry>
@@ -18635,20 +18537,16 @@
                 <engine.gameobject.test.TowerLabel>
                   <superType class="engine.gameobject.labels.TypeBase">
                     <myName>Base</myName>
-                    <index>0</index>
                   </superType>
                   <myName>Tower</myName>
-                  <index>0</index>
                 </engine.gameobject.test.TowerLabel>
                 <map>
                   <entry>
                     <engine.gameobject.test.EnemyLabel>
                       <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
-                        <index>0</index>
                       </superType>
                       <myName>Enemy</myName>
-                      <index>0</index>
                     </engine.gameobject.test.EnemyLabel>
                     <engine.interactions.ShootAt/>
                   </entry>

@@ -22,6 +22,7 @@ public class UpgradeTreeSimple implements UpgradeTree {
 
     private BuildableBundle first;
     private BuildableBundle current;
+    private BuildableBundle last;
 
     public UpgradeTreeSimple () {
     }
@@ -44,11 +45,17 @@ public class UpgradeTreeSimple implements UpgradeTree {
             last.addChild(node);
             last = node;
         }
+        this.last = last;
     }
 
     @Override
     public List<UpgradeBundle> getNextUpgrades () {
-        return (current == null) ? new ArrayList<>() : new ArrayList<>(Arrays.asList(current));
+        return (current == null) ? Arrays.asList(markFinal()) : Arrays.asList(current);
+    }
+
+    private BuildableBundle markFinal () {
+        last.markFinalUpgrade();
+        return last;
     }
 
     @Override
@@ -57,13 +64,13 @@ public class UpgradeTreeSimple implements UpgradeTree {
     }
 
     private double traverseActives (BuildableBundle active) {
-        if (active.equals(current)) { return active.getValue(); }
+        if (active == null || active.equals(current)) { return 0; }
         return active.getValue() + traverseActives(active.getNext());
     }
 
     @Override
     public void updateCurrent (UpgradeTree ... toUpdate) {
-        current = current.isFinalUpgrade() ? null : current.getNext();
+        current = current.isFinalUpgrade() ? current : current.getNext();
     }
 
     public UpgradeTree clone () {

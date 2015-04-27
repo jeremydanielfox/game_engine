@@ -25,6 +25,7 @@ public class Main extends Application {
         Stage myStage = new Stage();
         myStage.setWidth(SCREEN_WIDTH);
         myStage.setHeight(SCREEN_HEIGHT);
+        myStage.setResizable(false);
         OpeningView opener = new OpeningView(myStage);
         myStage.setScene(opener.getScene());
         myStage.show();

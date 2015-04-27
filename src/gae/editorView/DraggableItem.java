@@ -1,7 +1,5 @@
 package gae.editorView;
 
-import exception.FieldAlreadyExistingException;
-import javafx.beans.property.BooleanProperty;
 import javafx.scene.Group;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -9,7 +7,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import gae.editor.EditorIntermediate;
+import gae.editor.EditingParser;
 import gae.editor.ObjectComponentEditor;
 import javafx.scene.paint.Color;
 
@@ -78,7 +76,14 @@ public class DraggableItem extends Region {
     public Object getDraggedObject () {
         // TODO: obtain this object by looping through everything in the wrapper and add these
         // objects to the existing object
-        return klass.cast(object);
+        try {
+            return Class.forName(EditingParser.getInterfaceClassFromMap(klass)).cast(object);
+        }
+        catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public DraggableItem getNewInstance () {

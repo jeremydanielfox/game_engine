@@ -9,7 +9,7 @@ import javafx.scene.layout.StackPane;
  *
  */
 
-@Deprecated
+
 public class LevelPreferencesTab {
     private StackPane baseNode;
 

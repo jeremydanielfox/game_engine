@@ -31,6 +31,7 @@ public class ShopEditor implements UIObject {
     private Pane pane = new StackPane();
 
     private ShopCheckList checklist;
+    private ShopModel shop;
 
     public ShopEditor () {
         VBox vbox = new VBox();
@@ -39,15 +40,22 @@ public class ShopEditor implements UIObject {
         text.setFont(Font.font("Verdana", 20));
         vbox.getChildren().addAll(text,
                                   makeObjectChecklist(LibraryData.getInstance()
-                                          .getEditableObservableList()));
-        // vbox.getChildren().add(tempbutton());
+                                          .getEditableObservableList()),
+                                  makeSaveButton());
+      //   vbox.getChildren().add(tempbutton());
         pane.getChildren().add(vbox);
         pane.setMaxWidth(Screen.getPrimary().getBounds().getWidth());
+        
+        shop = new ShopModelSimple();
     }
 
     @Override
     public Node getObject () {
         return pane;
+    }
+
+    public ShopModel getShop () {
+        return shop;
     }
 
     private ScrollPane makeObjectChecklist (ObservableList<Authorable> list) {
@@ -58,7 +66,15 @@ public class ShopEditor implements UIObject {
         return pane;
     }
 
-    public ShopModel makeShop () {
+    private Button makeSaveButton () {
+        Button button = new Button("Save Shop");
+        button.setOnAction(e -> {
+            shop = makeShop();
+        });
+        return button;
+    }
+
+    private ShopModel makeShop () {
         ShopModelSimple shop = new ShopModelSimple();
         List<Purchasable<GameObject>> prototypes = new ArrayList<>();
         checklist.getSelectedPlaceables().stream().forEach(e -> {
@@ -68,13 +84,14 @@ public class ShopEditor implements UIObject {
         return shop;
     }
 
-   //for testing!!!!!!!!
+    // for testing!!!!!!!!
     private Button tempbutton () {
         Button button = new Button("Print selected");
 
         button.setOnAction(e -> {
-            for (Placeable obj : ((ShopCheckList) checklist).getSelectedPlaceables()) {
-                System.out.println(obj.getName());
+            for (Placeable obj : checklist.getSelectedPlaceables()) {
+                System.out.println(obj.getShopTag().getName());
+                System.out.println(((Purchasable<GameObject>) obj.getGameObject()).getName());
             }
         });
         return button;

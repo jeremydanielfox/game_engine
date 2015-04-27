@@ -144,7 +144,7 @@ public class LevelView {
     private void setGridOptions () {
         gridOptions = new VBox();
         gridOptions.setTranslateX(scene.getWidth() * 2 / 3);
-        gridOptions.setTranslateY(scene.getHeight() / 2);
+        gridOptions.setTranslateY(scene.getHeight() / 3);
         Text title = new Text("Grid Properties");
 
         gridOptions.getChildren().addAll(title, changeBackground(backgroundProperty));

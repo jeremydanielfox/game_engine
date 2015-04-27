@@ -87,27 +87,29 @@
                           <speedModifier>0.0</speedModifier>
                           <myDistance>0.0</myDistance>
                           <frozen>false</frozen>
-                          <none>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                          </none>
-                          <currentDirection reference="../none"/>
-                          <myGraphic>
-                            <myTitle></myTitle>
-                            <myHeight>40.0</myHeight>
-                            <myWidth>40.0</myWidth>
-                            <myImageName>Bloons_TackShooter.png</myImageName>
-                            <myPoint>
-                              <x>190.0</x>
-                              <y>190.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                            <index>0</index>
-                          </myGraphic>
+                          <myHandler>
+                            <myGraphic>
+                              <myTitle></myTitle>
+                              <myHeight>40.0</myHeight>
+                              <myWidth>40.0</myWidth>
+                              <myImageName>/images/Bloons_TackShooter.png</myImageName>
+                              <myPoint>
+                                <x>190.0</x>
+                                <y>190.0</y>
+                                <hash>0</hash>
+                              </myPoint>
+                              <myRotator class="engine.gameobject.RotateToPoint"/>
+                              <index>0</index>
+                            </myGraphic>
+                            <myDirection>
+                              <myPoint>
+                                <x>0.0</x>
+                                <y>0.0</y>
+                                <hash>0</hash>
+                              </myPoint>
+                            </myDirection>
+                            <ORIGIN reference="../myDirection"/>
+                          </myHandler>
                         </myMover>
                         <myBuffs>
                           <buffList/>
@@ -209,7 +211,7 @@
                               <myTitle></myTitle>
                               <myHeight>20.0</myHeight>
                               <myWidth>20.0</myWidth>
-                              <myImageName>robertDuvall.jpg</myImageName>
+                              <myImageName>/images/robertDuvall.jpg</myImageName>
                               <myPoint>
                                 <x>300.0</x>
                                 <y>300.0</y>
@@ -225,7 +227,7 @@
                                 <myTitle></myTitle>
                                 <myHeight>0.0</myHeight>
                                 <myWidth>0.0</myWidth>
-                                <myImageName>robertDuvall.jpg</myImageName>
+                                <myImageName>/images/robertDuvall.jpg</myImageName>
                                 <myPoint>
                                   <x>0.0</x>
                                   <y>0.0</y>
@@ -422,7 +424,7 @@
                             <engine.gameobject.behaviors.ExplosionBehavior/>
                           </death>
                         </myBehaviors>
-                        <myGraphic reference="../myMover/myGraphic"/>
+                        <myGraphic reference="../myMover/myHandler/myGraphic"/>
                         <myShopTag class="engine.shop.ShopTagSimple">
                           <myName></myName>
                           <myDescription>Just a test tower; nothing special here...</myDescription>
@@ -430,7 +432,7 @@
                             <myTitle></myTitle>
                             <myHeight>40.0</myHeight>
                             <myWidth>40.0</myWidth>
-                            <myImageName>Bloons_TackShooterIcon.png</myImageName>
+                            <myImageName>/images/Bloons_TackShooterIcon.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -16612,7 +16614,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -16628,7 +16630,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -16685,7 +16687,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -16701,7 +16703,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -16758,7 +16760,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -16774,7 +16776,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -16831,7 +16833,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -16847,7 +16849,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -16904,7 +16906,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -16920,7 +16922,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -16977,7 +16979,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -16993,7 +16995,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -17050,7 +17052,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -17066,7 +17068,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -17123,7 +17125,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -17139,7 +17141,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -17196,7 +17198,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -17212,7 +17214,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -17269,7 +17271,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -17285,7 +17287,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -17303,16 +17305,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1423</int>
-                    <int>710</int>
-                    <int>1688</int>
-                    <int>1298</int>
-                    <int>164</int>
-                    <int>145</int>
-                    <int>1018</int>
-                    <int>1525</int>
-                    <int>1194</int>
-                    <int>706</int>
+                    <int>1581</int>
+                    <int>1453</int>
+                    <int>533</int>
+                    <int>2264</int>
+                    <int>245</int>
+                    <int>1759</int>
+                    <int>288</int>
+                    <int>1148</int>
+                    <int>1111</int>
+                    <int>1699</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -17871,7 +17873,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -17887,7 +17889,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -18448,7 +18450,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -18464,7 +18466,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -19025,7 +19027,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -19041,7 +19043,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -19602,7 +19604,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -19618,7 +19620,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -20179,7 +20181,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -20195,7 +20197,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -20756,7 +20758,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -20772,7 +20774,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -21333,7 +21335,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -21349,7 +21351,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -21910,7 +21912,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -21926,7 +21928,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -22487,7 +22489,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -22503,7 +22505,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -23064,7 +23066,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                           <myTitle></myTitle>
                           <myHeight>25.0</myHeight>
                           <myWidth>25.0</myWidth>
-                          <myImageName>robertDuvall.jpg</myImageName>
+                          <myImageName>/images/robertDuvall.jpg</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>10000.0</y>
@@ -23080,7 +23082,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
-                            <myImageName>robertDuvall.jpg</myImageName>
+                            <myImageName>/images/robertDuvall.jpg</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -23929,6 +23931,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
   <myButtons>
     <View.ButtonWrapper>
       <myEnableCondition class="engine.goals.NoCurrentEventGoal" reference="../../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/obs/engine.goals.NoCurrentEventGoal"/>
+      <myLabel>wave</myLabel>
+      <myAction class="null"/>
     </View.ButtonWrapper>
   </myButtons>
   <myGameName>GameName</myGameName>

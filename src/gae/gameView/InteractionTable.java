@@ -68,7 +68,8 @@ public class InteractionTable {
                     Type added = change.getAddedSubList().get(0);
                     if (added instanceof Type) {
                         Type l = added;
-                        gaeLabels.add(l);
+                        //TODO: Uncomment the line below
+//                        gaeLabels.add(l);
                     }
                 }
             }

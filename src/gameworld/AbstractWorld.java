@@ -44,9 +44,9 @@ public class AbstractWorld implements GameWorld {
 		myTerrain = new Terrain(numRows, numCols, myTrans);
 		myBounds = new GridCell(numRows, numCols);
     }
-    
+
     @Settable
-    public void setObjects(List<GameObject> objects) {
+    public void setObjects (List<GameObject> objects) {
         myObjects = objects;
     }
 
@@ -78,17 +78,17 @@ public class AbstractWorld implements GameWorld {
 
     @Override
     public void updateGameObjects () {
-         ArrayList<GameObject> currentObjects = new ArrayList<GameObject>(myObjects);
-         for (GameObject object: currentObjects){
-             object.update(this);
-             for (GameObject interactObject: currentObjects){
-                 if (interactObject != object && !object.isDead() && !interactObject.isDead()){
-                     myCollisionEngine.interact(object, interactObject);
-                     myRangeEngine.interact(object, interactObject);
-                 }
-             }
-         }
-         removeDeadObjects();
+        ArrayList<GameObject> currentObjects = new ArrayList<GameObject>(myObjects);
+        for (GameObject object : currentObjects) {
+            object.update(this);
+            for (GameObject interactObject : currentObjects) {
+                if (interactObject != object && !object.isDead() && !interactObject.isDead()) {
+                    myCollisionEngine.interact(object, interactObject);
+                    myRangeEngine.interact(object, interactObject);
+                }
+            }
+        }
+        removeDeadObjects();
     }
 
     private void removeDeadObjects () {
@@ -128,12 +128,13 @@ public class AbstractWorld implements GameWorld {
 
     @Override
     public boolean isPlaceable (Node n, PointSimple pixelCoords) {
-    	GridCell c = myTrans.transformWorldToGrid(pixelCoords);
-    	try {
-			return myTerrain.getTerrainTile(c).getPlace();
-		} catch (InvalidArgumentException e) {
-			return false;
-		}
+        GridCell c = myTrans.transformWorldToGrid(pixelCoords);
+        try {
+            return myTerrain.getTerrainTile(c).getPlace();
+        }
+        catch (InvalidArgumentException e) {
+            return false;
+        }
     }
 
     @Override
@@ -150,28 +151,44 @@ public class AbstractWorld implements GameWorld {
     public Path getPath () {
         return myPath;
     }
-    
-	@Settable
-	public void setObstacles(List<GridCell> obstacles){
-		for(GridCell c : obstacles){
-			try {
-				myTerrain.getTerrainTile(c).setWalk(false);
-			} catch(InvalidArgumentException e){}
-		}
-		PathFree path = (PathFree) myPath;
-		path.setObstacles(obstacles);
-	}
-	
-	public void setTowerObstacles(List<GridCell> tObstacles){
-		for(GridCell c : tObstacles){
-			try {
-				myTerrain.getTerrainTile(c).setPlace(false);
-			} catch(InvalidArgumentException e){}
-		}
-	}
 
-	@Override
-	public void removeObject(GameObject toRemove) {
-		myObjects.remove(toRemove);
-	}
+    @Settable
+    public void setObstacles (List<GridCell> obstacles) {
+        for (GridCell c : obstacles) {
+            try {
+                myTerrain.getTerrainTile(c).setWalk(false);
+            }
+            catch (InvalidArgumentException e) {
+            }
+        }
+        PathFree path = (PathFree) myPath;
+        path.setObstacles(obstacles);
+    }
+
+    public void setTowerObstacles (List<GridCell> tObstacles) {
+        for (GridCell c : tObstacles) {
+            try {
+                myTerrain.getTerrainTile(c).setPlace(false);
+            }
+            catch (InvalidArgumentException e) {
+            }
+        }
+    }
+
+    @Override
+    public void removeObject (GameObject toRemove) {
+        myObjects.remove(toRemove);
+
+    }
+
+    @Settable
+    public void setRangeEngine (InteractionEngine engine) {
+        this.myRangeEngine = engine;
+    }
+
+    @Settable
+    public void setCollisionEngine (InteractionEngine engine) {
+        this.myCollisionEngine = engine;
+
+    }
 }

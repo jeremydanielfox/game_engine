@@ -12667,16 +12667,55 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>200</int>
-                    <int>1739</int>
-                    <int>1302</int>
-                    <int>757</int>
-                    <int>1116</int>
-                    <int>1967</int>
-                    <int>1655</int>
-                    <int>2207</int>
-                    <int>1059</int>
-                    <int>2001</int>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+                    <int>2115</int>
+                    <int>368</int>
+                    <int>1272</int>
+                    <int>2061</int>
+                    <int>752</int>
+                    <int>2050</int>
+                    <int>75</int>
+                    <int>1216</int>
+                    <int>244</int>
+                    <int>2363</int>
+=======
+                    <int>2234</int>
+                    <int>455</int>
+                    <int>966</int>
+                    <int>723</int>
+                    <int>451</int>
+                    <int>208</int>
+                    <int>1060</int>
+                    <int>1505</int>
+                    <int>743</int>
+                    <int>1566</int>
+>>>>>>> Stashed changes
+=======
+                    <int>1369</int>
+                    <int>227</int>
+                    <int>677</int>
+                    <int>1414</int>
+                    <int>422</int>
+                    <int>1701</int>
+                    <int>1096</int>
+                    <int>2052</int>
+                    <int>1894</int>
+                    <int>187</int>
+>>>>>>> 3bd3796e259613a6e7a79f93fd382dae5d523608
+=======
+                    <int>1880</int>
+                    <int>243</int>
+                    <int>164</int>
+                    <int>837</int>
+                    <int>1759</int>
+                    <int>876</int>
+                    <int>1307</int>
+                    <int>624</int>
+                    <int>1593</int>
+                    <int>1131</int>
+>>>>>>> b7774359617b21483cb3a3ccc8ab3965a87cc6f0
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -19007,6 +19046,8 @@
   <myButtons>
     <View.ButtonWrapper>
       <myEnableCondition class="engine.goals.NoCurrentEventGoal" reference="../../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/obs/engine.goals.NoCurrentEventGoal"/>
+      <myLabel>wave</myLabel>
+      <myAction class="null"/>
     </View.ButtonWrapper>
   </myButtons>
   <myGameName>GameName</myGameName>

@@ -4,7 +4,7 @@ import engine.fieldsetting.Settable;
 
 
 @Settable
-public class SimpleType implements Type{
+public class SimpleType implements Type {
 
     private Type superType;
     private String myName;
@@ -52,13 +52,12 @@ public class SimpleType implements Type{
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode () {
         return 7 * myName.hashCode() + 97 * superType.hashCode();
     }
-    
-    // TODO: equals method needs work... possibly should go all the way down to basetype
+
     @Override
     public boolean equals (Object other) {
-        return hashCode() == other.hashCode();
+        return other != null && hashCode() == other.hashCode();
     }
 }

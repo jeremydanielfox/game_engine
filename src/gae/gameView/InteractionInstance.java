@@ -153,8 +153,8 @@ public class InteractionInstance {
         }
 
         private void createDropDown (List<String> options) {
-            options.forEach(e -> choices.getItems().add(e));
-            container.getChildren().addAll(label, choices);
+//            options.forEach(e -> choices.getItems().add(e));
+//            container.getChildren().addAll(label, choices);
         }
 
         public Node getDropDown () {

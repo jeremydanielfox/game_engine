@@ -1,6 +1,7 @@
 package engine.gameobject.weapon.firingstrategy;
 
 import engine.gameobject.GameObject;
+import engine.gameobject.Mover;
 import engine.gameobject.MoverPoint;
 import engine.gameobject.PointSimple;
 
@@ -16,9 +17,13 @@ public abstract class BasicStrategy implements FiringStrategy {
     protected GameObject makeProjectile (PointSimple location,
                                          PointSimple target,
                                          GameObject prototype) {
-        //TODO: Conversion for non moverpoints.
-        MoverPoint newMover = (MoverPoint) prototype.getMover().clone();
-        newMover.setPoint(target);
+        Mover newMover = prototype.getMover().clone();
+        try {
+            ((MoverPoint) newMover).setPoint(target);
+        }
+        catch (Exception e){
+            //Do nothing
+        }
         GameObject newProjectile = prototype.clone();
         newProjectile.setPoint(location);
         newProjectile.setMover(newMover);

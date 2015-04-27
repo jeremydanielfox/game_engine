@@ -63,6 +63,12 @@ public class GameSelector {
         setUpFunctions();
     }
 
+    public ImageView getCurrentImage() {
+        ImageView img=new ImageView();
+        img.setImage(options.get(index).getGamePicture().getImage());
+        return img;
+    }
+    
     public Node getChooser () {
         return chooser;
     }
@@ -128,6 +134,7 @@ public class GameSelector {
         currentView.getChildren().add(options.get(index).getOption());
     }
 
+    
     /**
      * Represents one option the user can select from. Comprised of an image of the game and its
      * label.
@@ -174,6 +181,10 @@ public class GameSelector {
          */
         private void createDisplay () {
             display.getChildren().addAll(textBox, gamePicture);
+        }
+        
+        public ImageView getGamePicture(){
+            return gamePicture;
         }
     }
 

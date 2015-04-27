@@ -12667,16 +12667,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1369</int>
-                    <int>227</int>
-                    <int>677</int>
-                    <int>1414</int>
-                    <int>422</int>
-                    <int>1701</int>
-                    <int>1096</int>
-                    <int>2052</int>
-                    <int>1894</int>
-                    <int>187</int>
+                    <int>1880</int>
+                    <int>243</int>
+                    <int>164</int>
+                    <int>837</int>
+                    <int>1759</int>
+                    <int>876</int>
+                    <int>1307</int>
+                    <int>624</int>
+                    <int>1593</int>
+                    <int>1131</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -19007,6 +19007,8 @@
   <myButtons>
     <View.ButtonWrapper>
       <myEnableCondition class="engine.goals.NoCurrentEventGoal" reference="../../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/obs/engine.goals.NoCurrentEventGoal"/>
+      <myLabel>wave</myLabel>
+      <myAction class="null"/>
     </View.ButtonWrapper>
   </myButtons>
   <myGameName>GameName</myGameName>

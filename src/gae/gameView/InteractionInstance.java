@@ -72,18 +72,18 @@ public class InteractionInstance {
      * when create is pressed, the interaction is added to the interaction data
      */
     private void createButtonFunction () {
-        // create.setOnMousePressed(e -> {
-        // Interaction i;
-        // try {
-        // i = (Interaction) myInteractionData.getInteractionMap()
-        // .get(interactionType.getSelected()).newInstance();
-        //
-        // myInteractionData.addInteraction(box1.getLabelList(), i, box2.getLabelList());
-        // }
-        // catch (Exception e1) {
-        // e1.printStackTrace();
-        // }
-        // });
+        create.setOnMousePressed(e -> {
+            Interaction i;
+            try {
+                i = (Interaction) myInteractionData.getInteractionMap()
+                        .get(interactionType.getSelected()).newInstance();
+
+                myInteractionData.addInteraction(box1.getLabelList(), i, box2.getLabelList());
+            }
+            catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
 
         /*
          * TO EXPORT: DataManager.writeToXML(myObject, filepath);
@@ -91,31 +91,31 @@ public class InteractionInstance {
          * FOR TESTING:
          */
 
-        create.setOnMousePressed(e -> {
-            List<Type> list1 = Arrays.asList(new SimpleType("one"), new SimpleType("two"),
-                                             new SimpleType("three"), new SimpleType("four"),
-                                             new SimpleType("five"));
-            List<Type> list2 = Arrays.asList(new SimpleType("danny"), new SimpleType("jeremy"),
-                                             new SimpleType("eric"), new SimpleType("kaighn"),
-                                             new SimpleType("nina"));
-
-            BuffImparter bf = new BuffImparter();
-            myInteractionData.addInteraction(list1, bf, list2);
-
-            ShootAt sa = new ShootAt();
-            myInteractionData.addInteraction(list1, sa, list2);
-            
-            List<Type> list3 = Arrays.asList(new SimpleType("a"));
-            List<Type> list4 = Arrays.asList(new SimpleType("b"));
-            
-            NoInteraction ni = new NoInteraction();
-            myInteractionData.addInteraction(list3, ni, list4);
-
-            DataManager.writeToXML(myInteractionData.getEngines().get(0),
-                                   "src/xml/ExampleInteraction.xml");
-            DataManager.writeToXML(myInteractionData.getEngines().get(1),
-                                   "src/xml/ExampleInteraction2.xml");
-        });
+        // create.setOnMousePressed(e -> {
+        // List<Type> list1 = Arrays.asList(new SimpleType("one"), new SimpleType("two"),
+        // new SimpleType("three"), new SimpleType("four"),
+        // new SimpleType("five"));
+        // List<Type> list2 = Arrays.asList(new SimpleType("danny"), new SimpleType("jeremy"),
+        // new SimpleType("eric"), new SimpleType("kaighn"),
+        // new SimpleType("nina"));
+        //
+        // BuffImparter bf = new BuffImparter();
+        // myInteractionData.addInteraction(list1, bf, list2);
+        //
+        // ShootAt sa = new ShootAt();
+        // myInteractionData.addInteraction(list1, sa, list2);
+        //
+        // List<Type> list3 = Arrays.asList(new SimpleType("a"));
+        // List<Type> list4 = Arrays.asList(new SimpleType("b"));
+        //
+        // NoInteraction ni = new NoInteraction();
+        // myInteractionData.addInteraction(list3, ni, list4);
+        //
+        // DataManager.writeToXML(myInteractionData.getEngines().get(0),
+        // "src/xml/ExampleInteraction.xml");
+        // DataManager.writeToXML(myInteractionData.getEngines().get(1),
+        // "src/xml/ExampleInteraction2.xml");
+        // });
     }
 
     private void createInteraction () {

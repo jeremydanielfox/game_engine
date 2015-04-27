@@ -1,12 +1,9 @@
 package gae.levelPreferences;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
+
 import java.util.List;
-import engine.fieldsetting.Settable;
-import engine.game.Player;
-import engine.game.Timer;
 import engine.game.TimerConcrete;
+import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -41,6 +38,8 @@ public class LevelPreferencesEditor implements UIObject{
    private  GoalHoverPicture health;
    private GoalHoverPicture score;
    private LevelPreferencesData data;
+   private List<Goal> winningConditions;
+   private List<Goal> losingConditions;
 
 
  
@@ -106,45 +105,7 @@ public class LevelPreferencesEditor implements UIObject{
         HBox hbox=new HBox(min, colon, sec);
         return hbox;
     }
-    
-//    private Node makeTimeGoalOption(){
-//        Label prompt=new Label("Minimum time:");
-//        TextField textfield=new NumberTextField();
-//        textfield.setOnAction(e->{
-//            data.setTimeGoal(Double.parseDouble(textfield.getText()));
-//        });
-//        HBox hbox=new HBox(prompt, textfield);
-//        return hbox;
-//    }
-//    
-//    private Node makeHealthOptions(){
-//        Label prompt=new Label("Minimum health:");
-//        TextField textfield=new NumberTextField();
-//        textfield.setOnAction(e->{
-//            data.setHealthGoal(Double.parseDouble(textfield.getText()));
-//        });
-//        HBox hbox=new HBox(prompt, textfield);
-//        return hbox;
-//    }
-//    
-//    private Node makeScoreOptions(){
-//        Label prompt=new Label("Target score:");
-//        TextField textfield=new NumberTextField();
-//        textfield.setOnAction(e->{
-//            scoreGoal=Double.parseDouble(textfield.getText());
-//        });
-//        HBox hbox=new HBox(prompt, textfield);
-//        return hbox;
-//    }
-//    
-//    private Node makeSingleOption(String label, EventHandler<ActionEvent> event){
-//        Label prompt=new Label(label);
-//        TextField textfield=new NumberTextField();
-//        textfield.setOnAction(event);
-//        HBox hbox=new HBox(prompt, textfield);
-//        return hbox;
-//    }
-    
+ 
    
     private static class DoubleOption{
         private Node node;

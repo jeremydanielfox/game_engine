@@ -104,7 +104,7 @@ public class Graphic {
 
     @Settable(primary = true)
     public void setImagePath (String imageName) {
-        myImageName = imageName.substring(imageName.lastIndexOf("src"));
+        myImageName = imageName.substring(imageName.lastIndexOf("/images"));
 //        myImageName = imageName;
         initializeImageView();
     }

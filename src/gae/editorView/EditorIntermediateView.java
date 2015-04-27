@@ -1,6 +1,8 @@
 package gae.editorView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -27,17 +29,21 @@ public class EditorIntermediateView {
         Scene editorScene = new Scene(vbox);
         editorStage.setScene(editorScene);
         
-        Label titleLabel = new Label(String.format("Choose form of %s", componentEditor.getInterfaceClass().getSimpleName()));
+        Label titleLabel = new Label(String.format("Choose form of %s", EditingParser.getUserFriendlyName(componentEditor.getInterfaceClass().getSimpleName())));
         
         ObservableList<String> observable = FXCollections.observableArrayList();
-        observable.addAll(concreteClasses);
+        Map<String, String> displayNames = new HashMap<String, String>();
+        for (String s : concreteClasses) {
+            displayNames.put(EditingParser.getUserFriendlyName(s), s);
+        }
+        observable.addAll(displayNames.keySet());
         ComboBox<String> comboBox = new ComboBox<String>(observable);
         
         Button addButton = new Button("Choose");
         addButton.setOnAction(e -> {
             String className = comboBox.getSelectionModel().getSelectedItem();
             if (className != null) {
-                componentEditor.setObject(EditingParser.getInstanceFromName(className));
+                componentEditor.setObject(EditingParser.getInstanceFromName(displayNames.get(className)));
                 componentEditor.popNewEditor(i);
                 editorStage.close();
             }

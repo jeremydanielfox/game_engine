@@ -63,7 +63,6 @@ public class PlayerChangeBehavior implements Behavior{
         playersToChange.add(player);
     }
     
-    @Settable
     public void removePlayer(Player player){
         playersToChange.remove(player);
     }

@@ -118,10 +118,6 @@ public class BasicWeapon implements Weapon{
         // myFiringRate.addObserver(new UpgradeObserver(this::updateFiringRate));
     }
 
-    private void updateFiringRate () {
-
-    }
-
     @Override
     @Settable
     public void setFiringStrategy (FiringStrategy newStrategy) {
@@ -197,20 +193,6 @@ public class BasicWeapon implements Weapon{
     public void advanceTime () {
         timeSinceFire++;
     }
-
-    /*
-     * Utility that we may need in the future
-     * private void fireAtEnemyInRange (GameWorld world, PointSimple center) {
-     * ArrayList<GameObject> candidates =
-     * (ArrayList<GameObject>) world.objectsInRange(myRange, center);
-     * // TODO: In bloons, we choose from the candidates using first, last, strong, weak. We could
-     * // do something here as well using polymorphism. For now, we just choose a random one.
-     * if (!candidates.isEmpty()){
-     * myFiringStrategy.execute(world, candidates, center, myProjectile);
-     * timeSinceFire = 0;
-     * }
-     * }
-     */
 
     // TODO: Get the math correct here
     private double firingRateToSeconds () {

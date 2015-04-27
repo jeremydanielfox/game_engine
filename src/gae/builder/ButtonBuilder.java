@@ -1,4 +1,4 @@
-package gae.gameView;
+package gae.builder;
 
 import engine.fieldsetting.Settable;
 import engine.fieldsetting.Triggerable;
@@ -22,7 +22,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import View.ButtonWrapper;
 
-
 /**
  * Main class used to construct a button for the game player to use
  *
@@ -32,7 +31,7 @@ import View.ButtonWrapper;
  *
  */
 
-public class ButtonCreator extends Application {
+public class ButtonBuilder extends Application {
 
     private static final String DROPDOWN_DEFAULT = "Select action here";
     private static final String DEFAULT_NAME_FIELD = "Enter Button name here";
@@ -42,7 +41,7 @@ public class ButtonCreator extends Application {
     private Map<Method, String> settableMap;
     private Map<Method, String> triggerableMap;
 
-    public ButtonCreator () {
+    public ButtonBuilder (){
         container = new VBox(15);
         settableMap = new HashMap<>();
         triggerableMap = new HashMap<>();
@@ -74,9 +73,6 @@ public class ButtonCreator extends Application {
      */
     private String extractName (String method) {
         return method.substring(3);
-        /*
-         * how to split the capital letters with space?
-         */
     }
 
     /**
@@ -104,30 +100,28 @@ public class ButtonCreator extends Application {
             /*
              * if field requires a String, then create a text field
              */
-                if (e.isInstance(String.class)) {
-                    field = new TextField();
-                }
+            if (e.isInstance(String.class)) {
+                field = new TextField();
+            }
 
-                /*
-                 * if field requires a Consumer, then create drop down of all options for them to
-                 * use
-                 */
-                else if (e.isInstance(Consumer.class)) {
-                    field = getPossibleActions();
-                }
+            /*
+             * if field requires a Consumer, then create drop down of all options for them to use
+             */
+            else if (e.isInstance(Consumer.class)) {
+                field = getPossibleActions();
+            }
 
-                /*
-                 * if field requires a Goal, then create a drop down of all goals created & give
-                 * them
-                 * option to create new Goal
-                 */
-                else if (e.isInstance(Goal.class)) {
-                    field = getTriggerables();
-                }
+            /*
+             * if field requires a Goal, then create a drop down of all goals created & give them
+             * option to create new Goal
+             */
+            else if (e.isInstance(Goal.class)) {
+                field = getTriggerables();
+            }
 
+            if (field != null)
                 fieldSetter.getChildren().add(field);
-            });
-
+        });
         container.getChildren().add(fieldSetter);
     }
 
@@ -137,9 +131,7 @@ public class ButtonCreator extends Application {
      */
     @SuppressWarnings("rawtypes")
     private ComboBox getPossibleActions () {
-        /*
-         * TODO: How to extract possible actions?
-         */
+        
         return null;
     }
 
@@ -149,22 +141,20 @@ public class ButtonCreator extends Application {
      */
     @SuppressWarnings("rawtypes")
     private ComboBox getTriggerables () {
-        /*
-         * TODO: Currently only one triggerable...?
-         */
+        
         return null;
     }
-
+    
     public static void main (String[] args) {
         launch(args);
     }
 
     @Override
     public void start (Stage arg0) throws Exception {
-        Stage stage = new Stage();
-        ButtonCreator bc = new ButtonCreator();
-        Scene scene = new Scene(bc.getContainer(), 500, 500);
-        stage.setScene(scene);
-        stage.show();
+        Stage myStage = new Stage();
+        Scene scene = new Scene(container, 600, 600);
+        myStage.setScene(scene);
+        myStage.show();
+        myStage.centerOnScreen();
     }
 }

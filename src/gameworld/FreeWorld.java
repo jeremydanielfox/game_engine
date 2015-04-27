@@ -95,6 +95,7 @@ public class FreeWorld extends AbstractWorld {
 					PointSimple position = myTrans.findIntraCellPosition(g.getPoint());
 					if(!cell.withinBounds(myBounds)){
 						oustGameObject(r, c, g, cell, position);
+						return;
 					}
 					if (myGrid[cell.getRow()][cell.getCol()] != g) {
 						if(myGrid[cell.getRow()][cell.getCol()] != null){
@@ -106,7 +107,6 @@ public class FreeWorld extends AbstractWorld {
 							try {
 								myPath.updatePath();
 							} catch (NoPathExistsException e) {
-//								PointSimple position = myTrans.findIntraCellPosition(g.getPoint());
 								oustGameObject(r, c, g, cell, position);
 							}
 						}

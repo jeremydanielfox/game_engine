@@ -65,11 +65,9 @@ public class PathFree implements Path {
                                                                                            throws EndOfPathException {
         GridCell currentCell = myTrans.transformWorldToGrid(current);
         GridCell nextCell = myPath.get(currentCell);
-
-        for (GridCell endpoint : endPoints) {
-            if (currentCell.equals(endpoint)) {
+        
+        if(endPoints.contains(currentCell)){
                 throw new EndOfPathException();
-            }
         }
         if (nextCell != null) {
             return PointSimple.pointOnLine(
@@ -78,11 +76,22 @@ public class PathFree implements Path {
         }
         else {
             if (currentCell.withinBounds(bounds)) {// TODO make better algorithmically
-                for (GridCell c : myPath.keySet()) {
+                List<GridCell> myNeighbors = new ArrayList<>();
+            	for (GridCell c : myPath.keySet()) {
                     if (c.distance(currentCell) == 1) {
-                        return myTrans.transformGridToWorldInexact(c);
-                    }
+                    	myNeighbors.add(c);
+                    }                
                 }
+            	if(myNeighbors.size() > 0){
+            		GridCell bestNeighbor = myNeighbors.get(0);
+            		for(GridCell n : myNeighbors){
+            			if(PointSimple.distance(current, myTrans.tranformGridToWorld(n)) < 
+            					PointSimple.distance(current, myTrans.tranformGridToWorld(bestNeighbor))){
+            				bestNeighbor = n;
+            			}
+            		}
+            		return PointSimple.pointOnLine(current, myTrans.tranformGridToWorld(bestNeighbor),speed);
+            	}
             }
             return myTrans.tranformGridToWorld(spawnPoints.get((int)(Math.random()*spawnPoints.size())));
         }

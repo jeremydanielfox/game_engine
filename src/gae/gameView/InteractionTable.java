@@ -48,7 +48,7 @@ public class InteractionTable {
         interactions = new ArrayList<>();
         content = new VBox(35);
         gaeLabels = myLibraryData.getLabelList();
-        addLabelListener();
+        //addLabelListener();
         scroller.setContent(content);
         setUpButtons();
     }

@@ -9,13 +9,13 @@ import engine.gameobject.PointSimple;
  * @author Kei
  *
  */
-public class Path {
+public class AuthoringPath {
     private PointSimple start;
     private PointSimple end;
     private PointSimple control1;
     private PointSimple control2;
 
-    public Path (PointSimple start, PointSimple end, PointSimple control1, PointSimple control2) {
+    public AuthoringPath (PointSimple start, PointSimple end, PointSimple control1, PointSimple control2) {
         this.start = start;
         this.end = end;
         this.control1 = control1;

@@ -10,6 +10,8 @@ import engine.game.Player;
 import gae.editor.EditingParser;
 import javafx.application.Application;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -87,14 +89,17 @@ public class PlayerBuilder extends Application {
      */
     private void createWalletDropDown () {
         Label l = new Label("WalletUnit");
-        
+        List<String> labelList = new ArrayList<>();
+        ObservableList<String> observableList = FXCollections.observableList(labelList);
         fields.forEach(e -> {
             if (e.getPropertyName().equals("Label")) {
                 e.getInputs().forEach(f -> {
+                    //SimpleStringProperty input
                     
                 });
             }
         });
+        walletDropDown.setItems(observableList);
         walletBox.getChildren().addAll(l, walletDropDown);
     }
 

@@ -7,6 +7,7 @@ import engine.gameobject.Graphic;
 import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
+import engine.gameobject.units.Collider;
 import engine.gameobject.weapon.Weapon;
 import engine.shop.ShopTag;
 import gae.listView.Authorable;
@@ -72,6 +73,8 @@ public interface Placeable extends Serializable, Authorable {
 
     public void setLabel (Type label);
 
+    public void setCollider (Collider collider);
+
     public Object clone ();
 
     public Placeable makeNewInstance ();
@@ -87,4 +90,6 @@ public interface Placeable extends Serializable, Authorable {
     public String getDescription ();
 
     public GameObject getGameObject ();
+
+    public Collider getCollider ();
 }

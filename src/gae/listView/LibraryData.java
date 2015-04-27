@@ -1,6 +1,5 @@
 package gae.listView;
 
-import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
@@ -80,17 +79,16 @@ public class LibraryData {
     }
 
     public void addCreatedObjectToList (Class<?> klass, Object o) {
-        try {
+        if (createdObjectMap.containsKey(klass)) {
             int index = GameObjectInformation.getInstance().getIndex(o);
             if (index >= 0) {
                 createdObjectMap.get(klass).set(index, o);
-                System.out.println("replaced");
             }
             else {
                 createdObjectMap.get(klass).add(o);
             }
         }
-        catch (NullPointerException e) {
+        else {
             ObservableList<Object> list = FXCollections.observableArrayList();
             createdObjectMap.put(klass, list);
             createdObjectMap.get(klass).add(o);
@@ -115,7 +113,7 @@ public class LibraryData {
     }
 
     public void addGameObjectToList (Object gameObject) {
-        GameObjectToEditable editable = new GameObjectToEditable((GameObject) gameObject);
+        GameObjectToEditable editable = new GameObjectToEditable((GameObjectSimple) gameObject);
         editableList.add(editable);
         gameObjectList.add((GameObjectSimple) gameObject);
     }
@@ -142,7 +140,8 @@ public class LibraryData {
         object.setShopTag(editable.getShopTag());
         object.setMover(editable.getPath());
         object.setHealth(new HealthSimple(editable.getHealth()));
-        // set Collider
+        object.setCollider(editable.getCollider());
+        object.setWeapon(editable.getWeapon());
         gameObjectList.add(object);
     }
 

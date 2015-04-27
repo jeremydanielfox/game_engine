@@ -1,14 +1,11 @@
 package gae.editorView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import engine.gameobject.GameObjectSimple;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,7 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import gae.editor.ComponentEditor;
@@ -50,7 +46,6 @@ public class GameObjectEditorView implements UIObject {
     private TextField title;
     // not best way to do it because it takes up a lot of space but lack of time
     private static Map<Class<?>, Node> titleFieldMap = new HashMap<>();
-
     public GameObjectEditorView (Scene scene,
                                  Consumer<Object> consumer,
                                  BiConsumer<Class<?>, Object> biConsumer) {
@@ -88,7 +83,6 @@ public class GameObjectEditorView implements UIObject {
         top = new VBox();
         List<ComponentEditor> simpleList = simpleEditor.getSimpleComponentEditors();
         SimpleEditorView simpleEditorView = new SimpleEditorView(simpleList);
-        // top = (VBox) simpleEditorView.getObject();
         top.getChildren().addAll(titleBox(), (VBox) simpleEditorView.getObject());
         top.setPrefSize(vboxWidth, vboxHeight);
         Button addButton = new Button("Add");
@@ -120,7 +114,7 @@ public class GameObjectEditorView implements UIObject {
     }
 
     private Node setUpAnchor () {
-        bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
+        bottom = new GameObjectContainer(vboxWidth, vboxHeight);
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
 
@@ -156,4 +150,5 @@ public class GameObjectEditorView implements UIObject {
         return simpleEditor.createObject(clazz);
     }
 
+    
 }

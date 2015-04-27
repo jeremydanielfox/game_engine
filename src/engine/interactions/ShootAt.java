@@ -15,9 +15,7 @@ public class ShootAt extends Interaction {
 
     @Override
     public void accept (GameObject t, GameObject u) {
-        // TODO: This isDead check is in two places. Consolidate into the part that calls the
-        // interaction engine maybe?
-        if (!t.isDead() && t.getPoint().withinRange(u.getPoint(), t.getWeapon().getRange())) {
+        if (t.getPoint().withinRange(u.getPoint(), t.getWeapon().getRange())) {
             MusicianSimple.getInstance().laser();
             t.fire(super.getGameWorld(), u);
         }

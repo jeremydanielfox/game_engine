@@ -22,6 +22,7 @@ import javafx.scene.control.TitledPane;
 
 public class GenericObjectList {
     private static final String PROPERTY_FILE_PATH = "engine.fieldsetting.implementing_classes";
+    private static final int UNSELECTED_INDEX = -1;
     private ObservableList<Object> createdSpecificObjects;
     private Node node;
     private Group root;
@@ -54,13 +55,14 @@ public class GenericObjectList {
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
                     if (klass.getSimpleName().equals("Collider")) {
-                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass);
+                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass,
+                                                 UNSELECTED_INDEX);
                     }
-                    else {
-                        EditorIntermediate.handleEditorPop(objectEditor, -1);
-//                        objectEditor.popNewEditor(-1);
-                    }
-                });
+                        else {
+                            EditorIntermediate.handleEditorPop(objectEditor, UNSELECTED_INDEX);
+                            // objectEditor.popNewEditor(-1);
+                        }
+                    });
                 contextmenu.getItems().add(item);
                 contextmenu.show(titledPane, me.getSceneX(), me.getSceneY());
             }
@@ -72,7 +74,6 @@ public class GenericObjectList {
         ListView<?> list = ListViewUtilities.createGenericList(createdSpecificObjects, classType);
         BooleanProperty unclicked = new SimpleBooleanProperty(false);
         list.setOnMouseClicked(me -> {
-            System.out.println("UNCLICKED IS (If false you can make new)" + unclicked);
             if (me.getClickCount() == 2 && !unclicked.get()) {
                 unclicked.set(true);
                 DraggableItem draggable =

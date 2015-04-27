@@ -116,6 +116,7 @@ public class CentralTabView implements UIObject {
                                           IllegalArgumentException, InvocationTargetException {
 
         ShopModel shopModel = ((ShopTab) shopTab).getShop();
+     
 
         for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(game.getClass()
                 .getName()), Settable.class)) {

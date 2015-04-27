@@ -27,6 +27,7 @@ import gameworld.ObjectCollection;
  * @author Nathan Prabhu and Danny Oh
  *
  */
+
 @Settable
 public class BasicWeapon implements Weapon{
     private int timeSinceFire;
@@ -58,6 +59,7 @@ public class BasicWeapon implements Weapon{
         return clone;
     }
 
+    //TODO: make collisionBuffs unmodifable somehow...
     private void initializeUpgrades () {
         Set<Buff> collisionBuffs = myProjectile.getCollider().getCollisionBuffs();
         Set<Buff> explosBuffs = myProjectile.getCollider().getCollisionBuffs();
@@ -67,27 +69,34 @@ public class BasicWeapon implements Weapon{
                 syncBuffs(change, collisionBuffs, explosBuffs));
     }
 
+    /**
+     * Adds new buffs to either collision or explosion buff set, if added to upgrade set.
+     * 
+     * @param change
+     * @param collisionBuffs
+     * @param explosBuffs
+     */
     private void syncBuffs (Change<? extends Upgrade> change,
                             Set<Buff> collisionBuffs,
                             Set<Buff> explosBuffs) {
 
-        Buff buff = (change.wasAdded()) ? (Buff) change.getElementAdded() :
-                                       (Buff) change.getElementRemoved();
-        switch (buff.getType()) {
+        Upgrade upg = change.wasAdded() ? change.getElementAdded() :
+                                       change.getElementRemoved();
+        switch (upg.getType()) {
             case COLLISION:
                 if (change.wasAdded()) {
-                    collisionBuffs.add(buff);
+                    collisionBuffs.add((Buff) upg);
                 }
                 else {
-                    collisionBuffs.remove(buff);
+                    collisionBuffs.remove((Buff) upg);
                 }
                 break;
             case EXPLOSION:
                 if (change.wasAdded()) {
-                    explosBuffs.add(buff);
+                    explosBuffs.add((Buff) upg);
                 }
                 else {
-                    explosBuffs.remove(buff);
+                    explosBuffs.remove((Buff) upg);
                 }
                 break;
             default:
@@ -109,17 +118,13 @@ public class BasicWeapon implements Weapon{
         rangeProp.setValue(myRange.getRange());
         myRange.addObserver(new UpgradeObserver(this::updateRange));
     }
-  
+
     @Override
     @Settable
     public void setFiringRate (double firingRate) {
         myFiringRate = new FiringRateUpgrade(firingRate);
         upgradables.add(myFiringRate);
         // myFiringRate.addObserver(new UpgradeObserver(this::updateFiringRate));
-    }
-
-    private void updateFiringRate () {
-
     }
 
     @Override
@@ -197,20 +202,6 @@ public class BasicWeapon implements Weapon{
     public void advanceTime () {
         timeSinceFire++;
     }
-
-    /*
-     * Utility that we may need in the future
-     * private void fireAtEnemyInRange (GameWorld world, PointSimple center) {
-     * ArrayList<GameObject> candidates =
-     * (ArrayList<GameObject>) world.objectsInRange(myRange, center);
-     * // TODO: In bloons, we choose from the candidates using first, last, strong, weak. We could
-     * // do something here as well using polymorphism. For now, we just choose a random one.
-     * if (!candidates.isEmpty()){
-     * myFiringStrategy.execute(world, candidates, center, myProjectile);
-     * timeSinceFire = 0;
-     * }
-     * }
-     */
 
     // TODO: Get the math correct here
     private double firingRateToSeconds () {

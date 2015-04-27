@@ -86,26 +86,43 @@ public class FreeWorld extends AbstractWorld {
 	@Override
 	public void updateGameObjects() {
 		super.updateGameObjects();
+		//TODO refactor during freeze
 		for (int r = 0; r < myGrid.length; r++) {
 			for (int c = 0; c < myGrid[0].length; c++) {
 				GameObject g = myGrid[r][c];
 				if (g != null) {
 					GridCell cell = myTrans.transformWorldToGrid(g.getPoint());
+					PointSimple position = myTrans.findIntraCellPosition(g.getPoint());
+					if(!cell.withinBounds(myBounds)){
+						oustGameObject(r, c, g, cell, position);
+					}
 					if (myGrid[cell.getRow()][cell.getCol()] != g) {
 						if(myGrid[cell.getRow()][cell.getCol()] != null){
-							g.setPoint(myTrans.transformGridCellsToWorldMidPoint(cell, new GridCell(r,c)));
+							oustGameObject(r, c, g, cell, position);
 						}
 						else{
-						myGrid[cell.getRow()][cell.getCol()] = g;
-						myGrid[r][c] = null;
-						try {
-							myPath.updatePath();
-						} catch (NoPathExistsException e) {
-						}
+							myGrid[cell.getRow()][cell.getCol()] = g;
+							myGrid[r][c] = null;
+							try {
+								myPath.updatePath();
+							} catch (NoPathExistsException e) {
+//								PointSimple position = myTrans.findIntraCellPosition(g.getPoint());
+								oustGameObject(r, c, g, cell, position);
+							}
 						}
 					}
 				}
 			}
+		}
+	}
+
+	private void oustGameObject(int r, int c, GameObject g, GridCell cell,
+			PointSimple position) {
+		if(cell.getRow() == r){
+			g.setPoint(myTrans.transformGridCellsToWorldWall(new GridCell(r,c), cell, position.getY()));
+		}
+		if(cell.getCol() == c){
+			g.setPoint(myTrans.transformGridCellsToWorldWall(new GridCell(r,c), cell, position.getX()));
 		}
 	}
 

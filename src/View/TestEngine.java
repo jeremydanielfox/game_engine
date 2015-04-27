@@ -11,15 +11,17 @@ import xml.DataManager;
 
 public class TestEngine extends Application {
 
-    private static final String FILE_SOURCE = "src/xml/Game.xml";
+    private static final String FILE_SOURCE = "src/xml/GameFreePath.xml";
+
 
     @Override
     public void start (Stage primaryStage) throws Exception {
         Group root = new Group();
         primaryStage.setHeight(600);
         primaryStage.setWidth(950);
-//        primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add constants
-//        primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
+        // primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add
+        // constants
+        // primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
 
         Scene scene = new Scene(root);
         Game game = loadGame();

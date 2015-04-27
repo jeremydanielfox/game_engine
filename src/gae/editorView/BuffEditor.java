@@ -26,8 +26,8 @@ public class BuffEditor {
                 EditingParser.getInterfaceClasses(PROPERTY_FILE_PATH);
         for (String buffNames : interfaceToClassMap.get("engine.gameobject.units.Buff")) {
             Button button =
-                    new Button(EditingParser.getInstanceFromName(buffNames).getClass()
-                            .getSimpleName());
+                    new Button(EditingParser.getUserFriendlyName(EditingParser.getInstanceFromName(buffNames).getClass()
+                            .getSimpleName()));
             button.setOnAction(e -> {
                 new PopUpEditor(EditingParser.getInstanceFromName(buffNames).getClass(),
                                 getConsumer(),

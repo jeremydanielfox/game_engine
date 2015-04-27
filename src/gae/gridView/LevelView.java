@@ -29,6 +29,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.beans.property.BooleanProperty;
 
 
 /**
@@ -52,7 +53,8 @@ public class LevelView {
     private LibraryData libraryData;
     private TileViewToggle container;
     private VBox gridOptions;
-    private ObjectProperty<TileMode> tileModeProperty=new SimpleObjectProperty<>(TileMode.TOWERMODE);
+    private ObjectProperty<TileMode> tileModeProperty =
+            new SimpleObjectProperty<>(TileMode.TOWERMODE);
 
     public Pane getBorder (Scene scene) {
         border = new Pane();
@@ -149,13 +151,20 @@ public class LevelView {
 
         gridOptions.getChildren().addAll(title, changeBackground(backgroundProperty));
         makeTileDimensions();
-        Node tileMode=makeToggle(makeToggleButton("Enemy Grid", TileMode.ENEMYMODE), makeToggleButton("Tower Grid", TileMode.TOWERMODE), (obs, old, newVal)->{
-            tileModeProperty.setValue((TileMode) newVal.getUserData());
-        });
-        gridOptions.getChildren().add(makeToggle(makeToggleButton("Show Grid", true), makeToggleButton("Hide Grid", false), (obs, old, newVal)->{
-            container.setVisible((boolean) newVal.getUserData());
-            tileMode.setVisible((boolean) newVal.getUserData());
-        }));
+        Node tileMode =
+                makeToggle(makeToggleButton("Enemy Grid", TileMode.ENEMYMODE),
+                           makeToggleButton("Tower Grid", TileMode.TOWERMODE),
+                           (obs, old, newVal) -> {
+                               tileModeProperty.setValue((TileMode) newVal.getUserData());
+                           });
+        gridOptions.getChildren().add(makeToggle(makeToggleButton("Show Grid", true),
+                                                 makeToggleButton("Hide Grid", false),
+                                                 (obs, old, newVal) -> {
+                                                     container.setVisible((boolean) newVal
+                                                             .getUserData());
+                                                     tileMode.setVisible((boolean) newVal
+                                                             .getUserData());
+                                                 }));
         gridOptions.getChildren().add(tileMode);
     }
 
@@ -196,15 +205,17 @@ public class LevelView {
      * @param ChangeListener for what happens when toggle selected
      */
 
-    private Node makeToggle(ToggleButton button1, ToggleButton button2, ChangeListener<? super Toggle> listener){
+    private Node makeToggle (ToggleButton button1,
+                             ToggleButton button2,
+                             ChangeListener<? super Toggle> listener) {
         ToggleGroup group = new ToggleGroup();
-        group.selectedToggleProperty().addListener( listener);
+        group.selectedToggleProperty().addListener(listener);
         group.getToggles().addAll(button1, button2);
         HBox hbox = new HBox();
         hbox.getChildren().addAll(button1, button2);
         return hbox;
     }
-    
+
     /**
      * Makes a toggle button
      * 
@@ -212,52 +223,52 @@ public class LevelView {
      * @param data toggle holds
      * 
      */
-    private ToggleButton makeToggleButton(String label, Object data){
-        ToggleButton button=new ToggleButton(label);
+    private ToggleButton makeToggleButton (String label, Object data) {
+        ToggleButton button = new ToggleButton(label);
         button.setUserData(data);
         return button;
     }
-  
+
     /*
      * Removed once editor works
      * 
-    @Deprecated
-    private GridPane tempGrid () {
-        GridPane grid = new GridPane();
-        grid.setHgap(0);
-        grid.setTranslateX(200);
-//        grid.add(tempButtonTower(), 0, 0);
-//        grid.add(tempButtonEnemy(), 0, 1);
-        return grid;
-    }
-
-    @Deprecated
-    private Button tempButtonTower () {
-        Button temp = new Button("add Tower");
-//        Placeable Placeable = new TempTower();
-//        temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
-        return temp;
-    }
-
-    @Deprecated
-    private Button tempButtonEnemy () {
-        Button temp = new Button("add Enemy");
-//        Placeable Placeable = new TempEnemy();
-//        temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
-        return temp;
-    }
-    */
+     * @Deprecated
+     * private GridPane tempGrid () {
+     * GridPane grid = new GridPane();
+     * grid.setHgap(0);
+     * grid.setTranslateX(200);
+     * // grid.add(tempButtonTower(), 0, 0);
+     * // grid.add(tempButtonEnemy(), 0, 1);
+     * return grid;
+     * }
+     * 
+     * @Deprecated
+     * private Button tempButtonTower () {
+     * Button temp = new Button("add Tower");
+     * // Placeable Placeable = new TempTower();
+     * // temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
+     * return temp;
+     * }
+     * 
+     * @Deprecated
+     * private Button tempButtonEnemy () {
+     * Button temp = new Button("add Enemy");
+     * // Placeable Placeable = new TempEnemy();
+     * // temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
+     * return temp;
+     * }
+     */
 
     public Consumer<Placeable> getConsumer () {
         Consumer<Placeable> consumer = e -> libraryData.addEditableToList(e);
         return consumer;
     }
-    
-    public ObjectProperty<Dimension> getGridDimensionProperty() {
-        return gridSizeProperty;    
+
+    public ObjectProperty<Dimension> getGridDimensionProperty () {
+        return gridSizeProperty;
     }
-    
-    public String getBackgroundImagePath() {
+
+    public String getBackgroundImagePath () {
         return DEFAULT_IMAGE_PATH;
     }
 }

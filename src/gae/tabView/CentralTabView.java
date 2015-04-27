@@ -13,6 +13,7 @@ import gae.gameWorld.FixedGameWorldFactory;
 import gae.gameWorld.FreeGameWorldFactory;
 import gae.gameWorld.GameWorldFactory;
 import gae.gridView.LevelView;
+import gae.levelPreferences.LevelPreferencesEditor;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
 import gae.waveeditor.WaveEditor;
@@ -157,10 +158,13 @@ public class CentralTabView implements UIObject {
         }
         WaveEditor waves = createLevelAndWaveObject(gameWorldFactory.createGameWorld());
         InteractionTable iTable = new InteractionTable();
+
+        LevelPreferencesEditor prefs = new LevelPreferencesEditor();
         nextWorld.setCollisionEngine(iTable.getData().getCollisionEngine());
         nextWorld.setRangeEngine(iTable.getData().getRangeEngine());
-
-        LevelTabSet newLevel = new LevelTabSet(levelViewPane, waves.getObject(), iTable.getTable());
+        LevelTabSet newLevel =
+                new LevelTabSet(levelViewPane,
+                                waves.getObject(), iTable.getTable(), prefs.getObject());
 
         Tab newTab = new Tab("Level:" + levelCount++);
         newTab.setContent(newLevel.getBaseNode());
@@ -187,7 +191,8 @@ public class CentralTabView implements UIObject {
                 checkAndInvokeMethods(nextWorld, levelData, sb, m);
             }
 
-            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(shopModel.getClass()
+            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(shopModel
+                    .getClass()
                     .getName()), Settable.class)) {
                 if (m.getName().equals("setGameWorld")) {
                     m.invoke(shopModel, nextWorld);

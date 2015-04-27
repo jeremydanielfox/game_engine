@@ -30,7 +30,7 @@ public class HealthGoal extends PlayerGoal {
     }
 
     @Override
-    @Settable
+ //   @Settable
     public void setPlayer (Player p) {
         super.setPlayer(p);
     }

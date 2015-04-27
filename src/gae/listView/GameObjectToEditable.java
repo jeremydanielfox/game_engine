@@ -2,6 +2,7 @@ package gae.listView;
 
 import engine.gameobject.GameObject;
 import engine.gameobject.Graphic;
+import engine.gameobject.Health;
 import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
@@ -41,10 +42,11 @@ public class GameObjectToEditable implements Placeable {
     private int height;
     private ImageView imageView;
     private ImageView shopImageView;
-    private double health;
+//    private double health;
     private String description;
     private Type gameObjectType;
     private Collider collider;
+    private Health health;
 
     public GameObjectToEditable () {
 
@@ -65,7 +67,7 @@ public class GameObjectToEditable implements Placeable {
         shopGraphic = gameObject.getShopGraphic();
         location = gameObject.getPoint();
         weapon = gameObject.getWeapon();
-        System.out.println(weapon);
+        health = gameObject.getHealth();
         collider = gameObject.getCollider();
     }
 
@@ -215,13 +217,13 @@ public class GameObjectToEditable implements Placeable {
     }
 
     @Override
-    public double getHealth () {
+    public Health getHealth () {
         return health;
     }
 
     @Override
-    public double setHealth (double health) {
-        return this.health = health;
+    public void setHealth (Health health) {
+        this.health = health;
     }
 
     @Override

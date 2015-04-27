@@ -24,7 +24,7 @@ public class DirectionHandler {
     
     public PointSimple getDirection(){
         if (myNode == null)
-            initializeNode(myGraphic);
+        initializeNode(myGraphic);
         PointSimple ret = new PointSimple(myDirection.getX(), myDirection.getY());
         myDirection = ORIGIN;
         return ret;
@@ -46,9 +46,9 @@ public class DirectionHandler {
         else if (keyCode == KeyCode.A)
             myDirection = new PointSimple(-1, 0);
         else if (keyCode == KeyCode.W)
-            myDirection = new PointSimple(0, 1);
-        else if (keyCode == KeyCode.S)
             myDirection = new PointSimple(0, -1);
+        else if (keyCode == KeyCode.S)
+            myDirection = new PointSimple(0, 1);
     }
     
     public DirectionHandler clone(){

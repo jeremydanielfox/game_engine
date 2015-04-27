@@ -49,8 +49,7 @@ public class PathList {
 
     public PathList (StackPane stack,
                      Scene scene,
-                     ContainerWrapper container,
-                     BooleanProperty freeWorld) {
+                     ContainerWrapper container) {
         pathView = new PathView(stack, scene);
         pathView.setContainerArea(container);
         this.stack = stack;
@@ -64,9 +63,6 @@ public class PathList {
 
         buttonList
                 .addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, updatePath }));
-        freeWorld.addListener((observable, oldv, newv) -> {
-            disableScreen();
-        });
         stack.getChildren().add(makeGridPane());
     }
 

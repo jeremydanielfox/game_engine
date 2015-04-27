@@ -15,7 +15,7 @@ public class RedBloon extends GameObjectSimple{
     public RedBloon(){
         super();
         setLabel(new EnemyLabel());
-        setGraphic(new Graphic(18, 23, "Red_Bloon.png"));
+        setGraphic(new Graphic(18, 23, "/images/Red_Bloon.png"));
         setPoint(new PointSimple(0, 10000)); 
         setHealth(new HealthSimple(1));
         setWeapon(new NullWeapon());

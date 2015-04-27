@@ -3,6 +3,7 @@ package View;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import voogasalad.util.pathsearch.graph.GridCell;
@@ -24,9 +25,12 @@ import engine.game.StoryBoard;
 import engine.game.Timer;
 import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.Mover;
+import engine.gameobject.MoverNull;
 import engine.gameobject.MoverPath;
+import engine.gameobject.MoverUser;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.TestTower;
 import engine.goals.Goal;
@@ -144,10 +148,13 @@ public class GameWriterConcrete2 extends Application {
 		world.setObstacles(obstaclePoints);
 		
 		try {
-            world.addObject(new TestTower(2, 330, 130), new PointSimple(300,300));
+			GameObjectSimple g = new TestTower(2, 330, 330);
+			MoverUser m = new MoverUser();
+			m.setGraphic(g.getGraphic());
+			g.setMover(m);
+            world.addObject(g, new PointSimple(300,300));
         }
         catch (StructurePlacementException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
 

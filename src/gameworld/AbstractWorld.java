@@ -167,4 +167,9 @@ public class AbstractWorld implements GameWorld {
 			} catch(InvalidArgumentException e){}
 		}
 	}
+
+	@Override
+	public void removeObject(GameObject toRemove) {
+		myObjects.remove(toRemove);
+	}
 }

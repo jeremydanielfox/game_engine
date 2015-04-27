@@ -2,7 +2,11 @@ package gae.builder;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,14 +25,14 @@ public class FieldMaker {
     private String methodName;
     private String propertyName;
     private HBox field;
-    private List<TextField> textFields;
+    private Map<TextField, SimpleStringProperty> textFields;
 
     public FieldMaker (Method m) {
         myMethod = m;
         methodName = m.getName();
         propertyName = extractName(m);
         field = new HBox(15);
-        textFields = new ArrayList<>();
+        textFields = new HashMap<>();
         createField(myMethod);
     }
 
@@ -36,7 +40,7 @@ public class FieldMaker {
         return field;
     }
     
-    public List<TextField> getInputs() {
+    public Map<TextField, SimpleStringProperty> getInputMap() {
         return textFields;
     }
     
@@ -53,8 +57,10 @@ public class FieldMaker {
      */
     private void createField (Method m) {
         TextField tf = new TextField();
+        SimpleStringProperty s = new SimpleStringProperty("");
+        s.bind(tf.textProperty());
         Label l = new Label(propertyName);
-        textFields.add(tf);
+        textFields.put(tf, s);
         l.setPrefWidth(100);
         tf.setPrefWidth(150);
         field.getChildren().addAll(l, tf);

@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import engine.fieldsetting.Settable;
 import engine.game.Player;
 import gae.editor.EditingParser;
@@ -11,12 +12,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class PlayerBuilder implements Builder {
 
@@ -53,7 +57,12 @@ public class PlayerBuilder implements Builder {
     }
     
     @Override
-    public Node getBuilder () {
+    public Pane getBuilder () {
+        Stage stage = new Stage();
+        Scene scene = new Scene(builder);
+        stage.setScene(scene);
+        stage.show();
+        stage.centerOnScreen();
         return builder;
     }
 
@@ -66,7 +75,9 @@ public class PlayerBuilder implements Builder {
         playerData.fillProperties();
     }
     
-    public PlayerData getPlayerData() {
+    
+    @Override
+    public BuildObjectData getData () {
         return playerData;
     }
 

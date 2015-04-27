@@ -24,6 +24,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
@@ -33,6 +34,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Central container for the central tab view in the gae editor
@@ -127,8 +129,9 @@ public class CentralTabView implements UIObject {
     private void setUpPlayerAndLinkToGame ()
         throws ClassNotFoundException, IllegalAccessException, IllegalArgumentException,
         InvocationTargetException {
+        
         PlayerBuilder playerBuilder = new PlayerBuilder();
-        Player myPlayer = (Player) playerBuilder.getPlayerData().getBuiltObject();
+        Player myPlayer = (Player) playerBuilder.getData().getBuiltObject();
 
         for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(game.getClass()
                 .getName()), Settable.class)) {

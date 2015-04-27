@@ -118,7 +118,7 @@ public class EditingParser {
             // iae.printStackTrace();
         }
         catch (InstantiationException ie) {
-            // ie.printStackTrace();
+             ie.printStackTrace();
         }
 
         return component;

@@ -15,7 +15,8 @@ public class MoverUser extends BasicMover {
 
     @Override
     public PointSimple move (PointSimple current) throws EndOfPathException {
-        return current.add(myHandler.getDirection().multiply(currentSpeed()));
+        PointSimple direction = myHandler.getDirection();
+        return current.add(direction.multiply(currentSpeed()));
     }
 
     @Settable

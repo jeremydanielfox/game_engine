@@ -33,6 +33,11 @@ public class LabelCheckList extends CheckList {
         mytemp = new Stage();
         myScene = new Scene((Parent) getCheckList());
         myObjects = (ObservableList<Type>) (ObservableList<?>) objects;
+        
+        myObjects.forEach(e -> {
+            createCheckOption(new LabelCheckListItem(e));
+        });
+        
         myObjects.addListener( (ListChangeListener.Change<? extends Type> change) -> {
             while (change.next()) {
                 change.getAddedSubList().stream()

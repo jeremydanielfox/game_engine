@@ -13,8 +13,9 @@ import engine.fieldsetting.Settable;
 
 public class EditingParser {
     private static final String DEFAULT_PROPERTY_FILE = "engine.fieldsetting.implementing_classes";
+    private static final String USER_FRIENDLY_FILE = "engine.fieldsetting.user_friendly_names";
 
-    public static List<Method> getMethodsWithAnnotation (final Class<?> type, Class annotation) {
+    public static List<Method> getMethodsWithAnnotation (final Class<?> type, Class<?> annotation) {
         final List<Method> methods = new ArrayList<Method>();
         Class<?> klass = type;
         final List<Method> allMethods =
@@ -52,6 +53,21 @@ public class EditingParser {
             }
         }
         return map;
+    }
+    
+    public static String getUserFriendlyName(String originalName) {
+        Map<String, String> map = new HashMap<String, String>();
+        ResourceBundle rb = ResourceBundle.getBundle(USER_FRIENDLY_FILE);
+        Enumeration<String> enumerator = rb.getKeys();
+        
+        while (enumerator.hasMoreElements()) {
+            String key = enumerator.nextElement();
+            map.put(key, rb.getString(key));
+        }
+        
+        String ret = map.get(originalName);
+        if (ret != null) return ret;
+        else return originalName;
     }
     
     /**

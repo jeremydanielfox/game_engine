@@ -46,7 +46,7 @@ public class GenericObjectList {
     public TitledPane getTitledPane () {
         TitledPane titledPane = new TitledPane();
         String classType = getType();
-        titledPane.setText(classType);
+        titledPane.setText(EditingParser.getUserFriendlyName(classType));
         titledPane.setContent(setList(classType));
         titledPane.setOnMousePressed(me -> {
             if (me.isSecondaryButtonDown()) {

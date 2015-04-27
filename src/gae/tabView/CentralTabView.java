@@ -60,7 +60,8 @@ public class CentralTabView implements UIObject {
     private boolean editorInstantiated;
     private FreeWorld freeworld;
     private BooleanProperty isFreeWorld = new SimpleBooleanProperty();
-    ShopModel shopModel;
+    private ShopModel shopModel;
+    private AbstractWorld nextWorld;
 
     public CentralTabView (Scene sceneIn, Game gameIn, String gameTypeIn) {
         scene = sceneIn;
@@ -147,16 +148,16 @@ public class CentralTabView implements UIObject {
 
     private void createNewLevel () {
         isFreeWorld.set(false);
-        levelView = new LevelView(setSpawnPoints(), isFreeWorld);
+        levelView = new LevelView(setSpawnPoints(), setWalkable(), isFreeWorld);
         Pane levelViewPane = levelView.getBorder(scene);
         gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
-        AbstractWorld nextWorld = gameWorldFactory.createGameWorld();
+        nextWorld = gameWorldFactory.createGameWorld();
         if (nextWorld instanceof FreeWorld) {
             freeworld = (FreeWorld) nextWorld;
             LibraryData.getInstance().addFreeWorldPath(freeworld.getPath());
             isFreeWorld.set(true);
         }
-        WaveEditor waves = createLevelAndWaveObject(gameWorldFactory.createGameWorld());
+        WaveEditor waves = createLevelAndWaveObject(nextWorld);
         InteractionTable iTable = new InteractionTable();
 
         LevelPreferencesEditor prefs = new LevelPreferencesEditor();
@@ -241,6 +242,13 @@ public class CentralTabView implements UIObject {
             libraryData.addCreatedObjectToList(klass, o);
         };
         return biConsumer;
+    }
+
+    public BiConsumer<List<GridCell>, List<GridCell>> setWalkable () {
+        return (tower, enemy) -> {
+            nextWorld.setObstacles(enemy);
+            nextWorld.setTowerObstacles(tower);
+        };
     }
 
     public BiConsumer<List<GridCell>, List<GridCell>> setSpawnPoints () {

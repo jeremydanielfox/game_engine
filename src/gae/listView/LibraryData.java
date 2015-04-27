@@ -23,9 +23,7 @@ import javafx.collections.ObservableList;
 
 
 /**
- * Library Data class that stores the list of Editables
- *
- * @author Kei
+ * Library Data class that stores the list of Objects
  *
  */
 public class LibraryData {

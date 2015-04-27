@@ -50,11 +50,11 @@ public class UserStrategy extends BasicStrategy {
                          GameObject target,
                          PointSimple location,
                          GameObject prototype) {
+        if (myNode == null)
             initializeNode(myGraphic);
-            System.out.println(pressedRecently);
-            System.out.println(myDirection);
         if (pressedRecently){
-            GameObject newProjectile = makeProjectile(location, location.add(myDirection.multiply(10)), prototype);
+            PointSimple newLocation = location.add(myDirection.multiply(10));
+            GameObject newProjectile = makeProjectile(location, newLocation, prototype);
             world.addObject(newProjectile);
             pressedRecently = false;
         }

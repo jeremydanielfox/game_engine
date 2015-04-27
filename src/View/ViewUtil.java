@@ -1,5 +1,6 @@
 package View;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -9,6 +10,30 @@ import javafx.scene.input.MouseEvent;
 
 
 public class ViewUtil {
+    public static Node bindCursor (Node node,
+                                   Node pane,
+                                   Point2D initial,
+                                   KeyCode key,
+                                   BooleanProperty unclicked) {
+        final Group wrapGroup = new Group(node);
+        wrapGroup.relocate(initial.getX(), initial.getY());
+            pane.setOnMouseMoved(mouseEvent -> {
+                // mouseEvent.consume();
+                Point2D current = getMouseLocation(mouseEvent, node);
+                wrapGroup.relocate(current.getX(), current.getY());
+            });
+        pane.getScene().setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == key) {
+                unclicked.setValue(false);
+                unbindCursor(pane, node);
+            }
+        });
+
+        // TODO: figure out why keyPressed caller must be scene, and not pane or node
+        // EDIT: I changed this to node and it worked perfectly for me!
+
+        return wrapGroup;
+    }
 
     /**
      * Binds the cursor to the node. Binding will be disabled, and the node will be removed from the
@@ -20,7 +45,11 @@ public class ViewUtil {
      * @param key Disabling key
      * @return
      */
-    public static Node bindCursor (Node node, Node pane, Point2D initial, KeyCode key, boolean scene) {
+    public static Node bindCursor (Node node,
+                                   Node pane,
+                                   Point2D initial,
+                                   KeyCode key,
+                                   boolean scene) {
         final Group wrapGroup = new Group(node);
         wrapGroup.relocate(initial.getX(), initial.getY());
         if (scene) {

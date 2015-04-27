@@ -1,5 +1,9 @@
 package engine.gameobject.labels;
 
+import java.util.Collection;
+import java.util.HashSet;
+import com.sun.xml.internal.ws.org.objectweb.asm.Label;
+
 
 
 /**
@@ -10,10 +14,6 @@ package engine.gameobject.labels;
  *
  */
 public class TypeBase extends SimpleType {
-    /*
-     * private static String name = "Base";
-     * private static Collection<Label> mySubLabels = new HashSet<>();
-     */
 
     private static String myName = "Base";
     private static Type superType = null;
@@ -22,44 +22,9 @@ public class TypeBase extends SimpleType {
         super(myName, superType);
     }
 
-    /*
-     * @Override
-     * public String getLabel () {
-     * return name;
-     * }
-     * 
-     * 
-     * @Override
-     * public boolean hasSubLabel () {
-     * return mySubLabels.size() > 0;
-     * }
-     * 
-     * @Override
-     * public Collection<Label> getSubLabels () {
-     * return Collections.unmodifiableCollection(mySubLabels);
-     * }
-     * 
-     * @Override
-     * public boolean hasSuperLabel () {
-     * return false;
-     * }
-     * 
-     * @Override
-     * public Label getSuperLabel () {
-     * return null;
-     * }
-     * 
-     * @Override
-     * public void addSubLabel (Label label) {
-     * mySubLabels.add(label);
-     * }
-     * 
-     * 
-     * @Override
-     * public void removeSubLabel (Label label) {
-     * mySubLabels.remove(label);
-     * 
-     * }
-     */
+    @Override
+    public int hashCode(){
+        return 23 * myName.hashCode();
+    }
 
 }

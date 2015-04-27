@@ -8,11 +8,10 @@ public class SimpleType implements Type{
 
     private Type superType;
     private String myName;
-    private int index;
 
     public SimpleType () {
         superType = new TypeBase();
-        myName = "";
+        myName = " ";
     }
 
     public SimpleType (String name) {
@@ -52,14 +51,14 @@ public class SimpleType implements Type{
         return new SimpleType(myName, superType);
     }
 
+    @Override
+    public int hashCode(){
+        return 7 * myName.hashCode() + 97 * superType.hashCode();
+    }
+    
     // TODO: equals method needs work... possibly should go all the way down to basetype
     @Override
     public boolean equals (Object other) {
-        if (other instanceof Type) {
-            if (((Type) other).getName().equals(myName)) {
-                return true;
-            }
-        }
-        return false;
+        return hashCode() == other.hashCode();
     }
 }

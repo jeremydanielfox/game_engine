@@ -2,10 +2,9 @@ package gae.listView;
 
 import gae.backend.Placeable;
 import gae.gridView.ContainerWrapper;
-import gae.gridView.PathView;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.collections.FXCollections;
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -36,6 +35,7 @@ public class LibraryView {
     private TitledPane pathTitledPane;
     private PathList pathList;
     private ContainerWrapper wrapper;
+    private BooleanProperty freeWorld;
 
     public LibraryView () {
         instantiatedTypes = new ArrayList<>();
@@ -59,12 +59,13 @@ public class LibraryView {
      */
     public Group getGroup (Node pane,
                            Scene scene,
-                           ContainerWrapper wrapper) {
+                           ContainerWrapper wrapper, BooleanProperty freeWorld) {
         nodeScene = pane;
         myScene = scene;
         this.wrapper = wrapper;
         root = new Group();
         objectGroup = new Group();
+        this.freeWorld = freeWorld;
         root.getChildren().addAll(view(),
                                   objectGroup);
         root.setManaged(false);
@@ -109,7 +110,7 @@ public class LibraryView {
                 }
             }
         });
-        pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
+        pathList = new PathList((StackPane) nodeScene, myScene, wrapper, freeWorld);
         pathTitledPane =
                 pathList.getTitledPane("Path");
         accordion.getPanes().add(pathTitledPane);
@@ -127,7 +128,8 @@ public class LibraryView {
             for (PaneList list : listOfListObjects) {
                 list.removeRoot();
             }
-            pathList.setScreen();
+//            if (!freeWorld.getValue())
+                pathList.setScreen();
         });
         for (int i = 0; i < accordion.getPanes().size(); i++) {
             TitledPane chosen = accordion.getPanes().get(i);

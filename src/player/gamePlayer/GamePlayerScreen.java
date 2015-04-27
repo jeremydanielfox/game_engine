@@ -2,6 +2,7 @@ package player.gamePlayer;
 
 import View.EngineView;
 import View.GameWriter;
+import View.GameWriterConcrete2;
 import View.ViewConcrete2;
 import voogasalad.util.highscore.HighScoreController;
 import voogasalad.util.highscore.HighScoreException;
@@ -24,7 +25,11 @@ import engine.game.Player;
 import gae.gameView.Main;
 import gameworld.GameWorld;
 
-
+/**
+ * 
+ * @author goldstein
+ *
+ */
 public class GamePlayerScreen implements GameScene {
 
     private static final String USER_NAME_PROMPT_TEXT = "ENTER A NAME";
@@ -37,17 +42,19 @@ public class GamePlayerScreen implements GameScene {
     private BorderPane myPane;
     private String myPlayerName; // myPlayerName holds the name of the user to later be put into
                                  // high scores.
+    private ImageView image;
     private Scene myPreviousScene;
     private Scene myScene;
 
-    public GamePlayerScreen (Stage s, Scene previousScene) {
+    public GamePlayerScreen (Stage s, Scene previousScene,Game game) {
         myStage = s;
         myStage.setResizable(false);
 
         myVbox = new VBox(30);
-
+        
         pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
-        myGame = loadGame();
+        //myGame = loadGame();
+        myGame=game;
         myPlayerName = "";
         myPreviousScene = previousScene;
     }
@@ -59,24 +66,25 @@ public class GamePlayerScreen implements GameScene {
      */
     public Scene makeScene () {
         myPane = new BorderPane();
-        myPane.setPadding(new Insets(0, 40, 0, 0));
+        myPane.setPadding(new Insets(0, 40, 0, 40));
         myScene = new Scene(myPane);
         makeSideBar();
         myVbox.setAlignment(Pos.CENTER);
         myPane.setRight(myVbox);
 
         VBox gameTypeImageVBox = new VBox();
-        // this image below needs to be the image that was selected when the play button was pushed
-        // from the previous scene
-        ImageView image = new ImageView("images/Park_Path.png");
-        image.setPreserveRatio(true);
-        image.setFitHeight(Main.SCREEN_HEIGHT - 100);
         gameTypeImageVBox.getChildren().addAll(image);
         gameTypeImageVBox.setAlignment(Pos.CENTER);
         myPane.setLeft(gameTypeImageVBox);
         return myScene;
     }
 
+    public void setImage(ImageView n){
+        image=n;
+        image.setPreserveRatio(true);
+        image.setFitHeight(Main.SCREEN_HEIGHT - 100);
+    }
+    
     /**
      * @return myPlayerName user input of name to begin game
      */
@@ -91,7 +99,7 @@ public class GamePlayerScreen implements GameScene {
      */
     public Node makeDemoGameView () {
 
-        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT,new GameOverScreen(myStage,myScene,myPreviousScene,myGame));
         Node node = myGameView.initializeView();
         return node;
 
@@ -137,7 +145,7 @@ public class GamePlayerScreen implements GameScene {
         insideBox.setMaxWidth(400);
         Label labelText = new Label(label);
         Label description = new Label(text);
-        
+
         labelText.setWrapText(true);
         description.setWrapText(true);
 
@@ -150,7 +158,7 @@ public class GamePlayerScreen implements GameScene {
     /**
      * Displays high scores using HighScoreController from the high score utility.
      */
-    private void displayScores () {
+    public void displayScores () {
         HighScoreController scores = HighScoreController.getController();
         try {
             scores.displayHighScores(myGame.getGameName(), "Score:", 500, 500);
@@ -170,6 +178,8 @@ public class GamePlayerScreen implements GameScene {
      */
     private void changeScene (Scene sceneToChange) {
         myStage.setScene(sceneToChange);
+//         GameOverScreen gameover=new GameOverScreen(myStage,myScene,myPreviousScene,myGame);
+  //       myStage.setScene(gameover.getScene());
     }
 
     /**

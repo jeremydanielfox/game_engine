@@ -12,9 +12,7 @@ import javafx.scene.control.Tab;
  *
  */
 
-// Potentially combine this with the ShopTab using an abstract class
-
-public class GameObjectEditorTab {
+public class GameObjectEditorTab implements ITab {
 
     private Tab baseNode;
     private GameObjectEditorView view;
@@ -28,6 +26,7 @@ public class GameObjectEditorTab {
         baseNode.setClosable(false);
     }
 
+    @Override
     public Tab getBaseTabNode () {
         return baseNode;
     }

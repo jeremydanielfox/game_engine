@@ -19,9 +19,9 @@ import engine.fieldsetting.Settable;
 public class Graphic {
 
     // note to self: need to change this image path default when using data files
-    private static final String DEFAULT_IMAGE_PATH_PREFIX = "images/";
-    private static final String DEFAULT_IMAGE_NAME = "robertDuvall.jpg";
-
+    private static final String DEFAULT_IMAGE_PATH_PREFIX = "";//"/images/";
+    private static final String DEFAULT_IMAGE_NAME = "/images/robertDuvall.jpg";
+    private String myTitle = "";
     private double myHeight;
     private double myWidth;
     private String myImageName;
@@ -29,6 +29,7 @@ public class Graphic {
     @XStreamOmitField
     private transient ImageView myImageView;
     private Rotator myRotator;
+    private int index;
 
     public Graphic () {
         myImageName = DEFAULT_IMAGE_NAME;
@@ -56,11 +57,8 @@ public class Graphic {
     }
 
     private void initializeImageView () {
-        myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
-        // for TEST purpose:
-        if (myPoint == null) {
-            myPoint = new Point2D(0, 0);
-        }
+        myImageView = new ImageView(myImageName);//DEFAULT_IMAGE_PATH_PREFIX + myImageName);
+
         // myImageView.setOnMouseEntered(o -> System.out.println("boom"));
         // myImageView.setOnMouseClicked(e -> System.out.println("clicked"));
         // myImageView.setFocusTraversable(true);
@@ -90,7 +88,6 @@ public class Graphic {
     public void setPoint (PointSimple point) {
         Point2D temp = new Point2D(point.getX() + ViewUtil.getCenterOffsetX(myImageView),
                                    point.getY() + ViewUtil.getCenterOffsetY(myImageView));
-        rotate(new PointSimple(temp));
         myPoint = temp;
         getImageView().relocate(myPoint.getX(), myPoint.getY());
     }
@@ -135,16 +132,20 @@ public class Graphic {
     }
 
     public String getImagePath () {
-        return DEFAULT_IMAGE_PATH_PREFIX + myImageName;
+        return myImageName;//DEFAULT_IMAGE_PATH_PREFIX + myImageName;
     }
 
     /**
-     * Rotates the node for this graphic according to a point and its rotator.
+     * Rotates the node for this graphic according to a point and its rotator. It uses the center of
+     * the graphic as
+     * the current/from point and the point passed in as the "to" point.
      *
      * @param point
      */
     public void rotate (PointSimple point) {
-        myRotator.rotate(myImageView, new PointSimple(myPoint), point);
+        Point2D centerOfMyImage =
+                new Point2D(myPoint.getX() - ViewUtil.getCenterOffsetX(myImageView),
+                            myPoint.getY() - ViewUtil.getCenterOffsetY(myImageView));
+        myRotator.rotate(myImageView, new PointSimple(centerOfMyImage), point);
     }
-
 }

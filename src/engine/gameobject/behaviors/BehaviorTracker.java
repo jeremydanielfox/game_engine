@@ -13,7 +13,7 @@ public class BehaviorTracker {
         endOfPath = new ArrayList<Behavior>();
         death = new ArrayList<Behavior>();
         death.add(new ExplosionBehavior());//On default, explode on death
-        endOfPath.add(new DeathBehavior());
+        endOfPath.add(new DisappearBehavior());
     }
     
     public void addOnDeath(Behavior behavior){
@@ -51,4 +51,5 @@ public class BehaviorTracker {
             behavior.execute(world, object);
         }
     }
+    
 }

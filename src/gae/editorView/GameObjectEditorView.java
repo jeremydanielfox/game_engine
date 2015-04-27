@@ -1,6 +1,8 @@
 package gae.editorView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import engine.gameobject.GameObjectSimple;
@@ -9,9 +11,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import gae.editor.ComponentEditor;
@@ -36,42 +41,71 @@ public class GameObjectEditorView implements UIObject {
     private AnchorPane anchor;
     private SimpleEditor simpleEditor;
     private Class<?> clazz;
-
-    public GameObjectEditorView (Scene scene, Consumer<Object> consumer, BiConsumer<Class<?>, Object> biConsumer) {
+    private static Map<Class<?>, SimpleEditor> simpleEditorMap = new HashMap<>();
+    private int index = -1;
+    private TextField title;
+    // not best way to do it because it takes up a lot of space but lack of time
+    private static Map<Class<?>, Node> titleFieldMap = new HashMap<>();
+    public GameObjectEditorView (Scene scene,
+                                 Consumer<Object> consumer,
+                                 BiConsumer<Class<?>, Object> biConsumer) {
         simpleEditor = new SimpleEditor(DEFAULT_CLASS, biConsumer);
+        title = new TextField();
         clazz = DEFAULT_CLASS;
         init(scene, consumer, biConsumer);
     }
 
-    public GameObjectEditorView (Scene scene, Consumer<Object> consumer, BiConsumer<Class<?>, Object> biConsumer, Class<?> klass) {
-        simpleEditor = new SimpleEditor(klass, biConsumer);
+    public GameObjectEditorView (Scene scene,
+                                 Consumer<Object> consumer,
+                                 BiConsumer<Class<?>, Object> biConsumer,
+                                 Class<?> klass, int index) {
+        if (!simpleEditorMap.containsKey(klass)) {
+            simpleEditor = new SimpleEditor(klass, biConsumer);
+            title = new TextField();
+            titleFieldMap.put(klass, title);
+            simpleEditorMap.put(klass, simpleEditor);
+        }
+        else {
+            simpleEditor = simpleEditorMap.get(klass);
+            title = (TextField) titleFieldMap.get(klass);
+            this.index = index;
+        }
         clazz = klass;
         init(scene, consumer, biConsumer);
     }
 
-    private void init (Scene scene, Consumer<Object> consumer, BiConsumer<Class<?>, Object> biConsumer) {
+    private void init (Scene scene,
+                       Consumer<Object> consumer,
+                       BiConsumer<Class<?>, Object> biConsumer) {
         root = new Group();
         root.setManaged(false);
         this.scene = scene;
-
+        top = new VBox();
         List<ComponentEditor> simpleList = simpleEditor.getSimpleComponentEditors();
         SimpleEditorView simpleEditorView = new SimpleEditorView(simpleList);
-        top = (VBox) simpleEditorView.getObject();
+        top.getChildren().addAll(titleBox(), (VBox) simpleEditorView.getObject());
         top.setPrefSize(vboxWidth, vboxHeight);
-        // imageLocationMap =
-        // ResourceBundleUtil.useResourceBundle("gae/editorView/ObjectPathProperties");
         Button addButton = new Button("Add");
+
         addButton.setOnAction(e -> {
             Object obj = createObject();
+            GameObjectInformation.getInstance().addInformation(obj, title.getText(), index);
             consumer.accept(obj);
             biConsumer.accept(clazz, obj);
+            root.getChildren().clear();
         });
-        addButton().accept(addButton);
+        top.getChildren().add(addButton);
+    }
+
+    private Node titleBox () {
+        HBox titlebox = new HBox();
+        Label label = new Label("Title");
+        titlebox.getChildren().addAll(label, title);
+        return titlebox;
     }
 
     private BorderPane setUpBorder () {
         BorderPane border = new BorderPane();
-
         border.setCenter(setUpAnchor());
         border.setRight(setUpAccordion());
         LibraryList library = new LibraryList(scene);
@@ -80,7 +114,7 @@ public class GameObjectEditorView implements UIObject {
     }
 
     private Node setUpAnchor () {
-        bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
+        bottom = new GameObjectContainer(vboxWidth, vboxHeight);
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
 
@@ -116,8 +150,5 @@ public class GameObjectEditorView implements UIObject {
         return simpleEditor.createObject(clazz);
     }
 
-    public Consumer<Node> addButton () {
-        Consumer<Node> consumer = node -> top.getChildren().add(node);
-        return consumer;
-    }
+    
 }

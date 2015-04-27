@@ -2,9 +2,10 @@ package gae.listView;
 
 import gae.backend.Placeable;
 import gae.gridView.ContainerWrapper;
-import gae.gridView.PathView;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.BooleanProperty;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -23,23 +24,21 @@ import javafx.scene.layout.StackPane;
  *
  */
 public class LibraryView {
-    /*
-     * should be able to get the gameObjects list from a properties file
-     */
-    private String[] gameObjects = { "Tower", "Enemy" };
     private List<PaneList> listOfListObjects;
     private Group root;
     private Group objectGroup;
     private Node nodeScene;
     private ObservableList<Authorable> editableObservableList;
+    private List<String> instantiatedTypes;
     private Scene myScene;
     private Accordion accordion;
     private TitledPane pathTitledPane;
     private PathList pathList;
     private ContainerWrapper wrapper;
+    private BooleanProperty freeWorld;
 
-    public LibraryView (ObservableList<Authorable> editableObservableList) {
-        this.editableObservableList = editableObservableList;
+    public LibraryView () {
+        instantiatedTypes = new ArrayList<>();
     }
 
     public Scene getScene () {
@@ -60,16 +59,31 @@ public class LibraryView {
      */
     public Group getGroup (Node pane,
                            Scene scene,
-                           ContainerWrapper wrapper) {
+                           ContainerWrapper wrapper, BooleanProperty freeWorld) {
         nodeScene = pane;
         myScene = scene;
         this.wrapper = wrapper;
         root = new Group();
         objectGroup = new Group();
+        this.freeWorld = freeWorld;
         root.getChildren().addAll(view(),
                                   objectGroup);
         root.setManaged(false);
         return root;
+    }
+
+    private void setUpTitledPane (Authorable authorable) {
+        String type = authorable.getType();
+        if (!instantiatedTypes.contains(type)) {
+            instantiatedTypes.add(type);
+            PaneList paneList = new PaneList();
+            listOfListObjects.add(paneList);
+            accordion.getPanes()
+                    .add(paneList.initialize(objectGroup, nodeScene, myScene,
+                                             wrapper,
+                                             editableObservableList,
+                                             type));
+        }
     }
 
     /**
@@ -82,14 +96,21 @@ public class LibraryView {
     private Node view () {
         listOfListObjects = new ArrayList<>();
         accordion = new Accordion();
-        for (String gameObject : gameObjects) {
-            PaneList paneList = new PaneList();
-            listOfListObjects.add(paneList);
-            accordion.getPanes().add(paneList.initialize(objectGroup, nodeScene, myScene, wrapper,
-                                                         editableObservableList, gameObject));
-
+        editableObservableList = LibraryData.getInstance().getEditableObservableList();
+        for (Authorable authorable : editableObservableList) {
+            Placeable existing = (Placeable) authorable;
+            setUpTitledPane(existing);
         }
-        pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
+        editableObservableList
+                .addListener( (ListChangeListener.Change<? extends Authorable> change) -> {
+                    while (change.next()) {
+                        if (change.wasAdded()) { // if an editablenode was added
+                    Placeable added = (Placeable) change.getAddedSubList().get(0);
+                    setUpTitledPane(added);
+                }
+            }
+        });
+        pathList = new PathList((StackPane) nodeScene, myScene, wrapper, freeWorld);
         pathTitledPane =
                 pathList.getTitledPane("Path");
         accordion.getPanes().add(pathTitledPane);
@@ -107,7 +128,8 @@ public class LibraryView {
             for (PaneList list : listOfListObjects) {
                 list.removeRoot();
             }
-            pathList.setScreen();
+//            if (!freeWorld.getValue())
+                pathList.setScreen();
         });
         for (int i = 0; i < accordion.getPanes().size(); i++) {
             TitledPane chosen = accordion.getPanes().get(i);

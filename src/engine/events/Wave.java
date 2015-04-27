@@ -10,6 +10,16 @@ import java.util.List;
 import java.util.Set;
 
 
+/**
+ * This class outlines the the basic behavior of a wave: the ability to release game objects into a
+ * game world over a period of time. It depends on a GameWorld, which it releases game objects into,
+ * and it requires a GameObjectQueue which is used to populate the wave with game objects. The wave
+ * tracks the enemies that it releases into the world and marks itself as complete once all of the
+ * released objects have "died."
+ * 
+ * @author Sierra
+ *
+ */
 public abstract class Wave extends TimedEvent {
 
     private static final int DEFAULT_FRAME_TRIGGER = -1;
@@ -20,21 +30,11 @@ public abstract class Wave extends TimedEvent {
 
     public Wave () {
         super(DEFAULT_FRAME_TRIGGER);
-        initializeVars(new ConcreteQueue(), new FixedWorld());
+        initializeVars(new ConcreteQueue(), new FixedWorld(10,10));
     }
 
     public Wave (GameObjectQueue objects, GameWorld world) {
         this(DEFAULT_FRAME_TRIGGER, objects, world);
-    }
-
-    @Settable
-    public void setObjectQueue (GameObjectQueue objects) {
-        myQueue = objects;
-    }
-
-    @Settable
-    public void setGameWorld (GameWorld world) {
-        myWorld = world;
     }
 
     public Wave (double startTime, GameObjectQueue objects, GameWorld world) {
@@ -46,6 +46,16 @@ public abstract class Wave extends TimedEvent {
         myQueue = objects;
         myWorld = world;
         myWaveSet = new HashSet<GameObject>();
+    }
+
+    @Settable
+    public void setObjectQueue (GameObjectQueue objects) {
+        myQueue = objects;
+    }
+
+    @Settable
+    public void setGameWorld (GameWorld world) {
+        myWorld = world;
     }
 
     /**
@@ -84,7 +94,6 @@ public abstract class Wave extends TimedEvent {
      */
     public boolean releaseObject () {
         if (myQueue.getObjectCount() > 0) {
-            // System.out.println("Supposedly adding game object to world.");
             GameObject gameObject = myQueue.releaseGameObject();
             myWaveSet.add(gameObject);
             myWorld.addObject(gameObject);

@@ -21,6 +21,8 @@ public class ItemGraphic extends Parent {
     private String name;
     private Graphic shopGraphic;
 
+    private boolean isGlow = true;
+
     public ItemGraphic (String name, Graphic shopGraphic) {
         this.name = name;
         this.shopGraphic = shopGraphic;
@@ -34,9 +36,11 @@ public class ItemGraphic extends Parent {
         getChildren().add(itemNode);
     }
 
-    private void hoverAction () {
+    protected void hoverAction () {
         itemNode.setCursor(Cursor.HAND);
-        itemNode.setEffect(new Glow(GLOW_VALUE));
+        if (isGlow) {
+            itemNode.setEffect(new Glow(GLOW_VALUE));
+        }
     }
 
     public String getName () {
@@ -46,4 +50,9 @@ public class ItemGraphic extends Parent {
     public Node getGraphic () {
         return shopGraphic.getNode();
     }
+
+    public void unGlow () {
+        isGlow = false;
+    }
+
 }

@@ -25,9 +25,14 @@ import engine.game.StoryBoard;
 import engine.game.Timer;
 import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.Mover;
+import engine.gameobject.MoverNull;
 import engine.gameobject.MoverPath;
+import engine.gameobject.MoverUser;
+import engine.gameobject.PointSimple;
+import engine.gameobject.test.TestTower;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
@@ -40,6 +45,7 @@ import engine.shop.wallet.Wallet;
 import gameworld.FixedWorld;
 import gameworld.FreeWorld;
 import gameworld.GameWorld;
+import gameworld.StructurePlacementException;
 
 public class GameWriterConcrete2 extends Application {
 	static GameWriterConcrete2 myWriter;
@@ -98,7 +104,7 @@ public class GameWriterConcrete2 extends Application {
 		levelOne.addTimer(t);
 		board.addLevel(levelOne);
 		board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3,
-				list, new FixedWorld(), new StoryBoard()));
+				list, new FixedWorld(13,13), new StoryBoard()));
 
 		return board;
 	}
@@ -140,6 +146,17 @@ public class GameWriterConcrete2 extends Application {
 		world.setEndPoints(endPoints);
 		world.setSpawnPoints(startPoints);
 		world.setObstacles(obstaclePoints);
+		
+		try {
+			GameObjectSimple g = new TestTower(2, 330, 330);
+			MoverUser m = new MoverUser();
+			m.setGraphic(g.getGraphic());
+			g.setMover(m);
+            world.addObject(g, new PointSimple(300,300));
+        }
+        catch (StructurePlacementException e1) {
+            e1.printStackTrace();
+        }
 
 		try {
 			world.getPath().updatePath();

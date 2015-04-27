@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.io.File;
 import java.util.function.Consumer;
 import gae.backend.Placeable;
-import gae.backend.TempEnemy;
-import gae.backend.TempTower;
 import gae.gridView.TileViewToggle.TileMode;
 import gae.listView.LibraryData;
 import gae.listView.LibraryView;
@@ -31,6 +29,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.beans.property.BooleanProperty;
 
 
 /**
@@ -54,7 +53,13 @@ public class LevelView {
     private LibraryData libraryData;
     private TileViewToggle container;
     private VBox gridOptions;
-    private ObjectProperty<TileMode> tileModeProperty=new SimpleObjectProperty<>(TileMode.TOWERMODE);
+    private ObjectProperty<TileMode> tileModeProperty =
+            new SimpleObjectProperty<>(TileMode.TOWERMODE);
+    private BooleanProperty freeWorld;
+
+    public LevelView (BooleanProperty freeWorld) {
+        this.freeWorld = freeWorld;
+    }
 
     public Pane getBorder (Scene scene) {
         border = new Pane();
@@ -94,7 +99,7 @@ public class LevelView {
         Pane root = new Pane();
         container = new TileViewToggle(gridSizeProperty, scene);
         container.getTileModeProperty().bind(tileModeProperty);
-        root.getChildren().addAll(background, container, tempGrid());
+        root.getChildren().addAll(background, container);
         // root.getChildren().addAll(background, container);
 
         stack.getChildren().addAll(root);
@@ -115,9 +120,9 @@ public class LevelView {
     private Group getLibraryView () {
         libraryData = LibraryData.getInstance();
         libraryview =
-                new LibraryView(libraryData.getEditableObservableList());
+                new LibraryView();
         Group leftview =
-                libraryview.getGroup(stack, scene, wrapper);
+                libraryview.getGroup(stack, scene, wrapper, freeWorld);
         setGridOptions();
         leftview.getChildren().add(gridOptions);
         return leftview;
@@ -146,18 +151,25 @@ public class LevelView {
     private void setGridOptions () {
         gridOptions = new VBox();
         gridOptions.setTranslateX(scene.getWidth() * 2 / 3);
-        gridOptions.setTranslateY(scene.getHeight() / 2);
+        gridOptions.setTranslateY(scene.getHeight() / 3);
         Text title = new Text("Grid Properties");
 
         gridOptions.getChildren().addAll(title, changeBackground(backgroundProperty));
         makeTileDimensions();
-        Node tileMode=makeToggle(makeToggleButton("Enemy Grid", TileMode.ENEMYMODE), makeToggleButton("Tower Grid", TileMode.TOWERMODE), (obs, old, newVal)->{
-            tileModeProperty.setValue((TileMode) newVal.getUserData());
-        });
-        gridOptions.getChildren().add(makeToggle(makeToggleButton("Show Grid", true), makeToggleButton("Hide Grid", false), (obs, old, newVal)->{
-            container.setVisible((boolean) newVal.getUserData());
-            tileMode.setVisible((boolean) newVal.getUserData());
-        }));
+        Node tileMode =
+                makeToggle(makeToggleButton("Enemy Grid", TileMode.ENEMYMODE),
+                           makeToggleButton("Tower Grid", TileMode.TOWERMODE),
+                           (obs, old, newVal) -> {
+                               tileModeProperty.setValue((TileMode) newVal.getUserData());
+                           });
+        gridOptions.getChildren().add(makeToggle(makeToggleButton("Show Grid", true),
+                                                 makeToggleButton("Hide Grid", false),
+                                                 (obs, old, newVal) -> {
+                                                     container.setVisible((boolean) newVal
+                                                             .getUserData());
+                                                     tileMode.setVisible((boolean) newVal
+                                                             .getUserData());
+                                                 }));
         gridOptions.getChildren().add(tileMode);
     }
 
@@ -198,15 +210,17 @@ public class LevelView {
      * @param ChangeListener for what happens when toggle selected
      */
 
-    private Node makeToggle(ToggleButton button1, ToggleButton button2, ChangeListener<? super Toggle> listener){
+    private Node makeToggle (ToggleButton button1,
+                             ToggleButton button2,
+                             ChangeListener<? super Toggle> listener) {
         ToggleGroup group = new ToggleGroup();
-        group.selectedToggleProperty().addListener( listener);
+        group.selectedToggleProperty().addListener(listener);
         group.getToggles().addAll(button1, button2);
         HBox hbox = new HBox();
         hbox.getChildren().addAll(button1, button2);
         return hbox;
     }
-    
+
     /**
      * Makes a toggle button
      * 
@@ -214,38 +228,52 @@ public class LevelView {
      * @param data toggle holds
      * 
      */
-    private ToggleButton makeToggleButton(String label, Object data){
-        ToggleButton button=new ToggleButton(label);
+    private ToggleButton makeToggleButton (String label, Object data) {
+        ToggleButton button = new ToggleButton(label);
         button.setUserData(data);
         return button;
     }
-  
 
-    private GridPane tempGrid () {
-        GridPane grid = new GridPane();
-        grid.setHgap(0);
-        grid.setTranslateX(200);
-        grid.add(tempButtonTower(), 0, 0);
-        grid.add(tempButtonEnemy(), 0, 1);
-        return grid;
-    }
-
-    private Button tempButtonTower () {
-        Button temp = new Button("add Tower");
-        Placeable Placeable = new TempTower();
-        temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
-        return temp;
-    }
-
-    private Button tempButtonEnemy () {
-        Button temp = new Button("add Enemy");
-        Placeable Placeable = new TempEnemy();
-        temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
-        return temp;
-    }
+    /*
+     * Removed once editor works
+     * 
+     * @Deprecated
+     * private GridPane tempGrid () {
+     * GridPane grid = new GridPane();
+     * grid.setHgap(0);
+     * grid.setTranslateX(200);
+     * // grid.add(tempButtonTower(), 0, 0);
+     * // grid.add(tempButtonEnemy(), 0, 1);
+     * return grid;
+     * }
+     * 
+     * @Deprecated
+     * private Button tempButtonTower () {
+     * Button temp = new Button("add Tower");
+     * // Placeable Placeable = new TempTower();
+     * // temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
+     * return temp;
+     * }
+     * 
+     * @Deprecated
+     * private Button tempButtonEnemy () {
+     * Button temp = new Button("add Enemy");
+     * // Placeable Placeable = new TempEnemy();
+     * // temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
+     * return temp;
+     * }
+     */
 
     public Consumer<Placeable> getConsumer () {
         Consumer<Placeable> consumer = e -> libraryData.addEditableToList(e);
         return consumer;
+    }
+
+    public ObjectProperty<Dimension> getGridDimensionProperty () {
+        return gridSizeProperty;
+    }
+
+    public String getBackgroundImagePath () {
+        return DEFAULT_IMAGE_PATH;
     }
 }

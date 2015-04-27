@@ -12,7 +12,6 @@ import engine.pathfinding.EndOfPathException;
  */
 public interface Mover {
 
-    @Settable
     /**
      * Based on mover's state, returns next destination for moving.
      *
@@ -25,6 +24,12 @@ public interface Mover {
     @Settable
     public void setSpeed (double speed);
 
+    /**
+    * Speeds/slows down the mover
+    * @param percentage i.e. 90 for 90% speedup
+    */
+   public void speedBuff (double percentage);
+      
     public double getSpeed();
     public Mover clone ();
 

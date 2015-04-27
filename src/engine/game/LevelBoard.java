@@ -32,6 +32,8 @@ public interface LevelBoard {
      *
      * @return
      */
+    public boolean isWon();
+    public boolean isLost();
     public String getCurrentLevelMap ();
 
     /**
@@ -61,4 +63,9 @@ public interface LevelBoard {
      * @return
      */
     public Level getCurrentLevel ();
+    
+    /**
+     * Adds the given level to the end of the existing sequence of levels.
+     */
+    public void addLevel(Level newLevel);
 }

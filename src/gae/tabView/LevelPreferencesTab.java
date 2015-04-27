@@ -3,6 +3,12 @@ package gae.tabView;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
+/**
+ * Level Preferences Tab
+ * @author JohnGilhuly
+ *
+ */
+
 
 public class LevelPreferencesTab {
     private StackPane baseNode;

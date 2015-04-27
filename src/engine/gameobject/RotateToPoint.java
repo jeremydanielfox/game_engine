@@ -21,21 +21,22 @@ public class RotateToPoint implements Rotator {
         // class?
         double xDiff = to.getX() - from.getX();
         double yDiff = to.getY() - from.getY();
-        double finalAngle;
+        double angle;
         if (xDiff == 0 && yDiff == 0) {
-            finalAngle = 0;
+//            finalAngle = 0;
+            return;
         }
         else if (xDiff == 0) {
-            finalAngle = (yDiff > 0 ? 1 : -1) * Math.PI / 2;
+            angle = (yDiff > 0 ? 1 : -1) * Math.PI / 2;
         }
         else {
-            finalAngle = Math.atan(yDiff / xDiff);
+            angle = Math.atan(yDiff / xDiff);
             if (xDiff < 0) {
-                finalAngle += Math.PI;
+                angle += Math.PI;
             }
         }
         if (image != null) {
-            image.setRotate(Math.toDegrees(finalAngle));
+            image.setRotate(Math.toDegrees(angle));
         }
     }
 

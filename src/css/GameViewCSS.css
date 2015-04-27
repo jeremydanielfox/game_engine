@@ -7,3 +7,65 @@
 	-fx-width: 25px;
 	-fx-height: 25px;
 }
+
+
+/*TABS*/
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: .1;
+}
+
+.tab-pane
+{
+    -fx-tab-min-width:90px;
+}
+
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab
+{
+    -fx-background-color: #e6e6e6;
+
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color: #B6ECFF;
+}
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    /*-fx-font-weight: bold;*/
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+}
+
+/*preferences tab hover picture*/
+
+#selectGameText {
+   -fx-font-size: 25;
+}
+
+.hoverPicture {
+   -fx-opacity: 0.3;
+}
+
+  .hoverPicture:hover {
+    -fx-opacity: 1;
+  }
+
+    .hoverPicture:pressed {
+      -fx-opacity: 1;
+      -fx-border-color: red;
+      -fx-border-width: 5px;
+    }
+
+.gameLabel {
+  -fx-font-size: 30;
+}

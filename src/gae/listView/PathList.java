@@ -4,21 +4,20 @@ import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.gridView.ContainerWrapper;
-import gae.gridView.Path;
+import gae.gridView.AuthoringPath;
 import gae.gridView.PathView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import xml.DataManager;
@@ -33,7 +32,7 @@ import xml.DataManager;
  */
 public class PathList {
     private PathView pathView;
-    private List<List<Path>> allPaths;
+    private List<List<AuthoringPath>> allPaths;
     private List<PathView> previousPaths;
     private static int counter;
     private ObservableList<Authorable> paths;
@@ -44,12 +43,14 @@ public class PathList {
     private Button bezier;
     private Button completePath;
     private Button newPath;
-    private Button displayPath;
     private Button updatePath;
 
     private List<Button> buttonList;
 
-    public PathList (StackPane stack, Scene scene, ContainerWrapper container) {
+    public PathList (StackPane stack,
+                     Scene scene,
+                     ContainerWrapper container,
+                     BooleanProperty freeWorld) {
         pathView = new PathView(stack, scene);
         pathView.setContainerArea(container);
         this.stack = stack;
@@ -57,14 +58,15 @@ public class PathList {
         bezier = makeBezierCurve();
         completePath = completePath();
         newPath = newPath();
-        displayPath = displayPaths();
         updatePath = updatePath();
         buttonList = new ArrayList<>();
         buttonStates = new ArrayList<>();
 
-        buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
-                                                       updatePath }));
-        // stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
+        buttonList
+                .addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, updatePath }));
+        freeWorld.addListener((observable, oldv, newv) -> {
+            disableScreen();
+        });
         stack.getChildren().add(makeGridPane());
     }
 
@@ -92,7 +94,7 @@ public class PathList {
                 }
             });
         });
-   
+
         pane.setContent(listView);
         return pane;
     }
@@ -144,11 +146,11 @@ public class PathList {
                 if (newValue.intValue() == 0) {
                     makeCurve.setDisable(true);
                 }
-                else {
-                    makeCurve.setDisable(false);
-                    label.setTextFill(Color.BLACK);
-                }
-            });
+                                                   else {
+                                                       makeCurve.setDisable(false);
+                                                       label.setTextFill(Color.BLACK);
+                                                   }
+                                               });
         });
         return makeCurve;
     }
@@ -158,7 +160,7 @@ public class PathList {
         allPaths = new ArrayList<>();
         previousPaths = new ArrayList<>();
         complete.setOnMouseClicked(e -> {
-            List<Path> path = pathView.createPathObjects();
+            List<AuthoringPath> path = pathView.createPathObjects();
             previousPaths.add(pathView);
             allPaths.add(path);
             System.out.println("ADDING INDEX : " + paths.size());
@@ -179,42 +181,6 @@ public class PathList {
             completePath.setDisable(false);
         });
         return newPath;
-    }
-
-    /**
-     * This button must be clicked to not only display the path coordinates but to also write them
-     * into a XML file
-     */
-    private Button displayPaths () {
-        Button display = new Button("make XML");
-        // XStream xst = new XStream(new DomDriver());
-        display.setOnMouseClicked(e -> {
-            // this is the information that'll be passed into XML (allPaths)
-            // *****************************************//
-            System.out.println("PRINTING OUT ALLPATHS LIST!");
-            PathFixed myPath = new PathFixed();
-            for (List<Path> lists : allPaths) {
-
-                for (int i = 0; i < lists.size(); i++) {
-                    // System.out.println("Path " + i + "'s coordinates");
-                    Path temp = lists.get(i);
-                    temp.printInfo();
-                    // System.out.println();
-                    PathSegmentBezier tempBez = new PathSegmentBezier();
-                    List<PointSimple> points = new ArrayList<>();
-                    points.add(temp.getStart());
-                    points.add(temp.getControlOne());
-                    points.add(temp.getControlTwo());
-                    points.add(temp.getEnd());
-                    tempBez.setPoints(points);
-                    myPath.addPathSegment(tempBez);
-                }
-            }
-            // *****************************************//
-            DataManager.writeToXML(myPath, "src/gae/listView/Test.xml");
-        });
-
-        return display;
     }
 
     /**

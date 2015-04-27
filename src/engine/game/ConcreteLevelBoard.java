@@ -15,15 +15,18 @@ import gameworld.GameWorld;
  */
 @Settable
 public class ConcreteLevelBoard extends Observable implements LevelBoard {
-
+    private String myTitle = "";
     private List<Level> myLevels;
     private int curLevelIndex;
+    private boolean isLost;
+    private boolean isWon;
 
     public ConcreteLevelBoard () {
         myLevels = new ArrayList<Level>();
         curLevelIndex = 0;
     }
 
+    @Override
     public void addLevel (Level newLevel) {
         myLevels.add(newLevel);
     }
@@ -52,10 +55,20 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
      */
     @Override
     public boolean gameOver () {
+        isWon = myLevels.get(curLevelIndex).isWon();
+        isLost = myLevels.get(curLevelIndex).isLost();
         boolean answer =
-                ((curLevelIndex == myLevels.size() - 1) && (myLevels.get(curLevelIndex).isWon())) ||
-                myLevels.get(curLevelIndex).isLost();
+                ((curLevelIndex == myLevels.size() - 1) && (isWon)) || isLost;
         return answer;
+
+    }
+
+    public boolean isWon () {
+        return isWon;
+    }
+
+    public boolean isLost () {
+        return isLost;
     }
 
     @Override
@@ -88,5 +101,4 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
         }
         return null;
     }
-
 }

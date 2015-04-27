@@ -3,30 +3,31 @@ package gae.editorView;
 import java.util.ArrayList;
 import java.util.Map;
 import gae.editor.EditingParser;
+import gae.editor.EditorIntermediate;
 import gae.editor.ObjectComponentEditor;
 import gae.gridView.ContainerWrapper;
 import gae.listView.DraggableUtilities;
 import gae.listView.LibraryData;
 import gae.listView.ListViewUtilities;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
-import javafx.scene.input.MouseEvent;
 
 
 public class GenericObjectList {
     private static final String PROPERTY_FILE_PATH = "engine.fieldsetting.implementing_classes";
+    private static final int UNSELECTED_INDEX = -1;
     private ObservableList<Object> createdSpecificObjects;
     private Node node;
     private Group root;
     private Class<?> klass;
-    private EventHandler<? super MouseEvent> popNewEditor;
+    private ObjectComponentEditor objectEditor;
     private ContainerWrapper wrapper;
     private Map<String, ArrayList<String>> interfaceToClassMap;
 
@@ -34,7 +35,7 @@ public class GenericObjectList {
                               Node node,
                               ContainerWrapper wrapper,
                               Group root) {
-        popNewEditor = editor.popNewEditor();
+        objectEditor = editor;
         this.node = node;
         this.root = root;
         this.wrapper = wrapper;
@@ -46,15 +47,22 @@ public class GenericObjectList {
     public TitledPane getTitledPane () {
         TitledPane titledPane = new TitledPane();
         String classType = getType();
-        titledPane.setText(classType);
+        titledPane.setText(EditingParser.getUserFriendlyName(classType));
         titledPane.setContent(setList(classType));
         titledPane.setOnMousePressed(me -> {
             if (me.isSecondaryButtonDown()) {
                 ContextMenu contextmenu = new ContextMenu();
                 MenuItem item = new MenuItem("New");
                 item.setOnAction(ae -> {
-                    popNewEditor.handle(me);
-                });
+                    if (klass.getSimpleName().equals("Collider")) {
+                        new ColliderEditorOpener(objectEditor.getBiConsumer(), klass,
+                                                 UNSELECTED_INDEX);
+                    }
+                        else {
+                            EditorIntermediate.handleEditorPop(objectEditor, UNSELECTED_INDEX);
+                            // objectEditor.popNewEditor(-1);
+                        }
+                    });
                 contextmenu.getItems().add(item);
                 contextmenu.show(titledPane, me.getSceneX(), me.getSceneY());
             }
@@ -64,11 +72,17 @@ public class GenericObjectList {
 
     private ListView<?> setList (String classType) {
         ListView<?> list = ListViewUtilities.createGenericList(createdSpecificObjects, classType);
-        list.setOnMousePressed(me -> {
-            DraggableItem draggable =
-                    new DraggableItem(list.getSelectionModel().getSelectedItem(), klass, classType);
-            DraggableUtilities.makeObjectPlaceable(me, draggable, node,
-                                                   createdSpecificObjects, wrapper, root);
+        BooleanProperty unclicked = new SimpleBooleanProperty(false);
+        list.setOnMouseClicked(me -> {
+            if (me.getClickCount() == 2 && !unclicked.get()) {
+                unclicked.set(true);
+                DraggableItem draggable =
+                        new DraggableItem(list.getSelectionModel().getSelectedItem(), list
+                                .getSelectionModel().getSelectedIndex(), klass, objectEditor);
+                DraggableUtilities.makeObjectPlaceable(me, draggable, node,
+                                                       createdSpecificObjects, wrapper, root,
+                                                       objectEditor, unclicked);
+            }
         });
         return list;
     }

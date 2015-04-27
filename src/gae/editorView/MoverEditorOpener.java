@@ -2,7 +2,8 @@ package gae.editorView;
 
 import java.util.ArrayList;
 import java.util.List;
-import gae.editorView.TestEngine;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import xml.DataManager;
 import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
@@ -14,14 +15,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import gae.gridView.PathView;
 import gae.listView.Authorable;
 import gae.listView.LibraryData;
-import gae.gridView.Path;
+import gae.gridView.AuthoringPath;
 
 
-public class MoverEditorOpener extends EditorOpener {
+public class MoverEditorOpener extends PopUpEditorView {
+    public MoverEditorOpener (Consumer<Object> consumer,
+                              BiConsumer<Class<?>, Object> biConsumer,
+                              Class<?> klass) {
+        super(consumer, biConsumer, klass, 0);
+        // TODO Auto-generated constructor stub
+    }
+
     private LibraryData libraryData;
     private VBox optionBox;
     private boolean first = true;
@@ -31,14 +38,14 @@ public class MoverEditorOpener extends EditorOpener {
         // TODO Auto-generated method stub
         libraryData = LibraryData.getInstance();
         createdDropDownList = new ArrayList<>();
-        super.initialize();
+//        super.initialize();
     }
 
     private void save () {
         createdDropDownList.forEach( (dropDown) -> {
             PathView pathView = (PathView) dropDown.getSelectionModel().getSelectedItem();
             System.out.println("We have selected : " + pathView.getID());
-            List<Path> path = pathView.createPathObjects();
+//            List<Path> path = pathView.createPathObjects();
             // we need to add it to an Editable, which will then be converted to GameObjectSimple
             // later
 
@@ -49,7 +56,7 @@ public class MoverEditorOpener extends EditorOpener {
         HBox hbox = new HBox();
         ComboBox<Authorable> dropDown = new ComboBox<>(libraryData.getPathObservableList());
         createdDropDownList.add(dropDown);
-        
+
         dropDown.setButtonCell(new ListCell<Authorable>() {
             @Override
             protected void updateItem (Authorable pathView, boolean bln) {
@@ -88,7 +95,8 @@ public class MoverEditorOpener extends EditorOpener {
             Button plus = new Button("+");
             plus.setOnAction(e -> addMoreOptions());
             Button view = new Button("View currently selected animation");
-            view.setOnAction(e -> setEngineDemo((PathView) dropDown.getSelectionModel().getSelectedItem()));
+            view.setOnAction(e -> setEngineDemo((PathView) dropDown.getSelectionModel()
+                    .getSelectedItem()));
 
             hbox.getChildren().addAll(dropDown, plus, view);
             first = false;
@@ -106,11 +114,11 @@ public class MoverEditorOpener extends EditorOpener {
     private void setEngineDemo (PathView selected) {
         if (selected != null) {
             selected.createPathObjects();
-            List<Path> list = selected.createPathObjects();
+            List<AuthoringPath> list = selected.createPathObjects();
             PathFixed myPath = new PathFixed();
             for (int i = 0; i < list.size(); i++) {
                 // System.out.println("Path " + i + "'s coordinates");
-                Path temp = list.get(i);
+                AuthoringPath temp = list.get(i);
                 temp.printInfo();
                 // System.out.println();
                 PathSegmentBezier tempBez = new PathSegmentBezier();
@@ -123,9 +131,9 @@ public class MoverEditorOpener extends EditorOpener {
                 myPath.addPathSegment(tempBez);
             }
             DataManager.writeToXML(myPath, "src/gae/listView/Test.xml");
-            TestEngine test = new TestEngine();
+//            TestEngine test = new TestEngine();
             try {
-                test.start(new Stage());
+//                test.start(new Stage());
             }
             catch (Exception e) {
                 // TODO Auto-generated catch block
@@ -134,11 +142,6 @@ public class MoverEditorOpener extends EditorOpener {
         }
     }
 
-    // private void deleteOption() {
-    // optionBox.getChildren()
-    // }
-
-    @Override
     public Parent setUpParent () {
         VBox mainBox = new VBox();
         mainBox.setSpacing(10);
@@ -150,9 +153,4 @@ public class MoverEditorOpener extends EditorOpener {
         return mainBox;
     }
 
-    @Override
-    public String getTitle () {
-        // TODO Auto-generated method stub
-        return "Mover Editor";
-    }
 }

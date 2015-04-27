@@ -1,8 +1,10 @@
 package player.gamePlayer;
 
+import engine.game.Game;
 import gae.gameView.Main;
-import View.GamePlayerScreen;
+import java.io.File;
 import java.util.Arrays;
+import xml.DataManager;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+
 /**
  * Opens the game player. It will ideally have a few pre-authored games for the user to play but
  * also allow the user to upload new games he or she created as well.
@@ -21,7 +24,7 @@ import javafx.stage.Stage;
  * @author Brandon Choi
  *
  */
-public class PlayerOpener implements GameScreen{
+public class PlayerOpener implements GameScene {
 
     private static final String headerText = "Select a Game";
 
@@ -33,6 +36,7 @@ public class PlayerOpener implements GameScreen{
     private Text header;
     private Button loadB, playB;
     private GameSelector gameSelector;
+    private Game myGame;
 
     public PlayerOpener (Stage s) {
         myStage = s;
@@ -52,9 +56,9 @@ public class PlayerOpener implements GameScreen{
 
         setUpBorderPane();
     }
-    
+
     @Override
-    public Scene getScreen () {
+    public Scene getScene () {
         return playerScene;
     }
 
@@ -64,30 +68,46 @@ public class PlayerOpener implements GameScreen{
     private void setUpButtons () {
         loadB = new Button("LOAD GAME");
         loadB.setOnMousePressed(e -> {
-            openFileChooser();
+            File file=openFileChooser();
+            myGame=DataManager.readFromXML(Game.class, file.getAbsolutePath());
+            moveToNextScreen(myGame);
         });
 
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
-//            GamePlayerScreen screen = new GamePlayerScreen(myStage);
-//            myStage.setScene(screen.makeScene());
-            
-              PauseScene pause = new PauseScene(null, myStage, playerScene);
-              myStage.setScene(pause.getScreen());
+            myGame=DataManager.readFromXML(Game.class, "./src/xml/Game.xml");
+            moveToNextScreen(myGame);
+            // PauseScene pause = new PauseScene(null, myStage, playerScene);
+            // myStage.setScene(pause.getScene());
+
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {
             e.setId("playerButton");
-            e.setFocusTraversable(false);
+            // e.setFocusTraversable(false);
         });
 
         createOptions();
     }
 
-    private void openFileChooser () {
+    private void moveToNextScreen(Game game) {
+        GamePlayerScreen screen = new GamePlayerScreen(myStage, playerScene,game);
+        screen.setImage(gameSelector.getCurrentImage());
+        myStage.setScene(screen.makeScene());
+    }
+    
+    private File openFileChooser () {
         FileChooser fc = new FileChooser();
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter(
+                                                "XML files (*.xml)", "*.xml");
+        fc.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
-        fc.showOpenDialog(fileStage);
+        
+        
+        File file=fc.showOpenDialog(fileStage);
+        return file;
+        
     }
 
     /**

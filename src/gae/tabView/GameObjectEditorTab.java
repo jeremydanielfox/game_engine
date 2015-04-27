@@ -6,10 +6,13 @@ import gae.editorView.GameObjectEditorView;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 
+/**
+ * Object Editor Tab
+ * @author JohnGilhuly
+ *
+ */
 
-// Potentially combine this with the ShopTab using an abstract class
-
-public class GameObjectEditorTab {
+public class GameObjectEditorTab implements ITab {
 
     private Tab baseNode;
     private GameObjectEditorView view;
@@ -23,6 +26,7 @@ public class GameObjectEditorTab {
         baseNode.setClosable(false);
     }
 
+    @Override
     public Tab getBaseTabNode () {
         return baseNode;
     }

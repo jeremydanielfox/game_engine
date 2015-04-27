@@ -1,5 +1,7 @@
 package gae.builder;
 
+import View.ButtonWrapper;
+
 /**
  * Represents the data back end of ButtonBuilder and utilizes the Builder/BuildObjectData interface
  * system
@@ -9,20 +11,20 @@ package gae.builder;
  */
 public class ButtonData implements BuildObjectData {
 
+    ButtonWrapper myButton;
+    
     public ButtonData () {
-
+        myButton = new ButtonWrapper();
     }
 
     @Override
     public void fillProperties () {
-        // TODO Auto-generated method stub
-
+        
     }
 
     @Override
     public Object getBuiltObject () {
-        // TODO Auto-generated method stub
-        return null;
+        return myButton;
     }
 
 }

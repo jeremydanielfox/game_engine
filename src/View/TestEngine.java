@@ -12,7 +12,7 @@ import xml.DataManager;
 public class TestEngine extends Application {
 
 
-    private static final String FILE_SOURCE = "src/xml/ibelieve.xml";
+    private static final String FILE_SOURCE = "src/xml/testShop.xml";
 
     @Override
     public void start (Stage primaryStage) throws Exception {

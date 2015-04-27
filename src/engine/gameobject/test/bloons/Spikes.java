@@ -13,13 +13,13 @@ public class Spikes extends GameObjectSimple {
     public Spikes () {
         super();
         setLabel(new ProjectileLabel());
-        setGraphic(new Graphic(20, 20, "spikes.jpg"));
+        setGraphic(new Graphic(20, 20, "/images/spikes.jpg"));
         this.getCollider().addCollisionBehavior(new DamageBuff(1));
         setPoint(new PointSimple(0, 10000)); 
         setHealth(new HealthSimple(10));
         ShopTagSimple shopTag = new ShopTagSimple();
         shopTag.setName("Spikies");
-        shopTag.setShopGraphic(new Graphic(40, 40, "spikes.jpg"));
+        shopTag.setShopGraphic(new Graphic(40, 40, "/images/spikes.jpg"));
         shopTag.setDescription("Spikes!");
         setShopTag(shopTag);
     }

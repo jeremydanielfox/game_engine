@@ -12,7 +12,6 @@ import engine.pathfinding.EndOfPathException;
  */
 public interface Mover {
 
-    @Settable
     /**
      * Based on mover's state, returns next destination for moving.
      *

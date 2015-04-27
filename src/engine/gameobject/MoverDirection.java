@@ -9,6 +9,10 @@ public class MoverDirection extends MoverPoint {
     private double distanceLimit;
     private double distanceTraveled;
     private boolean pastPoint;
+    
+    public MoverDirection()     {
+        this(new PointSimple(0,0), 1, 10);
+    }
 
     /**
      * Makes a mover that will move with set speed for length distanceLimit towards direction.

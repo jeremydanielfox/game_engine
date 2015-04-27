@@ -48,7 +48,6 @@ public class BehaviorTracker {
     
     private void executeBehaviors(List<Behavior> behaviors, ObjectCollection world, GameObject object){
         for (Behavior behavior: behaviors){
-            System.out.println(behavior.getClass());
             behavior.execute(world, object);
         }
     }

@@ -29,7 +29,9 @@ public class UpgradeTreeSimple implements UpgradeTree {
 
     @Settable
     public void setUpgradeBundles (List<? extends BuildableBundle> nodes) {
-        buildTree(nodes);
+        if (!nodes.isEmpty()){
+            buildTree(nodes);
+        }
     }
 
     private void buildTree (List<? extends BuildableBundle> nodes) {

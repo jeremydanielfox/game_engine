@@ -8,20 +8,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import engine.fieldsetting.Settable;
 
+import engine.fieldsetting.Settable;
+import engine.fieldsetting.Triggerable;
 
 public class EditingParser {
     private static final String DEFAULT_PROPERTY_FILE = "engine.fieldsetting.implementing_classes";
+    private static final String USER_FRIENDLY_FILE = "engine.fieldsetting.user_friendly_names";
 
-    public static List<Method> getMethodsWithAnnotation (final Class<?> type, Class annotation) {
+    public static List<Method> getMethodsWithAnnotation (final Class<?> type, Class<?> annotation) {
         final List<Method> methods = new ArrayList<Method>();
         Class<?> klass = type;
-        final List<Method> allMethods =
-                new ArrayList<Method>(Arrays.asList(klass.getDeclaredMethods()));
-        for (final Method method : allMethods) {
-            if (method.isAnnotationPresent(Settable.class)) {
-                methods.add(method);
+        final List<Method> allMethods = new ArrayList<Method>(Arrays.asList(klass
+                .getDeclaredMethods()));
+        if (annotation.equals(Settable.class)) {
+            for (final Method method : allMethods) {
+                if (method.isAnnotationPresent(Settable.class)) {
+                    methods.add(method);
+                }
+            }
+        }
+        else if (annotation.equals(Triggerable.class)){
+            for (final Method method : allMethods) {
+                if (method.isAnnotationPresent(Triggerable.class)) {
+                    methods.add(method);
+                }
             }
         }
         return methods;
@@ -54,14 +65,31 @@ public class EditingParser {
         return map;
     }
 
+    public static String getUserFriendlyName (String originalName) {
+        Map<String, String> map = new HashMap<String, String>();
+        ResourceBundle rb = ResourceBundle.getBundle(USER_FRIENDLY_FILE);
+        Enumeration<String> enumerator = rb.getKeys();
+
+        while (enumerator.hasMoreElements()) {
+            String key = enumerator.nextElement();
+            map.put(key, rb.getString(key));
+        }
+
+        String ret = map.get(originalName);
+        if (ret != null)
+            return ret;
+        else
+            return originalName;
+    }
+
     public static String getInterfaceClassFromMap (Class<?> klass) {
         Map<String, ArrayList<String>> map = getInterfaceClasses(DEFAULT_PROPERTY_FILE);
-        for (Map.Entry<String,ArrayList<String>> entry: map.entrySet()) {
-                ArrayList<String> list = entry.getValue();
-                for (String concrete: list) {
-                    if (concrete.equals(klass.getName())) {
-                        return entry.getKey();
-                    }
+        for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+            ArrayList<String> list = entry.getValue();
+            for (String concrete : list) {
+                if (concrete.equals(klass.getName())) {
+                    return entry.getKey();
+                }
             }
         }
         return klass.getName();
@@ -101,7 +129,7 @@ public class EditingParser {
             // iae.printStackTrace();
         }
         catch (InstantiationException ie) {
-            // ie.printStackTrace();
+            ie.printStackTrace();
         }
 
         return component;

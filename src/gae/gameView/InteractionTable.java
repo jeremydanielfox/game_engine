@@ -48,13 +48,17 @@ public class InteractionTable {
         interactions = new ArrayList<>();
         content = new VBox(35);
         gaeLabels = myLibraryData.getLabelList();
-        addLabelListener();
+        //addLabelListener();
         scroller.setContent(content);
         setUpButtons();
     }
     
     public Node getTable() {
         return container;
+    }
+    
+    public InteractionData getData() {
+        return myInteractionData;
     }
 
     /**
@@ -68,7 +72,8 @@ public class InteractionTable {
                     Type added = change.getAddedSubList().get(0);
                     if (added instanceof Type) {
                         Type l = added;
-                        gaeLabels.add(l);
+                        //TODO: Uncomment the line below
+//                        gaeLabels.add(l);
                     }
                 }
             }

@@ -55,12 +55,10 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
      */
     @Override
     public boolean gameOver () {
-        boolean answer =
-                ((curLevelIndex == myLevels.size() - 1) && (myLevels.get(curLevelIndex).isWon())) ||
-                        myLevels.get(curLevelIndex).isLost();
         isWon = myLevels.get(curLevelIndex).isWon();
         isLost = myLevels.get(curLevelIndex).isLost();
-
+        boolean answer =
+                ((curLevelIndex == myLevels.size() - 1) && (isWon)) || isLost;
         return answer;
 
     }

@@ -1,19 +1,10 @@
 package gae.gameView;
 
 import engine.gameobject.labels.Type;
-import engine.gameobject.labels.SimpleType;
-import engine.interactions.BuffImparter;
 import engine.interactions.Interaction;
-import engine.interactions.NoInteraction;
-import engine.interactions.ShootAt;
 import gae.listView.LibraryData;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import sun.security.jca.GetInstance.Instance;
-import xml.DataManager;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -24,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
 
 /**
  * Defines a single interaction between game objects
@@ -78,7 +70,8 @@ public class InteractionInstance {
                 i = (Interaction) myInteractionData.getInteractionMap()
                         .get(interactionType.getSelected()).newInstance();
 
-                myInteractionData.addInteraction(box1.getLabelList(), i, box2.getLabelList());
+                myInteractionData.addInteraction(box1.getCheckList().getSelectedLabels(), i, box2
+                        .getCheckList().getSelectedLabels());
             }
             catch (Exception e1) {
                 e1.printStackTrace();
@@ -197,8 +190,8 @@ public class InteractionInstance {
             createObjectContainer();
         }
 
-        public List<Type> getLabelList () {
-            return labelList;
+        public LabelCheckList getCheckList () {
+            return myChecker;
         }
 
         /**

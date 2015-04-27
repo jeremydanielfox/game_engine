@@ -11,15 +11,16 @@ import xml.DataManager;
 
 public class TestEngine extends Application {
 
-    private static final String FILE_SOURCE = "src/xml/Game.xml";
+    private static final String FILE_SOURCE = "src/xml/ibelieve.xml";
 
     @Override
     public void start (Stage primaryStage) throws Exception {
         Group root = new Group();
         primaryStage.setHeight(600);
         primaryStage.setWidth(950);
-//        primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add constants
-//        primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
+        // primaryStage.setHeight(Main.SCREEN_HEIGHT); // needs to account for scaling; add
+        // constants
+        // primaryStage.setWidth(Main.SCREEN_WIDTH);// needs to account for scaling; add constants
 
         Scene scene = new Scene(root);
         Game game = loadGame();
@@ -39,9 +40,8 @@ public class TestEngine extends Application {
         // GameWorld world = gw.makeWorld();
         // Player player = gw.makePlayer();
         // return gw.makeGame(player, world, gw.makeShop(player, world));
-        //DataManager.addBtn();
+        // DataManager.addBtn();
         return DataManager.readFromXML(Game.class, FILE_SOURCE);
-        // return DataManager.readFromXML(Game.class, FILE_SOURCE);
 
     }
 

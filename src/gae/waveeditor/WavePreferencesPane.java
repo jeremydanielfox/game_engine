@@ -19,8 +19,11 @@ import javafx.scene.text.Text;
 
 public class WavePreferencesPane implements UIObject {
 
+    private static final double DEFAULT_SPACER = 2;
+    private static final double DEFAULT_MIN = .1;
+    private static final double DEFAULT_MAX = 10;
     private ScrollPane rootNode;
-    private Slider waveSpacing, totalWaveSpacing;
+    private Slider waveSpacing, totalWaveSpacing, betweenWaveSpacing;
     private CheckBox randomSpacing;
 
     public WavePreferencesPane () {
@@ -32,16 +35,26 @@ public class WavePreferencesPane implements UIObject {
         rootNode.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         rootNode.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 
-        waveSpacing = new Slider();
-        totalWaveSpacing = new Slider();
+        waveSpacing = createSlider();
+        totalWaveSpacing = createSlider();
+        betweenWaveSpacing = createSlider();
         randomSpacing = new CheckBox();
 
         VBox scrollContent = new VBox();
-        scrollContent.getChildren().addAll(new Text("Wave Spacing"), waveSpacing,
+        scrollContent.getChildren().addAll(new Text("Internal Wave Spacing"), waveSpacing,
                                            new Text("Random Wave Spacing"), randomSpacing,
-                                           new Text("Random wave Spacing Total Time"),
-                                           totalWaveSpacing);
+                                           new Text("Random Wave Spacing Total Time"),
+                                           totalWaveSpacing, new Text("Time Between Waves"),
+                                           betweenWaveSpacing);
         rootNode.setContent(scrollContent);
+    }
+
+    private Slider createSlider () {
+        Slider slider = new Slider();
+        slider.setValue(DEFAULT_SPACER);
+        slider.setMin(DEFAULT_MIN);
+        slider.setMax(DEFAULT_MAX);
+        return slider;
     }
 
     @Override
@@ -59,5 +72,9 @@ public class WavePreferencesPane implements UIObject {
 
     public double getTotalSpacingTime () {
         return totalWaveSpacing.getValue();
+    }
+
+    public double getWaveSpacing () {
+        return betweenWaveSpacing.getValue();
     }
 }

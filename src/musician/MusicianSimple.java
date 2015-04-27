@@ -1,6 +1,7 @@
 package musician;
 
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -144,6 +145,12 @@ public class MusicianSimple implements Musician {
             /* does nothing if myMusician is not initialized */
         }
     }
+    
+    @Override
+    public MediaPlayer reinitialize (MediaPlayer mp, Media m) {
+        mp = new MediaPlayer(m);
+        return mp;
+    }
 
     /**
      * Preset sounds that can are also settable and thus customizable
@@ -151,6 +158,7 @@ public class MusicianSimple implements Musician {
 
     public void rayGun () {
         rayGun.play();
+        rayGun = reinitialize(rayGun, rayGunSound);
     }
 
     public void setRayGun (Music m) {
@@ -159,6 +167,7 @@ public class MusicianSimple implements Musician {
 
     public void laser () {
         laser.play();
+        laser = reinitialize(laser, laserSound);
     }
 
     public void setLaser (Music m) {
@@ -167,6 +176,7 @@ public class MusicianSimple implements Musician {
 
     public void gun () {
         gun.play();
+        gun = reinitialize(gun, gunSound);
     }
 
     public void setGun (Music m) {

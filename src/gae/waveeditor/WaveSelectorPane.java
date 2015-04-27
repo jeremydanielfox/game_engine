@@ -23,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
+
 public class WaveSelectorPane implements UIObject {
 
     private ScrollPane rootNode;
@@ -46,12 +47,13 @@ public class WaveSelectorPane implements UIObject {
         listView.setEditable(true);
 
         listView.setItems(waves);
-        listView.setOnMouseClicked(e -> parent.newWaveSelected(listView.getSelectionModel().getSelectedItem()));
+        listView.setOnMouseClicked(e -> parent.newWaveSelected(listView.getSelectionModel()
+                .getSelectedItem()));
 
-        Button newWaveButton = new Button ("New Wave");
+        Button newWaveButton = new Button("New Wave");
         newWaveButton.setOnAction(e -> makeNewWave());
 
-        Button saveButton = new Button ("Save Waves");
+        Button saveButton = new Button("Save Waves");
         saveButton.setOnAction(e -> saveWaves());
 
         VBox scrollContents = new VBox();
@@ -69,21 +71,27 @@ public class WaveSelectorPane implements UIObject {
     }
 
     private void makeNewWave () {
-        waves.add(new WaveEnemyTable(waves.size()+1));
+        waves.add(new WaveEnemyTable(waves.size() + 1));
     }
 
     private void saveWaves () {
-        for (WaveEnemyTable wave : waves) {            
+        for (WaveEnemyTable wave : waves) {
             GameObjectQueue wQueue = new ConcreteQueue(wave.getEnemiesAsList());
             Wave newWave;
             if (wave.getPreferencesPane().randomWaveSpacing()) {
-                newWave = new RandomSpanWave(wave.getPreferencesPane().getTotalSpacingTime(), wQueue, parent.getGameWorld());
+                newWave =
+                        new RandomSpanWave(wave.getPreferencesPane().getWaveSpacing(), wave
+                                .getPreferencesPane().getTotalSpacingTime(), wQueue,
+                                           parent.getGameWorld());
             }
             else {
-                newWave = new ConstantSpacingWave(wave.getPreferencesPane().getSpacingTime(), wQueue, parent.getGameWorld());
+                newWave =
+                        new ConstantSpacingWave(wave.getPreferencesPane().getWaveSpacing(), wave
+                                .getPreferencesPane().getSpacingTime(), wQueue,
+                                                parent.getGameWorld());
             }
             parent.getStoryboard().addEvent(newWave);
-        }              
+        }
     }
 
     @Override

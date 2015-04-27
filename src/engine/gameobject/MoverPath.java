@@ -18,6 +18,7 @@ public class MoverPath extends BasicMover {
 	
 	public MoverPath() {
 	    super(0);
+	    this.setSpeed(1);
 	    myPath = new PathFixed();
 	}
 	
@@ -53,6 +54,12 @@ public class MoverPath extends BasicMover {
 	    MoverPath clone = new MoverPath(myPath, inherentSpeed);
 	    clone.myDistance = myDistance;
 	    return clone;
+	}
+	
+	@Settable
+	@Override
+	public void setSpeed(double speed) {
+	    super.setSpeed(speed);
 	}
 	
 }

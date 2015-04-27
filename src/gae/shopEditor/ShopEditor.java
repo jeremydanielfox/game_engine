@@ -31,7 +31,7 @@ public class ShopEditor implements UIObject {
     private Pane pane = new StackPane();
 
     private ShopCheckList checklist;
-    private ShopModel shop;
+    private ShopModelSimple shop;
 
     public ShopEditor () {
         VBox vbox = new VBox();
@@ -74,8 +74,7 @@ public class ShopEditor implements UIObject {
         return button;
     }
 
-    private ShopModel makeShop () {
-        ShopModelSimple shop = new ShopModelSimple();
+    private ShopModelSimple makeShop () {
         List<Purchasable<GameObject>> prototypes = new ArrayList<>();
         checklist.getSelectedPlaceables().stream().forEach(e -> {
             prototypes.add((Purchasable<GameObject>) e.getGameObject());

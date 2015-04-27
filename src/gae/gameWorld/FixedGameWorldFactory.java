@@ -1,5 +1,6 @@
 package gae.gameWorld;
 
+import gameworld.AbstractWorld;
 import gameworld.FixedWorld;
 import gameworld.GameWorld;
 import java.awt.Dimension;
@@ -26,7 +27,7 @@ public class FixedGameWorldFactory implements GameWorldFactory {
     }
 
     @Override
-    public GameWorld createGameWorld () {
+    public AbstractWorld createGameWorld () {
         return new FixedWorld(dimensions.get().width, dimensions.get().height);
     }
 

@@ -43,6 +43,10 @@ public class FieldMaker {
     public String getMethodName() {
         return methodName;
     }
+    
+    public String getPropertyName() {
+        return propertyName;
+    }
 
     /**
      * Creates field with all setters needed using text boxes

@@ -188,11 +188,13 @@ public class AbstractWorld implements GameWorld {
 
     @Settable
     public void setRangeEngine (InteractionEngine engine) {
+        engine.setWorld(this);
         this.myRangeEngine = engine;
     }
 
     @Settable
     public void setCollisionEngine (InteractionEngine engine) {
+        engine.setWorld(this);
         this.myCollisionEngine = engine;
 
     }

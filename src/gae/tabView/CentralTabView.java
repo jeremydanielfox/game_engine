@@ -107,7 +107,7 @@ public class CentralTabView implements UIObject {
     }
 
     private GameWorldFactory createGameWorldFactory (String gameTypeIn) {
-        if (gameTypeIn != null && gameTypeIn.equals("Free World")) {
+        if (gameTypeIn != null && gameTypeIn.equals("Free Path")) {
             return new FreeGameWorldFactory();
         }
         else {
@@ -146,6 +146,7 @@ public class CentralTabView implements UIObject {
     }
 
     private void createNewLevel () {
+        isFreeWorld.set(false);
         levelView = new LevelView(setSpawnPoints(), isFreeWorld);
         Pane levelViewPane = levelView.getBorder(scene);
         gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
@@ -153,6 +154,7 @@ public class CentralTabView implements UIObject {
         if (nextWorld instanceof FreeWorld) {
             freeworld = (FreeWorld) nextWorld;
             LibraryData.getInstance().addFreeWorldPath(freeworld.getPath());
+            isFreeWorld.set(true);
         }
         WaveEditor waves = createLevelAndWaveObject(gameWorldFactory.createGameWorld());
         InteractionTable iTable = new InteractionTable();

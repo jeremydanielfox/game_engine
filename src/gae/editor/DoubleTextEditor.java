@@ -40,6 +40,9 @@ public class DoubleTextEditor extends ComponentEditor {
 
     @Override
     public Object createObject (Class<?> c) {
+        if (doubleTextField.getText().equals("")) {
+            return 0.0;
+        }
         return Double.parseDouble(doubleTextField.getText());
     }
 

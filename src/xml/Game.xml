@@ -12671,16 +12671,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1306</int>
-                    <int>1203</int>
-                    <int>2201</int>
-                    <int>1898</int>
-                    <int>1548</int>
-                    <int>981</int>
-                    <int>2135</int>
-                    <int>1844</int>
-                    <int>1001</int>
-                    <int>1150</int>
+                    <int>1655</int>
+                    <int>1378</int>
+                    <int>1406</int>
+                    <int>1897</int>
+                    <int>572</int>
+                    <int>842</int>
+                    <int>2155</int>
+                    <int>1097</int>
+                    <int>661</int>
+                    <int>902</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -19349,13 +19349,13 @@
                 </myPoint>
               </myPoint>
               <myHealth class="engine.gameobject.HealthSimple">
-                <myHealth>1.0</myHealth>
-                <maxHealth>1.0</maxHealth>
+                <myHealth>100.0</myHealth>
+                <maxHealth>100.0</maxHealth>
                 <myTitle></myTitle>
                 <index>0</index>
               </myHealth>
               <myMover class="engine.gameobject.MoverDirection">
-                <inherentSpeed>2.5</inherentSpeed>
+                <inherentSpeed>2.0</inherentSpeed>
                 <speedModifier>1.0</speedModifier>
                 <myDistance>0.0</myDistance>
                 <frozen>false</frozen>
@@ -19452,9 +19452,9 @@
               </upgradeMap>
               <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
                 <backingSet>
-                  <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                  <engine.gameobject.units.directdamage.DamageBuff reference="../../../../myProjectile/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff"/>
                   <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
+                  <engine.gameobject.units.directdamage.DamageBuff reference="../../../../myProjectile/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff"/>
+                  <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
                 </backingSet>
                 <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
                   <listener class="null"/>

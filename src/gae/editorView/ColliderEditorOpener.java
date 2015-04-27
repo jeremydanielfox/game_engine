@@ -9,12 +9,16 @@ import gae.editor.ComponentEditor;
 import gae.editor.SimpleEditor;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
 public class ColliderEditorOpener extends EditorOpener {
     private static final String TITLE = "Collider Editor";
+    private TextField title;
 
     public ColliderEditorOpener (BiConsumer<Class<?>, Object> biconsumer,
                                  Class<?> klass, int index) {
@@ -27,7 +31,10 @@ public class ColliderEditorOpener extends EditorOpener {
         SimpleEditor editor = new SimpleEditor(klass, biconsumer);
         List<ComponentEditor> simpleList = editor.getSimpleComponentEditors();
         SimpleEditorView simpleEditorView = new SimpleEditorView(simpleList);
-        VBox top = (VBox) simpleEditorView.getObject();
+
+        VBox top = new VBox();
+        top.getChildren().add(getTitleBox());
+        top.getChildren().add((VBox) simpleEditorView.getObject());
         border.setTop(top);
         BuffEditor explosion = new BuffEditor();
         BuffEditor collision = new BuffEditor();
@@ -45,18 +52,25 @@ public class ColliderEditorOpener extends EditorOpener {
         return border;
     }
 
+    private HBox getTitleBox () {
+        HBox hbox = new HBox();
+        title = new TextField();
+        title.setPromptText("Set Title");
+        hbox.getChildren().addAll(new Label("Title"), title);
+        return hbox;
+    }
+
     private void setList (SimpleEditor editor,
                           Class<?> klass,
                           List<List<Object>> list,
                           List<Method> methodList,
                           BiConsumer<Class<?>, Object> biConsumer, int index) {
-
         try {
             Object obj = editor.createObject(klass);
             for (int i = 0; i < methodList.size(); i++) {
                 methodList.get(i).invoke(obj, list.get(i));
             }
-            GameObjectInformation.getInstance().addInformation(obj, "Collider", index);
+            GameObjectInformation.getInstance().addInformation(obj, title.getText(), index);
             biConsumer.accept(klass, obj);
         }
         catch (IllegalAccessException | IllegalArgumentException

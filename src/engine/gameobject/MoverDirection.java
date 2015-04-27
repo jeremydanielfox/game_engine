@@ -1,5 +1,6 @@
 package engine.gameobject;
 
+import View.ViewConcrete2;
 import engine.fieldsetting.Settable;
 import engine.pathfinding.EndOfPathException;
 
@@ -30,7 +31,7 @@ public class MoverDirection extends MoverPoint {
 
     @Override
     public PointSimple move (PointSimple current) throws EndOfPathException {
-        distanceTraveled += currentSpeed();
+    	distanceTraveled += currentSpeed();
         if (distanceTraveled > distanceLimit) {
             throw new EndOfPathException();
         }
@@ -46,6 +47,9 @@ public class MoverDirection extends MoverPoint {
         // Accounting for the exact movement that puts the mover past the reference point
         if (currentSpeed() > PointSimple.distance(current, getPoint()) && !pastPoint) {
             pastPoint = true;
+        }
+        if(!PointSimple.pointInBetween(new PointSimple(0,0), new PointSimple(ViewConcrete2.getWorldWidth()-10,ViewConcrete2.getWorldHeight()-10), newPoint)){
+        	throw new EndOfPathException();
         }
         return newPoint;
     }

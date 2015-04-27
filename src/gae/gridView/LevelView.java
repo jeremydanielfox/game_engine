@@ -195,15 +195,18 @@ public class LevelView {
 
     private Button setSpawnPoints () {
         Button button = new Button("Set Spawn Points");
-        List<GridCell> start = new ArrayList<>();
-        List<GridCell> end = new ArrayList<>();
-        for (Point point : container.getStartPoints()) {
-            start.add(new GridCell(point.x, point.y));
-        }
-        for (Point point : container.getEndPoints()) {
-            end.add(new GridCell(point.x, point.y));
-        }
-        biconsumer.accept(start, end);
+      
+        button.setOnAction(e-> {
+            List<GridCell> start = new ArrayList<>();
+            List<GridCell> end = new ArrayList<>();
+            for (Point point : container.getStartPoints()) {
+                start.add(new GridCell(point.x, point.y));
+            }
+            for (Point point : container.getEndPoints()) {
+                end.add(new GridCell(point.x, point.y));
+            }
+            biconsumer.accept(start, end);
+        });
         return button;
     }
 

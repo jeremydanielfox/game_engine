@@ -1587,6 +1587,14 @@
                         <myBehaviors>
                           <endOfPath>
                             <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior>
+                              <playersToChange>
+                                <engine.game.Player reference="../../../../../../../../../../../../../../../../myPlayer"/>
+                              </playersToChange>
+                              <moneyChange>0</moneyChange>
+                              <healthChange>-10</healthChange>
+                              <pointChange>0</pointChange>
+                            </engine.gameobject.behaviors.PlayerChangeBehavior>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -2173,6 +2181,14 @@
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior>
+                              <playersToChange>
+                                <engine.game.Player reference="../../../../../../../../../../../../../../../../myPlayer"/>
+                              </playersToChange>
+                              <moneyChange>10</moneyChange>
+                              <healthChange>0</healthChange>
+                              <pointChange>10</pointChange>
+                            </engine.gameobject.behaviors.PlayerChangeBehavior>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -2749,6 +2765,7 @@
                         <myBehaviors>
                           <endOfPath>
                             <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -3335,6 +3352,7 @@
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -3911,6 +3929,7 @@
                         <myBehaviors>
                           <endOfPath>
                             <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -4497,6 +4516,7 @@
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -5073,6 +5093,7 @@
                         <myBehaviors>
                           <endOfPath>
                             <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -5659,6 +5680,7 @@
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -6235,6 +6257,7 @@
                         <myBehaviors>
                           <endOfPath>
                             <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -6821,6 +6844,7 @@
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -7397,6 +7421,7 @@
                         <myBehaviors>
                           <endOfPath>
                             <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -7983,6 +8008,7 @@
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -8559,6 +8585,7 @@
                         <myBehaviors>
                           <endOfPath>
                             <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -9145,6 +9172,7 @@
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -9721,6 +9749,7 @@
                         <myBehaviors>
                           <endOfPath>
                             <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -10307,6 +10336,7 @@
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -10883,6 +10913,7 @@
                         <myBehaviors>
                           <endOfPath>
                             <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -11469,6 +11500,7 @@
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -12045,6 +12077,7 @@
                         <myBehaviors>
                           <endOfPath>
                             <engine.gameobject.behaviors.DeathBehavior/>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/endOfPath/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -12631,6 +12664,7 @@
                                 </engine.gameobject.test.bloons.RedBloon>
                               </mySummons>
                             </engine.gameobject.behaviors.SummonBehavior>
+                            <engine.gameobject.behaviors.PlayerChangeBehavior reference="../../../../engine.gameobject.test.bloons.BlueBloon/myBehaviors/death/engine.gameobject.behaviors.PlayerChangeBehavior"/>
                           </death>
                         </myBehaviors>
                         <myGraphic>
@@ -12673,16 +12707,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1447</int>
-                    <int>2176</int>
-                    <int>2255</int>
-                    <int>792</int>
-                    <int>316</int>
-                    <int>1017</int>
-                    <int>1527</int>
-                    <int>1393</int>
-                    <int>1636</int>
-                    <int>244</int>
+                    <int>1940</int>
+                    <int>1623</int>
+                    <int>443</int>
+                    <int>2262</int>
+                    <int>1516</int>
+                    <int>467</int>
+                    <int>698</int>
+                    <int>438</int>
+                    <int>396</int>
+                    <int>1453</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

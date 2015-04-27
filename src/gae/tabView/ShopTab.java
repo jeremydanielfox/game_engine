@@ -10,7 +10,7 @@ import javafx.scene.control.Tab;
  *
  */
 
-public class ShopTab {
+public class ShopTab implements ITab {
     private Tab baseNode;
     private ShopEditor editor;
 
@@ -22,11 +22,12 @@ public class ShopTab {
         baseNode = new Tab();
         baseNode.setText("Shop");
 
-        ShopEditor editor=new ShopEditor();
+        editor=new ShopEditor();
         baseNode.setContent(editor.getObject());
         baseNode.setClosable(false);
     }
 
+    @Override
     public Tab getBaseTabNode () {
         return baseNode;
     }

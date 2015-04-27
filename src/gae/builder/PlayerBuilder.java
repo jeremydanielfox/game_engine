@@ -4,12 +4,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import engine.fieldsetting.Settable;
 import engine.game.Player;
 import gae.editor.EditingParser;
 import javafx.application.Application;
-import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -30,6 +29,7 @@ public class PlayerBuilder extends Application {
     private EditingParser parser;
     private List<Method> settables;
     private List<FieldMaker> fields;
+    private List<String> sublabels;
 
     private HBox walletBox;
     private ComboBox<String> walletDropDown;
@@ -42,6 +42,7 @@ public class PlayerBuilder extends Application {
         parser = new EditingParser();
         settables = parser.getMethodsWithAnnotation(Player.class, Settable.class);
         fields = new ArrayList<>();
+        sublabels = new ArrayList<>();
         walletBox = new HBox(15);
         walletDropDown = new ComboBox<>();
         populateFields(settables);
@@ -87,14 +88,8 @@ public class PlayerBuilder extends Application {
      */
     private void createWalletDropDown () {
         Label l = new Label("WalletUnit");
-        
-        fields.forEach(e -> {
-            if (e.getPropertyName().equals("Label")) {
-                e.getInputs().forEach(f -> {
-                    
-                });
-            }
-        });
+        ObservableList<String> observableList = FXCollections.observableArrayList(sublabels);
+        walletDropDown.setItems(observableList);
         walletBox.getChildren().addAll(l, walletDropDown);
     }
 
@@ -106,6 +101,7 @@ public class PlayerBuilder extends Application {
      */
     private void addSubLabel (Method e) {
         Text sublabel = new Text(e.getName().substring(e.getName().indexOf("set") + "set".length()));
+        sublabels.add(sublabel.getText());
         builder.getChildren().add(sublabel);
     }
 

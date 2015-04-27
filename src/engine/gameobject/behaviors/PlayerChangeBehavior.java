@@ -31,19 +31,31 @@ public class PlayerChangeBehavior implements Behavior{
         }
     }
     
+    /**
+     * Sets the money added to the parameter
+     * @param money
+     */
     @Settable
     public void setMoney(int money){
         moneyChange = money;
     }
     
+    /**
+     * Sets points added to the parameter
+     * @param point
+     */
     @Settable
     public void setPoint(int point){
         pointChange = point;
     }
     
+    /**
+     * Sets the health so the change is decreasing the health
+     * @param health
+     */
     @Settable
     public void setHealth(int health){
-        healthChange = health;
+        healthChange = -health;
     }
     
     @Settable

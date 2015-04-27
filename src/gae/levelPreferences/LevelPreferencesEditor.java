@@ -1,6 +1,7 @@
 package gae.levelPreferences;
 
 import engine.game.TimerConcrete;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -8,14 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import gae.gameView.CheckListItem;
 import gae.gridView.NumberTextField;
-import gae.openingView.HoverPicture;
 import gae.openingView.UIObject;
-import javafx.event.*;
 
 public class LevelPreferencesEditor implements UIObject{
     private static final ImageView TIMER_IMAGE = new ImageView("/images/bloonsdefense.jpg");
@@ -37,11 +35,11 @@ public class LevelPreferencesEditor implements UIObject{
         base=new ScrollPane();
        // base.getChildren().add(makeTimerOptions());
        GoalHoverPicture timedGame=new GoalHoverPicture(TIMER_IMAGE, TIME, makeTimerOptions());
-       GoalHoverPicture health=new GoalHoverPicture(HEALTH_IMAGE, HEALTH, makeTimerOptions());
-       GoalHoverPicture score=new GoalHoverPicture(SCORE_IMAGE, SCORE, makeTimerOptions());
-       VBox vbox=new VBox(timedGame.getObject(), health.getObject());
+       GoalHoverPicture health=new GoalHoverPicture(HEALTH_IMAGE, HEALTH, makeHealthOptions());
+       GoalHoverPicture score=new GoalHoverPicture(SCORE_IMAGE, SCORE, makeScoreOptions());
+       VBox vbox=new VBox(timedGame.getObject(), health.getObject(), score.getObject());
        base.setContent(vbox);
-        
+        vbox.setAlignment(Pos.CENTER);
     }
     
     public void makeOptions(){
@@ -93,17 +91,17 @@ public class LevelPreferencesEditor implements UIObject{
         textfield.setOnAction(e->{
             healthGoal=Double.parseDouble(textfield.getText());
         });
-        HBox hbox=new HBox();
+        HBox hbox=new HBox(prompt, textfield);
         return hbox;
     }
     
-    private Node makeScore(){
+    private Node makeScoreOptions(){
         Label prompt=new Label("Target Score:");
         TextField textfield=new NumberTextField();
         textfield.setOnAction(e->{
             healthGoal=Double.parseDouble(textfield.getText());
         });
-        HBox hbox=new HBox();
+        HBox hbox=new HBox(prompt, textfield);
         return hbox;
     }
     

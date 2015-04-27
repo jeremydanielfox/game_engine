@@ -53,7 +53,20 @@ public class EditingParser {
         }
         return map;
     }
-    
+
+    public static String getInterfaceClassFromMap (Class<?> klass) {
+        Map<String, ArrayList<String>> map = getInterfaceClasses(DEFAULT_PROPERTY_FILE);
+        for (Map.Entry<String,ArrayList<String>> entry: map.entrySet()) {
+                ArrayList<String> list = entry.getValue();
+                for (String concrete: list) {
+                    if (concrete.equals(klass.getName())) {
+                        return entry.getKey();
+                    }
+            }
+        }
+        return klass.getName();
+    }
+
     /**
      * Checks to see if the input klass is an interface by looking in the properties map.
      *
@@ -82,17 +95,16 @@ public class EditingParser {
             component = c.newInstance();
         }
         catch (ClassNotFoundException e) {
-//             e.printStackTrace();
+            // e.printStackTrace();
         }
         catch (IllegalAccessException iae) {
-//             iae.printStackTrace();
+            // iae.printStackTrace();
         }
         catch (InstantiationException ie) {
-//             ie.printStackTrace();
+            // ie.printStackTrace();
         }
 
         return component;
     }
-
 
 }

@@ -2,6 +2,7 @@ package gae.levelPreferences;
 
 import gae.openingView.HoverPicture;
 import gae.openingView.UIObject;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;

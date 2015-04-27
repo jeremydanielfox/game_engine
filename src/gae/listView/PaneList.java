@@ -134,7 +134,7 @@ public class PaneList {
                                            ObservableList<Authorable> instanceList) {
         TitledPane newPane = new TitledPane();
         Placeable editable = (Placeable) authorable;
-        newPane.setText(editable.getName());
+        newPane.setText(editable.getTitle());
         newPane.setContent(ListViewUtilities.createList(instanceList, scene, "Editable"));
         newPane.setOnMousePressed(me -> {
             if (me.isSecondaryButtonDown()) {

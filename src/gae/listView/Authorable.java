@@ -3,7 +3,7 @@ package gae.listView;
 public interface Authorable {
     public String getType ();
 
-    public String getName ();
+    public String getTitle ();
 
     public int getID ();
     

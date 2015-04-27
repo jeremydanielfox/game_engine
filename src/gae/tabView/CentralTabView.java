@@ -157,9 +157,9 @@ public class CentralTabView implements UIObject {
         WaveEditor waves = createLevelAndWaveObject(gameWorldFactory.createGameWorld());
         InteractionTable iTable = new InteractionTable();
 
-        LevelPreferencesEditor prefs=new LevelPreferencesEditor();
-nextWorld.setCollisionEngine(iTable.getData().getCollisionEngine());
-nextWorld.setRangeEngine(iTable.getData().getRangeEngine());
+        LevelPreferencesEditor prefs = new LevelPreferencesEditor();
+        nextWorld.setCollisionEngine(iTable.getData().getCollisionEngine());
+        nextWorld.setRangeEngine(iTable.getData().getRangeEngine());
         LevelTabSet newLevel =
                 new LevelTabSet(levelViewPane,
                                 waves.getObject(), iTable.getTable(), prefs.getObject());
@@ -189,7 +189,8 @@ nextWorld.setRangeEngine(iTable.getData().getRangeEngine());
                 checkAndInvokeMethods(nextWorld, levelData, sb, m);
             }
 
-            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(shopModel.getClass()
+            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(shopModel
+                    .getClass()
                     .getName()), Settable.class)) {
                 if (m.getName().equals("setGameWorld")) {
                     m.invoke(shopModel, nextWorld);

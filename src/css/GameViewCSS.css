@@ -45,3 +45,27 @@
     -fx-alignment: CENTER;
     -fx-text-fill: black;
 }
+
+/*preferences tab hover picture*/
+
+#selectGameText {
+   -fx-font-size: 25;
+}
+
+.hoverPicture {
+   -fx-opacity: 0.3;
+}
+
+  .hoverPicture:hover {
+    -fx-opacity: 1;
+  }
+
+    .hoverPicture:pressed {
+      -fx-opacity: 1;
+      -fx-border-color: red;
+      -fx-border-width: 5px;
+    }
+
+.gameLabel {
+  -fx-font-size: 30;
+}

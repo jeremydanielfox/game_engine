@@ -16,11 +16,11 @@ import javafx.scene.layout.Pane;
 public class LevelTabSet {
     private TabPane baseNode;
 
-    public LevelTabSet (Pane world, Node waves) {
-        initialize(world, waves);
+    public LevelTabSet (Pane world, Node waves, Node prefs) {
+        initialize(world, waves, prefs);
     }
 
-    private void initialize (Pane world, Node waves) {
+    private void initialize (Pane world, Node waves, Node prefs) {
         baseNode = new TabPane();
         // actual code is worldTab.setContent(world)
         Tab worldTab = new Tab("World");
@@ -32,7 +32,7 @@ public class LevelTabSet {
         waveTab.setClosable(false);
         
         Tab prefTab = new Tab("Preferences");
-//        prefTab.setContent(waves);
+        prefTab.setContent(prefs);
         prefTab.setClosable(false);
 
         baseNode.getTabs().addAll(worldTab, waveTab, prefTab);

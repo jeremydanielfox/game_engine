@@ -1,6 +1,8 @@
 package gae.gameView;
 
+import engine.gameobject.GameObject;
 import engine.gameobject.Graphic;
+import engine.gameobject.Purchasable;
 import gae.backend.Placeable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -37,17 +39,17 @@ public class ShopCheckListItem implements CheckListItem {
         graphic.setHeight(50);
         Node image = graphic.getResizedGraphic(1);
         Label label = new Label(placeable.getName());
-        Text description=new Text(placeable.getDescription());
+        Text description = new Text(placeable.getDescription());
         System.out.println(placeable.getWeapon().getValue());
         String value;
-        try{
-            value=Double.toString(placeable.getWeapon().getValue());
+        try {
+            value = Double.toString(placeable.getWeapon().getValue());
         }
-        catch(Exception e){
-            value="No weapon value found";
+        catch (Exception e) {
+            value = "No weapon value found";
         }
-        Text price =new Text("Price: "+value);
-        VBox vbox=new VBox(label, description, price);
+        Text price = new Text("Price: " + value);
+        VBox vbox = new VBox(label, description, price);
         hbox.getChildren().addAll(image, vbox, checkbox);
         return hbox;
     }

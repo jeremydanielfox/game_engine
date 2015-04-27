@@ -15,11 +15,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import gae.gridView.PathView;
 import gae.listView.Authorable;
 import gae.listView.LibraryData;
-import gae.gridView.Path;
+import gae.gridView.AuthoringPath;
 
 
 public class MoverEditorOpener extends PopUpEditorView {
@@ -46,7 +45,7 @@ public class MoverEditorOpener extends PopUpEditorView {
         createdDropDownList.forEach( (dropDown) -> {
             PathView pathView = (PathView) dropDown.getSelectionModel().getSelectedItem();
             System.out.println("We have selected : " + pathView.getID());
-            List<Path> path = pathView.createPathObjects();
+//            List<Path> path = pathView.createPathObjects();
             // we need to add it to an Editable, which will then be converted to GameObjectSimple
             // later
 
@@ -115,11 +114,11 @@ public class MoverEditorOpener extends PopUpEditorView {
     private void setEngineDemo (PathView selected) {
         if (selected != null) {
             selected.createPathObjects();
-            List<Path> list = selected.createPathObjects();
+            List<AuthoringPath> list = selected.createPathObjects();
             PathFixed myPath = new PathFixed();
             for (int i = 0; i < list.size(); i++) {
                 // System.out.println("Path " + i + "'s coordinates");
-                Path temp = list.get(i);
+                AuthoringPath temp = list.get(i);
                 temp.printInfo();
                 // System.out.println();
                 PathSegmentBezier tempBez = new PathSegmentBezier();

@@ -1,5 +1,6 @@
 package gae.tabView;
 
+import engine.shop.ShopModel;
 import gae.shopEditor.ShopEditor;
 import javafx.scene.control.Tab;
 
@@ -11,6 +12,7 @@ import javafx.scene.control.Tab;
 
 public class ShopTab {
     private Tab baseNode;
+    private ShopEditor editor;
 
     public ShopTab () {
         initialize();
@@ -27,5 +29,9 @@ public class ShopTab {
 
     public Tab getBaseTabNode () {
         return baseNode;
+    }
+    
+    public ShopModel getShop(){
+        return editor.getShop();
     }
 }

@@ -4,7 +4,7 @@ import engine.gameobject.PointSimple;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.gridView.ContainerWrapper;
-import gae.gridView.Path;
+import gae.gridView.AuthoringPath;
 import gae.gridView.PathView;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,12 +13,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import xml.DataManager;
@@ -33,7 +31,7 @@ import xml.DataManager;
  */
 public class PathList {
     private PathView pathView;
-    private List<List<Path>> allPaths;
+    private List<List<AuthoringPath>> allPaths;
     private List<PathView> previousPaths;
     private static int counter;
     private ObservableList<Authorable> paths;
@@ -63,7 +61,7 @@ public class PathList {
         buttonStates = new ArrayList<>();
 
         buttonList.addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, displayPath,
-                                                       updatePath }));
+                                                      updatePath }));
         // stack.getChildren().addAll(bezier, completePath, newPath, displayPath, updatePath);
         stack.getChildren().add(makeGridPane());
     }
@@ -92,7 +90,7 @@ public class PathList {
                 }
             });
         });
-   
+
         pane.setContent(listView);
         return pane;
     }
@@ -144,11 +142,11 @@ public class PathList {
                 if (newValue.intValue() == 0) {
                     makeCurve.setDisable(true);
                 }
-                else {
-                    makeCurve.setDisable(false);
-                    label.setTextFill(Color.BLACK);
-                }
-            });
+                                                   else {
+                                                       makeCurve.setDisable(false);
+                                                       label.setTextFill(Color.BLACK);
+                                                   }
+                                               });
         });
         return makeCurve;
     }
@@ -158,7 +156,7 @@ public class PathList {
         allPaths = new ArrayList<>();
         previousPaths = new ArrayList<>();
         complete.setOnMouseClicked(e -> {
-            List<Path> path = pathView.createPathObjects();
+            List<AuthoringPath> path = pathView.createPathObjects();
             previousPaths.add(pathView);
             allPaths.add(path);
             System.out.println("ADDING INDEX : " + paths.size());
@@ -193,11 +191,11 @@ public class PathList {
             // *****************************************//
             System.out.println("PRINTING OUT ALLPATHS LIST!");
             PathFixed myPath = new PathFixed();
-            for (List<Path> lists : allPaths) {
+            for (List<AuthoringPath> lists : allPaths) {
 
                 for (int i = 0; i < lists.size(); i++) {
                     // System.out.println("Path " + i + "'s coordinates");
-                    Path temp = lists.get(i);
+                    AuthoringPath temp = lists.get(i);
                     temp.printInfo();
                     // System.out.println();
                     PathSegmentBezier tempBez = new PathSegmentBezier();

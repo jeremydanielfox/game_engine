@@ -1,7 +1,5 @@
 package gae.editorView;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,7 +114,7 @@ public class GameObjectEditorView implements UIObject {
     }
 
     private Node setUpAnchor () {
-        bottom = new GameObjectContainer(vboxWidth, vboxHeight, scene);
+        bottom = new GameObjectContainer(vboxWidth, vboxHeight);
         bottom.setPrefSize(vboxWidth, vboxHeight);
         bottom.getChildren().add(root);
 

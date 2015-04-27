@@ -4,7 +4,9 @@ import engine.fieldsetting.Settable;
 import engine.game.Game;
 import engine.game.Level;
 import engine.game.StoryBoard;
+import engine.shop.ShopModel;
 import gae.editor.EditingParser;
+import gae.gameView.InteractionTable;
 import gae.gameWorld.FixedGameWorldFactory;
 import gae.gameWorld.FreeGameWorldFactory;
 import gae.gameWorld.GameWorldFactory;
@@ -39,7 +41,9 @@ public class CentralTabView implements UIObject {
     private TabPane tabView;
     private int levelCount;
     private Scene scene;
-    private HudEditorTab hudTab;
+    private ITab hudTab;
+    private ITab shopTab;
+    private ITab gameObjectTab;
     private LevelView levelView;
     private LibraryData libraryData;
     private Game game;
@@ -58,9 +62,9 @@ public class CentralTabView implements UIObject {
         baseNode = new VBox();
         tabView = new TabPane();
         // refactor this code
-        ShopTab shopTab = new ShopTab();
+        shopTab = new ShopTab();
         hudTab = new HudEditorTab(null);
-        GameObjectEditorTab gameObjectTab =
+        gameObjectTab =
                 new GameObjectEditorTab(scene, getConsumer(), getBiconsumer());
 
         tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode(),
@@ -71,6 +75,27 @@ public class CentralTabView implements UIObject {
         baseNode.getChildren().addAll(newLevel, tabView);
 
         gameWorldFactory = createGameWorldFactory(gameTypeIn);
+
+        try {
+            setUpShopAndLinkToGame();
+        }
+        catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    private void setUpShopAndLinkToGame () throws ClassNotFoundException, IllegalAccessException,
+                                          IllegalArgumentException, InvocationTargetException {
+
+        ShopModel shopModel = ((ShopTab) shopTab).getShop();
+
+        for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(game.getClass()
+                .getName()), Settable.class)) {
+            if (m.getName().equals("setShop")) {
+                m.invoke(game, shopModel);
+            }
+        }
     }
 
     private void createNewLevel () {
@@ -79,16 +104,17 @@ public class CentralTabView implements UIObject {
         gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
 
         WaveEditor waves = createLevelAndWaveObject(gameWorldFactory.createGameWorld());
+        InteractionTable iTable = new InteractionTable();
 
         LevelTabSet newLevel =
                 new LevelTabSet(levelViewPane,
-                                waves.getObject());
+                                waves.getObject(), iTable.getTable());
 
         Tab newTab = new Tab("Level:" + levelCount++);
         newTab.setContent(newLevel.getBaseNode());
         newTab.setClosable(false);
         tabView.getTabs().add(newTab);
-        hudTab.setBackgroundImage(levelView.getBackgroundImage());
+        ((HudEditorTab) hudTab).setBackgroundImage(levelView.getBackgroundImage());
     }
 
     private WaveEditor createLevelAndWaveObject (GameWorld nextWorld) {

@@ -83,9 +83,6 @@ public class GameView implements UIMediator {
                 if (m.getName().equals("setLevelBoard")) {
                     m.invoke(g, levelBoard);
                 }
-                if (m.getName().equals("setShop")) {
-                    m.invoke(g, new ShopModelSimple());
-                }
             } 
         }
         catch (InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException | InvocationTargetException e) {

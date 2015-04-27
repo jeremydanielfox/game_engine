@@ -61,12 +61,16 @@ public class LevelView {
     private VBox gridOptions;
     private ObjectProperty<TileMode> tileModeProperty =
             new SimpleObjectProperty<>(TileMode.TOWERMODE);
-    private BiConsumer<List<GridCell>, List<GridCell>> biconsumer;
+    private BiConsumer<List<GridCell>, List<GridCell>> setSpawn;
+    private BiConsumer<List<GridCell>, List<GridCell>> setWalkable;
+
     private BooleanProperty isFreeWorld;
 
     public LevelView (BiConsumer<List<GridCell>, List<GridCell>> biconsumer,
+                      BiConsumer<List<GridCell>, List<GridCell>> setWalkable,
                       BooleanProperty isFreeWorld) {
-        this.biconsumer = biconsumer;
+        this.setSpawn = biconsumer;
+        this.setWalkable = setWalkable;
         this.isFreeWorld = isFreeWorld;
     }
 
@@ -184,7 +188,7 @@ public class LevelView {
             tileMode.setVisible((boolean) newVal
                     .getUserData());
         }));
-        gridOptions.getChildren().add(tileMode);
+        gridOptions.getChildren().addAll(tileMode, setWalkablePoints());
         isFreeWorld.addListener( (observable, oldv, newv) -> {
             boolean isFree = (boolean) newv;
             if (isFree) {
@@ -192,11 +196,25 @@ public class LevelView {
             }
         });
     }
-
+    private Button setWalkablePoints() {
+        Button button = new Button("Set Walkable Grids");
+        button.setOnAction(e -> {
+            List<GridCell> towerWalkable = new ArrayList<>();
+            List<GridCell> enemyWalkable = new ArrayList<>();
+            for (Point point : container.getTowerUnwalkable()) {
+                towerWalkable.add(new GridCell(point.x, point.y));
+            }
+            for (Point point : container.getEnemyUnwalkable()) {
+                enemyWalkable.add(new GridCell(point.x, point.y));
+            }
+            setWalkable.accept(towerWalkable, enemyWalkable);
+        });
+        return button;
+    }
     private Button setSpawnPoints () {
         Button button = new Button("Set Spawn Points");
-      
-        button.setOnAction(e-> {
+
+        button.setOnAction(e -> {
             List<GridCell> start = new ArrayList<>();
             List<GridCell> end = new ArrayList<>();
             for (Point point : container.getStartPoints()) {
@@ -205,7 +223,7 @@ public class LevelView {
             for (Point point : container.getEndPoints()) {
                 end.add(new GridCell(point.x, point.y));
             }
-            biconsumer.accept(start, end);
+            setSpawn.accept(start, end);
         });
         return button;
     }

@@ -46,52 +46,10 @@
         <myGameWorld class="gameworld.FreeWorld">
           <myObjects/>
           <myCollisionEngine class="engine.interactions.CollisionEngine">
-            <myTable>
-              <entry>
-                <engine.gameobject.test.ProjectileLabel>
-                  <superType class="engine.gameobject.labels.TypeBase">
-                    <myName>Base</myName>
-                  </superType>
-                  <myName>Projectile</myName>
-                </engine.gameobject.test.ProjectileLabel>
-                <map>
-                  <entry>
-                    <engine.gameobject.test.EnemyLabel>
-                      <superType class="engine.gameobject.labels.TypeBase">
-                        <myName>Base</myName>
-                      </superType>
-                      <myName>Enemy</myName>
-                    </engine.gameobject.test.EnemyLabel>
-                    <engine.interactions.BuffImparter/>
-                  </entry>
-                </map>
-              </entry>
-            </myTable>
-            <myGameWorld class="gameworld.FreeWorld" reference="../.."/>
+            <myTable/>
           </myCollisionEngine>
           <myRangeEngine class="engine.interactions.RangeEngine">
-            <myTable>
-              <entry>
-                <engine.gameobject.test.TowerLabel>
-                  <superType class="engine.gameobject.labels.TypeBase">
-                    <myName>Base</myName>
-                  </superType>
-                  <myName>Tower</myName>
-                </engine.gameobject.test.TowerLabel>
-                <map>
-                  <entry>
-                    <engine.gameobject.test.EnemyLabel>
-                      <superType class="engine.gameobject.labels.TypeBase">
-                        <myName>Base</myName>
-                      </superType>
-                      <myName>Enemy</myName>
-                    </engine.gameobject.test.EnemyLabel>
-                    <engine.interactions.ShootAt/>
-                  </entry>
-                </map>
-              </entry>
-            </myTable>
-            <myGameWorld class="gameworld.FreeWorld" reference="../.."/>
+            <myTable/>
           </myRangeEngine>
           <myNodeToGameObjectMap/>
           <myPath class="engine.pathfinding.PathFree">
@@ -553,14 +511,14 @@
             </bounds>
             <endPoints>
               <voogasalad.util.pathsearch.graph.GridCell>
-                <myRow>9</myRow>
-                <myCol>9</myCol>
+                <myRow>17</myRow>
+                <myCol>10</myCol>
               </voogasalad.util.pathsearch.graph.GridCell>
             </endPoints>
             <spawnPoints>
               <voogasalad.util.pathsearch.graph.GridCell>
-                <myRow>0</myRow>
-                <myCol>0</myCol>
+                <myRow>13</myRow>
+                <myCol>10</myCol>
               </voogasalad.util.pathsearch.graph.GridCell>
             </spawnPoints>
             <obstacles/>
@@ -2220,6 +2178,8 @@
             <myCol>20</myCol>
           </myBounds>
           <myGrid reference="../myPath/objectMatrix"/>
+          <mySpawnPoints reference="../myPath/spawnPoints"/>
+          <myEndPoints reference="../myPath/endPoints"/>
         </myGameWorld>
         <myStoryBoard reference="../myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard"/>
       </engine.game.ConcreteLevel>

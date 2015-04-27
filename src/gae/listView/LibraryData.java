@@ -10,6 +10,7 @@ import engine.gameobject.labels.Type;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.backend.Placeable;
+import gae.editor.EditingParser;
 import gae.editorView.GameObjectInformation;
 import gae.gridView.AuthoringPath;
 import engine.pathfinding.Path;
@@ -81,40 +82,38 @@ public class LibraryData {
     public ObservableList<Authorable> getPathObservableList () {
         return pathList;
     }
-    private String getSimplifiedName(Class<?> klass) {
-        String[] parts = klass.getSimpleName().split("\\.");
-        String[] importantFieldName = parts[parts.length - 1].split("(?=\\p{Upper})");
-        return importantFieldName[0];
+    private String getKeyName(Class<?> klass) {
+        return EditingParser.getInterfaceClassFromMap(klass);
     }
     public void addCreatedObjectToList (Class<?> klass, Object o) {
-        if (createdObjectMap.containsKey(getSimplifiedName(klass))) {
+        if (createdObjectMap.containsKey(getKeyName(klass))) {
             int index = GameObjectInformation.getInstance().getIndex(o);
             if (index >= 0) {
-                createdObjectMap.get(getSimplifiedName(klass)).set(index, o);
+                createdObjectMap.get(getKeyName(klass)).set(index, o);
             }
             else {
-                createdObjectMap.get(getSimplifiedName(klass)).add(o);
+                createdObjectMap.get(getKeyName(klass)).add(o);
             }
         }
         else {
             ObservableList<Object> list = FXCollections.observableArrayList();
-            createdObjectMap.put(getSimplifiedName(klass), list);
-            createdObjectMap.get(getSimplifiedName(klass)).add(o);
+            createdObjectMap.put(getKeyName(klass), list);
+            createdObjectMap.get(getKeyName(klass)).add(o);
         }
+        System.out.println(createdObjectMap);
     }
 
     public ObservableList<Object> getObservableList (Class<?> klass) {
-        if (!createdObjectMap.containsKey(getSimplifiedName(klass))) {
+        if (!createdObjectMap.containsKey(getKeyName(klass))) {
             if (!klass.getSimpleName().equals("PathFixed")) {
                 ObservableList<Object> list = FXCollections.observableArrayList();
-                createdObjectMap.put(getSimplifiedName(klass), list);
+                createdObjectMap.put(getKeyName(klass), list);
             }
             else {
-                createdObjectMap.put(getSimplifiedName(klass), moverList);
+                createdObjectMap.put(getKeyName(klass), moverList);
             }
         }
-        System.out.println(createdObjectMap);
-        return createdObjectMap.get(getSimplifiedName(klass));
+        return createdObjectMap.get(getKeyName(klass));
     }
 
     public void addEditableToList (Placeable editable) {

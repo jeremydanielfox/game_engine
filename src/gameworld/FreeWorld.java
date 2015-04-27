@@ -92,11 +92,16 @@ public class FreeWorld extends AbstractWorld {
 				if (g != null) {
 					GridCell cell = myTrans.transformWorldToGrid(g.getPoint());
 					if (myGrid[cell.getRow()][cell.getCol()] != g) {
+						if(myGrid[cell.getRow()][cell.getCol()] != null){
+							g.setPoint(myTrans.transformGridCellsToWorldMidPoint(cell, new GridCell(r,c)));
+						}
+						else{
 						myGrid[cell.getRow()][cell.getCol()] = g;
 						myGrid[r][c] = null;
 						try {
 							myPath.updatePath();
 						} catch (NoPathExistsException e) {
+						}
 						}
 					}
 				}

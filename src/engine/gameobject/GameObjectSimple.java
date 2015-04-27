@@ -41,7 +41,7 @@ public class GameObjectSimple implements GameObject {
         myType = new SimpleType();
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
-        myMover = new MoverPath();
+        myMover = new MoverNull();
         myBuffs = new BuffTracker();
         myWeapon = new NullWeapon();
         myCollider = new Collider();

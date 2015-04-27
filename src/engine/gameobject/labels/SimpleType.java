@@ -11,7 +11,7 @@ public class SimpleType implements Type{
 
     public SimpleType () {
         superType = new TypeBase();
-        myName = "";
+        myName = " ";
     }
 
     public SimpleType (String name) {

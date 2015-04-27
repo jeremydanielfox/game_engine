@@ -26,7 +26,7 @@ import gameworld.ObjectCollection;
  */
 @Settable
 public class GameObjectSimple implements GameObject {
-    private Type myLabel;
+    private Type myType;
     private PointSimple myPoint;
     private Health myHealth;
     private Mover myMover;
@@ -40,7 +40,7 @@ public class GameObjectSimple implements GameObject {
     private int index;
 
     public GameObjectSimple () {
-        myLabel = new SimpleType();
+        myType = new SimpleType();
         myPoint = new PointSimple();
         myHealth = new HealthSimple();
         myMover = new MoverPath();
@@ -149,7 +149,7 @@ public class GameObjectSimple implements GameObject {
     @Override
     public GameObject clone () {
         GameObjectSimple clone = new GameObjectSimple();
-        clone.setLabel(myLabel);
+        clone.setLabel(myType);
         clone.setPoint(new PointSimple(myPoint));
         clone.setHealth(myHealth.clone());
         clone.setWeapon(myWeapon.clone());
@@ -211,13 +211,13 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public Type getLabel () {
-        return myLabel;
+        return myType;
     }
 
     @Override
     @Settable
     public void setLabel (Type label) {
-        myLabel = label;
+        myType = label;
     }
 
     @Override
@@ -290,8 +290,9 @@ public class GameObjectSimple implements GameObject {
         myShopTag = shopTag;
     }
 
+    @Override
     public String toString () {
-        return "GameObject: " + myLabel.getName();
+        return "GameObject: " + myType.getName();
     }
 
 }

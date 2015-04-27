@@ -51,6 +51,8 @@ public class ButtonWrapper {
         myButton = new Button(label);
         myButton.setOnAction(e -> action.accept(null));
         myEnableCondition = enable;
+        myLabel = label;
+        myAction = action;
     }
 
     /**

@@ -22,7 +22,7 @@ public class GameObjectSimpleTest extends GameObjectSimple {
     public GameObjectSimpleTest () {
         super();
         setLabel(new EnemyLabel());
-        setGraphic(new Graphic(25, 25, "robertDuvall.jpg"));
+        setGraphic(new Graphic(25, 25, "/images/robertDuvall.jpg"));
         setPoint(new PointSimple(0, 10000)); // This initializes them off the screen. If we don't do
                                              // this, it will show a frame at this point. Needs to
                                              // be fixed in a better manner.

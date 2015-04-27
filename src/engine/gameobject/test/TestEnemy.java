@@ -10,7 +10,7 @@ import engine.shop.ShopTagSimple;
 public class TestEnemy extends GameObjectSimple {
     public TestEnemy () {
         super();
-        setGraphic(new Graphic(40, 40, "robertDuvall.jpg"));
+        setGraphic(new Graphic(40, 40, "/images/robertDuvall.jpg"));
         // setPoint();
         setHealth(new HealthSimple(3));
         setMover(new MoverNull());
@@ -19,7 +19,7 @@ public class TestEnemy extends GameObjectSimple {
         setShopTag(shopTag);
         shopTag.setName("TestTower");
         shopTag.setDescription("Just a test tower; nothing special here...");
-        shopTag.setShopGraphic(new Graphic(40, 40, "Bloons_TackShooterIcon.png"));
+        shopTag.setShopGraphic(new Graphic(40, 40, "/images/Bloons_TackShooterIcon.png"));
         setLabel(new EnemyLabel());
     }
 }

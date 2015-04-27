@@ -1,12 +1,6 @@
 package gae.builder;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -25,14 +19,14 @@ public class FieldMaker {
     private String methodName;
     private String propertyName;
     private HBox field;
-    private Map<TextField, SimpleStringProperty> textFields;
+    private TextField textField;
 
     public FieldMaker (Method m) {
         myMethod = m;
         methodName = m.getName();
         propertyName = extractName(m);
         field = new HBox(15);
-        textFields = new HashMap<>();
+        textField = new TextField();
         createField(myMethod);
     }
 
@@ -40,8 +34,8 @@ public class FieldMaker {
         return field;
     }
     
-    public Map<TextField, SimpleStringProperty> getInputMap() {
-        return textFields;
+    public TextField getInput() {
+        return textField;
     }
     
     public String getMethodName() {
@@ -51,19 +45,20 @@ public class FieldMaker {
     public String getPropertyName() {
         return propertyName;
     }
+    
+    public Method getMethod() {
+        return myMethod;
+    }
 
     /**
      * Creates field with all setters needed using text boxes
      */
     private void createField (Method m) {
-        TextField tf = new TextField();
-        SimpleStringProperty s = new SimpleStringProperty("");
-        s.bind(tf.textProperty());
+        textField = new TextField();
         Label l = new Label(propertyName);
-        textFields.put(tf, s);
         l.setPrefWidth(100);
-        tf.setPrefWidth(150);
-        field.getChildren().addAll(l, tf);
+        textField.setPrefWidth(150);
+        field.getChildren().addAll(l, textField);
     }
 
     /**

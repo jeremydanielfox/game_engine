@@ -68,10 +68,6 @@ public class UpgradeBundleSimple implements BuildableBundle {
 
     @Override
     public BuildableBundle getNext () {
-        if (next == null){
-            markFinalUpgrade();
-            return null;
-        }
         return next;
     }
 

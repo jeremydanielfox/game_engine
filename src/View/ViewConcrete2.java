@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import player.gamePlayer.GameOverScreen;
+import player.gamePlayer.GamePlayerScreen;
 import voogasalad.util.highscore.HighScoreController;
 import voogasalad.util.highscore.HighScoreException;
 import javafx.animation.Animation;
@@ -54,7 +56,19 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private double myDisplayWidth;
     private double myDisplayHeight;
     private HUD myHeadsUp;
+    private GameOverScreen myEndScreen;
 
+    public ViewConcrete2 (Game game,
+                          double stageWidth,
+                          double stageHeight, GameOverScreen screen) {
+        myGame = game;
+        myLevelBoard = myGame.getLevelBoard();
+        myLevelBoard.addObserver(this);
+        myDisplayWidth = stageWidth;
+        myDisplayHeight = stageHeight;
+        myEndScreen=screen;
+    }
+    
     public ViewConcrete2 (Game game,
                           double stageWidth,
                           double stageHeight) {
@@ -63,6 +77,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myLevelBoard.addObserver(this);
         myDisplayWidth = stageWidth;
         myDisplayHeight = stageHeight;
+        
     }
 
     @Override
@@ -72,14 +87,14 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myGameWorldPane.setMaxWidth(myDisplayHeight);
         myPane.setCenter(myGameWorldPane);
         initializeGameWorld();
-       // vbox.setFocusTraversable(false);
+        // vbox.setFocusTraversable(false);
         return myPane;
     }
 
     @Override
     public void initializeGameWorld () {
         setCurrentBackground();
-        myHeadsUp = new HUD(myGame.getLevelBoard().getGameWorld(), myPane, myGame.getShop());
+        myHeadsUp = new HUD(myPane, myGame.getShop());
         addControlButtons();
         for (Displayable d : myGame.getPlayer().getDisplayables()) {
             myHeadsUp.addPairedDisplay(d);
@@ -94,11 +109,11 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myPane.setRight(vbox);
         buildTimeline();
         // for testing purposes:
-//        PopUpScreen popup = new PopUpScreen();
-//        popup.makeScreen("Begin Level 1", "Start"); // these should be from resource files
-//        MainMenuScreen menu=new MainMenuScreen("Hi","hi","hi");
-//        Scene scene=menu.makeMenu();
-        
+        // PopUpScreen popup = new PopUpScreen();
+        // popup.makeScreen("Begin Level 1", "Start"); // these should be from resource files
+        // MainMenuScreen menu=new MainMenuScreen("Hi","hi","hi");
+        // Scene scene=menu.makeMenu();
+
         Button btn = new Button("Dec");
         btn.setOnAction(e -> myGame.getPlayer().changeHealth(-100));
         Button btn2 = new Button("Inc");
@@ -203,8 +218,14 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
                     e.printStackTrace();
                     System.out.println("Issue saving when game ends");
                 }
-                PopUpScreen gameOver = new PopUpScreen();
-                gameOver.makeScreen("GAME OVER", "Play Again");
+                if (myLevelBoard.isLost())
+                    myEndScreen.setResultsText("YOU LOST");
+                else if (myLevelBoard.isWon())
+                    myEndScreen.setResultsText("YOU WON");
+                myEndScreen.setScene();
+                
+//                PopUpScreen gameOver = new PopUpScreen();
+//                gameOver.makeScreen("GAME OVER", "Play Again");
                 // ideally gamePlayer/observers should be notified here
 
             }
@@ -282,15 +303,4 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     public boolean isPlaying () {
         return myAnimation.getStatus().equals(Status.RUNNING);
     }
-
-    private void handleKeyInput (KeyEvent e) {
-        KeyCode keyCode = e.getCode();
-        if (keyCode == KeyCode.A)
-            System.out.println("right");
-
-        else if (keyCode == KeyCode.LEFT)
-            System.out.println("left");
-
-    }
-
 }

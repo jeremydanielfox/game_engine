@@ -136,19 +136,18 @@ public class PathView implements Authorable {
     }
 
     public String getType () {
-        // TODO Auto-generated method stub
         return "Path";
     }
 
-    @Override
-    public String getName () {
-        // TODO Auto-generated method stub
-        return "Path";
-    }
 
     @Override
     public String getImagePath () {
-        // TODO Auto-generated method stub
         return DEFAULT_PATH;
+    }
+
+    @Override
+    public String getTitle () {
+       // change this to actual title later
+        return "Path";
     }
 }

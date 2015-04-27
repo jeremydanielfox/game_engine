@@ -35,8 +35,14 @@ public class ListViewUtilities {
         ImageView image = new ImageView(authorable.getImagePath());
         image.setFitHeight(THUMBNAIL_SIZE_HORIZONTAL);
         image.setPreserveRatio(true);
-        content.getChildren().addAll(image,
-                                     new Label(authorable.getName() + authorable.getID()));
+        Label label;
+        if (authorable.getID()==0) {
+            label = new Label(authorable.getTitle());
+        }
+        else {
+            label = new Label(authorable.getTitle() + " " + authorable.getID());
+        }
+        content.getChildren().addAll(image, label);
         return content;
     }
 

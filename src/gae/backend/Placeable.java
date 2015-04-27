@@ -75,6 +75,8 @@ public interface Placeable extends Serializable, Authorable {
     public void setLabel (Type label);
 
     public void setCollider (Collider collider);
+    
+    public String getTitle();
 
     public Object clone ();
 

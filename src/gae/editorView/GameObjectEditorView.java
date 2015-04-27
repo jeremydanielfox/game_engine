@@ -46,6 +46,7 @@ public class GameObjectEditorView implements UIObject {
     private TextField title;
     // not best way to do it because it takes up a lot of space but lack of time
     private static Map<Class<?>, Node> titleFieldMap = new HashMap<>();
+
     public GameObjectEditorView (Scene scene,
                                  Consumer<Object> consumer,
                                  BiConsumer<Class<?>, Object> biConsumer) {
@@ -150,6 +151,4 @@ public class GameObjectEditorView implements UIObject {
     public Object createObject () {
         return simpleEditor.createObject(clazz);
     }
-
-    
 }

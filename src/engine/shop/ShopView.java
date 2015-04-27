@@ -57,7 +57,6 @@ public class ShopView extends Parent {
 
     private FlowPane shopIcons;
     private StackPane infoBox;
-    private GameObjectSelector selector;
     private GameWorld world;
 
     public ShopView (ShopModel model, Pane pane) {
@@ -71,19 +70,17 @@ public class ShopView extends Parent {
         shopContainer.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
         shopContainer.setMaxWidth(SHOP_WIDTH);
         shopIcons = new FlowPane();
+
+        // initialize InfoBox
         infoBox = new StackPane();
-        selector =
-                new GameObjectSelector(this::displayUpgrades, this::removeFromInfoBox, pane);
+        infoBox.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.8),
+                                                                null, null)));
+        infoBox.setMinHeight(INFO_HEIGHT);
 
         shopContainer.getChildren().addAll(shopIcons, infoBox);
 
         // add Icons
         addIcons();
-
-        // initialize InfoBox
-        infoBox.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.8),
-                                                                null, null)));
-        infoBox.setMinHeight(INFO_HEIGHT);
 
         getChildren().add(shopContainer);
     }
@@ -93,23 +90,17 @@ public class ShopView extends Parent {
     private void addIcons () {
         shopIcons.setHgap(5);
         shopIcons.setVgap(5);
+
         List<ItemGraphic> icons = model.getItemGraphics();
         icons.forEach(icon -> {
             Node base = makeGameObjectInfo(icon);
-            icon.setOnMouseEntered(mouseEvent -> {
-                addToInfoBox(base);
-                // clearInfoBox();
-                // infoBox.getChildren().add(base);
-            });
+            icon.setOnMouseEntered(mouseEvent -> addToInfoBox(base));
             icon.setOnMouseExited(mouseEvent -> removeFromInfoBox());
             icon.setOnMouseClicked(mouseEvent -> {
-                RangeDisplay transition =
-                        model.getRangeDisplay(icon.getName());
+                RangeDisplay transition = model.getRangeDisplay(icon.getName());
                 Point2D location = ViewUtil.getMouseSceneLoc(mouseEvent, transition.getNode());
-                initializeTransition(model.getRangeDisplay(icon.getName()),
-                                     location);
+                initializeTransition(transition, location);
             });
-
         });
         shopIcons.getChildren().addAll(icons);
     }
@@ -173,6 +164,7 @@ public class ShopView extends Parent {
         base.setSpacing(10);
         base.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.8),
                                                              null, null)));
+
         Label name = new Label(gameObject.getName());
         base.getChildren().add(name);
 
@@ -254,8 +246,11 @@ public class ShopView extends Parent {
         });
     }
 
+
     private void selectGameObject (MouseEvent event) {
         GameObject selected = model.getObjectFromNode((Node) event.getSource());
+        GameObjectSelector selector =
+                new GameObjectSelector(this::displayUpgrades, this::removeFromInfoBox, pane);
         selector.select(selected);
     }
 }

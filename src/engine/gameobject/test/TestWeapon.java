@@ -19,6 +19,7 @@ public class TestWeapon extends BasicWeapon{
             setRange(300);
         }
         else {
+            setFiringStrategy(new MultipleProjectile(7));
             setProjectile(new TestProjectile(type));
             setRange(60);
         }

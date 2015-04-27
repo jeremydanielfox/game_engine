@@ -8,11 +8,8 @@
 	-fx-height: 25px;
 }
 
-.root {
-	-fx-font-family: "Courier Sans Serif";
-  -fx-background-image-opacity: 0.4;
-	-fx-background-color: white;
-}
+
+/*TABS*/
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-opacity: .1;
@@ -47,4 +44,28 @@
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: black;
+}
+
+/*preferences tab hover picture*/
+
+#selectGameText {
+   -fx-font-size: 25;
+}
+
+.hoverPicture {
+   -fx-opacity: 0.3;
+}
+
+  .hoverPicture:hover {
+    -fx-opacity: 1;
+  }
+
+    .hoverPicture:pressed {
+      -fx-opacity: 1;
+      -fx-border-color: red;
+      -fx-border-width: 5px;
+    }
+
+.gameLabel {
+  -fx-font-size: 30;
 }

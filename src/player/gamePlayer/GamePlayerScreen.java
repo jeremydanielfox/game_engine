@@ -236,7 +236,7 @@ public class GamePlayerScreen implements GameScene {
      * @return
      */
     private Game loadGame () {
-        GameWriterConcrete2 gw = new GameWriterConcrete2();
+        GameWriter gw = new GameWriter();
         GameWorld world = gw.makeWorld();
         Player player = gw.makePlayer();
         return gw.makeGame(player, world, gw.makeShop(player, world));

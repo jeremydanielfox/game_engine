@@ -3,8 +3,6 @@ package gae.listView;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
-import engine.gameobject.Mover;
-import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
 import engine.pathfinding.PathFixed;
@@ -38,6 +36,8 @@ public class LibraryData {
     private ObservableList<GameObjectSimple> gameObjectList = FXCollections.observableArrayList();
     private ObservableList<Type> labelList = FXCollections.observableArrayList();
     private ObservableList<Object> moverList = FXCollections.observableArrayList();
+    private ObservableList<Object> freeWorldList = FXCollections.observableArrayList();
+    private boolean free;
 
     private LibraryData () {
         setLists();
@@ -82,9 +82,11 @@ public class LibraryData {
     public ObservableList<Authorable> getPathObservableList () {
         return pathList;
     }
-    private String getKeyName(Class<?> klass) {
+
+    private String getKeyName (Class<?> klass) {
         return EditingParser.getInterfaceClassFromMap(klass);
     }
+
     public void addCreatedObjectToList (Class<?> klass, Object o) {
         if (createdObjectMap.containsKey(getKeyName(klass))) {
             int index = GameObjectInformation.getInstance().getIndex(o);
@@ -109,8 +111,11 @@ public class LibraryData {
                 ObservableList<Object> list = FXCollections.observableArrayList();
                 createdObjectMap.put(getKeyName(klass), list);
             }
-            else {
+            else if (!free) {
                 createdObjectMap.put(getKeyName(klass), moverList);
+            }
+            else if (free) {
+                createdObjectMap.put(getKeyName(klass), freeWorldList);
             }
         }
         return createdObjectMap.get(getKeyName(klass));
@@ -154,7 +159,7 @@ public class LibraryData {
     }
 
     private PathFixed getPath (List<AuthoringPath> list) {
-//        MoverPath mover = new MoverPath();
+        // MoverPath mover = new MoverPath();
         PathFixed myPath = new PathFixed();
         for (int i = 0; i < list.size(); i++) {
             // System.out.println("Path " + i + "'s coordinates");
@@ -170,7 +175,13 @@ public class LibraryData {
             tempBez.setPoints(points);
             myPath.addPathSegment(tempBez);
         }
-//        mover.setPath(myPath);
+        // mover.setPath(myPath);
         return myPath;
+    }
+
+    public void addFreeWorldPath (Path path) {
+        freeWorldList.add(path);
+        GameObjectInformation.getInstance().addInformation(path, "Free Path", -1);
+        free = true;
     }
 }

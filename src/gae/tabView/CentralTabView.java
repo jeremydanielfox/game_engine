@@ -13,12 +13,15 @@ import gae.levelPreferences.LevelPreferencesEditor;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
 import gae.waveeditor.WaveEditor;
+import gameworld.FreeWorld;
 import gameworld.GameWorld;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,6 +29,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
 
 /**
  * Central container for the central tab view in the gae editor
@@ -44,8 +48,11 @@ public class CentralTabView implements UIObject {
     private LibraryData libraryData;
     private Game game;
     private GameWorldFactory gameWorldFactory;
+    private boolean editorInstantiated;
+    private BooleanProperty freeWorld;
 
     public CentralTabView (Scene sceneIn, Game gameIn, String gameTypeIn) {
+        freeWorld = new SimpleBooleanProperty();
         scene = sceneIn;
         game = gameIn;
         initialize(gameTypeIn);
@@ -60,21 +67,26 @@ public class CentralTabView implements UIObject {
         // refactor this code
         ShopTab shopTab = new ShopTab();
         hudTab = new HudEditorTab(null);
-        GameObjectEditorTab gameObjectTab = new GameObjectEditorTab(scene, getConsumer(), getBiconsumer());
 
-        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode(),
-                                 gameObjectTab.getBaseTabNode());
+        tabView.getTabs().addAll(shopTab.getBaseTabNode(), hudTab.getBaseTabNode());
 
         Button newLevel = new Button("Add Level");
-        newLevel.setOnAction(e -> createNewLevel());
+        newLevel.setOnAction(e -> {
+            if (!editorInstantiated) {
+                GameObjectEditorTab gameObjectTab =
+                        new GameObjectEditorTab(scene, getConsumer(), getBiconsumer());
+                tabView.getTabs().add(gameObjectTab.getBaseTabNode());
+                editorInstantiated = true;
+            }
+            createNewLevel();
+        });
         baseNode.getChildren().addAll(newLevel, tabView);
-        
         gameWorldFactory = createGameWorldFactory(gameTypeIn);
     }
-    
-    private GameWorldFactory createGameWorldFactory (String gameTypeIn) {        
-        
-        if (gameTypeIn!= null && gameTypeIn.equals("Free World")) {
+
+    private GameWorldFactory createGameWorldFactory (String gameTypeIn) {
+
+        if (gameTypeIn != null && gameTypeIn.equals("Free Path")) {
             return new FreeGameWorldFactory();
         }
         else {
@@ -83,11 +95,15 @@ public class CentralTabView implements UIObject {
     }
 
     private void createNewLevel () {
-        levelView = new LevelView();
+        levelView = new LevelView(freeWorld);
         Pane levelViewPane = levelView.getBorder(scene);
         gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
         GameWorld nextWorld = gameWorldFactory.createGameWorld();
-        
+        if (nextWorld instanceof FreeWorld) {
+            FreeWorld game = (FreeWorld) nextWorld;
+            LibraryData.getInstance().addFreeWorldPath(game.getPath());
+            freeWorld.setValue(true);
+        }
         Level levelData = null;
         StoryBoard sb = new StoryBoard();
         List<Method> levelMethods;
@@ -95,11 +111,13 @@ public class CentralTabView implements UIObject {
         try {
             levelData =
                     (Level) Class.forName(EditingParser
-                                  .getInterfaceClasses("engine.fieldsetting.implementing_classes")
-                                  .get("Level").get(0)).newInstance();
-            
-            levelMethods = EditingParser.getMethodsWithAnnotation(Class.forName(levelData.getClass().getName()), Settable.class);
-            
+                            .getInterfaceClasses("engine.fieldsetting.implementing_classes")
+                            .get("Level").get(0)).newInstance();
+
+            levelMethods =
+                    EditingParser.getMethodsWithAnnotation(Class.forName(levelData.getClass()
+                            .getName()), Settable.class);
+
             for (Method m : levelMethods) {
                 if (m.getName().equals("setStoryBoard")) {
                     m.invoke(levelData, sb);
@@ -110,15 +128,16 @@ public class CentralTabView implements UIObject {
                 if (m.getName().equals("setImagePath")) {
                     m.invoke(levelData, levelView.getBackgroundImagePath());
                 }
-            }   
+            }
         }
-        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException e) {
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        
+
         game.getLevelBoard().addLevel(levelData);
         WaveEditor waves = new WaveEditor(sb, gameWorldFactory.createGameWorld());
-        LevelPreferencesEditor prefs=new LevelPreferencesEditor();
+        LevelPreferencesEditor prefs = new LevelPreferencesEditor();
         LevelTabSet newLevel =
                 new LevelTabSet(levelViewPane,
                                 waves.getObject(), prefs.getObject());

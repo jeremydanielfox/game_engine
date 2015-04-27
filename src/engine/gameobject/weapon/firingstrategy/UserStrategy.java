@@ -50,10 +50,11 @@ public class UserStrategy extends BasicStrategy {
                          GameObject target,
                          PointSimple location,
                          GameObject prototype) {
-        if (myNode == null)
             initializeNode(myGraphic);
+            System.out.println(pressedRecently);
+            System.out.println(myDirection);
         if (pressedRecently){
-            GameObject newProjectile = makeProjectile(location, location.add(myDirection), prototype);
+            GameObject newProjectile = makeProjectile(location, location.add(myDirection.multiply(10)), prototype);
             world.addObject(newProjectile);
             pressedRecently = false;
         }
@@ -66,9 +67,9 @@ public class UserStrategy extends BasicStrategy {
         else if (keyCode == KeyCode.A)
             myDirection = new PointSimple(-1, 0);
         else if (keyCode == KeyCode.W)
-            myDirection = new PointSimple(0, 1);
-        else if (keyCode == KeyCode.S)
             myDirection = new PointSimple(0, -1);
+        else if (keyCode == KeyCode.S)
+            myDirection = new PointSimple(0, 1);
         else if (keyCode == myKey){
             pressedRecently = true;
         }

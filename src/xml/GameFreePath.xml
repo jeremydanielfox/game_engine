@@ -126,12 +126,12 @@
                                 <updater class="null"/>
                               </engine.gameobject.weapon.UpgradeObserver>
                             </observers>
-                            <increment>60.0</increment>
+                            <increment>500.0</increment>
                             <decorated/>
                             <type>NULL</type>
                           </myRange>
                           <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
-                            <value>60.0</value>
+                            <value>500.0</value>
                             <valid>false</valid>
                             <name></name>
                           </rangeProp>
@@ -17323,16 +17323,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>751</int>
-                    <int>1335</int>
-                    <int>651</int>
-                    <int>118</int>
-                    <int>1337</int>
-                    <int>1584</int>
-                    <int>855</int>
-                    <int>1491</int>
-                    <int>1187</int>
-                    <int>1455</int>
+                    <int>2116</int>
+                    <int>268</int>
+                    <int>2044</int>
+                    <int>820</int>
+                    <int>2254</int>
+                    <int>439</int>
+                    <int>1828</int>
+                    <int>2217</int>
+                    <int>1992</int>
+                    <int>990</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

@@ -1,5 +1,9 @@
 package engine.gameobject.labels;
 
+import java.util.Collection;
+import java.util.HashSet;
+import com.sun.xml.internal.ws.org.objectweb.asm.Label;
+
 
 
 /**
@@ -10,10 +14,6 @@ package engine.gameobject.labels;
  *
  */
 public class TypeBase extends SimpleType {
-    /*
-     * private static String name = "Base";
-     * private static Collection<Label> mySubLabels = new HashSet<>();
-     */
 
     private static String myName = "Base";
     private static Type superType = null;

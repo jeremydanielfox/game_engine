@@ -26,7 +26,6 @@ public class BlueBloon extends GameObjectSimple {
         setMover(new MoverPath(myPath, 1.4));
         SummonBehavior summon = new SummonBehavior();
         summon.addSummon(new RedBloon());
-        
         addOnDeathBehavior(summon);
     }
 }

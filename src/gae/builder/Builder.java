@@ -22,7 +22,7 @@ public interface Builder {
     Node getBuilder ();
 
     /**
-     * resets all values to default & clears the fields
+     * function to be called when create button is pressed
      */
-    void restart ();
+    void build ();
 }

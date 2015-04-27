@@ -1,17 +1,10 @@
 package gae.gameView;
 
 import engine.gameobject.labels.Type;
-import engine.gameobject.labels.SimpleType;
-import engine.interactions.BuffImparter;
 import engine.interactions.Interaction;
-import engine.interactions.NoInteraction;
-import engine.interactions.ShootAt;
 import gae.listView.LibraryData;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import sun.security.jca.GetInstance.Instance;
-import xml.DataManager;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

@@ -73,7 +73,6 @@ public class AbstractWorld implements GameWorld {
         myObjects.add(toSpawn);
         toSpawn.setPoint(pixelCoords);
         myNodeToGameObjectMap.put(toSpawn.getGraphic().getNode(), toSpawn);
-        // myGrid.addObject(toSpawn);
     }
 
     @Override
@@ -190,5 +189,9 @@ public class AbstractWorld implements GameWorld {
     public void setCollisionEngine (InteractionEngine engine) {
         this.myCollisionEngine = engine;
 
+    }
+    
+    protected List<GameObject> getObjects(){
+    	return myObjects;
     }
 }

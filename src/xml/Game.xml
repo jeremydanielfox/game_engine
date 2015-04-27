@@ -12671,16 +12671,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1306</int>
-                    <int>1203</int>
-                    <int>2201</int>
-                    <int>1898</int>
-                    <int>1548</int>
-                    <int>981</int>
-                    <int>2135</int>
-                    <int>1844</int>
-                    <int>1001</int>
-                    <int>1150</int>
+                    <int>1103</int>
+                    <int>1574</int>
+                    <int>2096</int>
+                    <int>179</int>
+                    <int>1902</int>
+                    <int>295</int>
+                    <int>588</int>
+                    <int>1348</int>
+                    <int>1358</int>
+                    <int>1430</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -19452,9 +19452,9 @@
               </upgradeMap>
               <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
                 <backingSet>
-                  <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                  <engine.gameobject.units.directdamage.DamageBuff reference="../../../../myProjectile/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff"/>
                   <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
+                  <engine.gameobject.units.directdamage.DamageBuff reference="../../../../myProjectile/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff"/>
+                  <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
                 </backingSet>
                 <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
                   <listener class="null"/>

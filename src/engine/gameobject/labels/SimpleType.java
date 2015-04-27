@@ -57,8 +57,9 @@ public class SimpleType implements Type{
     }
     
     // TODO: equals method needs work... possibly should go all the way down to basetype
-//    @Override
-//    public boolean equals (Object other) {
+    @Override
+    public boolean equals (Object other) {
 //        return hashCode() == other.hashCode();
-//    }
+        return false;
+    }
 }

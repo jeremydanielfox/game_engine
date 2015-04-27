@@ -32,6 +32,7 @@ import engine.gameobject.MoverPath;
 import engine.gameobject.MoverUser;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.TestTower;
+import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.firingstrategy.UserStrategy;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
@@ -152,6 +153,7 @@ public class GameWriterConcrete2 extends Application {
 			MoverUser m = new MoverUser();
 			m.setGraphic(g.getGraphic());
 			g.setMover(m);
+			g.getWeapon().setFiringStrategy( new SingleProjectile());
 			UserStrategy pewpew = new UserStrategy();
 			pewpew.setGraphic(g.getGraphic());
 			g.getWeapon().setFiringStrategy(pewpew);

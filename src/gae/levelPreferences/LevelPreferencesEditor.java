@@ -1,8 +1,12 @@
 package gae.levelPreferences;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import engine.fieldsetting.Settable;
+import engine.game.Level;
 import engine.goals.Goal;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -15,6 +19,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import gae.editor.EditingParser;
 import gae.gameView.CheckListItem;
 import gae.gridView.NumberTextField;
 import gae.openingView.UIObject;
@@ -30,7 +35,7 @@ public class LevelPreferencesEditor implements UIObject {
     private static final Text TIME = new Text("Timed Game");
     private static final Text HEALTH = new Text("Health Losing Condition");
     private static final Text SCORE = new Text("Score Winning Condition");
-    private static final String DEFAULT_VALUE="0";
+    private static final String DEFAULT_VALUE = "0";
     private static final int TEXT_BOX_WIDTH = 100;
     private static final int NUMBER_TEXT_BOX_WIDTH = 50;
     private ScrollPane base;
@@ -41,6 +46,7 @@ public class LevelPreferencesEditor implements UIObject {
     private List<Goal> winningConditions;
     private List<Goal> losingConditions;
     private CheckListItem timer;
+    private Level myLevel;
 
     public LevelPreferencesEditor () {
         base = new ScrollPane();
@@ -126,14 +132,6 @@ public class LevelPreferencesEditor implements UIObject {
         }
     }
 
-    public List<Goal> getWinningConditions () {
-        return winningConditions;
-    }
-
-    public List<Goal> getLosingConditions () {
-        return losingConditions;
-    }
-
     private Button saveButton () {
         Button button = new Button("Save");
         button.setOnAction(e -> {
@@ -143,16 +141,41 @@ public class LevelPreferencesEditor implements UIObject {
             List<Goal> loselist = new ArrayList<>();
             loselist.add(health.isSelected() ? data.getHealthGoal() : null);
             loselist.add(timedGame.isSelected() && timer.getCheckBox().selectedProperty().get() ? data
-                    .getTimerGoal() : null);
-            losingConditions = loselist ;
+                                                                                                       .getTimerGoal()
+                                                                                               : null);
+            losingConditions = loselist;
             loselist.removeAll(Collections.singleton(null));
-            losingConditions.forEach(g->{
-                
-                    System.out.println(g.getClass());
-                
+            losingConditions.forEach(g -> {
+
+                System.out.println(g.getClass());
+
             });
+            setLevelGoals();
         });
         return button;
     }
 
+    private void setLevelGoals () {
+        try {
+            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(myLevel
+                    .getClass()
+                    .getName()), Settable.class)) {
+                if (m.getName().equals("setWinningGoals")) {
+                    m.invoke(myLevel, winningConditions);
+                }
+                else if (m.getName().equals("setLosingGoals")) {
+                    m.invoke(myLevel, losingConditions);
+                }
+            }
+        }
+        catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void setLevel (Level levelData) {
+        myLevel = levelData;
+    }
 }

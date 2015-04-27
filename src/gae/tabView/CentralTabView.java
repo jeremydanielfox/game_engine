@@ -35,7 +35,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 
 /**
@@ -129,7 +128,6 @@ public class CentralTabView implements UIObject {
         }
     }
 
-    @SuppressWarnings("unused")
     private void setUpPlayerAndLinkToGame ()
                                             throws ClassNotFoundException, IllegalAccessException,
                                             IllegalArgumentException,
@@ -157,10 +155,11 @@ public class CentralTabView implements UIObject {
             LibraryData.getInstance().addFreeWorldPath(freeworld.getPath());
             isFreeWorld.set(true);
         }
-        WaveEditor waves = createLevelAndWaveObject(nextWorld);
+        
+        LevelPreferencesEditor prefs = new LevelPreferencesEditor();
+        WaveEditor waves = createLevelAndWaveObject(nextWorld, prefs);
         InteractionTable iTable = new InteractionTable();
 
-        LevelPreferencesEditor prefs = new LevelPreferencesEditor();
         nextWorld.setCollisionEngine(iTable.getData().getCollisionEngine());
         nextWorld.setRangeEngine(iTable.getData().getRangeEngine());
         LevelTabSet newLevel =
@@ -174,7 +173,7 @@ public class CentralTabView implements UIObject {
         ((HudEditorTab) hudTab).setBackgroundImage(levelView.getBackgroundImage());
     }
 
-    private WaveEditor createLevelAndWaveObject (GameWorld nextWorld) {
+    private WaveEditor createLevelAndWaveObject (GameWorld nextWorld, LevelPreferencesEditor prefs) {
         Level levelData = null;
         StoryBoard sb = new StoryBoard();
         List<Method> levelMethods;
@@ -207,6 +206,7 @@ public class CentralTabView implements UIObject {
             e.printStackTrace();
         }
 
+        prefs.setLevel(levelData);
         game.getLevelBoard().addLevel(levelData);
         return new WaveEditor(sb, levelData.getGameWorld());
     }

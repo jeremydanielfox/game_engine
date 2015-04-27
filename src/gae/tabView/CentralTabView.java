@@ -16,6 +16,7 @@ import gae.gridView.LevelView;
 import gae.listView.LibraryData;
 import gae.openingView.UIObject;
 import gae.waveeditor.WaveEditor;
+import gameworld.AbstractWorld;
 import gameworld.FreeWorld;
 import gameworld.GameWorld;
 
@@ -145,7 +146,7 @@ public class CentralTabView implements UIObject {
         levelView = new LevelView(freeWorld);
         Pane levelViewPane = levelView.getBorder(scene);
         gameWorldFactory.bindGridSize(levelView.getGridDimensionProperty());
-        GameWorld nextWorld = gameWorldFactory.createGameWorld();
+        AbstractWorld nextWorld = gameWorldFactory.createGameWorld();
         if (nextWorld instanceof FreeWorld) {
             FreeWorld game = (FreeWorld) nextWorld;
             LibraryData.getInstance().addFreeWorldPath(game.getPath());
@@ -153,6 +154,8 @@ public class CentralTabView implements UIObject {
         }
         WaveEditor waves = createLevelAndWaveObject(gameWorldFactory.createGameWorld());
         InteractionTable iTable = new InteractionTable();
+        nextWorld.setCollisionEngine(iTable.getData().getCollisionEngine());
+        nextWorld.setRangeEngine(iTable.getData().getRangeEngine());
 
         LevelTabSet newLevel = new LevelTabSet(levelViewPane, waves.getObject(), iTable.getTable());
 

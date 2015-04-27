@@ -56,6 +56,10 @@ public class InteractionTable {
     public Node getTable() {
         return container;
     }
+    
+    public InteractionData getData() {
+        return myInteractionData;
+    }
 
     /**
      * adds a listener to the observable list of labels so that it remains updated whenever a new

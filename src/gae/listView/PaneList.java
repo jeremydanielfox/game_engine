@@ -89,7 +89,6 @@ public class PaneList {
     private TitledPane getTitledPane (String text) {
         TitledPane pane = new TitledPane();
         pane.setText(text);
-        pane.setTextFill(Color.RED);
         return pane;
     }
 
@@ -133,6 +132,7 @@ public class PaneList {
     private TitledPane setTitledPaneClick (Authorable authorable,
                                            ObservableList<Authorable> instanceList) {
         TitledPane newPane = new TitledPane();
+        newPane.getStyleClass().add("inner-titled-pane");
         Placeable editable = (Placeable) authorable;
         newPane.setText(editable.getTitle());
         newPane.setContent(ListViewUtilities.createList(instanceList, scene, "Editable"));

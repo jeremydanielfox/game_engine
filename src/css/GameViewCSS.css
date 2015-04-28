@@ -78,8 +78,8 @@
 
 .button
 {
-    -fx-background-color: #e6e6e6; 
-    -fx-border-color:#B9B9B9;
+    /*-fx-background-color: linear-gradient(to bottom, #e6e6e6, #CFCFCF); */
+    -fx-background-color: #e6e6e6;
     -fx-text-fill: black;
 
 }
@@ -92,13 +92,67 @@
 .toggle-button
 {
     -fx-background-color: #e6e6e6; 
-    -fx-border-color:#B9B9B9;
     -fx-text-fill: black;
 
 }
 
 .toggle-button:selected {
   -fx-background-color: #B6ECFF;
+}
+
+/*Accordion pane*/
+
+.titled-pane {
+  -fx-background-color: linear-gradient(to left, #B6ECFF , #94DBFF);
+}
+
+.titled-pane .title{
+  -fx-background-color: linear-gradient(to left, #B6ECFF , #94DBFF);
+}
+
+.titled-pane .title .text{
+  -fx-font-weight:normal;
+  -fx-text-fill:black;
+}
+
+.inner-titled-pane {
+  /*-fx-background-color: linear-gradient(to bottom, #e6e6e6, #CFCFCF);*/
+  -fx-label-padding: 0 0 0 20;
+  -fx-font-weight:italic;
+}
+
+.inner-titled-pane .title{
+  -fx-background-color: linear-gradient(to left, #e6e6e6, #CFCFCF);
+  -fx-font-weight:italic;
+}
+
+.inner-titled-pane .title .text{
+  -fx-font-weight:italic;
+  -fx-text-fill:black;
+}
+
+/*.innter-titled-pane > .title > .arrow-button > .arrow{
+    -fx-shape: "M 0 6 V 7 L 6 13 L 8 11 L 4 7  V 6 L 8 2 L 6 0 L 0 6 Z";
+}*/
+
+/* editor view */
+.draggable-label{
+-fx-font-size: 30px;
+-fx-font-weight: bold;
+-fx-text-fill: #333333;
+-fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+.text {
+    -fx-padding: 5;
+}
+
+.label {
+    -fx-padding: 5;
+}
+
+.large-title {
+  -fx-font-size: 18px;
 }
 
 

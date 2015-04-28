@@ -37,7 +37,7 @@ public class ShopEditor implements UIObject {
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.TOP_CENTER);
         Text text = new Text("Select Items for Shop");
-        text.setFont(Font.font("Verdana", 20));
+        text.getStyleClass().add("large-title");
         vbox.getChildren().addAll(text,
                                   makeObjectChecklist(LibraryData.getInstance()
                                           .getEditableObservableList()),

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
 
@@ -18,11 +20,18 @@ import javafx.scene.layout.VBox;
 
 public abstract class CheckList {
 
+    private VBox container;
+    private ScrollPane scroller;
     private VBox checkList;
     private Map<CheckListItem, Boolean> myMap;
 
     public CheckList () {
+        container = new VBox();
+        scroller = new ScrollPane();
+        scroller.setPrefSize(250, 200);
         checkList = new VBox(15);
+        scroller.setContent(checkList);
+        container.getChildren().add(scroller);
         myMap = new HashMap<>();
     }
 
@@ -32,7 +41,7 @@ public abstract class CheckList {
      * @return checklist
      */
     public Node getCheckList () {
-        return checkList;
+        return container;
     }
 
     /**
@@ -46,6 +55,9 @@ public abstract class CheckList {
         item.getCheckBox().selectedProperty().addListener( (obs, old, newVal) -> {
             myMap.put(item, newVal);
         });
+        /*
+         * TODO duplicate check? why isn't this working... vvv?
+         */
         if (!checkList.getChildren().contains(item.getNode()))
             checkList.getChildren().add(item.getNode());
     }

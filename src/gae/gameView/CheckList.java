@@ -42,12 +42,12 @@ public abstract class CheckList {
      * @param item CheckListItem to be added to map and checklist node
      */
     public void createCheckOption (CheckListItem item) {
-
         myMap.put(item, item.getCheckBox().isSelected());
         item.getCheckBox().selectedProperty().addListener( (obs, old, newVal) -> {
             myMap.put(item, newVal);
         });
-        checkList.getChildren().add(item.getNode());
+        if (!checkList.getChildren().contains(item.getNode()))
+            checkList.getChildren().add(item.getNode());
     }
 
     public Map<CheckListItem, Boolean> getMap () {

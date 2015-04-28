@@ -1,5 +1,6 @@
 package engine.game;
 
+import engine.shop.ShopModel;
 import gameworld.GameWorld;
 import java.util.Observer;
 
@@ -68,4 +69,6 @@ public interface LevelBoard {
      * Adds the given level to the end of the existing sequence of levels.
      */
     public void addLevel(Level newLevel);
+
+    public void setShop (ShopModel myShop);
 }

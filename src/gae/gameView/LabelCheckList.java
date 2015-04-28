@@ -2,11 +2,12 @@ package gae.gameView;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import engine.gameobject.labels.Type;
 import gae.backend.Placeable;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -17,41 +18,33 @@ import engine.gameobject.labels.Type;
 
 
 /**
- * Checklist for labels
+ * Checklist for types, previously called labels
  * 
  * @author Nina Sun
  */
 public class LabelCheckList extends CheckList {
 
-    private ObservableList<Type> myObjects;
-    private Stage mytemp;
+    private ObservableSet<Type> myObjects;
+    private Stage myStage;
     private Scene myScene;
 
-    public LabelCheckList (ObservableList<Type> objects) {
+    public LabelCheckList (ObservableSet<Type> objects) {
         super();
         myObjects = objects;
-        mytemp = new Stage();
+        myStage = new Stage();
         myScene = new Scene((Parent) getCheckList());
-        myObjects = (ObservableList<Type>) (ObservableList<?>) objects;
         
         myObjects.forEach(e -> {
             createCheckOption(new LabelCheckListItem(e));
         });
         
-        myObjects.addListener( (ListChangeListener.Change<? extends Type> change) -> {
-            while (change.next()) {
-                change.getAddedSubList().stream()
-                        .forEach(e -> {
-                            createCheckOption(new LabelCheckListItem(e));
-                        });
-                change.getRemoved().stream().forEach(e -> {
-                    for (CheckListItem key : getMap().keySet()) {
-                        if (((LabelCheckListItem) key).getLabel().equals(e)) {
-                            ((Pane) getCheckList()).getChildren().remove(key.getNode());
-                        }
-                    }
-                });
-            }
+        myObjects.addListener((SetChangeListener.Change<? extends Type> change)->{
+            createCheckOption(new LabelCheckListItem(change.getElementAdded()));
+            for (CheckListItem key : getMap().keySet()) {
+              if (((LabelCheckListItem) key).getLabel().equals(change.getElementRemoved())) {
+                  ((Pane) getCheckList()).getChildren().remove(key.getNode());
+              }
+          }
         });
     }
 
@@ -59,9 +52,9 @@ public class LabelCheckList extends CheckList {
      * Called by outside class to display the check list
      */
     public void showCheckList () {
-        mytemp.setScene(myScene);
-        mytemp.show();
-        mytemp.centerOnScreen();
+        myStage.setScene(myScene);
+        myStage.show();
+        myStage.centerOnScreen();
     }
 
     /**

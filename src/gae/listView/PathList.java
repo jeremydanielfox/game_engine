@@ -76,7 +76,6 @@ public class PathList {
         paths = LibraryData.getInstance().getPathObservableList();
         TitledPane pane = new TitledPane();
         pane.setText(text);
-        pane.setTextFill(Color.RED);
 
         final ListView<Authorable> listView = ListViewUtilities.createList(paths, scene, "Path");
         listView.setOnMouseClicked(e -> {

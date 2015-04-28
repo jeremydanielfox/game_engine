@@ -85,7 +85,7 @@ public class LevelPreferencesEditor implements UIObject {
         DoubleOption timeGoalOpt = new DoubleOption("Minimum time:");
         timeGoalOpt.setAction(e -> data.setTimeGoal(timeGoalOpt.getValue()));
         timeGoalOpt.getNode().setVisible(false);
-        timer.getCheckBox().selectedProperty().addListener( (obs, oldVal, newVal) -> {
+        timer.getSelectedProperty().addListener( (obs, oldVal, newVal) -> {
             timeGoalOpt.getNode().setVisible(newVal);
         });
         VBox vbox = new VBox(grid, timer.getNode(), timeGoalOpt.getNode());
@@ -137,13 +137,12 @@ public class LevelPreferencesEditor implements UIObject {
         button.setOnAction(e -> {
             List<Goal> winlist = new ArrayList<>();
             winlist.add(data.getScoreGoal());
-            winningConditions = timedGame.isSelected() ? winlist : new ArrayList<>();
+            winningConditions = score.isSelected() ? winlist : new ArrayList<>();
             List<Goal> loselist = new ArrayList<>();
             loselist.add(health.isSelected() ? data.getHealthGoal() : null);
-            loselist.add(timedGame.isSelected() && timer.getCheckBox().selectedProperty().get() ? data
-                                                                                                       .getTimerGoal()
-                                                                                               : null);
-            losingConditions = loselist;
+            loselist.add(timedGame.isSelected() && timer.getSelectedProperty().get() ? data
+                    .getTimerGoal() : null);
+            losingConditions = loselist ;
             loselist.removeAll(Collections.singleton(null));
             losingConditions.forEach(g -> {
 

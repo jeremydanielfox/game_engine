@@ -66,6 +66,40 @@
       -fx-border-width: 5px;
     }
 
+    .hoverPicture:selected {
+      -fx-opacity: 1;
+    }
+
 .gameLabel {
   -fx-font-size: 30;
 }
+
+/* buttons */
+
+.button
+{
+    -fx-background-color: #e6e6e6; 
+    -fx-border-color:#B9B9B9;
+    -fx-text-fill: black;
+
+}
+
+.button:hover {
+  -fx-background-color: #B6ECFF;
+}
+
+
+.toggle-button
+{
+    -fx-background-color: #e6e6e6; 
+    -fx-border-color:#B9B9B9;
+    -fx-text-fill: black;
+
+}
+
+.toggle-button:selected {
+  -fx-background-color: #B6ECFF;
+}
+
+
+

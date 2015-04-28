@@ -42,7 +42,6 @@ public class ShopEditor implements UIObject {
                                   makeObjectChecklist(LibraryData.getInstance()
                                           .getEditableObservableList()),
                                   makeSaveButton());
-         vbox.getChildren().add(tempbutton());
         pane.getChildren().add(vbox);
         pane.setMaxWidth(Screen.getPrimary().getBounds().getWidth());
         
@@ -82,30 +81,4 @@ public class ShopEditor implements UIObject {
         shop.setPurchasables(prototypes);
         return shop;
     }
-
-    // for testing!!!!!!!!
-    private Button tempbutton () {
-        Button button = new Button("Print selected");
-
-        button.setOnAction(e -> {
-//            for (Placeable obj : checklist.getSelectedPlaceables()) {
-//                System.out.println(obj.getShopTag().getName());
-//         
-//                System.out.println(((Purchasable<GameObject>) obj.getGameObject()).getName());
-//            
-//            }
-            List<Purchasable<GameObject>> prototypes = new ArrayList<>();
-            checklist.getSelectedPlaceables().stream().forEach(event -> {
-                prototypes.add((Purchasable<GameObject>) event.getGameObject());
-            });
-            prototypes.forEach(x->System.out.println(x.getName()));
-            System.out.println("hey");
-            for(String key: ((ShopModelSimple) shop).getMap().keySet()){
-                System.out.println(key);
-        }
-        });
-        
-        return button;
-        }
-
 }

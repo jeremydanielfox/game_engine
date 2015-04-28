@@ -51,8 +51,8 @@ public abstract class CheckList {
      * @param item CheckListItem to be added to map and checklist node
      */
     public void createCheckOption (CheckListItem item) {
-        myMap.put(item, item.getCheckBox().isSelected());
-        item.getCheckBox().selectedProperty().addListener( (obs, old, newVal) -> {
+        myMap.put(item, item.getSelectedProperty().getValue());
+        item.getSelectedProperty().addListener( (obs, old, newVal) -> {
             myMap.put(item, newVal);
         });
         /*

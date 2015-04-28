@@ -4,6 +4,7 @@ import engine.gameobject.GameObject;
 import engine.gameobject.Graphic;
 import engine.gameobject.Purchasable;
 import gae.backend.Placeable;
+import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -54,8 +55,8 @@ public class ShopCheckListItem implements CheckListItem {
         return hbox;
     }
 
-    public CheckBox getCheckBox () {
-        return checkbox;
+    public BooleanProperty getSelectedProperty () {
+        return checkbox.selectedProperty();
     }
 
     /**

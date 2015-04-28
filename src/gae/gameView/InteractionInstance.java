@@ -178,7 +178,7 @@ public class InteractionInstance {
             adder = new Button();
             addBox = new HBox(15);
             Text addText = new Text("Add Labels");
-            myChecker = new LabelCheckList(myLibraryData.getLabelList());
+            myChecker = new LabelCheckList(myLibraryData.getLabelSet());
 
             container.setId("interactionBox");
 

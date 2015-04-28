@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-
 /**
  * ImagePanel holds visuals to represent the types of game available for the author to create. A mix
  * of CSS and Java logic is used to set up effects such as hover, select, etc.
@@ -78,23 +77,33 @@ public class ImagePanel implements UIObject {
      * @param choices
      */
     private void setUpClick (List<HoverPicture> list) {
-        /*
-         * TODO: fix error with clicking other box and changing the field type? weird.
-         */
         list.forEach(e -> {
-            e.getObject().setOnMouseClicked(f -> {
-                if (!e.selected()) {
+            e.getObject().setOnMouseClicked(click -> {
+                if (!e.selected() && !anySelected()) {
                     e.changeSelectEffect();
+                    bindValue.set(e.getName());
                     alterRest(e);
-                    bindValue.setValue(e.getName());
                 }
-                                            else if (e.selected()) {
-                                                e.changeSelectEffect();
-                                                alterRest(e);
-                                                bindValue.setValue(OpeningView.DEFAULT_TYPE_MSG);
-                                            }
-                                        });
+                else if (e.selected()){
+                    alterRest(e);
+                    e.changeSelectEffect();
+                    bindValue.set(OpeningView.DEFAULT_TYPE_MSG);
+                }
+            });
         });
+    }
+
+    /**
+     * checks to see if any of the images have been selected
+     * 
+     * @return
+     */
+    private boolean anySelected () {
+        for (int i = 0; i < hoverPictures.size(); i++) {
+            if (hoverPictures.get(i).selected())
+                return true;
+        }
+        return false;
     }
 
     /**

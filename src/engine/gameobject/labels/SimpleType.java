@@ -53,7 +53,9 @@ public class SimpleType implements Type {
 
     @Override
     public int hashCode () {
-        return 7 * myName.hashCode() + 97 * superType.hashCode();
+        return 7 * myName.hashCode() ;//+ 97 * superType.hashCode();
+
+//        return 7 * myName.hashCode() + 97 * superType.hashCode();
     }
 
     @Override

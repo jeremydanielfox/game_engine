@@ -153,6 +153,7 @@ public class GameWriter extends Application {
 
         DataManager.writeToXML(myGame, FILE_DESTINATION);
         System.out.println("Written");
+        System.exit(0);
     }
 
     public ShopModel makeShop (Player player, GameWorld world) {

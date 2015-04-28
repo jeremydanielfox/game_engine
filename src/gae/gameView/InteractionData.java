@@ -29,7 +29,7 @@ public class InteractionData {
     /*
      * Values for the map of user options to interaction classes in the engine
      */
-    private static final List<String> MAP_KEYS = Arrays.asList("Collide", "Shoot",
+    private static final List<String> MAP_KEYS = Arrays.asList("Collide", "Shoot at",
                                                                "Do not collide", "Do not shoot");
     private static final List<Class<? extends Interaction>> MAP_VALUES = Arrays
             .asList(BuffImparter.class, ShootAt.class, NoInteraction.class, NoInteraction.class);

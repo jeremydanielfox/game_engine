@@ -38,8 +38,8 @@ public class AbstractWorld implements GameWorld {
 
     public AbstractWorld (int numRows, int numCols) {
         myObjects = new ArrayList<GameObject>();
-        // initiateCollisionEngine();
-        // initiateRangeEngine();
+        initiateCollisionEngine();
+        initiateRangeEngine();
         myNodeToGameObjectMap = new HashMap<>();
 
         myTrans =

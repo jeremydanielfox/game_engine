@@ -74,8 +74,6 @@ public class DraggableItem extends Region {
     }
 
     public Object getDraggedObject () {
-        // TODO: obtain this object by looping through everything in the wrapper and add these
-        // objects to the existing object
         try {
             return Class.forName(EditingParser.getInterfaceClassFromMap(klass)).cast(object);
         }

@@ -25,8 +25,9 @@ import View.ImageUtilities;
  *
  */
 public class GameObjectToEditable implements Placeable {
-    private GameObject gameObject;
     private static final long serialVersionUID = 1L;
+    private GameObject gameObject;
+    private static final String DEFAULT_TITLE = "No Name";
     private static int ourID = 0;
     private int myID = 0;
     private Weapon weapon;
@@ -71,6 +72,9 @@ public class GameObjectToEditable implements Placeable {
         health = gameObject.getHealth();
         collider = gameObject.getCollider();
         title = GameObjectInformation.getInstance().getTitle(gameObject);
+        if (title.equals("")) {
+            title = DEFAULT_TITLE;
+        }
     }
 
     @Override

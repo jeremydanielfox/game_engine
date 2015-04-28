@@ -3,6 +3,7 @@ package View;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import voogasalad.util.pathsearch.graph.GridCell;
@@ -32,6 +33,7 @@ import engine.gameobject.MoverPath;
 import engine.gameobject.MoverUser;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.TestTower;
+import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.firingstrategy.UserStrategy;
 import engine.goals.Goal;
@@ -153,10 +155,11 @@ public class GameWriterConcrete2 extends Application {
 			MoverUser m = new MoverUser();
 			m.setGraphic(g.getGraphic());
 			g.setMover(m);
-			g.getWeapon().setFiringStrategy( new SingleProjectile());
-			UserStrategy pewpew = new UserStrategy();
-			pewpew.setGraphic(g.getGraphic());
-			g.getWeapon().setFiringStrategy(pewpew);
+//			UserStrategy pewpew = new UserStrategy();
+//			pewpew.setGraphic(g.getGraphic());
+//			g.getWeapon().setFiringStrategy(pewpew);
+			g.setWeapon(new NullWeapon());
+
 			world.addObject(g, new PointSimple(300,300));
         }
         catch (StructurePlacementException e1) {
@@ -184,6 +187,7 @@ public class GameWriterConcrete2 extends Application {
 
 		DataManager.writeToXML(myGame, FILE_DESTINATION);
 		System.out.println("Written");
+		System.exit(0);
 	}
 
 	public ShopModel makeShop(Player player, GameWorld world) {

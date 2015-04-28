@@ -96,6 +96,7 @@ public class ConcreteInteractionEngine implements InteractionEngine {
         temp.put(second, interaction);
     }
 
+    @Settable
     @Override
     public void setWorld (GameWorld world) {
         myGameWorld = world;

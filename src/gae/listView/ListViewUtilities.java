@@ -35,16 +35,22 @@ public class ListViewUtilities {
         ImageView image = new ImageView(authorable.getImagePath());
         image.setFitHeight(THUMBNAIL_SIZE_HORIZONTAL);
         image.setPreserveRatio(true);
-        content.getChildren().addAll(image,
-                                     new Label(authorable.getName() + authorable.getID()));
+        Label label;
+        if (authorable.getID()==0) {
+            label = new Label(authorable.getTitle());
+        }
+        else {
+            label = new Label(authorable.getTitle() + " " + authorable.getID());
+        }
+        content.getChildren().addAll(image, label);
         return content;
     }
 
     public static void setEditableSelection (ListView<Authorable> list,
                                              ObservableList<Authorable> authorables,
                                              Scene scene) {
-        try {
-            list.setOnMousePressed(e -> {
+        list.setOnMousePressed(e -> {
+            try {
                 if (e.getClickCount() == 1) {
                     Placeable selected = (Placeable) list.getSelectionModel().getSelectedItem();
                     selected.getMovableImage().selectEditableImage();
@@ -60,15 +66,16 @@ public class ListViewUtilities {
                             editable.getMovableImage().unselectEditableImage();
                     }
                 }
-                    else if (e.getClickCount() == 2) {
-                        Placeable selected = (Placeable) list.getSelectionModel().getSelectedItem();
-                        selected.getMovableImage().unselectEditableImage();
-                        list.getSelectionModel().clearSelection();
-                    }
-                });
-        }
-        catch (NullPointerException e) {
-        }
+                else if (e.getClickCount() == 2) {
+                    Placeable selected = (Placeable) list.getSelectionModel().getSelectedItem();
+                    selected.getMovableImage().unselectEditableImage();
+                    list.getSelectionModel().clearSelection();
+                }
+            }
+            catch (NullPointerException nullpointer) {
+                // no movable object for this case
+            }
+        });
     }
 
     /**

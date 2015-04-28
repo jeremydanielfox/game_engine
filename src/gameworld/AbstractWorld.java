@@ -26,6 +26,7 @@ import engine.pathfinding.PathFree;
 
 
 public class AbstractWorld implements GameWorld {
+
     private List<GameObject> myObjects;
     private InteractionEngine myCollisionEngine;
     private InteractionEngine myRangeEngine;
@@ -40,9 +41,12 @@ public class AbstractWorld implements GameWorld {
         initiateCollisionEngine();
         initiateRangeEngine();
         myNodeToGameObjectMap = new HashMap<>();
-		myTrans = new CoordinateTransformer(numRows, numCols, ViewConcrete2.getWorldWidth(), ViewConcrete2.getWorldHeight()); // TODO fix window 1000
-		myTerrain = new Terrain(numRows, numCols, myTrans);
-		myBounds = new GridCell(numRows, numCols);
+
+        myTrans =
+                new CoordinateTransformer(numRows, numCols, ViewConcrete2.getWorldWidth(),
+                                          ViewConcrete2.getWorldHeight()); // TODO fix window 1000
+        myTerrain = new Terrain(numRows, numCols, myTrans);
+        myBounds = new GridCell(numRows, numCols);
     }
 
     @Settable
@@ -73,7 +77,6 @@ public class AbstractWorld implements GameWorld {
         myObjects.add(toSpawn);
         toSpawn.setPoint(pixelCoords);
         myNodeToGameObjectMap.put(toSpawn.getGraphic().getNode(), toSpawn);
-        // myGrid.addObject(toSpawn);
     }
 
     @Override
@@ -161,8 +164,10 @@ public class AbstractWorld implements GameWorld {
             catch (InvalidArgumentException e) {
             }
         }
-        PathFree path = (PathFree) myPath;
-        path.setObstacles(obstacles);
+        if (myPath instanceof PathFree) {
+            PathFree path = (PathFree) myPath;
+            path.setObstacles(obstacles);
+        }
     }
 
     public void setTowerObstacles (List<GridCell> tObstacles) {
@@ -183,12 +188,18 @@ public class AbstractWorld implements GameWorld {
 
     @Settable
     public void setRangeEngine (InteractionEngine engine) {
+        engine.setWorld(this);
         this.myRangeEngine = engine;
     }
 
     @Settable
     public void setCollisionEngine (InteractionEngine engine) {
+        engine.setWorld(this);
         this.myCollisionEngine = engine;
 
+    }
+
+    protected List<GameObject> getObjects () {
+        return myObjects;
     }
 }

@@ -99,32 +99,31 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myHeadsUp = new HUD(myPane, myGame.getShop());
         addControlButtons();
         for (Displayable d : myGame.getPlayer().getDisplayables()) {
-            myHeadsUp.addPairedDisplay(d);
+            myHeadsUp.addStatsDisplay(d);
         }
-        for (Displayable d : myGame.getLevelBoard().getCurrentLevel().getDisplayables()) {
-            myHeadsUp.addPairedDisplay(d);
-        }
+        addLevelDisplays();
         vbox.getChildren().add(myHeadsUp.getDisplay());
 
         addInitialObjects();
 
         myPane.setRight(vbox);
         buildTimeline();
-        // for testing purposes:
-        // PopUpScreen popup = new PopUpScreen();
-        // popup.makeScreen("Begin Level 1", "Start"); // these should be from resource files
-        // MainMenuScreen menu=new MainMenuScreen("Hi","hi","hi");
-        // Scene scene=menu.makeMenu();
-
+        
         Button btn = new Button("Dec");
         btn.setOnAction(e -> myGame.getPlayer().changeHealth(-100));
         Button btn2 = new Button("Inc");
         btn2.setTranslateX(btn2.getLayoutX());
-        btn2.setOnAction(e -> myGame.getPlayer().changeScore(100));// .changeScore(100));
+        btn2.setOnAction(e -> myGame.getPlayer().changeScore(100));
         vbox.getChildren().addAll(btn, btn2);
         myButtonList = myGame.getButtons();
         myButtonList.forEach(e -> vbox.getChildren().add(e.getButton()));
         play();
+    }
+
+    private void addLevelDisplays () {
+        for (Displayable d : myGame.getLevelBoard().getCurrentLevel().getDisplayables()) {
+            myHeadsUp.addLevelDisplay(d);
+        }
     }
 
     private void buildTimeline () {
@@ -207,7 +206,6 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         if (myLevelBoard.equals(o)) {
             pause();
             if (myLevelBoard.gameOver()) {
-                // note: display game over screen
                 HighScoreController scores = HighScoreController.getController();
                 // TODO eliminate magic values
                 try {
@@ -225,20 +223,12 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
                 else if (myLevelBoard.isWon())
                     myEndScreen.setResultsText("YOU WON");
                 myEndScreen.setScene();
-                
-//                PopUpScreen gameOver = new PopUpScreen();
-//                gameOver.makeScreen("GAME OVER", "Play Again");
-                // ideally gamePlayer/observers should be notified here
-
             }
             else {
                 myLevelBoard.startNextLevel();
-                // display new background
-                // display new sprites
-                // popup window
-                // then after closing popup window, play();
+                myHeadsUp.clearLevelDisplay();
+                addLevelDisplays();
                 setCurrentBackground();
-                // display new sprites
                 play();
             }
         }

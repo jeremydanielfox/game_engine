@@ -52,7 +52,7 @@ public class GamePlayerScreen implements GameScene {
 
         myVbox = new VBox(30);
         
-        pauseScreen = new PauseDropDown(e -> resumeGame(), myStage, null);
+//        pauseScreen = new PauseDropDown(e -> resumeGame(), myStage, null);
         //myGame = loadGame();
         myGame=game;
         myPlayerName = "";

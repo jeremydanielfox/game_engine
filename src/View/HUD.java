@@ -30,11 +30,12 @@ import engine.shop.ShopView;
 public class HUD implements Observer {
 
     // note: this should change with screen size, fix it later
-    private static final double SPACING = 10;
+    private static final double TEXT_SPACING = 10;
+    private final static int SHOP_WIDTH = 160;
+    private final static int ITEM_COUNT = 12;
 
     private Map<Displayable, Text> myDisplayFields;
     private VBox myStatsDisplay;
-    private VBox myLevelDisplay;
     private VBox myWholeDisplay;
     private BorderPane myPane;
     private HBox myDefaultButtonDisplay;
@@ -47,14 +48,16 @@ public class HUD implements Observer {
         initialize(pane);
     }
 
-    public HUD (BorderPane pane) {
+    public HUD (BorderPane pane, Displayable ... displays) {
         initialize(pane);
+        for (Displayable d : displays) {
+            addPairedDisplay(d);
+        }
     }
 
     private void initialize (BorderPane pane) {
-        myStatsDisplay = new VBox(SPACING);
-        myWholeDisplay = new VBox(SPACING);
-        myLevelDisplay = new VBox(SPACING);
+        myStatsDisplay = new VBox(10);
+        myWholeDisplay = new VBox(10);
         myWholeDisplay.setAlignment(Pos.CENTER);
         myStatsDisplay.setAlignment(Pos.CENTER_RIGHT);
         myWholeDisplay.setAlignment(Pos.CENTER);
@@ -78,9 +81,9 @@ public class HUD implements Observer {
         myDefaultButtonDisplay.getChildren().add(button.getButton());
     }
 
-    public void addPairedDisplay (Displayable d, VBox location) {
+    public void addPairedDisplay (Displayable d) {
         d.addObserver(this);
-        HBox newBox = new HBox(SPACING);
+        HBox newBox = new HBox(TEXT_SPACING);
         Text label = new Text(d.getLabel());
         formatText(label, 30);
         Text value = new Text(d.getStringValue());
@@ -88,22 +91,10 @@ public class HUD implements Observer {
         newBox.getChildren().addAll(label, value);
         newBox.setAlignment(Pos.CENTER);
         myDisplayFields.put(d, value);
-        location.getChildren().add(newBox);
-        location.setAlignment(Pos.CENTER);
-    }
-    
-    public void addLevelDisplay(Displayable d){
-        addPairedDisplay(d, myLevelDisplay);
+        myStatsDisplay.getChildren().add(newBox);
+        myStatsDisplay.setAlignment(Pos.CENTER);
     }
 
-    public void addStatsDisplay(Displayable d){
-        addPairedDisplay(d, myStatsDisplay);
-    }
-    
-    public void clearLevelDisplay(){
-        myLevelDisplay.getChildren().clear();
-    }
-    
     private void formatText (Text t, int fontSize) {
         t.setFont(Font.font("Verdana", fontSize));
         t.setFill(Color.BLUEVIOLET);

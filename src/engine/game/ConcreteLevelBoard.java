@@ -11,12 +11,12 @@ import gameworld.GameWorld;
 /**
  * This class contains all levels that exist in a game.
  *
- * @authors Sierra Smith
- * @author Cosette Goldstein
+ * @authors Sierra Smith, Cosette Goldstein
  *
  */
 @Settable
 public class ConcreteLevelBoard extends Observable implements LevelBoard {
+    private String myTitle = "";
     private List<Level> myLevels;
     private int curLevelIndex;
     private boolean isLost;
@@ -82,6 +82,7 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
     // rather, should the method just be called update current level? which can change the level
     @Override
     public void startNextLevel () {
+        // TODO Auto-generated method stub
         curLevelIndex++;
         shop.setGameWorld(getGameWorld());
     }

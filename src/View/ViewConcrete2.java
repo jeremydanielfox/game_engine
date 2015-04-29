@@ -201,6 +201,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
 
     @Override
     public void update (Observable o, Object arg) {
+        System.out.println("being notified that a level has ended.");
         if (myLevelBoard.equals(o)) {
             pause();
             if (myLevelBoard.gameOver()) {
@@ -224,6 +225,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
             }
             else {
                 myLevelBoard.startNextLevel();
+                System.out.println("changing to level 2");
                 myHeadsUp.clearLevelDisplay();
                 addLevelDisplays();
                 setCurrentBackground();

@@ -164,6 +164,8 @@ public class ConcreteGame implements Game {
     @Settable
     public void setShop (ShopModel shop) {
         myShop = shop;
+        //TODO get rid of shop in the game 
+        myLevelBoard.setShop(shop);
     }
 
 }

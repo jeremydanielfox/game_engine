@@ -27,7 +27,7 @@ public class ConcreteLevel implements Level {
     // we should identify images by name and have a constant image path that we pin on before
     // Retrieving image
     private String myTitle = "";
-    private String myImagePath = "src/images/Park_Path.png";
+    private String myImagePath;
     private List<Goal> myWinningGoals;
     private List<Goal> myLosingGoals;
     private GameWorld myGameWorld;
@@ -35,7 +35,7 @@ public class ConcreteLevel implements Level {
     private Timer myTimer;
 
     public ConcreteLevel () {
-        initialize("", new ArrayList<Goal>(), new ArrayList<Goal>(), new FixedWorld(10,10),
+        initialize("src/images/trophy.png", new ArrayList<Goal>(), new ArrayList<Goal>(), new FixedWorld(10,10),
                    new StoryBoard());
     }
 
@@ -88,6 +88,7 @@ public class ConcreteLevel implements Level {
     private boolean checkGoals (List<Goal> listOfGoals) {
         for (Goal goal : listOfGoals) {
             if (goal != null && goal.isSatisfied()) {
+                System.out.println("no events goal satisfied");
                 return true;
             }
         }
@@ -103,7 +104,6 @@ public class ConcreteLevel implements Level {
         }
         // myGameWorld.checkCollisions();
         // myGameWorld.removeDeadObjects();
-        // move GameObjects, needs to communicate with StoryBoard
     }
 
     @Override

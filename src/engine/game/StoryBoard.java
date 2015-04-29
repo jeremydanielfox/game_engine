@@ -38,6 +38,9 @@ public class StoryBoard extends Observable {
      * @return false if the StoryBoard has no more events to update
      */
     public boolean update () {
+        //System.out.println("Number of events: " + eventList.size());
+        setChanged();
+        notifyObservers();
         if (eventList.size() == 0) {
             return false;
         }
@@ -104,6 +107,7 @@ public class StoryBoard extends Observable {
      * @return no. of events left in storyboard
      */
     public int currentEventCount () {
+        System.out.println("Getting current event size, which is: " + eventList.size());
         return eventList.size();
     }
 

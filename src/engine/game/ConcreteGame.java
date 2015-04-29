@@ -130,14 +130,14 @@ public class ConcreteGame implements Game {
         return myShop;
     }
 
+    @Override @Settable
+    public void setPlayer (Player player) {
+        myPlayer = player;
+    }
+    
     @Override
     public Player getPlayer () {
         return myPlayer;
-    }
-
-    @Settable
-    public void setPlayer (Player player) {
-        myPlayer = player;
     }
 
     @Settable
@@ -167,5 +167,4 @@ public class ConcreteGame implements Game {
         //TODO get rid of shop in the game 
         myLevelBoard.setShop(shop);
     }
-
 }

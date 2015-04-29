@@ -53,6 +53,13 @@ public interface Game {
      * @return
      */
     public Player getPlayer ();
+    
+    /**
+     * Sets the game's Player object.
+     *
+     * @return
+     */
+    public void setPlayer (Player player);
 
     /**
      * Returns the string name of the game.

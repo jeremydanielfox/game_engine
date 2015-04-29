@@ -191,9 +191,7 @@ public class CentralTabView implements UIObject {
             for (Method m : levelMethods) {
                 checkAndInvokeMethods(nextWorld, levelData, sb, m);
             }
-            
-            ((ConcreteLevel) levelData).setStoryBoard(sb);
-
+           
             for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(shopModel
                     .getClass()
                     .getName()), Settable.class)) {
@@ -220,9 +218,9 @@ public class CentralTabView implements UIObject {
                                         Method m)
                                                  throws IllegalAccessException,
                                                  InvocationTargetException {
-//        if (m.getName().equals("setStoryBoard")) {
-//            m.invoke(levelData, sb);
-//        }
+        if (m.getName().equals("setStoryBoard")) {
+            m.invoke(levelData, sb);
+        }
         if (m.getName().equals("setGameWorld")) {
             m.invoke(levelData, nextWorld);
         }

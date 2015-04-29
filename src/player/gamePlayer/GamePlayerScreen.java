@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -52,8 +54,8 @@ public class GamePlayerScreen implements GameScene {
 
         myVbox = new VBox(30);
         
-        //pauseScreen = new PauseDropDown(e -> resumeGame(), myStage, null);
-        //myGame = loadGame();
+        pauseScreen = new PauseDropDown(e -> resumeGame(), myStage);
+        myGame = loadGame();
         
         myGame=game;
         myPlayerName = "";
@@ -69,6 +71,13 @@ public class GamePlayerScreen implements GameScene {
         myPane = new BorderPane();
         myPane.setPadding(new Insets(0, 40, 0, 40));
         myScene = new Scene(myPane);
+        
+        myScene.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
+            if (key.getCode().equals(KeyCode.P)){
+                pauseScreen.displayPauseScreen();
+            }
+        });
+        
         makeSideBar();
         myVbox.setAlignment(Pos.CENTER);
         myPane.setRight(myVbox);
@@ -99,7 +108,6 @@ public class GamePlayerScreen implements GameScene {
      * @returns a node to add to the scene
      */
     public Node makeDemoGameView () {
-
         myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT,new GameOverScreen(myStage,myScene,myPreviousScene,myGame));
         Node node = myGameView.initializeView();
         return node;
@@ -132,7 +140,7 @@ public class GamePlayerScreen implements GameScene {
      * Resumes game after pause.
      */
     private void resumeGame () {
-
+        myGameView.play();
     }
 
     /**

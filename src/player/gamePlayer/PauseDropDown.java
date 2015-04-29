@@ -3,10 +3,12 @@ package player.gamePlayer;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
+import animations.Animator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -14,8 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * PauseScene will be a drop down screen that holds options such as resume, restart, and return to
- * main menu
+ * Pause scene will be a new stage that pops up and automatically pauses the game going on
  *
  * @author Brandon Choi
  *
@@ -23,17 +24,21 @@ import javafx.stage.Stage;
 
 public class PauseDropDown implements GameScene {
 
-    private Stage myStage;
+    private Stage mainStage, myStage;
     private Scene myScene;
+    private Animator myAnimator;
     private BorderPane myContainer;
     private Button resume, restart, mainMenu;
     private VBox buttonBox;
     private HBox instructionsBox;
     private Text instructions;
 
-    public PauseDropDown (Consumer<? extends Object> lambda, Stage s, Scene previous) {
+    public PauseDropDown (Consumer<? extends Object> lambda, Stage s) {
+        mainStage = s;
+        myStage = new Stage ();
         myContainer = new BorderPane();
         myScene = new Scene(myContainer);
+        myAnimator = Animator.getInstance();
         resume = new Button("RESUME");
         restart = new Button("RESTART");
         mainMenu = new Button("MAIN MENU");
@@ -57,7 +62,7 @@ public class PauseDropDown implements GameScene {
     public Scene getScene () {
         return myScene;
     }
-    
+
     private void setUpCSS () {
         myScene.getStylesheets().add("/css/PauseScreenCSS.css");
         myContainer.setId("content");
@@ -72,39 +77,24 @@ public class PauseDropDown implements GameScene {
     }
 
     public void displayPauseScreen () {
-        /*
-         * TODO write animation for drop down
-         */
-        
+        myAnimator.dropDown(buttonBox);
     }
 
     /**
      * Sets up functionalities of the PauseScene
      */
     private void setUpFunctions () {
-        myScene.addEventFilter(KeyEvent, e -> {
-            
-        });
-        
-//        setOnKeyPressed(e -> {
-//            if (e.getCode().equals(KeyCode.ESCAPE)) {
-//                /*
-//                 * return to previous Scene as the dominant screen
-//                 */
-//            }
-//        });
-
         resume.setOnMouseClicked(e -> {
-
+            myStage.close();
         });
 
         restart.setOnMouseClicked(e -> {
-
+            
         });
 
         mainMenu.setOnMouseClicked(e -> {
-            PlayerOpener opener = new PlayerOpener(myStage);
-            myStage.setScene(opener.getScene());
+            PlayerOpener opener = new PlayerOpener(mainStage);
+            mainStage.setScene(opener.getScene());
         });
     }
 }

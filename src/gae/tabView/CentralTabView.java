@@ -148,7 +148,6 @@ public class CentralTabView implements UIObject {
         for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(game.getClass()
                 .getName()), Settable.class)) {
             if (m.getName().equals("setPlayer")) {
-                System.out.println("setted");
                 m.invoke(game, player);
             }
         }

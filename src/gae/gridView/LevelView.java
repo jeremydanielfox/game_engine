@@ -106,6 +106,7 @@ public class LevelView {
         stack = new StackPane();
         this.scene = scene;
         backgroundImage = new ImageView(new Image(DEFAULT_IMAGE_PATH));
+        setLevelImage();
         backgroundPathProperty.addListener(e->{
             backgroundImage.imageProperty().set(new Image(backgroundPathProperty.get()));
             setLevelImage();

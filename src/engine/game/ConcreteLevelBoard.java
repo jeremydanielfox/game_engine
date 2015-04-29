@@ -17,6 +17,7 @@ import gameworld.GameWorld;
  */
 @Settable
 public class ConcreteLevelBoard extends Observable implements LevelBoard {
+    private String myTitle = "";
     private List<Level> myLevels;
     private int curLevelIndex;
     private boolean isLost;

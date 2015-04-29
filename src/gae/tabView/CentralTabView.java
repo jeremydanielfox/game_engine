@@ -31,11 +31,14 @@ import java.util.function.Consumer;
 import voogasalad.util.pathsearch.graph.GridCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -178,7 +181,7 @@ public class CentralTabView implements UIObject {
         newTab.setContent(newLevel.getBaseNode());
         newTab.setClosable(false);
         tabView.getTabs().add(newTab);
-        ((HudEditorTab) hudTab).setBackgroundImage(levelView.getBackgroundImage());
+        ((HudEditorTab) hudTab).setBackgroundImage(new Image(levelView.getBackgroundImagePath().getValue()));
     }
 
     private WaveEditor createLevelAndWaveObject (GameWorld nextWorld, LevelPreferencesEditor prefs) {
@@ -214,6 +217,7 @@ public class CentralTabView implements UIObject {
         }
 
         prefs.setLevel(levelData);
+        levelView.setLevel(levelData);
         game.getLevelBoard().addLevel(levelData);
         return new WaveEditor(sb, levelData.getGameWorld());
     }
@@ -228,9 +232,6 @@ public class CentralTabView implements UIObject {
         }
         if (m.getName().equals("setGameWorld")) {
             m.invoke(levelData, nextWorld);
-        }
-        else if (m.getName().equals("setImagePath")) {
-            m.invoke(levelData, levelView.getBackgroundImagePath());
         }
     }
 

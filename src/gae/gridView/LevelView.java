@@ -319,5 +319,6 @@ public class LevelView {
     
     public void setLevel (Level levelData) {
         myLevel = levelData;
+        setLevelImage();
     }
 }

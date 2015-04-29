@@ -57,6 +57,10 @@ public class ConcreteLevel implements Level {
         myLosingGoals = losingGoals;
         myGameWorld = gameWorld;
         myStoryBoard = storyBoard;
+        addDefaultGoals();
+    }
+    
+    private void addDefaultGoals(){
         myWinningGoals.add(EVENT_GOAL_INDEX, new EventsCompleteGoal(myStoryBoard));
     }
 
@@ -83,7 +87,7 @@ public class ConcreteLevel implements Level {
 
     private boolean checkGoals (List<Goal> listOfGoals) {
         for (Goal goal : listOfGoals) {
-            if (goal.isSatisfied()) {
+            if (goal != null && goal.isSatisfied()) {
                 return true;
             }
         }
@@ -115,6 +119,7 @@ public class ConcreteLevel implements Level {
     @Settable
     public void setWinningGoals (List<Goal> goals) {
         myWinningGoals = goals;
+        addDefaultGoals();
     }
 
     @Settable

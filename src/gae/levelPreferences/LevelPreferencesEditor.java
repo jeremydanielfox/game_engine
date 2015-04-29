@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -29,12 +30,12 @@ import javafx.event.*;
 
 
 public class LevelPreferencesEditor implements UIObject {
-    private static final ImageView TIMER_IMAGE = new ImageView("/images/bloonsdefense.jpg");
-    private static final ImageView HEALTH_IMAGE = new ImageView("/images/desktopdefense.jpg");
-    private static final ImageView SCORE_IMAGE = new ImageView("/images/cartoonwars.jpg");
-    private static final Text TIME = new Text("Timed Game");
-    private static final Text HEALTH = new Text("Health Losing Condition");
-    private static final Text SCORE = new Text("Score Winning Condition");
+    private static final String TIMER_IMAGE = "/images/timer.png";
+    private static final String HEALTH_IMAGE = "/images/HealthImage.png";
+    private static final String SCORE_IMAGE = "/images/trophy.png";
+    private static final String TIME = "Timed Game";
+    private static final String HEALTH = "Health Losing Condition";
+    private static final String SCORE = "Score Winning Condition";
     private static final String DEFAULT_VALUE = "0";
     private static final int TEXT_BOX_WIDTH = 100;
     private static final int NUMBER_TEXT_BOX_WIDTH = 50;
@@ -42,6 +43,10 @@ public class LevelPreferencesEditor implements UIObject {
     private GoalHoverPicture timedGame;
     private GoalHoverPicture health;
     private GoalHoverPicture score;
+    private TextField sec;
+    private TextField min;
+    private DoubleOption scoreOpt;
+    private DoubleOption healthOpt;
     private LevelPreferencesData data;
     private List<Goal> winningConditions;
     private List<Goal> losingConditions;
@@ -50,18 +55,23 @@ public class LevelPreferencesEditor implements UIObject {
 
     public LevelPreferencesEditor () {
         base = new ScrollPane();
-        timedGame = new GoalHoverPicture(TIMER_IMAGE, TIME, makeTimerOptions());
-        DoubleOption healthOpt = new DoubleOption("Minimum health:");
-        healthOpt.setAction(e -> data.setHealthGoal(healthOpt.getValue()));
-        DoubleOption scoreOpt = new DoubleOption("Winning score:");
-        scoreOpt.setAction(e -> data.setHealthGoal(scoreOpt.getValue()));
-        health = new GoalHoverPicture(HEALTH_IMAGE, HEALTH, healthOpt.getNode());
-        score = new GoalHoverPicture(SCORE_IMAGE, SCORE, scoreOpt.getNode());
+        data = new LevelPreferencesData();
+        healthOpt = new DoubleOption("Minimum health:");
+//        healthOpt.setAction(e -> data.setHealthGoal(healthOpt.getValue()));
+        scoreOpt = new DoubleOption("Winning score:");
+//        scoreOpt.setAction(e -> data.setScoreGoal(scoreOpt.getValue()));
+        timedGame =
+                new GoalHoverPicture(new ImageView(TIMER_IMAGE), new Text(TIME), makeTimerOptions());
+        health =
+                new GoalHoverPicture(new ImageView(HEALTH_IMAGE), new Text(HEALTH),
+                                     healthOpt.getNode());
+        score =
+                new GoalHoverPicture(new ImageView(SCORE_IMAGE), new Text(SCORE),
+                                     scoreOpt.getNode());
         VBox vbox = new VBox(timedGame.getObject(), health.getObject(), score.getObject());
         base.setContent(vbox);
         vbox.setAlignment(Pos.CENTER);
         vbox.getChildren().add(saveButton());
-        data = new LevelPreferencesData();
 
     }
 
@@ -85,7 +95,7 @@ public class LevelPreferencesEditor implements UIObject {
         DoubleOption timeGoalOpt = new DoubleOption("Minimum time:");
         timeGoalOpt.setAction(e -> data.setTimeGoal(timeGoalOpt.getValue()));
         timeGoalOpt.getNode().setVisible(false);
-        timer.getCheckBox().selectedProperty().addListener( (obs, oldVal, newVal) -> {
+        timer.getSelectedProperty().addListener( (obs, oldVal, newVal) -> {
             timeGoalOpt.getNode().setVisible(newVal);
         });
         VBox vbox = new VBox(grid, timer.getNode(), timeGoalOpt.getNode());
@@ -93,8 +103,8 @@ public class LevelPreferencesEditor implements UIObject {
     }
 
     private Node makeTimeTextField () {
-        TextField min = new NumberTextField();
-        TextField sec = new NumberTextField();
+        min = new NumberTextField();
+        sec = new NumberTextField();
         min.setMaxWidth(NUMBER_TEXT_BOX_WIDTH);
         sec.setMaxWidth(NUMBER_TEXT_BOX_WIDTH);
         min.setPromptText("min");
@@ -136,20 +146,32 @@ public class LevelPreferencesEditor implements UIObject {
         Button button = new Button("Save");
         button.setOnAction(e -> {
             List<Goal> winlist = new ArrayList<>();
-            winlist.add(data.getScoreGoal());
-            winningConditions = timedGame.isSelected() ? winlist : new ArrayList<>();
+            if (score.isSelected()) {
+                data.setScoreGoal(scoreOpt.getValue());
+                winlist.add(data.getScoreGoal());
+            }
+            else if (timedGame.isSelected() && !timer.getSelectedProperty().get()) {
+                data.setMinutes(Integer.parseInt(min.getText()));
+                data.setSeconds(Integer.parseInt(sec.getText()));
+                winlist.add(data.getTimerGoal());
+                myLevel.addTimer(data.getTimer());
+            }
+            winningConditions = winlist;
+
             List<Goal> loselist = new ArrayList<>();
-            loselist.add(health.isSelected() ? data.getHealthGoal() : null);
-            loselist.add(timedGame.isSelected() && timer.getCheckBox().selectedProperty().get() ? data
-                                                                                                       .getTimerGoal()
-                                                                                               : null);
+            
+            if (health.isSelected()) {
+                data.setHealthGoal(healthOpt.getValue());
+                loselist.add(data.getHealthGoal());
+            }
+            else if (timedGame.isSelected() && timer.getSelectedProperty().get()) {
+                data.setMinutes(Integer.parseInt(min.getText()));
+                data.setSeconds(Integer.parseInt(sec.getText()));
+                loselist.add(data.getTimerGoal());
+                myLevel.addTimer(data.getTimer());
+            }
             losingConditions = loselist;
-            loselist.removeAll(Collections.singleton(null));
-            losingConditions.forEach(g -> {
-
-                System.out.println(g.getClass());
-
-            });
+            
             setLevelGoals();
         });
         return button;

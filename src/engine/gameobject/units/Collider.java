@@ -1,12 +1,12 @@
 package engine.gameobject.units;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
+import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.weapon.firingstrategy.Explosion;
 import gameworld.ObjectCollection;
 
@@ -23,6 +23,7 @@ public class Collider {
     public Collider () {
         collidedID = new HashSet<GameObject>();
         collisionBuffs = new HashSet<Buff>();
+        collisionBuffs.add(new DamageBuff(10));
         onDeath = new Explosion();
     }
 

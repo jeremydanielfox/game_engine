@@ -118,7 +118,16 @@
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -318,15 +327,9 @@
                           <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
                             <bits/>
                           </pseudoClassStates>
-                          <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
-                            <value class="javafx.scene.AccessibleRole">IMAGE_VIEW</value>
-                            <valid>false</valid>
-                            <bean class="javafx.scene.image.ImageView" reference="../.."/>
-                            <name>accessibleRole</name>
-                          </accessibleRole>
                           <image class="javafx.scene.image.ImageView$1">
                             <value class="javafx.scene.image.Image">
-                              <url>file:/C:/Users/Owner/Documents/GitHub/voogasalad_RDatGV/bin/images/Bloons_TackShooter.png</url>
+                              <url>file:/Users/Jeremy/Documents/Compsci%20308/voogasalad_RDatGV/bin/images/Bloons_TackShooter.png</url>
                               <progress>
                                 <value>1.0</value>
                                 <valid>true</valid>
@@ -15308,22 +15311,22 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </entry>
                         <entry>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>0</myRow>
-                            <myCol>5</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                          <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>0</myRow>
-                            <myCol>6</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                        </entry>
-                        <entry>
-                          <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>9</myRow>
                             <myCol>0</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>9</myRow>
                             <myCol>1</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                        </entry>
+                        <entry>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>0</myRow>
+                            <myCol>5</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>0</myRow>
+                            <myCol>6</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -16296,7 +16299,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -16369,7 +16381,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -16442,7 +16463,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -16515,7 +16545,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -16588,7 +16627,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -16661,7 +16709,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -16734,7 +16791,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -16807,7 +16873,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -16880,7 +16955,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -16953,7 +17037,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -17005,16 +17098,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>2003</int>
-                    <int>1943</int>
-                    <int>989</int>
-                    <int>995</int>
-                    <int>690</int>
-                    <int>306</int>
-                    <int>1354</int>
-                    <int>917</int>
-                    <int>1128</int>
-                    <int>1732</int>
+                    <int>2050</int>
+                    <int>1436</int>
+                    <int>1467</int>
+                    <int>1955</int>
+                    <int>199</int>
+                    <int>858</int>
+                    <int>1829</int>
+                    <int>617</int>
+                    <int>2043</int>
+                    <int>633</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -17555,7 +17648,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../../engine.events.RandomSpanWave/myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -18132,7 +18234,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../../engine.events.RandomSpanWave/myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -18709,7 +18820,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../../engine.events.RandomSpanWave/myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -19286,7 +19406,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../../engine.events.RandomSpanWave/myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -19863,7 +19992,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../../engine.events.RandomSpanWave/myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -20440,7 +20578,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../../engine.events.RandomSpanWave/myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -21017,7 +21164,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../../engine.events.RandomSpanWave/myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -21594,7 +21750,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../../engine.events.RandomSpanWave/myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -22171,7 +22336,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../../engine.events.RandomSpanWave/myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>
@@ -22748,7 +22922,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         <myWeapon class="engine.gameobject.weapon.NullWeapon"/>
                         <myCollider>
                           <collidedID/>
-                          <collisionBuffs/>
+                          <collisionBuffs>
+                            <engine.gameobject.units.directdamage.DamageBuff>
+                              <duration>20</duration>
+                              <timeSinceStart>0</timeSinceStart>
+                              <type>COLLISION</type>
+                              <observers/>
+                              <increment>10.0</increment>
+                              <decorated reference="../../../../../../../../engine.events.RandomSpanWave/myWorld/myObjects/engine.gameobject.test.TestTower/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
+                            </engine.gameobject.units.directdamage.DamageBuff>
+                          </collisionBuffs>
                           <onDeath>
                             <radius>0.0</radius>
                             <explosBuffs/>

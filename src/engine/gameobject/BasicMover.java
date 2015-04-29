@@ -12,10 +12,7 @@ public abstract class BasicMover implements Mover {
     boolean frozen;
 
     public BasicMover () {
-        inherentSpeed = 0;
-        speedModifier = 0;
-        myDistance = 0;
-        frozen = false;
+        this(0);
     }
 
     public BasicMover (double speed) {
@@ -50,7 +47,7 @@ public abstract class BasicMover implements Mover {
     public abstract Mover clone ();
 
     protected double currentSpeed () {
-        if (frozen != true) {
+        if (!frozen) {
             return inherentSpeed * speedModifier;
         }
         return 0;

@@ -29,7 +29,7 @@ public class ScoreGoal extends PlayerGoal {
     }
 
     @Override
-    @Settable
+ //   @Settable
     public void setPlayer (Player p) {
         super.setPlayer(p);
     }

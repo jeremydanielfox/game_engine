@@ -35,6 +35,7 @@ public class ShopModelSimple implements ShopModel {
 
     public ShopModelSimple () {
         markup = 1;
+        currentPlayer = new Player();
     }
 
     public ShopModelSimple (GameWorld world, Player player, double markup) {
@@ -77,7 +78,12 @@ public class ShopModelSimple implements ShopModel {
     
     @Settable
     public void setPurchasables (List<Purchasable<GameObject>> purchasables) {
+        purchasableMap.clear();
         purchasables.forEach(prototype -> addPurchasable(prototype));
+    }
+    
+    public Map<String, Purchasable<GameObject>> getMap(){
+        return purchasableMap;
     }
 
     @Override

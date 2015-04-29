@@ -31,18 +31,17 @@ public class ShopEditor implements UIObject {
     private Pane pane = new StackPane();
 
     private ShopCheckList checklist;
-    private ShopModel shop;
+    private ShopModelSimple shop;
 
     public ShopEditor () {
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.TOP_CENTER);
         Text text = new Text("Select Items for Shop");
-        text.setFont(Font.font("Verdana", 20));
+        text.getStyleClass().add("large-title");
         vbox.getChildren().addAll(text,
                                   makeObjectChecklist(LibraryData.getInstance()
                                           .getEditableObservableList()),
                                   makeSaveButton());
-      //   vbox.getChildren().add(tempbutton());
         pane.getChildren().add(vbox);
         pane.setMaxWidth(Screen.getPrimary().getBounds().getWidth());
         
@@ -74,8 +73,7 @@ public class ShopEditor implements UIObject {
         return button;
     }
 
-    private ShopModel makeShop () {
-        ShopModelSimple shop = new ShopModelSimple();
+    private ShopModelSimple makeShop () {
         List<Purchasable<GameObject>> prototypes = new ArrayList<>();
         checklist.getSelectedPlaceables().stream().forEach(e -> {
             prototypes.add((Purchasable<GameObject>) e.getGameObject());
@@ -83,18 +81,4 @@ public class ShopEditor implements UIObject {
         shop.setPurchasables(prototypes);
         return shop;
     }
-
-    // for testing!!!!!!!!
-    private Button tempbutton () {
-        Button button = new Button("Print selected");
-
-        button.setOnAction(e -> {
-            for (Placeable obj : checklist.getSelectedPlaceables()) {
-                System.out.println(obj.getShopTag().getName());
-                System.out.println(((Purchasable<GameObject>) obj.getGameObject()).getName());
-            }
-        });
-        return button;
-    }
-
 }

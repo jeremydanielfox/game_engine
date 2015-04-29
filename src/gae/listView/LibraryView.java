@@ -4,6 +4,8 @@ import gae.backend.Placeable;
 import gae.gridView.ContainerWrapper;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
+import voogasalad.util.pathsearch.graph.GridCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -35,7 +37,6 @@ public class LibraryView {
     private TitledPane pathTitledPane;
     private PathList pathList;
     private ContainerWrapper wrapper;
-    private BooleanProperty freeWorld;
 
     public LibraryView () {
         instantiatedTypes = new ArrayList<>();
@@ -59,13 +60,12 @@ public class LibraryView {
      */
     public Group getGroup (Node pane,
                            Scene scene,
-                           ContainerWrapper wrapper, BooleanProperty freeWorld) {
+                           ContainerWrapper wrapper) {
         nodeScene = pane;
         myScene = scene;
         this.wrapper = wrapper;
         root = new Group();
         objectGroup = new Group();
-        this.freeWorld = freeWorld;
         root.getChildren().addAll(view(),
                                   objectGroup);
         root.setManaged(false);
@@ -78,11 +78,19 @@ public class LibraryView {
             instantiatedTypes.add(type);
             PaneList paneList = new PaneList();
             listOfListObjects.add(paneList);
-            accordion.getPanes()
-                    .add(paneList.initialize(objectGroup, nodeScene, myScene,
-                                             wrapper,
-                                             editableObservableList,
-                                             type));
+            TitledPane pane = paneList.initialize(objectGroup, nodeScene, myScene,
+                                                  wrapper,
+                                                  editableObservableList,
+                                                  type);
+            pane.setOnMouseClicked(event -> {
+                if (!pane.equals(pathTitledPane) && event.getClickCount() == 1) {
+                    for (PaneList list : listOfListObjects) {
+                        list.addRoot();
+                    }
+                    pathList.disableScreen();
+                }
+            });
+            accordion.getPanes().add(pane);
         }
     }
 
@@ -107,14 +115,20 @@ public class LibraryView {
                         if (change.wasAdded()) { // if an editablenode was added
                     Placeable added = (Placeable) change.getAddedSubList().get(0);
                     setUpTitledPane(added);
+                    setUpToggle();
                 }
             }
         });
-        pathList = new PathList((StackPane) nodeScene, myScene, wrapper, freeWorld);
-        pathTitledPane =
-                pathList.getTitledPane("Path");
+        pathList = new PathList((StackPane) nodeScene, myScene, wrapper);
+        pathTitledPane = pathList.getTitledPane("Path");
+        pathTitledPane.setOnMousePressed(event -> {
+            for (PaneList list : listOfListObjects) {
+                list.removeRoot();
+            }
+            pathList.setScreen();
+        });
         accordion.getPanes().add(pathTitledPane);
-        setUpToggle();
+        // setUpToggle();
         return accordion;
     }
 
@@ -128,8 +142,7 @@ public class LibraryView {
             for (PaneList list : listOfListObjects) {
                 list.removeRoot();
             }
-//            if (!freeWorld.getValue())
-                pathList.setScreen();
+            pathList.setScreen();
         });
         for (int i = 0; i < accordion.getPanes().size(); i++) {
             TitledPane chosen = accordion.getPanes().get(i);

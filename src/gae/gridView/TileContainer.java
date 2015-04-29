@@ -149,6 +149,7 @@ public class TileContainer extends Region implements ContainerWrapper {
 
     public List<Point> getUnwalkableTiles () {
         List<Point> unwalkableTiles = new ArrayList<>();
+        System.out.println(tileList);
         tileList.stream().forEach(tile -> {
             if (!tile.getData().getWalkableProperty().get()) {
                 unwalkableTiles.add(tile.getData().getGridLocation());

@@ -1,8 +1,6 @@
 package gae.listView;
 
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.Graphic;
-import engine.gameobject.HealthSimple;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
 import engine.pathfinding.PathFixed;
@@ -20,12 +18,11 @@ import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 
 
 /**
- * Library Data class that stores the list of Editables
- *
- * @author Kei
+ * Library Data class that stores the list of Objects
  *
  */
 public class LibraryData {
@@ -34,7 +31,7 @@ public class LibraryData {
     private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
     private Map<String, ObservableList<Object>> createdObjectMap = new HashMap<>();
     private ObservableList<GameObjectSimple> gameObjectList = FXCollections.observableArrayList();
-    private ObservableList<Type> labelList = FXCollections.observableArrayList();
+    private ObservableSet<Type> labelList = FXCollections.observableSet();
     private ObservableList<Object> moverList = FXCollections.observableArrayList();
     private ObservableList<Object> freeWorldList = FXCollections.observableArrayList();
     private boolean free;
@@ -55,7 +52,7 @@ public class LibraryData {
                     if (added instanceof Placeable) {
                         Placeable placeable = (Placeable) added;
                         labelList.add(placeable.getLabel());
-                        addToExistingGameObjectList(placeable);
+//                        addToExistingGameObjectList(placeable);
                     }
                 }
             }
@@ -139,23 +136,8 @@ public class LibraryData {
         return gameObjectList;
     }
 
-    public ObservableList<Type> getLabelList () {
+    public ObservableSet<Type> getLabelSet () {
         return labelList;
-    }
-
-    private void addToExistingGameObjectList (Authorable authorable) {
-        Placeable editable = (Placeable) authorable;
-        GameObjectSimple object = new GameObjectSimple();
-        object.setPoint(editable.getLocation());
-        object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
-                                      editable.getImagePath()));
-        object.setLabel(editable.getLabel());
-        object.setShopTag(editable.getShopTag());
-        object.setMover(editable.getPath());
-        object.setHealth(editable.getHealth());
-        object.setCollider(editable.getCollider());
-        object.setWeapon(editable.getWeapon());
-        gameObjectList.add(object);
     }
 
     private PathFixed getPath (List<AuthoringPath> list) {

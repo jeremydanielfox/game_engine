@@ -14,16 +14,17 @@ import javafx.scene.control.TabPane;
 public class LevelTabSet {
     private TabPane baseNode;
 
-    public LevelTabSet (Node world, Node waves, Node interactionTable) {
-        initialize(world, waves, interactionTable);
+    public LevelTabSet (Node world, Node waves, Node interactionTable, Node prefs) {
+        initialize(world, waves, interactionTable, prefs);
     }
 
-    private void initialize (Node world, Node waves, Node interactionTable) {
+    private void initialize (Node world, Node waves, Node interactionTable, Node prefs) {
         baseNode = new TabPane();
 
         baseNode.getTabs().addAll(makeTabContainer("World", world),
                                   makeTabContainer("Waves", waves),
-                                  makeTabContainer("Interactions", interactionTable));
+                                  makeTabContainer("Interactions", interactionTable),
+                                  makeTabContainer("Preferences", prefs));
     }
 
     private Tab makeTabContainer (String title, Node interactionTable) {

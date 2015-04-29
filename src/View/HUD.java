@@ -14,9 +14,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import engine.gameobject.test.TestTower;
+import engine.gameobject.test.bloons.Spikes;
 import engine.shop.ShopModel;
 import engine.shop.ShopView;
-import gameworld.GameWorld;
 
 
 /**
@@ -128,8 +128,9 @@ public class HUD implements Observer {
 
     private void makeShop () {
         //TESTING purposes:
-        shop.addPurchasable(new TestTower(1,0,0));
+        //shop.addPurchasable(new TestTower(1,0,0));This is the tower that shoots itself
         shop.addPurchasable(new TestTower(0,0,0));
+        shop.addPurchasable(new Spikes());
         myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
     }
 }

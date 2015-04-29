@@ -60,6 +60,7 @@ public class ConcreteGame implements Game {
         myShop = shop;
         myPlayer = player;
         myLevelBoard = level;
+        myLevelBoard.setShop(myShop);
         myButtons = buttons;
         myGameName = DEFAULT_NAME;
         myAuthor = DEFAULT_AUTHOR;
@@ -142,6 +143,7 @@ public class ConcreteGame implements Game {
     @Settable
     public void setLevelBoard (LevelBoard levelBoard) {
         myLevelBoard = levelBoard;
+        myLevelBoard.setShop(myShop);
     }
 
     @Settable

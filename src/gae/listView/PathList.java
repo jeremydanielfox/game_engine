@@ -9,6 +9,7 @@ import gae.gridView.PathView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiConsumer;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import voogasalad.util.pathsearch.graph.GridCell;
 import xml.DataManager;
 
 
@@ -49,8 +51,7 @@ public class PathList {
 
     public PathList (StackPane stack,
                      Scene scene,
-                     ContainerWrapper container,
-                     BooleanProperty freeWorld) {
+                     ContainerWrapper container) {
         pathView = new PathView(stack, scene);
         pathView.setContainerArea(container);
         this.stack = stack;
@@ -64,9 +65,6 @@ public class PathList {
 
         buttonList
                 .addAll(Arrays.asList(new Button[] { bezier, completePath, newPath, updatePath }));
-        freeWorld.addListener((observable, oldv, newv) -> {
-            disableScreen();
-        });
         stack.getChildren().add(makeGridPane());
     }
 
@@ -78,7 +76,6 @@ public class PathList {
         paths = LibraryData.getInstance().getPathObservableList();
         TitledPane pane = new TitledPane();
         pane.setText(text);
-        pane.setTextFill(Color.RED);
 
         final ListView<Authorable> listView = ListViewUtilities.createList(paths, scene, "Path");
         listView.setOnMouseClicked(e -> {

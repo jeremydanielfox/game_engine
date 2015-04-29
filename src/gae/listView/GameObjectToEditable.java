@@ -11,6 +11,7 @@ import engine.gameobject.weapon.Weapon;
 import engine.shop.ShopTag;
 import engine.shop.ShopTagSimple;
 import gae.backend.Placeable;
+import gae.editorView.GameObjectInformation;
 import javafx.scene.image.ImageView;
 import View.ImageUtilities;
 
@@ -42,7 +43,7 @@ public class GameObjectToEditable implements Placeable {
     private int height;
     private ImageView imageView;
     private ImageView shopImageView;
-//    private double health;
+    private String title;
     private String description;
     private Type gameObjectType;
     private Collider collider;
@@ -69,6 +70,7 @@ public class GameObjectToEditable implements Placeable {
         weapon = gameObject.getWeapon();
         health = gameObject.getHealth();
         collider = gameObject.getCollider();
+        title = GameObjectInformation.getInstance().getTitle(gameObject);
     }
 
     @Override
@@ -195,8 +197,13 @@ public class GameObjectToEditable implements Placeable {
         copy.setName(name);
         copy.setDescription(description);
         copy.setCollider(collider);
+        copy.setTitle(title);
         ourID++;
         return copy;
+    }
+
+    public void setTitle (String title) {
+        this.title = title;
     }
 
     public void setImagePath (String imagePath) {
@@ -311,6 +318,12 @@ public class GameObjectToEditable implements Placeable {
     @Override
     public Collider getCollider () {
         return collider;
+    }
+
+    @Override
+    public String getTitle () {
+        // TODO Auto-generated method stub
+        return title;
     }
 
 }

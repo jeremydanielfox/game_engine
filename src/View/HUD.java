@@ -62,6 +62,7 @@ public class HUD implements Observer {
         myStatsDisplay.setAlignment(Pos.CENTER_RIGHT);
         myWholeDisplay.setAlignment(Pos.CENTER);
         myWholeDisplay.getChildren().add(myStatsDisplay);
+        myWholeDisplay.getChildren().add(myLevelDisplay);
         myDisplayFields = new HashMap<>();
         myPane = pane;
         makeShop();

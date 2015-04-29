@@ -118,7 +118,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         btn.setOnAction(e -> myGame.getPlayer().changeHealth(-100));
         Button btn2 = new Button("Inc");
         btn2.setTranslateX(btn2.getLayoutX());
-        btn2.setOnAction(e -> myGame.getPlayer().changeScore(100));// .changeScore(100));
+        btn2.setOnAction(e -> myGame.getPlayer().changeScore(100));
         vbox.getChildren().addAll(btn, btn2);
         myButtonList = myGame.getButtons();
         myButtonList.forEach(e -> vbox.getChildren().add(e.getButton()));

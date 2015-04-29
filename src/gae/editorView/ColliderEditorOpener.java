@@ -38,8 +38,8 @@ public class ColliderEditorOpener extends EditorOpener {
         border.setTop(top);
         BuffEditor explosion = new BuffEditor();
         BuffEditor collision = new BuffEditor();
-        border.setLeft(explosion.setLists("Explosion", biconsumer));
-        border.setRight(collision.setLists("Collison", biconsumer));
+        border.setLeft(explosion.setLists("Collision", biconsumer));
+        border.setRight(collision.setLists("Explosion", biconsumer));
         Button add = new Button("Add lists");
         add.setOnAction(e -> {
             List<List<Object>> buffLists = new ArrayList<>();

@@ -246,7 +246,7 @@ public class CentralTabView implements UIObject {
     }
 
     public BiConsumer<List<GridCell>, List<GridCell>> setWalkable () {
-        return (tower, enemy) -> {
+        return (tower, enemy) -> { 
             nextWorld.setObstacles(enemy);
             nextWorld.setTowerObstacles(tower);
         };

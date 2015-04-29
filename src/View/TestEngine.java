@@ -10,8 +10,7 @@ import xml.DataManager;
 
 
 public class TestEngine extends Application {
-
-    private static final String FILE_SOURCE = "src/xml/Path.xml";
+    private static final String FILE_SOURCE = "src/xml/testall.xml";
 
     @Override
     public void start (Stage primaryStage) throws Exception {

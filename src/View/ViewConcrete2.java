@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
 import player.gamePlayer.GameOverScreen;
 import player.gamePlayer.GamePlayerScreen;
 import voogasalad.util.highscore.HighScoreController;
@@ -22,6 +23,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.util.Duration;
 import engine.game.Game;
 import engine.game.LevelBoard;
@@ -37,8 +39,8 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private static final int DEFAULT_FRAME_RATE = 60;
     public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
-    public static final double WORLD_WIDTH = 600;
-    public static final double WORLD_HEIGHT = 600;
+    public static final double WORLD_WIDTH = 622;
+    public static final double WORLD_HEIGHT = 622;
     // public static final int MAX_FRAME_RATE = 500;
     // public static final int MIN_FRAME_RATE = 1000;
     public static final int DEFAULT_FRAMES_SECOND =
@@ -201,6 +203,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
 
     @Override
     public void update (Observable o, Object arg) {
+        System.out.println("being notified that a level has ended.");
         if (myLevelBoard.equals(o)) {
             pause();
             if (myLevelBoard.gameOver()) {
@@ -224,6 +227,7 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
             }
             else {
                 myLevelBoard.startNextLevel();
+                System.out.println("changing to level 2");
                 myHeadsUp.clearLevelDisplay();
                 addLevelDisplays();
                 setCurrentBackground();

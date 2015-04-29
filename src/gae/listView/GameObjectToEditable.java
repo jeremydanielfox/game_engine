@@ -13,6 +13,7 @@ import engine.shop.ShopTagSimple;
 import gae.backend.Placeable;
 import gae.editorView.GameObjectInformation;
 import javafx.scene.image.ImageView;
+import javafx.stage.Screen;
 import View.ImageUtilities;
 
 

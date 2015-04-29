@@ -54,6 +54,7 @@ public class GamePlayerScreen implements GameScene {
         
         //pauseScreen = new PauseDropDown(e -> resumeGame(), myStage, null);
         //myGame = loadGame();
+        
         myGame=game;
         myPlayerName = "";
         myPreviousScene = previousScene;

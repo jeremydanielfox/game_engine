@@ -22,9 +22,15 @@ public class EventsCompleteGoal extends StoryBoardGoal {
     }
 
     @Override
+    public boolean isSatisfied(){
+        return getStoryBoard().currentEventCount() <= 0;
+    }
+    
+    //TODO figure out why this isn't being called from storyboard
+    @Override
     public void update (Observable o, Object arg) {
         if (o.equals(getStoryBoard())) {
-            setIsSatisfied(getStoryBoard().currentEventCount() == 0);
+            setIsSatisfied(getStoryBoard().currentEventCount() <= 0);
         }
 
     }

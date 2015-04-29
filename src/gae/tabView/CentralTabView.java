@@ -1,6 +1,7 @@
 package gae.tabView;
 
 import engine.fieldsetting.Settable;
+import engine.game.ConcreteLevel;
 import engine.game.Game;
 import engine.game.Level;
 import engine.game.Player;
@@ -190,7 +191,7 @@ public class CentralTabView implements UIObject {
             for (Method m : levelMethods) {
                 checkAndInvokeMethods(nextWorld, levelData, sb, m);
             }
-
+           
             for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(shopModel
                     .getClass()
                     .getName()), Settable.class)) {
@@ -220,7 +221,7 @@ public class CentralTabView implements UIObject {
         if (m.getName().equals("setStoryBoard")) {
             m.invoke(levelData, sb);
         }
-        else if (m.getName().equals("setGameWorld")) {
+        if (m.getName().equals("setGameWorld")) {
             m.invoke(levelData, nextWorld);
         }
         else if (m.getName().equals("setImagePath")) {

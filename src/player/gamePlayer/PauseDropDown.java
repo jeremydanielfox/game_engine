@@ -1,6 +1,8 @@
 package player.gamePlayer;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,7 +31,7 @@ public class PauseDropDown implements GameScene {
     private HBox instructionsBox;
     private Text instructions;
 
-    public PauseDropDown () {
+    public PauseDropDown (Consumer<? extends Object> lambda, Stage s, Scene previous) {
         myContainer = new BorderPane();
         myScene = new Scene(myContainer);
         resume = new Button("RESUME");
@@ -80,13 +82,17 @@ public class PauseDropDown implements GameScene {
      * Sets up functionalities of the PauseScene
      */
     private void setUpFunctions () {
-        myScene.setOnKeyPressed(e -> {
-            if (e.getCode().equals(KeyCode.ESCAPE)) {
-                /*
-                 * return to previous Scene as the dominant screen
-                 */
-            }
+        myScene.addEventFilter(KeyEvent, e -> {
+            
         });
+        
+//        setOnKeyPressed(e -> {
+//            if (e.getCode().equals(KeyCode.ESCAPE)) {
+//                /*
+//                 * return to previous Scene as the dominant screen
+//                 */
+//            }
+//        });
 
         resume.setOnMouseClicked(e -> {
 

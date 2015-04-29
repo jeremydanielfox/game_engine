@@ -3,7 +3,11 @@ package gae.gameView;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
+import View.EngineView;
+import View.ViewConcrete2;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -76,7 +80,7 @@ public class UtilitiesBar {
 
     private void setUpFunctions () {
         playButton.setOnMousePressed(e -> {
-
+            liveEdit();
         });
 
         pauseButton.setOnMousePressed(e -> {
@@ -100,13 +104,28 @@ public class UtilitiesBar {
         });
     }
 
+    /**
+     * add exporting option
+     */
+    private void liveEdit () {
+        Stage primaryStage = new Stage();
+        Group root = new Group();
+        primaryStage.setHeight(600);
+        primaryStage.setWidth(950);
+        Scene scene = new Scene(root);
+        EngineView view = new ViewConcrete2(game, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        root.getChildren().add(view.initializeView());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
     private void export () {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Game File");
         File chosen = fileChooser.showSaveDialog(utilitiesBar.getScene().getWindow());
         DataManager.writeToXML(game, chosen.getAbsolutePath());
-        ShopModel shop = game.getShop();
-        System.out.println("test");
+//        ShopModel shop = game.getShop();
+//        System.out.println("test");
     }
 
     private void chooseFile () {

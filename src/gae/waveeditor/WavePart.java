@@ -39,7 +39,8 @@ public class WavePart implements UIObject {
         
         gameObjectSelector = new ComboBox<GameObjectSimple>(enemyList);
         
-        quantityField = new TextField("Enter Quantity");
+        quantityField = new TextField();
+        quantityField.setPromptText("Enter Quantity");
         quantityField.setEditable(true);
         
         Button deleteButton = new Button("Delete");

@@ -88,7 +88,6 @@ public class ConcreteLevel implements Level {
     private boolean checkGoals (List<Goal> listOfGoals) {
         for (Goal goal : listOfGoals) {
             if (goal != null && goal.isSatisfied()) {
-                System.out.println("no events goal satisfied");
                 return true;
             }
         }

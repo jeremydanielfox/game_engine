@@ -72,6 +72,7 @@ public class TileViewToggle extends Group implements ContainerWrapper {
 
     @Override
     public boolean checkBounds (double x, double y) {
+        // add the start and endview checkbounds
         return tileModeProperty.get().equals(TileMode.TOWERMODE) ? towerview.checkBounds(x, y)
                                                                 : enemyview.checkBounds(x, y);
     }

@@ -1,6 +1,7 @@
 package gae.tabView;
 
 import engine.fieldsetting.Settable;
+import engine.game.ConcreteLevel;
 import engine.game.Game;
 import engine.game.Level;
 import engine.game.Player;
@@ -190,6 +191,8 @@ public class CentralTabView implements UIObject {
             for (Method m : levelMethods) {
                 checkAndInvokeMethods(nextWorld, levelData, sb, m);
             }
+            
+            ((ConcreteLevel) levelData).setStoryBoard(sb);
 
             for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(shopModel
                     .getClass()
@@ -217,10 +220,10 @@ public class CentralTabView implements UIObject {
                                         Method m)
                                                  throws IllegalAccessException,
                                                  InvocationTargetException {
-        if (m.getName().equals("setStoryBoard")) {
-            m.invoke(levelData, sb);
-        }
-        else if (m.getName().equals("setGameWorld")) {
+//        if (m.getName().equals("setStoryBoard")) {
+//            m.invoke(levelData, sb);
+//        }
+        if (m.getName().equals("setGameWorld")) {
             m.invoke(levelData, nextWorld);
         }
         else if (m.getName().equals("setImagePath")) {

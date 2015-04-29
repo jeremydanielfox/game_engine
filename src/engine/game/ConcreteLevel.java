@@ -57,7 +57,7 @@ public class ConcreteLevel implements Level {
         myLosingGoals = losingGoals;
         myGameWorld = gameWorld;
         myStoryBoard = storyBoard;
-        myWinningGoals.add(EVENT_GOAL_INDEX, new EventsCompleteGoal(myStoryBoard));
+//        myWinningGoals.add(EVENT_GOAL_INDEX, new EventsCompleteGoal(myStoryBoard));
     }
 
     @Override

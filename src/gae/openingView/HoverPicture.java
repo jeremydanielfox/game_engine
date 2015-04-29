@@ -79,14 +79,14 @@ public class HoverPicture implements UIObject {
     }
 
     /**
-     * sets the select status
+     * sets the select status of entire node
      */
     public void changeSelectEffect () {
         selected = !selected;
     }
 
     /**
-     * alter status of the hover picture
+     * alter disable status of the hover picture
      */
     public void alter () {
         if (image.isDisable()) {

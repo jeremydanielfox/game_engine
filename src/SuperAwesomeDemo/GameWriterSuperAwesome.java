@@ -170,13 +170,13 @@ public class GameWriterSuperAwesome extends Application {
         WeaponPowerUp towerShooter = new WeaponPowerUp(new TowerShooter(hero), towerShooterGraphic);
         towerShooter.setPoint(new PointSimple(550, 250));
         
-        Graphic shotgunGraphic = new Graphic(100, 30, "/images/Shotgun.png");
+        Graphic shotgunGraphic = new Graphic(30, 100, "/images/Shotgun.png");
         WeaponPowerUp shotgun = new WeaponPowerUp(new Shotgun(hero),shotgunGraphic);
         shotgun.setPoint(new PointSimple(50, 250));
         
-        Graphic rocketGraphic = new Graphic(100,30, "/images/Missile_Launcher.png");
+        Graphic rocketGraphic = new Graphic(45,150, "/images/Missile_Launcher.png");
         WeaponPowerUp rocket = new WeaponPowerUp(new RocketLauncher(hero), rocketGraphic);
-        rocket.setPoint(new PointSimple(50, 500));
+        rocket.setPoint(new PointSimple(80, 500));
         world.addObject(mine);
         world.addObject(towerShooter);
         world.addObject(shotgun);
@@ -245,8 +245,9 @@ public class GameWriterSuperAwesome extends Application {
     public ShopModel makeShop (Player player, GameWorld world) {
         ShopModelSimple shop = new ShopModelSimple(world, player, 1);
         
-        shop.addPurchasable(new Wall());
-//        shop.addPurchasable(new Barrel());
+//        shop.addPurchasable(new Wall());
+        shop.addPurchasable(new Barrel());
+//        shop.addPurchasable(new Hero(0,0));
         return shop;
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import engine.fieldsetting.Settable;
+import engine.shop.ShopModel;
 import gameworld.GameWorld;
 
 
@@ -20,6 +21,7 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
     private int curLevelIndex;
     private boolean isLost;
     private boolean isWon;
+    private ShopModel shop;
 
     public ConcreteLevelBoard () {
         myLevels = new ArrayList<Level>();
@@ -82,6 +84,7 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
     public void startNextLevel () {
         // TODO Auto-generated method stub
         curLevelIndex++;
+        shop.setGameWorld(getGameWorld());
     }
 
     @Override
@@ -100,5 +103,9 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
             return myLevels.get(curLevelIndex);
         }
         return null;
+    }
+    
+    public void setShop (ShopModel shop) {
+        this.shop = shop;
     }
 }

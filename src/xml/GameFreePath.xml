@@ -161,54 +161,6 @@
                         </myShopTag>
                       </engine.gameobject.test.TestTower>
                     </myObjects>
-                    <myCollisionEngine class="engine.interactions.CollisionEngine">
-                      <myTable>
-                        <entry>
-                          <engine.gameobject.test.ProjectileLabel>
-                            <superType class="engine.gameobject.labels.TypeBase">
-                              <myName>Base</myName>
-                            </superType>
-                            <myName>Projectile</myName>
-                          </engine.gameobject.test.ProjectileLabel>
-                          <map>
-                            <entry>
-                              <engine.gameobject.test.EnemyLabel>
-                                <superType class="engine.gameobject.labels.TypeBase">
-                                  <myName>Base</myName>
-                                </superType>
-                                <myName>Enemy</myName>
-                              </engine.gameobject.test.EnemyLabel>
-                              <engine.interactions.BuffImparter/>
-                            </entry>
-                          </map>
-                        </entry>
-                      </myTable>
-                      <myGameWorld class="gameworld.FreeWorld" reference="../.."/>
-                    </myCollisionEngine>
-                    <myRangeEngine class="engine.interactions.RangeEngine">
-                      <myTable>
-                        <entry>
-                          <engine.gameobject.test.TowerLabel>
-                            <superType class="engine.gameobject.labels.TypeBase">
-                              <myName>Base</myName>
-                            </superType>
-                            <myName>Tower</myName>
-                          </engine.gameobject.test.TowerLabel>
-                          <map>
-                            <entry>
-                              <engine.gameobject.test.EnemyLabel>
-                                <superType class="engine.gameobject.labels.TypeBase">
-                                  <myName>Base</myName>
-                                </superType>
-                                <myName>Enemy</myName>
-                              </engine.gameobject.test.EnemyLabel>
-                              <engine.interactions.ShootAt/>
-                            </entry>
-                          </map>
-                        </entry>
-                      </myTable>
-                      <myGameWorld class="gameworld.FreeWorld" reference="../.."/>
-                    </myRangeEngine>
                     <myNodeToGameObjectMap>
                       <entry>
                         <javafx.scene.image.ImageView>
@@ -17098,16 +17050,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>2050</int>
-                    <int>1436</int>
-                    <int>1467</int>
-                    <int>1955</int>
-                    <int>199</int>
-                    <int>858</int>
-                    <int>1829</int>
-                    <int>617</int>
-                    <int>2043</int>
-                    <int>633</int>
+                    <int>301</int>
+                    <int>1928</int>
+                    <int>290</int>
+                    <int>1092</int>
+                    <int>1162</int>
+                    <int>1043</int>
+                    <int>838</int>
+                    <int>89</int>
+                    <int>1138</int>
+                    <int>733</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -23028,54 +22980,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
         <myLosingGoals reference="../../engine.game.ConcreteLevel/myLosingGoals"/>
         <myGameWorld class="gameworld.FixedWorld">
           <myObjects/>
-          <myCollisionEngine class="engine.interactions.CollisionEngine">
-            <myTable>
-              <entry>
-                <engine.gameobject.test.ProjectileLabel>
-                  <superType class="engine.gameobject.labels.TypeBase">
-                    <myName>Base</myName>
-                  </superType>
-                  <myName>Projectile</myName>
-                </engine.gameobject.test.ProjectileLabel>
-                <map>
-                  <entry>
-                    <engine.gameobject.test.EnemyLabel>
-                      <superType class="engine.gameobject.labels.TypeBase">
-                        <myName>Base</myName>
-                      </superType>
-                      <myName>Enemy</myName>
-                    </engine.gameobject.test.EnemyLabel>
-                    <engine.interactions.BuffImparter/>
-                  </entry>
-                </map>
-              </entry>
-            </myTable>
-            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
-          </myCollisionEngine>
-          <myRangeEngine class="engine.interactions.RangeEngine">
-            <myTable>
-              <entry>
-                <engine.gameobject.test.TowerLabel>
-                  <superType class="engine.gameobject.labels.TypeBase">
-                    <myName>Base</myName>
-                  </superType>
-                  <myName>Tower</myName>
-                </engine.gameobject.test.TowerLabel>
-                <map>
-                  <entry>
-                    <engine.gameobject.test.EnemyLabel>
-                      <superType class="engine.gameobject.labels.TypeBase">
-                        <myName>Base</myName>
-                      </superType>
-                      <myName>Enemy</myName>
-                    </engine.gameobject.test.EnemyLabel>
-                    <engine.interactions.ShootAt/>
-                  </entry>
-                </map>
-              </entry>
-            </myTable>
-            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
-          </myRangeEngine>
           <myNodeToGameObjectMap/>
           <myTerrain>
             <myMatrix>
@@ -23803,14 +23707,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
     <curLevelIndex>0</curLevelIndex>
     <isLost>false</isLost>
     <isWon>false</isWon>
+    <shop class="engine.shop.ShopModelSimple">
+      <currentPlayer reference="../../../myPlayer"/>
+      <myGameWorld class="gameworld.FreeWorld" reference="../../myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.RandomSpanWave/myWorld"/>
+      <purchasableMap/>
+      <upgradeMap/>
+      <markup>1.0</markup>
+    </shop>
   </myLevelBoard>
-  <myShop class="engine.shop.ShopModelSimple">
-    <currentPlayer reference="../../myPlayer"/>
-    <myGameWorld class="gameworld.FreeWorld" reference="../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.RandomSpanWave/myWorld"/>
-    <purchasableMap/>
-    <upgradeMap/>
-    <markup>1.0</markup>
-  </myShop>
+  <myShop class="engine.shop.ShopModelSimple" reference="../myLevelBoard/shop"/>
   <myButtons>
     <View.ButtonWrapper>
       <myEnableCondition class="engine.goals.NoCurrentEventGoal" reference="../../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/obs/engine.goals.NoCurrentEventGoal"/>

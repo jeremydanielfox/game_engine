@@ -18,6 +18,7 @@ import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 
 
 /**
@@ -30,7 +31,7 @@ public class LibraryData {
     private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
     private Map<String, ObservableList<Object>> createdObjectMap = new HashMap<>();
     private ObservableList<GameObjectSimple> gameObjectList = FXCollections.observableArrayList();
-    private ObservableList<Type> labelList = FXCollections.observableArrayList();
+    private ObservableSet<Type> labelList = FXCollections.observableSet();
     private ObservableList<Object> moverList = FXCollections.observableArrayList();
     private ObservableList<Object> freeWorldList = FXCollections.observableArrayList();
     private boolean free;
@@ -135,7 +136,7 @@ public class LibraryData {
         return gameObjectList;
     }
 
-    public ObservableList<Type> getLabelList () {
+    public ObservableSet<Type> getLabelSet () {
         return labelList;
     }
 

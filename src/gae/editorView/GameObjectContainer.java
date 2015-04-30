@@ -22,7 +22,8 @@ public class GameObjectContainer extends VBox implements ContainerWrapper {
 
     private Label getLabel () {
         Label title = new Label("My Properties");
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        title.getStyleClass().add("large-title");
+      //  title.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         title.setTranslateX(width * LABEL_LOCATION_PROPORTIONS);
         return title;
     }

@@ -1,7 +1,7 @@
 package gae.gameView;
 
 import engine.gameobject.labels.Type;
-
+import javafx.beans.property.BooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
@@ -36,8 +36,8 @@ public class LabelCheckListItem implements CheckListItem {
     }
 
     @Override
-    public CheckBox getCheckBox () {
-        return checkbox;
+    public BooleanProperty getSelectedProperty () {
+        return checkbox.selectedProperty();
     }
 
     /**

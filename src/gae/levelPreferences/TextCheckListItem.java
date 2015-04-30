@@ -1,5 +1,6 @@
 package gae.levelPreferences;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -25,8 +26,8 @@ public class TextCheckListItem implements CheckListItem {
     }
 
     @Override
-    public CheckBox getCheckBox () {
-        return myCheckBox;
+    public BooleanProperty getSelectedProperty () {
+        return myCheckBox.selectedProperty();
     }
 
 }

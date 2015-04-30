@@ -112,7 +112,7 @@ public class ConcreteLevel implements Level {
 
     @Settable
     public void setImagePath (String imagePath) {
-        myImagePath = imagePath;
+        myImagePath = imagePath.substring(imagePath.lastIndexOf("/images"));
     }
 
     @Settable

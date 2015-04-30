@@ -60,16 +60,18 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private double myDisplayHeight;
     private HUD myHeadsUp;
     private GameOverScreen myEndScreen;
+    private PauseDropDown pauseScreen;
 
     public ViewConcrete2 (Game game,
                           double stageWidth,
-                          double stageHeight, GameOverScreen screen) {
+                          double stageHeight, GameOverScreen screen, PauseDropDown pauser) {
         myGame = game;
         myLevelBoard = myGame.getLevelBoard();
         myLevelBoard.addObserver(this);
         myDisplayWidth = stageWidth;
         myDisplayHeight = stageHeight;
         myEndScreen=screen;
+        pauseScreen = pauser;
     }
     
     public ViewConcrete2 (Game game,
@@ -88,9 +90,10 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myPane = new BorderPane();
         myGameWorldPane = new Pane();
         
-        myGameWorldPane.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
+        myPane.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
             if (key.getCode().equals(KeyCode.P)){
-                //pauseScreen.displayPauseScreen();
+                this.pause();
+                pauseScreen.displayPauseScreen();
             }
         });
         

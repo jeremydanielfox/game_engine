@@ -11,7 +11,7 @@ import xml.DataManager;
 
 public class TestEngine extends Application {
 
-    private static final String FILE_SOURCE = "src/xml/GameFreePathZombie.xml";
+    private static final String FILE_SOURCE = "src/xml/BestDemoEver.xml";
 
     @Override
     public void start (Stage primaryStage) throws Exception {

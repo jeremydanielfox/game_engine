@@ -30,8 +30,8 @@ import engine.gameobject.PointSimple;
  */
 public class TileContainer extends Region implements ContainerWrapper {
     
-    private DoubleProperty gridWidthProperty = new SimpleDoubleProperty(623);
-    private DoubleProperty gridHeightProperty = new SimpleDoubleProperty(623);
+    private DoubleProperty gridWidthProperty = new SimpleDoubleProperty(578);
+    private DoubleProperty gridHeightProperty = new SimpleDoubleProperty(578);
     
     private static final int TAB_HEIGHT = 128;
     private List<TileView> tileList = new ArrayList<>();

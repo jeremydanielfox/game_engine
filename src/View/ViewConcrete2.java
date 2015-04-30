@@ -1,10 +1,12 @@
 package View;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
 import player.gamePlayer.GameOverScreen;
 import player.gamePlayer.GamePlayerScreen;
 import player.gamePlayer.PauseDropDown;
@@ -15,6 +17,7 @@ import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -75,11 +78,6 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         pauseScreen = pauser;
     }
 
-    private void addCSS() {
-        vbox.setId("VBOX");
-    }
-    
-
     public ViewConcrete2 (Game game,
                           double stageWidth,
                           double stageHeight) {
@@ -134,9 +132,18 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myButtonList = myGame.getButtons();
         myButtonList.forEach(e -> vbox.getChildren().add(e.getButton()));
         vbox.setTranslateX(600);
-
+        
+        addCSS();
         play();
-
+    }
+    
+    private void addCSS() {
+        myPane.getStylesheets().add("css/ViewCSS.css");
+        vbox.setId("viewVbox");
+        myPane.setId("viewPane");
+        myButtonList.forEach(e -> {
+            e.getButton().setId("viewButton");
+        });
     }
 
     private void addLevelDisplays () {

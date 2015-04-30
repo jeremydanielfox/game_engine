@@ -1,0 +1,16 @@
+.root {
+	-fx-background-color: black;
+}
+
+.button {
+	-fx-background-color: black;
+	-fx-text-fill: white;
+}
+
+#viewPane {
+	-fx-background-color: black;
+}
+
+#viewVbox {
+	-fx-background-color: black;
+}

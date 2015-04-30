@@ -43,8 +43,8 @@ public class ColliderEditorOpener extends EditorOpener {
         Button add = new Button("Add lists");
         add.setOnAction(e -> {
             List<List<Object>> buffLists = new ArrayList<>();
-            buffLists.add(explosion.getBuffList());
             buffLists.add(collision.getBuffList());
+            buffLists.add(explosion.getBuffList());
             setList(editor, klass, buffLists, editor.getSetListMethods(), biconsumer, index);
             close();
         });

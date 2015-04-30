@@ -38,6 +38,8 @@ public class StoryBoard extends Observable {
      * @return false if the StoryBoard has no more events to update
      */
     public boolean update () {
+        setChanged();
+        notifyObservers();
         if (eventList.size() == 0) {
             return false;
         }

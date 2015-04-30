@@ -3,19 +3,26 @@ package gae.gridView;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import engine.fieldsetting.Settable;
+import engine.game.Level;
 import voogasalad.util.pathsearch.graph.GridCell;
 import gae.backend.Placeable;
+import gae.editor.EditingParser;
 import gae.gridView.TileViewToggle.TileMode;
 import gae.listView.LibraryData;
 import gae.listView.LibraryView;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -52,19 +59,20 @@ public class LevelView {
     private StackPane stack;
     private Scene scene;
     private Pane border;
-    private ObjectProperty<Image> backgroundProperty;
+    private StringProperty backgroundPathProperty=new SimpleStringProperty(DEFAULT_IMAGE_PATH);
     private ObjectProperty<Dimension> gridSizeProperty;
     private ContainerWrapper wrapper;
     private LibraryView libraryview;
     private LibraryData libraryData;
     private TileViewToggle container;
     private VBox gridOptions;
+    private ImageView backgroundImage;
     private ObjectProperty<TileMode> tileModeProperty =
             new SimpleObjectProperty<>(TileMode.TOWERMODE);
     private BiConsumer<List<GridCell>, List<GridCell>> setSpawn;
     private BiConsumer<List<GridCell>, List<GridCell>> setWalkable;
-
     private BooleanProperty isFreeWorld;
+    private Level myLevel;
 
     public LevelView (BiConsumer<List<GridCell>, List<GridCell>> biconsumer,
                       BiConsumer<List<GridCell>, List<GridCell>> setWalkable,
@@ -83,9 +91,9 @@ public class LevelView {
         return border;
     }
 
-    public Image getBackgroundImage () {
-        return backgroundProperty.get();
-    }
+//    public Image getBackgroundImage () {
+//        return new Image(backgroundPathProperty.getValue());
+//    }
 
     /**
      * Creates a StackPane that includes the background image and the TileContainer, put together in
@@ -97,18 +105,21 @@ public class LevelView {
     private StackPane getStack (Scene scene) {
         stack = new StackPane();
         this.scene = scene;
-        ImageView background = new ImageView(new Image(DEFAULT_IMAGE_PATH));
-        backgroundProperty = background.imageProperty();
+        backgroundImage = new ImageView(new Image(DEFAULT_IMAGE_PATH));
+        backgroundPathProperty.addListener(e->{
+            backgroundImage.imageProperty().set(new Image(backgroundPathProperty.get()));
+            setLevelImage();
+        });
         gridSizeProperty = new SimpleObjectProperty<>(DEFAULT_GRID_DIMENSIONS);
         Pane root = new Pane();
         container = new TileViewToggle(gridSizeProperty, scene);
         container.getTileModeProperty().bind(tileModeProperty);
-        root.getChildren().addAll(background, container);
+        root.getChildren().addAll(backgroundImage, container);
 
         stack.getChildren().addAll(root);
         root.setTranslateX(scene.getWidth() / 6);
-        background.fitWidthProperty().bind(container.getGridWidthProperty());
-        background.fitHeightProperty().bind(container.getGridHeightProperty());
+        backgroundImage.fitWidthProperty().bind(container.getGridWidthProperty());
+        backgroundImage.fitHeightProperty().bind(container.getGridHeightProperty());
 
         wrapper = (ContainerWrapper) container;
         return stack;
@@ -136,13 +147,13 @@ public class LevelView {
      * 
      * @return
      */
-    private Button changeBackground (ObjectProperty<Image> backgroundProperty) {
+    private Button changeBackground () {
         Button background = new Button("Change Background");
         background.setOnAction(e -> {
             Stage stage = new Stage();
             FileChooser fc = new FileChooser();
             File picked = fc.showOpenDialog(stage);
-            backgroundProperty.setValue(new Image(picked.toURI().toString()));
+            backgroundPathProperty.setValue(picked.toURI().toString());
         });
         return background;
     }
@@ -157,7 +168,7 @@ public class LevelView {
         gridOptions.setTranslateY(scene.getHeight() / 3);
         Text title = new Text("Grid Properties");
 
-        gridOptions.getChildren().addAll(title, changeBackground(backgroundProperty));
+        gridOptions.getChildren().addAll(title, changeBackground());
         makeTileDimensions();
         List<ToggleButton> optionList =
                 Arrays.asList(new ToggleButton[] {
@@ -285,7 +296,29 @@ public class LevelView {
         return gridSizeProperty;
     }
 
-    public String getBackgroundImagePath () {
-        return DEFAULT_IMAGE_PATH;
+    public StringProperty getBackgroundImagePath () {
+       return backgroundPathProperty;
+    }
+    
+    private void setLevelImage () {
+        try {
+            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(myLevel
+                    .getClass()
+                    .getName()), Settable.class)) {
+                if (m.getName().equals("setImagePath")) {
+                    m.invoke(myLevel, backgroundPathProperty.get());
+                }
+            }
+        }
+        catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    public void setLevel (Level levelData) {
+        myLevel = levelData;
+        setLevelImage();
     }
 }

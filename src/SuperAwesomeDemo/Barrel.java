@@ -16,8 +16,8 @@ public class Barrel extends GameObjectSimple {
         setLabel(new NeutralGameType());
         Graphic myGraphic = new Graphic(47, 28, "/images/Barrel.png");
         myGraphic.setRotator(new RotatorNull());
-        this.getCollider().addExplosionBuff(new DamageBuff(1));
-        this.getCollider().setExplosionRadius(100);
+        this.getCollider().addExplosionBuff(new DamageBuff(3));
+        this.getCollider().setExplosionRadius(30);
         setGraphic(myGraphic);
         setPoint(new PointSimple(0, 10000));
         setHealth(new HealthSimple(1));

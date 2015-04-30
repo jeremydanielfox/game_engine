@@ -136,7 +136,7 @@ public class GameWriter extends Application {
         // world.addObject(new TestTower(3, 355, 455));
         
         //TODO wtf?
-        //world.setPath(DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml"));
+        world.setPath(DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml"));
         return world;
     }
 

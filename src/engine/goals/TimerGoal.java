@@ -45,10 +45,8 @@ public class TimerGoal extends Goal {
 
     @Override
     public void update (Observable o, Object arg) {
-        System.out.println("Getting updated");
         if (o.equals(myTimer)) {
             boolean bool = myTimer.getSecondsLeft() <= mySecondsGoal;
-            System.out.println("Setting satisfied to: "+ bool);
             setIsSatisfied(myTimer.getSecondsLeft() <= mySecondsGoal);
         }
 

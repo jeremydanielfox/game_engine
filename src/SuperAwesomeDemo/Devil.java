@@ -20,6 +20,6 @@ public class Devil extends GameObjectSimple {
         setPoint(new PointSimple(0, 10000));
         setHealth(new HealthSimple(5));
         setWeapon(new FireballShooter());
-        setMover(new MoverPath(gw.getPath(), 1));
+        setMover(new MoverPath(gw.getPath(), .5));
     }
 }

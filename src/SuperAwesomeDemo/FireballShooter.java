@@ -17,7 +17,7 @@ public class FireballShooter extends BasicWeapon {
 
     public FireballShooter () {
         super();
-        setFiringRate(.5);//Infinite "Firing Rate check"
+        setFiringRate(.1);//Infinite "Firing Rate check"
         setRange(1000);//Infinite range
         GameObject myProjectile = makeFireball();//Set projectile's basic properties here
         //Add extra projectile properties here, such as graphics or other buffs

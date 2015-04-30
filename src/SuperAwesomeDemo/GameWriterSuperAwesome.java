@@ -79,14 +79,17 @@ public class GameWriterSuperAwesome extends Application {
         for (int i=0;i<5;i++) {
             waveObjects.add(new Devil(world));
         }
+        
+
+        for (int i = 0; i < 100; i++) {
+            waveObjects.add(new BasicEnemy(world));
+        }
+        
         GameObjectQueue q = new ConcreteQueue(waveObjects);
-        TimedEvent wave = new RandomSpanWave(2, 20, q, world);
+        TimedEvent wave = new ConstantSpacingWave(2, .5, q, world);
         wave.setEndingAction(e -> player.changeScore(57));
 
         List<GameObject> waveObjects2 = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            waveObjects2.add(new BasicEnemy(world));
-        }
         waveObjects2.add(new Devil(world));
         waveObjects2.add(new Devil(world));
         GameObjectQueue q2 = new ConcreteQueue(waveObjects2);
@@ -180,6 +183,12 @@ public class GameWriterSuperAwesome extends Application {
         world.addObject(towerShooter);
         world.addObject(shotgun);
         world.addObject(rocket);
+        
+        Graphic mindGraphic = new Graphic(50, 50, "images/brain_shooter.png");
+        WeaponPowerUp mind = new WeaponPowerUp(new MindController(hero), mindGraphic);
+        mind.setPoint(new PointSimple(250, 550));
+        
+        world.addObject(mind);
 
         GridCell[] sPoints = { new GridCell(0, 0), new GridCell(9, 0) };
         List<GridCell> startPoints = Arrays.asList(sPoints);
@@ -232,7 +241,9 @@ public class GameWriterSuperAwesome extends Application {
 
     public ShopModel makeShop (Player player, GameWorld world) {
         ShopModelSimple shop = new ShopModelSimple(world, player, 1);
-        shop.addPurchasable(new Barrel());
+        
+//        shop.addPurchasable(new Wall());
+//        shop.addPurchasable(new Barrel());
         return shop;
     }
 

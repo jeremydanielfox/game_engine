@@ -34,16 +34,8 @@ public class ConcreteGame implements Game {
     private String myInstructions;
 
     public ConcreteGame () {
-        // initialize(new Player(), new ConcreteLevelBoard(), new ArrayList<ButtonWrapper>());
-        myPlayer = new Player();
-        myLevelBoard = new ConcreteLevelBoard();
-        myShop = new ShopModelSimple();
-        myButtons = new ArrayList<>();
-        myGameName = "";
-        myAuthor = "";
-        myType = "";
-        myDescription = "";
-        myInstructions = "";
+        initialize(new ShopModelSimple(), new Player(), new ConcreteLevelBoard(),
+                   new ArrayList<ButtonWrapper>());
     }
 
     public ConcreteGame (ShopModel shop,
@@ -89,6 +81,7 @@ public class ConcreteGame implements Game {
     }
 
     public String getDescription () {
+        System.out.println("Getting description: " + myDescription);
         return myDescription;
     }
 
@@ -130,11 +123,12 @@ public class ConcreteGame implements Game {
         return myShop;
     }
 
-    @Override @Settable
+    @Override
+    @Settable
     public void setPlayer (Player player) {
         myPlayer = player;
     }
-    
+
     @Override
     public Player getPlayer () {
         return myPlayer;
@@ -164,7 +158,7 @@ public class ConcreteGame implements Game {
     @Settable
     public void setShop (ShopModel shop) {
         myShop = shop;
-        //TODO get rid of shop in the game 
+        // TODO get rid of shop in the game
         myLevelBoard.setShop(shop);
     }
 }

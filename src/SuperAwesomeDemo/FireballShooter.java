@@ -8,6 +8,7 @@ import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
 import engine.gameobject.RotatorNull;
 import engine.gameobject.units.directdamage.DamageBuff;
+import engine.gameobject.units.poison.PoisonBuff;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.NullWeapon;
 
@@ -34,6 +35,7 @@ public class FireballShooter extends BasicWeapon {
         MoverDirection myMover = new MoverDirection(new PointSimple(0, 0), .5, 1000); // infinite //
                                                                                       // distance
         gos.getCollider().addCollisionBehavior(new DamageBuff(2));
+        gos.getCollider().addCollisionBehavior(new PoisonBuff());
         gos.setMover(myMover);
         return gos;
     }

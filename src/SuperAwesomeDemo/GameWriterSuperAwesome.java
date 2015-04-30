@@ -13,7 +13,6 @@ import View.ViewConcrete2;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
-import engine.events.RandomSpanWave;
 import engine.events.TimedEvent;
 import engine.game.ConcreteGame;
 import engine.game.ConcreteLevel;
@@ -26,7 +25,6 @@ import engine.game.StoryBoard;
 import engine.game.Timer;
 import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.Graphic;
 import engine.gameobject.PointSimple;
 import engine.gameobject.behaviors.PlayerChangeBehavior;
@@ -86,7 +84,7 @@ public class GameWriterSuperAwesome extends Application {
         }
         
         GameObjectQueue q = new ConcreteQueue(waveObjects);
-        TimedEvent wave = new ConstantSpacingWave(2, .5, q, world);
+        TimedEvent wave = new ConstantSpacingWave(2,2, q, world);
         wave.setEndingAction(e -> player.changeScore(57));
 
         List<GameObject> waveObjects2 = new ArrayList<>();
@@ -189,6 +187,11 @@ public class GameWriterSuperAwesome extends Application {
         mind.setPoint(new PointSimple(250, 550));
         
         world.addObject(mind);
+        
+        Graphic machineGraphic = new Graphic(50,50,"images/Machine_Gun.png");
+        WeaponPowerUp machine = new WeaponPowerUp(new MachineGun(hero), machineGraphic);
+        machine.setPoint(new PointSimple(550, 550));
+        world.addObject(machine);
 
         GridCell[] sPoints = { new GridCell(0, 0), new GridCell(9, 0) };
         List<GridCell> startPoints = Arrays.asList(sPoints);
@@ -242,7 +245,7 @@ public class GameWriterSuperAwesome extends Application {
     public ShopModel makeShop (Player player, GameWorld world) {
         ShopModelSimple shop = new ShopModelSimple(world, player, 1);
         
-//        shop.addPurchasable(new Wall());
+        shop.addPurchasable(new Wall());
 //        shop.addPurchasable(new Barrel());
         return shop;
     }

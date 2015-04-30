@@ -10,6 +10,7 @@ import engine.gameobject.RotatorNull;
 import engine.gameobject.test.FriendlyTowerType;
 import engine.gameobject.units.WeaponBuff;
 import engine.gameobject.units.ZombieBuff;
+import engine.gameobject.units.poison.PoisonBuff;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;
@@ -19,10 +20,11 @@ import engine.gameobject.weapon.firingstrategy.UserStrategy;
 public class MindController extends BasicWeapon{
     
     private static MindController mcInstance;
-    
+    private static boolean instanced = false;
     public MindController(GameObject object){
         super();
-        if (mcInstance == null){
+        if (mcInstance == null && !instanced){
+            instanced = true;
             mcInstance = new MindController(object);
         }
         setFiringRate(60);//Infinite "Firing Rate check"
@@ -48,9 +50,17 @@ public class MindController extends BasicWeapon{
         myProjectile.setHealth(new HealthSimple(1));
         myProjectile.setWeapon(new NullWeapon());
         myProjectile.getCollider().addCollisionBehavior(new ZombieBuff(new FriendlyTowerType()));
-        Weapon newWeapon = getInstance();
+        Weapon newWeapon;
+        if (mcInstance != null){
+        newWeapon = getInstance();
         newWeapon.setFiringStrategy(new SingleProjectile());
-        newWeapon.setFiringRate(2);
+        newWeapon.setFiringRate(.5);
+        }
+        else {
+            newWeapon = this;
+            newWeapon.setFiringStrategy(new SingleProjectile());
+            newWeapon.setFiringRate(.5);
+        }
         myProjectile.getCollider().addCollisionBehavior(new WeaponBuff(newWeapon));
         MoverDirection myMover = new MoverDirection(new PointSimple(0, 0), 1, 600);
         myProjectile.setMover(myMover);

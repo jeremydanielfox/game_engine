@@ -37,7 +37,7 @@ import animations.Animator;
 
 public class OpeningView implements UIMediator {
 
-    private static final String HAWIIAN_SONG = "skrillex.mp3";
+    private static final String HAWIIAN_SONG = "hula.mp3";
     private static final String MUSIC_PATH = "src/musician/";
     static final Animator myAnimator = Animator.getInstance();
     static final String DEFAULT_TYPE_MSG = "Choose from right ->";

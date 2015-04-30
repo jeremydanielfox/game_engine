@@ -18,7 +18,7 @@ public class DamageBuff extends Buff implements DirectDamage {
 
     private double increment;
     private Optional<DirectDamage> decorated;
-    private final static int graphicDuration = 20;
+    private final static double graphicDuration = .33;
 
     public DamageBuff () {
         super(graphicDuration);

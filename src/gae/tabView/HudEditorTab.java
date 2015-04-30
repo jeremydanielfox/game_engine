@@ -4,8 +4,10 @@ import gae.hudEditor.HudEditor;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 
+
 /**
  * Hud Editor Tab
+ * 
  * @author JohnGilhuly
  *
  */

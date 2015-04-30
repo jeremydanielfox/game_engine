@@ -11,8 +11,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 
+
 /**
  * HudEditor tab content
+ * 
  * @author JohnGilhuly
  *
  */

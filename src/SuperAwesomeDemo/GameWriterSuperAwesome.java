@@ -1,12 +1,12 @@
-package View;
+package SuperAwesomeDemo;
 
 import java.util.ArrayList;
 import java.util.List;
-import SuperAwesomeDemo.CollisionEngineAwesome;
-import SuperAwesomeDemo.RangeEngineAwesome;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import xml.DataManager;
+import View.ButtonWrapper;
+import View.GameWriter;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
@@ -23,14 +23,11 @@ import engine.game.StoryBoard;
 import engine.game.Timer;
 import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimple;
 import engine.gameobject.GameObjectSimpleTest;
-import engine.gameobject.MoverUser;
-import engine.gameobject.PointSimple;
 import engine.gameobject.behaviors.PlayerChangeBehavior;
 import engine.gameobject.test.TestTower;
 import engine.gameobject.test.bloons.BlueBloon;
-import engine.gameobject.weapon.firingstrategy.UserStrategy;
+import engine.gameobject.test.bloons.Spikes;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
@@ -43,11 +40,10 @@ import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
 import gameworld.FixedWorld;
 import gameworld.GameWorld;
-import gameworld.StructurePlacementException;
 
 
-public class GameWriter extends Application {
-    static GameWriter myWriter;
+public class GameWriterSuperAwesome extends Application {
+    static GameWriterSuperAwesome myWriter;
     private static final String FILE_DESTINATION = "src/SuperAwesomeDemo/SuperAwesomeGame.xml";
 
     /**
@@ -107,7 +103,8 @@ public class GameWriter extends Application {
         Level levelOne = new ConcreteLevel("images/Park_Path.png", list2, list, world, story);
         levelOne.addTimer(t);
         board.addLevel(levelOne);
-        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list, new FixedWorld(10,10),
+        board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list,
+                                         new FixedWorld(10, 10),
                                          new StoryBoard()));
 
         return board;
@@ -137,44 +134,27 @@ public class GameWriter extends Application {
      * @return
      */
     public GameWorld makeWorld () {
-        FixedWorld world = new FixedWorld(10,10);
+        FixedWorld world = new FixedWorld(10, 10);
         world.setCollisionEngine(new CollisionEngineAwesome());
         world.setRangeEngine(new RangeEngineAwesome());
         // world.addObject(new TestTower(2, 330, 130));
-        //world.addObject(new TestTower(5, 270, 270));
+        // world.addObject(new TestTower(5, 270, 270));
         // world.addObject(new TestTower(3, 355, 455));
-        GameObjectSimple g = new TestTower(2, 330, 330);
-        MoverUser m = new MoverUser();
-        m.setGraphic(g.getGraphic());
-        g.setMover(m);
-        UserStrategy pewpew = new UserStrategy();
-        pewpew.setGraphic(g.getGraphic());
-        g.getWeapon().setFiringStrategy(pewpew);
-        g.getWeapon().setFiringRate(100);
-        try {
-            world.addObject(g, new PointSimple(300,300));
-        }
-        catch (StructurePlacementException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        //TODO wtf?
+
+        // TODO wtf?
         world.setPath(DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml"));
         return world;
     }
 
     public static void main (String[] args) {
-        myWriter = new GameWriter();
+        myWriter = new GameWriterSuperAwesome();
         myWriter.writeGame();
     }
 
     private void writeGame () {
         Player myPlayer = makePlayer();
         GameWorld myWorld = makeWorld();
-        ShopModel myShop = new ShopModelSimple(myWorld, myPlayer, 1);
-        myShop.addPurchasable(new TestTower(0,0,0));
-        myShop.addPurchasable(new TestTower(1,0,0));
-        Game myGame = makeGame(myPlayer, myWorld, myShop);
+        Game myGame = makeGame(myPlayer, myWorld, makeShop(myPlayer, myWorld));
 
         DataManager.writeToXML(myGame, FILE_DESTINATION);
         System.out.println("Written");
@@ -182,7 +162,13 @@ public class GameWriter extends Application {
     }
 
     public ShopModel makeShop (Player player, GameWorld world) {
-        return new ShopModelSimple(world, player, 1);
+        ShopModelSimple shop = new ShopModelSimple(world, player, 1);
+        // TESTING purposes:
+        // shop.addPurchasable(new TestTower(1,0,0));This is the tower that shoots itself
+        // shop.addPurchasable(new TestTower(0, 0, 0));
+        // shop.addPurchasable(new Spikes());
+         shop.addPurchasable(new TowerSpawner());
+        return shop;
     }
 
     /**
@@ -195,7 +181,7 @@ public class GameWriter extends Application {
         Game myGame =
                 new ConcreteGame(myShop, myPlayer, makeLevelBoard(myWorld, myStory,
                                                                   myPlayer),
-                                                                  new ArrayList<ButtonWrapper>());
+                                 new ArrayList<ButtonWrapper>());
         ButtonWrapper wrap =
                 new ButtonWrapper("wave", e -> myStory.startNextEvent(),
                                   new NoCurrentEventGoal(myStory));

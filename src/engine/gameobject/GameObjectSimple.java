@@ -15,6 +15,7 @@ import engine.pathfinding.EndOfPathException;
 import engine.shop.RangeDisplay;
 import engine.shop.ShopTag;
 import engine.shop.ShopTagSimple;
+import gae.editorView.GameObjectInformation;
 import gameworld.ObjectCollection;
 
 
@@ -154,7 +155,7 @@ public class GameObjectSimple implements GameObject {
         clone.setMover(myMover.clone());
         clone.setGraphic(myGraphic.clone());
         clone.setShopTag(myShopTag.clone());
-        clone.myBehaviors = myBehaviors;//TODO: ??????????
+        clone.myBehaviors = myBehaviors;// TODO: ??????????
         return clone;
     }
 
@@ -290,7 +291,7 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public String toString () {
-        return "GameObject: " + myType.getName();
+        return "GameObject: " + GameObjectInformation.getInstance().getTitle(this);
     }
 
     @Override

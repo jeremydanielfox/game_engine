@@ -38,7 +38,7 @@ public class GamePlayerScreen implements GameScene {
     private Game myGame;
     private Stage myStage;
     private EngineView myGameView;
-    private PauseScene pauseScreen;
+    private PauseDropDown pauseScreen;
     private BorderPane myPane;
     private String myPlayerName; // myPlayerName holds the name of the user to later be put into
                                  // high scores.
@@ -52,8 +52,9 @@ public class GamePlayerScreen implements GameScene {
 
         myVbox = new VBox(30);
         
-        pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
+        //pauseScreen = new PauseDropDown(e -> resumeGame(), myStage, null);
         //myGame = loadGame();
+        
         myGame=game;
         myPlayerName = "";
         myPreviousScene = previousScene;

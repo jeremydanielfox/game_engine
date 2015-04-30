@@ -18,13 +18,13 @@ public interface CheckListItem {
      *
      * @return Node with checkbox
      */
-    public Node getNode ();
+    Node getNode ();
 
     /**
      * Returns checkbox property such that listener can be added in checklist
      *
      * @return booleanproperty
      */
-    public BooleanProperty getSelectedProperty ();
+    BooleanProperty getSelectedProperty ();
 
 }

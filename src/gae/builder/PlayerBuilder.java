@@ -58,11 +58,6 @@ public class PlayerBuilder implements Builder {
     
     @Override
     public Pane getBuilder () {
-        Stage stage = new Stage();
-        Scene scene = new Scene(builder);
-        stage.setScene(scene);
-        stage.show();
-        stage.centerOnScreen();
         return builder;
     }
 

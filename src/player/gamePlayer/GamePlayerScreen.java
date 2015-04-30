@@ -1,11 +1,13 @@
 package player.gamePlayer;
 
+import java.io.File;
 import View.EngineView;
 import View.GameWriter;
 import View.GameWriterConcrete2;
 import View.ViewConcrete2;
 import voogasalad.util.highscore.HighScoreController;
 import voogasalad.util.highscore.HighScoreException;
+import xml.DataManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -45,8 +47,25 @@ public class GamePlayerScreen implements GameScene {
     private ImageView image;
     private Scene myPreviousScene;
     private Scene myScene;
+    private File thisFile;
+    private String thisFilePath;
 
-    public GamePlayerScreen (Stage s, Scene previousScene,Game game) {
+//    public GamePlayerScreen (Stage s, Scene previousScene,Game game) {
+//        myStage = s;
+//        myStage.setResizable(false);
+//
+//        myVbox = new VBox(30);
+//        
+//        pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
+//        //myGame = loadGame();
+//        myGame=game;
+//        if (myGame.getLevelBoard().gameOver())
+//          myGame = loadGame();
+//        myPlayerName = "";
+//        myPreviousScene = previousScene;
+//    }
+    
+    public GamePlayerScreen (Stage s, Scene previousScene,String filePath) {
         myStage = s;
         myStage.setResizable(false);
 
@@ -54,7 +73,10 @@ public class GamePlayerScreen implements GameScene {
         
         pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
         //myGame = loadGame();
-        myGame=game;
+        thisFilePath=filePath;
+        myGame=DataManager.readFromXML(Game.class, thisFilePath);
+//        if (myGame.getLevelBoard().gameOver())
+//          myGame = loadGame();
         myPlayerName = "";
         myPreviousScene = previousScene;
     }
@@ -98,7 +120,8 @@ public class GamePlayerScreen implements GameScene {
      * @returns a node to add to the scene
      */
     public Node makeDemoGameView () {
-
+        myGame=DataManager.readFromXML(Game.class, thisFilePath);
+        //myGame=DataManager.readFromXML(Class.GAME, filePath)
         myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT,new GameOverScreen(myStage,myScene,myPreviousScene,myGame));
         Node node = myGameView.initializeView();
         return node;
@@ -252,5 +275,9 @@ public class GamePlayerScreen implements GameScene {
     public Scene getScene () {
         makeScene();
         return myScene;
+    }
+    
+    public void setFilePath(String filePath) {
+        thisFilePath=filePath;
     }
 }

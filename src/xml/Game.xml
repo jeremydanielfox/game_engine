@@ -9899,16 +9899,16 @@
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>565</int>
-                    <int>1161</int>
-                    <int>1352</int>
-                    <int>726</int>
-                    <int>2022</int>
-                    <int>458</int>
-                    <int>1929</int>
-                    <int>1647</int>
-                    <int>997</int>
-                    <int>331</int>
+                    <int>1569</int>
+                    <int>2351</int>
+                    <int>2052</int>
+                    <int>2168</int>
+                    <int>451</int>
+                    <int>2112</int>
+                    <int>1671</int>
+                    <int>257</int>
+                    <int>1793</int>
+                    <int>421</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -14996,8 +14996,8 @@
                 </upgradeMap>
                 <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
                   <backingSet>
-                    <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
                     <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
+                    <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
                   </backingSet>
                   <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
                     <listener class="null"/>
@@ -15075,7 +15075,7 @@
                       <first class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
                         <upgrades>
                           <engine.gameobject.units.freeze.FreezeBuff>
-                            <duration>60000</duration>
+                            <duration>3600000</duration>
                             <timeSinceStart>0</timeSinceStart>
                             <type defined-in="engine.gameobject.units.Buff">COLLISION</type>
                             <observers/>
@@ -15286,7 +15286,7 @@
                   <collidedID/>
                   <collisionBuffs>
                     <engine.gameobject.units.directdamage.DamageBuff>
-                      <duration>20</duration>
+                      <duration>19</duration>
                       <timeSinceStart>0</timeSinceStart>
                       <type>COLLISION</type>
                       <observers/>
@@ -15360,8 +15360,8 @@
                 <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
                   <backingSet>
                     <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                    <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
                     <engine.gameobject.units.directdamage.DamageBuff reference="../../../../myProjectile/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff"/>
+                    <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
                   </backingSet>
                   <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
                     <listener class="null"/>
@@ -15439,7 +15439,7 @@
                       <first class="engine.gameobject.weapon.upgradetree.upgradebundle.TestBundle">
                         <upgrades>
                           <engine.gameobject.units.freeze.FreezeBuff>
-                            <duration>60000</duration>
+                            <duration>3600000</duration>
                             <timeSinceStart>0</timeSinceStart>
                             <type defined-in="engine.gameobject.units.Buff">COLLISION</type>
                             <observers/>

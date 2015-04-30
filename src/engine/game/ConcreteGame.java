@@ -1,7 +1,10 @@
 package engine.game;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import xml.DataManager;
 import View.ButtonWrapper;
 import engine.fieldsetting.Settable;
 import engine.shop.ShopModel;
@@ -22,6 +25,7 @@ public class ConcreteGame implements Game {
     private static final String DEFAULT_TYPE = "Type";
     private static final String DEFAULT_DESCRIPTION = "This is a fun game.";
     private static final String DEFAULT_INSTRUCTIONS = "Have fun!";
+    private static final String DEFAULT_PHANTOM_PATH = "/src/taxes1997.xml";
 
     private Player myPlayer;
     private LevelBoard myLevelBoard;
@@ -166,5 +170,13 @@ public class ConcreteGame implements Game {
         myShop = shop;
         //TODO get rid of shop in the game 
         myLevelBoard.setShop(shop);
+    }
+
+    @Override
+    public Game cloneGame () throws IOException {
+        File temp = File.createTempFile(DEFAULT_PHANTOM_PATH, ".xml" );
+        String absolutePath = temp.getAbsolutePath();
+        DataManager.writeToXML(this, absolutePath);
+        return DataManager.readFromXML(this.getClass(), absolutePath);
     }
 }

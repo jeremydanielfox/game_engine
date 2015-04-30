@@ -74,6 +74,9 @@ public class WaveSelectorPane implements UIObject {
         waves.add(new WaveEnemyTable(waves.size() + 1));
     }
 
+    /**
+     * Saves the waves as the specified type of wave
+     */
     private void saveWaves () {
         for (WaveEnemyTable wave : waves) {
             GameObjectQueue wQueue = new ConcreteQueue(wave.getEnemiesAsList());

@@ -3,7 +3,11 @@ package engine.gameobject;
 import engine.pathfinding.EndOfPathException;
 
 
-public class MoverNull implements Mover {
+public class MoverNull extends BasicMover implements Mover {
+    
+    public MoverNull(){
+        super(0);
+    }
     
     @Override
     public PointSimple move (PointSimple current) throws EndOfPathException {

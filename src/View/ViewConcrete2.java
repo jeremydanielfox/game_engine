@@ -40,8 +40,8 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private static final int DEFAULT_FRAME_RATE = 60;
     public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
-    public static final double WORLD_WIDTH = 622;
-    public static final double WORLD_HEIGHT = 622;
+    public static final double WORLD_WIDTH = 623;
+    public static final double WORLD_HEIGHT = 623;
     // public static final int MAX_FRAME_RATE = 500;
     // public static final int MIN_FRAME_RATE = 1000;
     public static final int DEFAULT_FRAMES_SECOND =

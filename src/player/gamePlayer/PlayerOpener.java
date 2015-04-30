@@ -77,14 +77,11 @@ public class PlayerOpener implements GameScene {
         playB.setOnMousePressed(e -> {
             myGame=DataManager.readFromXML(Game.class, "./src/xml/Game.xml");
             moveToNextScreen(myGame);
-            // PauseScene pause = new PauseScene(null, myStage, playerScene);
-            // myStage.setScene(pause.getScene());
-
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {
             e.setId("playerButton");
-            // e.setFocusTraversable(false);
+            e.setFocusTraversable(false);
         });
 
         createOptions();

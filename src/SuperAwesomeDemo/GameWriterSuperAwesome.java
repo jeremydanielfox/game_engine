@@ -245,7 +245,7 @@ public class GameWriterSuperAwesome extends Application {
     public ShopModel makeShop (Player player, GameWorld world) {
         ShopModelSimple shop = new ShopModelSimple(world, player, 1);
         
-//        shop.addPurchasable(new Wall());
+        shop.addPurchasable(new Wall());
         shop.addPurchasable(new Barrel());
 //        shop.addPurchasable(new Hero(0,0));
         return shop;

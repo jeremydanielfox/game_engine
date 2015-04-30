@@ -91,12 +91,12 @@ public class GameWriterSuperAwesome extends Application {
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
         list.add(new TimerGoal(t, 0));
-        ScoreGoal score = new ScoreGoal(myPlayer, 200);
+//        ScoreGoal score = new ScoreGoal(myPlayer, 200);
         List<Goal> list2 = new ArrayList<Goal>();
-        list2.add(score);
+//        list2.add(score);
         List<Goal> list3 = new ArrayList<Goal>();
-        ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
-        list3.add(score2);
+//        ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
+//        list3.add(score2);
         Level levelOne = new ConcreteLevel("images/Park_Path.png", list2, list, world, story);
         levelOne.addTimer(t);
         board.addLevel(levelOne);

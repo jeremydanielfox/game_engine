@@ -12,19 +12,18 @@ import engine.gameobject.weapon.NullWeapon;
 import engine.pathfinding.PathFixed;
 
 
-public class BasicEnemy extends GameObjectSimple {
-    public BasicEnemy () {
+public class Devil extends GameObjectSimple {
+    public Devil () {
         super();
         setLabel(new EnemyTowerType());
-        Graphic myGraphic = new Graphic(47, 28, "/images/BoxHeadBasicEnemy.png");
+        Graphic myGraphic = new Graphic(58, 35, "/images/Devil.gif");
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);
         setPoint(new PointSimple(0, 10000));
-        setHealth(new HealthSimple(3));
+        setHealth(new HealthSimple(5));
         setWeapon(new NullWeapon());
         PathFixed myPath = new PathFixed();
         myPath = DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml");
         setMover(new MoverPath(myPath, 1.4));
     }
-  
 }

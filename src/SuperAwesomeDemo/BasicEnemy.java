@@ -20,7 +20,7 @@ public class BasicEnemy extends GameObjectSimple {
         setPoint(new PointSimple(0, 10000));
         setHealth(new HealthSimple(1));
         setWeapon(new MeleeWeapon(this));
-        setMover(new MoverPath(gw.getPath(), .7));
+        setMover(new MoverPath(gw.getPath(), .3));
     }
   
 }

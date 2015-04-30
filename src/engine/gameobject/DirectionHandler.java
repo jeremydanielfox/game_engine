@@ -58,6 +58,9 @@ public class DirectionHandler {
             myDirection = new PointSimple(0, 1);
             myGraphic.getImageView().setImage(new Image("/Images/Hero_Down.png"));
         }
+        else if (keyCode == KeyCode.SHIFT) {
+            
+        }
     }
     
     public DirectionHandler clone(){

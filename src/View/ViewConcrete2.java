@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import player.gamePlayer.GameOverScreen;
 import player.gamePlayer.GamePlayerScreen;
+import player.gamePlayer.PauseDropDown;
 import voogasalad.util.highscore.HighScoreController;
 import voogasalad.util.highscore.HighScoreException;
 import javafx.animation.Animation;
@@ -86,6 +87,13 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     public Node initializeView () {
         myPane = new BorderPane();
         myGameWorldPane = new Pane();
+        
+        myGameWorldPane.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
+            if (key.getCode().equals(KeyCode.P)){
+                //pauseScreen.displayPauseScreen();
+            }
+        });
+        
         myGameWorldPane.setMaxWidth(myDisplayHeight);
         myPane.setCenter(myGameWorldPane);
         initializeGameWorld();

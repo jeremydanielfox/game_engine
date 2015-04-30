@@ -26,7 +26,6 @@ public class PauseDropDown implements GameScene {
 
     private Stage mainStage, myStage;
     private Scene myScene;
-    private Animator myAnimator;
     private BorderPane myContainer;
     private Button resume, restart, mainMenu;
     private VBox buttonBox;
@@ -39,7 +38,6 @@ public class PauseDropDown implements GameScene {
         myStage = new Stage ();
         myContainer = new BorderPane();
         myScene = new Scene(myContainer);
-        myAnimator = Animator.getInstance();
         resumer = lambda;
         resume = new Button("RESUME");
         restart = new Button("RESTART");
@@ -79,7 +77,9 @@ public class PauseDropDown implements GameScene {
     }
 
     public void displayPauseScreen () {
-        myAnimator.dropDown(buttonBox);
+        Stage s = new Stage();
+        s.setScene(myScene);
+        s.show();
     }
 
     /**

@@ -27,6 +27,7 @@ import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.behaviors.PlayerChangeBehavior;
 import engine.gameobject.test.TestTower;
 import engine.gameobject.test.bloons.BlueBloon;
+import engine.gameobject.test.bloons.Spikes;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
@@ -42,8 +43,8 @@ import gameworld.GameWorld;
 
 
 public class GameWriterSuperAwesome extends Application {
-    static GameWriter myWriter;
-    private static final String FILE_DESTINATION = "src/xml/Game.xml";
+    static GameWriterSuperAwesome myWriter;
+    private static final String FILE_DESTINATION = "src/SuperAwesomeDemo/SuperAwesomeGame.xml";
 
     /**
      * @param world
@@ -134,6 +135,8 @@ public class GameWriterSuperAwesome extends Application {
      */
     public GameWorld makeWorld () {
         FixedWorld world = new FixedWorld(10, 10);
+        world.setCollisionEngine(new CollisionEngineAwesome());
+        world.setRangeEngine(new RangeEngineAwesome());
         // world.addObject(new TestTower(2, 330, 130));
         // world.addObject(new TestTower(5, 270, 270));
         // world.addObject(new TestTower(3, 355, 455));
@@ -144,17 +147,14 @@ public class GameWriterSuperAwesome extends Application {
     }
 
     public static void main (String[] args) {
-        myWriter = new GameWriter();
+        myWriter = new GameWriterSuperAwesome();
         myWriter.writeGame();
     }
 
     private void writeGame () {
         Player myPlayer = makePlayer();
         GameWorld myWorld = makeWorld();
-        ShopModel myShop = new ShopModelSimple(myWorld, myPlayer, 1);
-        myShop.addPurchasable(new TestTower(0, 0, 0));
-        myShop.addPurchasable(new TestTower(1, 0, 0));
-        Game myGame = makeGame(myPlayer, myWorld, myShop);
+        Game myGame = makeGame(myPlayer, myWorld, makeShop(myPlayer, myWorld));
 
         DataManager.writeToXML(myGame, FILE_DESTINATION);
         System.out.println("Written");
@@ -162,7 +162,13 @@ public class GameWriterSuperAwesome extends Application {
     }
 
     public ShopModel makeShop (Player player, GameWorld world) {
-        return new ShopModelSimple(world, player, 1);
+        ShopModelSimple shop = new ShopModelSimple(world, player, 1);
+        // TESTING purposes:
+        // shop.addPurchasable(new TestTower(1,0,0));This is the tower that shoots itself
+        // shop.addPurchasable(new TestTower(0, 0, 0));
+        // shop.addPurchasable(new Spikes());
+         shop.addPurchasable(new TowerSpawner());
+        return shop;
     }
 
     /**

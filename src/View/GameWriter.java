@@ -145,7 +145,7 @@ public class GameWriter extends Application {
         myWriter.writeGame();
     }
 
-    public void writeGame () {
+    private void writeGame () {
         Player myPlayer = makePlayer();
         GameWorld myWorld = makeWorld();
         ShopModel myShop = new ShopModelSimple(myWorld, myPlayer, 1);

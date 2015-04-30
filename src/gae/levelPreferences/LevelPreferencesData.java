@@ -54,8 +54,8 @@ public class LevelPreferencesData {
         return goal;
     }
     
-    public Goal getTimerGoal(){
-        Goal goal=new TimerGoal(getTimer(), (int) timeGoal);
+    public Goal getTimerGoal(Timer timer){
+        Goal goal=new TimerGoal(timer, (int) timeGoal);
         return goal;
     }
     

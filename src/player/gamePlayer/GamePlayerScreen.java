@@ -1,11 +1,13 @@
 package player.gamePlayer;
 
+import java.io.File;
 import View.EngineView;
 import View.GameWriter;
 import View.GameWriterConcrete2;
 import View.ViewConcrete2;
 import voogasalad.util.highscore.HighScoreController;
 import voogasalad.util.highscore.HighScoreException;
+import xml.DataManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -15,6 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -45,17 +49,42 @@ public class GamePlayerScreen implements GameScene {
     private ImageView image;
     private Scene myPreviousScene;
     private Scene myScene;
+    private File thisFile;
+    private String thisFilePath;
 
-    public GamePlayerScreen (Stage s, Scene previousScene,Game game) {
+//    public GamePlayerScreen (Stage s, Scene previousScene,Game game) {
+//        myStage = s;
+//        myStage.setResizable(false);
+//
+//        myVbox = new VBox(30);
+//        
+//        pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
+//        //myGame = loadGame();
+//        myGame=game;
+//        if (myGame.getLevelBoard().gameOver())
+//          myGame = loadGame();
+//        myPlayerName = "";
+//        myPreviousScene = previousScene;
+//    }
+    
+    public GamePlayerScreen (Stage s, Scene previousScene,String filePath) {
         myStage = s;
         myStage.setResizable(false);
 
         myVbox = new VBox(30);
         
-        //pauseScreen = new PauseDropDown(e -> resumeGame(), myStage, null);
+
+        //pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
         //myGame = loadGame();
-        
-        myGame=game;
+       // thisFilePath=filePath;
+        //myGame=DataManager.readFromXML(Game.class, thisFilePath);
+//        if (myGame.getLevelBoard().gameOver())
+//          myGame = loadGame();
+
+        pauseScreen = new PauseDropDown(e -> resumeGame(), myStage);
+        //myGame = loadGame();
+        thisFilePath=filePath;
+        myGame=DataManager.readFromXML(Game.class, thisFilePath);
         myPlayerName = "";
         myPreviousScene = previousScene;
     }
@@ -69,6 +98,13 @@ public class GamePlayerScreen implements GameScene {
         myPane = new BorderPane();
         myPane.setPadding(new Insets(0, 40, 0, 40));
         myScene = new Scene(myPane);
+        
+        myScene.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
+            if (key.getCode().equals(KeyCode.P)){
+                pauseScreen.displayPauseScreen();
+            }
+        });
+        
         makeSideBar();
         myVbox.setAlignment(Pos.CENTER);
         myPane.setRight(myVbox);
@@ -100,7 +136,10 @@ public class GamePlayerScreen implements GameScene {
      */
     public Node makeDemoGameView () {
 
-        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT,new GameOverScreen(myStage,myScene,myPreviousScene,myGame));
+        myGame=DataManager.readFromXML(Game.class, thisFilePath);
+        //myGame=DataManager.readFromXML(Class.GAME, filePath)
+        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT,new GameOverScreen(myStage,myScene,myPreviousScene,myGame), pauseScreen);
+
         Node node = myGameView.initializeView();
         return node;
 
@@ -132,7 +171,7 @@ public class GamePlayerScreen implements GameScene {
      * Resumes game after pause.
      */
     private void resumeGame () {
-
+        myGameView.play();
     }
 
     /**
@@ -253,5 +292,9 @@ public class GamePlayerScreen implements GameScene {
     public Scene getScene () {
         makeScene();
         return myScene;
+    }
+    
+    public void setFilePath(String filePath) {
+        thisFilePath=filePath;
     }
 }

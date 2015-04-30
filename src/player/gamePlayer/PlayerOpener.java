@@ -70,13 +70,13 @@ public class PlayerOpener implements GameScene {
         loadB.setOnMousePressed(e -> {
             File file=openFileChooser();
             myGame=DataManager.readFromXML(Game.class, file.getAbsolutePath());
-            moveToNextScreen(myGame);
+            moveToNextScreen(myGame,file);
         });
 
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
             myGame=DataManager.readFromXML(Game.class, "./src/xml/Game.xml");
-            moveToNextScreen(myGame);
+            moveToNextScreen(myGame,new File("./src/xml/Game.xml"));
             // PauseScene pause = new PauseScene(null, myStage, playerScene);
             // myStage.setScene(pause.getScene());
 
@@ -84,14 +84,16 @@ public class PlayerOpener implements GameScene {
 
         Arrays.asList(loadB, playB).forEach(e -> {
             e.setId("playerButton");
-            // e.setFocusTraversable(false);
+            e.setFocusTraversable(false);
         });
 
         createOptions();
     }
 
-    private void moveToNextScreen(Game game) {
-        GamePlayerScreen screen = new GamePlayerScreen(myStage, playerScene,game);
+    private void moveToNextScreen(Game game,File filePath) {
+        //GamePlayerScreen screen = new GamePlayerScreen(myStage, playerScene,game);
+        GamePlayerScreen screen = new GamePlayerScreen(myStage, playerScene,filePath.getAbsolutePath());
+        screen.setFilePath(filePath.getAbsolutePath());
         screen.setImage(gameSelector.getCurrentImage());
         myStage.setScene(screen.makeScene());
     }

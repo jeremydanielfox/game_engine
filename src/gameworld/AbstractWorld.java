@@ -12,10 +12,10 @@ import javafx.scene.Node;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
-import engine.gameobject.test.EnemyLabel;
+import engine.gameobject.test.EnemyTowerType;
 import engine.gameobject.test.ProjectileLabel;
 import engine.gameobject.test.TestTower;
-import engine.gameobject.test.TowerLabel;
+import engine.gameobject.test.FriendlyTowerType;
 import engine.interactions.BuffImparter;
 import engine.interactions.CollisionEngine;
 import engine.interactions.InteractionEngine;
@@ -62,13 +62,13 @@ public class AbstractWorld implements GameWorld {
     private void initiateCollisionEngine () {
         myCollisionEngine = new CollisionEngine();
         myCollisionEngine.setWorld(this);
-        myCollisionEngine.put(new ProjectileLabel(), new EnemyLabel(), new BuffImparter());
+        myCollisionEngine.put(new ProjectileLabel(), new EnemyTowerType(), new BuffImparter());
     }
 
     private void initiateRangeEngine () {
         myRangeEngine = new RangeEngine();
         myRangeEngine.setWorld(this);
-        myRangeEngine.put(new TowerLabel(), new EnemyLabel(), new ShootAt());
+        myRangeEngine.put(new FriendlyTowerType(), new EnemyTowerType(), new ShootAt());
     }
 
     @Override

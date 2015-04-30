@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import xml.DataManager;
 import View.ButtonWrapper;
-import View.GameWriter;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
@@ -25,9 +24,7 @@ import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.behaviors.PlayerChangeBehavior;
-import engine.gameobject.test.TestTower;
 import engine.gameobject.test.bloons.BlueBloon;
-import engine.gameobject.test.bloons.Spikes;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
@@ -60,7 +57,7 @@ public class GameWriterSuperAwesome extends Application {
         pointBehavior.setMoney(10);
         pointBehavior.setPoint(10);
         for (int i = 0; i < 10; i++) {
-            BlueBloon toAdd = new BlueBloon();
+            BasicEnemy toAdd = new BasicEnemy();
             toAdd.addOnDeathBehavior(pointBehavior);
             toAdd.addEndOfPathBehavior(healthBehavior);
             waveObjects.add(toAdd);

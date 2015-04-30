@@ -7,6 +7,7 @@ import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
 import engine.gameobject.RotatorNull;
 import engine.gameobject.test.ProjectileLabel;
+import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.weapon.NullWeapon;
 
 
@@ -20,6 +21,9 @@ public class BasicProjectile extends GameObjectSimple {
         setPoint(new PointSimple(0, 10000));
         setHealth(new HealthSimple(1));
         setWeapon(new NullWeapon());
-        setMover(new MoverDirection());
+        MoverDirection myMover = new MoverDirection();
+        myMover.setRange(100);
+        getCollider().addCollisionBehavior(new DamageBuff(1));
+        setMover(myMover);
     }
 }

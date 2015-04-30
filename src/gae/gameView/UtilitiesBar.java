@@ -116,8 +116,8 @@ public class UtilitiesBar {
     private void liveEdit () throws IOException {
         Stage primaryStage = new Stage();
         Group root = new Group();
-        primaryStage.setHeight(600);
-        primaryStage.setWidth(950);
+        primaryStage.setHeight(800);
+        primaryStage.setWidth(1050);
         Scene scene = new Scene(root);
         EngineView view = new ViewConcrete2(game.cloneGame(), Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         root.getChildren().add(view.initializeView());

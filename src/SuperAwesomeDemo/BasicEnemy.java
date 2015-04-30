@@ -1,6 +1,5 @@
 package SuperAwesomeDemo;
 
-import xml.DataManager;
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
@@ -8,8 +7,6 @@ import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
 import engine.gameobject.RotatorNull;
 import engine.gameobject.test.EnemyTowerType;
-import engine.gameobject.weapon.NullWeapon;
-import engine.pathfinding.PathFixed;
 import gameworld.GameWorld;
 
 
@@ -21,10 +18,8 @@ public class BasicEnemy extends GameObjectSimple {
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);
         setPoint(new PointSimple(0, 10000));
-        setHealth(new HealthSimple(3));
-        setWeapon(new NullWeapon());
-        PathFixed myPath = new PathFixed();
-        myPath = DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml");
+        setHealth(new HealthSimple(1));
+        setWeapon(new MeleeWeapon(this));
         setMover(new MoverPath(gw.getPath(), .7));
     }
   

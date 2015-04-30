@@ -148,6 +148,7 @@ public class MusicianSimple implements Musician {
     
     @Override
     public MediaPlayer reinitialize (MediaPlayer mp, Media m) {
+        mp.dispose();
         mp = new MediaPlayer(m);
         return mp;
     }

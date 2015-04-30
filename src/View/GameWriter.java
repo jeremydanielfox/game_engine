@@ -2,6 +2,8 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+import SuperAwesomeDemo.CollisionEngineAwesome;
+import SuperAwesomeDemo.RangeEngineAwesome;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import xml.DataManager;
@@ -21,10 +23,14 @@ import engine.game.StoryBoard;
 import engine.game.Timer;
 import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.GameObjectSimpleTest;
+import engine.gameobject.MoverUser;
+import engine.gameobject.PointSimple;
 import engine.gameobject.behaviors.PlayerChangeBehavior;
 import engine.gameobject.test.TestTower;
 import engine.gameobject.test.bloons.BlueBloon;
+import engine.gameobject.weapon.firingstrategy.UserStrategy;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
@@ -37,6 +43,7 @@ import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
 import gameworld.FixedWorld;
 import gameworld.GameWorld;
+import gameworld.StructurePlacementException;
 
 
 public class GameWriter extends Application {
@@ -131,10 +138,26 @@ public class GameWriter extends Application {
      */
     public GameWorld makeWorld () {
         FixedWorld world = new FixedWorld(10,10);
+        world.setCollisionEngine(new CollisionEngineAwesome());
+        world.setRangeEngine(new RangeEngineAwesome());
         // world.addObject(new TestTower(2, 330, 130));
         //world.addObject(new TestTower(5, 270, 270));
         // world.addObject(new TestTower(3, 355, 455));
-        
+        GameObjectSimple g = new TestTower(2, 330, 330);
+        MoverUser m = new MoverUser();
+        m.setGraphic(g.getGraphic());
+        g.setMover(m);
+        UserStrategy pewpew = new UserStrategy();
+        pewpew.setGraphic(g.getGraphic());
+        g.getWeapon().setFiringStrategy(pewpew);
+        g.getWeapon().setFiringRate(100);
+        try {
+            world.addObject(g, new PointSimple(300,300));
+        }
+        catch (StructurePlacementException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         //TODO wtf?
         world.setPath(DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml"));
         return world;

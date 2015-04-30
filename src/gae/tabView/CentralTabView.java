@@ -37,8 +37,6 @@ import javafx.scene.layout.VBox;
 import voogasalad.util.pathsearch.graph.GridCell;
 
 
-
-
 /**
  * Central container for the central tab view in the gae editor
  * 
@@ -64,6 +62,7 @@ public class CentralTabView implements UIObject {
     private FreeWorld freeworld;
     private BooleanProperty isFreeWorld = new SimpleBooleanProperty();
     private ShopModel shopModel;
+    private boolean shopSet;
     private AbstractWorld nextWorld;
 
     public CentralTabView (Scene sceneIn, Game gameIn, String gameTypeIn) {
@@ -75,6 +74,7 @@ public class CentralTabView implements UIObject {
     private void initialize (String gameTypeIn) {
         libraryData = LibraryData.getInstance();
         levelCount = 1;
+        shopSet = false;
 
         baseNode = new VBox();
         tabView = new TabPane();
@@ -231,10 +231,13 @@ public class CentralTabView implements UIObject {
                 checkAndInvokeMethods(nextWorld, levelData, sb, m);
             }
 
-            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(shopModel
-                    .getClass().getName()), Settable.class)) {
-                if (m.getName().equals("setGameWorld")) {
-                    m.invoke(shopModel, nextWorld);
+            if (!shopSet) {
+                for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(shopModel
+                        .getClass().getName()), Settable.class)) {
+                    if (m.getName().equals("setGameWorld")) {
+                        m.invoke(shopModel, nextWorld);
+                        shopSet = true;
+                    }
                 }
             }
         }

@@ -74,7 +74,7 @@ public class GameWriterSuperAwesome extends Application {
             waveObjects.add(new BasicEnemy(world));
         }
         
-        for (int i=0;i<5;i++) {
+        for (int i=0;i<20;i++) {
             waveObjects.add(new Devil(world));
         }
         

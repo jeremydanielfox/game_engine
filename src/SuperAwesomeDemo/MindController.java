@@ -10,7 +10,6 @@ import engine.gameobject.RotatorNull;
 import engine.gameobject.test.FriendlyTowerType;
 import engine.gameobject.units.WeaponBuff;
 import engine.gameobject.units.ZombieBuff;
-import engine.gameobject.units.poison.PoisonBuff;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;

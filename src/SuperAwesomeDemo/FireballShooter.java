@@ -18,7 +18,7 @@ public class FireballShooter extends BasicWeapon {
     public FireballShooter () {
         super();
         setFiringRate(.1);//Infinite "Firing Rate check"
-        setRange(1000);//Infinite range
+        setRange(100);//Infinite range
         GameObject myProjectile = makeFireball();//Set projectile's basic properties here
         //Add extra projectile properties here, such as graphics or other buffs
         setProjectile(myProjectile);
@@ -32,7 +32,7 @@ public class FireballShooter extends BasicWeapon {
         gos.setGraphic(myGraphic);
         gos.setHealth(new HealthSimple(1));
         gos.setWeapon(new NullWeapon());
-        MoverDirection myMover = new MoverDirection(new PointSimple(0, 0), .5, 1000); // infinite //
+        MoverDirection myMover = new MoverDirection(new PointSimple(0, 0), .5, 100); // infinite //
                                                                                       // distance
         gos.getCollider().addCollisionBehavior(new DamageBuff(2));
         gos.getCollider().addCollisionBehavior(new PoisonBuff());

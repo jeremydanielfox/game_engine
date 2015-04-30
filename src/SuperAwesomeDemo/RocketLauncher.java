@@ -34,8 +34,8 @@ public class RocketLauncher extends BasicWeapon {
         myProjectile.setPoint(new PointSimple(0, 10000));
         myProjectile.setHealth(new HealthSimple(1));
         myProjectile.setWeapon(new NullWeapon());
-        myProjectile.getCollider().addExplosionBuff(new DamageBuff(3));//damage set
-        myProjectile.getCollider().setExplosionRadius(100);//radius set
+        myProjectile.getCollider().addExplosionBuff(new DamageBuff(5));//damage set
+        myProjectile.getCollider().setExplosionRadius(150);//radius set
         MoverDirection myMover = new MoverDirection(new PointSimple(0, 0), 1, 600);
         myProjectile.setMover(myMover);
         return myProjectile;

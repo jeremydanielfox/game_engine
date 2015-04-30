@@ -74,6 +74,10 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         pauseScreen = pauser;
     }
     
+    private void addCSS() {
+        vbox.setId("VBOX");
+    }
+    
     public ViewConcrete2 (Game game,
                           double stageWidth,
                           double stageHeight) {

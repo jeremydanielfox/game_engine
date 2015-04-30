@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import xml.DataManager;
 import View.ButtonWrapper;
-import View.GameWriter;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
@@ -26,8 +25,6 @@ import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.behaviors.PlayerChangeBehavior;
 import engine.gameobject.test.TestTower;
-import engine.gameobject.test.bloons.BlueBloon;
-import engine.gameobject.test.bloons.Spikes;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
@@ -60,7 +57,7 @@ public class GameWriterSuperAwesome extends Application {
         pointBehavior.setMoney(10);
         pointBehavior.setPoint(10);
         for (int i = 0; i < 10; i++) {
-            BlueBloon toAdd = new BlueBloon();
+            BasicEnemy toAdd = new BasicEnemy();
             toAdd.addOnDeathBehavior(pointBehavior);
             toAdd.addEndOfPathBehavior(healthBehavior);
             waveObjects.add(toAdd);
@@ -137,9 +134,10 @@ public class GameWriterSuperAwesome extends Application {
         FixedWorld world = new FixedWorld(10, 10);
         world.setCollisionEngine(new CollisionEngineAwesome());
         world.setRangeEngine(new RangeEngineAwesome());
-        // world.addObject(new TestTower(2, 330, 130));
+//         world.addObject(new TestTower(2, 330, 130));
         // world.addObject(new TestTower(5, 270, 270));
         // world.addObject(new TestTower(3, 355, 455));
+        world.addObject(new Hero(100,100));
 
         // TODO wtf?
         world.setPath(DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml"));

@@ -11,6 +11,6 @@ import engine.interactions.CollisionEngine;
  */
 public class CollisionEngineTest extends CollisionEngine {
     public CollisionEngineTest () {
-        super.put(new ProjectileLabel(), new EnemyLabel(), new BuffImparter());
+        super.put(new ProjectileLabel(), new EnemyTowerType(), new BuffImparter());
     }
 }

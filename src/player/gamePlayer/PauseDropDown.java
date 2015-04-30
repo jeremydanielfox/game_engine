@@ -27,7 +27,7 @@ public class PauseDropDown implements GameScene {
     private Stage mainStage, myStage;
     private Scene myScene;
     private BorderPane myContainer;
-    private Button resume, restart, mainMenu;
+    private Button resume, mainMenu;
     private VBox buttonBox;
     private HBox instructionsBox;
     private Text instructions;
@@ -40,7 +40,6 @@ public class PauseDropDown implements GameScene {
         myScene = new Scene(myContainer);
         resumer = lambda;
         resume = new Button("RESUME");
-        restart = new Button("RESTART");
         mainMenu = new Button("MAIN MENU");
         buttonBox = new VBox(20);
         instructionsBox = new HBox(10);
@@ -48,7 +47,7 @@ public class PauseDropDown implements GameScene {
         instructions = new Text("Press ESC to exit");
         instructionsBox.getChildren().add(instructions);
 
-        buttonBox.getChildren().addAll(resume, restart, mainMenu);
+        buttonBox.getChildren().addAll(resume, mainMenu);
         buttonBox.setAlignment(Pos.CENTER);
         myContainer.setCenter(buttonBox);
         myContainer.setBottom(instructionsBox);
@@ -71,33 +70,39 @@ public class PauseDropDown implements GameScene {
     }
 
     private void sizeButtons () {
-        Arrays.asList(resume, restart, mainMenu).forEach(e -> {
+        Arrays.asList(resume, mainMenu).forEach(e -> {
             e.setPrefWidth(120);
         });
     }
 
-    public void displayPauseScreen () {
-        Stage s = new Stage();
-        s.setScene(myScene);
-        s.show();
+    public void displayPauseScreen () {;
+        myStage.setScene(myScene);
+        myStage.show();
     }
 
     /**
      * Sets up functionalities for all the clicks
      */
     private void setUpFunctions () {
-        resume.setOnMouseClicked(e -> {
-            myStage.close();
-            resumer.accept(null);
+        myScene.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
+            if (key.getCode().equals(KeyCode.ESCAPE)) {
+                resume();
+            }
         });
-
-        restart.setOnMouseClicked(e -> {
-            
+        
+        resume.setOnMouseClicked(e -> {
+            resume();
         });
 
         mainMenu.setOnMouseClicked(e -> {
             PlayerOpener opener = new PlayerOpener(mainStage);
             mainStage.setScene(opener.getScene());
+            myStage.close();
         });
+    }
+
+    private void resume () {
+        myStage.close();
+        resumer.accept(null);
     }
 }

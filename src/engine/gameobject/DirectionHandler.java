@@ -27,7 +27,6 @@ public class DirectionHandler {
         if (myNode == null)
         initializeNode(myGraphic);
         PointSimple ret = new PointSimple(myDirection.getX(), myDirection.getY());
-        myDirection = ORIGIN;
         return ret;
     }
     
@@ -38,6 +37,7 @@ public class DirectionHandler {
         myNode = graphic.getNode();
         myNode.setFocusTraversable(true);
         myNode.addEventHandler(KeyEvent.KEY_PRESSED, e -> handleKeyInput(e));
+        myNode.addEventHandler(KeyEvent.KEY_RELEASED, e -> handleKeyRelease(e));
     }
     
     private void handleKeyInput (KeyEvent e) {
@@ -58,10 +58,15 @@ public class DirectionHandler {
             myDirection = new PointSimple(0, 1);
             myGraphic.getImageView().setImage(new Image("/Images/Hero_Down.png"));
         }
-        else if (keyCode == KeyCode.SHIFT) {
-            
+    }
+    
+    private void handleKeyRelease (KeyEvent e) {
+        KeyCode keyCode = e.getCode();
+        if (keyCode == KeyCode.D || keyCode == KeyCode.S || keyCode == KeyCode.A || keyCode == KeyCode.W) {
+        	myDirection = ORIGIN;
         }
     }
+    
     
     public DirectionHandler clone(){
         DirectionHandler clone = new DirectionHandler();

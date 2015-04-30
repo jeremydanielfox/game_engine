@@ -27,7 +27,7 @@ public class TestTower extends GameObjectSimple {
         // moveruser.setNode(graphic.getNode());
         if (type == 0) {
             setMover(new MoverNull());
-            shopTag.setName("TestTower");
+            shopTag.setName("TestTower"+Math.random());
         }
         if (type == 1) {
             setMover(new MoverDirection(getPoint(), 1, 200));

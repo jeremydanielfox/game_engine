@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import engine.game.Player;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import engine.gameobject.Purchasable;
@@ -86,6 +87,7 @@ public interface ShopModel {
      */
     public void sellGameObject (GameObject obj);
 
+    public void setPlayer(Player p);
     
     public GameObject getObjectFromNode (Node node);
 }

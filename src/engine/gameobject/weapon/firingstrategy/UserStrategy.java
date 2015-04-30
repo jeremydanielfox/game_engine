@@ -19,6 +19,7 @@ public class UserStrategy extends BasicStrategy {
     private KeyCode myKey;
     private Graphic myGraphic;
     private PointSimple myDirection;
+    private FiringStrategy myStrategy;
     @XStreamOmitField
     private transient Node myNode;
     
@@ -28,9 +29,11 @@ public class UserStrategy extends BasicStrategy {
         myDirection = new PointSimple(0, 0);
         firingTimeLimit = Integer.MAX_VALUE;
         timeSinceFire = 0;
+        myStrategy = new SingleProjectile();
     }
     
     public UserStrategy(KeyCode myKey){
+        this();
         this.myKey = myKey;
     }
     
@@ -38,8 +41,8 @@ public class UserStrategy extends BasicStrategy {
      * Set firing rate such that it will fire @param per second
      * @param firePerSecond
      */
-    public void setFiringRate(int firePerSecond){
-        firingTimeLimit = 60/firePerSecond;
+    public void setFiringRate(double firePerSecond){
+        firingTimeLimit = (int) (60/firePerSecond);
     }
     
     private void initializeNode (Graphic graphic) {
@@ -58,6 +61,13 @@ public class UserStrategy extends BasicStrategy {
         myGraphic = graphic;
     }
     
+    @Settable
+    public void setFiringNumber(int number){
+        if (number > 1){
+            myStrategy = new MultipleProjectile(number);
+        }
+    }
+    
     @Override
     public void execute (ObjectCollection world,
                          GameObject target,
@@ -69,8 +79,7 @@ public class UserStrategy extends BasicStrategy {
             initializeNode(myGraphic);
         if (canFire()){
             PointSimple newLocation = location.add(myDirection.multiply(10));
-            GameObject newProjectile = makeProjectile(location, newLocation, prototype);
-            world.addObject(newProjectile);
+            myStrategy.execute(world, target, newLocation, prototype);
             timeSincePressed = Integer.MAX_VALUE/2;
             timeSinceFire = 0;
         }

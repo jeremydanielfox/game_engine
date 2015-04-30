@@ -153,13 +153,9 @@ public class MusicianSimple implements Musician {
      */
 
     public void rayGun () {
+        disposeSoundEffect();
         soundEffector = new MediaPlayer(rayGunSound);
-        playAndDispose();
-    }
-
-    private void playAndDispose () {
         soundEffector.play();
-        soundEffector.dispose();
     }
 
     public void setRayGun (Music m) {
@@ -167,8 +163,9 @@ public class MusicianSimple implements Musician {
     }
 
     public void laser () {
+        disposeSoundEffect();
         soundEffector = new MediaPlayer(laserSound);
-        playAndDispose();
+        soundEffector.play();
     }
 
     public void setLaser (Music m) {
@@ -176,11 +173,18 @@ public class MusicianSimple implements Musician {
     }
 
     public void gun () {
+        disposeSoundEffect();
         soundEffector = new MediaPlayer(gunSound);
-        playAndDispose();
+        soundEffector.play();
     }
 
     public void setGun (Music m) {
         gunSound = m.getMusic();
+    }
+    
+    private void disposeSoundEffect () {
+        if (soundEffector != null) {
+            soundEffector.dispose();
+        }
     }
 }

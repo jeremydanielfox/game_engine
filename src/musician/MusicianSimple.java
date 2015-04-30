@@ -34,7 +34,7 @@ public class MusicianSimple implements Musician {
     private boolean muted;
     private double savedVolume;
     private Media rayGunSound, laserSound, gunSound;
-    private MediaPlayer rayGun, laser, gun;
+    private MediaPlayer soundEffector;
 
     /*
      * try & catch blocks implemented for methods with MediaPlayer in case it isn't instantiated yet
@@ -49,10 +49,6 @@ public class MusicianSimple implements Musician {
         rayGunSound = new Media(Paths.get("src/musician/raygun.wav").toUri().toString());
         laserSound = new Media(Paths.get("src/musician/laser.wav").toUri().toString());
         gunSound = new Media(Paths.get("src/musician/gun.wav").toUri().toString());
-
-        rayGun = new MediaPlayer(rayGunSound);
-        laser = new MediaPlayer(laserSound);
-        gun = new MediaPlayer(gunSound);
     }
 
     /**
@@ -158,8 +154,13 @@ public class MusicianSimple implements Musician {
      */
 
     public void rayGun () {
-        rayGun.play();
-        rayGun = reinitialize(rayGun, rayGunSound);
+        soundEffector = new MediaPlayer(rayGunSound);
+        playAndDispose();
+    }
+
+    private void playAndDispose () {
+        soundEffector.play();
+        soundEffector.dispose();
     }
 
     public void setRayGun (Music m) {
@@ -167,8 +168,8 @@ public class MusicianSimple implements Musician {
     }
 
     public void laser () {
-        laser.play();
-        laser = reinitialize(laser, laserSound);
+        soundEffector = new MediaPlayer(laserSound);
+        playAndDispose();
     }
 
     public void setLaser (Music m) {
@@ -176,8 +177,8 @@ public class MusicianSimple implements Musician {
     }
 
     public void gun () {
-        gun.play();
-        gun = reinitialize(gun, gunSound);
+        soundEffector = new MediaPlayer(gunSound);
+        playAndDispose();
     }
 
     public void setGun (Music m) {

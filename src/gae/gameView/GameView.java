@@ -34,7 +34,7 @@ public class GameView implements UIMediator {
     // public void createLevel();
 
     private static final Image CURSOR_GRAPHIC = new Image("/images/swordCursor.jpg");
-    private static final String GAMEVIEW_CSS = "css/GameViewCSS.css";
+    public static final String GAMEVIEW_CSS = "css/GameViewCSS.css";
     private BorderPane myUI;
     private CentralTabView myTabs;
     private Scene myScene;

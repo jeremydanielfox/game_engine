@@ -31,7 +31,7 @@ public class ShopCheckList extends CheckList {
             while (change.next()) {
                 change.getAddedSubList()
                         .forEach(e->{
-                            if(e.getShopTag()!=null)
+                            if(e.getShopTag().getName()!="")
                                 createCheckOption(new ShopCheckListItem(e));
                             });
                 change.getRemoved().forEach(e -> {

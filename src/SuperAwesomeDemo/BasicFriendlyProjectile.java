@@ -6,15 +6,14 @@ import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
 import engine.gameobject.RotatorNull;
-import engine.gameobject.test.ProjectileLabel;
 import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.weapon.NullWeapon;
 
 
-public class BasicProjectile extends GameObjectSimple {
-    public BasicProjectile () {
+public class BasicFriendlyProjectile extends GameObjectSimple {
+    public BasicFriendlyProjectile () {
         super();
-        setLabel(new ProjectileLabel());
+        setLabel(new FriendlyProjectileType());
         Graphic myGraphic = new Graphic(25,25,"/images/robertDuvall.jpg");
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);

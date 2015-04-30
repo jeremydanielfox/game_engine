@@ -17,7 +17,7 @@ public class BasicTower extends GameObjectSimple {
     public BasicTower () {
         super();
         setLabel(new FriendlyTowerType());
-        Graphic myGraphic = new Graphic(25, 25, "/images/ArcaneTower.png");
+        Graphic myGraphic = new Graphic(30, 48, "/images/Cool_Turret.png");
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);
         setPoint(new PointSimple(0, 10000));

@@ -39,8 +39,13 @@
               <changed>false</changed>
               <obs/>
               <eventList>
+<<<<<<< Updated upstream
                 <engine.events.RandomSpanWave>
                   <frameTrigger>240</frameTrigger>
+=======
+                <engine.events.ConstantSpacingWave>
+                  <frameTrigger>-120</frameTrigger>
+>>>>>>> Stashed changes
                   <frameCount>0</frameCount>
                   <myWorld class="gameworld.FixedWorld">
                     <myObjects/>
@@ -1755,9 +1760,15 @@
                             <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
                             </superType>
+<<<<<<< Updated upstream
                             <myName> </myName>
                           </superType>
                           <myName>ENemy</myName>
+=======
+                            <myName></myName>
+                          </superType>
+                          <myName>UserTower</myName>
+>>>>>>> Stashed changes
                         </myType>
                         <myPoint>
                           <myPoint>
@@ -1767,6 +1778,7 @@
                           </myPoint>
                         </myPoint>
                         <myHealth class="engine.gameobject.HealthSimple">
+<<<<<<< Updated upstream
                           <myHealth>9.919354838709678</myHealth>
                           <maxHealth>9.919354838709678</maxHealth>
                           <myTitle></myTitle>
@@ -1814,6 +1826,39 @@
                               </engine.pathfinding.PathSegmentBezier>
                             </myPathSegments>
                           </myPath>
+=======
+                          <myHealth>0.0</myHealth>
+                          <maxHealth>0.0</maxHealth>
+                          <myTitle></myTitle>
+                          <index>0</index>
+                        </myHealth>
+                        <myMover class="engine.gameobject.MoverUser">
+                          <inherentSpeed>5.0</inherentSpeed>
+                          <speedModifier>0.0</speedModifier>
+                          <myDistance>0.0</myDistance>
+                          <frozen>false</frozen>
+                          <none>
+                            <myPoint>
+                              <x>0.0</x>
+                              <y>0.0</y>
+                              <hash>0</hash>
+                            </myPoint>
+                          </none>
+                          <currentDirection reference="../none"/>
+                          <myGraphic>
+                            <myTitle></myTitle>
+                            <myHeight>7.258064516129032</myHeight>
+                            <myWidth>7.338709677419355</myWidth>
+                            <myImageName>ArcaneTower.png</myImageName>
+                            <myPoint>
+                              <x>-3.6693549156188965</x>
+                              <y>-3.6290323734283447</y>
+                              <hash>0</hash>
+                            </myPoint>
+                            <myRotator class="engine.gameobject.RotateToPoint"/>
+                            <index>0</index>
+                          </myGraphic>
+>>>>>>> Stashed changes
                         </myMover>
                         <myBuffs>
                           <buffList/>
@@ -1845,7 +1890,11 @@
                         </myCollider>
                         <myBehaviors>
                           <endOfPath>
+<<<<<<< Updated upstream
                             <engine.gameobject.behaviors.DisappearBehavior/>
+=======
+                            <engine.gameobject.behaviors.DeathBehavior/>
+>>>>>>> Stashed changes
                           </endOfPath>
                           <death>
                             <engine.gameobject.behaviors.ExplosionBehavior/>
@@ -1865,13 +1914,22 @@
                           <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
+<<<<<<< Updated upstream
                           <myName>tagkadj</myName>
                           <myDescription>lksdjf</myDescription>
+=======
+                          <myName></myName>
+                          <myDescription></myDescription>
+>>>>>>> Stashed changes
                           <myShopGraphic>
                             <myTitle></myTitle>
                             <myHeight>0.0</myHeight>
                             <myWidth>0.0</myWidth>
+<<<<<<< Updated upstream
                             <myImageName>/images/robertDuvall.jpg</myImageName>
+=======
+                            <myImageName>robertDuvall.jpg</myImageName>
+>>>>>>> Stashed changes
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -1881,6 +1939,7 @@
                             <index>0</index>
                           </myShopGraphic>
                         </myShopTag>
+<<<<<<< Updated upstream
                       </engine.gameobject.GameObjectSimple>
                       <engine.gameobject.GameObjectSimple reference="../engine.gameobject.GameObjectSimple"/>
                       <engine.gameobject.GameObjectSimple reference="../engine.gameobject.GameObjectSimple"/>
@@ -1901,10 +1960,16 @@
                       <engine.gameobject.GameObjectSimple reference="../engine.gameobject.GameObjectSimple"/>
                       <engine.gameobject.GameObjectSimple reference="../engine.gameobject.GameObjectSimple"/>
                       <engine.gameobject.GameObjectSimple reference="../engine.gameobject.GameObjectSimple"/>
+=======
+                        <myTitle></myTitle>
+                        <index>0</index>
+                      </engine.gameobject.GameObjectSimple>
+>>>>>>> Stashed changes
                     </myOrderedObjects>
                     <curIndex>0</curIndex>
                   </myQueue>
                   <myWaveSet/>
+<<<<<<< Updated upstream
                   <myFrameDuration>360</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
@@ -3652,6 +3717,12 @@
               <changed>false</changed>
               <obs/>
               <eventList/>
+=======
+                  <myFramesBetweenEnemies>0</myFramesBetweenEnemies>
+                  <myFramesSinceLastRelease>0</myFramesSinceLastRelease>
+                </engine.events.ConstantSpacingWave>
+              </eventList>
+>>>>>>> Stashed changes
             </myStoryBoard>
           </engine.goals.EventsCompleteGoal>
         </myWinningGoals>

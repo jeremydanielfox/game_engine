@@ -7,26 +7,29 @@ import engine.gameobject.MoverUser;
 import engine.gameobject.PointSimple;
 import engine.gameobject.RotatorNull;
 import engine.gameobject.test.FriendlyTowerType;
-import engine.gameobject.weapon.BasicWeapon;
-import engine.gameobject.weapon.Weapon;
+import engine.shop.ShopTagSimple;
 
 
 public class Hero extends GameObjectSimple {
     public Hero (int xcor, int ycor) {
         super();
-        setPoint(new PointSimple(xcor, ycor));
+        ShopTagSimple shopTag = new ShopTagSimple();
+        shopTag.setDescription("Another hero?");
+        shopTag.setShopGraphic(new Graphic(47, 28, "/images/BoxheadHero.png"));
+        setShopTag(shopTag);
         setLabel(new FriendlyTowerType());
-        Graphic myGraphic = new Graphic(20, 33.3, "/images/BoxheadHero.png");
+        Graphic myGraphic = new Graphic(47, 28, "/images/BoxheadHero.png");
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);
-        setPoint(new PointSimple(0, 10000));
-        setHealth(new HealthSimple(10));
-        Weapon myWeapon = new BasicWeapon();
-        myWeapon.setProjectile(new BasicFriendlyProjectile());
-        myWeapon.setFiringRate(.5);
-        myWeapon.setRange(100);
-        setWeapon(myWeapon);
-        MoverUser myMover = new MoverUser();
+        setPoint(new PointSimple(xcor, ycor));
+        setHealth(new HealthSimple(500000));
+//        Weapon myWeapon = new BasicWeapon();
+//        myWeapon.setProjectile(new BasicFriendlyProjectile());
+//        myWeapon.setFiringRate(.5);
+//        myWeapon.setRange(100);
+//        setWeapon(new TowerShooter(this));
+        setWeapon(new Shotgun(this));
+        MoverUser myMover = new MoverUser(10);
         myMover.setGraphic(myGraphic);
         // myMover.setRange(200);
         setMover(myMover);

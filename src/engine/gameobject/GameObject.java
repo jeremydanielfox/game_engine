@@ -65,4 +65,6 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
     
     public Health getHealth ();
 
+    public void setGraphic (Graphic myGraphic);
+
 }

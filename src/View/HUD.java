@@ -9,6 +9,7 @@ import java.util.Observer;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -35,13 +36,13 @@ public class HUD implements Observer {
     private VBox myStatsDisplay;
     private VBox myLevelDisplay;
     private VBox myWholeDisplay;
-    private BorderPane myPane;
+    private Pane myPane;
     private HBox myDefaultButtonDisplay;
     private ShopModel shop;
 
     private List<ButtonWrapper> myButtonWrapperList;
 
-    public HUD (BorderPane pane, ShopModel shop) {
+    public HUD (Pane pane, ShopModel shop) {
         this.shop = shop;
         initialize(pane);
     }
@@ -50,7 +51,7 @@ public class HUD implements Observer {
         initialize(pane);
     }
 
-    private void initialize (BorderPane pane) {
+    private void initialize (Pane pane) {
         myStatsDisplay = new VBox(SPACING);
         myWholeDisplay = new VBox(SPACING);
         myLevelDisplay = new VBox(SPACING);

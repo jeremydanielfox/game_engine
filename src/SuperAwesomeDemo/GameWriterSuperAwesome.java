@@ -1,11 +1,15 @@
 package SuperAwesomeDemo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import voogasalad.util.pathsearch.graph.GridCell;
+import voogasalad.util.pathsearch.pathalgorithms.NoPathExistsException;
 import xml.DataManager;
 import View.ButtonWrapper;
+import View.ViewConcrete2;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
@@ -23,20 +27,23 @@ import engine.game.Timer;
 import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
+import engine.gameobject.Graphic;
+import engine.gameobject.PointSimple;
 import engine.gameobject.behaviors.PlayerChangeBehavior;
-import engine.gameobject.test.TestTower;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
-import engine.goals.ScoreGoal;
 import engine.goals.TimerGoal;
-import engine.pathfinding.PathFixed;
 import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
+import gameworld.CoordinateTransformer;
 import gameworld.FixedWorld;
+import gameworld.FreeWorld;
 import gameworld.GameWorld;
+import gameworld.GridCellFromPoint;
+import gameworld.StructurePlacementException;
 
 
 public class GameWriterSuperAwesome extends Application {
@@ -57,10 +64,20 @@ public class GameWriterSuperAwesome extends Application {
         pointBehavior.setMoney(10);
         pointBehavior.setPoint(10);
         for (int i = 0; i < 10; i++) {
-            BasicEnemy toAdd = new BasicEnemy();
-            toAdd.addOnDeathBehavior(pointBehavior);
-            toAdd.addEndOfPathBehavior(healthBehavior);
+//            Devil toAdd = new Devil(world);
+            BasicEnemy toAdd = new BasicEnemy(world);
             waveObjects.add(toAdd);
+        }
+        for (int i=1;i<4;i++) {
+            waveObjects.add(new Devil(world));
+        }
+        
+        for (int i=0;i<7;i++) {
+            waveObjects.add(new BasicEnemy(world));
+        }
+        
+        for (int i=0;i<5;i++) {
+            waveObjects.add(new Devil(world));
         }
         GameObjectQueue q = new ConcreteQueue(waveObjects);
         TimedEvent wave = new RandomSpanWave(2, 20, q, world);
@@ -68,13 +85,17 @@ public class GameWriterSuperAwesome extends Application {
 
         List<GameObject> waveObjects2 = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            waveObjects2.add(new GameObjectSimpleTest());
+            waveObjects2.add(new BasicEnemy(world));
         }
+        waveObjects2.add(new Devil(world));
+        waveObjects2.add(new Devil(world));
         GameObjectQueue q2 = new ConcreteQueue(waveObjects2);
         TimedEvent wave2 = new ConstantSpacingWave(2, q2, world);
 
         StoryBoard story = makeStoryBoard(wave);
         story.addEvent(wave2);
+        
+        
         return story;
     }
 
@@ -91,13 +112,13 @@ public class GameWriterSuperAwesome extends Application {
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
         list.add(new TimerGoal(t, 0));
-        ScoreGoal score = new ScoreGoal(myPlayer, 200);
+        // ScoreGoal score = new ScoreGoal(myPlayer, 200);
         List<Goal> list2 = new ArrayList<Goal>();
-        list2.add(score);
+        // list2.add(score);
         List<Goal> list3 = new ArrayList<Goal>();
-        ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
-        list3.add(score2);
-        Level levelOne = new ConcreteLevel("images/Park_Path.png", list2, list, world, story);
+        // ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
+        // list3.add(score2);
+        Level levelOne = new ConcreteLevel("images/Gray_Hexagon.jpg", list2, list, world, story);
         levelOne.addTimer(t);
         board.addLevel(levelOne);
         board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list,
@@ -131,16 +152,66 @@ public class GameWriterSuperAwesome extends Application {
      * @return
      */
     public GameWorld makeWorld () {
-        FixedWorld world = new FixedWorld(10, 10);
+        FreeWorld world = new FreeWorld(10, 10);
         world.setCollisionEngine(new CollisionEngineAwesome());
         world.setRangeEngine(new RangeEngineAwesome());
-//         world.addObject(new TestTower(2, 330, 130));
+        // world.addObject(new TestTower(2, 330, 130));
         // world.addObject(new TestTower(5, 270, 270));
         // world.addObject(new TestTower(3, 355, 455));
-        world.addObject(new Hero(100,100));
+        Hero hero = new Hero(100, 100);
+        // start initializing weapon powerups
+        
+        Graphic mineGraphic = new Graphic(40,40,"/images/Mine.png");
+        WeaponPowerUp mine = new WeaponPowerUp(new MineLayer(hero),mineGraphic);
+        mine.setPoint(new PointSimple(550,50));
+        
+        Graphic towerShooterGraphic = new Graphic (35,56, "/images/Cool_Turret.png");
+        WeaponPowerUp towerShooter = new WeaponPowerUp(new TowerShooter(hero), towerShooterGraphic);
+        towerShooter.setPoint(new PointSimple(550, 250));
+        
+        Graphic shotgunGraphic = new Graphic(100, 30, "/images/Shotgun.png");
+        WeaponPowerUp shotgun = new WeaponPowerUp(new Shotgun(hero),shotgunGraphic);
+        shotgun.setPoint(new PointSimple(50, 250));
+        
+        Graphic rocketGraphic = new Graphic(100,30, "/images/Missile_Launcher.png");
+        WeaponPowerUp rocket = new WeaponPowerUp(new RocketLauncher(hero), rocketGraphic);
+        rocket.setPoint(new PointSimple(50, 500));
+        world.addObject(mine);
+        world.addObject(towerShooter);
+        world.addObject(shotgun);
+        world.addObject(rocket);
 
-        // TODO wtf?
-        world.setPath(DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml"));
+        GridCell[] sPoints = { new GridCell(0, 0), new GridCell(9, 0) };
+        List<GridCell> startPoints = Arrays.asList(sPoints);
+        world.setSpawnPoints(startPoints);
+        try {
+            world.addObject(new Barrel(), new PointSimple(100, 100));
+        }
+        catch (StructurePlacementException e1) {
+            System.out.println("can't place");
+        }
+
+        try {
+            world.addObject(hero, new PointSimple(300, 300));
+        }
+        catch (StructurePlacementException e) {
+        }
+
+        GridCellFromPoint c =
+                new GridCellFromPoint(new CoordinateTransformer(10, 10,
+                                                                ViewConcrete2.getWorldWidth(),
+                                                                ViewConcrete2.getWorldHeight()),
+                                      hero);
+        List<GridCell> lst = new ArrayList<>();
+        lst.add(c);
+        world.setEndPoints(lst);
+
+        try {
+            world.getPath().updatePath();
+        }
+        catch (NoPathExistsException e) {
+        }
+
         return world;
     }
 
@@ -161,11 +232,7 @@ public class GameWriterSuperAwesome extends Application {
 
     public ShopModel makeShop (Player player, GameWorld world) {
         ShopModelSimple shop = new ShopModelSimple(world, player, 1);
-        // TESTING purposes:
-        // shop.addPurchasable(new TestTower(1,0,0));This is the tower that shoots itself
-        // shop.addPurchasable(new TestTower(0, 0, 0));
-        // shop.addPurchasable(new Spikes());
-         shop.addPurchasable(new TowerSpawner());
+        shop.addPurchasable(new Barrel());
         return shop;
     }
 

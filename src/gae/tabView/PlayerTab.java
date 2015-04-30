@@ -4,6 +4,13 @@ import engine.game.Player;
 import gae.builder.PlayerBuilder;
 import javafx.scene.control.Tab;
 
+/**
+ * Holds the Player editor tab
+ * 
+ * @author JohnGilhuly, Brandon Choi
+ *
+ */
+
 public class PlayerTab implements ITab {
     private Tab baseNode;
     private PlayerBuilder editor;
@@ -26,6 +33,11 @@ public class PlayerTab implements ITab {
         return baseNode;
     }
 
+    /**
+     * Used to link the Player and Game
+     * 
+     * @return
+     */
     public Player getPlayer () {
         return (Player) editor.getData().getBuiltObject();
     }

@@ -31,13 +31,15 @@
     <myLevels>
       <engine.game.ConcreteLevel>
         <myTitle></myTitle>
-        <myImagePath>file:/Users/sierrasmith95/Documents/Duke%20Sophomore/CS%20308%20(Software%20Design)/voogasalad_RDatGV/src/images/HealthImage.jpeg</myImagePath>
+        <myImagePath>/images/Park_Path.png</myImagePath>
         <myWinningGoals>
           <engine.goals.EventsCompleteGoal>
             <isSatisfied>false</isSatisfied>
             <myStoryBoard>
               <changed>false</changed>
-              <obs/>
+              <obs>
+                <engine.goals.EventsCompleteGoal reference="../../.."/>
+              </obs>
               <eventList>
                 <engine.events.ConstantSpacingWave>
                   <frameTrigger>240</frameTrigger>
@@ -1721,7 +1723,7 @@
                             </superType>
                             <myName> </myName>
                           </superType>
-                          <myName>d</myName>
+                          <myName>Tower</myName>
                         </myType>
                         <myPoint>
                           <myPoint>
@@ -1731,13 +1733,13 @@
                           </myPoint>
                         </myPoint>
                         <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
+                          <myHealth>10.0</myHealth>
+                          <maxHealth>10.0</maxHealth>
                           <myTitle></myTitle>
                           <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
+                          <inherentSpeed>3.0</inherentSpeed>
                           <speedModifier>1.0</speedModifier>
                           <myDistance>0.0</myDistance>
                           <frozen>false</frozen>
@@ -1747,29 +1749,29 @@
                                 <myPoints>
                                   <engine.gameobject.PointSimple>
                                     <myPoint>
-                                      <x>399.0</x>
-                                      <y>241.0</y>
+                                      <x>699.0</x>
+                                      <y>389.0</y>
                                       <hash>0</hash>
                                     </myPoint>
                                   </engine.gameobject.PointSimple>
                                   <engine.gameobject.PointSimple>
                                     <myPoint>
-                                      <x>272.5</x>
-                                      <y>307.0</y>
+                                      <x>579.0</x>
+                                      <y>388.0</y>
                                       <hash>0</hash>
                                     </myPoint>
                                   </engine.gameobject.PointSimple>
                                   <engine.gameobject.PointSimple>
                                     <myPoint>
-                                      <x>272.5</x>
-                                      <y>307.0</y>
+                                      <x>579.0</x>
+                                      <y>388.0</y>
                                       <hash>0</hash>
                                     </myPoint>
                                   </engine.gameobject.PointSimple>
                                   <engine.gameobject.PointSimple>
                                     <myPoint>
-                                      <x>146.0</x>
-                                      <y>373.0</y>
+                                      <x>459.0</x>
+                                      <y>387.0</y>
                                       <hash>0</hash>
                                     </myPoint>
                                   </engine.gameobject.PointSimple>
@@ -1780,29 +1782,62 @@
                                 <myPoints>
                                   <engine.gameobject.PointSimple>
                                     <myPoint>
-                                      <x>146.0</x>
-                                      <y>373.0</y>
+                                      <x>459.0</x>
+                                      <y>387.0</y>
                                       <hash>0</hash>
                                     </myPoint>
                                   </engine.gameobject.PointSimple>
                                   <engine.gameobject.PointSimple>
                                     <myPoint>
-                                      <x>376.0</x>
-                                      <y>468.5</y>
+                                      <x>475.5</x>
+                                      <y>250.0</y>
                                       <hash>0</hash>
                                     </myPoint>
                                   </engine.gameobject.PointSimple>
                                   <engine.gameobject.PointSimple>
                                     <myPoint>
-                                      <x>376.0</x>
-                                      <y>468.5</y>
+                                      <x>475.5</x>
+                                      <y>250.0</y>
                                       <hash>0</hash>
                                     </myPoint>
                                   </engine.gameobject.PointSimple>
                                   <engine.gameobject.PointSimple>
                                     <myPoint>
-                                      <x>611.0</x>
-                                      <y>559.0</y>
+                                      <x>512.0</x>
+                                      <y>125.0</y>
+                                      <hash>0</hash>
+                                    </myPoint>
+                                  </engine.gameobject.PointSimple>
+                                </myPoints>
+                                <myLength>0.0</myLength>
+                              </engine.pathfinding.PathSegmentBezier>
+                              <engine.pathfinding.PathSegmentBezier>
+                                <myPoints>
+                                  <engine.gameobject.PointSimple>
+                                    <myPoint>
+                                      <x>512.0</x>
+                                      <y>125.0</y>
+                                      <hash>0</hash>
+                                    </myPoint>
+                                  </engine.gameobject.PointSimple>
+                                  <engine.gameobject.PointSimple>
+                                    <myPoint>
+                                      <x>357.0</x>
+                                      <y>152.0</y>
+                                      <hash>0</hash>
+                                    </myPoint>
+                                  </engine.gameobject.PointSimple>
+                                  <engine.gameobject.PointSimple>
+                                    <myPoint>
+                                      <x>357.0</x>
+                                      <y>152.0</y>
+                                      <hash>0</hash>
+                                    </myPoint>
+                                  </engine.gameobject.PointSimple>
+                                  <engine.gameobject.PointSimple>
+                                    <myPoint>
+                                      <x>213.0</x>
+                                      <y>182.0</y>
                                       <hash>0</hash>
                                     </myPoint>
                                   </engine.gameobject.PointSimple>
@@ -1926,8 +1961,8 @@
                             </upgradeMap>
                             <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
                               <backingSet>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
                                 <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
+                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
                               </backingSet>
                               <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
                                 <listener class="null"/>
@@ -1955,9 +1990,9 @@
                         </myBehaviors>
                         <myGraphic>
                           <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
+                          <myHeight>100.0</myHeight>
+                          <myWidth>100.0</myWidth>
+                          <myImageName>/images/ArcaneTower.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -1967,13 +2002,13 @@
                           <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
+                          <myName>ShopImage</myName>
+                          <myDescription>none</myDescription>
                           <myShopGraphic>
                             <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
+                            <myHeight>100.0</myHeight>
+                            <myWidth>100.0</myWidth>
+                            <myImageName>/images/ArcaneTower.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -1994,13 +2029,13 @@
                           </myPoint>
                         </myPoint>
                         <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
+                          <myHealth>10.0</myHealth>
+                          <maxHealth>10.0</maxHealth>
                           <myTitle></myTitle>
                           <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
+                          <inherentSpeed>3.0</inherentSpeed>
                           <speedModifier>1.0</speedModifier>
                           <myDistance>0.0</myDistance>
                           <frozen>false</frozen>
@@ -2070,9 +2105,9 @@
                         <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
                         <myGraphic>
                           <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
+                          <myHeight>100.0</myHeight>
+                          <myWidth>100.0</myWidth>
+                          <myImageName>/images/ArcaneTower.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -2082,13 +2117,13 @@
                           <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
+                          <myName>ShopImage</myName>
+                          <myDescription>none</myDescription>
                           <myShopGraphic>
                             <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
+                            <myHeight>100.0</myHeight>
+                            <myWidth>100.0</myWidth>
+                            <myImageName>/images/ArcaneTower.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -2109,128 +2144,13 @@
                           </myPoint>
                         </myPoint>
                         <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
+                          <myHealth>10.0</myHealth>
+                          <maxHealth>10.0</maxHealth>
                           <myTitle></myTitle>
                           <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
-                          <speedModifier>1.0</speedModifier>
-                          <myDistance>0.0</myDistance>
-                          <frozen>false</frozen>
-                          <myPath class="engine.pathfinding.PathFixed" reference="../../../engine.gameobject.GameObjectSimple/myMover/myPath"/>
-                        </myMover>
-                        <myBuffs>
-                          <buffList/>
-                          <immunityList/>
-                        </myBuffs>
-                        <myWeapon class="engine.gameobject.weapon.BasicWeapon">
-                          <timeSinceFire>0</timeSinceFire>
-                          <myRange>
-                            <observers>
-                              <engine.gameobject.weapon.UpgradeObserver>
-                                <updater class="null"/>
-                              </engine.gameobject.weapon.UpgradeObserver>
-                            </observers>
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <type>NULL</type>
-                          </myRange>
-                          <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
-                            <value>0.0</value>
-                            <valid>true</valid>
-                            <name></name>
-                          </rangeProp>
-                          <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <observers/>
-                            <type>NULL</type>
-                          </myFiringRate>
-                          <myProjectile class="engine.gameobject.GameObjectSimple" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myProjectile"/>
-                          <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myFiringStrategy"/>
-                          <upgradables>
-                            <upgradeMap>
-                              <entry>
-                                <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </entry>
-                              <entry>
-                                <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </entry>
-                            </upgradeMap>
-                            <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
-                              <backingSet>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </backingSet>
-                              <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
-                                <listener class="null"/>
-                              </listenerHelper>
-                            </obsSet>
-                          </upgradables>
-                          <tree class="engine.gameobject.weapon.upgradetree.NullTree"/>
-                          <value>0.0</value>
-                        </myWeapon>
-                        <myCollider>
-                          <collidedID/>
-                          <collisionBuffs/>
-                          <onDeath>
-                            <radius>0.0</radius>
-                            <explosBuffs/>
-                          </onDeath>
-                        </myCollider>
-                        <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
-                        <myGraphic>
-                          <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                          <index>0</index>
-                        </myGraphic>
-                        <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
-                          <myShopGraphic>
-                            <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                            <index>0</index>
-                          </myShopGraphic>
-                        </myShopTag>
-                      </engine.gameobject.GameObjectSimple>
-                      <engine.gameobject.GameObjectSimple>
-                        <myType class="engine.gameobject.labels.SimpleType" reference="../../engine.gameobject.GameObjectSimple/myType"/>
-                        <myPoint>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                        </myPoint>
-                        <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
-                          <myTitle></myTitle>
-                          <index>0</index>
-                        </myHealth>
-                        <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
+                          <inherentSpeed>3.0</inherentSpeed>
                           <speedModifier>1.0</speedModifier>
                           <myDistance>0.0</myDistance>
                           <frozen>false</frozen>
@@ -2300,9 +2220,9 @@
                         <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
                         <myGraphic>
                           <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
+                          <myHeight>100.0</myHeight>
+                          <myWidth>100.0</myWidth>
+                          <myImageName>/images/ArcaneTower.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -2312,13 +2232,13 @@
                           <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
+                          <myName>ShopImage</myName>
+                          <myDescription>none</myDescription>
                           <myShopGraphic>
                             <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
+                            <myHeight>100.0</myHeight>
+                            <myWidth>100.0</myWidth>
+                            <myImageName>/images/ArcaneTower.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -2339,128 +2259,13 @@
                           </myPoint>
                         </myPoint>
                         <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
+                          <myHealth>10.0</myHealth>
+                          <maxHealth>10.0</maxHealth>
                           <myTitle></myTitle>
                           <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
-                          <speedModifier>1.0</speedModifier>
-                          <myDistance>0.0</myDistance>
-                          <frozen>false</frozen>
-                          <myPath class="engine.pathfinding.PathFixed" reference="../../../engine.gameobject.GameObjectSimple/myMover/myPath"/>
-                        </myMover>
-                        <myBuffs>
-                          <buffList/>
-                          <immunityList/>
-                        </myBuffs>
-                        <myWeapon class="engine.gameobject.weapon.BasicWeapon">
-                          <timeSinceFire>0</timeSinceFire>
-                          <myRange>
-                            <observers>
-                              <engine.gameobject.weapon.UpgradeObserver>
-                                <updater class="null"/>
-                              </engine.gameobject.weapon.UpgradeObserver>
-                            </observers>
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <type>NULL</type>
-                          </myRange>
-                          <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
-                            <value>0.0</value>
-                            <valid>true</valid>
-                            <name></name>
-                          </rangeProp>
-                          <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <observers/>
-                            <type>NULL</type>
-                          </myFiringRate>
-                          <myProjectile class="engine.gameobject.GameObjectSimple" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myProjectile"/>
-                          <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myFiringStrategy"/>
-                          <upgradables>
-                            <upgradeMap>
-                              <entry>
-                                <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </entry>
-                              <entry>
-                                <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </entry>
-                            </upgradeMap>
-                            <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
-                              <backingSet>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </backingSet>
-                              <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
-                                <listener class="null"/>
-                              </listenerHelper>
-                            </obsSet>
-                          </upgradables>
-                          <tree class="engine.gameobject.weapon.upgradetree.NullTree"/>
-                          <value>0.0</value>
-                        </myWeapon>
-                        <myCollider>
-                          <collidedID/>
-                          <collisionBuffs/>
-                          <onDeath>
-                            <radius>0.0</radius>
-                            <explosBuffs/>
-                          </onDeath>
-                        </myCollider>
-                        <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
-                        <myGraphic>
-                          <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                          <index>0</index>
-                        </myGraphic>
-                        <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
-                          <myShopGraphic>
-                            <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                            <index>0</index>
-                          </myShopGraphic>
-                        </myShopTag>
-                      </engine.gameobject.GameObjectSimple>
-                      <engine.gameobject.GameObjectSimple>
-                        <myType class="engine.gameobject.labels.SimpleType" reference="../../engine.gameobject.GameObjectSimple/myType"/>
-                        <myPoint>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                        </myPoint>
-                        <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
-                          <myTitle></myTitle>
-                          <index>0</index>
-                        </myHealth>
-                        <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
+                          <inherentSpeed>3.0</inherentSpeed>
                           <speedModifier>1.0</speedModifier>
                           <myDistance>0.0</myDistance>
                           <frozen>false</frozen>
@@ -2530,9 +2335,9 @@
                         <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
                         <myGraphic>
                           <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
+                          <myHeight>100.0</myHeight>
+                          <myWidth>100.0</myWidth>
+                          <myImageName>/images/ArcaneTower.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -2542,13 +2347,13 @@
                           <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
+                          <myName>ShopImage</myName>
+                          <myDescription>none</myDescription>
                           <myShopGraphic>
                             <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
+                            <myHeight>100.0</myHeight>
+                            <myWidth>100.0</myWidth>
+                            <myImageName>/images/ArcaneTower.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -2569,13 +2374,13 @@
                           </myPoint>
                         </myPoint>
                         <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
+                          <myHealth>10.0</myHealth>
+                          <maxHealth>10.0</maxHealth>
                           <myTitle></myTitle>
                           <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
+                          <inherentSpeed>3.0</inherentSpeed>
                           <speedModifier>1.0</speedModifier>
                           <myDistance>0.0</myDistance>
                           <frozen>false</frozen>
@@ -2645,9 +2450,9 @@
                         <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
                         <myGraphic>
                           <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
+                          <myHeight>100.0</myHeight>
+                          <myWidth>100.0</myWidth>
+                          <myImageName>/images/ArcaneTower.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -2657,13 +2462,13 @@
                           <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
+                          <myName>ShopImage</myName>
+                          <myDescription>none</myDescription>
                           <myShopGraphic>
                             <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
+                            <myHeight>100.0</myHeight>
+                            <myWidth>100.0</myWidth>
+                            <myImageName>/images/ArcaneTower.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -2684,13 +2489,13 @@
                           </myPoint>
                         </myPoint>
                         <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
+                          <myHealth>10.0</myHealth>
+                          <maxHealth>10.0</maxHealth>
                           <myTitle></myTitle>
                           <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
+                          <inherentSpeed>3.0</inherentSpeed>
                           <speedModifier>1.0</speedModifier>
                           <myDistance>0.0</myDistance>
                           <frozen>false</frozen>
@@ -2760,9 +2565,9 @@
                         <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
                         <myGraphic>
                           <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
+                          <myHeight>100.0</myHeight>
+                          <myWidth>100.0</myWidth>
+                          <myImageName>/images/ArcaneTower.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -2772,13 +2577,13 @@
                           <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
+                          <myName>ShopImage</myName>
+                          <myDescription>none</myDescription>
                           <myShopGraphic>
                             <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
+                            <myHeight>100.0</myHeight>
+                            <myWidth>100.0</myWidth>
+                            <myImageName>/images/ArcaneTower.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -2799,13 +2604,13 @@
                           </myPoint>
                         </myPoint>
                         <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
+                          <myHealth>10.0</myHealth>
+                          <maxHealth>10.0</maxHealth>
                           <myTitle></myTitle>
                           <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
+                          <inherentSpeed>3.0</inherentSpeed>
                           <speedModifier>1.0</speedModifier>
                           <myDistance>0.0</myDistance>
                           <frozen>false</frozen>
@@ -2875,9 +2680,9 @@
                         <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
                         <myGraphic>
                           <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
+                          <myHeight>100.0</myHeight>
+                          <myWidth>100.0</myWidth>
+                          <myImageName>/images/ArcaneTower.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -2887,13 +2692,13 @@
                           <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
+                          <myName>ShopImage</myName>
+                          <myDescription>none</myDescription>
                           <myShopGraphic>
                             <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
+                            <myHeight>100.0</myHeight>
+                            <myWidth>100.0</myWidth>
+                            <myImageName>/images/ArcaneTower.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -2914,13 +2719,13 @@
                           </myPoint>
                         </myPoint>
                         <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
+                          <myHealth>10.0</myHealth>
+                          <maxHealth>10.0</maxHealth>
                           <myTitle></myTitle>
                           <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
+                          <inherentSpeed>3.0</inherentSpeed>
                           <speedModifier>1.0</speedModifier>
                           <myDistance>0.0</myDistance>
                           <frozen>false</frozen>
@@ -2990,9 +2795,9 @@
                         <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
                         <myGraphic>
                           <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
+                          <myHeight>100.0</myHeight>
+                          <myWidth>100.0</myWidth>
+                          <myImageName>/images/ArcaneTower.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -3002,13 +2807,13 @@
                           <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
+                          <myName>ShopImage</myName>
+                          <myDescription>none</myDescription>
                           <myShopGraphic>
                             <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
+                            <myHeight>100.0</myHeight>
+                            <myWidth>100.0</myWidth>
+                            <myImageName>/images/ArcaneTower.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -3029,13 +2834,13 @@
                           </myPoint>
                         </myPoint>
                         <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
+                          <myHealth>10.0</myHealth>
+                          <maxHealth>10.0</maxHealth>
                           <myTitle></myTitle>
                           <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
+                          <inherentSpeed>3.0</inherentSpeed>
                           <speedModifier>1.0</speedModifier>
                           <myDistance>0.0</myDistance>
                           <frozen>false</frozen>
@@ -3105,9 +2910,9 @@
                         <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
                         <myGraphic>
                           <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
+                          <myHeight>100.0</myHeight>
+                          <myWidth>100.0</myWidth>
+                          <myImageName>/images/ArcaneTower.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -3117,13 +2922,13 @@
                           <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
+                          <myName>ShopImage</myName>
+                          <myDescription>none</myDescription>
                           <myShopGraphic>
                             <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
+                            <myHeight>100.0</myHeight>
+                            <myWidth>100.0</myWidth>
+                            <myImageName>/images/ArcaneTower.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -3144,128 +2949,13 @@
                           </myPoint>
                         </myPoint>
                         <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
+                          <myHealth>10.0</myHealth>
+                          <maxHealth>10.0</maxHealth>
                           <myTitle></myTitle>
                           <index>0</index>
                         </myHealth>
                         <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
-                          <speedModifier>1.0</speedModifier>
-                          <myDistance>0.0</myDistance>
-                          <frozen>false</frozen>
-                          <myPath class="engine.pathfinding.PathFixed" reference="../../../engine.gameobject.GameObjectSimple/myMover/myPath"/>
-                        </myMover>
-                        <myBuffs>
-                          <buffList/>
-                          <immunityList/>
-                        </myBuffs>
-                        <myWeapon class="engine.gameobject.weapon.BasicWeapon">
-                          <timeSinceFire>0</timeSinceFire>
-                          <myRange>
-                            <observers>
-                              <engine.gameobject.weapon.UpgradeObserver>
-                                <updater class="null"/>
-                              </engine.gameobject.weapon.UpgradeObserver>
-                            </observers>
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <type>NULL</type>
-                          </myRange>
-                          <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
-                            <value>0.0</value>
-                            <valid>true</valid>
-                            <name></name>
-                          </rangeProp>
-                          <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <observers/>
-                            <type>NULL</type>
-                          </myFiringRate>
-                          <myProjectile class="engine.gameobject.GameObjectSimple" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myProjectile"/>
-                          <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myFiringStrategy"/>
-                          <upgradables>
-                            <upgradeMap>
-                              <entry>
-                                <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </entry>
-                              <entry>
-                                <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </entry>
-                            </upgradeMap>
-                            <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
-                              <backingSet>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </backingSet>
-                              <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
-                                <listener class="null"/>
-                              </listenerHelper>
-                            </obsSet>
-                          </upgradables>
-                          <tree class="engine.gameobject.weapon.upgradetree.NullTree"/>
-                          <value>0.0</value>
-                        </myWeapon>
-                        <myCollider>
-                          <collidedID/>
-                          <collisionBuffs/>
-                          <onDeath>
-                            <radius>0.0</radius>
-                            <explosBuffs/>
-                          </onDeath>
-                        </myCollider>
-                        <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
-                        <myGraphic>
-                          <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                          <index>0</index>
-                        </myGraphic>
-                        <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
-                          <myShopGraphic>
-                            <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                            <index>0</index>
-                          </myShopGraphic>
-                        </myShopTag>
-                      </engine.gameobject.GameObjectSimple>
-                      <engine.gameobject.GameObjectSimple>
-                        <myType class="engine.gameobject.labels.SimpleType" reference="../../engine.gameobject.GameObjectSimple/myType"/>
-                        <myPoint>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                        </myPoint>
-                        <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
-                          <myTitle></myTitle>
-                          <index>0</index>
-                        </myHealth>
-                        <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
+                          <inherentSpeed>3.0</inherentSpeed>
                           <speedModifier>1.0</speedModifier>
                           <myDistance>0.0</myDistance>
                           <frozen>false</frozen>
@@ -3335,9 +3025,9 @@
                         <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
                         <myGraphic>
                           <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
+                          <myHeight>100.0</myHeight>
+                          <myWidth>100.0</myWidth>
+                          <myImageName>/images/ArcaneTower.png</myImageName>
                           <myPoint>
                             <x>0.0</x>
                             <y>0.0</y>
@@ -3347,818 +3037,13 @@
                           <index>0</index>
                         </myGraphic>
                         <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
+                          <myName>ShopImage</myName>
+                          <myDescription>none</myDescription>
                           <myShopGraphic>
                             <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                            <index>0</index>
-                          </myShopGraphic>
-                        </myShopTag>
-                      </engine.gameobject.GameObjectSimple>
-                      <engine.gameobject.GameObjectSimple>
-                        <myType class="engine.gameobject.labels.SimpleType" reference="../../engine.gameobject.GameObjectSimple/myType"/>
-                        <myPoint>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                        </myPoint>
-                        <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
-                          <myTitle></myTitle>
-                          <index>0</index>
-                        </myHealth>
-                        <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
-                          <speedModifier>1.0</speedModifier>
-                          <myDistance>0.0</myDistance>
-                          <frozen>false</frozen>
-                          <myPath class="engine.pathfinding.PathFixed" reference="../../../engine.gameobject.GameObjectSimple/myMover/myPath"/>
-                        </myMover>
-                        <myBuffs>
-                          <buffList/>
-                          <immunityList/>
-                        </myBuffs>
-                        <myWeapon class="engine.gameobject.weapon.BasicWeapon">
-                          <timeSinceFire>0</timeSinceFire>
-                          <myRange>
-                            <observers>
-                              <engine.gameobject.weapon.UpgradeObserver>
-                                <updater class="null"/>
-                              </engine.gameobject.weapon.UpgradeObserver>
-                            </observers>
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <type>NULL</type>
-                          </myRange>
-                          <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
-                            <value>0.0</value>
-                            <valid>true</valid>
-                            <name></name>
-                          </rangeProp>
-                          <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <observers/>
-                            <type>NULL</type>
-                          </myFiringRate>
-                          <myProjectile class="engine.gameobject.GameObjectSimple" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myProjectile"/>
-                          <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myFiringStrategy"/>
-                          <upgradables>
-                            <upgradeMap>
-                              <entry>
-                                <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </entry>
-                              <entry>
-                                <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </entry>
-                            </upgradeMap>
-                            <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
-                              <backingSet>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </backingSet>
-                              <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
-                                <listener class="null"/>
-                              </listenerHelper>
-                            </obsSet>
-                          </upgradables>
-                          <tree class="engine.gameobject.weapon.upgradetree.NullTree"/>
-                          <value>0.0</value>
-                        </myWeapon>
-                        <myCollider>
-                          <collidedID/>
-                          <collisionBuffs/>
-                          <onDeath>
-                            <radius>0.0</radius>
-                            <explosBuffs/>
-                          </onDeath>
-                        </myCollider>
-                        <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
-                        <myGraphic>
-                          <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                          <index>0</index>
-                        </myGraphic>
-                        <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
-                          <myShopGraphic>
-                            <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                            <index>0</index>
-                          </myShopGraphic>
-                        </myShopTag>
-                      </engine.gameobject.GameObjectSimple>
-                      <engine.gameobject.GameObjectSimple>
-                        <myType class="engine.gameobject.labels.SimpleType" reference="../../engine.gameobject.GameObjectSimple/myType"/>
-                        <myPoint>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                        </myPoint>
-                        <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
-                          <myTitle></myTitle>
-                          <index>0</index>
-                        </myHealth>
-                        <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
-                          <speedModifier>1.0</speedModifier>
-                          <myDistance>0.0</myDistance>
-                          <frozen>false</frozen>
-                          <myPath class="engine.pathfinding.PathFixed" reference="../../../engine.gameobject.GameObjectSimple/myMover/myPath"/>
-                        </myMover>
-                        <myBuffs>
-                          <buffList/>
-                          <immunityList/>
-                        </myBuffs>
-                        <myWeapon class="engine.gameobject.weapon.BasicWeapon">
-                          <timeSinceFire>0</timeSinceFire>
-                          <myRange>
-                            <observers>
-                              <engine.gameobject.weapon.UpgradeObserver>
-                                <updater class="null"/>
-                              </engine.gameobject.weapon.UpgradeObserver>
-                            </observers>
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <type>NULL</type>
-                          </myRange>
-                          <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
-                            <value>0.0</value>
-                            <valid>true</valid>
-                            <name></name>
-                          </rangeProp>
-                          <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <observers/>
-                            <type>NULL</type>
-                          </myFiringRate>
-                          <myProjectile class="engine.gameobject.GameObjectSimple" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myProjectile"/>
-                          <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myFiringStrategy"/>
-                          <upgradables>
-                            <upgradeMap>
-                              <entry>
-                                <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </entry>
-                              <entry>
-                                <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </entry>
-                            </upgradeMap>
-                            <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
-                              <backingSet>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </backingSet>
-                              <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
-                                <listener class="null"/>
-                              </listenerHelper>
-                            </obsSet>
-                          </upgradables>
-                          <tree class="engine.gameobject.weapon.upgradetree.NullTree"/>
-                          <value>0.0</value>
-                        </myWeapon>
-                        <myCollider>
-                          <collidedID/>
-                          <collisionBuffs/>
-                          <onDeath>
-                            <radius>0.0</radius>
-                            <explosBuffs/>
-                          </onDeath>
-                        </myCollider>
-                        <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
-                        <myGraphic>
-                          <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                          <index>0</index>
-                        </myGraphic>
-                        <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
-                          <myShopGraphic>
-                            <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                            <index>0</index>
-                          </myShopGraphic>
-                        </myShopTag>
-                      </engine.gameobject.GameObjectSimple>
-                      <engine.gameobject.GameObjectSimple>
-                        <myType class="engine.gameobject.labels.SimpleType" reference="../../engine.gameobject.GameObjectSimple/myType"/>
-                        <myPoint>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                        </myPoint>
-                        <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
-                          <myTitle></myTitle>
-                          <index>0</index>
-                        </myHealth>
-                        <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
-                          <speedModifier>1.0</speedModifier>
-                          <myDistance>0.0</myDistance>
-                          <frozen>false</frozen>
-                          <myPath class="engine.pathfinding.PathFixed" reference="../../../engine.gameobject.GameObjectSimple/myMover/myPath"/>
-                        </myMover>
-                        <myBuffs>
-                          <buffList/>
-                          <immunityList/>
-                        </myBuffs>
-                        <myWeapon class="engine.gameobject.weapon.BasicWeapon">
-                          <timeSinceFire>0</timeSinceFire>
-                          <myRange>
-                            <observers>
-                              <engine.gameobject.weapon.UpgradeObserver>
-                                <updater class="null"/>
-                              </engine.gameobject.weapon.UpgradeObserver>
-                            </observers>
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <type>NULL</type>
-                          </myRange>
-                          <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
-                            <value>0.0</value>
-                            <valid>true</valid>
-                            <name></name>
-                          </rangeProp>
-                          <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <observers/>
-                            <type>NULL</type>
-                          </myFiringRate>
-                          <myProjectile class="engine.gameobject.GameObjectSimple" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myProjectile"/>
-                          <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myFiringStrategy"/>
-                          <upgradables>
-                            <upgradeMap>
-                              <entry>
-                                <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </entry>
-                              <entry>
-                                <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </entry>
-                            </upgradeMap>
-                            <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
-                              <backingSet>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </backingSet>
-                              <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
-                                <listener class="null"/>
-                              </listenerHelper>
-                            </obsSet>
-                          </upgradables>
-                          <tree class="engine.gameobject.weapon.upgradetree.NullTree"/>
-                          <value>0.0</value>
-                        </myWeapon>
-                        <myCollider>
-                          <collidedID/>
-                          <collisionBuffs/>
-                          <onDeath>
-                            <radius>0.0</radius>
-                            <explosBuffs/>
-                          </onDeath>
-                        </myCollider>
-                        <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
-                        <myGraphic>
-                          <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                          <index>0</index>
-                        </myGraphic>
-                        <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
-                          <myShopGraphic>
-                            <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                            <index>0</index>
-                          </myShopGraphic>
-                        </myShopTag>
-                      </engine.gameobject.GameObjectSimple>
-                      <engine.gameobject.GameObjectSimple>
-                        <myType class="engine.gameobject.labels.SimpleType" reference="../../engine.gameobject.GameObjectSimple/myType"/>
-                        <myPoint>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                        </myPoint>
-                        <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
-                          <myTitle></myTitle>
-                          <index>0</index>
-                        </myHealth>
-                        <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
-                          <speedModifier>1.0</speedModifier>
-                          <myDistance>0.0</myDistance>
-                          <frozen>false</frozen>
-                          <myPath class="engine.pathfinding.PathFixed" reference="../../../engine.gameobject.GameObjectSimple/myMover/myPath"/>
-                        </myMover>
-                        <myBuffs>
-                          <buffList/>
-                          <immunityList/>
-                        </myBuffs>
-                        <myWeapon class="engine.gameobject.weapon.BasicWeapon">
-                          <timeSinceFire>0</timeSinceFire>
-                          <myRange>
-                            <observers>
-                              <engine.gameobject.weapon.UpgradeObserver>
-                                <updater class="null"/>
-                              </engine.gameobject.weapon.UpgradeObserver>
-                            </observers>
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <type>NULL</type>
-                          </myRange>
-                          <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
-                            <value>0.0</value>
-                            <valid>true</valid>
-                            <name></name>
-                          </rangeProp>
-                          <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <observers/>
-                            <type>NULL</type>
-                          </myFiringRate>
-                          <myProjectile class="engine.gameobject.GameObjectSimple" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myProjectile"/>
-                          <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myFiringStrategy"/>
-                          <upgradables>
-                            <upgradeMap>
-                              <entry>
-                                <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </entry>
-                              <entry>
-                                <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </entry>
-                            </upgradeMap>
-                            <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
-                              <backingSet>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </backingSet>
-                              <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
-                                <listener class="null"/>
-                              </listenerHelper>
-                            </obsSet>
-                          </upgradables>
-                          <tree class="engine.gameobject.weapon.upgradetree.NullTree"/>
-                          <value>0.0</value>
-                        </myWeapon>
-                        <myCollider>
-                          <collidedID/>
-                          <collisionBuffs/>
-                          <onDeath>
-                            <radius>0.0</radius>
-                            <explosBuffs/>
-                          </onDeath>
-                        </myCollider>
-                        <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
-                        <myGraphic>
-                          <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                          <index>0</index>
-                        </myGraphic>
-                        <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
-                          <myShopGraphic>
-                            <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                            <index>0</index>
-                          </myShopGraphic>
-                        </myShopTag>
-                      </engine.gameobject.GameObjectSimple>
-                      <engine.gameobject.GameObjectSimple>
-                        <myType class="engine.gameobject.labels.SimpleType" reference="../../engine.gameobject.GameObjectSimple/myType"/>
-                        <myPoint>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                        </myPoint>
-                        <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
-                          <myTitle></myTitle>
-                          <index>0</index>
-                        </myHealth>
-                        <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
-                          <speedModifier>1.0</speedModifier>
-                          <myDistance>0.0</myDistance>
-                          <frozen>false</frozen>
-                          <myPath class="engine.pathfinding.PathFixed" reference="../../../engine.gameobject.GameObjectSimple/myMover/myPath"/>
-                        </myMover>
-                        <myBuffs>
-                          <buffList/>
-                          <immunityList/>
-                        </myBuffs>
-                        <myWeapon class="engine.gameobject.weapon.BasicWeapon">
-                          <timeSinceFire>0</timeSinceFire>
-                          <myRange>
-                            <observers>
-                              <engine.gameobject.weapon.UpgradeObserver>
-                                <updater class="null"/>
-                              </engine.gameobject.weapon.UpgradeObserver>
-                            </observers>
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <type>NULL</type>
-                          </myRange>
-                          <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
-                            <value>0.0</value>
-                            <valid>true</valid>
-                            <name></name>
-                          </rangeProp>
-                          <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <observers/>
-                            <type>NULL</type>
-                          </myFiringRate>
-                          <myProjectile class="engine.gameobject.GameObjectSimple" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myProjectile"/>
-                          <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myFiringStrategy"/>
-                          <upgradables>
-                            <upgradeMap>
-                              <entry>
-                                <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </entry>
-                              <entry>
-                                <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </entry>
-                            </upgradeMap>
-                            <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
-                              <backingSet>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </backingSet>
-                              <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
-                                <listener class="null"/>
-                              </listenerHelper>
-                            </obsSet>
-                          </upgradables>
-                          <tree class="engine.gameobject.weapon.upgradetree.NullTree"/>
-                          <value>0.0</value>
-                        </myWeapon>
-                        <myCollider>
-                          <collidedID/>
-                          <collisionBuffs/>
-                          <onDeath>
-                            <radius>0.0</radius>
-                            <explosBuffs/>
-                          </onDeath>
-                        </myCollider>
-                        <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
-                        <myGraphic>
-                          <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                          <index>0</index>
-                        </myGraphic>
-                        <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
-                          <myShopGraphic>
-                            <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                            <index>0</index>
-                          </myShopGraphic>
-                        </myShopTag>
-                      </engine.gameobject.GameObjectSimple>
-                      <engine.gameobject.GameObjectSimple>
-                        <myType class="engine.gameobject.labels.SimpleType" reference="../../engine.gameobject.GameObjectSimple/myType"/>
-                        <myPoint>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                        </myPoint>
-                        <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
-                          <myTitle></myTitle>
-                          <index>0</index>
-                        </myHealth>
-                        <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
-                          <speedModifier>1.0</speedModifier>
-                          <myDistance>0.0</myDistance>
-                          <frozen>false</frozen>
-                          <myPath class="engine.pathfinding.PathFixed" reference="../../../engine.gameobject.GameObjectSimple/myMover/myPath"/>
-                        </myMover>
-                        <myBuffs>
-                          <buffList/>
-                          <immunityList/>
-                        </myBuffs>
-                        <myWeapon class="engine.gameobject.weapon.BasicWeapon">
-                          <timeSinceFire>0</timeSinceFire>
-                          <myRange>
-                            <observers>
-                              <engine.gameobject.weapon.UpgradeObserver>
-                                <updater class="null"/>
-                              </engine.gameobject.weapon.UpgradeObserver>
-                            </observers>
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <type>NULL</type>
-                          </myRange>
-                          <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
-                            <value>0.0</value>
-                            <valid>true</valid>
-                            <name></name>
-                          </rangeProp>
-                          <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <observers/>
-                            <type>NULL</type>
-                          </myFiringRate>
-                          <myProjectile class="engine.gameobject.GameObjectSimple" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myProjectile"/>
-                          <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myFiringStrategy"/>
-                          <upgradables>
-                            <upgradeMap>
-                              <entry>
-                                <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </entry>
-                              <entry>
-                                <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </entry>
-                            </upgradeMap>
-                            <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
-                              <backingSet>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </backingSet>
-                              <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
-                                <listener class="null"/>
-                              </listenerHelper>
-                            </obsSet>
-                          </upgradables>
-                          <tree class="engine.gameobject.weapon.upgradetree.NullTree"/>
-                          <value>0.0</value>
-                        </myWeapon>
-                        <myCollider>
-                          <collidedID/>
-                          <collisionBuffs/>
-                          <onDeath>
-                            <radius>0.0</radius>
-                            <explosBuffs/>
-                          </onDeath>
-                        </myCollider>
-                        <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
-                        <myGraphic>
-                          <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                          <index>0</index>
-                        </myGraphic>
-                        <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
-                          <myShopGraphic>
-                            <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
-                            <myPoint>
-                              <x>0.0</x>
-                              <y>0.0</y>
-                              <hash>0</hash>
-                            </myPoint>
-                            <myRotator class="engine.gameobject.RotateToPoint"/>
-                            <index>0</index>
-                          </myShopGraphic>
-                        </myShopTag>
-                      </engine.gameobject.GameObjectSimple>
-                      <engine.gameobject.GameObjectSimple>
-                        <myType class="engine.gameobject.labels.SimpleType" reference="../../engine.gameobject.GameObjectSimple/myType"/>
-                        <myPoint>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                        </myPoint>
-                        <myHealth class="engine.gameobject.HealthSimple">
-                          <myHealth>4.0</myHealth>
-                          <maxHealth>4.0</maxHealth>
-                          <myTitle></myTitle>
-                          <index>0</index>
-                        </myHealth>
-                        <myMover class="engine.gameobject.MoverPath">
-                          <inherentSpeed>5.0</inherentSpeed>
-                          <speedModifier>1.0</speedModifier>
-                          <myDistance>0.0</myDistance>
-                          <frozen>false</frozen>
-                          <myPath class="engine.pathfinding.PathFixed" reference="../../../engine.gameobject.GameObjectSimple/myMover/myPath"/>
-                        </myMover>
-                        <myBuffs>
-                          <buffList/>
-                          <immunityList/>
-                        </myBuffs>
-                        <myWeapon class="engine.gameobject.weapon.BasicWeapon">
-                          <timeSinceFire>0</timeSinceFire>
-                          <myRange>
-                            <observers>
-                              <engine.gameobject.weapon.UpgradeObserver>
-                                <updater class="null"/>
-                              </engine.gameobject.weapon.UpgradeObserver>
-                            </observers>
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <type>NULL</type>
-                          </myRange>
-                          <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
-                            <value>0.0</value>
-                            <valid>true</valid>
-                            <name></name>
-                          </rangeProp>
-                          <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
-                            <increment>0.0</increment>
-                            <decorated reference="../../../../engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
-                            <observers/>
-                            <type>NULL</type>
-                          </myFiringRate>
-                          <myProjectile class="engine.gameobject.GameObjectSimple" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myProjectile"/>
-                          <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile" reference="../../../engine.gameobject.GameObjectSimple/myWeapon/myFiringStrategy"/>
-                          <upgradables>
-                            <upgradeMap>
-                              <entry>
-                                <string>[Upgrade: FiringRateUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                              </entry>
-                              <entry>
-                                <string>[Upgrade: RangeUpgrade, BuffType: NULL]</string>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </entry>
-                            </upgradeMap>
-                            <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
-                              <backingSet>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
-                              </backingSet>
-                              <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$SingleChange">
-                                <listener class="null"/>
-                              </listenerHelper>
-                            </obsSet>
-                          </upgradables>
-                          <tree class="engine.gameobject.weapon.upgradetree.NullTree"/>
-                          <value>0.0</value>
-                        </myWeapon>
-                        <myCollider>
-                          <collidedID/>
-                          <collisionBuffs/>
-                          <onDeath>
-                            <radius>0.0</radius>
-                            <explosBuffs/>
-                          </onDeath>
-                        </myCollider>
-                        <myBehaviors reference="../../engine.gameobject.GameObjectSimple/myBehaviors"/>
-                        <myGraphic>
-                          <myTitle></myTitle>
-                          <myHeight>30.0</myHeight>
-                          <myWidth>30.0</myWidth>
-                          <myImageName>/images/Blue_Bloon.png</myImageName>
-                          <myPoint>
-                            <x>0.0</x>
-                            <y>0.0</y>
-                            <hash>0</hash>
-                          </myPoint>
-                          <myRotator class="engine.gameobject.RotateToPoint"/>
-                          <index>0</index>
-                        </myGraphic>
-                        <myShopTag class="engine.shop.ShopTagSimple">
-                          <myName></myName>
-                          <myDescription></myDescription>
-                          <myShopGraphic>
-                            <myTitle></myTitle>
-                            <myHeight>0.0</myHeight>
-                            <myWidth>0.0</myWidth>
-                            <myImageName>/images/robertDuvall.jpg</myImageName>
+                            <myHeight>100.0</myHeight>
+                            <myWidth>100.0</myWidth>
+                            <myImageName>/images/ArcaneTower.png</myImageName>
                             <myPoint>
                               <x>0.0</x>
                               <y>0.0</y>
@@ -4179,1695 +3064,30 @@
               </eventList>
             </myStoryBoard>
           </engine.goals.EventsCompleteGoal>
+          <engine.goals.TimerGoal>
+            <isSatisfied>false</isSatisfied>
+            <myTimer class="engine.game.TimerConcrete">
+              <changed>false</changed>
+              <obs>
+                <engine.goals.TimerGoal reference="../../.."/>
+              </obs>
+              <myMinutes>0</myMinutes>
+              <mySeconds>10</mySeconds>
+              <myFramesSinceUpdate>0</myFramesSinceUpdate>
+            </myTimer>
+            <mySecondsGoal>0</mySecondsGoal>
+          </engine.goals.TimerGoal>
         </myWinningGoals>
         <myLosingGoals/>
         <myGameWorld class="gameworld.FixedWorld" reference="../myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.ConstantSpacingWave/myWorld"/>
         <myStoryBoard reference="../myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard"/>
-      </engine.game.ConcreteLevel>
-      <engine.game.ConcreteLevel>
-        <myTitle></myTitle>
-        <myImagePath>file:/Users/sierrasmith95/Documents/Duke%20Sophomore/CS%20308%20(Software%20Design)/voogasalad_RDatGV/src/images/plus_sign.jpg</myImagePath>
-        <myWinningGoals>
-          <engine.goals.EventsCompleteGoal>
-            <isSatisfied>false</isSatisfied>
-            <myStoryBoard>
-              <changed>false</changed>
-              <obs/>
-              <eventList/>
-            </myStoryBoard>
-          </engine.goals.EventsCompleteGoal>
-        </myWinningGoals>
-        <myLosingGoals/>
-        <myGameWorld class="gameworld.FixedWorld">
-          <myObjects/>
-          <myCollisionEngine class="engine.interactions.CollisionEngine">
-            <myTable/>
-            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
-          </myCollisionEngine>
-          <myRangeEngine class="engine.interactions.RangeEngine">
-            <myTable/>
-            <myGameWorld class="gameworld.FixedWorld" reference="../.."/>
-          </myRangeEngine>
-          <myNodeToGameObjectMap/>
-          <myTerrain>
-            <myMatrix>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-              <gameworld.TerrainTile-array>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-                <gameworld.TerrainTile>
-                  <canWalk>true</canWalk>
-                  <canPlace>true</canPlace>
-                </gameworld.TerrainTile>
-              </gameworld.TerrainTile-array>
-            </myMatrix>
-            <myTrans>
-              <h>31.1</h>
-              <w>31.1</w>
-            </myTrans>
-            <myBounds>
-              <myRow>20</myRow>
-              <myCol>20</myCol>
-            </myBounds>
-          </myTerrain>
-          <myTrans reference="../myTerrain/myTrans"/>
-          <myBounds>
-            <myRow>20</myRow>
-            <myCol>20</myCol>
-          </myBounds>
-        </myGameWorld>
-        <myStoryBoard reference="../myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard"/>
+        <myTimer class="engine.game.TimerConcrete">
+          <changed>false</changed>
+          <obs/>
+          <myMinutes>0</myMinutes>
+          <mySeconds>10</mySeconds>
+          <myFramesSinceUpdate>0</myFramesSinceUpdate>
+        </myTimer>
       </engine.game.ConcreteLevel>
     </myLevels>
     <curLevelIndex>0</curLevelIndex>
@@ -5899,8 +3119,108 @@
           </myUnit>
         </myWallet>
       </currentPlayer>
-      <myGameWorld class="gameworld.FixedWorld" reference="../../myLevels/engine.game.ConcreteLevel[2]/myGameWorld"/>
-      <purchasableMap/>
+      <myGameWorld class="gameworld.FixedWorld" reference="../../myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.ConstantSpacingWave/myWorld"/>
+      <purchasableMap>
+        <entry>
+          <string>ShopImage</string>
+          <engine.gameobject.GameObjectSimple>
+            <myType class="engine.gameobject.labels.SimpleType" reference="../../../../../myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.ConstantSpacingWave/myQueue/myOrderedObjects/engine.gameobject.GameObjectSimple/myType"/>
+            <myPoint>
+              <myPoint>
+                <x>0.0</x>
+                <y>0.0</y>
+                <hash>0</hash>
+              </myPoint>
+            </myPoint>
+            <myHealth class="engine.gameobject.HealthSimple">
+              <myHealth>10.0</myHealth>
+              <maxHealth>10.0</maxHealth>
+              <myTitle></myTitle>
+              <index>0</index>
+            </myHealth>
+            <myMover class="engine.gameobject.MoverPath">
+              <inherentSpeed>3.0</inherentSpeed>
+              <speedModifier>1.0</speedModifier>
+              <myDistance>0.0</myDistance>
+              <frozen>false</frozen>
+              <myPath class="engine.pathfinding.PathFixed" reference="../../../../../../myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.ConstantSpacingWave/myQueue/myOrderedObjects/engine.gameobject.GameObjectSimple/myMover/myPath"/>
+            </myMover>
+            <myBuffs>
+              <buffList/>
+              <immunityList/>
+            </myBuffs>
+            <myWeapon class="engine.gameobject.weapon.BasicWeapon">
+              <timeSinceFire>0</timeSinceFire>
+              <myRange>
+                <observers/>
+                <increment>0.0</increment>
+                <decorated reference="../../../../../../../myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.ConstantSpacingWave/myQueue/myOrderedObjects/engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
+                <type>NULL</type>
+              </myRange>
+              <rangeProp class="javafx.beans.property.SimpleDoubleProperty">
+                <value>0.0</value>
+                <valid>true</valid>
+                <name></name>
+              </rangeProp>
+              <myFiringRate class="engine.gameobject.weapon.firingrate.FiringRateUpgrade">
+                <increment>0.0</increment>
+                <decorated reference="../../../../../../../myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.ConstantSpacingWave/myQueue/myOrderedObjects/engine.gameobject.GameObjectSimple/myWeapon/myRange/decorated"/>
+                <observers/>
+                <type>NULL</type>
+              </myFiringRate>
+              <myProjectile class="engine.gameobject.GameObjectSimple" reference="../../../../../../myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.ConstantSpacingWave/myQueue/myOrderedObjects/engine.gameobject.GameObjectSimple/myWeapon/myProjectile"/>
+              <myFiringStrategy class="engine.gameobject.weapon.firingstrategy.SingleProjectile" reference="../../../../../../myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.ConstantSpacingWave/myQueue/myOrderedObjects/engine.gameobject.GameObjectSimple/myWeapon/myFiringStrategy"/>
+              <upgradables>
+                <upgradeMap/>
+                <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
+                  <backingSet/>
+                </obsSet>
+              </upgradables>
+              <tree class="engine.gameobject.weapon.upgradetree.NullTree"/>
+              <value>0.0</value>
+            </myWeapon>
+            <myCollider>
+              <collidedID/>
+              <collisionBuffs/>
+              <onDeath>
+                <radius>0.0</radius>
+                <explosBuffs/>
+              </onDeath>
+            </myCollider>
+            <myBehaviors reference="../../../../../myLevels/engine.game.ConcreteLevel/myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.ConstantSpacingWave/myQueue/myOrderedObjects/engine.gameobject.GameObjectSimple/myBehaviors"/>
+            <myGraphic>
+              <myTitle></myTitle>
+              <myHeight>100.0</myHeight>
+              <myWidth>100.0</myWidth>
+              <myImageName>/images/ArcaneTower.png</myImageName>
+              <myPoint>
+                <x>0.0</x>
+                <y>0.0</y>
+                <hash>0</hash>
+              </myPoint>
+              <myRotator class="engine.gameobject.RotateToPoint"/>
+              <index>0</index>
+            </myGraphic>
+            <myShopTag class="engine.shop.ShopTagSimple">
+              <myName>ShopImage</myName>
+              <myDescription>none</myDescription>
+              <myShopGraphic>
+                <myTitle></myTitle>
+                <myHeight>100.0</myHeight>
+                <myWidth>100.0</myWidth>
+                <myImageName>/images/ArcaneTower.png</myImageName>
+                <myPoint>
+                  <x>0.0</x>
+                  <y>0.0</y>
+                  <hash>0</hash>
+                </myPoint>
+                <myRotator class="engine.gameobject.RotateToPoint"/>
+                <index>0</index>
+              </myShopGraphic>
+            </myShopTag>
+          </engine.gameobject.GameObjectSimple>
+        </entry>
+      </purchasableMap>
       <upgradeMap/>
       <markup>1.0</markup>
     </shop>

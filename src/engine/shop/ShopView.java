@@ -75,8 +75,6 @@ public class ShopView extends Parent {
         selector =
                 new GameObjectSelector(this::displayUpgrades, this::removeFromInfoBox, pane);
 
-        shopContainer.getChildren().addAll(shopIcons, infoBox);
-
         // add Icons
         addIcons();
 
@@ -84,7 +82,7 @@ public class ShopView extends Parent {
         infoBox.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.8),
                                                                 null, null)));
         infoBox.setMinHeight(INFO_HEIGHT);
-
+        shopContainer.getChildren().addAll(shopIcons, infoBox);
         getChildren().add(shopContainer);
     }
 

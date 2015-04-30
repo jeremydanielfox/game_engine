@@ -39,8 +39,9 @@ public class MindController extends BasicWeapon{
         myProjectile.setHealth(new HealthSimple(1));
         myProjectile.setWeapon(new NullWeapon());
         myProjectile.getCollider().addCollisionBehavior(new ZombieBuff(new FriendlyTowerType()));
-        Weapon newWeapon = new Shotgun(object);
+        Weapon newWeapon = new MachineGun(object);
         newWeapon.setFiringStrategy(new SingleProjectile());
+        newWeapon.setFiringRate(2);
         myProjectile.getCollider().addCollisionBehavior(new WeaponBuff(newWeapon));
         MoverDirection myMover = new MoverDirection(new PointSimple(0, 0), 1, 600);
         myProjectile.setMover(myMover);

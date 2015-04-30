@@ -202,11 +202,14 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         for (Node n : hack) {
             myGameWorldPane.getChildren().remove(n);
         }
-        hack.clear();
+        List<Node> buffer = new ArrayList<Node>();
         for (GameObject o : gameObjects) {
-            myGameWorldPane.getChildren().add(o.getGraphic().getNode());
-            hack.add(o.getGraphic().getNode());
+            if (hack.contains(o.getGraphic().getNode()))//If this object existed last frame, add. If first frame, don't add.
+                myGameWorldPane.getChildren().add(o.getGraphic().getNode());
+            buffer.add(o.getGraphic().getNode());
         }
+        hack.clear();
+        buffer.forEach(b -> hack.add(b));
     }
 
     @Override

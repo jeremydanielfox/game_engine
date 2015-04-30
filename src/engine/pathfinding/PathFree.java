@@ -58,13 +58,6 @@ public class PathFree implements Path {
                 myAlgorithm.shortestPath(end.getRow(),end.getCol(), start.getRow(), start.getCol());
         	}
         }
-        // myPathCoordinates = myPath.stream().map(cell ->
-        // myTrans.tranformGridToWorld(cell)).collect(Collectors.toList());
-        // p = new PathFixed();
-        // for(int i = 0; i < myPathCoordinates.size()-1; i++){
-        // p.addPathSegment(new
-        // PathSegmentStraight(myPathCoordinates.get(i),myPathCoordinates.get(i+1)));
-        // }
     }
 
     @Override
@@ -72,12 +65,9 @@ public class PathFree implements Path {
                                                                                            throws EndOfPathException {
         GridCell currentCell = myTrans.transformWorldToGrid(current);
         GridCell nextCell = myPath.get(currentCell);
-
-        // GridWrapper.printGradient(myPath);
-        for (GridCell endpoint : endPoints) {
-            if (currentCell.equals(endpoint)) {
+        
+        if(endPoints.contains(currentCell)){
                 throw new EndOfPathException();
-            }
         }
         if (nextCell != null) {
             return PointSimple.pointOnLine(
@@ -86,11 +76,22 @@ public class PathFree implements Path {
         }
         else {
             if (currentCell.withinBounds(bounds)) {// TODO make better algorithmically
-                for (GridCell c : myPath.keySet()) {
+                List<GridCell> myNeighbors = new ArrayList<>();
+            	for (GridCell c : myPath.keySet()) {
                     if (c.distance(currentCell) == 1) {
-                        return myTrans.transformGridToWorldInexact(c);
-                    }
+                    	myNeighbors.add(c);
+                    }                
                 }
+            	if(myNeighbors.size() > 0){
+            		GridCell bestNeighbor = myNeighbors.get(0);
+            		for(GridCell n : myNeighbors){
+            			if(PointSimple.distance(current, myTrans.tranformGridToWorld(n)) < 
+            					PointSimple.distance(current, myTrans.tranformGridToWorld(bestNeighbor))){
+            				bestNeighbor = n;
+            			}
+            		}
+            		return PointSimple.pointOnLine(current, myTrans.tranformGridToWorld(bestNeighbor),speed);
+            	}
             }
             return myTrans.tranformGridToWorld(spawnPoints.get((int)(Math.random()*spawnPoints.size())));
         }

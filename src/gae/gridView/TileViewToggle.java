@@ -22,21 +22,32 @@ public class TileViewToggle extends Group implements ContainerWrapper {
     private ObjectProperty<TileMode> tileModeProperty;
     private TileContainer towerview;
     private TileContainer enemyview;
+    private TileContainer startpointview;
+    private TileContainer endpointview;
 
     public TileViewToggle (ObjectProperty<Dimension> sizeProp, Scene scene) {
         towerview = new TileContainer(sizeProp, scene, "blue");
         enemyview = new TileContainer(sizeProp, scene, "red");
+        startpointview = new TileContainer(sizeProp, scene, "yellow");
+        endpointview = new TileContainer(sizeProp, scene, "green");
         tileModeProperty = new SimpleObjectProperty<>();
         tileModeProperty.addListener( (obs, oldVal, newVal) -> {
             switch (newVal) {
                 case ENEMYMODE:
                     getChildren().clear();
                     getChildren().add(enemyview);
-
                     break;
                 case TOWERMODE:
                     getChildren().clear();
                     getChildren().add(towerview);
+                    break;
+                case STARTPOINTMODE:
+                    getChildren().clear();
+                    getChildren().add(startpointview);
+                    break;
+                case ENDPOINTMODE:
+                    getChildren().clear();
+                    getChildren().add(endpointview);
                     break;
             }
 
@@ -44,7 +55,7 @@ public class TileViewToggle extends Group implements ContainerWrapper {
     }
 
     public enum TileMode {
-        ENEMYMODE, TOWERMODE
+        ENEMYMODE, TOWERMODE, STARTPOINTMODE, ENDPOINTMODE
     }
 
     public ObjectProperty<TileMode> getTileModeProperty () {
@@ -61,6 +72,7 @@ public class TileViewToggle extends Group implements ContainerWrapper {
 
     @Override
     public boolean checkBounds (double x, double y) {
+        // add the start and endview checkbounds
         return tileModeProperty.get().equals(TileMode.TOWERMODE) ? towerview.checkBounds(x, y)
                                                                 : enemyview.checkBounds(x, y);
     }
@@ -91,5 +103,13 @@ public class TileViewToggle extends Group implements ContainerWrapper {
      */
     public List<Point> getEnemyUnwalkable () {
         return enemyview.getUnwalkableTiles();
+    }
+    
+    public List<Point> getStartPoints () {
+        return startpointview.getUnwalkableTiles();
+    }
+    
+    public List<Point> getEndPoints () {
+        return endpointview.getUnwalkableTiles();
     }
 }

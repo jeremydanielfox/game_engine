@@ -14,9 +14,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import engine.gameobject.test.TestTower;
+import engine.gameobject.test.bloons.Spikes;
 import engine.shop.ShopModel;
 import engine.shop.ShopView;
-import gameworld.GameWorld;
 
 
 /**
@@ -30,12 +30,11 @@ import gameworld.GameWorld;
 public class HUD implements Observer {
 
     // note: this should change with screen size, fix it later
-    private static final double TEXT_SPACING = 10;
-    private final static int SHOP_WIDTH = 160;
-    private final static int ITEM_COUNT = 12;
+    private static final double SPACING = 10;
 
     private Map<Displayable, Text> myDisplayFields;
     private VBox myStatsDisplay;
+    private VBox myLevelDisplay;
     private VBox myWholeDisplay;
     private BorderPane myPane;
     private HBox myDefaultButtonDisplay;
@@ -48,20 +47,19 @@ public class HUD implements Observer {
         initialize(pane);
     }
 
-    public HUD (BorderPane pane, Displayable ... displays) {
+    public HUD (BorderPane pane) {
         initialize(pane);
-        for (Displayable d : displays) {
-            addPairedDisplay(d);
-        }
     }
 
     private void initialize (BorderPane pane) {
-        myStatsDisplay = new VBox(10);
-        myWholeDisplay = new VBox(10);
+        myStatsDisplay = new VBox(SPACING);
+        myWholeDisplay = new VBox(SPACING);
+        myLevelDisplay = new VBox(SPACING);
         myWholeDisplay.setAlignment(Pos.CENTER);
         myStatsDisplay.setAlignment(Pos.CENTER_RIGHT);
         myWholeDisplay.setAlignment(Pos.CENTER);
         myWholeDisplay.getChildren().add(myStatsDisplay);
+        myWholeDisplay.getChildren().add(myLevelDisplay);
         myDisplayFields = new HashMap<>();
         myPane = pane;
         makeShop();
@@ -81,9 +79,9 @@ public class HUD implements Observer {
         myDefaultButtonDisplay.getChildren().add(button.getButton());
     }
 
-    public void addPairedDisplay (Displayable d) {
+    public void addPairedDisplay (Displayable d, VBox location) {
         d.addObserver(this);
-        HBox newBox = new HBox(TEXT_SPACING);
+        HBox newBox = new HBox(SPACING);
         Text label = new Text(d.getLabel());
         formatText(label, 30);
         Text value = new Text(d.getStringValue());
@@ -91,10 +89,22 @@ public class HUD implements Observer {
         newBox.getChildren().addAll(label, value);
         newBox.setAlignment(Pos.CENTER);
         myDisplayFields.put(d, value);
-        myStatsDisplay.getChildren().add(newBox);
-        myStatsDisplay.setAlignment(Pos.CENTER);
+        location.getChildren().add(newBox);
+        location.setAlignment(Pos.CENTER);
+    }
+    
+    public void addLevelDisplay(Displayable d){
+        addPairedDisplay(d, myLevelDisplay);
     }
 
+    public void addStatsDisplay(Displayable d){
+        addPairedDisplay(d, myStatsDisplay);
+    }
+    
+    public void clearLevelDisplay(){
+        myLevelDisplay.getChildren().clear();
+    }
+    
     private void formatText (Text t, int fontSize) {
         t.setFont(Font.font("Verdana", fontSize));
         t.setFill(Color.BLUEVIOLET);
@@ -128,8 +138,9 @@ public class HUD implements Observer {
 
     private void makeShop () {
         //TESTING purposes:
-        shop.addPurchasable(new TestTower(1,0,0));
+        //shop.addPurchasable(new TestTower(1,0,0));This is the tower that shoots itself
         shop.addPurchasable(new TestTower(0,0,0));
+        shop.addPurchasable(new Spikes());
         myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
     }
 }

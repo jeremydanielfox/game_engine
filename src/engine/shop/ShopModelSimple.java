@@ -35,6 +35,7 @@ public class ShopModelSimple implements ShopModel {
 
     public ShopModelSimple () {
         markup = 1;
+        currentPlayer = new Player();
     }
 
     public ShopModelSimple (GameWorld world, Player player, double markup) {
@@ -77,7 +78,12 @@ public class ShopModelSimple implements ShopModel {
     
     @Settable
     public void setPurchasables (List<Purchasable<GameObject>> purchasables) {
+        purchasableMap.clear();
         purchasables.forEach(prototype -> addPurchasable(prototype));
+    }
+    
+    public Map<String, Purchasable<GameObject>> getMap(){
+        return purchasableMap;
     }
 
     @Override
@@ -111,17 +117,15 @@ public class ShopModelSimple implements ShopModel {
      */
     public boolean purchaseGameObject (String name, PointSimple location, EventHandler selected) {
         if (canPurchase(name) && checkPlacement(name, location)) {
-            currentPlayer.getWallet().withdraw(getPrice(name));
             try {
                 GameObject tower = purchasableMap.get(name).clone(); 
                 //GameObject tower = new TestTower(1, 100, 100);
                 tower.getGraphic().getNode().setOnMousePressed(selected);
                 myGameWorld.addObject(tower, location);
+                currentPlayer.getWallet().withdraw(getPrice(name));
                 return true;
             }
             catch (StructurePlacementException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
                 return false;
             }
         }

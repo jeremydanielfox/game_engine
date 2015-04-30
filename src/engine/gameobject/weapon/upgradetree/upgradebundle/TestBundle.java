@@ -2,6 +2,7 @@ package engine.gameobject.weapon.upgradetree.upgradebundle;
 
 import engine.gameobject.Graphic;
 import engine.gameobject.units.directdamage.DamageBuff;
+import engine.gameobject.units.freeze.FreezeBuff;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.weapon.firingrate.FiringRateUpgrade;
 import engine.gameobject.weapon.range.RangeUpgrade;
@@ -26,13 +27,13 @@ public class TestBundle extends UpgradeBundleSimple {
             setValue(25);
         }
         if (i == 2) {
-            setUpgrades(new Upgrade[] { new DamageBuff(10) });
-            shopTag.setName("Damage Upgrade");
-            shopTag.setDescription("Damage + 10");
-            setValue(90);
+            setUpgrades(new Upgrade[] { new FreezeBuff(60000) });
+            shopTag.setName("Freeze Upgrade");
+            shopTag.setDescription("Freeze + 10");
+            setValue(15);
         }
         
-        shopTag.setShopGraphic(new Graphic(30, 30, "Bloons_DartMonkey.png"));
+        shopTag.setShopGraphic(new Graphic(30, 30, "/images/Bloons_DartMonkey.png"));
         
     }
 }

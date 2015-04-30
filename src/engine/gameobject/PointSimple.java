@@ -52,7 +52,7 @@ public class PointSimple {
     }
 
     public static boolean pointInBetween (PointSimple start, PointSimple end, PointSimple point) {
-        return inRange(start.getX(), end.getX(), point.getX()) ||
+        return inRange(start.getX(), end.getX(), point.getX()) &&
                 inRange(start.getY(), end.getY(), point.getY());
     }
 
@@ -79,6 +79,10 @@ public class PointSimple {
     public static double distance (PointSimple first, PointSimple second) {
         return Math.sqrt(Math.pow(first.getX() - second.getX(), 2) +
                          Math.pow(first.getY() - second.getY(), 2));
+    }
+    
+    public static PointSimple getPointOnLine(PointSimple p1, PointSimple p2, double percentage){
+    	return new PointSimple(p1.getX()+ percentage*(p2.getX() - p1.getX()), p1.getY()+ percentage*(p2.getY() + p1.getY()));
     }
 
     @Settable

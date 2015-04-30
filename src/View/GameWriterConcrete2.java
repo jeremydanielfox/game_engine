@@ -33,6 +33,9 @@ import engine.gameobject.MoverPath;
 import engine.gameobject.MoverUser;
 import engine.gameobject.PointSimple;
 import engine.gameobject.test.TestTower;
+import engine.gameobject.weapon.NullWeapon;
+import engine.gameobject.weapon.firingstrategy.SingleProjectile;
+import engine.gameobject.weapon.firingstrategy.UserStrategy;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
@@ -133,12 +136,12 @@ public class GameWriterConcrete2 extends Application {
 	 * @return
 	 */
 	public GameWorld makeWorld() {
-		FreeWorld world = new FreeWorld(13,13);
+		FreeWorld world = new FreeWorld(10,10);
 
-		GridCell[] sPoints = { new GridCell(0, 0), new GridCell(12, 0) };
+		GridCell[] sPoints = { new GridCell(0, 0), new GridCell(9, 0) };
 		List<GridCell> startPoints = Arrays.asList(sPoints);
-		GridCell[] ePoints = { new GridCell(12, 12), new GridCell(0, 12),
-				new GridCell(6, 12) };
+		GridCell[] ePoints = { new GridCell(9, 9), new GridCell(0, 9),
+				new GridCell(6, 9) };
 		List<GridCell> endPoints = Arrays.asList(ePoints);
 		GridCell[] oPoints = { new GridCell(0, 3), new GridCell(1, 3),
 				new GridCell(2, 3) };
@@ -152,7 +155,12 @@ public class GameWriterConcrete2 extends Application {
 			MoverUser m = new MoverUser();
 			m.setGraphic(g.getGraphic());
 			g.setMover(m);
-            world.addObject(g, new PointSimple(300,300));
+//			UserStrategy pewpew = new UserStrategy();
+//			pewpew.setGraphic(g.getGraphic());
+//			g.getWeapon().setFiringStrategy(pewpew);
+			g.setWeapon(new NullWeapon());
+
+			world.addObject(g, new PointSimple(300,300));
         }
         catch (StructurePlacementException e1) {
             e1.printStackTrace();
@@ -179,6 +187,7 @@ public class GameWriterConcrete2 extends Application {
 
 		DataManager.writeToXML(myGame, FILE_DESTINATION);
 		System.out.println("Written");
+		System.exit(0);
 	}
 
 	public ShopModel makeShop(Player player, GameWorld world) {

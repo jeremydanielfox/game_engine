@@ -2,6 +2,7 @@ package engine.gameobject.behaviors;
 
 import java.util.ArrayList;
 import java.util.List;
+import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.Mover;
 import gameworld.ObjectCollection;
@@ -14,6 +15,7 @@ public class SummonBehavior implements Behavior{
         mySummons = new ArrayList<GameObject>();
     }
 
+    @Settable
     public void addSummon(GameObject toAdd){
         mySummons.add(toAdd);
     }

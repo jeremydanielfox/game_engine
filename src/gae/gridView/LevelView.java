@@ -1,14 +1,28 @@
 package gae.gridView;
 
 import java.awt.Dimension;
+import java.awt.Point;
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import engine.fieldsetting.Settable;
+import engine.game.Level;
+import voogasalad.util.pathsearch.graph.GridCell;
 import gae.backend.Placeable;
+import gae.editor.EditingParser;
 import gae.gridView.TileViewToggle.TileMode;
 import gae.listView.LibraryData;
 import gae.listView.LibraryView;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -45,14 +59,28 @@ public class LevelView {
     private StackPane stack;
     private Scene scene;
     private Pane border;
-    private ObjectProperty<Image> backgroundProperty;
+    private StringProperty backgroundPathProperty=new SimpleStringProperty(DEFAULT_IMAGE_PATH);
     private ObjectProperty<Dimension> gridSizeProperty;
     private ContainerWrapper wrapper;
     private LibraryView libraryview;
     private LibraryData libraryData;
     private TileViewToggle container;
     private VBox gridOptions;
-    private ObjectProperty<TileMode> tileModeProperty=new SimpleObjectProperty<>(TileMode.TOWERMODE);
+    private ImageView backgroundImage;
+    private ObjectProperty<TileMode> tileModeProperty =
+            new SimpleObjectProperty<>(TileMode.TOWERMODE);
+    private BiConsumer<List<GridCell>, List<GridCell>> setSpawn;
+    private BiConsumer<List<GridCell>, List<GridCell>> setWalkable;
+    private BooleanProperty isFreeWorld;
+    private Level myLevel;
+
+    public LevelView (BiConsumer<List<GridCell>, List<GridCell>> biconsumer,
+                      BiConsumer<List<GridCell>, List<GridCell>> setWalkable,
+                      BooleanProperty isFreeWorld) {
+        this.setSpawn = biconsumer;
+        this.setWalkable = setWalkable;
+        this.isFreeWorld = isFreeWorld;
+    }
 
     public Pane getBorder (Scene scene) {
         border = new Pane();
@@ -63,18 +91,9 @@ public class LevelView {
         return border;
     }
 
-    public Image getBackgroundImage () {
-        return backgroundProperty.get();
-    }
-
-    /**
-     * Temporary method to pass in the PlaceableNode all the way to the LibraryView
-     * 
-     * @param node
-     */
-    public void getAddFunction (Placeable Placeable) {
-        libraryData.addEditableToList(Placeable);
-    }
+//    public Image getBackgroundImage () {
+//        return new Image(backgroundPathProperty.getValue());
+//    }
 
     /**
      * Creates a StackPane that includes the background image and the TileContainer, put together in
@@ -86,19 +105,21 @@ public class LevelView {
     private StackPane getStack (Scene scene) {
         stack = new StackPane();
         this.scene = scene;
-        ImageView background = new ImageView(new Image(DEFAULT_IMAGE_PATH));
-        backgroundProperty = background.imageProperty();
+        backgroundImage = new ImageView(new Image(DEFAULT_IMAGE_PATH));
+        backgroundPathProperty.addListener(e->{
+            backgroundImage.imageProperty().set(new Image(backgroundPathProperty.get()));
+            setLevelImage();
+        });
         gridSizeProperty = new SimpleObjectProperty<>(DEFAULT_GRID_DIMENSIONS);
         Pane root = new Pane();
         container = new TileViewToggle(gridSizeProperty, scene);
         container.getTileModeProperty().bind(tileModeProperty);
-        root.getChildren().addAll(background, container);
-        // root.getChildren().addAll(background, container);
+        root.getChildren().addAll(backgroundImage, container);
 
         stack.getChildren().addAll(root);
         root.setTranslateX(scene.getWidth() / 6);
-        background.fitWidthProperty().bind(container.getGridWidthProperty());
-        background.fitHeightProperty().bind(container.getGridHeightProperty());
+        backgroundImage.fitWidthProperty().bind(container.getGridWidthProperty());
+        backgroundImage.fitHeightProperty().bind(container.getGridHeightProperty());
 
         wrapper = (ContainerWrapper) container;
         return stack;
@@ -126,13 +147,13 @@ public class LevelView {
      * 
      * @return
      */
-    private Button changeBackground (ObjectProperty<Image> backgroundProperty) {
+    private Button changeBackground () {
         Button background = new Button("Change Background");
         background.setOnAction(e -> {
             Stage stage = new Stage();
             FileChooser fc = new FileChooser();
             File picked = fc.showOpenDialog(stage);
-            backgroundProperty.setValue(new Image(picked.toURI().toString()));
+            backgroundPathProperty.setValue(picked.toURI().toString());
         });
         return background;
     }
@@ -147,16 +168,66 @@ public class LevelView {
         gridOptions.setTranslateY(scene.getHeight() / 3);
         Text title = new Text("Grid Properties");
 
-        gridOptions.getChildren().addAll(title, changeBackground(backgroundProperty));
+        gridOptions.getChildren().addAll(title, changeBackground());
         makeTileDimensions();
-        Node tileMode=makeToggle(makeToggleButton("Enemy Grid", TileMode.ENEMYMODE), makeToggleButton("Tower Grid", TileMode.TOWERMODE), (obs, old, newVal)->{
+        List<ToggleButton> optionList =
+                Arrays.asList(new ToggleButton[] {
+                                                  makeToggleButton("Enemy Grid", TileMode.ENEMYMODE),
+                                                  makeToggleButton("Tower Grid", TileMode.TOWERMODE),
+                                                  makeToggleButton("Spawn Point",
+                                                                   TileMode.STARTPOINTMODE),
+                                                  makeToggleButton("End Point",
+                                                                   TileMode.ENDPOINTMODE) });
+        List<ToggleButton> gridOptionsList =
+                Arrays.asList(new ToggleButton[] { makeToggleButton("Show Grid", true),
+                                                  makeToggleButton("Hide Grid", false) });
+        Node tileMode = makeToggle(optionList, (obs, old, newVal) -> {
             tileModeProperty.setValue((TileMode) newVal.getUserData());
         });
-        gridOptions.getChildren().add(makeToggle(makeToggleButton("Show Grid", true), makeToggleButton("Hide Grid", false), (obs, old, newVal)->{
-            container.setVisible((boolean) newVal.getUserData());
-            tileMode.setVisible((boolean) newVal.getUserData());
+        gridOptions.getChildren().add(makeToggle(gridOptionsList, (obs, old, newVal) -> {
+            container.setVisible((boolean) newVal
+                    .getUserData());
+            tileMode.setVisible((boolean) newVal
+                    .getUserData());
         }));
-        gridOptions.getChildren().add(tileMode);
+        gridOptions.getChildren().addAll(tileMode, setWalkablePoints());
+        isFreeWorld.addListener( (observable, oldv, newv) -> {
+            boolean isFree = (boolean) newv;
+            if (isFree) {
+                gridOptions.getChildren().add(setSpawnPoints());
+            }
+        });
+    }
+    private Button setWalkablePoints() {
+        Button button = new Button("Set Walkable Grids");
+        button.setOnAction(e -> {
+            List<GridCell> towerWalkable = new ArrayList<>();
+            List<GridCell> enemyWalkable = new ArrayList<>();
+            for (Point point : container.getTowerUnwalkable()) {
+                towerWalkable.add(new GridCell(point.x, point.y));
+            }
+            for (Point point : container.getEnemyUnwalkable()) {
+                enemyWalkable.add(new GridCell(point.x, point.y));
+            }
+            setWalkable.accept(towerWalkable, enemyWalkable);
+        });
+        return button;
+    }
+    private Button setSpawnPoints () {
+        Button button = new Button("Set Spawn Points");
+
+        button.setOnAction(e -> {
+            List<GridCell> start = new ArrayList<>();
+            List<GridCell> end = new ArrayList<>();
+            for (Point point : container.getStartPoints()) {
+                start.add(new GridCell(point.x, point.y));
+            }
+            for (Point point : container.getEndPoints()) {
+                end.add(new GridCell(point.x, point.y));
+            }
+            setSpawn.accept(start, end);
+        });
+        return button;
     }
 
     /**
@@ -196,15 +267,18 @@ public class LevelView {
      * @param ChangeListener for what happens when toggle selected
      */
 
-    private Node makeToggle(ToggleButton button1, ToggleButton button2, ChangeListener<? super Toggle> listener){
+    private Node makeToggle (List<ToggleButton> list,
+                             ChangeListener<? super Toggle> listener) {
         ToggleGroup group = new ToggleGroup();
-        group.selectedToggleProperty().addListener( listener);
-        group.getToggles().addAll(button1, button2);
+        group.selectedToggleProperty().addListener(listener);
         HBox hbox = new HBox();
-        hbox.getChildren().addAll(button1, button2);
+        for (ToggleButton button : list) {
+            group.getToggles().add(button);
+            hbox.getChildren().add(button);
+        }
         return hbox;
     }
-    
+
     /**
      * Makes a toggle button
      * 
@@ -212,52 +286,39 @@ public class LevelView {
      * @param data toggle holds
      * 
      */
-    private ToggleButton makeToggleButton(String label, Object data){
-        ToggleButton button=new ToggleButton(label);
+    private ToggleButton makeToggleButton (String label, Object data) {
+        ToggleButton button = new ToggleButton(label);
         button.setUserData(data);
         return button;
     }
-  
-    /*
-     * Removed once editor works
-     * 
-    @Deprecated
-    private GridPane tempGrid () {
-        GridPane grid = new GridPane();
-        grid.setHgap(0);
-        grid.setTranslateX(200);
-//        grid.add(tempButtonTower(), 0, 0);
-//        grid.add(tempButtonEnemy(), 0, 1);
-        return grid;
+
+    public ObjectProperty<Dimension> getGridDimensionProperty () {
+        return gridSizeProperty;
     }
 
-    @Deprecated
-    private Button tempButtonTower () {
-        Button temp = new Button("add Tower");
-//        Placeable Placeable = new TempTower();
-//        temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
-        return temp;
-    }
-
-    @Deprecated
-    private Button tempButtonEnemy () {
-        Button temp = new Button("add Enemy");
-//        Placeable Placeable = new TempEnemy();
-//        temp.setOnAction(e -> libraryData.addEditableToList(Placeable));
-        return temp;
-    }
-    */
-
-    public Consumer<Placeable> getConsumer () {
-        Consumer<Placeable> consumer = e -> libraryData.addEditableToList(e);
-        return consumer;
+    public StringProperty getBackgroundImagePath () {
+       return backgroundPathProperty;
     }
     
-    public ObjectProperty<Dimension> getGridDimensionProperty() {
-        return gridSizeProperty;    
+    private void setLevelImage () {
+        try {
+            for (Method m : EditingParser.getMethodsWithAnnotation(Class.forName(myLevel
+                    .getClass()
+                    .getName()), Settable.class)) {
+                if (m.getName().equals("setImagePath")) {
+                    m.invoke(myLevel, backgroundPathProperty.get());
+                }
+            }
+        }
+        catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
-    public String getBackgroundImagePath() {
-        return DEFAULT_IMAGE_PATH;
+    public void setLevel (Level levelData) {
+        myLevel = levelData;
+        setLevelImage();
     }
 }

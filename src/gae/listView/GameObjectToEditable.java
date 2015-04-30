@@ -2,6 +2,7 @@ package gae.listView;
 
 import engine.gameobject.GameObject;
 import engine.gameobject.Graphic;
+import engine.gameobject.Health;
 import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
@@ -10,7 +11,9 @@ import engine.gameobject.weapon.Weapon;
 import engine.shop.ShopTag;
 import engine.shop.ShopTagSimple;
 import gae.backend.Placeable;
+import gae.editorView.GameObjectInformation;
 import javafx.scene.image.ImageView;
+import javafx.stage.Screen;
 import View.ImageUtilities;
 
 
@@ -23,8 +26,9 @@ import View.ImageUtilities;
  *
  */
 public class GameObjectToEditable implements Placeable {
-    private GameObject gameObject;
     private static final long serialVersionUID = 1L;
+    private GameObject gameObject;
+    private static final String DEFAULT_TITLE = "No Name";
     private static int ourID = 0;
     private int myID = 0;
     private Weapon weapon;
@@ -41,10 +45,11 @@ public class GameObjectToEditable implements Placeable {
     private int height;
     private ImageView imageView;
     private ImageView shopImageView;
-    private double health;
+    private String title;
     private String description;
     private Type gameObjectType;
     private Collider collider;
+    private Health health;
 
     public GameObjectToEditable () {
 
@@ -65,8 +70,12 @@ public class GameObjectToEditable implements Placeable {
         shopGraphic = gameObject.getShopGraphic();
         location = gameObject.getPoint();
         weapon = gameObject.getWeapon();
-        System.out.println(weapon);
+        health = gameObject.getHealth();
         collider = gameObject.getCollider();
+        title = GameObjectInformation.getInstance().getTitle(gameObject);
+        if (title.equals("")) {
+            title = DEFAULT_TITLE;
+        }
     }
 
     @Override
@@ -193,8 +202,13 @@ public class GameObjectToEditable implements Placeable {
         copy.setName(name);
         copy.setDescription(description);
         copy.setCollider(collider);
+        copy.setTitle(title);
         ourID++;
         return copy;
+    }
+
+    public void setTitle (String title) {
+        this.title = title;
     }
 
     public void setImagePath (String imagePath) {
@@ -215,13 +229,13 @@ public class GameObjectToEditable implements Placeable {
     }
 
     @Override
-    public double getHealth () {
+    public Health getHealth () {
         return health;
     }
 
     @Override
-    public double setHealth (double health) {
-        return this.health = health;
+    public void setHealth (Health health) {
+        this.health = health;
     }
 
     @Override
@@ -309,6 +323,12 @@ public class GameObjectToEditable implements Placeable {
     @Override
     public Collider getCollider () {
         return collider;
+    }
+
+    @Override
+    public String getTitle () {
+        // TODO Auto-generated method stub
+        return title;
     }
 
 }

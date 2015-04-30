@@ -73,7 +73,6 @@ public class LibraryList {
                 editableMap.get(editable.getType()).add(editable);
             }
             catch (NullPointerException e) {
-
             }
         }
     }
@@ -87,7 +86,6 @@ public class LibraryList {
     private TitledPane getTitledPane (String text) {
         TitledPane pane = new TitledPane();
         pane.setText(text);
-        pane.setTextFill(Color.RED);
         pane.setContent(ListViewUtilities.createList(editableMap.get(text), scene, "Editable"));
         return pane;
     }

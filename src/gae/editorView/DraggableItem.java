@@ -38,10 +38,11 @@ public class DraggableItem extends Region {
 
     private HBox setFields (HBox newBox, String name) {
         Label label = new Label(name);
-        label.setStyle("-fx-font-size: 30px;\n" +
-                       "    -fx-font-weight: bold;\n" +
-                       "    -fx-text-fill: #333333;\n" +
-                       "    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );");
+        label.getStyleClass().add("draggable-label");
+//        label.setStyle("-fx-font-size: 30px;\n" +
+//                       "    -fx-font-weight: bold;\n" +
+//                       "    -fx-text-fill: #333333;\n" +
+//                       "    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );");
         newBox.getChildren().add(label);
         newBox.setOnMousePressed(e -> {
             label.setTextFill(Color.RED);
@@ -74,8 +75,6 @@ public class DraggableItem extends Region {
     }
 
     public Object getDraggedObject () {
-        // TODO: obtain this object by looping through everything in the wrapper and add these
-        // objects to the existing object
         try {
             return Class.forName(EditingParser.getInterfaceClassFromMap(klass)).cast(object);
         }

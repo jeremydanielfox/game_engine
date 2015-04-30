@@ -1,5 +1,6 @@
 package engine.gameobject;
 
+import View.ViewConcrete2;
 import engine.pathfinding.EndOfPathException;
 @Deprecated
 public class DirectPointMover extends MoverPoint {
@@ -15,9 +16,11 @@ public class DirectPointMover extends MoverPoint {
     @Override
     public PointSimple move (PointSimple current) throws EndOfPathException {
         PointSimple newPoint = PointSimple.pointOnLine(current, getPoint(), currentSpeed());
-        if (PointSimple.pointInBetween(current, newPoint, getPoint())) {
+        if (PointSimple.pointInBetween(current, newPoint, getPoint())||
+        		PointSimple.pointInBetween(new PointSimple(0,0), new PointSimple(ViewConcrete2.getWorldWidth(),ViewConcrete2.getWorldHeight()), newPoint)) {
             throw new EndOfPathException();
         }
+        
         return newPoint;
     }
 

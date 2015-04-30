@@ -134,7 +134,9 @@ public class GameWriter extends Application {
         // world.addObject(new TestTower(2, 330, 130));
         //world.addObject(new TestTower(5, 270, 270));
         // world.addObject(new TestTower(3, 355, 455));
-        world.setPath(DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml"));
+        
+        //TODO wtf?
+        //world.setPath(DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml"));
         return world;
     }
 
@@ -147,10 +149,13 @@ public class GameWriter extends Application {
         Player myPlayer = makePlayer();
         GameWorld myWorld = makeWorld();
         ShopModel myShop = new ShopModelSimple(myWorld, myPlayer, 1);
+        myShop.addPurchasable(new TestTower(0,0,0));
+        myShop.addPurchasable(new TestTower(1,0,0));
         Game myGame = makeGame(myPlayer, myWorld, myShop);
 
         DataManager.writeToXML(myGame, FILE_DESTINATION);
         System.out.println("Written");
+        System.exit(0);
     }
 
     public ShopModel makeShop (Player player, GameWorld world) {

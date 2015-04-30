@@ -19,8 +19,8 @@ import engine.fieldsetting.Settable;
 public class Graphic {
 
     // note to self: need to change this image path default when using data files
-    private static final String DEFAULT_IMAGE_PATH_PREFIX = "/images/";
-    private static final String DEFAULT_IMAGE_NAME = "robertDuvall.jpg";
+    private static final String DEFAULT_IMAGE_PATH_PREFIX = "";//"/images/";
+    private static final String DEFAULT_IMAGE_NAME = "/images/robertDuvall.jpg";
     private String myTitle = "";
     private double myHeight;
     private double myWidth;
@@ -57,7 +57,7 @@ public class Graphic {
     }
 
     private void initializeImageView () {
-        myImageView = new ImageView(DEFAULT_IMAGE_PATH_PREFIX + myImageName);
+        myImageView = new ImageView(myImageName);//DEFAULT_IMAGE_PATH_PREFIX + myImageName);
 
         // myImageView.setOnMouseEntered(o -> System.out.println("boom"));
         // myImageView.setOnMouseClicked(e -> System.out.println("clicked"));
@@ -103,8 +103,9 @@ public class Graphic {
     }
 
     @Settable(primary = true)
-    public void setImageName (String imageName) {
-        myImageName = imageName;
+    public void setImagePath (String imageName) {
+        myImageName = imageName.substring(imageName.lastIndexOf("/images"));
+//        myImageName = imageName;
         initializeImageView();
     }
 
@@ -132,7 +133,7 @@ public class Graphic {
     }
 
     public String getImagePath () {
-        return DEFAULT_IMAGE_PATH_PREFIX + myImageName;
+        return myImageName;//DEFAULT_IMAGE_PATH_PREFIX + myImageName;
     }
 
     /**

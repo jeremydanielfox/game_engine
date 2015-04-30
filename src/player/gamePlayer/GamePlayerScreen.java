@@ -17,6 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -40,7 +42,7 @@ public class GamePlayerScreen implements GameScene {
     private Game myGame;
     private Stage myStage;
     private EngineView myGameView;
-    private PauseScene pauseScreen;
+    private PauseDropDown pauseScreen;
     private BorderPane myPane;
     private String myPlayerName; // myPlayerName holds the name of the user to later be put into
                                  // high scores.
@@ -71,12 +73,18 @@ public class GamePlayerScreen implements GameScene {
 
         myVbox = new VBox(30);
         
-        pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
+
+        //pauseScreen = new PauseScene(e -> resumeGame(), myStage, null);
+        //myGame = loadGame();
+       // thisFilePath=filePath;
+        //myGame=DataManager.readFromXML(Game.class, thisFilePath);
+//        if (myGame.getLevelBoard().gameOver())
+//          myGame = loadGame();
+
+        pauseScreen = new PauseDropDown(e -> resumeGame(), myStage);
         //myGame = loadGame();
         thisFilePath=filePath;
         myGame=DataManager.readFromXML(Game.class, thisFilePath);
-//        if (myGame.getLevelBoard().gameOver())
-//          myGame = loadGame();
         myPlayerName = "";
         myPreviousScene = previousScene;
     }
@@ -90,6 +98,13 @@ public class GamePlayerScreen implements GameScene {
         myPane = new BorderPane();
         myPane.setPadding(new Insets(0, 40, 0, 40));
         myScene = new Scene(myPane);
+        
+        myScene.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
+            if (key.getCode().equals(KeyCode.P)){
+                pauseScreen.displayPauseScreen();
+            }
+        });
+        
         makeSideBar();
         myVbox.setAlignment(Pos.CENTER);
         myPane.setRight(myVbox);
@@ -154,7 +169,7 @@ public class GamePlayerScreen implements GameScene {
      * Resumes game after pause.
      */
     private void resumeGame () {
-
+        myGameView.play();
     }
 
     /**

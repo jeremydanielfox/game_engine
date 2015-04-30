@@ -1,5 +1,6 @@
 package gae.gameView;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 
@@ -17,13 +18,13 @@ public interface CheckListItem {
      *
      * @return Node with checkbox
      */
-    public Node getNode ();
+    Node getNode ();
 
     /**
-     * Returns checkbox such that listener can be added in checklist
+     * Returns checkbox property such that listener can be added in checklist
      *
-     * @return checkbox
+     * @return booleanproperty
      */
-    public CheckBox getCheckBox ();
+    BooleanProperty getSelectedProperty ();
 
 }

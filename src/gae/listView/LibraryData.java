@@ -1,10 +1,6 @@
 package gae.listView;
 
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.Graphic;
-import engine.gameobject.HealthSimple;
-import engine.gameobject.Mover;
-import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
 import engine.gameobject.labels.Type;
 import engine.pathfinding.PathFixed;
@@ -22,12 +18,11 @@ import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 
 
 /**
- * Library Data class that stores the list of Editables
- *
- * @author Kei
+ * Library Data class that stores the list of Objects
  *
  */
 public class LibraryData {
@@ -36,8 +31,10 @@ public class LibraryData {
     private ObservableList<Authorable> pathList = FXCollections.observableArrayList();
     private Map<String, ObservableList<Object>> createdObjectMap = new HashMap<>();
     private ObservableList<GameObjectSimple> gameObjectList = FXCollections.observableArrayList();
-    private ObservableList<Type> labelList = FXCollections.observableArrayList();
+    private ObservableSet<Type> labelList = FXCollections.observableSet();
     private ObservableList<Object> moverList = FXCollections.observableArrayList();
+    private ObservableList<Object> freeWorldList = FXCollections.observableArrayList();
+    private boolean free;
 
     private LibraryData () {
         setLists();
@@ -55,7 +52,7 @@ public class LibraryData {
                     if (added instanceof Placeable) {
                         Placeable placeable = (Placeable) added;
                         labelList.add(placeable.getLabel());
-                        addToExistingGameObjectList(placeable);
+//                        addToExistingGameObjectList(placeable);
                     }
                 }
             }
@@ -82,9 +79,11 @@ public class LibraryData {
     public ObservableList<Authorable> getPathObservableList () {
         return pathList;
     }
-    private String getKeyName(Class<?> klass) {
+
+    private String getKeyName (Class<?> klass) {
         return EditingParser.getInterfaceClassFromMap(klass);
     }
+
     public void addCreatedObjectToList (Class<?> klass, Object o) {
         if (createdObjectMap.containsKey(getKeyName(klass))) {
             int index = GameObjectInformation.getInstance().getIndex(o);
@@ -109,8 +108,11 @@ public class LibraryData {
                 ObservableList<Object> list = FXCollections.observableArrayList();
                 createdObjectMap.put(getKeyName(klass), list);
             }
-            else {
+            else if (!free) {
                 createdObjectMap.put(getKeyName(klass), moverList);
+            }
+            else if (free) {
+                createdObjectMap.put(getKeyName(klass), freeWorldList);
             }
         }
         return createdObjectMap.get(getKeyName(klass));
@@ -134,27 +136,12 @@ public class LibraryData {
         return gameObjectList;
     }
 
-    public ObservableList<Type> getLabelList () {
+    public ObservableSet<Type> getLabelSet () {
         return labelList;
     }
 
-    private void addToExistingGameObjectList (Authorable authorable) {
-        Placeable editable = (Placeable) authorable;
-        GameObjectSimple object = new GameObjectSimple();
-        object.setPoint(editable.getLocation());
-        object.setGraphic(new Graphic(editable.getWidth(), editable.getHeight(),
-                                      editable.getImagePath()));
-        object.setLabel(editable.getLabel());
-        object.setShopTag(editable.getShopTag());
-        object.setMover(editable.getPath());
-        object.setHealth(new HealthSimple(editable.getHealth()));
-        object.setCollider(editable.getCollider());
-        object.setWeapon(editable.getWeapon());
-        gameObjectList.add(object);
-    }
-
     private PathFixed getPath (List<AuthoringPath> list) {
-//        MoverPath mover = new MoverPath();
+        // MoverPath mover = new MoverPath();
         PathFixed myPath = new PathFixed();
         for (int i = 0; i < list.size(); i++) {
             // System.out.println("Path " + i + "'s coordinates");
@@ -170,7 +157,13 @@ public class LibraryData {
             tempBez.setPoints(points);
             myPath.addPathSegment(tempBez);
         }
-//        mover.setPath(myPath);
+        // mover.setPath(myPath);
         return myPath;
+    }
+
+    public void addFreeWorldPath (Path path) {
+        freeWorldList.add(path);
+        GameObjectInformation.getInstance().addInformation(path, "Free Path", -1);
+        free = true;
     }
 }

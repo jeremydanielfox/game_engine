@@ -2,8 +2,6 @@ package engine.gameobject.labels;
 
 import java.util.Collection;
 import java.util.HashSet;
-import com.sun.xml.internal.ws.org.objectweb.asm.Label;
-
 
 
 /**

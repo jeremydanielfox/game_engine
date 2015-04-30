@@ -84,7 +84,7 @@ public class PlayerOpener implements GameScene {
 
         Arrays.asList(loadB, playB).forEach(e -> {
             e.setId("playerButton");
-            // e.setFocusTraversable(false);
+            e.setFocusTraversable(false);
         });
 
         createOptions();

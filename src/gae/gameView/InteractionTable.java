@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -31,7 +33,7 @@ public class InteractionTable {
     private VBox content;
     private Button adder;
     private List<InteractionInstance> interactions;
-    private ObservableList<Type> gaeLabels;
+    private ObservableSet<Type> gaeLabels;
 
     /*
      * use observable list from library data. get labels and add listener.
@@ -47,8 +49,8 @@ public class InteractionTable {
         container.setTop(adder);
         interactions = new ArrayList<>();
         content = new VBox(35);
-        gaeLabels = myLibraryData.getLabelList();
-        addLabelListener();
+        gaeLabels = myLibraryData.getLabelSet();
+        //addLabelListener();
         scroller.setContent(content);
         setUpButtons();
     }
@@ -56,22 +58,19 @@ public class InteractionTable {
     public Node getTable() {
         return container;
     }
+    
+    public InteractionData getData() {
+        return myInteractionData;
+    }
 
     /**
      * adds a listener to the observable list of labels so that it remains updated whenever a new
      * label is added
      */
     private void addLabelListener () {
-        gaeLabels.addListener( (ListChangeListener.Change<? extends Type> change) -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    Type added = change.getAddedSubList().get(0);
-                    if (added instanceof Type) {
-                        Type l = added;
-                        gaeLabels.add(l);
-                    }
-                }
-            }
+        //TODO: do you want this to handle the case where a type is deleted as well?
+        gaeLabels.addListener((SetChangeListener.Change<? extends Type> change)->{
+            gaeLabels.add(change.getElementAdded());
         });
     }
 

@@ -12,4 +12,9 @@ public interface BuildObjectData {
      * fills all the build object's properties from the engine's object
      */
     void fillProperties ();
+    
+    /**
+     * returns the object that was built
+     */
+    Object getBuiltObject();
 }

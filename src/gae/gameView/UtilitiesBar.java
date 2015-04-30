@@ -3,7 +3,11 @@ package gae.gameView;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
+import View.EngineView;
+import View.ViewConcrete2;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -14,9 +18,11 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import xml.DataManager;
 import engine.game.Game;
+import engine.shop.ShopModel;
 
 
 public class UtilitiesBar {
@@ -74,7 +80,7 @@ public class UtilitiesBar {
 
     private void setUpFunctions () {
         playButton.setOnMousePressed(e -> {
-
+            liveEdit();
         });
 
         pauseButton.setOnMousePressed(e -> {
@@ -94,8 +100,23 @@ public class UtilitiesBar {
         });
 
         fullscreenButton.setOnMousePressed(e -> {
-
+            maximizeWindow();
         });
+    }
+
+    /**
+     * add exporting option
+     */
+    private void liveEdit () {
+        Stage primaryStage = new Stage();
+        Group root = new Group();
+        primaryStage.setHeight(600);
+        primaryStage.setWidth(950);
+        Scene scene = new Scene(root);
+        EngineView view = new ViewConcrete2(game, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        root.getChildren().add(view.initializeView());
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     private void export () {
@@ -103,6 +124,8 @@ public class UtilitiesBar {
         fileChooser.setTitle("Save Game File");
         File chosen = fileChooser.showSaveDialog(utilitiesBar.getScene().getWindow());
         DataManager.writeToXML(game, chosen.getAbsolutePath());
+//        ShopModel shop = game.getShop();
+//        System.out.println("test");
     }
 
     private void chooseFile () {
@@ -123,6 +146,11 @@ public class UtilitiesBar {
         helpRoot.getChildren().add(browser);
         stage.setScene(new Scene(helpRoot, 800, 800));
         stage.show();
+    }
+    
+    private void maximizeWindow () {
+        utilitiesBar.getScene().getWindow().setWidth(Screen.getPrimary().getBounds().getWidth());
+        utilitiesBar.getScene().getWindow().setHeight(Screen.getPrimary().getBounds().getHeight());
     }
 
     private void placeButtons () {

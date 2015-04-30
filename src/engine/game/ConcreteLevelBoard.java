@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import engine.fieldsetting.Settable;
+import engine.shop.ShopModel;
 import gameworld.GameWorld;
 
 
 /**
  * This class contains all levels that exist in a game.
  *
- * @authors Sierra Smith, Cosette Goldstein
+ * @authors Sierra Smith
+ * @author Cosette Goldstein
  *
  */
 @Settable
@@ -20,6 +22,7 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
     private int curLevelIndex;
     private boolean isLost;
     private boolean isWon;
+    private ShopModel shop;
 
     public ConcreteLevelBoard () {
         myLevels = new ArrayList<Level>();
@@ -80,8 +83,8 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
     // rather, should the method just be called update current level? which can change the level
     @Override
     public void startNextLevel () {
-        // TODO Auto-generated method stub
         curLevelIndex++;
+        shop.setGameWorld(getGameWorld());
     }
 
     @Override
@@ -100,5 +103,9 @@ public class ConcreteLevelBoard extends Observable implements LevelBoard {
             return myLevels.get(curLevelIndex);
         }
         return null;
+    }
+    
+    public void setShop (ShopModel shop) {
+        this.shop = shop;
     }
 }

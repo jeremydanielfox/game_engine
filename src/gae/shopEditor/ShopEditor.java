@@ -75,7 +75,7 @@ public class ShopEditor implements UIObject {
 
     private ShopModelSimple makeShop () {
         List<Purchasable<GameObject>> prototypes = new ArrayList<>();
-        checklist.getSelectedPlaceables().stream().forEach(e -> {
+        checklist.getSelectedPlaceables().forEach(e -> {
             prototypes.add((Purchasable<GameObject>) e.getGameObject());
         });
         shop.setPurchasables(prototypes);

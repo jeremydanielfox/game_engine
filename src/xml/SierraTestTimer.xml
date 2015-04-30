@@ -37,7 +37,9 @@
             <isSatisfied>false</isSatisfied>
             <myStoryBoard>
               <changed>false</changed>
-              <obs/>
+              <obs>
+                <engine.goals.EventsCompleteGoal reference="../../.."/>
+              </obs>
               <eventList>
                 <engine.events.ConstantSpacingWave>
                   <frameTrigger>240</frameTrigger>
@@ -4179,10 +4181,24 @@
               </eventList>
             </myStoryBoard>
           </engine.goals.EventsCompleteGoal>
+          <engine.goals.TimerGoal>
+            <isSatisfied>false</isSatisfied>
+            <myTimer class="engine.game.TimerConcrete">
+              <changed>false</changed>
+              <obs>
+                <engine.goals.TimerGoal reference="../../.."/>
+              </obs>
+              <myMinutes>0</myMinutes>
+              <mySeconds>10</mySeconds>
+              <myFramesSinceUpdate>0</myFramesSinceUpdate>
+            </myTimer>
+            <mySecondsGoal>0</mySecondsGoal>
+          </engine.goals.TimerGoal>
         </myWinningGoals>
         <myLosingGoals/>
         <myGameWorld class="gameworld.FixedWorld" reference="../myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard/eventList/engine.events.ConstantSpacingWave/myWorld"/>
         <myStoryBoard reference="../myWinningGoals/engine.goals.EventsCompleteGoal/myStoryBoard"/>
+        <myTimer class="engine.game.TimerConcrete" reference="../myWinningGoals/engine.goals.TimerGoal/myTimer"/>
       </engine.game.ConcreteLevel>
       <engine.game.ConcreteLevel>
         <myTitle></myTitle>

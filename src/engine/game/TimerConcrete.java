@@ -98,6 +98,7 @@ public class TimerConcrete extends Timer {
     private void updateObservers () {
         setChanged();
         notifyObservers();
+        System.out.println("updating observer");
     }
 
 }

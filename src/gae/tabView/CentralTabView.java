@@ -1,13 +1,11 @@
 package gae.tabView;
 
 import engine.fieldsetting.Settable;
-import engine.game.ConcreteLevel;
 import engine.game.Game;
 import engine.game.Level;
 import engine.game.Player;
 import engine.game.StoryBoard;
 import engine.shop.ShopModel;
-import gae.builder.PlayerBuilder;
 import gae.editor.EditingParser;
 import gae.gameView.InteractionTable;
 import gae.gameWorld.FixedGameWorldFactory;
@@ -26,11 +24,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import voogasalad.util.pathsearch.graph.GridCell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -39,7 +34,9 @@ import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import voogasalad.util.pathsearch.graph.GridCell;
+
+
 
 
 /**
@@ -100,6 +97,7 @@ public class CentralTabView implements UIObject {
             }
             createNewLevel();
         });
+
         baseNode.getChildren().addAll(newLevel, tabView);
         gameWorldFactory = createGameWorldFactory(gameTypeIn);
 

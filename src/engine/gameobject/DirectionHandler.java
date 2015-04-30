@@ -1,6 +1,7 @@
 package engine.gameobject;
 
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -41,14 +42,25 @@ public class DirectionHandler {
     
     private void handleKeyInput (KeyEvent e) {
         KeyCode keyCode = e.getCode();
-        if (keyCode == KeyCode.D)
+        if (keyCode == KeyCode.D) {
             myDirection = new PointSimple(1, 0);
-        else if (keyCode == KeyCode.A)
+            myGraphic.getImageView().setImage(new Image("/Images/Hero_Right.png"));
+        }
+        else if (keyCode == KeyCode.A) {
             myDirection = new PointSimple(-1, 0);
-        else if (keyCode == KeyCode.W)
+            myGraphic.getImageView().setImage(new Image("/Images/Hero_Left.png"));
+        }
+        else if (keyCode == KeyCode.W) {
             myDirection = new PointSimple(0, -1);
-        else if (keyCode == KeyCode.S)
+            myGraphic.getImageView().setImage(new Image("/Images/BoxheadHero.png"));
+        }
+        else if (keyCode == KeyCode.S) {
             myDirection = new PointSimple(0, 1);
+            myGraphic.getImageView().setImage(new Image("/Images/Hero_Down.png"));
+        }
+        else if (keyCode == KeyCode.SHIFT) {
+            
+        }
     }
     
     public DirectionHandler clone(){

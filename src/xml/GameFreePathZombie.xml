@@ -331,15 +331,9 @@
                           <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
                             <bits/>
                           </pseudoClassStates>
-                          <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
-                            <value class="javafx.scene.AccessibleRole">IMAGE_VIEW</value>
-                            <valid>false</valid>
-                            <bean class="javafx.scene.image.ImageView" reference="../.."/>
-                            <name>accessibleRole</name>
-                          </accessibleRole>
                           <image class="javafx.scene.image.ImageView$1">
                             <value class="javafx.scene.image.Image">
-                              <url>file:/C:/Users/Owner/Documents/GitHub/voogasalad_RDatGV/bin/images/Bloons_TackShooter.png</url>
+                              <url>file:/Users/Jeremy/Documents/Compsci%20308/voogasalad_RDatGV/bin/images/Bloons_TackShooter.png</url>
                               <progress>
                                 <value>1.0</value>
                                 <valid>true</valid>
@@ -17242,6 +17236,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
+<<<<<<< HEAD
+                    <int>249</int>
+                    <int>1142</int>
+                    <int>858</int>
+                    <int>1340</int>
+                    <int>505</int>
+                    <int>2019</int>
+                    <int>2113</int>
+                    <int>611</int>
+                    <int>619</int>
+                    <int>1909</int>
+=======
                     <int>2307</int>
                     <int>1186</int>
                     <int>709</int>
@@ -17252,6 +17258,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                     <int>113</int>
                     <int>1579</int>
                     <int>1736</int>
+>>>>>>> 0df33b703986af9ec19d96a6214c1759badd40d5
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

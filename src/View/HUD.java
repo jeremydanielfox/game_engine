@@ -19,10 +19,9 @@ import engine.gameobject.test.bloons.Spikes;
 import engine.shop.ShopModel;
 import engine.shop.ShopView;
 
-
 /**
- * This class acts as a heads up display, which contains player stats and the shop for the game.
- * It can display "displayable" objects as well as any other nodes.
+ * This class acts as a heads up display, which contains player stats and the shop for the game. It
+ * can display "displayable" objects as well as any other nodes.
  *
  * @author Sierra Smith
  * @author Cosette Goldstein
@@ -40,7 +39,7 @@ public class HUD implements Observer {
     private Pane myPane;
     private HBox myDefaultButtonDisplay;
     private ShopModel shop;
-    
+
     private List<ButtonWrapper> myButtonWrapperList;
 
     public HUD (Pane pane, ShopModel shop) {
@@ -93,19 +92,19 @@ public class HUD implements Observer {
         location.getChildren().add(newBox);
         location.setAlignment(Pos.CENTER);
     }
-    
-    public void addLevelDisplay(Displayable d){
+
+    public void addLevelDisplay (Displayable d) {
         addPairedDisplay(d, myLevelDisplay);
     }
 
-    public void addStatsDisplay(Displayable d){
+    public void addStatsDisplay (Displayable d) {
         addPairedDisplay(d, myStatsDisplay);
     }
-    
-    public void clearLevelDisplay(){
+
+    public void clearLevelDisplay () {
         myLevelDisplay.getChildren().clear();
     }
-    
+
     private void formatText (Text t, int fontSize) {
         t.setFont(Font.font("Verdana", fontSize));
         t.setFill(Color.BLUEVIOLET);
@@ -123,7 +122,7 @@ public class HUD implements Observer {
             else {
                 e.getButton().setDisable(true);
 
-                }
+            }
         });
     }
 

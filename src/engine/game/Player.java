@@ -23,6 +23,7 @@ import engine.shop.wallet.Wallet;
 public class Player extends Observable implements Observer {
 
     private static final String DEFAULT_NAME = "Player 1";
+    private static final String HEALTH = "Health";
 
     private String myName;
     private PlayerUnit myHealth;
@@ -121,7 +122,7 @@ public class Player extends Observable implements Observer {
     
     @Settable
     public void setWalletUnit (String unitLabel) {
-        if(myHealth.getLabel().equals(unitLabel))
+        if(myHealth.getLabel().equals(HEALTH))
             myWallet = new ConcreteWallet(myHealth);
         else
             myWallet = new ConcreteWallet(myScore);

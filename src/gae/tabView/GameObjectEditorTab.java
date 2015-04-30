@@ -6,8 +6,10 @@ import gae.editorView.GameObjectEditorView;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 
+
 /**
  * Object Editor Tab
+ * 
  * @author JohnGilhuly
  *
  */
@@ -17,7 +19,9 @@ public class GameObjectEditorTab implements ITab {
     private Tab baseNode;
     private GameObjectEditorView view;
 
-    public GameObjectEditorTab (Scene scene, Consumer<Object> consumer, BiConsumer<Class<?>, Object> biConsumer) {
+    public GameObjectEditorTab (Scene scene,
+                                Consumer<Object> consumer,
+                                BiConsumer<Class<?>, Object> biConsumer) {
         baseNode = new Tab();
         baseNode.setText("Game Object Editor");
 

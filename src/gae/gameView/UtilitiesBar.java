@@ -1,9 +1,9 @@
 package gae.gameView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
 import View.EngineView;
 import View.ViewConcrete2;
 import javafx.geometry.Pos;
@@ -80,7 +80,12 @@ public class UtilitiesBar {
 
     private void setUpFunctions () {
         playButton.setOnMousePressed(e -> {
-            liveEdit();
+            try {
+                liveEdit();
+            }
+            catch (Exception e1) {
+                e1.printStackTrace();
+            }
         });
 
         pauseButton.setOnMousePressed(e -> {
@@ -106,14 +111,15 @@ public class UtilitiesBar {
 
     /**
      * add exporting option
+     * @throws IOException 
      */
-    private void liveEdit () {
+    private void liveEdit () throws IOException {
         Stage primaryStage = new Stage();
         Group root = new Group();
         primaryStage.setHeight(600);
         primaryStage.setWidth(950);
         Scene scene = new Scene(root);
-        EngineView view = new ViewConcrete2(game, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        EngineView view = new ViewConcrete2(game.cloneGame(), Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         root.getChildren().add(view.initializeView());
         primaryStage.setScene(scene);
         primaryStage.show();

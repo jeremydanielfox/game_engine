@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
+
 /**
  * The individual pieces of a wave
  * 
@@ -26,27 +27,28 @@ public class WavePart implements UIObject {
     private TextField quantityField;
     private ComboBox<GameObjectSimple> gameObjectSelector;
 
-    public WavePart(WaveEnemyTable parent) {
+    public WavePart (WaveEnemyTable parent) {
         this.parent = parent;
         initialize();
     }
 
     private void initialize () {
         rootNode = new HBox();
-        
+
         LibraryData libData = LibraryData.getInstance();
         ObservableList<GameObjectSimple> enemyList = libData.getGameObjectList();
-        
+
         gameObjectSelector = new ComboBox<GameObjectSimple>(enemyList);
-        
+
         quantityField = new TextField();
         quantityField.setPromptText("Enter Quantity");
         quantityField.setEditable(true);
-        
+
         Button deleteButton = new Button("Delete");
         deleteButton.setOnAction(e -> parent.deleteWavePart(this));
-        
-        rootNode.getChildren().addAll(new Text("Enemy Type: "), gameObjectSelector, new Text ("Quantity"), quantityField, deleteButton);
+
+        rootNode.getChildren().addAll(new Text("Enemy Type: "), gameObjectSelector,
+                                      new Text("Quantity"), quantityField, deleteButton);
         rootNode.setSpacing(5);
     }
 
@@ -58,8 +60,8 @@ public class WavePart implements UIObject {
     public int getQuantity () {
         return Integer.parseInt(quantityField.getText());
     }
-    
-    public GameObject getGameObject() {
+
+    public GameObject getGameObject () {
         return gameObjectSelector.getSelectionModel().getSelectedItem();
     }
 }

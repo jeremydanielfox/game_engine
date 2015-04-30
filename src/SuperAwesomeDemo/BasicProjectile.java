@@ -12,7 +12,7 @@ import engine.gameobject.weapon.NullWeapon;
 
 
 public class BasicProjectile extends GameObjectSimple {
-    public BasicProjectile () {
+    public BasicProjectile (int damage, double speed, double distanceLimit) {
         super();
         setLabel(new ProjectileLabel());
         Graphic myGraphic = new Graphic(25,25,"/images/robertDuvall.jpg");
@@ -21,9 +21,8 @@ public class BasicProjectile extends GameObjectSimple {
         setPoint(new PointSimple(0, 10000));
         setHealth(new HealthSimple(1));
         setWeapon(new NullWeapon());
-        MoverDirection myMover = new MoverDirection();
-        myMover.setRange(100);
-        getCollider().addCollisionBehavior(new DamageBuff(1));
+        MoverDirection myMover = new MoverDirection(new PointSimple(0, 0), speed, distanceLimit);
+        getCollider().addCollisionBehavior(new DamageBuff(damage));
         setMover(myMover);
     }
 }

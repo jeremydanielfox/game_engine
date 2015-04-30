@@ -38,8 +38,8 @@ public class AbstractWorld implements GameWorld {
 
     public AbstractWorld (int numRows, int numCols) {
         myObjects = new ArrayList<GameObject>();
-//         initiateCollisionEngine();
-//         initiateRangeEngine();
+         initiateCollisionEngine();
+         initiateRangeEngine();
         myNodeToGameObjectMap = new HashMap<>();
 
         myTrans =
@@ -102,7 +102,7 @@ public class AbstractWorld implements GameWorld {
             }
         });
         for (GameObject toRemove : buffer) {
-            myObjects.remove(toRemove);
+        	removeObject(toRemove);
             toRemove.onDeath(this);
         }
     }

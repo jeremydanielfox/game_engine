@@ -22,13 +22,18 @@ public class ShopCheckList extends CheckList {
     public ShopCheckList (ObservableList<Authorable> objects) {
         super();
         myObjects = (ObservableList<Placeable>) (ObservableList<?>) objects;
-        myObjects.forEach(e->createCheckOption(new ShopCheckListItem(e)));
+        myObjects.forEach(e->{
+            if(e.getShopTag()!=null){
+            createCheckOption(new ShopCheckListItem(e));
+            }
+        });
         myObjects.addListener( (ListChangeListener.Change<? extends Placeable> change) -> {
             while (change.next()) {
                 change.getAddedSubList()
-                        .forEach(e -> {
-                            createCheckOption(new ShopCheckListItem(e));
-                        });
+                        .forEach(e->{
+                            if(e.getShopTag().getName()!="")
+                                createCheckOption(new ShopCheckListItem(e));
+                            });
                 change.getRemoved().forEach(e -> {
                     for (CheckListItem key : getMap().keySet()) {
                         if (((ShopCheckListItem) key).getPlaceable().equals(e)) {

@@ -1,12 +1,12 @@
 package engine.gameobject.units;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
+import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.weapon.firingstrategy.Explosion;
 import gameworld.ObjectCollection;
 
@@ -23,6 +23,7 @@ public class Collider {
     public Collider () {
         collidedID = new HashSet<GameObject>();
         collisionBuffs = new HashSet<Buff>();
+        collisionBuffs.add(new DamageBuff(10));
         onDeath = new Explosion();
     }
 
@@ -36,6 +37,7 @@ public class Collider {
     public void setCollisionList(Collection<Buff> buffs){
         Set<Buff> buffList = new HashSet<>();
         buffList.addAll(buffs);
+        System.out.println(buffs);
         System.out.println("added collision list");
     }
     
@@ -43,6 +45,7 @@ public class Collider {
     public void setExplosionList(Collection<Buff> buffs){
         onDeath.clearBuffs();
         buffs.forEach(b -> onDeath.addBuff(b));
+        System.out.println(buffs);
         System.out.println("added explosion list");
     }
     

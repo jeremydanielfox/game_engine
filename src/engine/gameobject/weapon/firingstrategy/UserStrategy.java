@@ -32,7 +32,7 @@ public class UserStrategy extends BasicStrategy {
     private void initializeNode (Graphic graphic) {
         myNode = graphic.getNode();
         myNode.setFocusTraversable(true);
-        myNode.setOnKeyPressed(e -> handleKeyInput(e));
+        myNode.addEventHandler(KeyEvent.KEY_PRESSED, e -> handleKeyInput(e));
     }
     
     @Settable
@@ -63,13 +63,13 @@ public class UserStrategy extends BasicStrategy {
     private void handleKeyInput (KeyEvent e) {
         KeyCode keyCode = e.getCode();
         if (keyCode == KeyCode.D)
-            myDirection = new PointSimple(1, 0);
+            myDirection = new PointSimple(1, .01);
         else if (keyCode == KeyCode.A)
-            myDirection = new PointSimple(-1, 0);
+            myDirection = new PointSimple(-1, .01);
         else if (keyCode == KeyCode.W)
-            myDirection = new PointSimple(0, -1);
+            myDirection = new PointSimple(.01, -1);
         else if (keyCode == KeyCode.S)
-            myDirection = new PointSimple(0, 1);
+            myDirection = new PointSimple(.01, 1);
         else if (keyCode == myKey){
             pressedRecently = true;
         }

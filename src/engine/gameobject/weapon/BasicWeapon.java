@@ -161,7 +161,7 @@ public class BasicWeapon implements Weapon{
     @Override
     public void fire (ObjectCollection world, GameObject target, PointSimple location) {
         if (canFire()) {
-            MusicianSimple.getInstance().laser();
+            //MusicianSimple.getInstance().laser();
             myFiringStrategy.execute(world, target, location, myProjectile);
             timeSinceFire = 0;
         }

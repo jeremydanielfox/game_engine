@@ -36,7 +36,7 @@ public class DirectionHandler {
     private void initializeNode (Graphic graphic) {
         myNode = graphic.getNode();
         myNode.setFocusTraversable(true);
-        myNode.setOnKeyPressed(e -> handleKeyInput(e));
+        myNode.addEventHandler(KeyEvent.KEY_PRESSED, e -> handleKeyInput(e));
     }
     
     private void handleKeyInput (KeyEvent e) {

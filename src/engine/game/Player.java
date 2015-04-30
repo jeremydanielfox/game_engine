@@ -3,6 +3,7 @@ package engine.game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 import View.Displayable;
 import engine.fieldsetting.Settable;
 import engine.shop.wallet.ConcreteWallet;
@@ -19,9 +20,10 @@ import engine.shop.wallet.Wallet;
  *
  */
 @Settable
-public class Player extends Observable {
+public class Player extends Observable implements Observer {
 
     private static final String DEFAULT_NAME = "Player 1";
+    private static final String HEALTH = "Health";
 
     private String myName;
     private PlayerUnit myHealth;
@@ -29,17 +31,21 @@ public class Player extends Observable {
     private Wallet myWallet;
 
     public Player () {
-        myName = DEFAULT_NAME;
-        myHealth = new PlayerUnit();
-        myScore = new PlayerUnit();
-        myWallet = new ConcreteWallet();
+        PlayerUnit defaultScore = new PlayerUnit();
+        intialize(DEFAULT_NAME, new PlayerUnit(), defaultScore, new ConcreteWallet(defaultScore));
     }
 
     public Player (String name, PlayerUnit health, PlayerUnit score, Wallet wallet) {
+        intialize(name, health, score, wallet);
+    }
+    
+    private void intialize(String name, PlayerUnit health, PlayerUnit score, Wallet wallet){
         myHealth = health;
         myScore = score;
         myName = name;
         myWallet = wallet;
+        myHealth.addObserver(this);
+        myScore.addObserver(this);
     }
 
     public void setName (String name) {
@@ -55,6 +61,7 @@ public class Player extends Observable {
         myScore.changeValue(toAdd);
         setChanged();
         notifyObservers(myScore);
+        System.out.println("Score is now: " + myScore);
     }
 
     /**
@@ -66,6 +73,7 @@ public class Player extends Observable {
         myHealth.changeValue(change);
         setChanged();
         notifyObservers(myHealth);
+        System.out.println("Score is now: " + myHealth);
     }
 
     public double getScore () {
@@ -99,11 +107,13 @@ public class Player extends Observable {
     @Settable
     public void setHealth (PlayerUnit health) {
         myHealth = health;
+        myHealth.addObserver(this);
     }
 
     @Settable
     public void setScore (PlayerUnit score) {
         myScore = score;
+        myScore.addObserver(this);
     }
 
     public void setWallet (Wallet wallet) {
@@ -112,9 +122,15 @@ public class Player extends Observable {
     
     @Settable
     public void setWalletUnit (String unitLabel) {
-        if(myHealth.getLabel().equals(unitLabel))
+        if(myHealth.getLabel().equals(HEALTH))
             myWallet = new ConcreteWallet(myHealth);
         else
             myWallet = new ConcreteWallet(myScore);
+    }
+
+    @Override
+    public void update (Observable o, Object arg) {
+        setChanged();
+        notifyObservers(myScore);
     }
 }

@@ -41,5 +41,6 @@ public class PlayerData implements BuildObjectData {
         myPlayer.setScore(scoreUnit);
         myPlayer.setWalletUnit(myData.get(4));
         myPlayer.setWallet(myWallet);
+        //myPlayer.setWallet(myWallet);
     }
 }

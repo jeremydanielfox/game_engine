@@ -71,8 +71,8 @@
                         </myType>
                         <myPoint>
                           <myPoint>
-                            <x>279.90000000000003</x>
-                            <y>279.90000000000003</y>
+                            <x>280.34999999999997</x>
+                            <y>280.34999999999997</y>
                             <hash>0</hash>
                           </myPoint>
                         </myPoint>
@@ -94,8 +94,8 @@
                               <myWidth>40.0</myWidth>
                               <myImageName>/images/Bloons_TackShooter.png</myImageName>
                               <myPoint>
-                                <x>259.90000000000003</x>
-                                <y>259.90000000000003</y>
+                                <x>260.34999999999997</x>
+                                <y>260.34999999999997</y>
                                 <hash>0</hash>
                               </myPoint>
                               <myRotator class="engine.gameobject.RotateToPoint"/>
@@ -268,22 +268,6 @@
                             </upgradeMap>
                             <obsSet class="com.sun.javafx.collections.ObservableSetWrapper">
                               <backingSet>
-                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade>
-                                  <increment>0.5</increment>
-                                  <decorated reference="../../../../../myRange/decorated"/>
-                                  <observers/>
-                                  <type>NULL</type>
-                                </engine.gameobject.weapon.firingrate.FiringRateUpgrade>
-                                <engine.gameobject.units.directdamage.DamageBuff>
-                                  <duration>19</duration>
-                                  <timeSinceStart>0</timeSinceStart>
-                                  <type>COLLISION</type>
-                                  <observers/>
-                                  <increment>4.0</increment>
-                                  <decorated reference="../../../../../myRange/decorated"/>
-                                </engine.gameobject.units.directdamage.DamageBuff>
-                                <engine.gameobject.units.directdamage.DamageBuff reference="../../../../myProjectile/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff"/>
-                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
                                 <engine.gameobject.weapon.range.RangeUpgrade>
                                   <observers>
                                     <engine.gameobject.weapon.UpgradeObserver>
@@ -294,6 +278,22 @@
                                   <decorated reference="../../../../../myRange/decorated"/>
                                   <type>NULL</type>
                                 </engine.gameobject.weapon.range.RangeUpgrade>
+                                <engine.gameobject.units.directdamage.DamageBuff reference="../../../../myProjectile/myCollider/collisionBuffs/engine.gameobject.units.directdamage.DamageBuff"/>
+                                <engine.gameobject.weapon.firingrate.FiringRateUpgrade>
+                                  <increment>0.5</increment>
+                                  <decorated reference="../../../../../myRange/decorated"/>
+                                  <observers/>
+                                  <type>NULL</type>
+                                </engine.gameobject.weapon.firingrate.FiringRateUpgrade>
+                                <engine.gameobject.weapon.range.RangeUpgrade reference="../../../../myRange"/>
+                                <engine.gameobject.units.directdamage.DamageBuff>
+                                  <duration>19</duration>
+                                  <timeSinceStart>0</timeSinceStart>
+                                  <type>COLLISION</type>
+                                  <observers/>
+                                  <increment>4.0</increment>
+                                  <decorated reference="../../../../../myRange/decorated"/>
+                                </engine.gameobject.units.directdamage.DamageBuff>
                                 <engine.gameobject.weapon.firingrate.FiringRateUpgrade reference="../../../../myFiringRate"/>
                               </backingSet>
                               <listenerHelper class="com.sun.javafx.collections.SetListenerHelper$Generic">
@@ -558,12 +558,12 @@
                           </styleClass>
                           <derivedDepthTest>true</derivedDepthTest>
                           <layoutX class="javafx.scene.Node$10">
-                            <value>-70.09999999999997</value>
+                            <value>-69.65000000000003</value>
                             <valid>false</valid>
                             <outer-class class="javafx.scene.image.ImageView" reference="../.."/>
                           </layoutX>
                           <layoutY class="javafx.scene.Node$11">
-                            <value>-70.09999999999997</value>
+                            <value>-69.65000000000003</value>
                             <valid>false</valid>
                             <outer-class class="javafx.scene.image.ImageView" reference="../.."/>
                           </layoutY>
@@ -637,9 +637,15 @@
                           <pseudoClassStates class="com.sun.javafx.css.PseudoClassState">
                             <bits/>
                           </pseudoClassStates>
+                          <accessibleRole class="javafx.beans.property.SimpleObjectProperty">
+                            <value class="javafx.scene.AccessibleRole">IMAGE_VIEW</value>
+                            <valid>false</valid>
+                            <bean class="javafx.scene.image.ImageView" reference="../.."/>
+                            <name>accessibleRole</name>
+                          </accessibleRole>
                           <image class="javafx.scene.image.ImageView$1">
                             <value class="javafx.scene.image.Image">
-                              <url>file:/Users/myungoh/Documents/CS308/vooga4/bin/images/Bloons_TackShooter.png</url>
+                              <url>file:/Users/JohnGilhuly/Documents/workspace/CompSci%20308/voogasalad_RDatGV/bin/images/Bloons_TackShooter.png</url>
                               <progress>
                                 <value>1.0</value>
                                 <valid>true</valid>
@@ -15621,22 +15627,22 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </entry>
                         <entry>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>9</myRow>
-                            <myCol>0</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                          <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>9</myRow>
-                            <myCol>1</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                        </entry>
-                        <entry>
-                          <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>0</myRow>
                             <myCol>5</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>0</myRow>
                             <myCol>6</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                        </entry>
+                        <entry>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>9</myRow>
+                            <myCol>0</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>9</myRow>
+                            <myCol>1</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -15751,22 +15757,22 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </entry>
                         <entry>
                           <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>9</myRow>
-                            <myCol>1</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                          <voogasalad.util.pathsearch.graph.GridCell>
-                            <myRow>9</myRow>
-                            <myCol>2</myCol>
-                          </voogasalad.util.pathsearch.graph.GridCell>
-                        </entry>
-                        <entry>
-                          <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>0</myRow>
                             <myCol>6</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                           <voogasalad.util.pathsearch.graph.GridCell>
                             <myRow>0</myRow>
                             <myCol>7</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                        </entry>
+                        <entry>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>9</myRow>
+                            <myCol>1</myCol>
+                          </voogasalad.util.pathsearch.graph.GridCell>
+                          <voogasalad.util.pathsearch.graph.GridCell>
+                            <myRow>9</myRow>
+                            <myCol>2</myCol>
                           </voogasalad.util.pathsearch.graph.GridCell>
                         </entry>
                         <entry>
@@ -15961,8 +15967,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </entry>
                       </myPath>
                       <myTrans>
-                        <h>62.2</h>
-                        <w>62.2</w>
+                        <h>62.3</h>
+                        <w>62.3</w>
                       </myTrans>
                       <objectMatrix>
                         <engine.gameobject.GameObject-array>
@@ -17408,16 +17414,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>305</int>
-                    <int>1497</int>
-                    <int>1696</int>
-                    <int>805</int>
-                    <int>1876</int>
-                    <int>2287</int>
-                    <int>249</int>
-                    <int>1778</int>
-                    <int>1650</int>
-                    <int>2117</int>
+                    <int>736</int>
+                    <int>1883</int>
+                    <int>713</int>
+                    <int>2242</int>
+                    <int>549</int>
+                    <int>838</int>
+                    <int>900</int>
+                    <int>1725</int>
+                    <int>242</int>
+                    <int>435</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -22725,8 +22731,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
               </gameworld.TerrainTile-array>
             </myMatrix>
             <myTrans>
-              <h>47.84615384615385</h>
-              <w>47.84615384615385</w>
+              <h>47.92307692307692</h>
+              <w>47.92307692307692</w>
             </myTrans>
             <myBounds>
               <myRow>13</myRow>

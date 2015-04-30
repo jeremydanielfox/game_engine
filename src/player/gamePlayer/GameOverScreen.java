@@ -1,8 +1,10 @@
 package player.gamePlayer;
 
+import java.io.File;
 import engine.game.Game;
 import voogasalad.util.highscore.HighScoreController;
 import voogasalad.util.highscore.HighScoreException;
+import xml.DataManager;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -30,6 +32,7 @@ public class GameOverScreen implements GameScene {
     private Scene myGameSelectScene;
     private Game myGame;
     private Text myResultsText;
+    //private File previousGameFilePath;
     
     public GameOverScreen(Stage stage, Scene previousScene,Scene gameSelectionScene,Game game) {
         myStage=stage;
@@ -37,6 +40,7 @@ public class GameOverScreen implements GameScene {
         myGameSelectScene=gameSelectionScene;
         myGame=game;
         myResultsText=new Text("");
+        //previousGameFilePath=previousFilePath;
         makeScene();
     }
 
@@ -50,7 +54,9 @@ public class GameOverScreen implements GameScene {
         Button btn1=formatButton("Play Again",BUTTON_RESIZE_SCALE_FACTOR);
         btn1.setOnAction(e->myStage.setScene(myPreviousScene));
         Button btn2=formatButton("Select New Game",BUTTON_RESIZE_SCALE_FACTOR);
-        btn2.setOnAction(e->myStage.setScene(myGameSelectScene));
+        btn2.setOnAction(e->{//myGame=DataManager.readFromXML(Game.class, previousGameFilePath.getAbsolutePath());
+            myStage.setScene(myGameSelectScene);
+            });
         Button btn3=formatButton("View High Scores",BUTTON_RESIZE_SCALE_FACTOR);
         btn3.setOnAction(e->displayScores());
         

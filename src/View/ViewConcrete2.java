@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import player.gamePlayer.GameOverScreen;
 import player.gamePlayer.GamePlayerScreen;
+import player.gamePlayer.PauseDropDown;
 import voogasalad.util.highscore.HighScoreController;
 import voogasalad.util.highscore.HighScoreException;
 import javafx.animation.Animation;
@@ -59,16 +60,18 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private double myDisplayHeight;
     private HUD myHeadsUp;
     private GameOverScreen myEndScreen;
+    private PauseDropDown pauseScreen;
 
     public ViewConcrete2 (Game game,
                           double stageWidth,
-                          double stageHeight, GameOverScreen screen) {
+                          double stageHeight, GameOverScreen screen, PauseDropDown pauser) {
         myGame = game;
         myLevelBoard = myGame.getLevelBoard();
         myLevelBoard.addObserver(this);
         myDisplayWidth = stageWidth;
         myDisplayHeight = stageHeight;
         myEndScreen=screen;
+        pauseScreen = pauser;
     }
     
     public ViewConcrete2 (Game game,
@@ -86,6 +89,14 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     public Node initializeView () {
         myPane = new BorderPane();
         myGameWorldPane = new Pane();
+        
+        myPane.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
+            if (key.getCode().equals(KeyCode.P)){
+                this.pause();
+                pauseScreen.displayPauseScreen();
+            }
+        });
+        
         myGameWorldPane.setMaxWidth(myDisplayHeight);
         myPane.setCenter(myGameWorldPane);
         initializeGameWorld();

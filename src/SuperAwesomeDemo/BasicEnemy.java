@@ -10,21 +10,22 @@ import engine.gameobject.RotatorNull;
 import engine.gameobject.test.EnemyTowerType;
 import engine.gameobject.weapon.NullWeapon;
 import engine.pathfinding.PathFixed;
+import gameworld.GameWorld;
 
 
 public class BasicEnemy extends GameObjectSimple {
-    public BasicEnemy () {
+    public BasicEnemy (GameWorld gw) {
         super();
         setLabel(new EnemyTowerType());
         Graphic myGraphic = new Graphic(47, 28, "/images/BoxHeadBasicEnemy.png");
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);
         setPoint(new PointSimple(0, 10000));
-        setHealth(new HealthSimple(1));
+        setHealth(new HealthSimple(3));
         setWeapon(new NullWeapon());
         PathFixed myPath = new PathFixed();
         myPath = DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml");
-        setMover(new MoverPath(myPath, 1.4));
+        setMover(new MoverPath(gw.getPath(), .7));
     }
   
 }

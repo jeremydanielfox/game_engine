@@ -23,9 +23,6 @@ public class MultipleProjectile extends BasicStrategy {
                          GameObject target,
                          PointSimple location,
                          GameObject prototype) {
-        // PointSimple referencePoint = target.getPoint();
-        // A point 45 degrees to current location as reference TODO: This only works for 8
-        // projectiles right now.
         PointSimple referencePoint = new PointSimple(location.getX() + 5, location.getY() + 5);
         for (int i = 0; i < projectilesCreated; i++) {
             PointSimple newPoint =

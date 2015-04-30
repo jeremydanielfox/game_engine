@@ -11,10 +11,14 @@ import engine.gameobject.weapon.NullWeapon;
 
 
 public class BasicFriendlyProjectile extends GameObjectSimple {
+    
+    public BasicFriendlyProjectile(){
+        this(1, 1, 100);
+    }
     public BasicFriendlyProjectile (int damage, double speed, double distanceLimit) {
         super();
         setLabel(new FriendlyProjectileType());
-        Graphic myGraphic = new Graphic(25,25,"/images/robertDuvall.jpg");
+        Graphic myGraphic = new Graphic(7,7,"/images/Black_dot.png");
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);
         setPoint(new PointSimple(0, 10000));

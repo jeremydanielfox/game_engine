@@ -2,14 +2,17 @@ package player.gamePlayer;
 
 import engine.game.Game;
 import gae.gameView.Main;
+
 import java.io.File;
 import java.util.Arrays;
+
 import xml.DataManager;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -75,11 +78,13 @@ public class PlayerOpener implements GameScene {
 
         playB = new Button("PLAY");
         playB.setOnMousePressed(e -> {
-            myGame=DataManager.readFromXML(Game.class, "./src/xml/Game.xml");
-            moveToNextScreen(myGame,new File("./src/xml/Game.xml"));
-            // PauseScene pause = new PauseScene(null, myStage, playerScene);
-            // myStage.setScene(pause.getScene());
-
+            playSelectedGame();
+        });
+        
+        playerScene.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
+            if (key.getCode() == KeyCode.ENTER) {
+                playSelectedGame();
+            }
         });
 
         Arrays.asList(loadB, playB).forEach(e -> {
@@ -88,6 +93,12 @@ public class PlayerOpener implements GameScene {
         });
 
         createOptions();
+    }
+
+    private void playSelectedGame () {
+        String filePath = gameSelector.getSelectedGamePath();
+        myGame=DataManager.readFromXML(Game.class, filePath);
+        moveToNextScreen(myGame,new File(filePath));
     }
 
     private void moveToNextScreen(Game game,File filePath) {

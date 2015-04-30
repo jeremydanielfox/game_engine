@@ -67,7 +67,7 @@
                   <myWorld class="gameworld.FreeWorld">
                     <myObjects>
                       <engine.gameobject.test.TestTower>
-                        <myType class="engine.gameobject.test.TowerLabel">
+                        <myType class="engine.gameobject.test.FriendlyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -176,12 +176,12 @@
                           </engine.gameobject.test.ProjectileLabel>
                           <map>
                             <entry>
-                              <engine.gameobject.test.EnemyLabel>
+                              <engine.gameobject.test.EnemyTowerType>
                                 <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
                                 </superType>
                                 <myName>Enemy</myName>
-                              </engine.gameobject.test.EnemyLabel>
+                              </engine.gameobject.test.EnemyTowerType>
                               <engine.interactions.BuffImparter/>
                             </entry>
                           </map>
@@ -192,20 +192,20 @@
                     <myRangeEngine class="engine.interactions.RangeEngine">
                       <myTable>
                         <entry>
-                          <engine.gameobject.test.TowerLabel>
+                          <engine.gameobject.test.FriendlyTowerType>
                             <superType class="engine.gameobject.labels.TypeBase">
                               <myName>Base</myName>
                             </superType>
                             <myName>Tower</myName>
-                          </engine.gameobject.test.TowerLabel>
+                          </engine.gameobject.test.FriendlyTowerType>
                           <map>
                             <entry>
-                              <engine.gameobject.test.EnemyLabel>
+                              <engine.gameobject.test.EnemyTowerType>
                                 <superType class="engine.gameobject.labels.TypeBase">
                                   <myName>Base</myName>
                                 </superType>
                                 <myName>Enemy</myName>
-                              </engine.gameobject.test.EnemyLabel>
+                              </engine.gameobject.test.EnemyTowerType>
                               <engine.interactions.ShootAt/>
                             </entry>
                           </map>
@@ -16410,7 +16410,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myQueue class="engine.events.ConcreteQueue">
                     <myOrderedObjects class="linked-list">
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -16498,7 +16498,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -16580,7 +16580,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -16662,7 +16662,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -16744,7 +16744,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -16826,7 +16826,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -16908,7 +16908,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -16990,7 +16990,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -17072,7 +17072,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -17154,7 +17154,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -17242,16 +17242,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>41</int>
-                    <int>2173</int>
-                    <int>1445</int>
-                    <int>292</int>
-                    <int>1474</int>
-                    <int>1944</int>
-                    <int>2314</int>
-                    <int>1340</int>
-                    <int>971</int>
-                    <int>1801</int>
+                    <int>2307</int>
+                    <int>1186</int>
+                    <int>709</int>
+                    <int>1693</int>
+                    <int>635</int>
+                    <int>2021</int>
+                    <int>523</int>
+                    <int>113</int>
+                    <int>1579</int>
+                    <int>1736</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -17261,7 +17261,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myQueue class="engine.events.ConcreteQueue">
                     <myOrderedObjects class="linked-list">
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -17715,7 +17715,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -18169,7 +18169,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -18623,7 +18623,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -19077,7 +19077,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -19531,7 +19531,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -19985,7 +19985,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -20439,7 +20439,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -20893,7 +20893,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -21347,7 +21347,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                         </myShopTag>
                       </engine.gameobject.GameObjectSimpleTest>
                       <engine.gameobject.GameObjectSimpleTest>
-                        <myType class="engine.gameobject.test.EnemyLabel">
+                        <myType class="engine.gameobject.test.EnemyTowerType">
                           <superType class="engine.gameobject.labels.TypeBase">
                             <myName>Base</myName>
                           </superType>
@@ -21863,12 +21863,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                 </engine.gameobject.test.ProjectileLabel>
                 <map>
                   <entry>
-                    <engine.gameobject.test.EnemyLabel>
+                    <engine.gameobject.test.EnemyTowerType>
                       <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
                       </superType>
                       <myName>Enemy</myName>
-                    </engine.gameobject.test.EnemyLabel>
+                    </engine.gameobject.test.EnemyTowerType>
                     <engine.interactions.BuffImparter/>
                   </entry>
                 </map>
@@ -21879,20 +21879,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
           <myRangeEngine class="engine.interactions.RangeEngine">
             <myTable>
               <entry>
-                <engine.gameobject.test.TowerLabel>
+                <engine.gameobject.test.FriendlyTowerType>
                   <superType class="engine.gameobject.labels.TypeBase">
                     <myName>Base</myName>
                   </superType>
                   <myName>Tower</myName>
-                </engine.gameobject.test.TowerLabel>
+                </engine.gameobject.test.FriendlyTowerType>
                 <map>
                   <entry>
-                    <engine.gameobject.test.EnemyLabel>
+                    <engine.gameobject.test.EnemyTowerType>
                       <superType class="engine.gameobject.labels.TypeBase">
                         <myName>Base</myName>
                       </superType>
                       <myName>Enemy</myName>
-                    </engine.gameobject.test.EnemyLabel>
+                    </engine.gameobject.test.EnemyTowerType>
                     <engine.interactions.ShootAt/>
                   </entry>
                 </map>

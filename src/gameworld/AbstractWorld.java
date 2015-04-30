@@ -102,7 +102,7 @@ public class AbstractWorld implements GameWorld {
             }
         });
         for (GameObject toRemove : buffer) {
-            myObjects.remove(toRemove);
+        	removeObject(toRemove);
             toRemove.onDeath(this);
         }
     }

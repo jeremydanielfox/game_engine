@@ -17236,6 +17236,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
+<<<<<<< HEAD
                     <int>249</int>
                     <int>1142</int>
                     <int>858</int>
@@ -17246,6 +17247,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</hb>
                     <int>611</int>
                     <int>619</int>
                     <int>1909</int>
+=======
+                    <int>2307</int>
+                    <int>1186</int>
+                    <int>709</int>
+                    <int>1693</int>
+                    <int>635</int>
+                    <int>2021</int>
+                    <int>523</int>
+                    <int>113</int>
+                    <int>1579</int>
+                    <int>1736</int>
+>>>>>>> 0df33b703986af9ec19d96a6214c1759badd40d5
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

@@ -97,7 +97,7 @@ public class GameWriterSuperAwesome extends Application {
         List<Goal> list3 = new ArrayList<Goal>();
 //        ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
 //        list3.add(score2);
-        Level levelOne = new ConcreteLevel("images/Park_Path.png", list2, list, world, story);
+        Level levelOne = new ConcreteLevel("images/Gray_Hexagon.jpg", list2, list, world, story);
         levelOne.addTimer(t);
         board.addLevel(levelOne);
         board.addLevel(new ConcreteLevel("images/example_path.jpeg", list3, list,

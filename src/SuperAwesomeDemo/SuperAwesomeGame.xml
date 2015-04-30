@@ -36,7 +36,7 @@
     <myLevels>
       <engine.game.ConcreteLevel>
         <myTitle></myTitle>
-        <myImagePath>images/Park_Path.png</myImagePath>
+        <myImagePath>images/Gray_Hexagon.jpg</myImagePath>
         <myWinningGoals>
           <engine.goals.EventsCompleteGoal>
             <isSatisfied>false</isSatisfied>
@@ -349,9 +349,9 @@
                             </myBehaviors>
                             <myGraphic>
                               <myTitle></myTitle>
-                              <myHeight>25.0</myHeight>
-                              <myWidth>25.0</myWidth>
-                              <myImageName>/images/ArcaneTower.png</myImageName>
+                              <myHeight>48.0</myHeight>
+                              <myWidth>30.0</myWidth>
+                              <myImageName>/images/Cool_Turret.png</myImageName>
                               <myPoint>
                                 <x>0.0</x>
                                 <y>10000.0</y>
@@ -6318,16 +6318,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>2373</int>
-                    <int>425</int>
-                    <int>711</int>
-                    <int>467</int>
-                    <int>2078</int>
-                    <int>1358</int>
-                    <int>334</int>
-                    <int>2052</int>
-                    <int>1051</int>
-                    <int>1434</int>
+                    <int>2328</int>
+                    <int>374</int>
+                    <int>117</int>
+                    <int>1583</int>
+                    <int>1905</int>
+                    <int>439</int>
+                    <int>2073</int>
+                    <int>1857</int>
+                    <int>1712</int>
+                    <int>395</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>
@@ -11647,9 +11647,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
                 </myBehaviors>
                 <myGraphic>
                   <myTitle></myTitle>
-                  <myHeight>25.0</myHeight>
-                  <myWidth>25.0</myWidth>
-                  <myImageName>/images/ArcaneTower.png</myImageName>
+                  <myHeight>48.0</myHeight>
+                  <myWidth>30.0</myWidth>
+                  <myImageName>/images/Cool_Turret.png</myImageName>
                   <myPoint>
                     <x>0.0</x>
                     <y>10000.0</y>

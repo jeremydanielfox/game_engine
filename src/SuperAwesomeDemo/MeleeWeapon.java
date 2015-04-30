@@ -10,7 +10,6 @@ import engine.gameobject.RotatorNull;
 import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.NullWeapon;
-import engine.gameobject.weapon.firingstrategy.UserStrategy;
 
 public class MeleeWeapon extends BasicWeapon{
     public MeleeWeapon(GameObject object){

@@ -1,7 +1,7 @@
 package gameworld;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import View.ViewConcrete2;
 import voogasalad.util.pathsearch.graph.GridCell;
 import voogasalad.util.pathsearch.pathalgorithms.NoPathExistsException;
@@ -30,6 +30,8 @@ public class FreeWorld extends AbstractWorld {
         myGrid = new GameObject[numRows][numCols];
         // 1000 measurements
         myPath = new PathFree(myTrans, myGrid);
+        mySpawnPoints = new ArrayList<>();
+        myEndPoints = new ArrayList<>();
         try {
             myPath.updatePath();
         }

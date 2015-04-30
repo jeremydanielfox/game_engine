@@ -117,7 +117,7 @@ public class Graphic {
      *
      * @return
      */
-    private ImageView getImageView () {
+    public ImageView getImageView () {
         if (myImageView == null) {
             initializeImageView();
         }

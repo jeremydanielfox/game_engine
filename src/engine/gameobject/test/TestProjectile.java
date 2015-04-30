@@ -39,7 +39,7 @@ public class TestProjectile extends GameObjectSimple {
         }
         if (type == 5){
             setWeapon(new TestWeapon(4, null));
-            setLabel(new TowerLabel());
+            setLabel(new FriendlyTowerType());
         }
     }
 

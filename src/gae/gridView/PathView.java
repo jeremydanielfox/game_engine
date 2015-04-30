@@ -82,7 +82,7 @@ public class PathView implements Authorable {
         });
 
         set.setOnMouseExited(e -> {
-            set.changeColor(Color.FORESTGREEN);
+            set.changeColor(Color.BLUE);
             set.makeVisible(false);
         });
 

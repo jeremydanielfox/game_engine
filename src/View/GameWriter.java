@@ -41,7 +41,7 @@ import gameworld.GameWorld;
 
 public class GameWriter extends Application {
     static GameWriter myWriter;
-    private static final String FILE_DESTINATION = "src/xml/Game.xml";
+    private static final String FILE_DESTINATION = "src/SuperAwesomeDemo/SuperAwesomeGame.xml";
 
     /**
      * @param world
@@ -145,7 +145,7 @@ public class GameWriter extends Application {
         myWriter.writeGame();
     }
 
-    private void writeGame () {
+    public void writeGame () {
         Player myPlayer = makePlayer();
         GameWorld myWorld = makeWorld();
         ShopModel myShop = new ShopModelSimple(myWorld, myPlayer, 1);

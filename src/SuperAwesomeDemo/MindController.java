@@ -7,6 +7,7 @@ import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
 import engine.gameobject.RotatorNull;
+import engine.gameobject.test.EnemyTowerType;
 import engine.gameobject.test.FriendlyTowerType;
 import engine.gameobject.units.WeaponBuff;
 import engine.gameobject.units.ZombieBuff;
@@ -21,7 +22,10 @@ public class MindController extends BasicWeapon{
     private static MindController mcInstance;
     private static boolean instanced = false;
     public MindController(GameObject object){
+       
         super();
+//        if (!(object.getLabel() instanceof EnemyTowerType) )
+//            return;
         if (mcInstance == null && !instanced){
             instanced = true;
             mcInstance = new MindController(object);

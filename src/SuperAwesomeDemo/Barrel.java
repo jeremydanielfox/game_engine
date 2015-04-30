@@ -15,6 +15,7 @@ public class Barrel extends GameObjectSimple {
     public Barrel () {
         super();
         ShopTagSimple shopTag = new ShopTagSimple();
+        shopTag.setName("Barrel");
         shopTag.setDescription("Blow people up!");
         shopTag.setShopGraphic(new Graphic(90, 60, "/images/Barrel.png"));
         setShopTag(shopTag);

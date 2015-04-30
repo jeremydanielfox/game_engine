@@ -28,7 +28,7 @@ public class RocketLauncher extends BasicWeapon {
     private GameObject makeProjectile(){
         GameObject myProjectile = new GameObjectSimple();
         myProjectile.setLabel(new FriendlyProjectileType());
-        Graphic myGraphic = new Graphic(25,25,"/images/robertDuvall.jpg");//TODO: Set graphic here
+        Graphic myGraphic = new Graphic(25,25,"/images/Missile.png");//TODO: Set graphic here
         myGraphic.setRotator(new RotatorNull());
         myProjectile.setGraphic(myGraphic);
         myProjectile.setPoint(new PointSimple(0, 10000));

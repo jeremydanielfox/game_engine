@@ -27,7 +27,7 @@ public class MeleeWeapon extends BasicWeapon{
         myGraphic.setRotator(new RotatorNull());
         myProjectile.setGraphic(myGraphic);
         myProjectile.setPoint(new PointSimple(0, 10000));
-        myProjectile.setHealth(new HealthSimple(0));
+        myProjectile.setHealth(new HealthSimple(1));
         myProjectile.setWeapon(new NullWeapon());
         myProjectile.getCollider().addCollisionBehavior(new DamageBuff(3));//damage set
         myProjectile.setMover(new MoverDirection(new PointSimple(), 5, 30));

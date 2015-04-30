@@ -4,7 +4,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -13,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import engine.interactions.Interaction;
+
 
 /**
  * Concrete musician that can be accessed by any classes in the project to add music to their scene,
@@ -88,13 +88,13 @@ public class MusicianSimple implements Musician {
                     if (muted) {
                         myMusician.setVolume(savedVolume);
                     }
-                    else {
-                        mute();
-                    }
-                    muted = !muted;
-                }
-            }
-        }));
+                             else {
+                                 mute();
+                             }
+                             muted = !muted;
+                         }
+                     }
+                 }));
     }
 
     @Override
@@ -141,10 +141,9 @@ public class MusicianSimple implements Musician {
             /* does nothing if myMusician is not initialized */
         }
     }
-    
+
     @Override
     public MediaPlayer reinitialize (MediaPlayer mp, Media m) {
-        mp.dispose();
         mp = new MediaPlayer(m);
         return mp;
     }

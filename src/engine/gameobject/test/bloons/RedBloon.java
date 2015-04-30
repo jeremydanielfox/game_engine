@@ -6,7 +6,7 @@ import engine.gameobject.Graphic;
 import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
-import engine.gameobject.test.EnemyLabel;
+import engine.gameobject.test.EnemyTowerType;
 import engine.gameobject.weapon.NullWeapon;
 import engine.pathfinding.PathFixed;
 
@@ -14,7 +14,7 @@ public class RedBloon extends GameObjectSimple{
 
     public RedBloon(){
         super();
-        setLabel(new EnemyLabel());
+        setLabel(new EnemyTowerType());
         setGraphic(new Graphic(18, 23, "/images/Red_Bloon.png"));
         setPoint(new PointSimple(0, 10000)); 
         setHealth(new HealthSimple(1));

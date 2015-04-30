@@ -13,7 +13,7 @@ import gameworld.GameWorld;
 public class RangeEngineTest extends RangeEngine {
     public RangeEngineTest (GameWorld world) {
         super.setWorld(world);
-        super.put(new TowerLabel(), new EnemyLabel(), new ShootAt());
+        super.put(new FriendlyTowerType(), new EnemyTowerType(), new ShootAt());
     }
 
 }

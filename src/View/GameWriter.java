@@ -139,6 +139,7 @@ public class GameWriter extends Application {
     public GameWorld makeWorld () {
         FixedWorld world = new FixedWorld(10,10);
         world.setCollisionEngine(new CollisionEngineAwesome());
+        
         world.setRangeEngine(new RangeEngineAwesome());
         // world.addObject(new TestTower(2, 330, 130));
         //world.addObject(new TestTower(5, 270, 270));

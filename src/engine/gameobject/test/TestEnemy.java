@@ -20,6 +20,6 @@ public class TestEnemy extends GameObjectSimple {
         shopTag.setName("TestTower");
         shopTag.setDescription("Just a test tower; nothing special here...");
         shopTag.setShopGraphic(new Graphic(40, 40, "/images/Bloons_TackShooterIcon.png"));
-        setLabel(new EnemyLabel());
+        setLabel(new EnemyTowerType());
     }
 }

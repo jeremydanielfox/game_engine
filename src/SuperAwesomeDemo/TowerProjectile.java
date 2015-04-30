@@ -1,5 +1,5 @@
 package SuperAwesomeDemo;
 
-public class TowerProjectile {
+public class TowerProjectile extends BasicFriendlyProjectile {
 
 }

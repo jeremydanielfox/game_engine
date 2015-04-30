@@ -13,7 +13,7 @@ public class Shotgun extends BasicWeapon{
         UserStrategy myStrategy = new UserStrategy();
         myStrategy.setFiringRate(1);//Set Firing Rate here
         setFiringStrategy(new UserStrategy());//TODO: Make this shoot multiple
-        GameObject myProjectile = new BasicProjectile(3, 1.5, 200);//Set projectile's basic properties here
+        GameObject myProjectile = new BasicFriendlyProjectile(3, 1.5, 200);//Set projectile's basic properties here
         //Add extra projectile properties here, such as graphics or other buffs
         setProjectile(myProjectile);
     }

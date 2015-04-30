@@ -39,8 +39,9 @@ public class UserStrategy extends BasicStrategy {
      * @param firePerSecond
      */
     public void setFiringRate(int firePerSecond){
-        
+        firingTimeLimit = 60/firePerSecond;
     }
+    
     private void initializeNode (Graphic graphic) {
         myNode = graphic.getNode();
         myNode.setFocusTraversable(true);

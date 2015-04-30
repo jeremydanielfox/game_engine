@@ -16,7 +16,7 @@ public class BasicEnemy extends GameObjectSimple {
     public BasicEnemy () {
         super();
         setLabel(new EnemyTowerType());
-        Graphic myGraphic = new Graphic(40, 40, "/images/GanonScary.png");
+        Graphic myGraphic = new Graphic(47, 28, "/images/BoxHeadBasicEnemy.png");
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);
         setPoint(new PointSimple(0, 10000));

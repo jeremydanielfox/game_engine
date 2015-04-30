@@ -3,7 +3,8 @@ package View;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import SuperAwesomeDemo.CollisionEngineAwesome;
+import SuperAwesomeDemo.RangeEngineAwesome;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import voogasalad.util.pathsearch.graph.GridCell;
@@ -136,8 +137,10 @@ public class GameWriterConcrete2 extends Application {
 	 * @return
 	 */
 	public GameWorld makeWorld() {
+	    
 		FreeWorld world = new FreeWorld(10,10);
-
+		world.setCollisionEngine(new CollisionEngineAwesome());
+	        world.setRangeEngine(new RangeEngineAwesome());
 		GridCell[] sPoints = { new GridCell(0, 0), new GridCell(9, 0) };
 		List<GridCell> startPoints = Arrays.asList(sPoints);
 		GridCell[] ePoints = { new GridCell(9, 9), new GridCell(0, 9),
@@ -155,10 +158,11 @@ public class GameWriterConcrete2 extends Application {
 			MoverUser m = new MoverUser();
 			m.setGraphic(g.getGraphic());
 			g.setMover(m);
-//			UserStrategy pewpew = new UserStrategy();
-//			pewpew.setGraphic(g.getGraphic());
-//			g.getWeapon().setFiringStrategy(pewpew);
-			g.setWeapon(new NullWeapon());
+			UserStrategy pewpew = new UserStrategy();
+			pewpew.setGraphic(g.getGraphic());
+			g.getWeapon().setFiringStrategy(pewpew);
+			g.getWeapon().setFiringRate(100);
+			//g.setWeapon(new NullWeapon());
 
 			world.addObject(g, new PointSimple(300,300));
         }

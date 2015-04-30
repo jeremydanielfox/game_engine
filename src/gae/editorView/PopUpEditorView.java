@@ -1,5 +1,6 @@
 package gae.editorView;
 
+import gae.gameView.GameView;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javafx.scene.Node;
@@ -24,6 +25,7 @@ public class PopUpEditorView {
                 new GameObjectEditorView(editorScene, consumer, biConsumer, klass, index);
         Node pane = (BorderPane) editor.getObject();
         scroll.setContent(pane);
+        editorScene.getStylesheets().add(GameView.GAMEVIEW_CSS);
         editorStage.setScene(editorScene);
         editorStage.show();
     }

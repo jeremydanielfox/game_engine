@@ -23,7 +23,6 @@ public class Collider {
     public Collider () {
         collidedID = new HashSet<GameObject>();
         collisionBuffs = new HashSet<Buff>();
-        collisionBuffs.add(new DamageBuff(10));
         onDeath = new Explosion();
     }
 

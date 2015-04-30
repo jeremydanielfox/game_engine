@@ -8,11 +8,16 @@ import engine.gameobject.PointSimple;
 import engine.gameobject.RotatorNull;
 import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.weapon.NullWeapon;
+import engine.shop.ShopTagSimple;
 
 
 public class Barrel extends GameObjectSimple {
     public Barrel () {
         super();
+        ShopTagSimple shopTag = new ShopTagSimple();
+        shopTag.setDescription("Blow people up!");
+        shopTag.setShopGraphic(new Graphic(90, 60, "/images/Barrel.png"));
+        setShopTag(shopTag);
         setLabel(new NeutralGameType());
         Graphic myGraphic = new Graphic(47, 28, "/images/Barrel.png");
         myGraphic.setRotator(new RotatorNull());

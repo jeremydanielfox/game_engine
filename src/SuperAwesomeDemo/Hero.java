@@ -22,8 +22,8 @@ public class Hero extends GameObjectSimple {
 //        myWeapon.setProjectile(new BasicFriendlyProjectile());
 //        myWeapon.setFiringRate(.5);
 //        myWeapon.setRange(100);
-        setWeapon(new TowerShooter(this));
-//        setWeapon(new Shotgun(this));
+//        setWeapon(new TowerShooter(this));
+        setWeapon(new Shotgun(this));
         MoverUser myMover = new MoverUser(10);
         myMover.setGraphic(myGraphic);
         // myMover.setRange(200);

@@ -100,14 +100,14 @@
                             </engine.gameobject.units.directdamage.DamageBuff>
                           </collisionBuffs>
                           <onDeath>
-                            <radius>100.0</radius>
+                            <radius>30.0</radius>
                             <explosBuffs>
                               <engine.gameobject.units.directdamage.DamageBuff>
                                 <duration>19</duration>
                                 <timeSinceStart>0</timeSinceStart>
                                 <type>COLLISION</type>
                                 <observers/>
-                                <increment>1.0</increment>
+                                <increment>3.0</increment>
                                 <decorated reference="../../../../collisionBuffs/engine.gameobject.units.directdamage.DamageBuff/decorated"/>
                               </engine.gameobject.units.directdamage.DamageBuff>
                             </explosBuffs>
@@ -6541,16 +6541,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
                   <myFrameDuration>2400</myFrameDuration>
                   <myFramesSinceStart>0</myFramesSinceStart>
                   <myReleaseTimes>
-                    <int>1685</int>
-                    <int>854</int>
-                    <int>731</int>
-                    <int>971</int>
-                    <int>282</int>
-                    <int>758</int>
-                    <int>109</int>
-                    <int>846</int>
-                    <int>776</int>
-                    <int>452</int>
+                    <int>40</int>
+                    <int>1900</int>
+                    <int>678</int>
+                    <int>1141</int>
+                    <int>286</int>
+                    <int>2149</int>
+                    <int>1494</int>
+                    <int>308</int>
+                    <int>676</int>
+                    <int>439</int>
                   </myReleaseTimes>
                 </engine.events.RandomSpanWave>
                 <engine.events.ConstantSpacingWave>

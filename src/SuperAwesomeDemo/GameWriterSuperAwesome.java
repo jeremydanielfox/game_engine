@@ -63,6 +63,7 @@ public class GameWriterSuperAwesome extends Application {
         pointBehavior.setMoney(10);
         pointBehavior.setPoint(10);
         for (int i = 0; i < 10; i++) {
+//            Devil toAdd = new Devil(world);
             BasicEnemy toAdd = new BasicEnemy(world);
             toAdd.addOnDeathBehavior(pointBehavior);
             toAdd.addEndOfPathBehavior(healthBehavior);

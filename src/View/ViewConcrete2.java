@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
 import player.gamePlayer.GameOverScreen;
 import player.gamePlayer.GamePlayerScreen;
 import player.gamePlayer.PauseDropDown;
@@ -15,6 +14,7 @@ import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.util.Duration;
@@ -40,8 +41,8 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private static final int DEFAULT_FRAME_RATE = 60;
     public static final int MAX_FRAME_RATE = 200;
     public static final int MIN_FRAME_RATE = 500;
-    public static final double WORLD_WIDTH = 623;
-    public static final double WORLD_HEIGHT = 623;
+    public static final double WORLD_WIDTH = 578;
+    public static final double WORLD_HEIGHT = 578;
     // public static final int MAX_FRAME_RATE = 500;
     // public static final int MIN_FRAME_RATE = 1000;
     public static final int DEFAULT_FRAMES_SECOND =
@@ -70,10 +71,10 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myLevelBoard.addObserver(this);
         myDisplayWidth = stageWidth;
         myDisplayHeight = stageHeight;
-        myEndScreen=screen;
+        myEndScreen = screen;
         pauseScreen = pauser;
     }
-    
+
     public ViewConcrete2 (Game game,
                           double stageWidth,
                           double stageHeight) {
@@ -82,25 +83,24 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         myLevelBoard.addObserver(this);
         myDisplayWidth = stageWidth;
         myDisplayHeight = stageHeight;
-        
+
     }
 
     @Override
     public Node initializeView () {
         myPane = new BorderPane();
         myGameWorldPane = new Pane();
-        
+
         myPane.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
-            if (key.getCode().equals(KeyCode.P)){
+            if (key.getCode().equals(KeyCode.P)) {
                 this.pause();
                 pauseScreen.displayPauseScreen();
             }
         });
-        
+
         myGameWorldPane.setMaxWidth(myDisplayHeight);
         myPane.setCenter(myGameWorldPane);
         initializeGameWorld();
-        // vbox.setFocusTraversable(false);
         return myPane;
     }
 
@@ -113,13 +113,13 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
             myHeadsUp.addStatsDisplay(d);
         }
         addLevelDisplays();
-        vbox.getChildren().add(myHeadsUp.getDisplay());
 
+        myPane.setManaged(false);
         addInitialObjects();
-
-        myPane.setRight(vbox);
-        buildTimeline();
+        myPane.getChildren().add(vbox);
         
+        buildTimeline();
+        vbox.getChildren().add(myHeadsUp.getDisplay());
         Button btn = new Button("Dec");
         btn.setOnAction(e -> myGame.getPlayer().changeHealth(-100));
         Button btn2 = new Button("Inc");
@@ -128,7 +128,10 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         vbox.getChildren().addAll(btn, btn2);
         myButtonList = myGame.getButtons();
         myButtonList.forEach(e -> vbox.getChildren().add(e.getButton()));
+        vbox.setTranslateX(600);
+
         play();
+
     }
 
     private void addLevelDisplays () {
@@ -147,8 +150,6 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
     private KeyFrame makeKeyFrame (int frameRate) {
         return new KeyFrame(Duration.millis(myRate / frameRate),
                             e -> executeFrameActions());
-        // return new KeyFrame(Duration.millis(myRate / frameRate),
-        // e -> executeFrameActions());
     }
 
     @Override
@@ -207,7 +208,8 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         }
         List<Node> buffer = new ArrayList<Node>();
         for (GameObject o : gameObjects) {
-            if (hack.contains(o.getGraphic().getNode()))//If this object existed last frame, add. If first frame, don't add.
+            if (hack.contains(o.getGraphic().getNode()))// If this object existed last frame, add.
+                                                        // If first frame, don't add.
                 myGameWorldPane.getChildren().add(o.getGraphic().getNode());
             buffer.add(o.getGraphic().getNode());
         }
@@ -268,10 +270,6 @@ public class ViewConcrete2 implements EngineView, Observer, ChangeableSpeed, Pla
         ImageView image = new ImageView(myLevelBoard.getCurrentLevelMap());
         // image.setFitHeight(myDisplayHeight);
         // image.setFitWidth(myDisplayHeight * GAME_WIDTH_TO_HEIGHT);
-        /*
-         * I changed this to 600 because that's the size of the container - the relative thing works
-         * I think - Kei
-         */
         image.setFitHeight(WORLD_HEIGHT);
         image.setFitWidth(WORLD_WIDTH);
         myGameWorldPane.getChildren().clear();

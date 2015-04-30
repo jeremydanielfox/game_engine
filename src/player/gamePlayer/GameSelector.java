@@ -54,7 +54,8 @@ public class GameSelector {
         SelectOption s1 = new SelectOption(new ImageView("/images/custombloons.jpg"), "Custom Bloons", "src/xml/CS308BloonsDemo.xml");
         SelectOption s2 = new SelectOption(new ImageView("/images/pineapplegame.png"), "(Pine)Apples", "src/xml/(pine)apple.xml");
         SelectOption s3 = new SelectOption(new ImageView("/images/rpgmode.jpg"), "Box Head 2.0", "src/SuperAwesomeDemo/SuperAwesomeGame.xml");
-        options.addAll(Arrays.asList(s1, s2, s3));
+        SelectOption s4 = new SelectOption(new ImageView("/images/kaighngame.jpg"), "Free Path", "src/xml/GameFreePath.xml");
+        options.addAll(Arrays.asList(s1, s2, s3, s4));
 
         index = 0;
         currentView = new Pane(options.get(index).getOption());

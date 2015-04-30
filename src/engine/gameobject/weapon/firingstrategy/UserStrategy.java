@@ -6,6 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
+import engine.gameobject.GameObjectSimple;
 import engine.gameobject.Graphic;
 import engine.gameobject.PointSimple;
 import gameworld.ObjectCollection;
@@ -79,7 +80,9 @@ public class UserStrategy extends BasicStrategy {
             initializeNode(myGraphic);
         if (canFire()){
             PointSimple newLocation = location.add(myDirection.multiply(10));
-            myStrategy.execute(world, target, newLocation, prototype);
+            GameObject dummyObject = new GameObjectSimple();
+            dummyObject.setPoint(newLocation);
+            myStrategy.execute(world, dummyObject, location, prototype);
             timeSincePressed = Integer.MAX_VALUE/2;
             timeSinceFire = 0;
         }

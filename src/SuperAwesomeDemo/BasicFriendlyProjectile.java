@@ -11,6 +11,11 @@ import engine.gameobject.weapon.NullWeapon;
 
 
 public class BasicFriendlyProjectile extends GameObjectSimple {
+    
+    public BasicFriendlyProjectile (){
+        this(1, 1, 100);
+    }
+    
     public BasicFriendlyProjectile (int damage, double speed, double distanceLimit) {
         super();
         setLabel(new FriendlyProjectileType());

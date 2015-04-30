@@ -17,8 +17,14 @@ import engine.gameobject.weapon.firingstrategy.SingleProjectile;
 import engine.gameobject.weapon.firingstrategy.UserStrategy;
 
 public class MindController extends BasicWeapon{
+    
+    private static MindController mcInstance;
+    
     public MindController(GameObject object){
         super();
+        if (mcInstance == null){
+            mcInstance = new MindController(object);
+        }
         setFiringRate(60);//Infinite "Firing Rate check"
         setRange(1000);//Infinite range
         UserStrategy myStrategy = new UserStrategy();
@@ -29,6 +35,9 @@ public class MindController extends BasicWeapon{
         setProjectile(myProjectile);
     }
     
+    public MindController getInstance(){
+        return mcInstance;
+    }
     private GameObject makeProjectile(GameObject object){
         GameObject myProjectile = new GameObjectSimple();
         myProjectile.setLabel(new FriendlyProjectileType());
@@ -39,7 +48,7 @@ public class MindController extends BasicWeapon{
         myProjectile.setHealth(new HealthSimple(1));
         myProjectile.setWeapon(new NullWeapon());
         myProjectile.getCollider().addCollisionBehavior(new ZombieBuff(new FriendlyTowerType()));
-        Weapon newWeapon = new MachineGun(object);
+        Weapon newWeapon = getInstance();
         newWeapon.setFiringStrategy(new SingleProjectile());
         newWeapon.setFiringRate(2);
         myProjectile.getCollider().addCollisionBehavior(new WeaponBuff(newWeapon));

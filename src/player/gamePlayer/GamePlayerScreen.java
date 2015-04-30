@@ -135,9 +135,11 @@ public class GamePlayerScreen implements GameScene {
      * @returns a node to add to the scene
      */
     public Node makeDemoGameView () {
+
         myGame=DataManager.readFromXML(Game.class, thisFilePath);
         //myGame=DataManager.readFromXML(Class.GAME, filePath)
-        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT,new GameOverScreen(myStage,myScene,myPreviousScene,myGame));
+        myGameView = new ViewConcrete2(myGame, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT,new GameOverScreen(myStage,myScene,myPreviousScene,myGame), pauseScreen);
+
         Node node = myGameView.initializeView();
         return node;
 

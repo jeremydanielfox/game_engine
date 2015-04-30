@@ -131,6 +131,7 @@ public class ConcreteGame implements Game {
     @Settable
     public void setPlayer (Player player) {
         myPlayer = player;
+        myShop.setPlayer(player);
     }
 
     @Override

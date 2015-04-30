@@ -106,7 +106,7 @@ public class PathSet extends Region {
                 startY = e.getY();
                 checkBounds(startX, startY);
                 pathLabel = new PathLabel(index);
-                start = new Anchor(Color.PALEGREEN, startX, startY, pathLabel);
+                start = new Anchor(Color.GREEN, startX, startY, pathLabel);
                 root.getChildren().add(pathLabel);
                 addAnchor(start);
                 addPath.setValue(increment);
@@ -117,7 +117,7 @@ public class PathSet extends Region {
             else if (increment == 1 && makePath) {
                 addPath.setValue(increment);
                 addPathInstructions.setValue("Make Path");
-                Anchor end = new Anchor(Color.TOMATO, e.getX(), e.getY());
+                Anchor end = new Anchor(Color.RED, e.getX(), e.getY());
                 curve.setStartX(startX);
                 curve.setStartY(startY);
                 double endX = e.getX();
@@ -135,7 +135,7 @@ public class PathSet extends Region {
 
                 bindProperties(curve, start, end, control1, control2);
 
-                curve.setStroke(Color.FORESTGREEN);
+                curve.setStroke(Color.BLUE);
                 curve.setStrokeWidth(4);
                 curve.setStrokeLineCap(StrokeLineCap.ROUND);
 

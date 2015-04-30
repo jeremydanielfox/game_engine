@@ -37,9 +37,10 @@ public class PlayerData implements BuildObjectData {
         healthUnit.setStartingValue(Double.parseDouble(myData.get(1)));
         scoreUnit.setLabel(myData.get(2));
         scoreUnit.setStartingValue(Double.parseDouble(myData.get(3)));
-        myPlayer.setWalletUnit(myData.get(4));
-        myPlayer.setWallet(myWallet);
         myPlayer.setHealth(healthUnit);
         myPlayer.setScore(scoreUnit);
+        myPlayer.setWalletUnit(myData.get(4));
+        myPlayer.setWallet(myWallet);
+        //myPlayer.setWallet(myWallet);
     }
 }

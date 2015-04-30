@@ -32,6 +32,7 @@ public class PauseDropDown implements GameScene {
     private VBox buttonBox;
     private HBox instructionsBox;
     private Text instructions;
+    private Consumer<? extends Object> resumer;
 
     public PauseDropDown (Consumer<? extends Object> lambda, Stage s) {
         mainStage = s;
@@ -39,6 +40,7 @@ public class PauseDropDown implements GameScene {
         myContainer = new BorderPane();
         myScene = new Scene(myContainer);
         myAnimator = Animator.getInstance();
+        resumer = lambda;
         resume = new Button("RESUME");
         restart = new Button("RESTART");
         mainMenu = new Button("MAIN MENU");
@@ -81,11 +83,12 @@ public class PauseDropDown implements GameScene {
     }
 
     /**
-     * Sets up functionalities of the PauseScene
+     * Sets up functionalities for all the clicks
      */
     private void setUpFunctions () {
         resume.setOnMouseClicked(e -> {
             myStage.close();
+            resumer.accept(null);
         });
 
         restart.setOnMouseClicked(e -> {

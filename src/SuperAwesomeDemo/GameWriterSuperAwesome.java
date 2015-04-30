@@ -13,7 +13,6 @@ import View.ViewConcrete2;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
-import engine.events.RandomSpanWave;
 import engine.events.TimedEvent;
 import engine.game.ConcreteGame;
 import engine.game.ConcreteLevel;
@@ -26,7 +25,6 @@ import engine.game.StoryBoard;
 import engine.game.Timer;
 import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.Graphic;
 import engine.gameobject.PointSimple;
 import engine.gameobject.behaviors.PlayerChangeBehavior;
@@ -76,17 +74,20 @@ public class GameWriterSuperAwesome extends Application {
             waveObjects.add(new BasicEnemy(world));
         }
         
-        for (int i=0;i<5;i++) {
+        for (int i=0;i<20;i++) {
             waveObjects.add(new Devil(world));
         }
+        
+
+        for (int i = 0; i < 100; i++) {
+            waveObjects.add(new BasicEnemy(world));
+        }
+        
         GameObjectQueue q = new ConcreteQueue(waveObjects);
-        TimedEvent wave = new RandomSpanWave(2, 20, q, world);
+        TimedEvent wave = new ConstantSpacingWave(2,2, q, world);
         wave.setEndingAction(e -> player.changeScore(57));
 
         List<GameObject> waveObjects2 = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            waveObjects2.add(new BasicEnemy(world));
-        }
         waveObjects2.add(new Devil(world));
         waveObjects2.add(new Devil(world));
         GameObjectQueue q2 = new ConcreteQueue(waveObjects2);
@@ -180,6 +181,17 @@ public class GameWriterSuperAwesome extends Application {
         world.addObject(towerShooter);
         world.addObject(shotgun);
         world.addObject(rocket);
+        
+        Graphic mindGraphic = new Graphic(50, 50, "images/brain_shooter.png");
+        WeaponPowerUp mind = new WeaponPowerUp(new MindController(hero), mindGraphic);
+        mind.setPoint(new PointSimple(250, 550));
+        
+        world.addObject(mind);
+        
+        Graphic machineGraphic = new Graphic(50,50,"images/Machine_Gun.png");
+        WeaponPowerUp machine = new WeaponPowerUp(new MachineGun(hero), machineGraphic);
+        machine.setPoint(new PointSimple(550, 550));
+        world.addObject(machine);
 
         GridCell[] sPoints = { new GridCell(0, 0), new GridCell(9, 0) };
         List<GridCell> startPoints = Arrays.asList(sPoints);
@@ -232,7 +244,9 @@ public class GameWriterSuperAwesome extends Application {
 
     public ShopModel makeShop (Player player, GameWorld world) {
         ShopModelSimple shop = new ShopModelSimple(world, player, 1);
-        shop.addPurchasable(new Barrel());
+        
+        shop.addPurchasable(new Wall());
+//        shop.addPurchasable(new Barrel());
         return shop;
     }
 

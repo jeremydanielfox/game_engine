@@ -17,7 +17,7 @@ public class Hero extends GameObjectSimple {
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);
         setPoint(new PointSimple(xcor, ycor));
-        setHealth(new HealthSimple(50));
+        setHealth(new HealthSimple(500000));
 //        Weapon myWeapon = new BasicWeapon();
 //        myWeapon.setProjectile(new BasicFriendlyProjectile());
 //        myWeapon.setFiringRate(.5);

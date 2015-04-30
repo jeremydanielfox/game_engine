@@ -3,11 +3,14 @@ package engine.pathfinding;
 import engine.gameobject.GameObject;
 import engine.gameobject.PointSimple;
 import gameworld.CoordinateTransformer;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import voogasalad.util.pathsearch.graph.GridCell;
 import voogasalad.util.pathsearch.pathalgorithms.NoPathExistsException;
+import voogasalad.util.pathsearch.pathalgorithms.ObstacleFunction;
 import voogasalad.util.pathsearch.wrappers.GridWrapper;
 import engine.fieldsetting.Settable;
 
@@ -47,7 +50,7 @@ public class PathFree implements Path {
     	Boolean[][] obstacleMatrix = new Boolean[objectMatrix.length][objectMatrix[0].length];
     	for(int r = 0; r < objectMatrix.length; r++){
     		for(int c = 0; c < objectMatrix[0].length; c++){
-    			obstacleMatrix[r][c] = objectMatrix[r][c] != null || obstacles.contains(new GridCell(r,c));
+    			obstacleMatrix[r][c] = (objectMatrix[r][c] != null && !endPoints.contains(new GridCell(r,c))) || obstacles.contains(new GridCell(r,c));
     		}
     	}
         myAlgorithm.initializeGraph(obstacleMatrix, b -> (Boolean)b);

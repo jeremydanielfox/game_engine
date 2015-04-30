@@ -10,7 +10,6 @@ import engine.gameobject.RotatorNull;
 import engine.gameobject.test.FriendlyTowerType;
 import engine.gameobject.units.WeaponBuff;
 import engine.gameobject.units.ZombieBuff;
-import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;
@@ -33,7 +32,7 @@ public class MindController extends BasicWeapon{
     private GameObject makeProjectile(GameObject object){
         GameObject myProjectile = new GameObjectSimple();
         myProjectile.setLabel(new FriendlyProjectileType());
-        Graphic myGraphic = new Graphic(25,25,"/images/Missile.png");//TODO: Set graphic here
+        Graphic myGraphic = new Graphic(25,25,"/images/brain.png");//TODO: Set graphic here
         myGraphic.setRotator(new RotatorNull());
         myProjectile.setGraphic(myGraphic);
         myProjectile.setPoint(new PointSimple(0, 10000));

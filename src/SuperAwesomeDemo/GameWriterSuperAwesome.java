@@ -1,11 +1,15 @@
 package SuperAwesomeDemo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import voogasalad.util.pathsearch.graph.GridCell;
+import voogasalad.util.pathsearch.pathalgorithms.NoPathExistsException;
 import xml.DataManager;
 import View.ButtonWrapper;
+import View.ViewConcrete2;
 import engine.events.ConcreteQueue;
 import engine.events.ConstantSpacingWave;
 import engine.events.GameObjectQueue;
@@ -23,20 +27,23 @@ import engine.game.Timer;
 import engine.game.TimerConcrete;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimpleTest;
+import engine.gameobject.PointSimple;
 import engine.gameobject.behaviors.PlayerChangeBehavior;
-import engine.gameobject.test.TestTower;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
-import engine.goals.ScoreGoal;
 import engine.goals.TimerGoal;
 import engine.pathfinding.PathFixed;
 import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;
 import engine.shop.wallet.ConcreteWallet;
 import engine.shop.wallet.Wallet;
+import gameworld.CoordinateTransformer;
 import gameworld.FixedWorld;
+import gameworld.FreeWorld;
 import gameworld.GameWorld;
+import gameworld.GridCellFromPoint;
+import gameworld.StructurePlacementException;
 
 
 public class GameWriterSuperAwesome extends Application {
@@ -57,7 +64,7 @@ public class GameWriterSuperAwesome extends Application {
         pointBehavior.setMoney(10);
         pointBehavior.setPoint(10);
         for (int i = 0; i < 10; i++) {
-            BasicEnemy toAdd = new BasicEnemy();
+            BasicEnemy toAdd = new BasicEnemy(world);
             toAdd.addOnDeathBehavior(pointBehavior);
             toAdd.addEndOfPathBehavior(healthBehavior);
             waveObjects.add(toAdd);
@@ -131,16 +138,37 @@ public class GameWriterSuperAwesome extends Application {
      * @return
      */
     public GameWorld makeWorld () {
-        FixedWorld world = new FixedWorld(10, 10);
+        FreeWorld world = new FreeWorld(10, 10);
         world.setCollisionEngine(new CollisionEngineAwesome());
         world.setRangeEngine(new RangeEngineAwesome());
 //         world.addObject(new TestTower(2, 330, 130));
         // world.addObject(new TestTower(5, 270, 270));
         // world.addObject(new TestTower(3, 355, 455));
-        world.addObject(new Hero(100,100));
+        Hero hero = new Hero(100,100);
+        
+        GridCell[] sPoints = { new GridCell(0, 0), new GridCell(9, 0) };
+        List<GridCell> startPoints = Arrays.asList(sPoints);
+        world.setSpawnPoints(startPoints);
+        
+        
+        try {
+            world.addObject(hero, new PointSimple(300,300));
+        }
+        catch (StructurePlacementException e) {
+        }
+        
+        GridCellFromPoint c = new GridCellFromPoint(new CoordinateTransformer(10, 10, ViewConcrete2.getWorldWidth(),
+                                                                              ViewConcrete2.getWorldHeight()), hero);
+                                                                              List<GridCell> lst = new ArrayList<>();
+                                                                              lst.add(c);
+                                                                              world.setEndPoints(lst);
+                                                                              
+                                                                              try {
+                                                                                      world.getPath().updatePath();
+                                                                              } catch (NoPathExistsException e) {
+                                                                              }
+                                                                              
 
-        // TODO wtf?
-        world.setPath(DataManager.readFromXML(PathFixed.class, "src/xml/Path.xml"));
         return world;
     }
 

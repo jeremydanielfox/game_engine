@@ -126,7 +126,6 @@ public class OpeningView implements UIMediator {
         }
         else {
             myAnimator.shake(dataForm.getObject());
-            myMusician.laser();
         }
     }
 

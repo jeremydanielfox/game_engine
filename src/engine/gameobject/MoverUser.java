@@ -14,7 +14,7 @@ public class MoverUser extends BasicMover {
     }
 
     public MoverUser () {
-        this.inherentSpeed = 5;
+        this.inherentSpeed = 1;
         myHandler = new DirectionHandler();
     }
 

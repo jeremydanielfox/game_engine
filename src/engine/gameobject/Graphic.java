@@ -19,7 +19,7 @@ import engine.fieldsetting.Settable;
 public class Graphic {
 
     // note to self: need to change this image path default when using data files
-    private static final String DEFAULT_IMAGE_PATH_PREFIX = "";//"/images/";
+    private static final String DEFAULT_IMAGE_PATH_PREFIX = "";// "/images/";
     private static final String DEFAULT_IMAGE_NAME = "/images/robertDuvall.jpg";
     private String myTitle = "";
     private double myHeight;
@@ -57,7 +57,7 @@ public class Graphic {
     }
 
     private void initializeImageView () {
-        myImageView = new ImageView(myImageName);//DEFAULT_IMAGE_PATH_PREFIX + myImageName);
+        myImageView = new ImageView(myImageName);// DEFAULT_IMAGE_PATH_PREFIX + myImageName);
 
         // myImageView.setOnMouseEntered(o -> System.out.println("boom"));
         // myImageView.setOnMouseClicked(e -> System.out.println("clicked"));
@@ -105,7 +105,7 @@ public class Graphic {
     @Settable(primary = true)
     public void setImagePath (String imageName) {
         myImageName = imageName.substring(imageName.lastIndexOf("/images"));
-//        myImageName = imageName;
+        // myImageName = imageName;
         initializeImageView();
     }
 
@@ -133,7 +133,7 @@ public class Graphic {
     }
 
     public String getImagePath () {
-        return myImageName;//DEFAULT_IMAGE_PATH_PREFIX + myImageName;
+        return myImageName;// DEFAULT_IMAGE_PATH_PREFIX + myImageName;
     }
 
     /**
@@ -148,5 +148,9 @@ public class Graphic {
                 new Point2D(myPoint.getX() - ViewUtil.getCenterOffsetX(myImageView),
                             myPoint.getY() - ViewUtil.getCenterOffsetY(myImageView));
         myRotator.rotate(myImageView, new PointSimple(centerOfMyImage), point);
+    }
+
+    public void setRotator (Rotator rotator) {
+        myRotator = rotator;
     }
 }

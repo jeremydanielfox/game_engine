@@ -119,7 +119,6 @@ public class ShopModelSimple implements ShopModel {
         if (canPurchase(name) && checkPlacement(name, location)) {
             try {
                 GameObject tower = purchasableMap.get(name).clone(); 
-                //GameObject tower = new TestTower(1, 100, 100);
                 tower.getGraphic().getNode().setOnMousePressed(selected);
                 myGameWorld.addObject(tower, location);
                 currentPlayer.getWallet().withdraw(getPrice(name));
@@ -135,7 +134,6 @@ public class ShopModelSimple implements ShopModel {
     @Override
     public void sellGameObject (GameObject obj) {
         currentPlayer.getWallet().deposit(obj.getValue());
-        //myGameWorld.
     }
 
     /**

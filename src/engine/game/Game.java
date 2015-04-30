@@ -1,5 +1,6 @@
 package engine.game;
 
+import java.io.IOException;
 import java.util.List;
 import View.ButtonWrapper;
 import engine.shop.ShopModel;
@@ -53,7 +54,7 @@ public interface Game {
      * @return
      */
     public Player getPlayer ();
-    
+
     /**
      * Sets the game's Player object.
      *
@@ -81,4 +82,13 @@ public interface Game {
      * @return
      */
     public String getDescription ();
+
+    /**
+     * Clones the game object for live editing
+     * 
+     * @return
+     * @throws IOException 
+     */
+    public Game cloneGame () throws IOException;
+
 }

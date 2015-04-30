@@ -34,7 +34,7 @@ public class TestTower extends GameObjectSimple {
             shopTag.setName("TestTower2");
         }
         setWeapon(new TestWeapon(type, this));
-        setLabel(new TowerLabel());
+        setLabel(new FriendlyTowerType());
     }
 
 }

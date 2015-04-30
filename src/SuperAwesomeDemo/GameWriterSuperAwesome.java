@@ -33,7 +33,6 @@ import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NoCurrentEventGoal;
 import engine.goals.TimerGoal;
-import engine.pathfinding.PathFixed;
 import engine.shop.ShopModel;
 import engine.shop.ShopModelSimple;
 import engine.shop.wallet.ConcreteWallet;
@@ -64,6 +63,7 @@ public class GameWriterSuperAwesome extends Application {
         pointBehavior.setMoney(10);
         pointBehavior.setPoint(10);
         for (int i = 0; i < 10; i++) {
+//            Devil toAdd = new Devil(world);
             BasicEnemy toAdd = new BasicEnemy(world);
             toAdd.addOnDeathBehavior(pointBehavior);
             toAdd.addEndOfPathBehavior(healthBehavior);
@@ -98,12 +98,12 @@ public class GameWriterSuperAwesome extends Application {
         List<Goal> list = new ArrayList<Goal>();
         list.add(healthy);
         list.add(new TimerGoal(t, 0));
-//        ScoreGoal score = new ScoreGoal(myPlayer, 200);
+        // ScoreGoal score = new ScoreGoal(myPlayer, 200);
         List<Goal> list2 = new ArrayList<Goal>();
-//        list2.add(score);
+        // list2.add(score);
         List<Goal> list3 = new ArrayList<Goal>();
-//        ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
-//        list3.add(score2);
+        // ScoreGoal score2 = new ScoreGoal(myPlayer, 300);
+        // list3.add(score2);
         Level levelOne = new ConcreteLevel("images/Gray_Hexagon.jpg", list2, list, world, story);
         levelOne.addTimer(t);
         board.addLevel(levelOne);
@@ -141,33 +141,41 @@ public class GameWriterSuperAwesome extends Application {
         FreeWorld world = new FreeWorld(10, 10);
         world.setCollisionEngine(new CollisionEngineAwesome());
         world.setRangeEngine(new RangeEngineAwesome());
-//         world.addObject(new TestTower(2, 330, 130));
+        // world.addObject(new TestTower(2, 330, 130));
         // world.addObject(new TestTower(5, 270, 270));
         // world.addObject(new TestTower(3, 355, 455));
-        Hero hero = new Hero(100,100);
-        
+        Hero hero = new Hero(100, 100);
+
         GridCell[] sPoints = { new GridCell(0, 0), new GridCell(9, 0) };
         List<GridCell> startPoints = Arrays.asList(sPoints);
         world.setSpawnPoints(startPoints);
-        
-        
         try {
-            world.addObject(hero, new PointSimple(300,300));
+            world.addObject(new Barrel(), new PointSimple(100, 100));
+        }
+        catch (StructurePlacementException e1) {
+            System.out.println("can't place");
+        }
+
+        try {
+            world.addObject(hero, new PointSimple(300, 300));
         }
         catch (StructurePlacementException e) {
         }
-        
-        GridCellFromPoint c = new GridCellFromPoint(new CoordinateTransformer(10, 10, ViewConcrete2.getWorldWidth(),
-                                                                              ViewConcrete2.getWorldHeight()), hero);
-                                                                              List<GridCell> lst = new ArrayList<>();
-                                                                              lst.add(c);
-                                                                              world.setEndPoints(lst);
-                                                                              
-                                                                              try {
-                                                                                      world.getPath().updatePath();
-                                                                              } catch (NoPathExistsException e) {
-                                                                              }
-                                                                              
+
+        GridCellFromPoint c =
+                new GridCellFromPoint(new CoordinateTransformer(10, 10,
+                                                                ViewConcrete2.getWorldWidth(),
+                                                                ViewConcrete2.getWorldHeight()),
+                                      hero);
+        List<GridCell> lst = new ArrayList<>();
+        lst.add(c);
+        world.setEndPoints(lst);
+
+        try {
+            world.getPath().updatePath();
+        }
+        catch (NoPathExistsException e) {
+        }
 
         return world;
     }
@@ -193,7 +201,7 @@ public class GameWriterSuperAwesome extends Application {
         // shop.addPurchasable(new TestTower(1,0,0));This is the tower that shoots itself
         // shop.addPurchasable(new TestTower(0, 0, 0));
         // shop.addPurchasable(new Spikes());
-         shop.addPurchasable(new TowerSpawner());
+        shop.addPurchasable(new TowerSpawner());
         return shop;
     }
 

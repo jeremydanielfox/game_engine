@@ -98,7 +98,7 @@ public class SimpleType implements Type {
     /**
      * Overrides the hashCode for SimpleType to be incorporate the String of the type and the String
      * of the super Type. This has to happen because two Types should be equal on the basis of two
-     * conditons:
+     * conditions:
      * their strings are the same, and they extend from the same Type. This hashCode takes care of
      * both of those things
      */

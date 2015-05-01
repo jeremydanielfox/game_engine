@@ -5,7 +5,7 @@ import engine.fieldsetting.Settable;
 
 @Settable
 public class SimpleType implements Type {
-
+    private static final int[] PRIME_NUMBERS = { 7, 97 };
     private Type superType;
     private String myName;
 
@@ -53,9 +53,7 @@ public class SimpleType implements Type {
 
     @Override
     public int hashCode () {
-        return 7 * myName.hashCode() ;//+ 97 * superType.hashCode();
-
-//        return 7 * myName.hashCode() + 97 * superType.hashCode();
+        return PRIME_NUMBERS[0] * myName.hashCode() + PRIME_NUMBERS[1] * superType.hashCode();
     }
 
     @Override

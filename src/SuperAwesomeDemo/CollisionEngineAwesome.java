@@ -12,6 +12,6 @@ public class CollisionEngineAwesome extends CollisionEngine {
         this.put(new EnemyProjectileType(), new FriendlyTowerType(), new BuffImparter());
         this.put(new FriendlyProjectileType(), new NeutralGameType(), new BuffImparter());
         this.put(new EnemyProjectileType(), new NeutralGameType(), new BuffImparter());
-        this.put(new PowerupType(), new FriendlyTowerType(), new BuffImparter());
+        this.put(new PowerupType(), new HeroType(), new BuffImparter());
     }
 }

@@ -14,6 +14,7 @@ public class Wall extends GameObjectSimple {
     public Wall () {
         super();
         ShopTagSimple shopTag = new ShopTagSimple();
+        shopTag.setName("Wall");
         shopTag.setDescription("Block your enemies!");
         shopTag.setShopGraphic(new Graphic(90, 78, "/images/Wall.png"));
         setShopTag(shopTag);

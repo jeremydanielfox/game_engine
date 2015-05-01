@@ -6,7 +6,9 @@ import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
 import engine.gameobject.RotatorNull;
+import engine.gameobject.behaviors.SummonBehavior;
 import engine.gameobject.test.EnemyTowerType;
+import engine.gameobject.test.bloons.RedBloon;
 import gameworld.GameWorld;
 
 
@@ -21,5 +23,8 @@ public class Devil extends GameObjectSimple {
         setHealth(new HealthSimple(5));
         setWeapon(new FireballShooter());
         setMover(new MoverPath(gw.getPath(), .5));
+        SummonBehavior summon = new SummonBehavior();
+        summon.addSummon(new BasicEnemy(gw));
+        addOnDeathBehavior(summon);
     }
 }

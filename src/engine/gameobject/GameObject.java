@@ -11,7 +11,8 @@ import gameworld.ObjectCollection;
 
 /**
  *
- * @author Jeremy, Kaighn
+ * @author Jeremy
+ * @author Kaighn
  *
  */
 

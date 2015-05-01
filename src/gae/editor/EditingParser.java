@@ -12,10 +12,23 @@ import java.util.ResourceBundle;
 import engine.fieldsetting.Settable;
 import engine.fieldsetting.Triggerable;
 
+/**
+ * 
+ * @author Eric Saba
+ *
+ * This class provides all of the reflection for the editor and other parts of the software.
+ */
 public class EditingParser {
     private static final String DEFAULT_PROPERTY_FILE = "engine.fieldsetting.implementing_classes";
     private static final String USER_FRIENDLY_FILE = "engine.fieldsetting.user_friendly_names";
 
+    /**
+     * Gets the methods with the annotation type from a specific class.
+     * 
+     * @param type      The class reflected over.
+     * @param annotation        The annotation looked for in that class.
+     * @return          A list of all the methods that have the given annotation in the given class.
+     */
     public static List<Method> getMethodsWithAnnotation (final Class<?> type, Class<?> annotation) {
         final List<Method> methods = new ArrayList<Method>();
         Class<?> klass = type;
@@ -65,6 +78,14 @@ public class EditingParser {
         return map;
     }
 
+    
+    /**
+     * 
+     * This method gets user-friendly names from the user_friendly_names properties file to display in the UI.
+     * 
+     * @param originalName       the name that needs to be replaced from the properties file.
+     * @return          the user friendly name
+     */
     public static String getUserFriendlyName (String originalName) {
         Map<String, String> map = new HashMap<String, String>();
         ResourceBundle rb = ResourceBundle.getBundle(USER_FRIENDLY_FILE);
@@ -82,6 +103,12 @@ public class EditingParser {
             return originalName;
     }
 
+    /**
+     * Gets the interface class from a class that implements it..
+     * 
+     * @param klass A class that implements the returned interface.
+     * @return The name of the interface that the given class implements.
+     */
     public static String getInterfaceClassFromMap (Class<?> klass) {
         Map<String, ArrayList<String>> map = getInterfaceClasses(DEFAULT_PROPERTY_FILE);
         for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
@@ -115,6 +142,12 @@ public class EditingParser {
         return klass;
     }
 
+    /**
+     * Creates an instance from a class and checks for exceptions.
+     * 
+     * @param name The class name including package location
+     * @return the instance of that class
+     */
     public static Object getInstanceFromName (String name) {
         Class<?> c = null;
         Object component = null;
@@ -123,10 +156,10 @@ public class EditingParser {
             component = c.newInstance();
         }
         catch (ClassNotFoundException e) {
-            // e.printStackTrace();
+             e.printStackTrace();
         }
         catch (IllegalAccessException iae) {
-            // iae.printStackTrace();
+             iae.printStackTrace();
         }
         catch (InstantiationException ie) {
             ie.printStackTrace();

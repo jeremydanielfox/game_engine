@@ -7,8 +7,9 @@ import java.util.List;
 
 /**
  *
- * @author Eric
+ * @author Eric Saba
  *
+ * A data node to create a tree of ComponentEditors for all editing capabilities.
  */
 public class TreeNode {
     private ArrayList<TreeNode> myTreeNodes;

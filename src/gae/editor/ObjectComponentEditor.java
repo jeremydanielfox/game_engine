@@ -23,6 +23,15 @@ public class ObjectComponentEditor extends ComponentEditor {
     private BiConsumer<Class<?>, Object> biConsumer;
 
     public ObjectComponentEditor (Class<?> klass, BiConsumer<Class<?>, Object> biconsumer) {
+        createObjectClass(klass, biconsumer);
+        myAddExistingButton = new Button("Add Existing");
+        myCreateNewButton = new Button("Create New");
+        // myCreateNewButton.setOnMouseClicked(popNewEditor());
+        // TODO: setup lambda's for these buttons
+        getEditBox().getChildren().addAll(getLabel(), myAddExistingButton, myCreateNewButton);
+    }
+    
+    private void createObjectClass(Class<?> klass, BiConsumer<Class<?>, Object> biconsumer) {
         clazz = klass;
         biConsumer = biconsumer;
         try {
@@ -39,11 +48,6 @@ public class ObjectComponentEditor extends ComponentEditor {
             }
 //            e1.printStackTrace();
         }
-        myAddExistingButton = new Button("Add Existing");
-        myCreateNewButton = new Button("Create New");
-        // myCreateNewButton.setOnMouseClicked(popNewEditor());
-        // TODO: setup lambda's for these buttons
-        getEditBox().getChildren().addAll(getLabel(), myAddExistingButton, myCreateNewButton);
     }
 
     public void setObject (Object obj) {

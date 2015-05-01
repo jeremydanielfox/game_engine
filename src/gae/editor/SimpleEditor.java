@@ -26,6 +26,8 @@ import javafx.scene.layout.VBox;
 public class SimpleEditor extends Editor implements UIObject {
 
     private static final String CLASS_PATH = "gae.editor.";
+    private static final String OBJECT_COMP_EDITOR = "ObjectComponentEditor";
+    private static final String COLLECTION_EDITOR = "CollectionComponentEditor";
 
     private VBox simpleEditorVBox;
     private List<ComponentEditor> editFields;
@@ -98,17 +100,24 @@ public class SimpleEditor extends Editor implements UIObject {
         simpleEditorVBox.getChildren().addAll(editors);
     }
 
-    private void loadArrayWithEditors (TreeNode root, ArrayList<Node> editors) {
+    /**
+     * Loads the SimpleEditor's arrays with created ComponentEditors. The ComponentEditors are created based on the
+     * editor type described by the TreeNode.
+     * 
+     * @param root      The root whose data is used to make the ComponentEditors.
+     * @param editors   The current ArrayList of editors.
+     */
+    private void loadArrayWithEditors (TreeNode root, List<Node> editors) {
         ComponentEditor component;
         String rootType = root.getInputType();
-        if (rootType.equals("ObjectComponentEditor")) {
+        if (rootType.equals(OBJECT_COMP_EDITOR)) {
             Class<?> klass = (Class<?>) root.getMethod().getGenericParameterTypes()[0];
 //            klass = EditingParser.getConcreteClassFromMap(klass);
             component = new ObjectComponentEditor(klass, biConsumer);
             objectFields.add((ObjectComponentEditor) component);
             finishMap(component, root);
         }
-        else if (rootType.equals("CollectionComponentEditor")) {
+        else if (rootType.equals(COLLECTION_EDITOR)) {
             component = null;
             setListMethods.add(root.getMethod());
         }

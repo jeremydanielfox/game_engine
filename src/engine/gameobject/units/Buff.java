@@ -50,7 +50,7 @@ public abstract class Buff implements Upgrade {
      * @param timePassed
      * @param myUnit
      */
-    public void advanceTime (int timePassed, GameObject myUnit) {
+    public void advanceTime (int timePassed, GameObject myUnit) {       
         timeSinceStart = timeSinceStart + timePassed;
         changeOverTime(myUnit);
     }
@@ -91,7 +91,7 @@ public abstract class Buff implements Upgrade {
             initialEffect = (ColorAdjust) myObject.getGraphic().getNode().getEffect();
         }
         myObject.getGraphic().getNode()
-        .setEffect(new ColorAdjust(initialEffect.getHue() + brightness,
+        .setEffect(new ColorAdjust(initialEffect.getHue() + hue,
                                    initialEffect.getSaturation() + saturation,
                                    initialEffect.getBrightness() + brightness,
                                    initialEffect.getContrast() + contrast));

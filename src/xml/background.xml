@@ -31,7 +31,7 @@
     <myLevels>
       <engine.game.ConcreteLevel>
         <myTitle></myTitle>
-        <myImagePath>/images/Park_Path.png</myImagePath>
+        <myImagePath>/images/fullscreenButton.jpg</myImagePath>
         <myWinningGoals>
           <engine.goals.EventsCompleteGoal>
             <isSatisfied>false</isSatisfied>
@@ -1698,8 +1698,8 @@
               </gameworld.TerrainTile-array>
             </myMatrix>
             <myTrans>
-              <h>30.0</h>
-              <w>30.0</w>
+              <h>31.15</h>
+              <w>31.15</w>
             </myTrans>
             <myBounds>
               <myRow>20</myRow>
@@ -1744,46 +1744,17 @@
           </myUnit>
         </myWallet>
       </currentPlayer>
+      <myGameWorld class="gameworld.FixedWorld" reference="../../myLevels/engine.game.ConcreteLevel/myGameWorld"/>
       <purchasableMap/>
       <upgradeMap/>
       <markup>1.0</markup>
     </shop>
   </myLevelBoard>
-  <myShop class="engine.shop.ShopModelSimple">
-    <currentPlayer>
-      <changed>false</changed>
-      <obs/>
-      <myName>Player 1</myName>
-      <myHealth>
-        <changed>false</changed>
-        <obs/>
-        <myValue>100.0</myValue>
-        <myLabel></myLabel>
-      </myHealth>
-      <myScore>
-        <changed>false</changed>
-        <obs/>
-        <myValue>100.0</myValue>
-        <myLabel></myLabel>
-      </myScore>
-      <myWallet class="engine.shop.wallet.ConcreteWallet">
-        <myUnit>
-          <changed>false</changed>
-          <obs/>
-          <myValue>100.0</myValue>
-          <myLabel></myLabel>
-        </myUnit>
-      </myWallet>
-    </currentPlayer>
-    <myGameWorld class="gameworld.FixedWorld" reference="../../myLevelBoard/myLevels/engine.game.ConcreteLevel/myGameWorld"/>
-    <purchasableMap/>
-    <upgradeMap/>
-    <markup>1.0</markup>
-  </myShop>
+  <myShop class="engine.shop.ShopModelSimple" reference="../myLevelBoard/shop"/>
   <myButtons/>
-  <myGameName></myGameName>
-  <myAuthor></myAuthor>
-  <myType></myType>
-  <myDescription></myDescription>
-  <myInstructions></myInstructions>
+  <myGameName>GameName</myGameName>
+  <myAuthor>Sierra</myAuthor>
+  <myType>Type</myType>
+  <myDescription>This is a fun game.</myDescription>
+  <myInstructions>Have fun!</myInstructions>
 </engine.game.ConcreteGame>

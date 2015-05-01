@@ -25,7 +25,7 @@ public abstract class Buff implements Upgrade {
     private List<Observer> observers = new ArrayList<>();
 
     public Buff (double duration) {
-        this.duration = (int) duration;
+        this.duration = (int)(60 * duration);
         timeSinceStart = 0;
         type = UpgradeType.COLLISION; // could be overridden
     }

@@ -1,5 +1,6 @@
 package engine.gameobject.units;
 
+import java.awt.Color;
 import engine.gameobject.GameObject;
 import engine.gameobject.weapon.Upgrade;
 import engine.gameobject.labels.SimpleType;
@@ -35,6 +36,9 @@ public class ZombieBuff extends Buff{
     @Override
     public void apply (GameObject myUnit) {
         myUnit.setLabel(myType);
+        float[] hsbvals = new float[3];
+        Color.RGBtoHSB(46, 139, 87, hsbvals);
+        adjustEffect(myUnit, -hsbvals[0], -hsbvals[1], -hsbvals[2], 0);
     }
 
     @Override

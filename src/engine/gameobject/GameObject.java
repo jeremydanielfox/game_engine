@@ -11,7 +11,8 @@ import gameworld.ObjectCollection;
 
 /**
  *
- * @author Jeremy, Kaighn
+ * @author Jeremy
+ * @author Kaighn
  *
  */
 
@@ -64,5 +65,7 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
     public Graphic getGraphic ();
     
     public Health getHealth ();
+
+    public void setGraphic (Graphic myGraphic);
 
 }

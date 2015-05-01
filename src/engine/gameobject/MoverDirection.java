@@ -60,6 +60,11 @@ public class MoverDirection extends MoverPoint {
     }
     
     @Settable
+    public void setSpeed(double speed) {
+        super.setSpeed(speed);
+    }
+    
+    @Settable
     @Override
     public void setPoint (PointSimple myPoint) {
         super.setPoint(myPoint);

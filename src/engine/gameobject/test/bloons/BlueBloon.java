@@ -7,7 +7,7 @@ import engine.gameobject.HealthSimple;
 import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
 import engine.gameobject.behaviors.SummonBehavior;
-import engine.gameobject.test.EnemyLabel;
+import engine.gameobject.test.EnemyTowerType;
 import engine.gameobject.weapon.NullWeapon;
 import engine.pathfinding.PathFixed;
 
@@ -15,7 +15,7 @@ public class BlueBloon extends GameObjectSimple {
     
     public BlueBloon () {
         super();
-        setLabel(new EnemyLabel());
+        setLabel(new EnemyTowerType());
         setGraphic(new Graphic(25, 35, "/images/Blue_Bloon.png"));
         setPoint(new PointSimple(0, 10000));
         setHealth(new HealthSimple(1));

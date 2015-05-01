@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import SuperAwesomeDemo.Barrel;
+import SuperAwesomeDemo.CollisionEngineAwesome;
+import SuperAwesomeDemo.RangeEngineAwesome;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import voogasalad.util.pathsearch.graph.GridCell;
@@ -32,6 +35,7 @@ import engine.gameobject.MoverNull;
 import engine.gameobject.MoverPath;
 import engine.gameobject.MoverUser;
 import engine.gameobject.PointSimple;
+import engine.gameobject.RotatorNull;
 import engine.gameobject.test.TestTower;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.firingstrategy.SingleProjectile;
@@ -53,6 +57,7 @@ import gameworld.StructurePlacementException;
 public class GameWriterConcrete2 extends Application {
 	static GameWriterConcrete2 myWriter;
 	private static final String FILE_DESTINATION = "src/xml/GameFreePath.xml";
+	GameObject hero;
 
 	/**
 	 * @param world
@@ -136,8 +141,10 @@ public class GameWriterConcrete2 extends Application {
 	 * @return
 	 */
 	public GameWorld makeWorld() {
-		FreeWorld world = new FreeWorld(10,10);
 
+		FreeWorld world = new FreeWorld(10,10);
+		world.setCollisionEngine(new CollisionEngineAwesome());
+		world.setRangeEngine(new RangeEngineAwesome());
 		GridCell[] sPoints = { new GridCell(0, 0), new GridCell(9, 0) };
 		List<GridCell> startPoints = Arrays.asList(sPoints);
 		GridCell[] ePoints = { new GridCell(9, 9), new GridCell(0, 9),
@@ -146,31 +153,39 @@ public class GameWriterConcrete2 extends Application {
 		GridCell[] oPoints = { new GridCell(0, 3), new GridCell(1, 3),
 				new GridCell(2, 3) };
 		List<GridCell> obstaclePoints = Arrays.asList(oPoints);
+		GridCell[] tPoints = {new GridCell(7,3), new GridCell(8,3), new GridCell(9,3),
+				new GridCell(7,2), new GridCell(8,2), new GridCell(9,2),
+				new GridCell(7,1), new GridCell(8,1),
+				new GridCell(7,0), new GridCell(8,0), new GridCell(9,1)};
+		List<GridCell> towerPoints = Arrays.asList(tPoints);
 		world.setEndPoints(endPoints);
 		world.setSpawnPoints(startPoints);
 		world.setObstacles(obstaclePoints);
-		
+		world.setTowerObstacles(towerPoints);
+
 		try {
-			GameObjectSimple g = new TestTower(2, 330, 330);
+			hero = new TestTower(2, 330, 330);
 			MoverUser m = new MoverUser();
-			m.setGraphic(g.getGraphic());
-			g.setMover(m);
+			m.setGraphic(hero.getGraphic());
+			hero.setMover(m);
 //			UserStrategy pewpew = new UserStrategy();
 //			pewpew.setGraphic(g.getGraphic());
 //			g.getWeapon().setFiringStrategy(pewpew);
-			g.setWeapon(new NullWeapon());
-
-			world.addObject(g, new PointSimple(300,300));
-        }
-        catch (StructurePlacementException e1) {
-            e1.printStackTrace();
-        }
+//			g.getWeapon().setFiringRate(100);
+			hero.setWeapon(new NullWeapon());
+			hero.getGraphic().setRotator(new RotatorNull());
+			hero.getGraphic().setImagePath("/images/BoxheadHero.png");
+			world.addObject(hero, new PointSimple(300,300));
+		}
+		catch (StructurePlacementException e1) {
+			e1.printStackTrace();
+		}
 
 		try {
 			world.getPath().updatePath();
 		} catch (NoPathExistsException e) {
 		}
-		
+
 		return world;
 	}
 
@@ -182,7 +197,7 @@ public class GameWriterConcrete2 extends Application {
 	private void writeGame() {
 		Player myPlayer = makePlayer();
 		GameWorld myWorld = makeWorld();
-		ShopModel myShop = new ShopModelSimple(myWorld, myPlayer, 1);
+		ShopModel myShop = makeShop(myPlayer, myWorld);
 		Game myGame = makeGame(myPlayer, myWorld, myShop);
 
 		DataManager.writeToXML(myGame, FILE_DESTINATION);
@@ -191,7 +206,16 @@ public class GameWriterConcrete2 extends Application {
 	}
 
 	public ShopModel makeShop(Player player, GameWorld world) {
-		return new ShopModelSimple(world, player, 1);
+		ShopModelSimple shop = new ShopModelSimple(world, player, 1);
+		GameObject go = new TestTower(0,0,0);
+		go.getWeapon().setFiringRate(0);
+		shop.addPurchasable(go);
+		
+		shop.addPurchasable(hero);
+		
+		
+//		shop.addPurchasable(new Spikes());
+		return shop;
 	}
 
 	/**

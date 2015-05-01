@@ -191,10 +191,13 @@ public class LevelView {
                     .getUserData());
         }));
         gridOptions.getChildren().addAll(tileMode, setWalkablePoints());
+        Button spawnPoint=setSpawnPoints();
+        gridOptions.getChildren().add(spawnPoint);
+        spawnPoint.setVisible(false);
         isFreeWorld.addListener( (observable, oldv, newv) -> {
             boolean isFree = (boolean) newv;
             if (isFree) {
-                gridOptions.getChildren().add(setSpawnPoints());
+                spawnPoint.setVisible(true);;
             }
         });
     }

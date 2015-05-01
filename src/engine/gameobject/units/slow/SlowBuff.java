@@ -38,7 +38,7 @@ public class SlowBuff extends Buff implements Slow {
     }
 
     @Settable
-    public void setDamage (double slowPercent) {
+    public void setSlow (double slowPercent) {
         this.slowPercent = slowPercent;
     }
 

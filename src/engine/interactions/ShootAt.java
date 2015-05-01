@@ -1,6 +1,5 @@
 package engine.interactions;
 
-import musician.MusicianSimple;
 import engine.gameobject.GameObject;
 
 

@@ -11,8 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
+
 /**
  * The holder of wave parts which comprise a wave
+ * 
  * @author JohnGilhuly
  *
  */
@@ -23,8 +25,8 @@ public class WaveEnemyTable implements UIObject {
     private String myText;
     private VBox wavePartsBox;
     private ObservableList<WavePart> myWaveParts;
-    
-    public WaveEnemyTable(int number) {
+
+    public WaveEnemyTable (int number) {
         myText = "Wave " + number;
         initialize();
     }
@@ -33,32 +35,32 @@ public class WaveEnemyTable implements UIObject {
         myPreferences = new WavePreferencesPane();
         rootNode = new ScrollPane();
         myWaveParts = FXCollections.observableArrayList();
-        
+
         Button newWavePart = new Button("New Wave Part");
         newWavePart.setOnAction(e -> makeNewWavePart());
-        
+
         wavePartsBox = new VBox();
         wavePartsBox.setSpacing(10);
         updateWavePartsBox();
-        
+
         VBox scrollContents = new VBox();
         scrollContents.getChildren().addAll(wavePartsBox, newWavePart);
         scrollContents.setSpacing(10);
-        
-        rootNode.setContent(scrollContents);
-    }
 
-    private void updateWavePartsBox () {
-        wavePartsBox.getChildren().clear();
-        
-        for (WavePart wp : myWaveParts) {
-            wavePartsBox.getChildren().add(wp.getObject());
-        }
+        rootNode.setContent(scrollContents);
     }
 
     private void makeNewWavePart () {
         myWaveParts.add(new WavePart(this));
         updateWavePartsBox();
+    }
+
+    private void updateWavePartsBox () {
+        wavePartsBox.getChildren().clear();
+
+        for (WavePart wp : myWaveParts) {
+            wavePartsBox.getChildren().add(wp.getObject());
+        }
     }
 
     @Override
@@ -69,9 +71,9 @@ public class WaveEnemyTable implements UIObject {
     public WavePreferencesPane getPreferencesPane () {
         return myPreferences;
     }
-    
+
     @Override
-    public String toString() {
+    public String toString () {
         return myText;
     }
 
@@ -80,10 +82,15 @@ public class WaveEnemyTable implements UIObject {
         updateWavePartsBox();
     }
 
+    /**
+     * Returns a list of GameObjects in the wave table
+     * 
+     * @return
+     */
     public List<GameObject> getEnemiesAsList () {
         List<GameObject> enemies = new ArrayList<GameObject>();
-        for (WavePart wp: myWaveParts) {
-            for (int i = 0; i < wp.getQuantity(); i++) {                
+        for (WavePart wp : myWaveParts) {
+            for (int i = 0; i < wp.getQuantity(); i++) {
                 enemies.add(wp.getGameObject().clone());
             }
         }

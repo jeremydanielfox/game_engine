@@ -23,7 +23,6 @@ public class Collider {
     public Collider () {
         collidedID = new HashSet<GameObject>();
         collisionBuffs = new HashSet<Buff>();
-        collisionBuffs.add(new DamageBuff(10));
         onDeath = new Explosion();
     }
 
@@ -37,6 +36,7 @@ public class Collider {
     public void setCollisionList(Collection<Buff> buffs){
         Set<Buff> buffList = new HashSet<>();
         buffList.addAll(buffs);
+        System.out.println(buffs);
         System.out.println("added collision list");
     }
     
@@ -44,6 +44,7 @@ public class Collider {
     public void setExplosionList(Collection<Buff> buffs){
         onDeath.clearBuffs();
         buffs.forEach(b -> onDeath.addBuff(b));
+        System.out.println(buffs);
         System.out.println("added explosion list");
     }
     

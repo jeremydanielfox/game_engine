@@ -49,13 +49,13 @@ public class GameSelector {
         left.setId("arrow");
 
         /*
-         * manually adding select options to test out player
+         * manually adding select options to test out player for the three games we made
          */
-        SelectOption s1 = new SelectOption(new ImageView("/images/bloonsdefense.jpg"), "Bloons");
-        SelectOption s2 = new SelectOption(new ImageView("/images/desktopdefense.jpg"),
-                                           "Desktop Tower Defense");
-        SelectOption s3 = new SelectOption(new ImageView("/images/cartoonwars.jpg"), "Cartoon Wars");
-        options.addAll(Arrays.asList(s1, s2, s3));
+        SelectOption s1 = new SelectOption(new ImageView("/images/custombloons.jpg"), "Custom Bloons", "src/xml/CS308BloonsDemo.xml");
+        SelectOption s2 = new SelectOption(new ImageView("/images/pineapplegame.png"), "(Pine)Apples", "src/xml/(pine)apple.xml");
+        SelectOption s3 = new SelectOption(new ImageView("/images/rpgmode.jpg"), "Box Head 2.0", "src/SuperAwesomeDemo/SuperAwesomeGame.xml");
+        SelectOption s4 = new SelectOption(new ImageView("/images/kaighngame.jpg"), "Free Path", "src/xml/GameFreePath.xml");
+        options.addAll(Arrays.asList(s1, s2, s3, s4));
 
         index = 0;
         currentView = new Pane(options.get(index).getOption());
@@ -67,6 +67,10 @@ public class GameSelector {
         ImageView img=new ImageView();
         img.setImage(options.get(index).getGamePicture().getImage());
         return img;
+    }
+    
+    public String getSelectedGamePath() {
+        return options.get(index).getFilePath();
     }
     
     public Node getChooser () {
@@ -148,10 +152,12 @@ public class GameSelector {
         private ImageView gamePicture;
         private HBox textBox;
         private Text gameName;
+        private String filePath;
 
-        public SelectOption (ImageView picture, String name) {
+        public SelectOption (ImageView picture, String name, String file) {
             display = new VBox(10);
             gamePicture = picture;
+            filePath = file;
 
             /*
              * set width and height to ratio of the screen
@@ -170,6 +176,10 @@ public class GameSelector {
             textBox.setId("textBox");
 
             createDisplay();
+        }
+        
+        public String getFilePath() {
+            return filePath;
         }
 
         public Node getOption () {

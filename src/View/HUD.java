@@ -9,6 +9,7 @@ import java.util.Observer;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -18,10 +19,9 @@ import engine.gameobject.test.bloons.Spikes;
 import engine.shop.ShopModel;
 import engine.shop.ShopView;
 
-
 /**
- * This class acts as a heads up display, which contains player stats and the shop for the game.
- * It can display "displayable" objects as well as any other nodes.
+ * This class acts as a heads up display, which contains player stats and the shop for the game. It
+ * can display "displayable" objects as well as any other nodes.
  *
  * @author Sierra Smith
  * @author Cosette Goldstein
@@ -36,13 +36,13 @@ public class HUD implements Observer {
     private VBox myStatsDisplay;
     private VBox myLevelDisplay;
     private VBox myWholeDisplay;
-    private BorderPane myPane;
+    private Pane myPane;
     private HBox myDefaultButtonDisplay;
     private ShopModel shop;
-    
+
     private List<ButtonWrapper> myButtonWrapperList;
 
-    public HUD (BorderPane pane, ShopModel shop) {
+    public HUD (Pane pane, ShopModel shop) {
         this.shop = shop;
         initialize(pane);
     }
@@ -51,7 +51,7 @@ public class HUD implements Observer {
         initialize(pane);
     }
 
-    private void initialize (BorderPane pane) {
+    private void initialize (Pane pane) {
         myStatsDisplay = new VBox(SPACING);
         myWholeDisplay = new VBox(SPACING);
         myLevelDisplay = new VBox(SPACING);
@@ -92,19 +92,19 @@ public class HUD implements Observer {
         location.getChildren().add(newBox);
         location.setAlignment(Pos.CENTER);
     }
-    
-    public void addLevelDisplay(Displayable d){
+
+    public void addLevelDisplay (Displayable d) {
         addPairedDisplay(d, myLevelDisplay);
     }
 
-    public void addStatsDisplay(Displayable d){
+    public void addStatsDisplay (Displayable d) {
         addPairedDisplay(d, myStatsDisplay);
     }
-    
-    public void clearLevelDisplay(){
+
+    public void clearLevelDisplay () {
         myLevelDisplay.getChildren().clear();
     }
-    
+
     private void formatText (Text t, int fontSize) {
         t.setFont(Font.font("Verdana", fontSize));
         t.setFill(Color.BLUEVIOLET);
@@ -122,7 +122,7 @@ public class HUD implements Observer {
             else {
                 e.getButton().setDisable(true);
 
-                }
+            }
         });
     }
 
@@ -137,10 +137,6 @@ public class HUD implements Observer {
     }
 
     private void makeShop () {
-        //TESTING purposes:
-        //shop.addPurchasable(new TestTower(1,0,0));This is the tower that shoots itself
-        shop.addPurchasable(new TestTower(0,0,0));
-        shop.addPurchasable(new Spikes());
         myWholeDisplay.getChildren().add(new ShopView(shop, myPane));
     }
 }

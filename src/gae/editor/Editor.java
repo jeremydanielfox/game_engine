@@ -14,6 +14,7 @@ import engine.gameobject.units.Buff;
  *
  * @author Eric Saba
  *
+ * The base editor class that provides basic reflection and recursion methods for all subclasses.
  */
 public abstract class Editor implements Edits {
     private Map<String, ArrayList<String>> myPropertiesMap;
@@ -28,13 +29,20 @@ public abstract class Editor implements Edits {
 
     abstract void clearValues ();
 
+    /**
+     * Creates and returns the method tree of TreeNodes that holds the given class's set methods, parameter types and 
+     * editor types.
+     * 
+     * @param klass     The class which is reflected over.
+     * @param m         The set method for this class to be set. Used for recursively creating the tree.
+     * @return          The base TreeNode that holds all of the other nodes.
+     */
     public TreeNode getMethodsTree (Class<?> klass, Method m) {
         TreeNode root = new TreeNode(m, "null");
         List<Method> methods = EditingParser.getMethodsWithAnnotation(klass, Settable.class);
         for (Method method : methods) {
             // System.out.println(method.toString());
             Type parameterClass = method.getGenericParameterTypes()[0];
-            String das = parameterClass.getTypeName();
             if (parameterClass.equals(double.class)) {
                 System.out.println("double  " + getPropertyName(method.getName()));
                 root.addToNodes(new TreeNode(method, "DoubleTextEditor"));
@@ -61,6 +69,11 @@ public abstract class Editor implements Edits {
         return root;
     }
 
+    /**
+     * A quick method to get the basic property name by cutting up the method name. 
+     * @param methodName        The name of the set method.
+     * @return          The method name without the beginning "set" and with spaces after all capital letters.
+     */
     public static String getPropertyName (String methodName) {
         String propertyName = methodName.substring(3, methodName.length());
         char[] chars = propertyName.toCharArray();

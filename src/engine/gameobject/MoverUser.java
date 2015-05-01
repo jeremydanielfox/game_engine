@@ -7,9 +7,14 @@ import engine.pathfinding.EndOfPathException;
 @Settable
 public class MoverUser extends BasicMover {
     private DirectionHandler myHandler;
+    
+    public MoverUser(double speed) {
+        this.inherentSpeed = speed;
+        myHandler = new DirectionHandler();
+    }
 
     public MoverUser () {
-        this.inherentSpeed = 5;
+        this.inherentSpeed = 1;
         myHandler = new DirectionHandler();
     }
 

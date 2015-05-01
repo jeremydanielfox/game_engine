@@ -4,7 +4,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -13,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import engine.interactions.Interaction;
+
 
 /**
  * Concrete musician that can be accessed by any classes in the project to add music to their scene,
@@ -34,7 +34,7 @@ public class MusicianSimple implements Musician {
     private boolean muted;
     private double savedVolume;
     private Media rayGunSound, laserSound, gunSound;
-    private MediaPlayer rayGun, laser, gun;
+    private MediaPlayer soundEffector;
 
     /*
      * try & catch blocks implemented for methods with MediaPlayer in case it isn't instantiated yet
@@ -49,10 +49,6 @@ public class MusicianSimple implements Musician {
         rayGunSound = new Media(Paths.get("src/musician/raygun.wav").toUri().toString());
         laserSound = new Media(Paths.get("src/musician/laser.wav").toUri().toString());
         gunSound = new Media(Paths.get("src/musician/gun.wav").toUri().toString());
-
-        rayGun = new MediaPlayer(rayGunSound);
-        laser = new MediaPlayer(laserSound);
-        gun = new MediaPlayer(gunSound);
     }
 
     /**
@@ -92,13 +88,13 @@ public class MusicianSimple implements Musician {
                     if (muted) {
                         myMusician.setVolume(savedVolume);
                     }
-                    else {
-                        mute();
-                    }
-                    muted = !muted;
-                }
-            }
-        }));
+                             else {
+                                 mute();
+                             }
+                             muted = !muted;
+                         }
+                     }
+                 }));
     }
 
     @Override
@@ -145,7 +141,7 @@ public class MusicianSimple implements Musician {
             /* does nothing if myMusician is not initialized */
         }
     }
-    
+
     @Override
     public MediaPlayer reinitialize (MediaPlayer mp, Media m) {
         mp = new MediaPlayer(m);
@@ -157,8 +153,9 @@ public class MusicianSimple implements Musician {
      */
 
     public void rayGun () {
-        rayGun.play();
-        rayGun = reinitialize(rayGun, rayGunSound);
+        disposeSoundEffect();
+        soundEffector = new MediaPlayer(rayGunSound);
+        soundEffector.play();
     }
 
     public void setRayGun (Music m) {
@@ -166,8 +163,9 @@ public class MusicianSimple implements Musician {
     }
 
     public void laser () {
-        laser.play();
-        laser = reinitialize(laser, laserSound);
+        disposeSoundEffect();
+        soundEffector = new MediaPlayer(laserSound);
+        soundEffector.play();
     }
 
     public void setLaser (Music m) {
@@ -175,11 +173,18 @@ public class MusicianSimple implements Musician {
     }
 
     public void gun () {
-        gun.play();
-        gun = reinitialize(gun, gunSound);
+        disposeSoundEffect();
+        soundEffector = new MediaPlayer(gunSound);
+        soundEffector.play();
     }
 
     public void setGun (Music m) {
         gunSound = m.getMusic();
+    }
+    
+    private void disposeSoundEffect () {
+        if (soundEffector != null) {
+            soundEffector.dispose();
+        }
     }
 }

@@ -11,7 +11,7 @@ import engine.gameobject.GameObject;
  *
  */
 public class BuffImparter extends Interaction {
-
+    
     @Override
     public void accept (GameObject buffer, GameObject buffable) {
         if (!buffer.isDead() && buffer.getGraphic().getNode().getBoundsInParent()

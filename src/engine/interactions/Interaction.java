@@ -15,10 +15,20 @@ import gameworld.GameWorld;
 public abstract class Interaction implements BiConsumer<GameObject, GameObject> {
     private GameWorld myWorld;
 
+    /**
+     * Allows sub Interactions to get the GameWorld so they can use it.
+     * 
+     * @return
+     */
     protected GameWorld getGameWorld () {
         return myWorld;
     }
 
+    /**
+     * Allows the gameworld to be set for each interaction
+     * 
+     * @param world
+     */
     protected void setGameWorld (GameWorld world) {
         myWorld = world;
     }

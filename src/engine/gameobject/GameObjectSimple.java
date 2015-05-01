@@ -22,7 +22,8 @@ import gameworld.ObjectCollection;
 /**
  * Simple (and possibly only) implementation of the gameobject.
  *
- * @author Jeremy, Kaighn
+ * @author Jeremy
+ * @author Kaighn
  *
  */
 @Settable

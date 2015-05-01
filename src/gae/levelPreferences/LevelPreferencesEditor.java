@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import engine.fieldsetting.Settable;
 import engine.game.Level;
+import engine.game.Timer;
 import engine.goals.Goal;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -153,8 +154,9 @@ public class LevelPreferencesEditor implements UIObject {
             else if (timedGame.isSelected() && !timer.getSelectedProperty().get()) {
                 data.setMinutes(Integer.parseInt(min.getText()));
                 data.setSeconds(Integer.parseInt(sec.getText()));
-                winlist.add(data.getTimerGoal());
-                myLevel.addTimer(data.getTimer());
+                Timer timer=data.getTimer();
+                winlist.add(data.getTimerGoal(timer));
+                myLevel.addTimer(timer);
             }
             winningConditions = winlist;
 
@@ -167,8 +169,9 @@ public class LevelPreferencesEditor implements UIObject {
             else if (timedGame.isSelected() && timer.getSelectedProperty().get()) {
                 data.setMinutes(Integer.parseInt(min.getText()));
                 data.setSeconds(Integer.parseInt(sec.getText()));
-                loselist.add(data.getTimerGoal());
-                myLevel.addTimer(data.getTimer());
+                Timer timer=data.getTimer();
+                loselist.add(data.getTimerGoal(timer));
+                myLevel.addTimer(timer);
             }
             losingConditions = loselist;
             

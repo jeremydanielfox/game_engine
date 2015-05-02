@@ -1,7 +1,7 @@
 package engine.gameobject.behaviors;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.MoverNull;
+import engine.gameobject.movers.MoverNull;
 import gameworld.ObjectCollection;
 
 /**

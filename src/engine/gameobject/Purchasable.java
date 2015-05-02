@@ -1,5 +1,8 @@
 package engine.gameobject;
 
+import engine.gameobject.graphics.Graphic;
+import engine.shop.RangeDisplay;
+
 
 
 public interface Purchasable<E> {
@@ -28,6 +31,14 @@ public interface Purchasable<E> {
      *         the receiving weapon's total value.
      */
     public double getValue ();
+    
+    /**
+     * Returns the RangeDisplay
+     * 
+     * @return RangeDisplay
+     */
+    public RangeDisplay getRangeDisplay ();
+
 
     public E clone ();
 

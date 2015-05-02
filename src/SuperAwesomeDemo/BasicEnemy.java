@@ -1,11 +1,11 @@
 package SuperAwesomeDemo;
 
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.Graphic;
-import engine.gameobject.HealthSimple;
-import engine.gameobject.MoverPath;
 import engine.gameobject.PointSimple;
-import engine.gameobject.RotatorNull;
+import engine.gameobject.graphics.Graphic;
+import engine.gameobject.graphics.RotatorNull;
+import engine.gameobject.healths.HealthSimple;
+import engine.gameobject.movers.MoverPath;
 import engine.gameobject.test.EnemyTowerType;
 import gameworld.GameWorld;
 
@@ -13,7 +13,7 @@ import gameworld.GameWorld;
 public class BasicEnemy extends GameObjectSimple {
     public BasicEnemy (GameWorld gw) {
         super();
-        setLabel(new EnemyTowerType());
+        setType(new EnemyTowerType());
         Graphic myGraphic = new Graphic(47, 28, "/images/BoxHeadBasicEnemy.png");
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);

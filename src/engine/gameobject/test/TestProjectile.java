@@ -1,10 +1,10 @@
 package engine.gameobject.test;
 
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.Graphic;
-import engine.gameobject.HealthSimple;
-import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
+import engine.gameobject.graphics.Graphic;
+import engine.gameobject.healths.HealthSimple;
+import engine.gameobject.movers.MoverDirection;
 import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.units.freeze.FreezeBuff;
 import engine.gameobject.units.poison.PoisonBuff;
@@ -23,7 +23,7 @@ public class TestProjectile extends GameObjectSimple {
         setHealth(new HealthSimple(100));
         setMover(new MoverDirection(getPoint(), 2, 500));
         setWeapon(new NullWeapon());
-        setLabel(new ProjectileLabel());
+        setType(new ProjectileLabel());
         if (type == 0 || type == 2 || type == 4) {
             getCollider().addCollisionBehavior(new DamageBuff(4));
             //getCollider().addCollisionBehavior(new FreezeBuff(120));
@@ -39,7 +39,7 @@ public class TestProjectile extends GameObjectSimple {
         }
         if (type == 5){
             setWeapon(new TestWeapon(4, null));
-            setLabel(new FriendlyTowerType());
+            setType(new FriendlyTowerType());
         }
     }
 

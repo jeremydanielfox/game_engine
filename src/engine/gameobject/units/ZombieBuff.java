@@ -35,7 +35,7 @@ public class ZombieBuff extends Buff{
 
     @Override
     public void apply (GameObject myUnit) {
-        myUnit.setLabel(myType);
+        myUnit.setType(myType);
         float[] hsbvals = new float[3];
         Color.RGBtoHSB(46, 139, 87, hsbvals);
         adjustEffect(myUnit, -hsbvals[0], -hsbvals[1], -hsbvals[2], 0);

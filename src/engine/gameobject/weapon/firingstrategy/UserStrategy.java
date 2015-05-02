@@ -7,8 +7,8 @@ import javafx.scene.input.KeyEvent;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.Graphic;
 import engine.gameobject.PointSimple;
+import engine.gameobject.graphics.Graphic;
 import gameworld.ObjectCollection;
 //TODO: THIS IS DUPLICATED AS FUCK FROM MOVERUSER AND THE IF STATEMENT TREE HAS TO BE REFACTORED AS SHIT.
 public class UserStrategy extends BasicStrategy {

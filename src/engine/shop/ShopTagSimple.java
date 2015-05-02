@@ -1,7 +1,7 @@
 package engine.shop;
 
 import engine.fieldsetting.Settable;
-import engine.gameobject.Graphic;
+import engine.gameobject.graphics.Graphic;
 
 
 public class ShopTagSimple implements ShopTag {

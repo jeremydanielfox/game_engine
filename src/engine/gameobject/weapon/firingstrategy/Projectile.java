@@ -29,7 +29,7 @@ public class Projectile extends GameObjectSimple implements Buffer {
         collidedID = new HashSet<String>();
         onCollision = new HashSet<Buff>();
         onDeath = new Explosion();
-        super.setLabel(new ProjectileLabel());
+        super.setType(new ProjectileLabel());
     }
 
     @Settable

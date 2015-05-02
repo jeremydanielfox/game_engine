@@ -2,8 +2,8 @@ package engine.gameobject.units.freeze;
 
 import java.util.Optional;
 import engine.fieldsetting.Settable;
-import engine.gameobject.BasicMover;
 import engine.gameobject.GameObject;
+import engine.gameobject.movers.BasicMover;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.UpgradeType;
 import engine.gameobject.weapon.Upgrade;

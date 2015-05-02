@@ -4,7 +4,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.effect.Glow;
-import engine.gameobject.Graphic;
+import engine.gameobject.graphics.Graphic;
 
 
 /**

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
-import engine.gameobject.Mover;
+import engine.gameobject.movers.Mover;
 import gameworld.ObjectCollection;
 
 public class SummonBehavior implements Behavior{

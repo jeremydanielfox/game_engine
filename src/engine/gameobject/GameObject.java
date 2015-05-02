@@ -1,11 +1,13 @@
 package engine.gameobject;
 
 import engine.gameobject.behaviors.EndBehaviorful;
+import engine.gameobject.graphics.Graphical;
+import engine.gameobject.healths.Health;
 import engine.gameobject.labels.Type;
+import engine.gameobject.movers.Movable;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.units.Colliding;
 import engine.gameobject.units.Firing;
-import engine.shop.RangeDisplay;
 import gameworld.ObjectCollection;
 
 
@@ -28,7 +30,7 @@ import gameworld.ObjectCollection;
  */
 
 public interface GameObject extends Firing, Colliding, Buffable, Movable, Health,
-        Purchasable<GameObject>, EndBehaviorful {
+        Purchasable<GameObject>, EndBehaviorful, Graphical {
 
     /**
      * Updates the object accordingly within the objectcollection (usually gameworld) given the
@@ -46,48 +48,42 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
     public void onDeath (ObjectCollection world);
 
     /**
-     * Returns the Mover associated with the GameObject
-     * 
-     * @return the Mover of the GameObject
-     */
-    public Mover getMover ();
-
-    /**
      * Returns the Type for the GameObject
      * 
      * @return
      */
-    public Type getLabel ();
-
-    // public void setGraphic (Graphic graphic);
-
-    public void setLabel (Type label);
+    public Type getType ();
 
     /**
-     * Returns the Cartesian coordinate of the game object.
+     * Sets the Type for the GameObject
+     * 
+     * @param type: Type to be set for the GameObject
+     */
+    public void setType (Type type);
+
+    /**
+     * Returns the Cartesian coordinate of the game object as a PointSimple.
      */
     public PointSimple getPoint ();
 
     /**
      * Sets the object's location to point
      *
-     * @param point
+     * @param point : Point in Cartesian coordinates that the GameObject will be set to
      */
     public void setPoint (PointSimple point);
 
     /**
-     * Sets the GameObject's Mover
+     * Sets the Health Object that will be used as the Health for this GameObject
+     * 
+     * @param health
      */
-    public void setMover (Mover mover);
+    public void setHealth (Health health);
 
-    public void setHealth (Health clone);
-
-    public RangeDisplay getRangeDisplay ();
-
-    public Graphic getGraphic ();
-
+    /**
+     * Returns the Health of the GameObject
+     * 
+     * @return Health
+     */
     public Health getHealth ();
-
-    public void setGraphic (Graphic myGraphic);
-
 }

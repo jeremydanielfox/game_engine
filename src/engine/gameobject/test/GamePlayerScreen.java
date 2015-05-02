@@ -30,7 +30,6 @@ import engine.game.Player;
 import engine.game.PlayerUnit;
 import engine.game.StoryBoard;
 import engine.gameobject.GameObject;
-import engine.gameobject.GameObjectSimpleTest;
 import engine.goals.Goal;
 import engine.goals.HealthGoal;
 import engine.goals.NullGoal;

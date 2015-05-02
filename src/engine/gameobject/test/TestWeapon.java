@@ -1,7 +1,7 @@
 package engine.gameobject.test;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.MoverDirection;
+import engine.gameobject.movers.MoverDirection;
 import engine.gameobject.test.bloons.Spikes;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.firingstrategy.MultipleProjectile;

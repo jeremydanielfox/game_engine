@@ -3,8 +3,13 @@ package engine.gameobject;
 import engine.fieldsetting.Settable;
 import engine.gameobject.behaviors.Behavior;
 import engine.gameobject.behaviors.BehaviorTracker;
+import engine.gameobject.graphics.Graphic;
+import engine.gameobject.healths.Health;
+import engine.gameobject.healths.HealthSimple;
 import engine.gameobject.labels.SimpleType;
 import engine.gameobject.labels.Type;
+import engine.gameobject.movers.Mover;
+import engine.gameobject.movers.MoverNull;
 import engine.gameobject.units.Buff;
 import engine.gameobject.units.BuffTracker;
 import engine.gameobject.units.UpgradeType;
@@ -28,6 +33,7 @@ import gameworld.ObjectCollection;
  */
 @Settable
 public class GameObjectSimple implements GameObject {
+    private static final String TO_STRING_PREFACE = "GameObject: ";
     private Type myType;
     private PointSimple myPoint;
     private Health myHealth;
@@ -64,6 +70,7 @@ public class GameObjectSimple implements GameObject {
         myBuffs.receiveBuff(buff, this);
     }
 
+    @Override
     public void addImmunity (Class<? extends Buff> immunity, UpgradeType buffType) {
         myBuffs.addImmunity(immunity, buffType);
     }
@@ -135,6 +142,7 @@ public class GameObjectSimple implements GameObject {
     }
 
     @Settable
+    @Override
     public void setGraphic (Graphic graphic) {
         myGraphic = graphic;
     }
@@ -144,11 +152,10 @@ public class GameObjectSimple implements GameObject {
         return myWeapon.getValue();
     }
 
-    // TODO: Weapon upgrade cloning not done
     @Override
     public GameObject clone () {
         GameObjectSimple clone = new GameObjectSimple();
-        clone.setLabel(myType);
+        clone.setType(myType);
         clone.setPoint(new PointSimple(myPoint));
         clone.setHealth(myHealth.clone());
         clone.setWeapon(myWeapon.clone());
@@ -156,7 +163,7 @@ public class GameObjectSimple implements GameObject {
         clone.setMover(myMover.clone());
         clone.setGraphic(myGraphic.clone());
         clone.setShopTag(myShopTag.clone());
-        clone.myBehaviors = myBehaviors;// TODO: ??????????
+        clone.myBehaviors = myBehaviors;
         return clone;
     }
 
@@ -188,19 +195,22 @@ public class GameObjectSimple implements GameObject {
     /*
      * EndBehaviorful methods follow
      */
-
+    @Override
     public void addOnDeathBehavior (Behavior behavior) {
         myBehaviors.addOnDeath(behavior);
     }
 
+    @Override
     public void clearDeathBehavior () {
         myBehaviors.clearDeath();
     }
 
+    @Override
     public void addEndOfPathBehavior (Behavior behavior) {
         myBehaviors.addEndOfPath(behavior);
     }
 
+    @Override
     public void clearEndOfPathBehavior () {
         myBehaviors.clearEndOfPath();
     }
@@ -210,13 +220,13 @@ public class GameObjectSimple implements GameObject {
      */
 
     @Override
-    public Type getLabel () {
+    public Type getType () {
         return myType;
     }
 
     @Override
     @Settable
-    public void setLabel (Type label) {
+    public void setType (Type label) {
         myType = label;
     }
 
@@ -292,7 +302,7 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public String toString () {
-        return "GameObject: " + GameObjectInformation.getInstance().getTitle(this);
+        return TO_STRING_PREFACE + GameObjectInformation.getInstance().getTitle(this);
     }
 
     @Override

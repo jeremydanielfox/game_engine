@@ -1,11 +1,11 @@
 package gae.listView;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.Graphic;
-import engine.gameobject.Health;
-import engine.gameobject.Mover;
 import engine.gameobject.PointSimple;
+import engine.gameobject.graphics.Graphic;
+import engine.gameobject.healths.Health;
 import engine.gameobject.labels.Type;
+import engine.gameobject.movers.Mover;
 import engine.gameobject.units.Collider;
 import engine.gameobject.weapon.Weapon;
 import engine.shop.ShopTag;
@@ -59,7 +59,7 @@ public class GameObjectToEditable implements Placeable {
         this.gameObject = gameObject;
         name = gameObject.getName();
         imagePath = gameObject.getGraphic().getImagePath();
-        gameObjectType = gameObject.getLabel();
+        gameObjectType = gameObject.getType();
         type = gameObjectType.getName();
         description = gameObject.getDescription();
         shopImagePath = gameObject.getShopGraphic().getImagePath();

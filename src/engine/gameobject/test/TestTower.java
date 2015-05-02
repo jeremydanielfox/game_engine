@@ -1,12 +1,12 @@
 package engine.gameobject.test;
 
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.Graphic;
-import engine.gameobject.HealthSimple;
-import engine.gameobject.MoverDirection;
-import engine.gameobject.MoverNull;
 import engine.gameobject.PointSimple;
 import engine.gameobject.behaviors.PlantBehavior;
+import engine.gameobject.graphics.Graphic;
+import engine.gameobject.healths.HealthSimple;
+import engine.gameobject.movers.MoverDirection;
+import engine.gameobject.movers.MoverNull;
 import engine.shop.ShopTagSimple;
 
 
@@ -34,7 +34,7 @@ public class TestTower extends GameObjectSimple {
             shopTag.setName("TestTower2");
         }
         setWeapon(new TestWeapon(type, this));
-        setLabel(new FriendlyTowerType());
+        setType(new FriendlyTowerType());
     }
 
 }

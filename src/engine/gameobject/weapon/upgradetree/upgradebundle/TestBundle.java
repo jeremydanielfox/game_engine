@@ -1,6 +1,6 @@
 package engine.gameobject.weapon.upgradetree.upgradebundle;
 
-import engine.gameobject.Graphic;
+import engine.gameobject.graphics.Graphic;
 import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.units.freeze.FreezeBuff;
 import engine.gameobject.weapon.Upgrade;

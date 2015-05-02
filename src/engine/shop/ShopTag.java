@@ -1,6 +1,6 @@
 package engine.shop;
 
-import engine.gameobject.Graphic;
+import engine.gameobject.graphics.Graphic;
 
 
 public interface ShopTag {

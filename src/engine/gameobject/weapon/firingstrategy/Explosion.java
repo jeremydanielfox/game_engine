@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.GameObjectSimpleTest;
 import engine.gameobject.PointSimple;
+import engine.gameobject.test.GameObjectSimpleTest;
 import engine.gameobject.units.Buff;
 import gameworld.ObjectCollection;
 

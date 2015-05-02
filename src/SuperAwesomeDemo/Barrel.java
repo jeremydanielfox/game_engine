@@ -1,11 +1,11 @@
 package SuperAwesomeDemo;
 
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.Graphic;
-import engine.gameobject.HealthSimple;
-import engine.gameobject.MoverNull;
 import engine.gameobject.PointSimple;
-import engine.gameobject.RotatorNull;
+import engine.gameobject.graphics.Graphic;
+import engine.gameobject.graphics.RotatorNull;
+import engine.gameobject.healths.HealthSimple;
+import engine.gameobject.movers.MoverNull;
 import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.weapon.NullWeapon;
 import engine.shop.ShopTagSimple;
@@ -19,7 +19,7 @@ public class Barrel extends GameObjectSimple {
         shopTag.setDescription("Blow people up!");
         shopTag.setShopGraphic(new Graphic(90, 60, "/images/Barrel.png"));
         setShopTag(shopTag);
-        setLabel(new NeutralGameType());
+        setType(new NeutralGameType());
         Graphic myGraphic = new Graphic(47, 28, "/images/Barrel.png");
         myGraphic.setRotator(new RotatorNull());
         this.getCollider().addExplosionBuff(new DamageBuff(5));

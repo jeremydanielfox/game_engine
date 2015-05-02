@@ -2,11 +2,11 @@ package SuperAwesomeDemo;
 
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.Graphic;
-import engine.gameobject.HealthSimple;
-import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
-import engine.gameobject.RotatorNull;
+import engine.gameobject.graphics.Graphic;
+import engine.gameobject.graphics.RotatorNull;
+import engine.gameobject.healths.HealthSimple;
+import engine.gameobject.movers.MoverDirection;
 import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.weapon.BasicWeapon;
 import engine.gameobject.weapon.NullWeapon;
@@ -22,7 +22,7 @@ public class MeleeWeapon extends BasicWeapon{
     
     private GameObject makeProjectile(){
         GameObject myProjectile = new GameObjectSimple();
-        myProjectile.setLabel(new EnemyProjectileType());
+        myProjectile.setType(new EnemyProjectileType());
         Graphic myGraphic = new Graphic(1, 1,"/images/robertDuvall.jpg");//TODO: Set graphic here
         myGraphic.setRotator(new RotatorNull());
         myProjectile.setGraphic(myGraphic);

@@ -2,11 +2,11 @@ package SuperAwesomeDemo;
 
 import engine.gameobject.GameObject;
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.Graphic;
-import engine.gameobject.HealthSimple;
-import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
-import engine.gameobject.RotatorNull;
+import engine.gameobject.graphics.Graphic;
+import engine.gameobject.graphics.RotatorNull;
+import engine.gameobject.healths.HealthSimple;
+import engine.gameobject.movers.MoverDirection;
 import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.units.poison.PoisonBuff;
 import engine.gameobject.weapon.BasicWeapon;
@@ -26,7 +26,7 @@ public class FireballShooter extends BasicWeapon {
 
     private GameObject makeFireball () {
         GameObjectSimple gos = new GameObjectSimple();
-        gos.setLabel(new EnemyProjectileType());
+        gos.setType(new EnemyProjectileType());
         Graphic myGraphic = new Graphic(10, 10, "/images/Fireball.png");
         myGraphic.setRotator(new RotatorNull());
         gos.setGraphic(myGraphic);

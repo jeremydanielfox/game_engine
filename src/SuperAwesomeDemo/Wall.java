@@ -1,11 +1,11 @@
 package SuperAwesomeDemo;
 
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.Graphic;
-import engine.gameobject.HealthSimple;
-import engine.gameobject.MoverNull;
 import engine.gameobject.PointSimple;
-import engine.gameobject.RotatorNull;
+import engine.gameobject.graphics.Graphic;
+import engine.gameobject.graphics.RotatorNull;
+import engine.gameobject.healths.HealthSimple;
+import engine.gameobject.movers.MoverNull;
 import engine.gameobject.weapon.NullWeapon;
 import engine.shop.ShopTagSimple;
 
@@ -18,7 +18,7 @@ public class Wall extends GameObjectSimple {
         shopTag.setDescription("Block your enemies!");
         shopTag.setShopGraphic(new Graphic(90, 78, "/images/Wall.png"));
         setShopTag(shopTag);
-        setLabel(new NeutralGameType());
+        setType(new NeutralGameType());
         Graphic myGraphic = new Graphic(60, 45, "/images/Wall.png");
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);

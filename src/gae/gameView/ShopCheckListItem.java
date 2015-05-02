@@ -1,8 +1,8 @@
 package gae.gameView;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.Graphic;
 import engine.gameobject.Purchasable;
+import engine.gameobject.graphics.Graphic;
 import gae.backend.Placeable;
 import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Pos;

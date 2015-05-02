@@ -36,8 +36,8 @@ public class ConcreteInteractionEngine implements InteractionEngine {
      */
     @Override
     public void interact (GameObject first, GameObject second) {
-        Type firstLabel = first.getLabel();
-        Type secondLabel = second.getLabel();
+        Type firstLabel = first.getType();
+        Type secondLabel = second.getType();
         Interaction interaction = findInteraction(firstLabel, secondLabel);
         interaction.setGameWorld(myGameWorld);
         interaction.accept(first, second);

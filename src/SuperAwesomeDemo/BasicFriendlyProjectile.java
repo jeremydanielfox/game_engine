@@ -1,11 +1,11 @@
 package SuperAwesomeDemo;
 
 import engine.gameobject.GameObjectSimple;
-import engine.gameobject.Graphic;
-import engine.gameobject.HealthSimple;
-import engine.gameobject.MoverDirection;
 import engine.gameobject.PointSimple;
-import engine.gameobject.RotatorNull;
+import engine.gameobject.graphics.Graphic;
+import engine.gameobject.graphics.RotatorNull;
+import engine.gameobject.healths.HealthSimple;
+import engine.gameobject.movers.MoverDirection;
 import engine.gameobject.units.directdamage.DamageBuff;
 import engine.gameobject.weapon.NullWeapon;
 
@@ -17,7 +17,7 @@ public class BasicFriendlyProjectile extends GameObjectSimple {
     }
     public BasicFriendlyProjectile (int damage, double speed, double distanceLimit) {
         super();
-        setLabel(new FriendlyProjectileType());
+        setType(new FriendlyProjectileType());
         Graphic myGraphic = new Graphic(7,7,"/images/Black_dot.png");
         myGraphic.setRotator(new RotatorNull());
         setGraphic(myGraphic);

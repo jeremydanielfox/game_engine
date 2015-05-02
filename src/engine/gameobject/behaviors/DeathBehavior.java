@@ -1,7 +1,7 @@
 package engine.gameobject.behaviors;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.HealthSimple;
+import engine.gameobject.healths.HealthSimple;
 import gameworld.ObjectCollection;
 
 public class DeathBehavior implements Behavior{

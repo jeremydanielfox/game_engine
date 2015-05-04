@@ -1,4 +1,4 @@
-package engine.gameobject.labels;
+package engine.gameobject.types;
 
 /**
  * Forms the basic for a dynamic, user-defined typing system. Since the engine is built with only

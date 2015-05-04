@@ -1,4 +1,4 @@
-package engine.gameobject.labels;
+package engine.gameobject.types;
 
 import engine.fieldsetting.Settable;
 

@@ -1,9 +1,9 @@
 package SuperAwesomeDemo;
 
+import engine.gameobject.interactions.RangeEngine;
+import engine.gameobject.interactions.ShootAt;
 import engine.gameobject.test.EnemyTowerType;
 import engine.gameobject.test.FriendlyTowerType;
-import engine.interactions.RangeEngine;
-import engine.interactions.ShootAt;
 
 
 public class RangeEngineAwesome extends RangeEngine {

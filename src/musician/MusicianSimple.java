@@ -11,7 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import engine.interactions.Interaction;
+import engine.gameobject.interactions.Interaction;
 
 
 /**

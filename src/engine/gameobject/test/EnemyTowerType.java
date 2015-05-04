@@ -1,6 +1,6 @@
 package engine.gameobject.test;
 
-import engine.gameobject.labels.SimpleType;
+import engine.gameobject.types.SimpleType;
 
 
 public class EnemyTowerType extends SimpleType {

@@ -1,25 +1,26 @@
+// This entire file is part of my masterpiece.
+// JEREMY FOX
 package engine.gameobject;
 
 import engine.fieldsetting.Settable;
-import engine.gameobject.behaviors.Behavior;
-import engine.gameobject.behaviors.BehaviorTracker;
+import engine.gameobject.behaviors.BehaviorComponent;
+import engine.gameobject.behaviors.BehaviorComponentConcrete;
 import engine.gameobject.graphics.Graphic;
-import engine.gameobject.healths.Health;
-import engine.gameobject.healths.HealthSimple;
-import engine.gameobject.labels.SimpleType;
-import engine.gameobject.labels.Type;
+import engine.gameobject.healths.HealthComponent;
+import engine.gameobject.healths.HealthComponentConcrete;
 import engine.gameobject.movers.Mover;
 import engine.gameobject.movers.MoverNull;
-import engine.gameobject.units.Buff;
-import engine.gameobject.units.BuffTracker;
-import engine.gameobject.units.UpgradeType;
-import engine.gameobject.units.Collider;
+import engine.gameobject.types.TypeComponent;
+import engine.gameobject.types.TypeComponentConcrete;
+import engine.gameobject.units.BuffComponent;
+import engine.gameobject.units.BuffComponentConcrete;
+import engine.gameobject.units.CollisionComponent;
+import engine.gameobject.units.CollisionComponentConcrete;
 import engine.gameobject.weapon.NullWeapon;
 import engine.gameobject.weapon.Weapon;
 import engine.pathfinding.EndOfPathException;
-import engine.shop.RangeDisplay;
-import engine.shop.ShopTag;
-import engine.shop.ShopTagSimple;
+import engine.shop.ShopComponent;
+import engine.shop.ShopComponentConcrete;
 import gae.editorView.GameObjectInformation;
 import gameworld.ObjectCollection;
 
@@ -34,45 +35,28 @@ import gameworld.ObjectCollection;
 @Settable
 public class GameObjectSimple implements GameObject {
     private static final String TO_STRING_PREFACE = "GameObject: ";
-    private Type myType;
+    private TypeComponent myTypeComponent;
     private PointSimple myPoint;
-    private Health myHealth;
     private Mover myMover;
-    private BuffTracker myBuffs;
     private Weapon myWeapon;
-    private Collider myCollider;
-    private BehaviorTracker myBehaviors;
     private Graphic myGraphic;
-    private ShopTag myShopTag;
+    private BuffComponent myBuffComponent;
+    private ShopComponent myShopComponent;
+    private BehaviorComponent myBehaviorComponent;
+    private HealthComponent myHealthComponent;
+    private CollisionComponent myCollisionComponent;
 
     public GameObjectSimple () {
-        myType = new SimpleType();
+        myTypeComponent = new TypeComponentConcrete();
+        myHealthComponent = new HealthComponentConcrete();
         myPoint = new PointSimple();
-        myHealth = new HealthSimple();
         myMover = new MoverNull();
-        myBuffs = new BuffTracker();
         myWeapon = new NullWeapon();
-        myCollider = new Collider();
-        myBehaviors = new BehaviorTracker();
         myGraphic = new Graphic();
-        myShopTag = new ShopTagSimple();
-    }
-
-    /*
-     * Buffable methods follow
-     */
-
-    /**
-     * Give the object a buff e.g. burn this object
-     */
-    @Override
-    public void receiveBuff (Buff buff) {
-        myBuffs.receiveBuff(buff, this);
-    }
-
-    @Override
-    public void addImmunity (Class<? extends Buff> immunity, UpgradeType buffType) {
-        myBuffs.addImmunity(immunity, buffType);
+        myBuffComponent = new BuffComponentConcrete(this);
+        myShopComponent = new ShopComponentConcrete(myWeapon);
+        myBehaviorComponent = new BehaviorComponentConcrete();
+        myCollisionComponent = new CollisionComponentConcrete();
     }
 
     /*
@@ -96,51 +80,6 @@ public class GameObjectSimple implements GameObject {
         return myWeapon;
     }
 
-    /*
-     * Colliding methods follow
-     */
-
-    @Override
-    public Collider getCollider () {
-        return myCollider;
-    }
-
-    @Override
-    @Settable
-    public void setCollider (Collider collider) {
-        myCollider = collider;
-    }
-
-    @Override
-    public void explode (ObjectCollection world) {
-        myCollider.explode(world, myPoint);
-    }
-
-    @Override
-    public void collide (GameObject target) {
-        myCollider.collide(target);
-        changeHealth(-1);
-    }
-
-    /*
-     * Purchasable methods follow
-     */
-
-    @Override
-    public String getName () {
-        return myShopTag.getName();
-    }
-
-    @Override
-    public String getDescription () {
-        return myShopTag.getDescription();
-    }
-
-    @Override
-    public Graphic getShopGraphic () {
-        return myShopTag.getShopGraphic();
-    }
-
     @Settable
     @Override
     public void setGraphic (Graphic graphic) {
@@ -148,28 +87,15 @@ public class GameObjectSimple implements GameObject {
     }
 
     @Override
-    public double getValue () {
-        return myWeapon.getValue();
-    }
-
-    @Override
     public GameObject clone () {
         GameObjectSimple clone = new GameObjectSimple();
-        clone.setType(myType);
         clone.setPoint(new PointSimple(myPoint));
-        clone.setHealth(myHealth.clone());
         clone.setWeapon(myWeapon.clone());
-        clone.setCollider(myCollider.clone());
         clone.setMover(myMover.clone());
         clone.setGraphic(myGraphic.clone());
-        clone.setShopTag(myShopTag.clone());
-        clone.myBehaviors = myBehaviors;
         return clone;
     }
 
-    /*
-     * Movable, Health methods follow
-     */
     @Override
     public void move () throws EndOfPathException {
         PointSimple point = myMover.move(myPoint);
@@ -178,56 +104,8 @@ public class GameObjectSimple implements GameObject {
     }
 
     @Override
-    public boolean isDead () {
-        return myHealth.isDead();
-    }
-
-    @Override
-    public void changeHealth (double amount) {
-        myHealth.changeHealth(amount);
-    }
-
-    @Override
     public void setSpeed (double speed) {
         myMover.setSpeed(speed);
-    }
-
-    /*
-     * EndBehaviorful methods follow
-     */
-    @Override
-    public void addOnDeathBehavior (Behavior behavior) {
-        myBehaviors.addOnDeath(behavior);
-    }
-
-    @Override
-    public void clearDeathBehavior () {
-        myBehaviors.clearDeath();
-    }
-
-    @Override
-    public void addEndOfPathBehavior (Behavior behavior) {
-        myBehaviors.addEndOfPath(behavior);
-    }
-
-    @Override
-    public void clearEndOfPathBehavior () {
-        myBehaviors.clearEndOfPath();
-    }
-
-    /*
-     * GameObject specific methods follow
-     */
-
-    @Override
-    public Type getType () {
-        return myType;
-    }
-
-    @Override
-    @Settable
-    public void setType (Type label) {
-        myType = label;
     }
 
     @Override
@@ -247,18 +125,6 @@ public class GameObjectSimple implements GameObject {
         return myMover;
     }
 
-    /**
-     * Note that this takes in a new health object.
-     * Should only be used when setting to a new health, not for damage.
-     * 
-     * @param health
-     */
-    @Override
-    @Settable
-    public void setHealth (Health health) {
-        myHealth = health;
-    }
-
     @Override
     @Settable
     public void setMover (Mover mover) {
@@ -267,27 +133,13 @@ public class GameObjectSimple implements GameObject {
 
     @Override
     public void update (ObjectCollection world) {
-        myBuffs.update(this);
+        myBuffComponent.update();
         myWeapon.advanceTime();
         try {
             move();
         }
         catch (EndOfPathException e) {
-            myBehaviors.onEndOfPath(world, this);
-            // Note that something doesn't always have to die at end of path, but if it doesn't die,
-            // it may
-            // keep doing endofpath over and over again
         }
-    }
-
-    @Override
-    public void onDeath (ObjectCollection world) {
-        myBehaviors.onDeath(world, this);
-    }
-
-    @Override
-    public RangeDisplay getRangeDisplay () {
-        return new RangeDisplay(getName(), myGraphic, myWeapon.getRangeProperty());
     }
 
     @Override
@@ -295,9 +147,27 @@ public class GameObjectSimple implements GameObject {
         return myGraphic;
     }
 
-    @Settable
-    public void setShopTag (ShopTag shopTag) {
-        myShopTag = shopTag;
+    /*
+     * Component methods to follow
+     */
+    @Override
+    public TypeComponent getTypeComponent () {
+        return myTypeComponent;
+    }
+
+    @Override
+    public ShopComponent getShopComponent () {
+        return myShopComponent;
+    }
+
+    @Override
+    public BehaviorComponent getBehaviorComponent () {
+        return myBehaviorComponent;
+    }
+
+    @Override
+    public HealthComponent getHealthComponent () {
+        return myHealthComponent;
     }
 
     @Override
@@ -306,8 +176,13 @@ public class GameObjectSimple implements GameObject {
     }
 
     @Override
-    public Health getHealth () {
-        return myHealth;
+    public CollisionComponent getCollisionComponent () {
+        return myCollisionComponent;
+    }
+
+    @Override
+    public BuffComponent getBuffComponent () {
+        return myBuffComponent;
     }
 
 }

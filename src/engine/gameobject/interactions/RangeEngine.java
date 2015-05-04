@@ -1,6 +1,6 @@
-package engine.interactions;
+package engine.gameobject.interactions;
 
-import engine.gameobject.labels.Type;
+import engine.gameobject.types.Type;
 
 
 public class RangeEngine extends ConcreteInteractionEngine {

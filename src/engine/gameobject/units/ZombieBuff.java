@@ -2,9 +2,9 @@ package engine.gameobject.units;
 
 import java.awt.Color;
 import engine.gameobject.GameObject;
+import engine.gameobject.types.SimpleType;
+import engine.gameobject.types.Type;
 import engine.gameobject.weapon.Upgrade;
-import engine.gameobject.labels.SimpleType;
-import engine.gameobject.labels.Type;
 /**
  * Buff that changes the target's type
  * @author myungoh

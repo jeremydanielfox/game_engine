@@ -1,7 +1,7 @@
-package engine.interactions;
+package engine.gameobject.interactions;
 
 import engine.gameobject.GameObject;
-import engine.gameobject.labels.Type;
+import engine.gameobject.types.Type;
 import gameworld.GameWorld;
 
 

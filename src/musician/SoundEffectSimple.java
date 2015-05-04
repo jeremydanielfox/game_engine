@@ -1,6 +1,6 @@
 package musician;
 
-import engine.interactions.Interaction;
+import engine.gameobject.interactions.Interaction;
 import javafx.scene.Node;
 import javafx.scene.media.Media;
 

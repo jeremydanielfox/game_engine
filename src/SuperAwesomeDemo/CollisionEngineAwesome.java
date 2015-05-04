@@ -1,9 +1,9 @@
 package SuperAwesomeDemo;
 
+import engine.gameobject.interactions.BuffImparter;
+import engine.gameobject.interactions.CollisionEngine;
 import engine.gameobject.test.EnemyTowerType;
 import engine.gameobject.test.FriendlyTowerType;
-import engine.interactions.BuffImparter;
-import engine.interactions.CollisionEngine;
 
 
 public class CollisionEngineAwesome extends CollisionEngine {

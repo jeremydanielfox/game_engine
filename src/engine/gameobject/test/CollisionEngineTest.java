@@ -1,7 +1,7 @@
 package engine.gameobject.test;
 
-import engine.interactions.BuffImparter;
-import engine.interactions.CollisionEngine;
+import engine.gameobject.interactions.BuffImparter;
+import engine.gameobject.interactions.CollisionEngine;
 
 
 /**

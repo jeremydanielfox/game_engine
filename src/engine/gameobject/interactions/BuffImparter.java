@@ -1,4 +1,4 @@
-package engine.interactions;
+package engine.gameobject.interactions;
 
 import engine.gameobject.GameObject;
 

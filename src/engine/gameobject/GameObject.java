@@ -1,10 +1,13 @@
+// This entire file is part of my masterpiece.
+// JEREMY FOX
 package engine.gameobject;
 
 import engine.gameobject.behaviors.EndBehaviorful;
 import engine.gameobject.graphics.Graphical;
 import engine.gameobject.healths.Health;
-import engine.gameobject.labels.Type;
+import engine.gameobject.healths.HealthComponent;
 import engine.gameobject.movers.Movable;
+import engine.gameobject.types.TypeComponent;
 import engine.gameobject.units.Buffable;
 import engine.gameobject.units.Colliding;
 import engine.gameobject.units.Firing;
@@ -29,7 +32,7 @@ import gameworld.ObjectCollection;
  *
  */
 
-public interface GameObject extends Firing, Colliding, Buffable, Movable, Health,
+public interface GameObject extends Firing, Colliding, Buffable, Movable,
         Purchasable<GameObject>, EndBehaviorful, Graphical {
 
     /**
@@ -41,25 +44,11 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
     public void update (ObjectCollection world);
 
     /**
-     * Performs the ondeath behavior of the object upon the world
-     * 
-     * @param world
-     */
-    public void onDeath (ObjectCollection world);
-
-    /**
-     * Returns the Type for the GameObject
+     * Returns the TypeComponent for the GameObject
      * 
      * @return
      */
-    public Type getType ();
-
-    /**
-     * Sets the Type for the GameObject
-     * 
-     * @param type: Type to be set for the GameObject
-     */
-    public void setType (Type type);
+    public TypeComponent getTypeComponent ();
 
     /**
      * Returns the Cartesian coordinate of the game object as a PointSimple.
@@ -74,16 +63,9 @@ public interface GameObject extends Firing, Colliding, Buffable, Movable, Health
     public void setPoint (PointSimple point);
 
     /**
-     * Sets the Health Object that will be used as the Health for this GameObject
+     * Returns the Health Component for the GameObject
      * 
-     * @param health
+     * @return
      */
-    public void setHealth (Health health);
-
-    /**
-     * Returns the Health of the GameObject
-     * 
-     * @return Health
-     */
-    public Health getHealth ();
+    public HealthComponent getHealthComponent ();
 }

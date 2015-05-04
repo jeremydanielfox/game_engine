@@ -1,6 +1,6 @@
 package gae.gameView;
 
-import engine.gameobject.labels.Type;
+import engine.gameobject.types.Type;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;

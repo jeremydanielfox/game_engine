@@ -1,10 +1,10 @@
-package engine.interactions;
+package engine.gameobject.interactions;
 
 import java.util.HashMap;
 import java.util.Map;
 import engine.fieldsetting.Settable;
 import engine.gameobject.GameObject;
-import engine.gameobject.labels.Type;
+import engine.gameobject.types.Type;
 import gameworld.GameWorld;
 
 

@@ -2,7 +2,7 @@ package gae.listView;
 
 import engine.gameobject.GameObjectSimple;
 import engine.gameobject.PointSimple;
-import engine.gameobject.labels.Type;
+import engine.gameobject.types.Type;
 import engine.pathfinding.PathFixed;
 import engine.pathfinding.PathSegmentBezier;
 import gae.backend.Placeable;

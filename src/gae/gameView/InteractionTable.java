@@ -1,6 +1,6 @@
 package gae.gameView;
 
-import engine.gameobject.labels.Type;
+import engine.gameobject.types.Type;
 import gae.listView.LibraryData;
 import java.util.ArrayList;
 import java.util.List;

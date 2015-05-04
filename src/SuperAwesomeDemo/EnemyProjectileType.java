@@ -1,6 +1,6 @@
 package SuperAwesomeDemo;
 
-import engine.gameobject.labels.SimpleType;
+import engine.gameobject.types.SimpleType;
 
 public class EnemyProjectileType extends SimpleType {
     private static final String MY_NAME = "EnemyProjectile";

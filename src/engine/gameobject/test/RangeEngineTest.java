@@ -1,7 +1,7 @@
 package engine.gameobject.test;
 
-import engine.interactions.RangeEngine;
-import engine.interactions.ShootAt;
+import engine.gameobject.interactions.RangeEngine;
+import engine.gameobject.interactions.ShootAt;
 import gameworld.GameWorld;
 
 

@@ -2,7 +2,6 @@ package gae.gameView;
 
 import java.util.ArrayList;
 import java.util.List;
-import engine.gameobject.labels.Type;
 import gae.backend.Placeable;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -14,7 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import engine.gameobject.labels.Type;
+import engine.gameobject.types.Type;
 
 
 /**

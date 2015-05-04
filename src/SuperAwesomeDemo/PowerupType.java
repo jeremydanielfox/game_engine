@@ -1,6 +1,6 @@
 package SuperAwesomeDemo;
 
-import engine.gameobject.labels.SimpleType;
+import engine.gameobject.types.SimpleType;
 
 
 public class PowerupType extends SimpleType {

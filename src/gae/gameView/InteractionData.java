@@ -1,20 +1,18 @@
 package gae.gameView;
 
 import java.util.ArrayList;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import engine.gameobject.labels.Type;
-import engine.interactions.BuffImparter;
-import engine.interactions.CollisionEngine;
-import engine.interactions.Interaction;
-import engine.interactions.InteractionEngine;
-import engine.interactions.NoInteraction;
-import engine.interactions.RangeEngine;
-import engine.interactions.ShootAt;
+import engine.gameobject.interactions.BuffImparter;
+import engine.gameobject.interactions.CollisionEngine;
+import engine.gameobject.interactions.Interaction;
+import engine.gameobject.interactions.InteractionEngine;
+import engine.gameobject.interactions.NoInteraction;
+import engine.gameobject.interactions.RangeEngine;
+import engine.gameobject.interactions.ShootAt;
+import engine.gameobject.types.Type;
 
 /**
  * Class that acts as the data holder of all interactions authored. This will hold the interactions
